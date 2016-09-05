@@ -1,0 +1,42 @@
+
+@startuml "rp-login.png"
+
+autonumber
+
+!define SHOW_RuntimeA
+
+!define SHOW_CoreRuntimeA
+!define SHOW_MsgBUSAtRuntimeA
+!define SHOW_RegistryAtRuntimeA
+!define SHOW_IdentitiesAtRuntimeA
+
+!define SHOW_IDPSandboxAtRuntimeA
+
+!define SHOW_IDP
+
+!include ../runtime_objects.plantuml
+
+
+     -> RunID@A : rtLogin( )
+
+    RunID@A -> BUS@A : postMessage( CREATE Token Message )
+
+    BUS@A -> RunReg@A : resolve( IdP URL )
+
+    BUS@A <- RunReg@A : return IdP Proxy sandbox URL
+
+    BUS@A  -> idpProxy@A : postMessage\n( CREATE Token Message )
+
+    idpProxy@A -> IDP : RT Login
+
+    IDP -> IDP : validate and generate Id Token
+
+    idpProxy@A <- IDP : Id Token Granted
+
+    idpProxy@A -> BUS@A : postMessage\n(RESPONSE with Id Token generated)
+
+    RunID@A <- BUS@A : postMessage\n(RESPONSE with Id Token generated)
+
+     <- RunID@A : return login successful
+
+@enduml

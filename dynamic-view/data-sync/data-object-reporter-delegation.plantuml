@@ -1,0 +1,102 @@
+
+
+@startuml "data-object-reporter-delegation.png"
+
+autonumber
+
+!define SHOW_SP1
+!define SHOW_SMAtSP1
+
+!define SHOW_RuntimeA
+
+!define SHOW_CoreRuntimeA
+!define SHOW_SMAtRuntimeA
+!define SHOW_SP1SandboxAtRuntimeA
+!define SHOW_Syncher1AtRuntimeA
+
+!define SHOW_Runtime1B
+
+!define SHOW_CoreRuntime1B
+!define SHOW_SMAtRuntime1B
+!define SHOW_SP1SandboxAtRuntime1B
+!define SHOW_Syncher1AtRuntime1B
+
+!include ../runtime_objects.plantuml
+
+
+== Hyperty asks another Hyperty to be a Reporter of an existing Data Object ==
+
+Sync1@A -> RunSM@A : Create Delegation Msg
+
+RunSM@A <- RunSM@A :	check it is the reporter
+
+Sync1@1B <- RunSM@A : Create Delegation Msg\nwith body similar\nto the original Create Message\nplus indication of the Reporter invitation
+
+== invited Reporter accepts ==
+
+Sync1@1B -> RunSM@1B : Create Delegation Msg
+
+RunSM@1B <- RunSM@1B : policyEngine.authorise()
+
+== Invited Sync Manager confirms with current Sync Manager that Reporter role can be delegated ==
+
+RunSM@A <- RunSM@1B : Forward Create Delegation Msg
+
+RunSM@A -> RunSM@1B : 200 OK Forward
+
+== New Reporter Sync Manager is set ==
+
+RunSM@1B -> RunSM@1B : bus.addListener\n( SMListener, \n<ObjectURL>/subscription )
+
+opt Synch Manager keeps the most updated version \nof the data object, which will be returned to new Observers
+
+	RunSM@1B -> RunSM@1B : bus.addListener(\n<ObjectURL>/changes, \nSyncManagerListener )
+
+end
+
+opt Hyperty owner / reporter is updated\n when object observers are added or removed
+
+	RunSM@1B -> RunSM@1B : bus.addListener(\n<ObjectURL>/observers, \nhypertyOwnerSandboxListener )
+
+end
+
+loop for each authorised Observer
+
+RunSM@1B -> RunSM@1B : bus.addListener(\nDataObjURL\changes URL, Observerlistener)
+
+note left
+	Listeners of authorised observers are added into message bus,
+	 to receive updates about changes in the data object
+end note
+
+end
+
+RunSM@A <- RunSM@A : registry.registerDataObject()
+
+ note right
+ 	Update Object registry with new Reporter
+ end note
+
+RunSM@1B -> Sync1@1B : 200 OK Response Message
+
+note left
+ Confirm Reporter Hyperty is set
+end note
+
+== Update Object with new HypertyURL Reporter ==
+
+Sync1@1B <- Sync1@1B : Update Object \nwith new \nHypertyURL Reporter
+
+== Confirm back to former Reporter that delegation was accepted and performed ==
+
+RunSM@1B -> Sync1@1B : 200 OK Response Message
+
+RunSM@A <- Sync1@1B : 200 OK Response to Delegation Create Message
+
+loop for each Reporter listener
+ RunSM@A <- RunSM@A : listener.remove()
+end
+
+RunSM@A -> Sync1@A : 200 OK Response to Delegation Create Message
+
+@enduml

@@ -1,0 +1,102 @@
+
+
+@startuml "data-object-subscribe.png"
+
+autonumber
+
+!define SHOW_SP1
+!define SHOW_SMAtSP1
+
+!define SHOW_SP2
+!define SHOW_SMAtSP2
+
+!define SHOW_RuntimeA
+
+!define SHOW_CoreRuntimeA
+!define SHOW_SMAtRuntimeA
+!define SHOW_SP1SandboxAtRuntimeA
+!define SHOW_Syncher1AtRuntimeA
+
+!define SHOW_Runtime1B
+
+!define SHOW_CoreRuntime1B
+!define SHOW_SMAtRuntime1B
+!define SHOW_SP1SandboxAtRuntime1B
+!define SHOW_Syncher1AtRuntime1B
+
+!include ../runtime_objects.plantuml
+
+
+== Hyperty requests to be Observer of new Data Object ==
+
+== Start adding listeners on Observer side ==
+
+Sync1@1B -> Sync1@1B : Minibus.Addlisteners(\nDataObjURL\changes,\nSyncherListener)
+
+Sync1@1B -> RunSM@1B : Subscribe Msg
+
+RunSM@1B -> RunSM@1B : bus.addListener(\nDataObjURL\changes URL, \nObserverSandboxListener)
+
+== Set Routing Path at Observer Msg Node ==
+
+RunSM@1B -> SM@SP2 : Subscribe Msg
+
+SM@SP2 -> SM@SP2 : add Listeners
+
+RunSM@1B <- SM@SP2 : OK Subscribe Response Msg
+
+== Set Routing Path at Reporter Msg Node ==
+
+RunSM@1B -> SM@SP1 : Subscribe Msg
+
+SM@SP1 -> SM@SP1 : add Listeners
+
+RunSM@1B <- SM@SP1 : OK Subscribe Response Msg
+
+== Requests Reporter Sync Manager to Subscribe ==
+
+RunSM@1B -> RunSM@A : Subscribe Msg
+
+RunSM@A <- RunSM@A :	check subscriber has been already authorised
+
+opt Authorisation policies requires to check data object is registered
+
+	RunSM@A -> RunSM@A : registry.discoverDataObject(\n DataObj URL )
+
+end
+
+RunSM@A -> RunSM@A : bus.addListener(\nDataObjURL\changes URL, listener)
+
+note right
+	Listeners of new observers are added into message bus,
+	 to receive updates about changes in the data object
+end note
+
+opt
+	RunSM@A -> RunSM@A : bus.postMessage(\n Update Message\nfor DataObjectObservers )
+
+	note right
+		the DataObjectObservers resource is updated
+		with information about the new Hyperty observer
+		thus, if Hyperty owner is listening on this resource
+		it will be informed about the new Observer.
+	end note
+
+end
+
+RunSM@A -> RunSM@1B : OK Subscribe\nResponse Message
+
+== Observer Side Sync Manager confirms Subscription ==
+
+Sync1@1B <- RunSM@1B : Subscribe Response Msg \n w/ Data Objs
+
+newpage
+
+== Object is Updated ==
+
+Sync1@A -> RunSM@A : Update Message
+
+Sync1@A -> Sync1@1B : Update Message
+
+
+@enduml

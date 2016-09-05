@@ -1,0 +1,91 @@
+
+
+@startuml "msg-node-architecture.png"
+
+
+node "Management Services" as Man1 {
+	node "Registry" as Server1
+	node "Identity Management" as IdM1
+
+}
+
+node "Service Provider 2" as SP2 {
+	node "Messaging\nNode" as Msg2
+	node "Repository\nServer" as Repo2
+}
+
+node "End-User Device 1" as User1 {
+	node "Hyperty" as H1
+}
+
+node "End-User Device 2" as User2 {
+	node "Hyperty" as H2
+}
+
+node "Network Server" as Net {
+	node "Hyperty" as H3
+}
+
+node "Messaging Node" as msg {
+
+
+ node "ProtoStub\nSandbox" as Proto1Sand {
+
+	 node "SP2 ProtoStub" as Proto1
+ }
+
+node "Connectors" as Conn {
+	node "IdM\nConnector" as ConnIdM
+	node "Registry\nConnector" as ConnMan
+	node "End-User Device\nConnector" as ConnUser
+	node "Network Server\nConnector" as ConnNet
+}
+
+
+node "Core Functionalities" as core {
+
+ node "*            Message      BUS                *" as Bus
+
+ node "Policy Engine" as BusPEP
+
+ node "Session Manager" as Reg
+
+ node "Address Allocation\nManagement" as ID
+
+ node "Subscription\nManager" as Sync
+
+ }
+
+Repo2 ..down-> Proto1: provide
+
+Msg2 <-left-> Proto1 : communicate
+
+ Bus <-right-> Proto1
+
+ BusPEP ..right-> Bus : enforce
+
+ ConnIdM ..down-> BusPEP : authorise
+
+ BusPEP .down-> Reg
+
+ Reg .left. ID
+
+ Reg <-up. Bus: session valid?
+
+ Sync -up.> Bus: add Sync\nListeners
+
+ ConnIdM <-up-> IdM1 : authorise
+
+ Bus <-up-> ConnUser : communicate
+ ConnUser <-up-> H1 : communicate
+
+ ConnUser <-up-> H2 : communicate
+
+ Bus <-up-> ConnNet : communicate
+ ConnNet <-up-> H3 : communicate
+
+ Bus <-up-> ConnMan : communicate
+ ConnMan <-up-> Server1 : communicate
+ 	}
+
+@enduml

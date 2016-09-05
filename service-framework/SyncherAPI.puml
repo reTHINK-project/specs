@@ -1,0 +1,125 @@
+@startuml
+
+interface SyncSubscription {
+  url: HypertyURL
+}
+
+interface SyncStatus {
+  status: on | paused | waiting
+  pause(): void
+  resume(): void
+  stop(): void
+}
+
+class Syncher {
+  owner: HypertyURL
+  __
+  constructor(owner: HypertyURL, bus: MiniBus, config: Config)
+  create(schema: SchemaURL, observers?: [HypertyURL], initialData?: JSON): Promise<DataObjectReporter>
+  subscribe(schema: SchemaURL, url: ObjectURL): Promise<DataObjectObserver>
+  read(url: ObjectURL): Promise<JSON>
+  __ event handlers __
+  onNotification(callback: (event: CreateEvent | DeleteEvent) => void): void
+}
+
+class DataObject {
+  url: ObjectURL
+  data: JSON
+  schema: SchemaURL
+  addChild(children: string, initialData: JSON): Promise<DataObjectChild>
+  __ event handlers __
+  onChange(filter: string, callback: (event: ChangeEvent) => void): void
+  onAddChil(callback: (event: CreateEvent) => void): void
+}
+
+class DataObjectChild {
+  childId: URL
+  data: JSON
+  __ event handlers __
+  onResponse(callback: (event: ReponseEvent) => void): void
+  onChange(callback: (event: ChangeEvent) => void): void
+}
+
+class DataObjectReporter {
+  inviteObservers(observers: [HypertyURL]): void
+  __ event handlers __
+  onSubscription(callback: (event: SubscribeEvent | UnSubscribeEvent) => void): void
+  onResponse(callback: (event: ReponseEvent) => void): void
+  onRead(callback: (event: ReponseEvent) => void): void
+}
+
+class DataObjectObserver {
+  owner: HypertyURL
+}
+
+interface Event {
+  identity: ?Identity.Identity
+  url: URL
+  type: create | delete | subscribe | unsubscribe | response | change
+}
+
+interface CreateEvent {
+  from: HypertyURL
+  value: JSON
+  schema?: SchemaURL
+  ack(type): void
+}
+
+interface DeleteEvent {
+  object: DataObjectObserver
+}
+
+interface SubscribeEvent {
+  accept(): SyncSubscription
+  reject(reason): void
+}
+
+interface UnSubscribeEvent {
+  object: SyncSubscription
+}
+
+interface ResponseEvent {
+  code: int
+  source?: HypertyURL
+}
+
+interface ChangeEvent {
+  cType: update | add | delete
+  oType: object | array
+  field: string /*separated dot path*/
+  data?: value | [value]
+}
+
+interface ReadEvent {
+  accept(): void
+  reject(reason): void
+}
+
+CreateEvent --|> Event
+DeleteEvent --|> Event
+SubscribeEvent --|> Event
+UnSubscribeEvent --|> Event
+ResponseEvent --|> Event
+ChangeEvent --|> Event
+ReadEvent --|> Event
+
+SyncSubscription --|> SyncStatus
+
+DataObject --|> SyncStatus
+DataObject *--"*" DataObjectChild:children
+
+DataObjectObserver ---|> DataObject
+
+DataObjectReporter ---|> DataObject
+DataObjectReporter *--"*" SyncSubscription:subscriptions
+
+Syncher *--"*" DataObjectReporter:reporters
+Syncher *--"*" DataObjectObserver:observers
+
+DataObjectChild -[hidden]down- DeleteEvent
+DataObjectChild -[hidden]down- CreateEvent
+DataObjectChild -[hidden]down- SubscribeEvent
+DataObjectChild -[hidden]down- UnSubscribeEvent
+DataObjectChild -[hidden]down- ResponseEvent
+
+@enduml

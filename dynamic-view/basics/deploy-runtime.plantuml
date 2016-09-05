@@ -1,0 +1,50 @@
+@startuml "deploy-runtime.png"
+
+autonumber
+
+!define SHOW_RuntimeA
+
+!define SHOW_AppAtRuntimeA
+
+!define SHOW_CoreRuntimeA
+!define SHOW_MsgBUSAtRuntimeA
+!define SHOW_RegistryAtRuntimeA
+!define SHOW_IdentitiesAtRuntimeA
+!define SHOW_AuthAtRuntimeA
+!define SHOW_CoreAgentAtRuntimeA
+
+!define SHOW_CoreRuntimeProvider
+
+!include ../runtime_objects.plantuml
+
+== Deploy Core Runtime ==
+
+group option : these steps won't be needed in case the Runtime User Agent is already running in the device
+
+Alice -> CoreRunSP : download App with Core Runtime
+
+create RunUA@A
+App@A -> RunUA@A : new
+end group
+
+RunUA@A -> CoreRunSP : get runtime/<id>/RuntimeDescriptor
+
+create RunReg@A
+RunUA@A -> RunReg@A : new
+
+create RunID@A
+RunUA@A -> RunID@A : new
+
+create RunAuth@A
+RunUA@A -> RunAuth@A : new
+
+create BUS@A
+RunUA@A -> BUS@A : new
+
+RunUA@A -> CoreRunSP : post registry/hypertyRuntimeInstance/
+
+RunUA@A <- CoreRunSP : return hypertyRuntimeURL
+
+RunUA@A -> RunReg@A : init( hypertyRuntimeURL, remoteRegistryURL )
+
+@enduml

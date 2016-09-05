@@ -1,0 +1,179 @@
+
+
+@startuml "data-object-child.png"
+
+autonumber
+
+!define SHOW_SP1
+!define SHOW_SMAtSP1
+
+!define SHOW_RuntimeA
+
+!define SHOW_CoreRuntimeA
+!define SHOW_SMAtRuntimeA
+!define SHOW_SP1SandboxAtRuntimeA
+!define SHOW_Syncher1AtRuntimeA
+
+!define SHOW_Runtime1B
+
+!define SHOW_CoreRuntime1B
+!define SHOW_SMAtRuntime1B
+!define SHOW_SP1SandboxAtRuntime1B
+!define SHOW_Syncher1AtRuntime1B
+
+!include ../runtime_objects.plantuml
+
+== When object is Created, Reporter will also be an observer of Data Object Children ==
+
+Sync1@A -> RunSM@A : Create MSG
+
+...
+
+RunSM@A -> RunSM@A : runtimeCatalogue.getDataSchemaSource( CatalogueURL )
+
+RunSM@A -> RunSM@A : look for data object children resources\n in data object schema
+
+loop for each data object children resource add Reporter listener
+
+	RunSM@A -> RunSM@A : bus.addListener\n( ReporterListener, \n<ObjectURL>/children/<resource> )
+
+end
+
+...
+
+newpage
+
+== When object is subscribed, Observers will also listen for Data Object Children resources ==
+
+Sync1@1B -> RunSM@1B : Subscribe Msg
+
+RunSM@1B -> RunSM@1B : runtimeCatalogue.getDataSchemaSource( CatalogueURL )
+
+RunSM@1B -> RunSM@1B : look for data object children resources\n in data object schema
+
+== Provisional Response is sent back to Observer to let it add listener responses in advance ==
+
+Sync1@1B <- RunSM@1B : Provisional Response with\n children resources
+
+loop for each data object children \nresource add Observer listener
+
+	Sync1@1B -> Sync1@1B : Minibus.addListener\n( ObserverListener, \n<ObjectURL>/children/<resource> )
+
+end
+
+...
+
+loop for each data object children \nresource add Observer listener
+
+	RunSM@1B -> RunSM@1B : bus.addListener\n( ObserverListener, \n<ObjectURL>/children/<resource> )
+
+end
+
+...
+
+RunSM@1B -> SM@SP1: Subscribe Msg
+
+...
+
+loop for each data object children \nresource add Observer listener
+
+	SM@SP1 -> SM@SP1 : add ObserverRuntimeListener\nto <ObjectURL>/children/<resource> )
+
+end
+
+...
+
+RunSM@1B <- SM@SP1: Response to Subscribe Msg
+
+RunSM@1B -> RunSM@A: Subscribe Msg
+
+...
+
+loop for each data object children \nresource add Observer listener
+
+	RunSM@A -> RunSM@A : add bus.addListener(\nObserverProtostubListener\nto <ObjectURL>/children/<resource> )
+
+end
+...
+
+RunSM@1B <- RunSM@A: Response to Subscribe Msg
+
+Sync1@1B <- RunSM@1B : Final Response with\n last Object version
+
+newpage
+
+== Object Child is Created by Reporter ==
+
+Sync1@A -> Sync1@1B : Create Message to <ObjectURL>/children/<resource>
+
+opt
+	Sync1@A <- Sync1@1B  : Create Message Response.
+end
+
+Sync1@A -> Sync1@A : Ignore received Create\n Message sent by himself
+
+Sync1@A -> RunSM@A : Create Message to <ObjectURL>/children/<resource>
+
+opt
+	Sync1@A <- RunSM@A : Create Message Response.
+end
+
+newpage
+
+== Object Child is Created by Observer ==
+
+Sync1@A <- Sync1@1B : Create Message to <ObjectURL>/children/<resource>
+
+opt
+	Sync1@A -> Sync1@1B  : Create Message Response.
+end
+
+Sync1@1B -> RunSM@A : Create Message to <ObjectURL>/children/<resource>
+
+opt
+	Sync1@1B <- RunSM@A : Create Message Response.
+end
+
+Sync1@1B -> Sync1@1B : Ignore received Create\n Message sent by himself
+
+newpage
+
+== Object Child Created by Reporter is updated ==
+
+Sync1@A -> RunSM@A : Update Message to <ObjectURL>/children/<resource>
+
+Sync1@A -> Sync1@1B : Update Message to <ObjectURL>/children/<resource>
+
+Sync1@A -> Sync1@A : Ignore received Update\n Message sent by himself
+
+newpage
+
+== Object Child Created by Observer is updated==
+
+Sync1@A <- Sync1@1B : Update Message to <ObjectURL>/children/<resource>
+
+Sync1@1B -> RunSM@A : Update Message to <ObjectURL>/children/<resource>
+
+Sync1@1B -> Sync1@1B : Ignore received Update\n Message sent by himself
+
+newpage
+
+== Object Child Created by Reporter is deleted ==
+
+Sync1@A -> RunSM@A : Delete Message to <ObjectURL>/children/<resource>
+
+Sync1@A -> Sync1@1B : Delete Message to <ObjectURL>/children/<resource>
+
+Sync1@A -> Sync1@A : Ignore received Delete\n Message sent by himself
+
+newpage
+
+== Object Child Created by Observer is Deleted==
+
+Sync1@A <- Sync1@1B : Delete Message to <ObjectURL>/children/<resource>
+
+Sync1@1B -> RunSM@A : Delete Message to <ObjectURL>/children/<resource>
+
+Sync1@1B -> Sync1@1B : Ignore received Delete\n Message sent by himself
+
+@enduml

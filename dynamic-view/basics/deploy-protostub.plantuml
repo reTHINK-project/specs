@@ -1,0 +1,120 @@
+
+@startuml "deploy-protostub.png"
+
+autonumber
+
+!define SHOW_RuntimeA
+
+
+!define SHOW_CoreRuntimeA
+!define SHOW_MsgBUSAtRuntimeA
+!define SHOW_RegistryAtRuntimeA
+!define SHOW_CoreAgentAtRuntimeA
+
+!define SHOW_SP1SandboxAtRuntimeA
+!define SHOW_Protostub1AtRuntimeA
+!define SHOW_ServiceProvider1SandboxManagerAtRuntimeA
+
+!define SHOW_SP1
+!define SHOW_Cat1
+
+!include ../runtime_objects.plantuml
+
+-> RunUA@A : loadStub( sp-domain )
+
+RunUA@A -> RunReg@A : discoverStub( sp-domain )
+
+alt Stub Not Available in Registry
+
+RunUA@A <-- RunReg@A : returns null
+
+== get protocol stub descriptor ==
+
+
+	RunUA@A -> Cat1 : get <sp-domain>/.well-known/protostub/default/
+
+		note over BUS@A
+			as defined in the data model the
+			Protocol Stub Descriptor is located
+			 in a well known URI.
+		end note
+
+	RunUA@A <-- Cat1 : returned protostub descriptor
+
+	== get protocol stub source code ==
+
+	RunUA@A -> SP1 : get protocolStubSourceCode
+
+	RunUA@A <-- SP1 : return protostub.js
+
+	== get protocol stub URL ==
+
+	group Protocol Stub instance is registered
+		RunUA@A -> RunReg@A : registerStub(sp-domain)
+
+		note right
+			protostub can be generated locally
+			by the Runtime Registry ensuring
+			the address is unique in the Runtime namespace
+			since it only has to be reached by Runtime components
+		end note
+
+		RunReg@A -> RunReg@A : generateStubURL(sp-domain)
+
+		opt Protocol Stub instance is registered in the remote Domain Registry
+		...
+		end
+
+		RunReg@A -> BUS@A : addListener(\n registryListener,\n RuntimeProtoStubURL\status)
+
+		RunUA@A <-- RunReg@A : return RuntimeProtoStubURL
+	end
+
+== Instantiate Sandbox with Protocol Stub ==
+
+	create Sand1@A
+	RunUA@A -> Sand1@A : new( msgBus )
+
+	RunUA@A <-- Sand1@A : return sandboxInstance
+
+	RunUA@A -> RunReg@A : registerSandbox\n( sandboxInstance, domainURL )
+
+	RunUA@A <-- RunReg@A : return RuntimeSandboxURL
+
+	RunUA@A -> Sand1@A : deployComponent( protostub.js, RuntimeProtoStubURL,configuration )
+
+
+
+	create Proto1@A
+	Sand1@A -> Proto1@A : new
+
+	RunUA@A <-- Sand1@A : return componet is deployed
+
+
+== configure core msg bus to route messages to new protocol stub ==
+
+
+	BUS@A <- RunUA@A : addListener( sandboxInstance.postMessage, RuntimeProtoStubURL)
+
+	 <- RunUA@A : successful
+
+== Protocol Stub connects to domain ==
+
+	group Protocol Stub connection to domain: see Domain Registration in the Identity Management diagrams
+
+	...
+
+	end group
+
+	Proto1@A -> BUS@A : postMessage( \nprotostubStatusUpdate message )
+
+
+	note left
+		eg protostub is connected or disconnected from the domain
+	end note
+
+	BUS@A -> RunReg@A : onEvent( \nprotostubStatusUpdate message )
+
+end
+
+@enduml

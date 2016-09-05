@@ -1,0 +1,77 @@
+
+
+@startuml "bus-msg-routing.png"
+
+autonumber
+
+!define SHOW_RuntimeA
+
+!define SHOW_CoreRuntimeA
+!define SHOW_MsgBUSAtRuntimeA
+!define SHOW_RegistryAtRuntimeA
+!define SHOW_IdentitiesAtRuntimeA
+!define SHOW_AuthAtRuntimeA
+
+!include ../runtime_objects.plantuml
+
+BUS@A <-  : send msg
+
+RunReg@A <- BUS@A : resolve(Message)
+
+RunReg@A -> RunReg@A  : verify source(association Id Token)
+
+RunReg@A -> RunReg@A  : resolve targed address
+
+group option :unregistered Protocol Stub for external address
+
+	group discover Protocol Stub URL
+	end
+
+	group deploy Protocol Stub
+	end
+
+end
+
+
+RunReg@A -> BUS@A : return(ResolvedMessage)
+
+loop until authorised or final error
+	RunAuth@A <- BUS@A : authorise(Message)
+
+	RunAuth@A -> RunAuth@A : apply authz Policies
+
+	alt Message Routing authorised
+		RunAuth@A -> BUS@A : authorised
+	else
+
+		alt assertion required
+			RunAuth@A -> RunID@A : generateAssertion( message / scope? )
+
+			RunAuth@A <- RunID@A : return Assertion
+
+
+		else verify assertion
+			RunAuth@A -> RunID@A : validateAssertion( message )
+			RunAuth@A <- RunID@A : return validation
+		end
+	else
+		RunAuth@A -> BUS@A : final error
+
+		alt Error : unknown source
+
+		else Error : target not found
+
+		else Error : not associated with Identity
+
+		else Error : blocked by source policy
+
+		else Error : blocked by target policy
+		end
+	end
+end
+
+
+BUS@A ->  : send msg
+
+
+@enduml

@@ -1,0 +1,71 @@
+
+
+@startuml "data-object-unsubscribe.png"
+
+autonumber
+
+!define SHOW_SP1
+!define SHOW_SMAtSP1
+
+!define SHOW_SP2
+!define SHOW_SMAtSP2
+
+!define SHOW_RuntimeA
+
+!define SHOW_CoreRuntimeA
+!define SHOW_SMAtRuntimeA
+!define SHOW_SP1SandboxAtRuntimeA
+!define SHOW_Syncher1AtRuntimeA
+
+!define SHOW_Runtime1B
+
+!define SHOW_CoreRuntime1B
+!define SHOW_SMAtRuntime1B
+!define SHOW_SP1SandboxAtRuntime1B
+!define SHOW_Syncher1AtRuntime1B
+
+!include ../runtime_objects.plantuml
+
+
+== Hyperty requests to stop be Observer of Data Object ==
+
+Sync1@1B -> RunSM@1B : Unsubscribe Msg
+
+RunSM@1B -> RunSM@A : Unsubscribe Msg
+
+RunSM@A -> RunSM@A : listener.remove()
+
+opt
+	RunSM@A -> RunSM@A : bus.postMessage(\n Update Message\nfor DataObjectObservers )
+
+	note right
+		the DataObjectObservers resource is updated
+		with information about the removal of the Hyperty observer
+		thus, if Hyperty owner is listening on this resource
+		it will be informed about the Observer removal.
+	end note
+
+end
+
+RunSM@A -> RunSM@1B : Unsubscription\nResponse Message
+
+== Routing Path removed from Reporter side to stop receiving data object updates ==
+
+RunSM@1B -> SM@SP1 : Unsubscribe Msg
+SM@SP1 -> SM@SP1 : removeListeners
+
+RunSM@1B <- SM@SP1 : OK Unsubscribe Response Msg
+
+== listeners removed at Observer side to stop receiving data object updates ==
+
+RunSM@1B -> RunSM@1B : listener.remove()
+
+RunSM@1B -> SM@SP2 : Unsubscribe Msg
+SM@SP2 -> SM@SP2 : removeListeners
+
+RunSM@1B <- SM@SP2 : OK Unsubscribe Response Msg
+
+
+RunSM@1B -> Sync1@1B : OK Unsubscribe Response Msg
+
+@enduml

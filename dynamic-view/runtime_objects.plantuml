@@ -1,0 +1,288 @@
+
+!ifdef SHOW_Alice
+	actor "Alice" as Alice
+	!endif
+
+!ifdef SHOW_RuntimeA
+
+	!ifdef SHOW_AppAtRuntimeA
+		participant "AppCoreStub" as App@A
+	!endif
+
+	!ifdef SHOW_AppSandboxAtRuntimeA
+		participant "AppSandbox" as AppSand@A
+	!endif
+
+	!ifdef SHOW_NativeAtRuntimeA
+		box "Alice's Device Native Runtime" #LightBlue
+			!ifdef SHOW_HTTPClientAtRuntimeA
+				participant "HTTP Client" as HTTP_UAC@A
+			!endif
+
+			!ifdef SHOW_WebRTCAtRuntimeA
+				participant "WebRTC" as WRTC@A
+			!endif
+
+			!ifdef SHOW_JavascriptEngineAtRuntimeA
+				participant "JavaScript Runtime" as JS@A
+			!endif
+		end box
+	!endif
+
+	!ifdef SHOW_CoreRuntimeA
+		box "Alice's Device\nCore Runtime" #LightBlue
+			!ifdef SHOW_CoreAgentAtRuntimeA
+				participant "RuntimeUA" as RunUA@A
+			!endif
+
+			!ifdef SHOW_RegistryAtRuntimeA
+				participant "Registry" as RunReg@A
+			!endif
+
+			!ifdef SHOW_IdentitiesAtRuntimeA
+				participant "Identity\nModule" as RunID@A
+			!endif
+
+			!ifdef SHOW_AuthAtRuntimeA
+				participant "Policy\nEngine" as RunAuth@A
+			!endif
+
+			!ifdef SHOW_PEPAtRuntimeA
+				participant "Core PEP" as RunPEP@A
+			!endif
+
+			!ifdef SHOW_SMAtRuntimeA
+				participant "Sync Manager" as RunSM@A
+			!endif
+
+			!ifdef SHOW_MsgBUSAtRuntimeA
+				participant "Msg BUS" as BUS@A
+			!endif
+		end box
+	!endif
+
+	!ifdef SHOW_SP1SandboxAtRuntimeA
+		box "Service Provider 1\nSandbox at Alice Device" #LightBlue
+
+			!ifdef SHOW_ServiceProvider1SandboxManagerAtRuntimeA
+			participant "Service Provider1\nSandbox" as Sand1@A
+			!endif
+
+
+			!ifdef SHOW_ServiceProvider1HypertyAtRuntimeA
+			participant "Service Provider1\nHyperty" as SP1H@A
+			!endif
+
+			!ifdef SHOW_ServiceProvider1Hyperty2AtRuntimeA
+			participant "Service Provider1\nHyperty2" as SP1H2@A
+			!endif
+
+			!ifdef SHOW_ServiceProvider1RouterAtRuntimeA
+			participant "Service Provider1\nPEP" as Router1@A
+			!endif
+
+			!ifdef SHOW_IdentityObjectAtRuntimeA
+			participant "Identity\nData Object" as IDObj@A
+			!endif
+
+			!ifdef SHOW_CommObjectAtRuntimeA
+			participant "Connection\nData Object" as CommObj@A
+			!endif
+
+			!ifdef SHOW_LocalObjectAtRuntimeA
+			participant "Reporting\nData Objects" as LocObj@A
+			!endif
+
+			!ifdef SHOW_RemoteObjectAtRuntimeA
+			participant "Remote\nData Objects" as RemObj@A
+			!endif
+
+			!ifdef SHOW_Syncher1AtRuntimeA
+			participant "Syncher" as Sync1@A
+			!endif
+
+			!ifdef SHOW_Protostub1AtRuntimeA
+			participant "SP1\nprotoStub" as Proto1@A
+			!endif
+		end box
+	!endif
+
+	!ifdef SHOW_SP2SandboxAtRuntimeA
+		box "Service Provider 2\n Sandbox at Alice Device" #LightBlue
+			!ifdef SHOW_Protostub2AtRuntimeA
+			participant "SP2\nprotoStub" as Proto2@A
+			!endif
+
+			!ifdef SHOW_ServiceProvider2HypertyAtRuntimeA
+			participant "Service Provider2\nHyperty" as SP2H@A
+			!endif
+
+			!ifdef SHOW_ServiceProvider2RouterAtRuntimeA
+			participant "Service Provider2\nPEP" as Router2@A
+			!endif
+
+			!ifdef SHOW_Syncher2AtRuntimeA
+			participant "Syncher" as Sync2@A
+			!endif
+
+		end box
+	!endif
+
+	!ifdef SHOW_IDPSandboxAtRuntimeA
+		box "IDP Sandbox at Alice Device" #LightBlue
+			participant "IdP Proxy" as idpProxy@A
+
+		end box
+	!endif
+!endif
+
+!ifdef SHOW_CoreRuntimeProvider
+	box "Core Runtime Service Provider"
+		participant "Back-end Service" as CoreRunSP
+	end box
+
+!endif
+
+
+!ifdef SHOW_SP1
+	box "Service Provider 1\nReporter"
+		participant "Back-end Service" as SP1
+
+		!ifdef SHOW_Msg1
+			participant "Msg Service" as Msg1
+		!endif
+
+		!ifdef SHOW_SMAtSP1
+			participant "Synch Manager" as SM@SP1
+		!endif
+
+		!ifdef SHOW_Cat1
+			participant "Catalogue\nSupport Service" as Cat1
+		!endif
+	end box
+!endif
+
+!ifdef SHOW_SP1_WITH_SP2Stub
+	box "Service Provider 1"
+		participant "SP2 protoStub" as SP2Stub
+	end box
+!endif
+
+!ifdef SHOW_Runtime1B
+
+	!ifdef SHOW_AppAtRuntime1B
+		participant "App" as App@1B
+	!endif
+
+	!ifdef SHOW_NativeAtRuntime1B
+		box "Bob's Device Native Runtime"  #DarkSalmon
+			!ifdef SHOW_WebRTCAtRuntime1B
+				participant "WebRTC" as WRTC
+			!endif
+
+			!ifdef SHOW_JavascriptEngineAtRuntime1B
+				participant "JavaScript Runtime" as JS
+			!endif
+		end box
+	!endif
+
+	!ifdef SHOW_CoreRuntime1B
+		box "Bob's Device Core Runtime" #DarkSalmon
+
+			!ifdef SHOW_RegistryAtRuntime1B
+				participant "Registry" as RunReg@1B
+			!endif
+
+			!ifdef SHOW_SMAtRuntime1B
+				participant "Sync Manager" as RunSM@1B
+			!endif
+
+			!ifdef SHOW_IdentitiesAtRuntime1B
+				participant "Identities" as RunID@1B
+			!endif
+
+			!ifdef SHOW_AuthAtRuntime1B
+				participant "Authorisation" as RunAuth@1B
+			!endif
+			!ifdef SHOW_MsgBUSAtRuntime1B
+				participant "Msg BUS" as BUS@1B
+			!endif
+		end box
+	!endif
+
+	!ifdef SHOW_SP1SandboxAtRuntime1B
+		box "Service Provider 1 Sandbox\n at Bob Device" #DarkSalmon
+			!ifdef SHOW_Protostub1AtRuntime1B
+			participant "SP1\nprotoStub" as Proto1@1B
+			!endif
+
+			!ifdef SHOW_ServiceProvider1RouterAtRuntime1B
+			participant "Service Provider1\nRouter" as Router1@1B
+			!endif
+
+			!ifdef SHOW_ServiceProvider1HypertyAtRuntime1B
+			participant "Service Provider1\nHyperty" as SP1H@1B
+			!endif
+
+			!ifdef SHOW_CommObjectAtRuntime1B
+			participant "Connection\nData Object" as CommObj@1B
+			!endif
+
+			!ifdef SHOW_LocalObjectAtRuntime1B
+			participant "Local\nData Object" as LocObj@1B
+			!endif
+
+			!ifdef SHOW_RemoteObjectAtRuntime1B
+			participant "Remote\nData Object" as RemObj@1B
+			!endif
+
+			!ifdef SHOW_IdentityObjectAtRuntime1B
+			participant "Identity\nData Object" as IDObj@1B
+			!endif
+
+			!ifdef SHOW_Syncher1AtRuntime1B
+			participant "Syncher" as Sync1@1B
+			!endif
+
+		end box
+	!endif
+
+	!ifdef SHOW_SP2SandboxAtRuntime1B
+		box "Service Provider 2\n Sandbox at Bob Device"
+			!ifdef SHOW_Protostub2AtRuntime1B
+			participant "SP2\nprotoStub" as Proto2@1B
+			!endif
+
+			!ifdef SHOW_ServiceProvider2HypertyAtRuntime1B
+			participant "Service Provider2\nHyperty" as SP2H@1B
+			!endif
+
+			!ifdef SHOW_ServiceProvider2RouterAtRuntime1B
+			participant "Service Provider2\nRouter" as Router2@1B
+			!endif
+		end box
+	!endif
+
+
+!endif
+
+
+!ifdef SHOW_SP2
+	box "Service Provider 2\nObserver"
+		participant "Backend Service" as SP2
+
+		!ifdef SHOW_SMAtSP2
+			participant "Synch Manager" as SM@SP2
+		!endif
+	end box
+!endif
+
+!ifdef SHOW_IDP
+	box "Identity Provider"
+		participant "Identity Management" as IDP
+	end box
+!endif
+
+!ifdef SHOW_Bob
+	actor "Bob" as Bob
+!endif
