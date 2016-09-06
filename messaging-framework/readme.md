@@ -35,8 +35,25 @@ Protocol on-the-fly leverages the code on-demand support by Web runtimes (eg Jav
 
 ### Message Delivery between different Hyperty Runtimes
 
-*to be updated with p2p message delivery*
+Communication between different Hyperty Runtimes can be supported with peer to peer connections or via a Message Node. In both options a Protostub implementing the most appropriate network protocol stack is used. For example,  JSON over Websockets and  Restfull API Client are good options for Protostubs used to interface with a Message Node, while WebRTC Datachannel is a good option for a Protostub used to directly interface with another Hyperty Runtime.
 
-Communication between the Message BUS and Message Nodes are provided by a Protostub that implements the protocol stack used to interact with the Message Node e.g. JSON over Websockets or a Restfull API Client. Listeners of protostubs are registered in the MessageBUS for a set of Message recipient addresses, usually a Hyperty Domain like `domain://example.com`.
+Protostubs are registered in the Runtime Registry with its own Hyperty Runtime URL e.g. `hyperty-runtime://example.com/runtime-123/protostub-3` and have listeners in the MessageBUS to receive messages targeting its URL.
 
-When the MessageBUS is processing a new message and looking up routing paths for an address (The Message Routing generic procedure is described [here](../dynamic-view/basics/bus-msg-routing.md)), which is not local (eg `hyperty://example.com/alice-hyperty`), it won't find any registered listeners. In this case, the MessageBUS will ask the [Runtime Registry](https://github.com/reTHINK-project/dev-runtime-core/blob/master/src/registry/Registry.js) to resolve the "Message.to" header field, which will look for registered Protostubs that are able to deliver messages to such non-local address. If there is already a deployed Protostub that is able to deliver the message to the remote Hyperty, the Registry will return the Hyperty Runtime protostub address and the MessageBUS will look up again for the protostub listener registered for its address. Otherwise, the [deployment of the required Protostub is performed](../dynamic-view/basics/deploy-protostub.md) and as soon as the Protostub is successfully instantiated, its hyperty runtime address is returned.
+When the MessageBUS is processing a new message and looking up routing paths for an address (The Message Routing generic procedure is described [here](../dynamic-view/basics/bus-msg-routing.md)), which is not local (eg `hyperty://example.com/alice-hyperty`), it won't find any registered listeners. In this case, the MessageBUS will ask the [Runtime Registry](https://github.com/reTHINK-project/dev-runtime-core/blob/master/src/registry/Registry.js) to resolve the "Message.to" header field. Then, the Runtime Registry will look for registered Protostubs that are able to deliver messages to such non-local address.
+
+If there is already a deployed Protostub that is able to deliver the message to the remote Hyperty, the Registry will return the Hyperty Runtime protostub address and the MessageBUS will look up again for the protostub listener registered for its address. Otherwise, the [deployment of the required Protostub is performed](../dynamic-view/basics/deploy-protostub.md) and as soon as the Protostub is successfully instantiated, its hyperty runtime address is returned.
+
+In this process, P2P Protostubs are favored since less resources are spent and Network latency should be better.
+
+#### Peer to peer message delivery
+
+There are two types of P2P Protostubs:
+
+- P2P Handler Stub: would be deployed as soon as the Runtime is instantiated to be ready to receive requests setup P2P Connections. It would be the [observer](p2p-data-sync.md) of [Connection Data objects](../datamodel/data-objects/connection) that are created by remote P2P Requesters Stub. The P2P Handler Stub can observe more than one connection data objects ie it can handle several p2p connections to remote runtimes. Each p2p connection would be managed by a connection controller (see Connector hyperty design). As soon as the Runtime is instantiated, the P2P Handler Stub is deployed and the path to receive P2P Data Connection creation requests from P2P Requester Stubs is set.
+- P2P Requester Stub : it would be deployed to setup a p2p connection with a remote runtime  P2P Handler Stub. It would be the [reporter]([observer](p2p-data-sync.md)) of a single [Connection Data object](../datamodel/data-objects/connection) object instance.
+
+These P2P Protostubs are provisioned in the catalogue with p2p attribute enabled. *todo: propose new p2p attribute  in the protostub descriptor*.
+
+Hyperties that are deployed in a P2P enabled runtime, are registered in the Domain Registration with its Hyperty Runtime URL and its P2P Handler Stub instance URL. P2P Requester Protostubs in other Runtimes can setup a P2P connection exchanging messages with the P2P Handler Protostub through the Message Node ie using Message Nodes Protosubs (see picture below).
+
+![P2P Protostubs](p2p-protostub.png)
