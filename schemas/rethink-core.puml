@@ -1,4 +1,4 @@
-@startuml "../docs/datamodel/Rethink-Core.png"
+@startuml "../datamodel/Rethink-Core.png"
 
 package RethinkCore <<Rect>> {
 
