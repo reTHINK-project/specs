@@ -1,0 +1,37 @@
+@startuml "../../docs/datamodel/core/hyperty-registry/Hyperty-Data-Object-Instance-Model.png"
+
+package RegistryDataObject <<Rect>> {
+
+	package HypertyDataObjectInstance <<Rect>> {
+
+		class HypertyDataObjectInstance {
+			owner : URL.HypertyURL
+			resources : HypertyResource.HypertyResourceType[]
+			name : string
+			description ?: string
+			tags ?: string[]
+		}
+
+		class HypertyCommunicationDataObjectInstance {
+			url : URL.CommunicationURL
+		}
+
+		class HypertyContextDataObjectInstance {
+			url : URL.ContextURL
+		}
+
+		HypertyContextDataObjectInstance .up.|> HypertyDataObjectInstance
+		HypertyCommunicationDataObjectInstance .up.|> HypertyDataObjectInstance
+
+		HypertyDataObjectInstance .up.|> RegistryDataObject.RegistryDataObject
+	}
+
+	package HypertyInstance <<Rect>> {
+	}
+
+	HypertyDataObjectInstance ..> RegistryDataObject.HypertyInstance.HypertyInstance : owned by
+	HypertyDataObjectInstance ..> RethinkCore.CatalogueDataObject.DataObjectSchema.DataObjectSchema : described by
+	HypertyDataObjectInstance .up.> HypertyResource.HypertyResourceType
+}
+
+@enduml

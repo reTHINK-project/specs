@@ -1,0 +1,54 @@
+@startuml "../../docs/datamodel/core/graph-connector/graph-connector.png"
+
+GraphConnector -->"*" GraphConnectorContactData
+GraphConnector -->"1" GlobalRegistryRecord
+
+package GraphConnector <<Rect>> {
+
+  class GraphConnector {
+
+  GUID : String
+  firstName : String
+  lastName : String
+  contacts : List<GraphConnectorContactData>
+  contactsBloomFilter1Hop : graphconnector.BloomFilter
+  lastCalculationBloomFilter1Hop : ISO.Date
+  globalRegistryRecord : graphconnector.GlobalRegistryRecord
+  groups : List<String>
+  residenceLocation : String
+
+  }
+
+
+  class GraphConnectorContactData {
+
+  GUID : String
+  userIDs : List<String>
+  lastSyncDomainUserIDs : ISO.Date
+  firstName : String
+  lastName : String
+  groups : List<String>
+  contactsBloomFilter1Hop : graphconnector.BloomFilter
+  lastSyncBloomFilter1Hop : ISO.Date
+  privateContact : Boolean
+  residenceLocation : String
+
+  }
+
+
+  class GlobalRegistryRecord {
+
+  GUID : guid
+  salt : String
+  userIDs : List<String>
+  lastUpdate : ISO.Date
+  timeout : ISO.Date
+  publicKey : String
+  active : Integer
+  revoked : Integer
+
+  }
+}
+
+
+@enduml

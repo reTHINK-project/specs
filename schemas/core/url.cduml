@@ -1,0 +1,81 @@
+@startuml "../../docs/datamodel/core/address/Address-Model.png"
+
+package URL <<Rect>> {
+
+	class URL {
+		scheme : string
+		username? : string
+		password? : string
+		host? : string
+		port? : string
+		path? : string
+		query? : string
+		fragment? : string
+	}
+	note right: as standardised at https://url.spec.whatwg.org/
+
+	class UserURL {
+		scheme = "user"
+	}
+
+	class UserGUIDURL {
+		scheme = "user-guid"
+	}
+
+	class DomainURL {
+		scheme = "domain"
+	}
+
+	class UserAccountURL {
+		scheme = "acct"
+	}
+	note top: as standardised at http://tools.ietf.org/html/rfc7565
+
+	class HypertyURL {
+		scheme = "hyperty"
+	}
+
+	class HypertyCatalogueURL {
+		scheme = "hyperty-catalogue"
+	}
+
+	class HypertyRuntimeURL {
+		scheme = "hyperty-runtime"
+	}
+
+	class CommunicationURL {
+		scheme = "comm"
+	}
+
+	class ConnectionURL {
+		scheme = "connection"
+	}
+
+	class ContextURL {
+		scheme = "ctxt"
+	}
+
+	class HypertyCatalogueURLList {
+	}
+
+	UserURL --|> URL
+	UserGUIDURL --|> URL
+	UserAccountURL --|> URL
+	HypertyURL -up-|> URL
+	HypertyCatalogueURL -up-|> URL
+	HypertyRuntimeURL -up-|> URL
+	CommunicationURL -up-|> URL
+	ConnectionURL --|> URL
+	DomainURL -up-|> URL
+	ContextURL --|> URL
+
+	URL.URLList *-- URL
+
+	URL --|> RethinkType.ListElement
+	URL.URLList --|> RethinkType.List
+
+	HypertyCatalogueURLList ..|> RethinkType.List
+	HypertyCatalogueURLList *.up.> HypertyCatalogueURL
+}
+
+@enduml

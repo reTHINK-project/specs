@@ -1,0 +1,38 @@
+@startuml "../../docs/datamodel/core/hyperty-registry/Registry-Data-Object.png"
+
+package RegistryDataObject <<Rect>> {
+
+	class RegistryDataObject {
+		id : string
+		url : URL.URL
+		descriptor : URL.HypertyCatalogueURL
+		startingTime : date
+		lastModified : date
+		expires : integer
+		stubs ?: URL.HypertyCatalogueURL
+		stubsConfiguration ?: RethinkCore.CatalogueDataObject.ProtoStubDescriptor.ProtostubConfiguration
+	}
+
+	enum RegistryDataObjectStatus {
+		CREATED
+		LIVE
+		DISCONNECTED
+		DEAD
+	}
+
+	package HypertyInstance <<Rect>> {
+	}
+
+	package HypertyRuntimeInstance <<Rect>> {
+	}
+
+	package HypertyDataObjectInstance <<Rect>> {
+	}
+
+	RegistryDataObject .up.> RegistryDataObjectStatus
+
+	RegistryDataObject.HypertyInstance.HypertyInstance .up.|> RegistryDataObject
+	RegistryDataObject.HypertyRuntimeInstance.HypertyRuntimeInstance .up.|> RegistryDataObject
+	RegistryDataObject.HypertyDataObjectInstance.HypertyDataObjectInstance .up.|> RegistryDataObject
+}
+@enduml

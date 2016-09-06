@@ -1,0 +1,64 @@
+@startuml "../../docs/datamodel/data-objects/connection/Connection-Data-Object-Model.png"
+
+package Connection <<Rect>> {
+
+	class Connection {
+		scheme = "connection"
+		status : string
+		owner : URL.UserURL
+		peer : URL.ConnectionURL
+	}
+
+  	class OwnerPeer {
+	}
+
+	class Peer {
+	}
+
+	class IceCandidate {
+		candidate : string
+		sdpMLineIndex : integer
+		sdpMid : string
+	}
+
+	class IceCandidates {
+    	status : RTCIceConnectionState
+	}
+
+	class ConnectionDescription {
+		sdp : string
+	}
+
+	class RtpTransportParameters {
+    	status
+	}
+	note top : to be used for ORTC compliant browsers
+
+	enum RTCIceConnectionState {
+	    new
+	    checking
+	    connected
+	    completed
+	    failed
+	    disconnected
+	    closed
+	}
+	
+	Connection -up-|> SyncDataObject.SyncDataObject
+	Peer -up-|> SyncDataObject.SyncDataObject
+
+	Connection *--> "1" OwnerPeer
+	Connection ..> "1" Peer
+
+	Peer *--> "1" IceCandidates
+	Peer *--> "1" ConnectionDescription
+	Peer *--> "1" RtpTransportParameters
+
+	OwnerPeer *--> "1" IceCandidates
+	OwnerPeer *--> "1" ConnectionDescription
+	OwnerPeer *--> "1" RtpTransportParameters
+
+	IceCandidates -down-> RTCIceConnectionState
+	IceCandidates *--> IceCandidate
+}
+@enduml

@@ -1,0 +1,54 @@
+@startuml "../../docs/datamodel/data-objects/communication/Communication-Data-Object-Model.png"
+
+package Communication <<Rect>> {
+
+	class Communication {
+		scheme = "comm"
+		startingTime : date
+		lastModified : date
+		duration ?: date
+		status : CommunicationStatus
+		participants ?: Participant[]
+		qos ?: CommunicationQuality
+		children = ["resources"]
+	}
+
+	class Resources <<Children>> {
+		parent = "communication"
+		listener = "resources"
+		type = "HypertyResource"
+	}
+
+
+	enum CommunicationStatus {
+		OPEN
+		PENDING
+		CLOSED
+		PAUSED
+		FAILED
+	}
+
+	enum ParticipantStatus {
+	}
+
+	class Participant {
+		status ?: ParticipantStatus
+	}
+
+	class CommunicationQuality {
+	}
+
+	Communication -up-|> SyncDataObject.SyncObjectParent
+	Resources -up-|> SyncDataObject.SyncObjectChildren
+	Communication .. CommunicationStatus
+	Communication .left. Resources
+	Communication *.. Participant
+	Communication *.. CommunicationQuality
+	Participant .. ParticipantStatus
+	Participant ..> HypertyResource.HypertyResource
+	Participant ..> Identity.Identity
+
+	HypertyResource ..> Connection.Connection : transportedBy
+}
+
+@enduml

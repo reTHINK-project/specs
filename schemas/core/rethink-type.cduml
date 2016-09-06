@@ -1,0 +1,26 @@
+@startuml "../../docs/datamodel/core/Types.png"
+	package RethinkType {
+
+		enum Basic {
+		STRING
+		BOOLEAN
+		FLOAT
+		DOUBLE
+		}
+
+		class Date {
+
+		}
+
+		class List {
+
+		}
+
+		class ListElement {
+
+		}
+
+	List *.. ListElement
+
+	}
+@enduml

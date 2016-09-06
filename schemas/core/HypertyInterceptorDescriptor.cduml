@@ -1,0 +1,35 @@
+@startuml "../../docs/datamodel/core/hyperty-catalogue/Hyperty-Interceptor-Descriptor-Data-Object-Model.png"
+
+package RethinkCore <<Rect>> {
+
+	package CatalogueDataObject <<Rect>> {
+	
+		package HypertyInterceptorDescriptor <<Rect>> {
+		
+			class HypertyInterceptorDescriptor {
+				configuration ?: HypertyInterceptorConfiguration
+				policies ?: HypertyPolicyList
+			}
+		
+			class HypertyInterceptorConfiguration {
+			}
+		
+		
+			class HypertyPolicyList {
+			}
+		
+			class HypertyPolicy {
+			}
+		
+		
+			HypertyInterceptorDescriptor .up.|> RethinkCore.CatalogueDataObject.CatalogueDataObject
+		
+			HypertyInterceptorDescriptor *.. "0..1" HypertyPolicyList
+			HypertyInterceptorDescriptor *.. "0..1" HypertyInterceptorConfiguration
+		
+			HypertyPolicyList *.. HypertyPolicy
+		}
+	
+	}
+}
+@enduml

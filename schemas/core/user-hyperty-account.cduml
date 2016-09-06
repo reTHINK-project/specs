@@ -1,0 +1,21 @@
+@startuml "../../docs/datamodel/core/user-hyperty-account/User-Hyperty-Account-Data-Object-Model.png"
+
+package UserHypertyAccount <<Rect>> {
+
+	class UserHypertyAccount {
+		id
+		account : URL.UserURL
+		hyperty : URL.HypertyURL
+	}
+
+	class UserHypertyConfigurationData {
+	}
+
+	class UserHypertyPolicy {
+	}
+
+	UserHypertyAccount *-- UserHypertyPolicy
+	UserHypertyAccount *-- UserHypertyConfigurationData
+}
+
+@enduml

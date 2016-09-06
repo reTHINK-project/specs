@@ -1,0 +1,15 @@
+@startuml "../../docs/datamodel/core/hyperty-registry/Hyperty-Runtime-Instance-Data-Object-Model.png"
+
+package RegistryDataObject <<Rect>> {
+
+	package HypertyRuntimeInstance <<Rect>> {
+
+		class HypertyRuntimeInstance {
+			url : URL.HypertyRuntimeURL
+			domains : URL.URL[]
+		}
+	
+		HypertyRuntimeInstance .up.|> RegistryDataObject.RegistryDataObject
+	}
+}
+@enduml

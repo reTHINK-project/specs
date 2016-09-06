@@ -1,0 +1,61 @@
+@startuml "../../docs/datamodel/core/address/Address-List-Model.png"
+
+package URL <<Rect>> {
+
+	class URLList {
+	}
+
+	class UserURLList {
+	}
+
+	class UserUUIDURLList {
+	}
+
+	class DomainURLList {
+	}
+
+	class UserAccountURLList {
+	}
+
+	class HypertyURLList {
+	}
+
+	class HypertyCatalogueURLList {
+	}
+
+	class HypertyRuntimeURLList {
+	}
+
+	class CommunicationURLList {
+	}
+
+	class ContextURLList {
+	}
+
+	UserURLList --|> URLList
+	UserUUIDURLList --|> URLList
+	UserAccountURLList --|> URLList
+	HypertyURLList -up-|> URLList
+	HypertyCatalogueURLList -up-|> URLList
+	HypertyRuntimeURLList -up-|> URLList
+	CommunicationURLList -up-|> URLList
+	DomainURLList -up-|> URLList
+	ContextURLList --|> URLList
+
+	UserURLList *-up- URL.UserURL
+	UserUUIDURLList *-up- URL.UserGUIDURL
+	UserAccountURLList *-up- URL.UserAccountURL
+	HypertyURLList *-down- URL.HypertyURL
+	HypertyCatalogueURLList *-down- URL.HypertyCatalogueURL
+	HypertyRuntimeURLList *-down- URL.HypertyRuntimeURL
+	CommunicationURLList *-down- URL.CommunicationURL
+	DomainURLList *-down- URL.DomainURL
+	ContextURLList *-up- URL.ContextURL
+
+	URL.URL --|> RethinkCore.RethinkType.ListElement
+	URLList --|> RethinkCore.RethinkType.List
+
+	URLList *-right- URL.URL
+}
+
+@enduml

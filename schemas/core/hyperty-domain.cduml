@@ -1,0 +1,62 @@
+@startuml "../../docs/datamodel/core/hyperty-domain/domain.png"
+
+package HypertyDomain <<Rect>> {
+
+	class HypertyDomain {
+		identifier : string
+		name : URL.DomainURL
+		description ?: string
+	}
+
+	class Infrastructure {
+		hypertyReferential ?: URL.URL
+		catalogue : URL.URL
+		registry : URL.URL
+		registryStubURL : URL.URL
+		messageServerStubURL ?: URL.URL
+		interDomainMessageServerStubURL ?: URL.URL
+		networkPlatformStubURL ?: URL.URL
+		stunServer ?: URL.URL
+		turnServer ?: URL.URL
+	}
+
+	class Governance {
+		domainDataSchemas : DomainDataSchemas
+		partnershipLifeCycle
+		partnershipPolicies
+		hypertyLifeCycle : HypertyLifecycle
+		hypertyPolicies : HypertyPolicies
+	}
+
+	class DomainDataSchemas {
+		hypertyDescriptorSchema : URL.URL
+		hypertyInstanceSchema : URL.URL
+		hypertyRuntimeSchema : URL.URL
+		addressSchema : URL.URL
+		messageSchema : URL.URL
+		userHypertyAccountSchema : URL.URL
+		userIdentitySchema : URL.URL
+	}
+
+	note bottom: links to JSON Schemas files describing the data sets used in the domain
+
+	class HypertyLifecycle {
+		businessProcess : string
+	}
+
+	note bottom: BPMN is a good candidate to describe reTHINK life cycles
+
+	class HypertyPolicies {
+		management
+		aaa
+		qos
+	}
+}
+
+HypertyDomain --> Governance
+HypertyDomain --> Infrastructure
+Governance --> HypertyLifecycle
+Governance --> HypertyPolicies
+Governance --> DomainDataSchemas
+
+@enduml

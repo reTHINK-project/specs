@@ -1,0 +1,71 @@
+@startuml "../../docs/datamodel/core/hyperty-catalogue/Catalogue-Data-Object.png"
+
+package CatalogueDataObject <<Rect>> {
+
+	class CatalogueDataObject {
+		cguid : string
+		type : CatalogueObjectType
+		version : string
+		objectName : string
+		description : string
+		language : DataObjectSourceLanguage
+		sourcePackageURL : URL.URL
+		sourcePackage ?: SourcePackage
+		signature ?: string
+	}
+
+	class CatalogueObjectType {
+	HYPERTY
+	PROTOSTUB
+	IDP_PROXY
+	HYPERTY_RUNTIME
+	HYPERTY_INTERCEPTOR
+	HYPERTY_DATA_OBJECT
+	}
+
+	class DataObjectSourceLanguage {
+	JAVASCRIPT_ECMA6
+	JAVASCRIPT_ECMA5
+	JSON_SCHEMA_V4
+	PYTHON
+	TYPE_SCRIPT
+	}
+
+	class SourcePackage {
+	encoding ?: string
+	sourceCodeClassname : string
+	sourceCode : string
+	signature ?: string
+	}
+
+	package HypertyDescriptor <<Rect>> {
+	}
+
+	package ProtoStubDescriptor <<Rect>> {
+	}
+
+	package HypertyRuntimeDescriptor <<Rect>> {
+	}
+
+	package HypertyInterceptorDescriptor <<Rect>> {
+	}
+
+	package DataObjectSchema <<Rect>> {
+	}
+
+	package IdpProxyDescriptor <<Rect>> {
+	}
+
+	CatalogueDataObject -right-> SourcePackage
+	CatalogueDataObject -left-> CatalogueObjectType
+	CatalogueDataObject -up-> DataObjectSourceLanguage
+
+	HypertyDescriptor.HypertyDescriptor .up.|> CatalogueDataObject
+	ProtoStubDescriptor.ProtoStubDescriptor .up.|> CatalogueDataObject
+	ProtoStubDescriptor.ProtoStubDescriptor <|.down. IdpProxyDescriptor.IdpProxyDescriptor
+	HypertyRuntimeDescriptor.HypertyRuntimeDescriptor .up.|> CatalogueDataObject
+	HypertyInterceptorDescriptor.HypertyInterceptorDescriptor .up.|> CatalogueDataObject
+	DataObjectSchema.DataObjectSchema .up.|> CatalogueDataObject
+}
+
+@enduml

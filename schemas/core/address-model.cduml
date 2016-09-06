@@ -1,0 +1,78 @@
+@startuml "../../docs/datamodel/core/address/Address-Model.png"
+
+package URL <<Rect>> {
+
+	class URL <<(T,orchid)>> {
+		scheme : string
+		username? : string
+		password? : string
+		host? : string
+		port? : string
+		path? : string
+		query? : string
+		fragment? : string
+	}
+	note right: as standardised at https://url.spec.whatwg.org/
+
+	class UserURL <<(T,orchid)>> {
+		scheme = "user"
+	}
+
+	class UserGUIDURL <<(T,orchid)>> {
+		scheme = "user-guid"
+	}
+
+	class DomainURL <<(T,orchid)>> {
+		scheme = "domain"
+	}
+
+	class UserAccountURL <<(T,orchid)>> {
+		scheme = "acct"
+	}
+	note top: as standardised at http://tools.ietf.org/html/rfc7565
+
+	class HypertyURL <<(T,orchid)>> {
+		scheme = "hyperty"
+	}
+
+	class HypertyCatalogueURL <<(T,orchid)>> {
+		scheme = "hyperty-catalogue"
+	}
+
+	class HypertyRuntimeURL <<(T,orchid)>> {
+		scheme = "hyperty-runtime"
+	}
+
+	class CommunicationURL <<(T,orchid)>> {
+		scheme = "comm"
+	}
+
+	class ConnectionURL <<(T,orchid)>> {
+		scheme = "connection"
+	}
+
+	class ContextURL <<(T,orchid)>> {
+		scheme = "ctxt"
+	}
+
+	class HypertyCatalogueURLList <<(T,orchid)>> {
+	}
+
+	UserURL --|> URL
+	UserGUIDURL --|> URL
+	UserAccountURL --|> URL
+	HypertyURL -up-|> URL
+	HypertyCatalogueURL -up-|> URL
+	HypertyRuntimeURL -up-|> URL
+	CommunicationURL -up-|> URL
+	ConnectionURL --|> URL
+	DomainURL -up-|> URL
+	ContextURL --|> URL
+
+	URL --|> RethinkCore.RethinkType.ListElement
+
+	HypertyCatalogueURLList ..|> RethinkCore.RethinkType.List
+	HypertyCatalogueURLList *.up.> HypertyCatalogueURL
+}
+
+@enduml

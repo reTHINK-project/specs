@@ -1,0 +1,17 @@
+@startuml "../../docs/datamodel/core/Types.png"
+package RethinkCore <<Rect>> {
+
+	package RethinkType {
+
+		class List {
+	
+		}
+	
+		class ListElement {
+	
+		}
+	
+		List *.. ListElement
+	}
+}
+@enduml

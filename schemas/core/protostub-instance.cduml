@@ -1,0 +1,16 @@
+@startuml "../../docs/datamodel/core/hyperty-registry/Protostub-Instance-Data-Object-Model.png"
+
+package RegistryDataObject <<Rect>> {
+
+	package ProtoStubInstance <<Rect>> {
+	
+		class ProtoStubInstance {
+			runtime : URL.HypertyRuntimeURL
+		}
+	
+		ProtoStubInstance .up.|> RegistryDataObject.RegistryDataObject
+		ProtoStubInstance ..> RethinkCore.CatalogueDataObject.ProtoStubDescriptor.ProtoStubDescriptor : instance of
+		ProtoStubInstance ..> RegistryDataObject.HypertyRuntimeInstance.HypertyRuntimeInstance : executing at
+	}
+}
+@enduml

@@ -1,0 +1,21 @@
+@startuml "../../docs/datamodel/core/hyperty-registry/Hyperty-Instance-Data-Object-Model.png"
+
+package RegistryDataObject <<Rect>> {
+
+	package HypertyInstance <<Rect>> {
+
+		class HypertyInstance {
+			url : URL.HypertyURL
+			user : URL.UserURL
+			guid : URL.UserGUIDURL
+			dataSchemes : RethinkCore.CatalogueDataObject.DataObjectSchema.DataUrlScheme[]
+			resources : HypertyResource.HypertyResourceType[]
+			runtime : URL.HypertyRuntimeURL
+			context : URL.ContextURL
+		}
+
+		HypertyInstance .up.|> RegistryDataObject.RegistryDataObject
+	}
+}
+
+@enduml

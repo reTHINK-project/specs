@@ -1,0 +1,216 @@
+@startuml "../../docs/datamodel/data-objects/context/Context.png"
+
+package Context <<Rect>> {
+
+	class Context {
+		url : URL.ContextURL
+		reporter : URL.HypertyURL
+		schema : URL.HypertyCatalogueURL
+		name : string
+		scheme = "context"
+		id: string
+		description ?: string
+		time?: date
+		unit?: ContextUnit
+		version?: integer
+		values: ContextValue[]
+		tag?: string
+		children ?: string[]
+		childUrls ?: URL.URL[]
+		address ?: URL.HypertyRuntimeURL
+	}
+
+	enum ContextUnitName {
+	METER
+	GRAM
+	SECOND
+	AMPERE
+	KELVIN
+	CANDELA
+	MOLE
+	HERTZ
+	RADIAN
+	STERADIAN
+	NEWTON
+	PASCAL
+	JOULE
+	WATT
+	COULOMB
+	VOLT
+	FARAD
+	OHM
+	SIEMENS
+	WEBER
+	TESLA
+	HENRY
+	DEGREES_CELSIUS
+	LUMEN
+	LUX
+	BECQUEREL
+	GRAY
+	SIEVERT
+	KATAL
+	PH_ACIDITY
+	VALUE_OF_A_SWITCH
+	COUNTER_VALUE
+	RELATIVE_HUMIDITY
+	AREA
+	VOLUME_IN_LITERS
+	VELOCITY
+	ACCELERATION
+	FLOW_RATE_IN_LITERS_PER_SECOND
+	IRRADIANCE
+	LUMINANCE
+	BEL_SOUND_PRESSURE_LEVEL
+	BITS_PER_SECOND
+	DEGREES_LATITUDE
+	DEGREES_LONGITUDE
+	REMAINING_BATTERY_ENERGY_LEVEL_IN_PERCENTS
+	REMAINING_BATTERY_ENERGY_LEVEL_IN_SECONDS
+	HEART_RATE_IN_BEATS_PER_MINUTE
+	CUMULATIVE_NUMBER_OF_HEART_BEATS
+	STEPS
+	AVAILABILITY
+	USER_ACTIVITY
+	USER_COMMUNICATION
+	}
+
+	enum ContextUnit {
+	METER
+	GRAM
+	SECOND
+	AMPERE
+	KELVIN
+	CANDELA
+	MOLE
+	HERTZ
+	RADIAN
+	STERADIAN
+	NEWTON
+	PASCAL
+	JOULE
+	WATT
+	COULOMB
+	VOLT
+	FARAD
+	OHM
+	SIEMENS
+	WEBER
+	TESLA
+	HENRY
+	DEGREES_CELSIUS
+	LUMEN
+	LUX
+	BECQUEREL
+	GRAY
+	SIEVERT
+	KATAL
+	PH_ACIDITY
+	VALUE_OF_A_SWITCH
+	COUNTER_VALUE
+	RELATIVE_HUMIDITY
+	AREA
+	VOLUME_IN_LITERS
+	VELOCITY
+	ACCELERATION
+	FLOW_RATE_IN_LITERS_PER_SECOND
+	IRRADIANCE
+	LUMINANCE
+	BEL_SOUND_PRESSURE_LEVEL
+	BITS_PER_SECOND
+	DEGREES_LATITUDE
+	DEGREES_LONGITUDE
+	REMAINING_BATTERY_ENERGY_LEVEL_IN_PERCENTS
+	REMAINING_BATTERY_ENERGY_LEVEL_IN_SECONDS
+	HEART_RATE_IN_BEATS_PER_MINUTE
+	CUMULATIVE_NUMBER_OF_HEART_BEATS
+	STEPS
+	PRES
+	ACT
+	COMM
+	}
+
+note bottom : to be updated
+
+	class ContextValue {
+		type ?: HypertyResource.HypertyResourceType
+		name : ContextUnitName
+		unit ?: ContextUnit
+		value : object
+		sum ?: ContextUnit
+		time ?: date
+		updateTime ?: date
+		expires ?: date
+	}
+
+	enum AvailabilityStatus {
+	 AVAILABLE
+	 UNAVAILABLE
+	 AWAY
+	 BUSY
+	}
+
+	enum UserActivity {
+	 WALKING
+	 RUNNING
+	 SLEEPING
+	 STILL
+	}
+
+	enum UserCommunication {
+	 TALKING
+	 CHATTING
+	 ON_AUDIO_COMM
+	 ON_VIDEO_COMM
+	 IN_AUDIO_COMM_FAILED
+	 OUT_AUDIO_COMM_FAILED
+	 IN_VIDEO_COMM_FAILED
+	 OUT_VIDEO_COMM_FAILED
+	}
+
+	class Actions <<Children>> {
+		parent = "context"
+		listener = "<actions>"
+		type = "<Action>"
+		observerPermissions = "write"
+	}
+
+	class Action <<SyncObjectChild>> {
+		type ?: HypertyResource.HypertyResourceType
+		url : URL.URL
+		reporter : URL.HypertyURL
+		schema : URL.HypertyCatalogueURL
+		id: string
+		type : HypertyResource.HypertyResourceType
+		description ?: string
+		time?: date
+		unit?: ContextUnit
+		version?: integer
+		values: ContextValue[]
+		tag?: string
+	}
+
+
+
+	Context *-- "1..*" ContextValue
+
+	Context -up-|> SyncDataObject.SyncObjectParent
+	Actions -up-|> SyncDataObject.SyncObjectChildren
+	Action -up-|> SyncDataObject.SyncObjectChild
+	Context -up-|> SyncDataObject.SyncObjectChild
+	Context .left. Actions
+	Action .. Actions
+	ContextValue -up-> HypertyResource.HypertyResourceType
+	ContextValue -up-> URL.HypertyRuntimeURL
+
+
+	ContextValue .down.> AvailabilityStatus : for Availability Context
+	ContextValue .down.> UserActivity : for UserActivity Context
+	ContextValue .down.> UserCommunication : for UserCommunication Context
+
+	ContextValue -right- ContextUnitName
+	ContextValue -left- ContextUnit
+
+}
+
+@enduml

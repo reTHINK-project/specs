@@ -1,0 +1,90 @@
+@startuml "../../docs/datamodel/core/user-identity/Identity-Data-Object-Model.png"
+
+package Identity <<Rect>> {
+
+	enum IdentityType {
+		HUMAN
+		ORGANISATION
+		PHYSICAL_SPACE
+		PHYSICAL_OBJECT
+	}
+
+	class Identity {
+		guid : URL.UserUUIDURL
+		identifiers : URL.UserURL
+	}
+
+	Identity -up- UserHypertyAccount.UserHypertyAccount
+
+	class AuthenticationData {
+	}
+
+	class AuthorisationData {
+	}
+
+	class IdAssertion {
+		assertion : string
+		idp : URL.URL
+		scope : string
+	}
+
+	note top : compliant with WebRTC\n RTCIdentityAssertionResult
+
+	class IdValidation {
+		// identifier?
+		identity : string
+		contents : string
+	}
+
+	note top : compliant with WebRTC\n RTCIdentityValidationResult
+
+	class ServiceType {
+		E164_TELEPHONY
+		VOIP_SIP
+		EMAIL
+		W3C_PUSH
+		TWITTER
+	}
+
+	class ServiceAddress {
+		address : URL.URL
+	}
+
+	class UserProfile {
+		username : string
+		cn : string
+		avatar : URL.URL
+		context : URL.ContextURL
+	}
+
+	note top : compliant with OIDC standard claims?
+
+	class JWT {
+	}
+
+	note bottom : JSON Web Token
+
+	class IDToken {
+	}
+
+	class AccessToken {
+	}
+
+	IDToken ..|> JWT
+	AccessToken ..|> JWT
+
+	Identity ..> IdentityType
+	Identity *.. "1..*" AuthenticationData
+	Identity *.. "0..*" AuthorisationData
+	Identity *.. "1..*" UserProfile
+	Identity *.. "0..*" ServiceAddress
+	Identity *.. "0..*" IdAssertion
+	ServiceAddress ..> ServiceType
+
+	IdAssertion ..> IdValidation : validated by
+
+	AuthenticationData *.. "1..*" IDToken
+	AuthorisationData *.. "1..*" AccessToken
+}
+
+@enduml

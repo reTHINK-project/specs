@@ -1,0 +1,34 @@
+@startuml "../../docs/datamodel/core/hyperty-catalogue/Hyperty-Descriptor-Data-Object-Model.png"
+
+package RethinkCore <<Rect>> {
+
+	package CatalogueDataObject <<Rect>> {
+
+		package HypertyRuntimeDescriptor <<Rect>> {
+		}
+
+		package HypertyDescriptor <<Rect>> {
+
+			class HypertyDescriptor {
+				dataObjectUrls : URL.HypertyCatalogueURLList
+				hypertyType : HypertyResource.HypertyResourceType[]
+				messageSchemaUrl : URL.HypertyCatalogueURL
+				configuration ?: HypertyConfiguration
+				constraints : RethinkCore.CatalogueDataObject.HypertyRuntimeDescriptor.RuntimeHypertyCapabilities
+				policiesUrl ?: URL.HypertyCatalogueURL
+			}
+
+
+			class HypertyConfiguration {
+			}
+
+			HypertyDescriptor .up.|> RethinkCore.CatalogueDataObject.CatalogueDataObject
+
+			HypertyDescriptor .. HypertyResource.HypertyResourceType
+			HypertyDescriptor *.. "0..1" RethinkCore.CatalogueDataObject.HypertyRuntimeDescriptor.RuntimeHypertyCapabilities
+			HypertyDescriptor *.. "0..1" HypertyConfiguration
+
+		}
+	}
+}
+@enduml

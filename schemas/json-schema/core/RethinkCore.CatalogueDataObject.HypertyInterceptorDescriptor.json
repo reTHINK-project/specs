@@ -1,0 +1,29 @@
+{
+	"$schema": "http://json-schema.org/draft-04/schema#",
+
+	"id": "HypertyInterceptorDescriptor",
+	"type": "object",
+	"properties": {
+		"configuration": {
+			"$ref": "#/HypertyInterceptorConfiguration"
+		},
+		"policies": {
+			"$ref": "#/HypertyPolicyList"
+		}
+	}, 
+	"HypertyInterceptorConfiguration": {
+		"type": "object",
+		"properties": {
+		}
+	}, 
+	"HypertyPolicyList": {
+		"type": "object",
+		"properties": {
+		}
+	}, 
+	"HypertyPolicy": {
+		"type": "object",
+		"properties": {
+		}
+	}
+}

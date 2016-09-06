@@ -1,0 +1,52 @@
+@startuml "../../docs/datamodel/data-objects/hyperty-resource/Hyperty-Resource-Data-Object-Model.png"
+
+package HypertyResource <<Rect>> {
+
+	class HypertyResource {
+		type : HypertyResourceType
+		mimetype ?: string
+		direction ?: ResourceDirection
+		author ?: URL.UserURL
+		content ?: object
+		contentUrl ?: URL.URL
+		player ?: URL.HypertyCatalogueURL
+	}
+
+	note right : player is provided by a certain Hyperty\n to play the HypertyResource Content
+
+	enum HypertyResourceType {
+		CHAT
+		AUDIO
+		VIDEO
+		AV
+		SCREEN
+		FILE
+		MIDI
+		ACTIVITY_CONTEXT
+		AVAILABILITY_CONTEXT
+		LOCATION_CONTEXT
+		HEART_RATE_CONTEXT
+		USER_STEPS_CONTEXT
+		BATTERY_CONTEXT
+		SLEEP_CONTEXT
+		LIGHT_CONTEXT
+		HUMIDITY_CONTEXT
+		POWER
+		USER_ACTIVITY_CONTEXT
+		USER_COMMUNICATION_CONTEXT
+	}
+
+	enum ResourceDirection {
+		IN
+		OUT
+		INOUT
+	}
+
+	HypertyResource -up-|> SyncDataObject.SyncObjectChild
+	HypertyResource ..> HypertyResourceType
+	HypertyResource ..> ResourceDirection
+	Identity.Identity ..> HypertyResource: author
+
+}
+
+@enduml
