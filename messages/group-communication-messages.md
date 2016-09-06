@@ -1,5 +1,7 @@
-Identity Management Messages
+Group Communication Messages
 ----------------------------
+
+*content below was copied from id management messages specs and should be adapted*
 
 This doc specifies Messages to be used to manage identities, where,
 
