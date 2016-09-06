@@ -11,7 +11,6 @@ The specification contained in this repository are:
 
 * [the decentralised communication framework specification](messaging-framework/readme.md) that is used to support hyperty communication across domains dramaticaly reducing standardisation efforts thanks to the protocol-on-the-fly concept and to the P2P Reporter-Observer pattern.
 * [the runtime specification](runtime/readme.md) that is used to support Hyperties execution in multiple platforms including browsers, NodeJS and Smartphones.
-* [the Message Node specification](msg-node) to support back-end based communication when P2P communication is not possible *should we move this inside the Messaging Framework?*
 * [the trust and identity management specification](trust-management/readme.md) that supports fully secured and trustful communication among Hyperties by using independent Identity Providers, giving the user full control of his Identity and personal data.
 * [the Quality of Service management specification](qos/readme.md) that supports quality of service on-demand (work in progress).
 * [the specification on how to support multiparty / group communication](group-communication/readme.md)
