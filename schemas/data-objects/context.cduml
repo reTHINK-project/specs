@@ -1,4 +1,4 @@
-@startuml "../../docs/datamodel/data-objects/context/Context.png"
+@startuml "../../datamodel/data-objects/context/Context.png"
 
 package Context <<Rect>> {
 

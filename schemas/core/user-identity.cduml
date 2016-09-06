@@ -1,4 +1,4 @@
-@startuml "../../docs/datamodel/core/user-identity/Identity-Data-Object-Model.png"
+@startuml "../../datamodel/core/user-identity/Identity-Data-Object-Model.png"
 
 package Identity <<Rect>> {
 

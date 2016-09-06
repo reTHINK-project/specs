@@ -1,4 +1,4 @@
-@startuml "../../docs/datamodel/data-objects/connection/Connection-Data-Object-Model.png"
+@startuml "../../datamodel/data-objects/connection/Connection-Data-Object-Model.png"
 
 package Connection <<Rect>> {
 

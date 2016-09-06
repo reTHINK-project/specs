@@ -1,4 +1,4 @@
-@startuml "../../docs/datamodel/core/address/Address-Model.png"
+@startuml "../../datamodel/core/address/Address-Model.png"
 
 package URL <<Rect>> {
 

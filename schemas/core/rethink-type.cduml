@@ -1,4 +1,4 @@
-@startuml "../../docs/datamodel/core/Types.png"
+@startuml "../../datamodel/core/Types.png"
 	package RethinkType {
 
 		enum Basic {

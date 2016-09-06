@@ -1,4 +1,4 @@
-@startuml "../../docs/datamodel/core/message/Message-Data-Model.png"
+@startuml "../../datamodel/core/message/Message-Data-Model.png"
 
 package Message <<Rect>> {
 

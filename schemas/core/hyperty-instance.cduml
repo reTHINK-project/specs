@@ -1,4 +1,4 @@
-@startuml "../../docs/datamodel/core/hyperty-registry/Hyperty-Instance-Data-Object-Model.png"
+@startuml "../../datamodel/core/hyperty-registry/Hyperty-Instance-Data-Object-Model.png"
 
 package RegistryDataObject <<Rect>> {
 

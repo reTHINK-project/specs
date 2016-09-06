@@ -1,4 +1,4 @@
-@startuml "../../docs/datamodel/core/hyperty-catalogue/Catalogue-Data-Object.png"
+@startuml "../../datamodel/core/hyperty-catalogue/Catalogue-Data-Object.png"
 
 package RethinkCore <<Rect>> {
 

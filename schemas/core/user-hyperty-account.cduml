@@ -1,4 +1,4 @@
-@startuml "../../docs/datamodel/core/user-hyperty-account/User-Hyperty-Account-Data-Object-Model.png"
+@startuml "../../datamodel/core/user-hyperty-account/User-Hyperty-Account-Data-Object-Model.png"
 
 package UserHypertyAccount <<Rect>> {
 
