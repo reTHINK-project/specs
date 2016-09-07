@@ -12,6 +12,10 @@ autonumber
 !define SHOW_IdentitiesAtRuntimeA
 !define SHOW_AuthAtRuntimeA
 !define SHOW_CoreAgentAtRuntimeA
+!define SHOW_CatalogueAtRuntimeA
+
+!define SHOW_SP1SandboxAtRuntimeA
+!define SHOW_Protostub1AtRuntimeA
 
 !define SHOW_CoreRuntimeProvider
 
@@ -19,15 +23,25 @@ autonumber
 
 == Deploy Core Runtime ==
 
-group option : these steps won't be needed in case the Runtime User Agent is already running in the device
-
 Alice -> CoreRunSP : download App with Core Runtime
 
 create RunUA@A
 App@A -> RunUA@A : new
+
+create RunCat@A
+RunUA@A -> RunCat@A : new
+
+RunUA@A -> RunCat@A : getRuntime(RuntimeCatalogueURL)
+
+group option : if most updated version of Runtime source package is not stored locally
+
+  RunCat@A -> CoreRunSP : get RuntimeCatalogueURL
+
+  RunCat@A <-- CoreRunSP : return Runtime descriptor
+
 end group
 
-RunUA@A -> CoreRunSP : get runtime/<id>/RuntimeDescriptor
+RunUA@A <-- RunCat@A : return Runtime
 
 create RunReg@A
 RunUA@A -> RunReg@A : new
@@ -41,10 +55,40 @@ RunUA@A -> RunAuth@A : new
 create BUS@A
 RunUA@A -> BUS@A : new
 
-RunUA@A -> CoreRunSP : post registry/hypertyRuntimeInstance/
-
-RunUA@A <- CoreRunSP : return hypertyRuntimeURL
-
 RunUA@A -> RunReg@A : init( hypertyRuntimeURL, remoteRegistryURL )
+
+group option : ** New!! if runtime is P2P enabled  **
+
+  group : P2P Handler Stub is loaded (see protostub-load.md)
+  end group
+
+RunUA@A -> BUS@A : postMsg( subscribe P2PHandlerStubURL request message)
+
+  note right
+    the message delivery path has to be set in the Message Node
+  end note
+
+  BUS@A -> Proto1@A : send subscribe P2PHandlerStubURL request message
+
+
+  group : it performs the Service Provider 1 domain protostub load, see protostub-load.md)
+
+    create Proto1@A
+    RunUA@A -> Proto1@A : new
+    ...
+
+  end group
+
+  CoreRunSP <- Proto1@A : send subscribe P2PHandlerStubURL request message
+
+  CoreRunSP <-- Proto1@A : subscribe P2PHandlerStubURL response message
+
+  BUS@A <-- Proto1@A : subscribe P2PHandlerStubURL response message
+
+  RunUA@A <- BUS@A : ontMsg( subscribe P2PHandlerStubURL response message)
+
+end group
+
+
 
 @enduml

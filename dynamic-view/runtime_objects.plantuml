@@ -35,6 +35,10 @@
 				participant "RuntimeUA" as RunUA@A
 			!endif
 
+			!ifdef SHOW_CatalogueAtRuntimeA
+				participant "Catalogue" as RunCat@A
+			!endif
+
 			!ifdef SHOW_RegistryAtRuntimeA
 				participant "Registry" as RunReg@A
 			!endif

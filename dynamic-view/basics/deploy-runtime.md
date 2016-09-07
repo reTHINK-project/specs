@@ -6,8 +6,11 @@ The main data flow to support the deployment of the Hyperty Core Runtime is depi
 
 ![Figure @runtime-deploy-runtime: Deploy Core Runtime Components in the Native Runtime](deploy-runtime.png)
 
-Steps 1 - 2: the Runtime can be explicitly deployed by a specific Application or can be implicitly deployed when an Hyperty or Protocol Stub is required. The usage of existing libraries like require.js [110] will be evaluated.
+Steps 1 - 2: the Runtime User Agent, that will handle the deployment of the full runtime, can be explicitly deployed by a specific Application or can be implicitly deployed when an Hyperty or Protocol Stub is required.
 
-Steps 3 - 8: the Runtime User Agent handles the download, instantiation and initialisation of required Runtime Core components including the Runtime Registry, Identity Module, Runtime Policy Engine and the Message BUS.
+Steps 3 - 7: the Runtime User Agent loads all required Runtime components via the Runtime Catalogue. If these components are not locally stored, the Runtime Catalogue will get them from the Catalogue Server.
 
-Steps 9 - 10: the Runtime User Agent registers the Runtime Instance into the remote Registry Service of the Hyperty Runtime Service Provider which returns the RuntimeURL allocated to the new Runtime. Then, the Registry is initialised with the previously returned RuntimeURL that will be used to derive the internal runtime addresses to be allocated to runtime components.
+Steps 8 - 12: the Runtime User Agent handles the deployment and initialisation of required Runtime Core components including the Runtime Registry, Identity Module, Runtime Policy Engine and the Message BUS.
+
+**New!**
+Steps 13 - 19: in case the Runtime User Agent detects the capability to support [P2P Connections](https://github.com/reTHINK-project/specs/tree/master/messaging-framework#peer-to-peer-message-delivery) (eg if it supports WebRTC Datachannel) it performs the deployment of the P2P Handler Stub (see the [Protostub deployment procedure](deploy-protostub.md)). As soon as the P2P Handler stub is deployed, the path to receive P2P Data Connection creation requests from P2P Requester Stubs is set in the MN with the P2P Stub URL by sending a Subscription Request message to Message Node Subscription Management functionality (*put link to message spec*).
