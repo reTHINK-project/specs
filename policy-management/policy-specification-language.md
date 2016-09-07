@@ -92,7 +92,7 @@ policy: {
 }
 ```
 
-#### Advanced Conditions
+## Advanced Conditions
 
 Previously it was presented how to specify policies that only support the verification of one system attribute. This syntax is not enough to specify a policy that expresses an authorization decision based on multiple system attributes, hence the introduction of advanced conditions. This feature is achieved by using the ***and***, ***or*** and ***not*** logical operators to combine a set of attributes verifications. Figure 2 presents the syntax of the condition field used for the specification of an advanced policy using the three logical operators and a combination of them.
 
