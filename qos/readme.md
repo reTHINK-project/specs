@@ -47,26 +47,33 @@ The Quality of service depends of the ICE candidate setup. During the buildPeerC
                clientName:"RealTimeVideoCall"           
     }
 that returns:  
+
     ["TURN_IP:PORT","identifier"]  
+    
 if the application still benefits of the TURN service, otherwise it returns “Unable to get a turn server : data consumption exceeded”  
 
 Then second call should be:  
+
     https://broker_URL/getCredentials
     {
                 clientId : “identifier”
     }
+    
 that returns:  
+	
     {"clientId":"identifier","password":"xxxx"}
 
-The resulting object should be:
+The resulting object should be:  
+
     RTCPeerConfiguration = {
-      iceServers: [
-     {
-      urls: 'turn:'+ TURN_IP:PORT
-      }
-      ],
-     	iceTransportPolicy: "relay"
-    } 
+        iceServers: [
+        {
+                urls: 'turn:'+ TURN_IP:PORT
+        }
+        ],
+        iceTransportPolicy: "relay"
+    }  
+        
 This object is then used to build the peerconnection with the constraint {'googDscp': true}.   
 
 Example of code:
@@ -84,17 +91,18 @@ Example of code:
 
 
 To build the PeerConnection:  
+
         if (useQoS)
        	{
-			    var turnServer;
-          var RTCPeerConfiguration;
-          ///
-        $.ajax({
-          url:settingsJS.brokerGetTurnURL,
-	    		type:'get',
-	    		async:false,
-	    		data:
-	    		{
+            var turnServer;
+            var RTCPeerConfiguration;
+            ///
+            $.ajax({
+                url:settingsJS.brokerGetTurnURL,
+                type:'get',
+                async:false,
+                data:
+                {
 	            cspId: settingsJS.applicationclientID,
 	            clientName:"RealTimeVideoCall"           
 	        },
