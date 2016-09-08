@@ -23,7 +23,7 @@ autonumber
 
 RunUA@A -> RunReg@A : registerHyperty(\npostMessage,\nHypertyDescriptor )
 
-	group associate to Identity : to be designed in a separate diagram by Id Management Group
+	group associate to Identity : see ../identity-management/user-to-hyperty-binding.md
 
 		RunID@A <- RunReg@A : get Identity
 
@@ -54,7 +54,7 @@ RunUA@A -> RunReg@A : registerHyperty(\npostMessage,\nHypertyDescriptor )
 		RunReg@A <- BUS@A : postMessage(\nread response \nmessage with\n hyperty Address\n MSG)
 
 	end group
-		
+
 	group register Hyperty at SP1 Registry
 		RunReg@A <- RunReg@A : collect Hyperty\nruntime Context data
 		RunReg@A <- RunReg@A : resolve \nprotoStub URL
