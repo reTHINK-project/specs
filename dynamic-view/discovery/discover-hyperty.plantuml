@@ -23,6 +23,12 @@ SP1H@A -> SP1H@A : discoverHypertyPerUser( UserURL )
 
 SP1H@A -> BUS@A : postMessage(\n READ Message \nto discover Hyperties )
 
+BUS@A -> RunReg@A : postMessage(\n READ Message \nto discover Hyperties)
+
+RunReg@A -> RunReg@A : is HypertyURL stored locally?
+
+BUS@A <- RunReg@A : postMessage(\n READ Message \nto discover Hyperties)
+
 BUS@A -> Proto1@A : postMessage(\n READ Message \nto discover Hyperties)
 
 Proto1@A -> SP1 : discover Hyperties with SP1 MSG Protocol
@@ -31,7 +37,14 @@ Proto1@A <- SP1 : discovered Hyperties with SP1 MSG Protocol
 
 BUS@A <- Proto1@A : postMessage(\n RESPONSE Message \nwith discovered Hyperties)
 
+RunReg@A <- BUS@A : postMessage(\n RESPONSE Message \nwith discovered Hyperties)
+
+RunReg@A <- RunReg@A : save discovered Hyperties locally
+
+RunReg@A -> BUS@A : postMessage(\n RESPONSE Message \nwith discovered Hyperties)
+
 SP1H@A <- BUS@A : postMessage(\n RESPONSE Message \nwith discovered Hyperties)
+
 
 
 @enduml
