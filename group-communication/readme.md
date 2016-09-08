@@ -2,7 +2,7 @@
 
 *to provide here Multiparty / Group Communication related specification defining architectural functionalities and concepts involved. A dynamic view should be provided [here](../dynamic-view/group-communication/readme.md) with MSC diagrams and the specification of messages would be provided [here](../messages/group-communication-messages.md)*
 
-The goal of this repository is to provide specifications for enabling WebRTC group communication in reTHINK (aka WebRTC Multiparty).Furthermore, an ongoing discussions about these specs can be found here [WebRTC Multiparty #106](https://github.com/reTHINK-project/dev-runtime-core/issues/106#issuecomment-245019063).Besides,in this issue more details and arguments can be found as well.
+The goal of this repository is to provide specifications for enabling WebRTC group communication in reTHINK (aka WebRTC Multiparty). Furthermore, an ongoing discussions about these specs can be found here [WebRTC Multiparty #106](https://github.com/reTHINK-project/dev-runtime-core/issues/106#issuecomment-245019063).Besides,in this issue more details and arguments can be found as well.
 
 ## 1. Overall Architecture
 
