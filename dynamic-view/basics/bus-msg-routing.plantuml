@@ -12,26 +12,60 @@ autonumber
 !define SHOW_IdentitiesAtRuntimeA
 !define SHOW_AuthAtRuntimeA
 
+!define SHOW_SP1SandboxAtRuntimeA
+!define SHOW_Protostub1AtRuntimeA
+
+!define SHOW_SP1
+
 !include ../runtime_objects.plantuml
 
-BUS@A <-  : send msg
+-> BUS@A : postMsg(message)
 
 RunReg@A <- BUS@A : resolve(Message)
 
 RunReg@A -> RunReg@A  : verify source(association Id Token)
 
-RunReg@A -> RunReg@A  : resolve targed address
+RunReg@A -> RunReg@A  : resolve target address
 
-group option :unregistered Protocol Stub for external address
+group option :unregistered P2P Protocol Stub for external address
 
-	group discover Protocol Stub URL
+	group discover P2P Protocol Stub URL
+
+		group P2P Protocol Stub URL not stored locally
+
+			RunReg@A -> RunReg@A : is HypertyURL stored locally?
+
+			BUS@A <- RunReg@A : postMessage(\n READ Message \nto discover Hyperties)
+
+			BUS@A -> Proto1@A : postMessage(\n READ Message \nto discover Hyperties)
+
+			Proto1@A -> SP1 : discover Hyperties\n with SP1 MSG Protocol
+
+			Proto1@A <- SP1 : discovered Hyperties\n with SP1 MSG Protocol
+
+			BUS@A <- Proto1@A : postMessage(\n RESPONSE Message \nwith discovered Hyperties)
+
+			RunReg@A <- BUS@A : postMessage(\n RESPONSE Message \nwith discovered Hyperties)
+
+			RunReg@A <-RunReg@A : extract P2P \nRequester Catalogue URL
+
+		end
 	end
 
-	group deploy Protocol Stub
+	group deploy P2P Protocol Stub
 	end
 
 end
 
+group option :P2P Stub failed, unregistered Protocol Stub for external address
+
+	group discover MN Protocol Stub URL
+	end
+
+	group deploy MN Protocol Stub
+	end
+
+end
 
 RunReg@A -> BUS@A : return(ResolvedMessage)
 

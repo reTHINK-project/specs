@@ -4,7 +4,7 @@ The main data flows to support the deployment of protocol stubs required to conn
 
 ![Figure @runtime-deploy-protostub: Deploy Protocol Stub](deploy-protostub.png)
 
-Steps 1-3: Several components might initiate de Protocol Stub deploy that can come from the Core Runtime Sandbox (e.g. Runtime Registry) or from other sandbox (e.g. Application). The Protocol Stub deployment may be triggered by the deployment of an Hyperty or by some attempt from a local Hyperty to communicate with a remote Hyperty running in the domain served by the Protocol Stub. In this former case the Runtime Registry would take the initiative to start the Protocol Stub deploy. The Runtime UA only downloads and deploys requested Protocol Stub after checking in the Registry that there is no Protocol Stub available in the Hyperty Runtime.
+Steps 1-3: Several components might initiate de Protocol Stub deploy that can come from the Core Runtime Sandbox (e.g. Runtime Registry) or from other sandbox (e.g. Application). The Protocol Stub deployment may be triggered by the deployment of an Hyperty or by some attempt from a local Hyperty to communicate with a remote Hyperty running in the domain served by the Protocol Stub. In this former case the Runtime Registry would take the initiative to start the Protocol Stub deploy. The Runtime UA only downloads and deploys requested Protocol Stub after checking in the Registry that there is no Protocol Stub available in the Hyperty Runtime. **Phase 2 New!** For the deployment of P2P Requester Stubs, the "p2pconfig" parameter should provided containing the remote [P2P Handler Stub](../../messaging-framework/readme.md#message-delivery-between-different-hyperty-runtimes) instance URL and the "local MN StubURL" connecting to the MN from the remote runtime that will be used for the P2P setup signalling.
 
 Steps 4 - 5: the Runtime UA is able to derive the URL to download the Protocol Stub descriptor from the domain URL (sp-domain), since it is a well known URI defined in the reTHINK Architecture Interfaces [15].
 
@@ -14,7 +14,7 @@ Steps 8 - 11: the new Protocol Stub is registered in the Runtime Registry, which
 
 Steps 12-15: The Runtime UA instantiates a new sandbox through the Sandbox interface which is registered in the Registry
 
-Steps 16-18: The Runtime UA requests the new sandbox to instantiate the protostub source code, extracting the configuration data from the protostub descriptor.
+Steps 16-18: The Runtime UA requests the new sandbox to instantiate the protostub source code, extracting the configuration data from the protostub descriptor. (**Phase 2 New!**) For P2P Requester Stubs, the p2pConfig json data is concatonated with the protostub descriptor configuration json data.
 
 Steps 19-20: The Runtime UA finishes the Protocol Stub deploy by adding in the runtime BUS the protostub listener to receive messages from the runtime.
 

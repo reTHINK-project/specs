@@ -87,6 +87,12 @@ hyperty-runtime://<runtime-instance-identifier>/idm
 
 The Runtime User Agent, manages Core Sandbox components including its download, deployment and update from Core Runtime Provider. It also handles Device bootstrap and the deployment and update of Service Provider sandboxes including Hyperties, Protocol Stubs and Policy Enforcers, via the Runtime Catalogue.
 
+The Runtime User Agent must have listeners to receive messages at:
+
+```
+hyperty-runtime://<runtime-instance-identifier>/ua
+```
+
 #### Runtime Catalogue
 
 The Runtime Catalogue manages the descriptors of deployable components and Hyperty Data Object schemas that are downloaded from the Service Provider Catalogue via the [Catalogue Service interface](https://github.com/reTHINK-project/architecture/blob/master/docs/interface-design/Interface-Design.md#73-catalogue-interface). The Runtime Catalogue ensures synchronisation with Back-end Catalogue servers.

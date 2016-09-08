@@ -1,26 +1,72 @@
-### Hyperty Data Object Synchronisation Messages
+### P2P Connection Messages
 
-This doc specifies Messages that are used to manage Hyperty Data Object Synchronisation, including:
+This doc specifies Messages that are used to manage P2P Connections between different Runtime using P2P Protostubs, including:
 
--	[Synchronisation Management Messages by Syncher Reporter](#synchronisation-management-by-syncher-reporter)
--	[Synchronisation Management by Syncher Observer](#synchronisation-management-by-syncher-observer)
--	[Synchronisation management by Sync Manager Reporter](#synchronisation-management-by-sync-manager-reporter)
--	[Synchronisation management by Sync Manager Observer](#synchronisation-management-by-sync-manager-observer)
--	[Synchronisation Management by Message Node](#synchronisation-management-by-message-node)
--	[Synchronisation Messages among Synchers](#synchronisation-messages-among-synchers)
--	[Data Object Read Messages between Synchers](#data-object-read)
+-	[P2P Connections managed by the RuntimeUA](#runtime-ua-management)
 
 where,
 
--	`<ObjectURL>` is any valid [Data Object URL](https://github.com/reTHINK-project/dev-service-framework/blob/master/docs/datamodel/address/readme.md) including CommunicationURL, ConnectionURL and ContextURL. Example: `"comm://example.com/<alice>/123456"`
--	`<json object>` is the Data Object instance itself
--	`<ChildDataObject>` is a Child Data Object instance itself
+-	`<P2PHandlerStubURL>` is the Runtime URL of the P2P Handler Protostub
+- `<p2p-handler-sp-domain>` is the domain the runtime where the P2P Handler stub is deployed, belongs to.
+- `<p2p-handler-runtime-instance-identifier>` is the runtime instance identifier where the P2P Handler stub is deployed.
 
-#### Synchronisation Management by Syncher Reporter
+#### Runtime UA Management
 
-##### Hyperty Data Object Creation
+##### Add P2P Handler path
 
-Message sent by the Reporter Syncher Hyperty to Reporter Runtime Sync Manager.
+Request by P2P Handler Runtime UA to its domain Message Node Subscription Manager to add the path to P2P Handler stub.
+
+```
+"id" : 1,
+"type" : "subscribe",
+"from" : "hyperty-runtime://<p2p-handler-sp-domain>/<p2p-handler-runtime-instance-identifier>/ua",
+"to" : "domain://msg-node.<p2p-handler-sp-domain>/sm",
+"body" : { "subscribe" : ["<P2PHandlerStubURL>"], "source" : "hyperty-runtime://<p2p-handler-sp-domain>/<p2p-handler-runtime-instance-identifier>" }
+```
+
+With this message the setup of the routing path is:
+
+1- who is subscribing: `body.source` or `from` in case there is no `body.source`
+2- what to subscribe: `body.subscribe` ie a list of URLs to be subscribed to
+
+###### Response
+
+200OK Response Message sent back by Message Node to P2P Handler Stub Runtime User Agent.
+
+```
+"id" : 1,
+"type" : "response",
+"from" : "domain://msg-node.<p2p-handler-sp-domain>/sm",
+"to" : "hyperty-runtime://<p2p-handler-sp-domain>/<p2p-handler-runtime-instance-identifier>/ua",
+"body" : { "code" : "2XX" }
+```
+
+##### Request to remove P2P Handler Routing Path at P2P Handler Message Node
+
+Message sent by P2P Handler Runtime UA to P2P Handler Message Node to request the removal of the P2P Handler Routing Path.
+
+```
+"id" : 2,
+"type" : "unsubscribe",
+"from" : "hyperty-runtime://<p2p-handler-sp-domain>/<p2p-handler-runtime-instance-identifier>/ua",
+"to" : "domain://msg-node.<p2p-handler-sp-domain>/sm",
+"body" : { "unsubscribe" : ["<P2PHandlerStubURL>"] }
+```
+
+###### Response
+
+200OK Response Message sent back by Message Node to Observer Runtime Sync Manager.
+
+```
+"id" : 2,
+"type" : "response",
+"from" : "domain://msg-node.<p2p-handler-sp-domain>/sm",
+"to" : "hyperty-runtime://<p2p-handler-sp-domain>/<p2p-handler-runtime-instance-identifier>/ua",
+"body" : { "code" : "2XX" }
+```
+
+---- below to be deleted ----
+
 
 ```
 "id"   : 1,
@@ -242,34 +288,7 @@ Message sent by Observer Runtime Sync Manager to Data Object Subscription Handle
 
 #### Synchronisation Management by Message Node
 
-##### Reporter Data Sync Routing Path setup request at Reporter Message Node for a new Data Object
 
-Message sent by Reporter Runtime Sync Manager to Reporter Message Node to request the setup of the Data Sync Routing Path for a new Data Object.
-
-```
-"id" : 1,
-"type" : "subscribe",
-"from" : "hyperty-runtime://<reporter-sp-domain>/<hyperty-observer-runtime-instance-identifier>/sm",
-"to" : "domain://msg-node.<reporter-sp-domain>/sm",
-"body" : { "subscribe" : ["<ObjectURL>","<ObjectURL>/subscription", "<ObjectURL>/children/<resource-children-name1>", "<ObjectURL>/children/<resource-children-name2>",.. ], "source" : "hyperty-runtime://<reporter-sp-domain>/<hyperty-reporter-runtime-instance-identifier>" }
-```
-
-With this message the setup of the routing path is:
-
-1- who is subscribing: `body.source` or `from` in case there is no `body.source`
-2- what to subscribe: `body.subscribe` ie a list of URLs to be subscribed to
-
-###### Response
-
-200OK Response Message sent back by Message Node to Observer Runtime Sync Manager.
-
-```
-"id" : 1,
-"type" : "response",
-"from" : "domain://msg-node.<reporter-sp-domain>/sm",
-"to" : "hyperty-runtime://<reporter-sp-domain>/<hyperty-observer-runtime-instance-identifier>/sm",
-"body" : { "code" : "2XX" }
-```
 
 ##### Data Sync Routing Path setup request at Observer Message Node
 

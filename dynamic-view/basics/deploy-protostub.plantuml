@@ -20,7 +20,7 @@ autonumber
 
 !include ../runtime_objects.plantuml
 
--> RunUA@A : loadStub( sp-domain )
+-> RunUA@A : loadStub( sp-domain,\n p2pConfig )
 
 RunUA@A -> RunReg@A : discoverStub( sp-domain )
 
