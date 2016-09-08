@@ -36,6 +36,6 @@ The application is using a Quality of Service Broker, that manages a fleet of TU
 
 ### Interface of reTHINK QoS support with the Runtime QoS Agent
 
-*specify the interface of the Runtime QoS Agent here.  Currently, only the DIRECT interface of the Runtime QoS Agent with other QoS components is in scope.  This section might actually not appear in this md-file but instead  [here](../dynamic-view/qos/readme.md) with MSC diagrams and the specification of messages would be provided [here](../messages/qos-management-messages.md)*
+*specify the interface of the Runtime QoS Agent here. Currently, only the DIRECT interface of the Runtime QoS Agent with other QoS components is in scope.  This section might actually not appear in this md-file but instead  [here](../dynamic-view/qos/readme.md) with MSC diagrams and the specification of messages would be provided [here](../messages/qos-management-messages.md)*
 
-**Note:  the final spec should be included (refined) the the dedicated QoS deliverable**
+**Note:  the final spec should be included (refined) in the dedicated QoS deliverable**
