@@ -15,10 +15,10 @@ Several QoS enforcing points and technologies have been envisioned. One of the s
 #### reTHINK TURN services
 
 On the first solution, design of network traffic control has been implemented in the CPE. The general mechanism is the following one:   
-<img src="https://cloud.githubusercontent.com/assets/10738516/18352611/5f6843c6-75df-11e6-9185-118147e31177.png" width="60%"/>
+<img src="https://cloud.githubusercontent.com/assets/10738516/18352611/5f6843c6-75df-11e6-9185-118147e31177.png" width="90%"/>
 
 To use the right TURN server, the general flow is the following:     
-<img src="https://cloud.githubusercontent.com/assets/10738516/18353161/52414b28-75e1-11e6-904c-af307afd1a43.png" width="60%"/>
+<img src="https://cloud.githubusercontent.com/assets/10738516/18353161/52414b28-75e1-11e6-904c-af307afd1a43.png" width="70%"/>
 
 •	Step 0: Offline CSP’s provisioning for a certain amount of a data : audio, video, throughput datachannel. The subscriber (CSP) is assigned a unique identifier cspID, it will provide to its clients so they can later be associated to the subscriber by the broker.  
 •	Step 1: The client retrieves from its CSP a communication Web App (including cspID).  
