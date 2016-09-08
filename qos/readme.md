@@ -37,5 +37,114 @@ The application is using a Quality of Service Broker, that manages a fleet of TU
 ### Interface of reTHINK QoS support with the Runtime QoS Agent
 
 *specify the interface of the Runtime QoS Agent here. Currently, only the DIRECT interface of the Runtime QoS Agent with other QoS components is in scope.  This section might actually not appear in this md-file but instead  [here](../dynamic-view/qos/readme.md) with MSC diagrams and the specification of messages would be provided [here](../messages/qos-management-messages.md)*
+*** This part should be carefully studied, as the QoS Agent is not really an element like the others. It's just a flag and a configuration that should be used to set up the QoS ***
+
+The Quality of service depends of the ICE candidate setup. During the buildPeerConnection, the application has to call two methods, and provide its application identifier. This can be implemented in the QoS Agent.
+  
+    https://broker_URL/getAppropriateTurn
+    {
+               cspId: applicationclientID,
+               clientName:"RealTimeVideoCall"           
+    }
+that returns:  
+    ["TURN_IP:PORT","identifier"]  
+if the application still benefits of the TURN service, otherwise it returns “Unable to get a turn server : data consumption exceeded”  
+
+Then second call should be:  
+    https://broker_URL/getCredentials
+    {
+                clientId : “identifier”
+    }
+that returns:  
+    {"clientId":"identifier","password":"xxxx"}
+
+The resulting object should be:
+    RTCPeerConfiguration = {
+      iceServers: [
+     {
+      urls: 'turn:'+ TURN_IP:PORT
+      }
+      ],
+     	iceTransportPolicy: "relay"
+    } 
+This object is then used to build the peerconnection with the constraint {'googDscp': true}.   
+
+Example of code:
+
+    function buildPeerConstraints(useQos) {
+            var options = [];
+            options.push({'DtlsSrtpKeyAgreement': 'true'}); 
+          	// We add DSCP support in case of QoS needs
+           	if (useQos)
+    	      {
+    		      options.push({'googDscp': true}); // for QoS
+    	      }
+            return {optional: options};
+        }
+
+
+To build the PeerConnection:  
+        if (useQoS)
+       	{
+			    var turnServer;
+          var RTCPeerConfiguration;
+          ///
+        $.ajax({
+          url:settingsJS.brokerGetTurnURL,
+	    		type:'get',
+	    		async:false,
+	    		data:
+	    		{
+	            cspId: settingsJS.applicationclientID,
+	            clientName:"RealTimeVideoCall"           
+	        },
+	        success:function(data, status){
+		    	console.log('done - buildPeerConnection: ');
+		        console.log(data);
+		        turnServer = {
+		            urls: 'turn:'+data[0],
+		        };
+		        $.ajax({
+		        	url:settingsJS.brokerGetCredsURL,
+		        	type:'get',
+  		    		async:false,
+  		    		data:{	        
+  		            clientId : data[1]
+  		    		},
+  		    		success:function(data,status){
+			            turnServer.username = data.clientId;
+			            turnServer.credential = data.password;
+			            console.log(turnServer);
+			            RTCPeerConfiguration = {
+			                iceServers: [
+			                    turnServer
+			                ],
+			                iceTransportPolicy: "relay"
+			            };
+			            console.log('turnServer :');
+			            console.log(turnServer);
+			            console.log("RTCPeerConfiguration"+RTCPeerConfiguration);
+			            
+			            //installICE(RTCPeerConfiguration);
+			            iceConfig = RTCPeerConfiguration;
+			            console.log('iceConfig :');
+			            console.log(iceConfig);
+			        }
+		    })},
+		    error:function(err){
+		        //Only 404 supported now
+		    	console.error("Unable to get appropriate turn:" + err);
+		    }
+		    });
+       	}	    
+	    
+  	    console.log(iceConfig);
+        if (self.debugPrinter) {
+            self.debugPrinter("building peer connection to " + otherUser);
+        }
+
+        try {
+            pc = self.createRTCPeerConnection(iceConfig, buildPeerConstraints());
+
 
 **Note:  the final spec should be included (refined) in the dedicated QoS deliverable**
