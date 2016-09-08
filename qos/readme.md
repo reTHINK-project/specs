@@ -9,15 +9,16 @@
 
 The reTHINK architecture enables activating QoS and policy as selectable options, via APIs to the service providers. While OTT services have no such choice, and Mobile services automatically provide managed QoS over managed packet network, the reTHINK architecture can deliver QoS ‘on-demand’ over the Internet, selected only where necessary, according to network conditions, user preference and service requirements.
 Several QoS enforcing points and technologies have been envisioned. One of the solutions is based on providing QoS on CPE Broadband and mobile access. The other one is a solution based on network selection (LHCB).
-![qosoverview](https://cloud.githubusercontent.com/assets/10738516/18352706/c3108348-75df-11e6-82a8-66793ed0ca4f.png)
+
+<img src="https://cloud.githubusercontent.com/assets/10738516/18352706/c3108348-75df-11e6-82a8-66793ed0ca4f.png" width="60%"/>
 
 #### reTHINK TURN services
 
 On the first solution, design of network traffic control has been implemented in the CPE. The general mechanism is the following one:
-![qos](https://cloud.githubusercontent.com/assets/10738516/18352611/5f6843c6-75df-11e6-9185-118147e31177.png)
+<img src="https://cloud.githubusercontent.com/assets/10738516/18352611/5f6843c6-75df-11e6-9185-118147e31177.png" width="60%"/>
 
 Here is the flow:
-![qosflow](https://cloud.githubusercontent.com/assets/10738516/18353161/52414b28-75e1-11e6-904c-af307afd1a43.png)
+<img src="https://cloud.githubusercontent.com/assets/10738516/18353161/52414b28-75e1-11e6-904c-af307afd1a43.png" width="60%"/>
 •	Step 0: Offline CSP’s provisioning for a certain amount of a data : audio, video, throughput datachannel. The subscriber (CSP) is assigned a unique identifier cspID, it will provide to its clients so they can later be associated to the subscriber by the broker.  
 •	Step 1: The client retrieves from its CSP a communication Web App (including cspID).  
 •	Step 2: The Web App asks the broker information about the TURN server to use (IP address). If the data quota reserved is exceeded, the broker returns an error. __clientID = getTurnAddr(cspID, mediaType, clientName);__  
