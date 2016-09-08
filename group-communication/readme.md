@@ -7,8 +7,8 @@ an ongoing discussions about these specs have been documented here [WebRTC Multi
 
 ## 1. Overall Architecture
 
-<p align="justify">In summury, star topology having an intermediary media server seems to be a good candidate for scalable group communication.
-This start topology, decribes H2H WebRTC group communication between reTHINK users. Therefore, hyperties running on runtime browsers can exchange signaling descriptions between each other and the media server through reTHINK edge server.</p>
+In summury, star topology having an intermediary media server seems to be a good candidate for scalable group communication.
+This start topology, decribes H2H WebRTC group communication between reTHINK users. Therefore, hyperties running on runtime browsers can exchange signaling descriptions between each other and the media server through reTHINK edge server.
 
 Moreover,in order to exchange signaling descriptions with this intermediary media server, reTHINK runtime nodejs [dev-runtime-nodejs](https://github.com/reTHINK-project/dev-runtime-nodejs) is justified choice for exchanging WebRTC signaling.In addition, runtime nodejs is a fully conform with reTHINK specs.
 
@@ -23,8 +23,8 @@ In the following sections call flows between the components of this topology wil
 
 ## 2. Top view call flows
 
-<p align="justify">Figure 2 illustrates top level view of how this call flows might look like.
-This call flow involves Hyperty conference of Client A (we can call him initiator) running on runtime browser A, hyperty conference of client B, Message Node(just relay no processing), Kurento media server, and Hyperty conference server running on Runtime Node as signaling server relaying messages between them.</p>
+Figure 2 illustrates top level view of how this call flows might look like.
+This call flow involves Hyperty conference of Client A (we can call him initiator) running on runtime browser A, hyperty conference of client B, Message Node(just relay no processing), Kurento media server, and Hyperty conference server running on Runtime Node as signaling server relaying messages between them.
 
 ![../dynamic-view/group-communication/Top-Level-View](../dynamic-view/group-communication/Top-Level-View.png)
 <p align="center">
