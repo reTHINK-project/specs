@@ -38,8 +38,8 @@ The application is using a Quality of Service Broker, that manages a fleet of TU
 
 ### Interface of reTHINK QoS support with the Runtime QoS Agent
 
-*specify the interface of the Runtime QoS Agent here. Currently, only the DIRECT interface of the Runtime QoS Agent with other QoS components is in scope.  This section might actually not appear in this md-file but instead  [here](../dynamic-view/qos/readme.md) with MSC diagrams and the specification of messages would be provided [here](../messages/qos-management-messages.md)*
-*** This part should be carefully studied, as the QoS Agent is not really an element like the others. It's just a flag and a configuration that should be used to set up the QoS ***
+*specify the interface of the Runtime QoS Agent here. Currently, only the DIRECT interface of the Runtime QoS Agent with other QoS components is in scope.  This section might actually not appear in this md-file but instead  [here](../dynamic-view/qos/readme.md) with MSC diagrams and the specification of messages would be provided [here](../messages/qos-management-messages.md)*  
+***This is internal use of the QoS, this has to be designed to be integrated in the runtime. The QoS Agent seems to be the place, even if the logic is rather thin in this runtime.***
 
 The Quality of service depends of the ICE candidate setup. During the buildPeerConnection, the application has to call two methods, and provide its application identifier. This can be implemented in the QoS Agent.
   
