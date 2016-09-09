@@ -78,7 +78,19 @@
 			},
 			"datachannel": {
 				"type": "boolean"
-			}
+			},
+			"RuntimeSandboxCapabilities": {
+				"type": "object",
+				"properties": {
+					"window": {
+						"type": "boolean"
+					},
+					"webrtc": {
+						"type": "boolean"
+					},
+					"ortc": {
+						"type": "boolean"
+					}
 		}
 	}
 }

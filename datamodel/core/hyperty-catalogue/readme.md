@@ -79,6 +79,10 @@ Besides the attributes inherited from the general CatalogueDataObject described 
 
 The Hyperty Runtime Descriptor is used to model the Runtime that can be used to execute Hyperties in a certain device or network server. Hyperty Runtimes are described in terms of supported capabilities to execute Hyperties (RuntimeHypertyCapabilities) and Protocol Stubs (RuntimeProtocolCapabilities) and its type including browser, standalone, server and (IoT/M2M) gateway.
 
+**Phase 2 New!!**
+
+RuntimeSandboxCapabilities describes the sandboxing capabilities supported by the runtime ie if sandbox implementations give access to window APIs, WebRTC APIs or ORTC APIs.
+
 The `p2pHandlerStub` defines the Catalogue URL of a [P2P Handler protocolStub](../../messaging-framework/readme.md#peer-to-peer-message-delivery) that can be deployed in the Runtime.
 
 The `p2pRequesterStub` defines the Catalogue URL of a [P2P Requester protocolStub](../../messaging-framework/readme.md#peer-to-peer-message-delivery) that can be used in order to setup a P2P Connection with this runtime.

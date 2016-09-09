@@ -38,9 +38,16 @@ package RethinkCore <<Rect>> {
 				datachannel ?: boolean
 			}
 
+			class RuntimeSandboxCapabilities {
+				window ?: boolean
+				webrtc ?: boolean
+				ortc ?: boolean
+			}
+
 			HypertyRuntimeDescriptor ..> RuntimeType
-			HypertyRuntimeDescriptor *.. "1" RuntimeHypertyCapabilities
-			HypertyRuntimeDescriptor *.. "1" RuntimeProtocolCapabilities
+			HypertyRuntimeDescriptor .. "1" RuntimeHypertyCapabilities
+			HypertyRuntimeDescriptor .. "1" RuntimeProtocolCapabilities
+			HypertyRuntimeDescriptor .. "1" RuntimeSandboxCapabilities
 			HypertyRuntimeDescriptor .up.|> RethinkCore.CatalogueDataObject.CatalogueDataObject
 		}
 

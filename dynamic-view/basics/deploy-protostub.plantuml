@@ -73,7 +73,7 @@ RunUA@A <-- RunReg@A : returns null
 == Instantiate Sandbox with Protocol Stub ==
 
 	create Sand1@A
-	RunUA@A -> Sand1@A : new( msgBus )
+	RunUA@A -> Sand1@A : new( msgBus, capabilities )
 
 	RunUA@A <-- Sand1@A : return sandboxInstance
 
