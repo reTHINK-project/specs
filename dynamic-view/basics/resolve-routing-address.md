@@ -12,7 +12,7 @@ Steps 3: Registry verifies the originator is valid i.e. its Runtime URL has been
 **Phase 2 New!**
 Steps 5 - 6: the registry will give more priority for the usage of P2P Connections, thus it looks for one that is registered and connected.
 
-Steps 7: in case no P2P Connection is registered, the Registry starts the process to request a P2P Connection through a P2P Requester Stub, by creating a new P2P Connection entry with status "connecting".
+Steps 7: in case no P2P Connection is registered, the Registry starts the process to request a P2P Connection through a P2P Requester Stub, by creating a new P2P Connection entry with status "connecting". Each P2P Connection entry should contain the remote runtime URL, executing Hyperty URLs and reporting data object URLs. 
 
 Steps 8 - 14: The first task is to discover the catalogue URL from where the P2P Requester Stub can be loaded. The runtime registry looks for the P2P Requester catalogue URL in locally stored Hyperty registry. If not found in its local cache, it queries the Runtime Registry for the Hyperty P2P Requester Stub URL, using a [Read Request Message](../../messages/registration-messages.md#hyperty-instance-query-per-hyperty-url). The
 

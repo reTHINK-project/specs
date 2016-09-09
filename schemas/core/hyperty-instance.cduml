@@ -10,10 +10,8 @@ package RegistryDataObject <<Rect>> {
 			guid ?: URL.UserGUIDURL
 			dataSchemes : RethinkCore.CatalogueDataObject.DataObjectSchema.DataUrlScheme[]
 			resources : HypertyResource.HypertyResourceType[]
-			runtime : URL.HypertyRuntimeURL
 			context ?: URL.ContextURL
 			p2pHandler ?: URL.HypertyRuntimeURL
-			p2pRequester ?: URL.CatalogueURL
 		}
 
 		HypertyInstance .up.|> RegistryDataObject.RegistryDataObject
