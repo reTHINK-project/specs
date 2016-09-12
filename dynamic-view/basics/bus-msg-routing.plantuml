@@ -17,9 +17,9 @@ autonumber
 
  BUS@A <- : postMsg(message)
 
-RunReg@A <- BUS@A : resolve(Message)
-
 group resolve-routing-address
+
+  RunReg@A <- BUS@A : resolve(Message)
 
 	...
 
@@ -27,26 +27,26 @@ group resolve-routing-address
 
 end
 
-loop until authorised or final error
 	RunAuth@A <- BUS@A : authorise(Message)
+
+  alt assertion required
+    RunAuth@A -> RunID@A : getIdentityOfHyperty( message / scope? )
+    RunID@A -> RunID@A : generateAssertion( )
+
+    RunAuth@A <- RunID@A : return Assertion
+  else verify assertion
+    RunAuth@A -> RunID@A : decrypt ( message )
+    RunID@A -> RunID@A : validateIdentity( )
+    RunID@A -> RunID@A : validateData( )
+    RunAuth@A <- RunID@A : return message\n(decrypted and validated)
+  end
 
 	RunAuth@A -> RunAuth@A : apply authz Policies
 
 	alt Message Routing authorised
 		RunAuth@A -> BUS@A : authorised
-	else
+	else error
 
-		alt assertion required
-			RunAuth@A -> RunID@A : generateAssertion( message / scope? )
-
-			RunAuth@A <- RunID@A : return Assertion
-
-
-		else verify assertion
-			RunAuth@A -> RunID@A : validateAssertion( message )
-			RunAuth@A <- RunID@A : return validation
-		end
-	else
 		RunAuth@A -> BUS@A : final error
 
 		alt Error : unknown source
@@ -60,7 +60,6 @@ loop until authorised or final error
 		else Error : blocked by target policy
 		end
 	end
-end
 
 
 BUS@A ->  : send msg

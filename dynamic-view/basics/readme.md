@@ -10,7 +10,7 @@
 
 #### [Message BUS Routing](bus-msg-routing.md)
 
-#### [Data Object Synch Setup](create-sync-data-object.md)
+#### [Resolve Routing Address](resolve-routing-address.md)
 
 #### [Intra domain local communication](intra-local-comm.md)
 
@@ -19,3 +19,5 @@
 #### [Intra domain remote communication](intra-remote-comm.md)
 
 #### [Inter domain remote communication](inter-remote-comm.md)
+
+#### [P2P Connection Setup](p2p-setup.md)

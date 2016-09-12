@@ -25,7 +25,7 @@ box "Bob Device" #LightRed
 end box
 
 
-group : P2P Connection Setup (see p2p-setup.md)
+group 	#######################################################  P2P Connection Setup (see p2p-setup.md) 
 
 end
 
