@@ -31,7 +31,7 @@ The Hyperty Instance Data Model is used to model instances of Hyperties running 
 
 The Hyperty Instance object contains:
 
--	Its URL ([HypertyURL](../address/readme.md#hyperty-instance-address)) that can be used to reach the Hyperty Instance
+-	Its URL ([HypertyURL](../../address/readme.md#hyperty-instance-address)) that can be used to reach the Hyperty Instance
 
 -	the Hyperty Descriptor URL ([HypertyURL](../address/readme.md#hyperty-address)) that can be used to consult hyperty metadata
 
