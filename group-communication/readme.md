@@ -65,7 +65,7 @@ In the following step-by-step description:
 #### Note:
 <p align="justify">The server connection object is a special object, created and maintained by the server Hyperty upon incoming request from client hyperty to create new room. Thus, this object is related to a room. Besides, is created by the Hyperty server which means is the reporter (owner) of this connection object. This object will be destroyed when the last participants leaves the room.</p>
 
-### 3.2 Server conference Hyperty Logic
+### 3.2 Server Conference Hyperty Logic
 
 The `server conference hyperty` will be loaded and executed inside Runtime Node.The figure below represents the internal architecture of the `server conference hyperty`. Essentially, we describe the messages exchanged between the `app`, `conference hyperty`, and the `Syncher`(provided by the core runtime).
 
