@@ -79,10 +79,10 @@ We suppose that this server hyperty is up running waiting for connection incomin
 The sequence diagram evolves through the following macro steps:  
 
 1. The Message BUS receives incoming request to create connection object including roomId and some options. This message is mainly coming from the messaging node associated with domain where this server application is hosted.
-2. Next, the server hyperty receives a notification message. Then, it forward this request to the server application.
+2. Next, the server hyperty receives a notification message. Then, it forwards this request to the server application.
 3. The server application, will check if the roomId is new or not. In case of new room, the server application will request kurento media server to create room pipeline, and returns an SDP answer to incoming request.
 4. After, the server hyperty will in its turn request the syncher to subscribe to the client hyperty that requests to join the room.
-5. Then, the server hyperty will also request Syncher to create data connection object associated to this roomID. This server connection object is owned by the server hyperty. Thus, it's the reporter for this object. Each room has its own connection object. Bijective relationship. Thus, this connection object maintains several observers hyperties. (Similar to group chat hyperty). Everytime a new room pipeline is created in kurento media server, the hyperty will create an associated connection data objects.
+5. Then, the server hyperty will also request Syncher to create data connection object associated to this roomId. This server connection object is owned by the server hyperty. Thus, it's the reporter for this object. Each room has its own connection object. Bijective relationship. Thus, this connection object maintains several observers hyperties. (Similar to group chat hyperty). Everytime a new room pipeline is created in kurento media server, the hyperty will create an associated connection data objects.
 6. The client hyperties replies, after that media start following directly to kurento media server.
 7. Up to this stage, both client and server hyperty have been subscribed to each other connection objects.
 8. Simultaneously, the server hyperty will create connection controller, to maintain and keep track of the WebRTC connection parameters (participants sessions, connected peers Icecandidate,etc).
