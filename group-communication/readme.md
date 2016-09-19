@@ -3,8 +3,8 @@ The goal of this repository is to provide specifications for enabling WebRTC gro
 
 ## 1. Overall Architecture
 
-In summury, star topology having an intermediary media server seems to be a good candidate for scalable group communication.
-This start topology, decribes H2H WebRTC group communication between reTHINK users. Therefore, hyperties running on runtime browsers can exchange signaling descriptions between each other and the media server through reTHINK edge server.
+<p align="justify">In summury, star topology having an intermediary media server seems to be a good candidate for scalable group communication.
+This start topology, decribes H2H WebRTC group communication between reTHINK users. Therefore, hyperties running on runtime browsers can exchange signaling descriptions between each other and the media server through reTHINK edge server.</p>
 
 Moreover,in order to exchange signaling descriptions with this intermediary media server, reTHINK runtime nodejs [dev-runtime-nodejs](https://github.com/reTHINK-project/dev-runtime-nodejs) is justified choice for exchanging WebRTC signaling. In addition, runtime nodejs is a fully conform with reTHINK specs.
 
@@ -69,7 +69,7 @@ In the following step-by-step description:
 
 The `server conference hyperty` will be loaded and executed inside Runtime Node.The figure below represents the internal architecture of the `server conference hyperty`. Essentially, we describe the messages exchanged between the `app`, `conference hyperty`, and the `Syncher`(provided by the core runtime).
 
-We suppose that this server hyperty is up running waiting for connection incoming requests. This hyperty will have an interesting feature of coordinating multiple data objects, each per room. an orchestrator hyperty.
+<p align="justify">We suppose that this server hyperty is up running waiting for connection incoming requests. This hyperty will have an interesting feature of coordinating multiple data objects, each per room. an orchestrator hyperty.</p>
 
 ![../dynamic-view/group-communication/Server Conference Hyperty](../dynamic-view/group-communication/Server Conference Hyperty.png)
 <p align="center">
