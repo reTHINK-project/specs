@@ -17,7 +17,7 @@ The same is applicable to other popular services such as Facebook, Slack, Salesf
 
 The diagram below shows the architeture of the integration of reTHINK with an external service.
 
-![alt text](rethink-IMS-Integration-approach2.png "Legacy domain interworking diagram")
+![alt text](rethink-Legacy-Integration-approach2.png "Legacy domain interworking diagram")
 
 A stated in the introduction the Hyperty will need to be associated to two identities. The Identity Module will handle the authentication against the Identity Provider of the Legacy domain. After a successful authentication normally a token will be provided. This token has to be used from the Protostub to authenticate itself during the registration/login process to the legacy domain. Depending on the Legacy Domain this process may be different, however the case we are describing here should be compatible with the most scenarios.
 
