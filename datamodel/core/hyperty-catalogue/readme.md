@@ -73,21 +73,20 @@ Besides the attributes inherited from the general CatalogueDataObject described 
 | **configuration**  |                 ProtostubConfiguration                  |      no       | Data required to configure the ProtocolStub                                                                                                                                                                                                                                               |
 | **constraints**    |               RuntimeProtocolCapabilities               |      no       | [RuntimeProtocolCapabilities](#hyperty-runtime-descriptor) describes capabilities required from the Hyperty Runtime in order to be able to execute the ProtocolStub                                                                                                                       |
 
-### Hyperty Interceptor Descriptor
-
-![Hyperty Interceptor Data Object Model](Hyperty-Interceptor-Descriptor-Data-Object-Model.png)
-
-This Descriptor Data Object is used to model interceptoes that can be used to perform proprietary policy enforcement on Hyperties.
-
-The Hyperty Interceptor descriptor contains the policies to enforce rule Hyperty execution (HypertyPolicy) and the data needed to configure its deployment in the runtime.
-
 ### Hyperty Runtime Descriptor
 
 ![Hyperty Runtime Descriptor Model](Hyperty-Runtime-Descriptor-Data-Object-Model.png)
 
 The Hyperty Runtime Descriptor is used to model the Runtime that can be used to execute Hyperties in a certain device or network server. Hyperty Runtimes are described in terms of supported capabilities to execute Hyperties (RuntimeHypertyCapabilities) and Protocol Stubs (RuntimeProtocolCapabilities) and its type including browser, standalone, server and (IoT/M2M) gateway.
 
-The Protocol Stub Descriptor sourceCode attribute contains the source code of core runtime components that are needed to be deployed in the device.
+**Phase 2 New!!**
+
+RuntimeSandboxCapabilities describes the sandboxing capabilities supported by the runtime ie if sandbox implementations give access to window APIs, WebRTC APIs or ORTC APIs.
+
+The `p2pHandlerStub` defines the Catalogue URL of a [P2P Handler protocolStub](../../messaging-framework/readme.md#peer-to-peer-message-delivery) that can be deployed in the Runtime.
+
+The `p2pRequesterStub` defines the Catalogue URL of a [P2P Requester protocolStub](../../messaging-framework/readme.md#peer-to-peer-message-delivery) that can be used in order to setup a P2P Connection with this runtime.
+
 
 ### Data Object Schema
 

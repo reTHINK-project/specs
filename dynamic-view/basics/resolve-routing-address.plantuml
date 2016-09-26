@@ -1,0 +1,136 @@
+
+
+@startuml "resolve-routing-address.png"
+
+autonumber
+
+!define SHOW_RuntimeA
+
+!define SHOW_CoreRuntimeA
+!define SHOW_MsgBUSAtRuntimeA
+!define SHOW_RegistryAtRuntimeA
+
+!define SHOW_SP1SandboxAtRuntimeA
+!define SHOW_Protostub1AtRuntimeA
+
+!define SHOW_SP1
+
+!include ../runtime_objects.plantuml
+
+-> BUS@A : postMsg(message)
+
+RunReg@A <- BUS@A : resolve(Message)
+
+RunReg@A -> RunReg@A  : verify source(association Id Token)
+
+RunReg@A -> RunReg@A  : resolve target address
+
+RunReg@A -> RunReg@A  : look for P2P Connection
+
+alt :P2P Connection is registered and active
+
+	RunReg@A -> BUS@A : return(ResolvedMessage\nwith P2P Stub URL)
+
+else :unregistered P2P Protocol Stub
+
+	RunReg@A -> RunReg@A : create p2p connection entry\n with status "connecting"
+
+	note right
+		there is no p2p connection. starting creating one
+	end note
+
+	RunReg@A -> RunReg@A  : searchLocalCache(message.to)
+
+	alt : no registry in the local cache
+
+			BUS@A <- RunReg@A : postMessage(\n READ Message \nto discover Hyperties)
+
+			note right
+				No registry entry cache for message.to.
+				It has to be retrieved from the Domain Registry
+			end note
+
+			BUS@A -> Proto1@A : postMessage(\n READ Message \nto discover Hyperties)
+
+			Proto1@A -> SP1 : discover Hyperties\n with SP1 MSG Protocol
+
+			Proto1@A <- SP1 : discovered Hyperties\n with SP1 MSG Protocol
+
+			BUS@A <- Proto1@A : postMessage(\n RESPONSE Message \nwith discovered Hyperties)
+
+			RunReg@A <- BUS@A : postMessage(\n RESPONSE Message \nwith discovered Hyperties)
+
+	end
+
+	RunReg@A <-RunReg@A : extract P2P \nRequester Catalogue URL
+
+	group deploy P2P Protocol Stub
+	end
+
+	group P2P Connection setup
+	end
+
+	alt :P2P Connection was successfuly established
+
+		RunReg@A -> BUS@A : return(ResolvedMessage\nwith new P2P Stub URL)
+
+	else : P2P Connection failed
+
+		group resolve MN Stub URL
+
+			RunReg@A -> RunReg@A : look for MN Protostub
+
+			alt : MN Protostub is registered
+
+				RunReg@A -> BUS@A : return(ResolvedMessage\nwith MN Stub URL)
+
+			else : MN Protostub is not registered
+
+				group : deploy MN Protocol Stub
+
+					RunReg@A -> RunReg@A : derive Catalogue Protocolstub\n Well-known URI from domain
+
+					note right
+						No MN Protocol Stub exists. It has to be deployed. see deploy-protostub.md
+
+						**question:** what happens if the MN deployment has already started
+						 from a previous resolve request?
+						 do we already have a "connecting" status?
+					end note
+
+
+					RunReg@A -> RunReg@A : start protostub deploy
+					...
+
+				end
+
+			RunReg@A -> BUS@A : return(ResolvedMessage\nwith new MN Stub URL)
+
+			end
+
+		end
+
+	end
+
+else :P2P connection is registered but not connected yet
+
+	group resolve MN Stub URL
+
+		RunReg@A -> RunReg@A : look for MN Protostub
+
+		note right
+			this means the P2P connection has started but not finished yet.
+			In this case we must use a MN Stub.
+			This message could be itself part of the P2P connection signalling process.
+			see all the process above in group "resolve MN Stub URL"
+		end note
+
+		...
+		RunReg@A -> BUS@A : return(ResolvedMessage\nwith MN Stub URL)
+	end
+
+end
+
+
+
+@enduml

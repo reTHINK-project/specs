@@ -43,15 +43,11 @@ RunUA@A <- App@A : loadHyperty\n(HypertyDescriptorURL)
 
 	== deploy Hyperty policies ==
 
-RunUA@A -> RunAuth@A : addPolicies( hypertyURL, policies )
+	group opt: if there are Hyperty policies
+		RunUA@A -> RunAuth@A : addPolicies( hypertyURL, policies )
 
-RunUA@A -> RunUA@A : HypertyDescriptor.policies?
-
-alt deploy policy enforcer (see separated diagram)
-
-...
-
-end
+		RunUA@A -> RunUA@A : HypertyDescriptor.policies?
+	end
 
 == Decide in which Sandbox is the Hyperty deployed ==
 
@@ -78,7 +74,7 @@ alt sandbox does not exist
 == Instantiate Sandbox ==
 
 	create Sand1@A
-	RunUA@A -> Sand1@A : new( msgBus )
+	RunUA@A -> Sand1@A : new( msgBus, capabilities )
 
 	RunUA@A <-- Sand1@A : return sandbox
 

@@ -11,11 +11,7 @@ In Figure above, the Application and the Hyperty Instances it consumes, are down
 
 ![High Level Runtime Architecture with untrusted Hyperties](Runtime_Architecture_high_level_unstrusted.png)
 
-As described below, to prevent cross origin attacks / spy, access to Core Runtime Message BUS is subject to authorisation, by using standardised policies downloaded from each involved Service Provider. In addition, the Hyperty Runtime Architecture also supports Hyperty Interceptors executed in a dedicated sandbox (see Figure below) enabling the enforcement of proprietary policies.
-
-![High Level Runtime Architecture with domain specific Policy Enforcer](Runtime_Architecture_high_level_pep.png)
-
-In addition, Core Policy Engine should enforce general access control policies that are agnostic of sender and target domains, or specific to the domain managing the device runtime (Core Runtime Provider). The policies used to control the access to [Hyperty Data Objects](https://github.com/reTHINK-project/dev-service-framework/blob/master/docs/manuals/p2p-data-sync.md) (see below) , are a good example of such policies.
+As described below, to prevent cross origin attacks / spy, access to Core Runtime Message BUS is subject to authorisation, by using standardised policies enforced by the Core Policy Engine.
 
 Some more details are provided in the following sections.
 
@@ -86,6 +82,12 @@ hyperty-runtime://<runtime-instance-identifier>/idm
 #### Runtime User Agent
 
 The Runtime User Agent, manages Core Sandbox components including its download, deployment and update from Core Runtime Provider. It also handles Device bootstrap and the deployment and update of Service Provider sandboxes including Hyperties, Protocol Stubs and Policy Enforcers, via the Runtime Catalogue.
+
+The Runtime User Agent must have listeners to receive messages at:
+
+```
+hyperty-runtime://<runtime-instance-identifier>/ua
+```
 
 #### Runtime Catalogue
 

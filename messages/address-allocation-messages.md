@@ -16,7 +16,7 @@ The following Messages used to manage URL address allocation are specified in th
 Message sent by the Hyperty Runtime Registry function to Message Node Address Allocation function.
 
 ```
-"id" : "<1>"
+"id" : 1
 "type" : "CREATE",
 "from" : "hyperty-runtime://<sp-domain>/<runtime-instance-identifier>/registry/allocation",
 "to" : "domain://msg-node.<sp-domain>/<type>-address-allocation",
@@ -28,7 +28,7 @@ Message sent by the Hyperty Runtime Registry function to Message Node Address Al
 Message sent by the Message Node Address Allocation function to Hyperty Runtime Registry function.
 
 ```
-"id" : "<1>"
+"id" : 1
 "type" : "RESPONSE",
 "from" : "domain://msg-node.<sp-domain>/<type>-address-allocation",
 "to" : "hyperty-runtime://sp1/runalice/registry/allocation",
@@ -42,7 +42,7 @@ Message sent by the Message Node Address Allocation function to Hyperty Runtime 
 Message sent by the Hyperty Runtime Registry function to Message Node Address Allocation function.
 
 ```
-"id" : "<3>"
+"id" : 3
 "type" : "DELETE",
 "from" : "hyperty-runtime://<sp-domain>/<runtime-instance-identifier>/registry/allocation",
 "to" : "domain://msg-node.<sp-domain>/<type>-address-allocation",
@@ -54,7 +54,7 @@ Message sent by the Hyperty Runtime Registry function to Message Node Address Al
 Message sent by the Message Node Address Allocation function to Hyperty Runtime Registry function.
 
 ```
-"id" : "3"
+"id" : 3
 "type" : "RESPONSE",
 "from" : "domain://msg-node.<sp-domain>/<type>-address-allocation",
 "to" : "hyperty-runtime://sp1/runalice/registry/allocation",
@@ -68,7 +68,7 @@ Message sent by the Message Node Address Allocation function to Hyperty Runtime 
 Message sent by the Hyperty Runtime Registry function to Message Node Address Allocation function.
 
 ```
-"id" : "<2>"
+"id" : 2
 "type" : "DELETE",
 "from" : "hyperty-runtime://<sp-domain>/<runtime-instance-identifier>/registry/allocation",
 "to" : "domain://msg-node.<sp-domain>/<type>-address-allocation",
@@ -80,7 +80,7 @@ Message sent by the Hyperty Runtime Registry function to Message Node Address Al
 Message sent by the Message Node Address Allocation function to Hyperty Runtime Registry function.
 
 ```
-"id" : "2"
+"id" : 2
 "type" : "RESPONSE",
 "from" : "domain://msg-node.<sp-domain>/<type>-address-allocation",
 "to" : "hyperty-runtime://sp1/runalice/registry/allocation",

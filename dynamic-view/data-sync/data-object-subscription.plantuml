@@ -37,21 +37,26 @@ Sync1@1B -> RunSM@1B : Subscribe Msg
 
 RunSM@1B -> RunSM@1B : bus.addListener(\nDataObjURL\changes URL, \nObserverSandboxListener)
 
-== Set Routing Path at Observer Msg Node ==
+RunSM@1B -> RunSM@1B : registry.getP2PStubSandbox(\nDataObjURL)
 
-RunSM@1B -> SM@SP2 : Subscribe Msg
+alt : No p2p Stub available
+	== Set Routing Path at Observer Msg Node ==
 
-SM@SP2 -> SM@SP2 : add Listeners
+	RunSM@1B -> SM@SP2 : Subscribe Msg
 
-RunSM@1B <- SM@SP2 : OK Subscribe Response Msg
+	SM@SP2 -> SM@SP2 : add Listeners
 
-== Set Routing Path at Reporter Msg Node ==
+	RunSM@1B <- SM@SP2 : OK Subscribe Response Msg
 
-RunSM@1B -> SM@SP1 : Subscribe Msg
+	== Set Routing Path at Reporter Msg Node ==
 
-SM@SP1 -> SM@SP1 : add Listeners
+	RunSM@1B -> SM@SP1 : Subscribe Msg
 
-RunSM@1B <- SM@SP1 : OK Subscribe Response Msg
+	SM@SP1 -> SM@SP1 : add Listeners
+
+	RunSM@1B <- SM@SP1 : OK Subscribe Response Msg
+
+end
 
 == Requests Reporter Sync Manager to Subscribe ==
 
@@ -83,6 +88,12 @@ opt
 	end note
 
 end
+
+RunSM@A -> RunSM@A : registry.p2pConnetion(message)
+
+note right
+	registry checks if message was sent via a P2P Stub and if yes it adds its originator into the corresponding P2P Connection entry
+end note
 
 RunSM@A -> RunSM@1B : OK Subscribe\nResponse Message
 

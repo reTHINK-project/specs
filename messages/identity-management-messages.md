@@ -16,7 +16,7 @@ Message sent by the Identity Module function to Identity Management (IDP Proxy) 
 (since the login will be handled by the IDP Proxy this message is an RPC to execute the login)
 
 ```
-"id" : "1"
+"id" : 1
 "type" : "EXECUTE",
 "from" : "hyperty-runtime://<runtime-domain>/<runtime-instance-identifier>/idm",
 "to" : "domain-idp://<idp-domain>",
@@ -26,7 +26,7 @@ Message sent by the Identity Module function to Identity Management (IDP Proxy) 
 Response Message sent back from the Identity Management (IDP Proxy).
 
 ```
-"id" : "<1>"
+"id" : 1
 "type" : "RESPONSE",
 "from" : "domain-idp://<idp-domain>",
 "to" : "hyperty-runtime://<runtime-domain>/<runtime-instance-identifier>/idm",
@@ -39,7 +39,7 @@ Response Message sent back from the Identity Management (IDP Proxy).
 Message sent by the Identity Module function to Identity Management (IDP Proxy) to generate an Identity Assertion.
 
 ```
-"id" : "2"
+"id" : 2
 "type" : "EXECUTE",
 "from" : "hyperty-runtime://<runtime-domain>/<runtime-instance-identifier>/idm",
 "to" : "domain-idp://<idp-domain>",
@@ -49,7 +49,7 @@ Message sent by the Identity Module function to Identity Management (IDP Proxy) 
 Response Message sent back from the Identity Management (IDP Proxy).
 
 ```
-"id" : "<2>"
+"id" : 2
 "type" : "RESPONSE",
 "from" : "domain-idp://<idp-domain>",
 "to" : "hyperty-runtime://<runtime-domain>/<runtime-instance-identifier>/idm",
@@ -61,7 +61,7 @@ Response Message sent back from the Identity Management (IDP Proxy).
 Message sent by the Identity Module function to Identity Management (IDP Proxy) to validate an Identity Assertion.
 
 ```
-"id" : "3"
+"id" : 3
 "type" : "EXECUTE",
 "from" : "hyperty-runtime://<runtime-domain>/<runtime-instance-identifier>/idm",
 "to" : "domain-idp://<idp-domain>",
@@ -71,7 +71,7 @@ Message sent by the Identity Module function to Identity Management (IDP Proxy) 
 Response Message sent back from the Identity Management (IDP Proxy).
 
 ```
-"id" : "<3>"
+"id" : 3
 "type" : "RESPONSE",
 "from" : "domain-idp://<idp-domain>",
 "to" : "hyperty-runtime://<runtime-domain>/<runtime-instance-identifier>/idm",
@@ -83,7 +83,7 @@ Response Message sent back from the Identity Management (IDP Proxy).
 Message sent by the Identity Module function to Application Sandbox to unhide admin page.
 
 ```
-"id" : "3"
+"id" : 3
 "type" : "EXECUTE",
 "from" : "hyperty-runtime://<runtime-domain>/<runtime-instance-identifier>/idm",
 "to" : "hyperty-runtime://<runtime-domain>/<runtime-instance-identifier>/gui-manager",
@@ -93,7 +93,7 @@ Message sent by the Identity Module function to Application Sandbox to unhide ad
 Message sent by the Identity Module function to Application Sandbox to hide admin page.
 
 ```
-"id" : "3"
+"id" : 3
 "type" : "EXECUTE",
 "from" : "hyperty-runtime://<runtime-domain>/<runtime-instance-identifier>/idm",
 "to" : "hyperty-runtime://<runtime-domain>/<runtime-instance-identifier>/gui-manager",
@@ -103,7 +103,7 @@ Message sent by the Identity Module function to Application Sandbox to hide admi
 #### Get Identity Associated to Hyperty Instance
 
 ```
-"id" : "4"
+"id" : 4
 "type" : "read",
 "from" : "hyperty://<hyperty-connector>/<hyperty-instance-identifier>",
 "to" : "hyperty-runtime://<runtime-domain>/<runtime-instance-identifier>/idm",

@@ -10,6 +10,8 @@ package RegistryDataObject <<Rect>> {
 		lastModified : RethinkCore.RethinkType.Date
 		status : RegistryDataObjectStatus
 		expires : integer
+		runtime : URL.HypertyRuntimeURL
+		p2pRequester ?: URL.CatalogueURL
 		stubs ?: URL.HypertyCatalogueURL
 		stubsConfiguration ?: RethinkCore.CatalogueDataObject.ProtoStubDescriptor.ProtostubConfiguration
 	}
