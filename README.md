@@ -2,13 +2,14 @@
 
 You'll find here the full detailed specification of reTHINK Framework
 
-The reTHINK Framework provides a [decentralised communication infrastructure](http://www.rand.org/pubs/research_memoranda/RM3420.html) to make network services faster, more effective, more trustful, fully programmable and implicitly inter-operable, radically reducing standardisation efforts. Ultimately, reTHINK framework is an alternative to current [dominant walled garden communication networks](https://www.theguardian.com/technology/2012/apr/17/walled-gardens-facebook-apple-censors) that prevent newcomers from entering in the market and, at the same time, empower the users with the choice and the management of their private data and identities.
-
-![reTHINK architecture](rethink-arch.png)
+The reTHINK Framework provides a [decentralised communication infrastructure](http://www.rand.org/pubs/research_memoranda/RM3420.html) to make network services **faster**, **more effective**, **more trustful**, **fully programmable** and **implicitly inter-operable**. Only data formats are required to be standardised to ensure interoperability. No standards are needed for network protocols or for APIs, radically reducing standardisation efforts. Ultimately, reTHINK framework is an alternative to current [dominant walled garden communication networks](https://www.theguardian.com/technology/2012/apr/17/walled-gardens-facebook-apple-censors) that prevent newcomers from entering in the market and, at the same time, empowers the users with the choice and the management of their private data and identities.
 
 The reTHINK Framework provides the tools to build a global decentralised network of [Hyperlinked Entities (hyperties)](tutorials/hyperty.md) that are [executed at the edge](/runtime) and [trustfully](/trust-management) communicates through a [Decentralised Messaging Framework](messaging-framework/readme.md).
 
-The specification contained in this repository are:
+![reTHINK architecture](rethink-arch.png)
+
+
+This repository contains specifications for:
 
 * [the decentralised communication framework specification](messaging-framework/readme.md) that is used to support hyperty communication across domains dramaticaly reducing standardisation efforts thanks to the protocol-on-the-fly concept and to the P2P Reporter-Observer pattern.
 * [the runtime specification](runtime/readme.md) that is used to support Hyperties execution in multiple platforms including browsers, NodeJS and Smartphones.
