@@ -38,7 +38,10 @@ The emergence of WebRTC support by most important browser vendors motivated 3GPP
 
 
 ###IMS interworking
+3GPP has released a [draft specification 24.371](https://portal.3gpp.org/desktopmodules/Specifications/SpecificationDetails.aspx?specificationId=1087) to define WebRTC access to IMS systems. The proposed legacy interconnection scheme for reTHINK is compliant with this specification and it will be shown in T.6.3.
 
+The diagram below shows the interconnection diagram which is very similar to the generic one previusly shown. The IMS gateway will perform a validation of the token obtained from the Identity provider and it will be passed to the gateway element of the IMS network in order to validate the token and registrate the identity associated to the reTHINK hyperty in the IMS network through the IMS protostub.
+From this point on, the Hyperty will be able to interact with the IMS network through the protostub. From the IMS point of view the registered Hyperty is just another User Equipement. To enable voice and video calls the WebRTC gateway would perform the tranlastion between the media with WebRTC profile to a media profile compatible with the IMS network.
 
 ![alt text](rethink-IMS-Integration-approach2.png "IMS interworking diagram")
 
