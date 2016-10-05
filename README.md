@@ -4,9 +4,13 @@ You'll find here the full detailed specification of reTHINK Framework
 
 The reTHINK Framework provides a [decentralised communication infrastructure](http://www.rand.org/pubs/research_memoranda/RM3420.html) to make network services **faster**, **more effective**, **more trustful**, **fully programmable** and **implicitly inter-operable**. Only data formats are required to be standardised to ensure interoperability. No standards are needed for network protocols or for APIs, radically reducing standardisation efforts. Ultimately, reTHINK framework is an alternative to current [dominant walled garden communication networks](https://www.theguardian.com/technology/2012/apr/17/walled-gardens-facebook-apple-censors) that prevent newcomers from entering in the market and, at the same time, empowers the users with the choice and the management of their private data and identities.
 
+
 The reTHINK Framework provides the tools to build a global decentralised network of [Hyperlinked Entities (hyperties)](tutorials/hyperty.md) that are [executed at the edge](/runtime) and [trustfully](/trust-management) communicates through a [Decentralised Messaging Framework](messaging-framework/readme.md).
 
-![reTHINK architecture](rethink-arch.png)
+<a href="http://www.youtube.com/watch?feature=player_embedded&v=8H57GIBs31o
+" target="_blank"><img src="http://img.youtube.com/vi/8H57GIBs31o/0.jpg" 
+alt="reTHINK Overview" width="960" height="720" border="1" /></a>
+
 
 
 This repository contains specifications for:
