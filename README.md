@@ -7,9 +7,13 @@ The reTHINK Framework provides a [decentralised communication infrastructure](ht
 
 The reTHINK Framework provides the tools to build a global decentralised network of [Hyperlinked Entities (hyperties)](tutorials/hyperty.md) that are [executed at the edge](/runtime) and [trustfully](/trust-management) communicates through a [Decentralised Messaging Framework](messaging-framework/readme.md).
 
+![reTHINK architecture](rethink-arch.png)
+
+Watch reTHINK Overview YouTube Video:
+
 <a href="http://www.youtube.com/watch?feature=player_embedded&v=8H57GIBs31o
 " target="_blank"><img src="http://img.youtube.com/vi/8H57GIBs31o/0.jpg" 
-alt="reTHINK Overview" width="960" height="720" border="1" /></a>
+alt="reTHINK Overview" width="240" height="180" border="10" /></a>
 
 
 
