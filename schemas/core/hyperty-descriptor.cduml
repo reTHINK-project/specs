@@ -10,7 +10,7 @@ package RethinkCore <<Rect>> {
 		package HypertyDescriptor <<Rect>> {
 
 			class HypertyDescriptor {
-				dataObjectUrls : URL.HypertyCatalogueURLList
+				dataObjects : HypertyDataObject[]
 				hypertyType : HypertyResource.HypertyResourceType[]
 				messageSchemaUrl : URL.HypertyCatalogueURL
 				configuration ?: HypertyConfiguration
@@ -18,16 +18,28 @@ package RethinkCore <<Rect>> {
 				policiesUrl ?: URL.HypertyCatalogueURL
 			}
 
+			class HypertyDataObject {
+				dataObjectURLs : URL.HypertyCatalogueURLList
+				role : HypertyRole
+			}
+
+			enum HypertyRole {
+				reporter
+				observer
+				reporter-observer
+			}
 
 			class HypertyConfiguration {
 			}
 
 			HypertyDescriptor .up.|> RethinkCore.CatalogueDataObject.CatalogueDataObject
 
+			HypertyDescriptor *.."1..*" HypertyDataObject
 			HypertyDescriptor .. HypertyResource.HypertyResourceType
 			HypertyDescriptor *.. "0..1" RethinkCore.CatalogueDataObject.HypertyRuntimeDescriptor.RuntimeHypertyCapabilities
 			HypertyDescriptor *.. "0..1" HypertyConfiguration
 
+			HypertyRole -- HypertyDataObject
 		}
 	}
 }
