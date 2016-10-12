@@ -3,12 +3,12 @@ WORK IN PROGRESS...
 ## Interworking with Legacy Services
 
 ###Introduction
-ReTHINK frameworks provides a mechanism to interact with legacy networks. This allows for example, to send calls to an IMS system from a Hyperty running in a browser, or exchanging Slack messages from a Hyperty. The elements involved is the same in the previous examples. Both of them require the implementation of a protostub which will interact with the legacy service. The protostubs also have to be created to interact with different Message Nodes so it does not add any relevant change to reTHINK architecture. It is also necessary to associate the Hyperty to more than one Identity, at least one identity used by the application which uses the Hyperty and also an identity valid for the Legacy domain. Both identities could be the same, however this would not be a common case.
+ReTHINK frameworks provides a mechanism to interact with legacy networks. This allows for example, to send calls to an IMS system from a Hyperty running in a browser, or exchanging Slack messages from a Hyperty. The elements involved is the same in the previous examples. Both of them require the implementation of a protostub - the "IWStub" - which will interact with the legacy service. The protostubs also have to be created to interact with different Message Nodes so it does not add any relevant change to reTHINK architecture. It is also necessary to associate the Hyperty to more than one Identity, at least one identity used by the application which uses the Hyperty and also an identity valid for the Legacy domain. Both identities could be the same, however this would not be a common case.
 
 ###Applications
 This integration with existing services . This is a critical requirement in order to make possible a soft migration between the existing services to reTHINK by making reTHINK application interoperable with potentially any service.
 
-One of applications which comes to mind for operator environment is to integrate reTHINK with existing telephony networks. Being able to make and receive calls, and use other advanced services provided by operator's IMS allow to open the operator services in a flexible and secure way to all the devices and platforms where reTHINK runtime can be executed. 
+One of applications which comes to mind for operator environment is to integrate reTHINK with existing telephony networks. Being able to make and receive calls, and use other advanced services provided by operator's IMS allow to open the operator services in a flexible and secure way to all the devices and platforms where reTHINK runtime can be executed.
 
 The same is applicable to other popular services such as Facebook, Slack, Salesforce and any other social network or messaging system which expose public APIs. For example, this interworking mechanism will allow to build an application which can receive calls from IMS in the public Identity of the user (normally an e.164 number) and also to send and receive slack messages in the same web interface. These features can be combined with any reTHINK-based service.
 
@@ -17,7 +17,12 @@ The same is applicable to other popular services such as Facebook, Slack, Salesf
 
 The diagram below shows the architeture of the integration of reTHINK with an external service.
 
+*todo: in the picture below replace "SIPoWS messages" by "Legacy Domain Protocol"*
+
 ![alt text](rethink-Legacy-Integration-approach2.png "Legacy domain interworking diagram")
+
+> to define here what is a IWStub ie a protostub that implements the protocol supported by the legacy domain as well as  it implements IDP Proxy functions if the legacy domain protocol is also used for IdM eg Login. Also mention that ideally the IWStun is downloaded from the legacy domain itself. Otherwise the fallback is to be loaded from the default domain (the same way we implement idp-proxy in place of Google for instance).
+
 
 A stated in the introduction the Hyperty will need to be associated to two identities. The Identity Module will handle the authentication against the Identity Provider of the Legacy domain. After a successful authentication normally a token will be provided. This token has to be used from the Protostub to authenticate itself during the registration/login process to the legacy domain. Depending on the Legacy Domain this process may be different, however the case we are describing here should be compatible with the most scenarios.
 
@@ -44,5 +49,3 @@ The diagram below shows the interconnection diagram which is very similar to the
 From this point on, the Hyperty will be able to interact with the IMS network through the protostub. From the IMS point of view the registered Hyperty is just another User Equipement. To enable voice and video calls the WebRTC gateway would perform the tranlastion between the media with WebRTC profile to a media profile compatible with the IMS network.
 
 ![alt text](rethink-IMS-Integration-approach2.png "IMS interworking diagram")
-
-
