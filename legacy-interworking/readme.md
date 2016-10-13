@@ -15,6 +15,8 @@ The same is applicable to other popular services such as Facebook, Slack, Salesf
 
 ###Interworking strategy proposal
 
+The IWStub must be provided by the legacy domain and it must make ReTHINK interoperable with the API or GW deployed in the legacy service to expose service to third parties. For example, in the case of IMS the IWstub must implement the protocol needed to interact with gateway element which translates a web-based signaling protocol and WebRTC media profile in SIP and media profiles compatible with IMS.
+
 The diagram below shows the architeture of the integration of reTHINK with an external service.
 
 *todo: in the picture below replace "SIPoWS messages" by "Legacy Domain Protocol"*
