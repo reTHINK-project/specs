@@ -5,7 +5,7 @@ The goal of this repository is to provide specifications for enabling WebRTC gro
 
 <p align="justify">In summury, star topology having an intermediary media server seems to be a good candidate for scalable group communication.</p>
 
-This start topology, decribes H2H WebRTC group communication between reTHINK users. Therefore, hyperties running on runtime browsers can exchange signaling descriptions between each other and the media server through reTHINK edge server(Runtime Node). 
+This start topology, decribes H2H WebRTC group communication between reTHINK users. Therefore, hyperties running on runtime browsers can exchange signaling descriptions between each other and the media server through reTHINK edge server(Runtime Node).
 Especially ,reTHINK Runtime Node [dev-runtime-nodejs](https://github.com/reTHINK-project/dev-runtime-nodejs) is a justified choice for exchanging WebRTC signaling. In addition, Runtime Node is a fully conform with reTHINK specs in term of reliability and security.
 
 Figure 1 below provides a big picture of this star topology, we have proposed. In this star topology, we have three main components: `Client conference Hyperty` running on `Runtime browser`, `Server Conference Hyperty` running on `Runtime NodeJS`, and the `Media Server`. While, the messaging node is just relay point in reTHINK framework. Thus, it's transparent for the different communication messages.
@@ -43,7 +43,8 @@ The sequence diagram evolves through the following macro steps:
 10. Hyperty client A sends its local stream directly to kurento media server.
 11. If Hyperty Client B wants to join(the joiner) the same room pipeline as client A, it mirrors the same behavior of hyperty A from step 4) to 10).
 12. The Hyperty conference server connects the two streams on kurento media server.
-13. At this point media streams are exchanged between client A and Client B passing by Kurento media server in star topology.The sequence diagram evolves through the following macro steps:
+13. At this point media streams are exchanged between client A and Client B passing by Kurento media server in star topology.
+
 ## 3. Detailed call flows
 In this section, we mainly describe the internal logic architecture of the client and server conference Hyperties.
 
@@ -69,9 +70,11 @@ In the following step-by-step description:
 
 ### 3.2 Server Conference Hyperty Logic
 
-The `server conference hyperty` will be loaded and executed inside Runtime Node.The figure below represents the internal architecture of the `server conference hyperty`. Essentially, we describe the messages exchanged between the `app`, `conference hyperty`, and the `Syncher`(provided by the core runtime).
+The `server conference hyperty` will be loaded and executed inside Runtime Node.The figure below represents the internal architecture of the `Server Conference Hyperty`. Essentially, we describe the messages exchanged between the `Server Conference App`, `Server Conference Hyperty`, and the `Syncher`(provided by the core runtime).
+
 
 <p align="justify">We suppose that this server hyperty is up running waiting for connection incoming requests. This hyperty will have an interesting feature of coordinating multiple data objects, each per room. an orchestrator hyperty.</p>
+
 
 ![../dynamic-view/group-communication/Server Conference Hyperty](../dynamic-view/group-communication/Server Conference Hyperty.png)
 <p align="center">
@@ -80,13 +83,11 @@ The `server conference hyperty` will be loaded and executed inside Runtime Node.
 
 The sequence diagram evolves through the following macro steps:  
 
-1. The Message BUS receives incoming request to create connection object including roomId and some options. This message is mainly coming from the messaging node associated with domain where this server application is hosted.
-2. Next, the server hyperty receives a notification message. Then, it forwards this request to the server application.
-3. The server application, will check if the roomId is new or not. In case of new room, the server application will request kurento media server to create room pipeline, and returns an SDP answer to incoming request.
-4. After, the server hyperty will in its turn request the syncher to subscribe to the client hyperty that requests to join the room.
-5. Then, the server hyperty will also request Syncher to create data connection object associated to this roomId. This server connection object is owned by the server hyperty. Thus, it's the reporter for this object. Each room has its own connection object. Bijective relationship. Thus, this connection object maintains several observers hyperties. (Similar to group chat hyperty). Everytime a new room pipeline is created in kurento media server, the hyperty will create an associated connection data objects.
-6. The client hyperties replies, after that media start following directly to kurento media server.
-7. Up to this stage, both client and server hyperty have been subscribed to each other connection objects.
-8. Simultaneously, the server hyperty will create connection controller, to maintain and keep track of the WebRTC connection parameters (participants sessions, connected peers Icecandidate,etc).
+1. The Message BUS receives incoming request to create communication object including `roomId` and some options. This message is mainly coming from the messaging node associated with domain where this server application is hosted.  
+2. Next, the server hyperty receives a notification message. Then, it forward this request to the server application.
+3. The server application, will check if the `roomId` is new or not. In case of new room, the server application will request kurento media server to create room pipeline, and returns an SDP answer to incoming request.
+4. After, the server hyperty will in its turn request the `Syncher` to subscribe to the client hyperty that requests to join the room.  
+5. Then, `the server hyperty` will also request `Syncher` to create data communication object associated to this `roomId`. This server communication object is owned by `the server hyperty`. Thus, it's the reporter for this object. Each room has its own communication data object. Bijective relationship. Thus, this communication object maintains several observers hyperties. (Similar to group chat hyperty). Everytime a new room pipeline is created in kurento media server, the hyperty will create an associated communication data objects.
 
-<p align="justify">In case another participant joins the same room, the server mirror the same behavior from step 9. to 13. (see Figure 4). However, it will not create new connection data object, since it has been already created. Instead, it will subscribe this new peer(observer) into room connection data object. Then, as in 4) the server hyperty will subscribe to new peer connection data objects. Afterwards, media will start following to kurento media server. The server hyperty will request previously connection controller related to this room to interconnect  peers media streams at kurento media server.</p>
+
+In case another participant joins the same room, `the server hyperty` mirrors the same behavior from step 9. to 13. (see Figure 4). However, it will not create new communication data object, since it has been already created. Instead, it will subscribe this new peer(observer) into room communication data object. Then, as in 4) the server hyperty will subscribe to new communication data objects. Afterwards, media will start following to kurento media server. `The server hyperty` will request previously communication/connection controller related to this room to interconnect peers media streams at kurento media server.
