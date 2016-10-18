@@ -7,29 +7,19 @@ package RethinkCore <<Rect>> {
 		package HypertyRuntimeDescriptor <<Rect>> {
 
 			class HypertyRuntimeDescriptor {
-				runtimeType : RuntimeType
 				p2pHandlerStub ?: URL.HypertyCatlogueURL
 				p2pRequesterStub ?: URL.HypertyCatlogueURL
-				hypertyCapabilities ?: RuntimeHypertyCapabilities
-				protocolCapabilities ?: RuntimeProtocolCapabilities
+				capabilities ?: RuntimeCapabilities
 			}
 
-			enum RuntimeType {
-				browser
-				standalone
-				server
-				gateway
-			}
-
-			class RuntimeHypertyCapabilities {
+			class RuntimeCapabilities {
+				browser ?: boolean
+				node ?: boolean
 				mic ?: boolean
 				camera ?: boolean
 				sensor ?: boolean
 				webrtc ?: boolean
 				ortc ?: boolean
-			}
-
-			class RuntimeProtocolCapabilities {
 				http ?: boolean
 				https ?: boolean
 				ws ?: boolean
@@ -38,17 +28,8 @@ package RethinkCore <<Rect>> {
 				datachannel ?: boolean
 			}
 
-			class RuntimeSandboxCapabilities {
-				window ?: boolean
-				webrtc ?: boolean
-				ortc ?: boolean
-			}
-
-			HypertyRuntimeDescriptor ..> RuntimeType
-			HypertyRuntimeDescriptor .. "1" RuntimeHypertyCapabilities
-			HypertyRuntimeDescriptor .. "1" RuntimeProtocolCapabilities
-			HypertyRuntimeDescriptor .. "1" RuntimeSandboxCapabilities
-			HypertyRuntimeDescriptor .up.|> RethinkCore.CatalogueDataObject.CatalogueDataObject
+			HypertyRuntimeDescriptor .. "1" RuntimeCapabilities
+			HypertyRuntimeDescriptor .up.|> CatalogueDataObject.CatalogueDataObject
 		}
 
 	}

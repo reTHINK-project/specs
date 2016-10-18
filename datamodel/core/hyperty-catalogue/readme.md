@@ -54,7 +54,7 @@ Besides the attributes inherited from the general CatalogueDataObject described 
 | **dataObjects**    |                                    HypertyDataObject  **Changed in Phase 2**                                  |      yes      | A list of HypertyDataObjects supported by the Hyperty. Each HypertyDataObject is defined by the [Data Schema Catalogue URL](#data-object-schema) from where the schema can be loaded and the role the Hyperty plays when handling it (reporter, observer or both)                                                                                                                          |
 | **messageSchema**  |                                      [URL.HypertyCatalogueURL](../address#catalogue-address)                                      |      no       | It defines the [Schema](#data-object-schema) describing the [Message Data Model](../message) used by the Hyperty through the Catalogue URL from where the Message schema can be reached. If not defined, by default it is assumed the *standard* [Message Model](../message) is used |
 | **configuration**  |                                                       HypertyConfiguration                                                        |      no       | A Data required to configure the Hyperty                                                                                                                                                                                                                                             |
-| **constraints**    |                                                    RuntimeHypertyCapabilities                                                     |      no       | [RuntimeHypertyCapabilities](#hyperty-runtime-descriptor) describing capabilities required from the Hyperty Runtime in order to be able to execute the Hyperty                                                                                                                       |
+| **constraints**    |                                                    RuntimeCapabilities                                                     |      no       | [RuntimeCapabilities](#hyperty-runtime-descriptor) describing capabilities required from the Hyperty Runtime in order to be able to execute the Hyperty                                                                                                                       |
 | **policies**       |                                                HypertyPolicy (*not yet defined*\)                                                 |      no       | A list of policies to be enforced when executing the Hyperty                                                                                                                                                                                                                         |
 
 ### Protocol Stub Descriptor
@@ -63,7 +63,7 @@ Besides the attributes inherited from the general CatalogueDataObject described 
 
 The Protocol Stub Descriptor is used to model each Protocol Stub that can be used to connect to a certain Service Provider domain. It is characterised by the schemas of the supported messages (messageSchemas) which contains a HypertyCatalogueURL that links to the corresponding Messages schema descriptor (see below).
 
-In Addition, Protocol Stub Descriptor contains the required runtime protocol capabilities (Constraints) and the data needed to configure the Protocol Stub deployment in the runtime (Configuration).
+In Addition, Protocol Stub Descriptor contains the required runtime capabilities (Constraints) and the data needed to configure the Protocol Stub deployment in the runtime (Configuration).
 
 Besides the attributes inherited from the general CatalogueDataObject described above, additional Hyperty Descriptor attributes are:
 
@@ -71,17 +71,15 @@ Besides the attributes inherited from the general CatalogueDataObject described 
 |--------------------|:-------------------------------------------------------:|:-------------:|:------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | **messageSchema**  | [URL.HypertyCatalogueURL](../address#catalogue-address) |      no       | It defines the [Schema](#data-object-schema) describing the [Message Data Model](../message) used by the ProtocolStub through the Catalogue URL from where the Message schema can be reached. If not defined, by default it is assumed the *standard* [Message Model](../message) is used |
 | **configuration**  |                 ProtostubConfiguration                  |      no       | Data required to configure the ProtocolStub                                                                                                                                                                                                                                               |
-| **constraints**    |               RuntimeProtocolCapabilities               |      no       | [RuntimeProtocolCapabilities](#hyperty-runtime-descriptor) describes capabilities required from the Hyperty Runtime in order to be able to execute the ProtocolStub                                                                                                                       |
+| **constraints**    |               RuntimeCapabilities               |      no       | [RuntimeCapabilities](#hyperty-runtime-descriptor) describes capabilities required from the Hyperty Runtime in order to be able to execute the ProtocolStub                                                                                                                       |
 
 ### Hyperty Runtime Descriptor
 
 ![Hyperty Runtime Descriptor Model](Hyperty-Runtime-Descriptor-Data-Object-Model.png)
 
-The Hyperty Runtime Descriptor is used to model the Runtime that can be used to execute Hyperties in a certain device or network server. Hyperty Runtimes are described in terms of supported capabilities to execute Hyperties (RuntimeHypertyCapabilities) and Protocol Stubs (RuntimeProtocolCapabilities) and its type including browser, standalone, server and (IoT/M2M) gateway.
+The Hyperty Runtime Descriptor is used to model the Runtime that can be used to execute Hyperties in a certain device or network server. Hyperty Runtimes are described in terms of supported capabilities to execute Hyperties, and Protocol Stubs (RuntimeCapabilities).
 
 **Phase 2 New!!**
-
-RuntimeSandboxCapabilities describes the sandboxing capabilities supported by the runtime ie if sandbox implementations give access to window APIs, WebRTC APIs or ORTC APIs.
 
 The `p2pHandlerStub` defines the Catalogue URL of a [P2P Handler protocolStub](../../messaging-framework/readme.md#peer-to-peer-message-delivery) that can be deployed in the Runtime.
 

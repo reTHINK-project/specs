@@ -32,11 +32,11 @@ package RethinkCore <<Rect>> {
 			class HypertyConfiguration {
 			}
 
-			HypertyDescriptor .up.|> RethinkCore.CatalogueDataObject.CatalogueDataObject
+			HypertyDescriptor .up.|> CatalogueDataObject.CatalogueDataObject
 
 			HypertyDescriptor *.."1..*" HypertyDataObject
-			HypertyDescriptor .. HypertyResource.HypertyResourceType
-			HypertyDescriptor *.. "0..1" RethinkCore.CatalogueDataObject.HypertyRuntimeDescriptor.RuntimeHypertyCapabilities
+			HypertyDescriptor .up. HypertyResource.HypertyResourceType
+			HypertyDescriptor *.up. "0..1" HypertyRuntimeDescriptor.RuntimeHypertyCapabilities
 			HypertyDescriptor *.. "0..1" HypertyConfiguration
 
 			HypertyRole -- HypertyDataObject
