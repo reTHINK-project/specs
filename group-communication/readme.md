@@ -5,7 +5,7 @@ The goal of this repository is to provide specifications for enabling WebRTC gro
 
 <p align="justify">In summury, star topology having an intermediary media server seems to be a good candidate for scalable group communication.</p>
 
-This start topology, decribes H2H WebRTC group communication between reTHINK users. Therefore, hyperties running on runtime browsers can exchange signaling descriptions between each other and the media server through reTHINK edge server(Runtime Node). 
+This start topology, decribes H2H WebRTC group communication between reTHINK users. Therefore, hyperties running on runtime browsers can exchange signaling descriptions between each other and the media server through reTHINK edge server(Runtime Node).
 Especially ,reTHINK Runtime Node [dev-runtime-nodejs](https://github.com/reTHINK-project/dev-runtime-nodejs) is a justified choice for exchanging WebRTC signaling. In addition, Runtime Node is a fully conform with reTHINK specs in term of reliability and security.
 
 Figure 1 below provides a big picture of this star topology, we have proposed. In this star topology, we have three main components: `Client conference Hyperty` running on `Runtime browser`, `Server Conference Hyperty` running on `Runtime NodeJS`, and the `Media Server`. While, the messaging node is just relay point in reTHINK framework. Thus, it's transparent for the different communication messages.
@@ -72,11 +72,9 @@ In the following step-by-step description:
 
 The `server conference hyperty` will be loaded and executed inside Runtime Node.The figure below represents the internal architecture of the `Server Conference Hyperty`. Essentially, we describe the messages exchanged between the `Server Conference App`, `Server Conference Hyperty`, and the `Syncher`(provided by the core runtime).
 
-<<<<<<< HEAD
-We suppose that this `server hyperty` is up running waiting for connection incoming requests. This hyperty will have an interesting feature of coordinating multiple communication data objects, each per room. an orchestrator hyperty. This hyperty uses [the Communication Data schema](https://github.com/reTHINK-project/specs/blob/master/datamodel/data-objects/communication/readme.md).
-=======
+
 <p align="justify">We suppose that this server hyperty is up running waiting for connection incoming requests. This hyperty will have an interesting feature of coordinating multiple data objects, each per room. an orchestrator hyperty.</p>
->>>>>>> abaa3217bdf287588aac3a06a9d1ae55ee965118
+
 
 ![../dynamic-view/group-communication/Server Conference Hyperty](../dynamic-view/group-communication/Server Conference Hyperty.png)
 <p align="center">
