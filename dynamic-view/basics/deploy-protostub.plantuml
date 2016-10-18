@@ -20,7 +20,7 @@ autonumber
 
 !include ../runtime_objects.plantuml
 
--> RunUA@A : loadStub( sp-domain )
+-> RunUA@A : loadStub( sp-domain,\n p2pConfig )
 
 RunUA@A -> RunReg@A : discoverStub( sp-domain )
 
@@ -73,7 +73,7 @@ RunUA@A <-- RunReg@A : returns null
 == Instantiate Sandbox with Protocol Stub ==
 
 	create Sand1@A
-	RunUA@A -> Sand1@A : new( msgBus )
+	RunUA@A -> Sand1@A : new( msgBus, capabilities )
 
 	RunUA@A <-- Sand1@A : return sandboxInstance
 

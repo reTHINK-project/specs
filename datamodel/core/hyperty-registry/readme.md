@@ -20,6 +20,8 @@ Each of these objects share a common set of data:
 - expires: period of time in seconds about how long a registry entry is "alive" without receiving an update message.
 -	stubs: the protocol stubs descriptor (including the deployable protocol stub package) that can be used to reach the registered Object including Hyperty Instance, Hyperty Runtime and Data Objects. The protocol stub can be used to reach the Object instance through a Message Node or directly connect to the Object Instance runtime (full P2P connection)
 -	stubsConfiguration: configuration data required when deploying stubs used for P2P connections.
+- **Phase 2 new!!** the `runtime` defines the URL of the runtime where the Hyperty instance is deployed.
+- **Phase 2 new!!** The `p2pRequester` defines the Catalogue URL of a [P2P Requester protocolStub](../../../messaging-framework/p2p-msg-delivery.md) that can be used in order to setup a P2P Connection with this Hyperty instance.
 
 ### Hyperty Instance
 
@@ -29,13 +31,16 @@ The Hyperty Instance Data Model is used to model instances of Hyperties running 
 
 The Hyperty Instance object contains:
 
--	Its URL ([HypertyURL](../address/readme.md#hyperty-instance-address)) that can be used to reach the Hyperty Instance
+-	Its URL ([HypertyURL](../../address/readme.md#hyperty-instance-address)) that can be used to reach the Hyperty Instance
 
 -	the Hyperty Descriptor URL ([HypertyURL](../address/readme.md#hyperty-address)) that can be used to consult hyperty metadata
 
 -	the User URL or User GUID URL ([HypertyURL](../address/readme.md#user-url-type)) which identifies the user that is associated with the Hyperty Instance.
 
 - the Objects URL Schemes supported by the Hyperty.
+
+- **Phase 2 new!!** The `p2pHandler` defines the Runtime URL of a [P2P Handler protocolStub instance](../../../messaging-framework/p2p-msg-delivery.md) deployed in the Hyperty instance runtime.
+
 
 -	the Context URL for the user associated to the Hyperty Instance, which may include Presence information.
 

@@ -3,7 +3,7 @@
 
 	"id": "HypertyInstance",
 	"type": "object",
-	"required": ["url", "user", "guid", "dataSchemes", "resources", "runtime", "context"],
+	"required": ["url", "user", "dataSchemes", "resources", "runtime"],
 	"properties": {
 		"url": {
 			"type": "string"
@@ -55,6 +55,12 @@
 			"type": "string"
 		},
 		"context": {
+			"type": "string"
+		},
+		"p2pHandler": {
+			"type": "string"
+		},
+		"p2pRequester": {
 			"type": "string"
 		}
 	}

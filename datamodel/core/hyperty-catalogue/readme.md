@@ -41,7 +41,7 @@ The detailed description of the SourcePackage is described below.
 
 The Hyperty Descriptor Data Object is used to model each Hyperty offered by a certain Service Provider.
 
-To support the Hyperty interoperability concept based on [data synchronisation mechanisms](../../data-objects/data-synch/readme.me), the Hyperty Descriptor is characterised by the schemas that describes the data objects handled by the Hyperty: dataObjects. DataObjects contains a HypertyCatalogueURL that links to the data object schema descriptor (see below).
+To support the Hyperty interoperability concept based on [data synchronisation mechanisms](../../data-objects/data-synch/readme.me), the Hyperty Descriptor is characterised by the schemas that describes the data objects handled by the Hyperty: HypertyDataObject. **Changed in Phase 2**  **Each HypertyDataObject contains a HypertyCatalogueURL that links to the data object schema descriptor (see below) and the role the Hyperty plays when handling this object: "reporter", "observer" or both ie "reporter-observer".
 
 In Addition, Hyperty Descriptor contains the policies to rule Hyperty execution (HypertyPolicy), the required runtime Hyperty capabilities (Constraints) and the data needed to configure the Hyperty delivery to users (Configuration).
 
@@ -51,7 +51,7 @@ Besides the attributes inherited from the general CatalogueDataObject described 
 |--------------------|:---------------------------------------------------------------------------------------------------------------------------------:|:-------------:|:-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | **type**           | Integer (Enumeration which maps the valid tags: "Communicator", "Identity", "Context" to a defined corresponding interger value). |      no      | A tag that identifies what type of hyperty is described in the object.                                                                                                                                                                                                               |
 | **hypertyType**           | Array of [HypertyResource.HypertyResourceType](../../data-objects/hyperty-resource) |      yes      | It defines the type of resources handled by the Hyperty.                                                                                                                                                                                                               |
-| **dataObjects**    |                                    [URL.HypertyCatalogueURLList](../address#catalogue-address)                                    |      yes      | It defines the [Data Object Schemas](#data-object-schema) supported by the Hyperty through a list of Catalogue URLs from where these schemas can be reached                                                                                                                          |
+| **dataObjects**    |                                    HypertyDataObject  **Changed in Phase 2**                                  |      yes      | A list of HypertyDataObjects supported by the Hyperty. Each HypertyDataObject is defined by the [Data Schema Catalogue URL](#data-object-schema) from where the schema can be loaded and the role the Hyperty plays when handling it (reporter, observer or both)                                                                                                                          |
 | **messageSchema**  |                                      [URL.HypertyCatalogueURL](../address#catalogue-address)                                      |      no       | It defines the [Schema](#data-object-schema) describing the [Message Data Model](../message) used by the Hyperty through the Catalogue URL from where the Message schema can be reached. If not defined, by default it is assumed the *standard* [Message Model](../message) is used |
 | **configuration**  |                                                       HypertyConfiguration                                                        |      no       | A Data required to configure the Hyperty                                                                                                                                                                                                                                             |
 | **constraints**    |                                                    RuntimeHypertyCapabilities                                                     |      no       | [RuntimeHypertyCapabilities](#hyperty-runtime-descriptor) describing capabilities required from the Hyperty Runtime in order to be able to execute the Hyperty                                                                                                                       |
@@ -73,21 +73,20 @@ Besides the attributes inherited from the general CatalogueDataObject described 
 | **configuration**  |                 ProtostubConfiguration                  |      no       | Data required to configure the ProtocolStub                                                                                                                                                                                                                                               |
 | **constraints**    |               RuntimeProtocolCapabilities               |      no       | [RuntimeProtocolCapabilities](#hyperty-runtime-descriptor) describes capabilities required from the Hyperty Runtime in order to be able to execute the ProtocolStub                                                                                                                       |
 
-### Hyperty Interceptor Descriptor
-
-![Hyperty Interceptor Data Object Model](Hyperty-Interceptor-Descriptor-Data-Object-Model.png)
-
-This Descriptor Data Object is used to model interceptoes that can be used to perform proprietary policy enforcement on Hyperties.
-
-The Hyperty Interceptor descriptor contains the policies to enforce rule Hyperty execution (HypertyPolicy) and the data needed to configure its deployment in the runtime.
-
 ### Hyperty Runtime Descriptor
 
 ![Hyperty Runtime Descriptor Model](Hyperty-Runtime-Descriptor-Data-Object-Model.png)
 
 The Hyperty Runtime Descriptor is used to model the Runtime that can be used to execute Hyperties in a certain device or network server. Hyperty Runtimes are described in terms of supported capabilities to execute Hyperties (RuntimeHypertyCapabilities) and Protocol Stubs (RuntimeProtocolCapabilities) and its type including browser, standalone, server and (IoT/M2M) gateway.
 
-The Protocol Stub Descriptor sourceCode attribute contains the source code of core runtime components that are needed to be deployed in the device.
+**Phase 2 New!!**
+
+RuntimeSandboxCapabilities describes the sandboxing capabilities supported by the runtime ie if sandbox implementations give access to window APIs, WebRTC APIs or ORTC APIs.
+
+The `p2pHandlerStub` defines the Catalogue URL of a [P2P Handler protocolStub](../../messaging-framework/readme.md#peer-to-peer-message-delivery) that can be deployed in the Runtime.
+
+The `p2pRequesterStub` defines the Catalogue URL of a [P2P Requester protocolStub](../../messaging-framework/readme.md#peer-to-peer-message-delivery) that can be used in order to setup a P2P Connection with this runtime.
+
 
 ### Data Object Schema
 

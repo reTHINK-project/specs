@@ -1,0 +1,91 @@
+
+@startuml "p2p-setup.png"
+
+autonumber
+
+box "Alice Device" #LightBlue
+
+	participant "P2P Connection\nObj Reporter" as Conn@A
+
+	participant "P2P Requester\nStub" as ReqStub
+
+	participant "MessageBus" as Bus@A
+
+	participant "Registry" as Reg@A
+
+	participant "Bob's MessageNode\nStub" as BobMNStub@A
+end box
+
+box "Bob's Backend" #LightGreen
+
+	participant "Message Node" as BobMN
+
+end box
+
+box "Bob Device" #LightRed
+	participant "Bob's MessageNode\nStub" as BobMNStub@B
+
+	participant "MessageBus" as Bus@B
+
+	participant "P2P Handler\nStub" as HandlerStub
+
+	participant "P2P Connection\nObj Observer" as Conn@B
+
+end box
+
+
+group : deployment of P2P Requester (see ../basics/deploy-protostub.md)
+
+
+end
+
+group : WebRTC Connection setup
+
+	create Conn@A
+	ReqStub -> Conn@A: new
+
+	ReqStub -> Bus@A: postMgs(\ncreate connection)
+
+	Reg@A <- Bus@A: resolve(P2PHandlerURL)
+
+	Reg@A <- Reg@A: p2p connection Setup ongoing
+
+	alt : MN Stub is no registered
+
+		group deploy Bob's MN stub
+
+		create BobMNStub@A
+		Reg@A -> BobMNStub@A: new
+		end
+
+	end
+
+	Reg@A -> Bus@A: return Bob's MessageNode Stub
+
+	BobMNStub@A <- Bus@A: postMgs(\ncreate connection)
+
+	BobMNStub@A -> BobMN: create connection\n object Message
+
+	BobMNStub@B <- BobMN: create connection\n object Message
+
+	BobMNStub@B -> Bus@B: postMgs(\ncreate connection)
+
+	HandlerStub <- Bus@B: postMgs(\ncreate connection)
+
+	create Conn@B
+	HandlerStub -> Conn@B: new
+
+	...
+
+	note over BobMN
+		Messages are exchanged to setup a WebRTC Data Channel
+		as performed by the Connector Hyperty
+		ie by synchronising Connection and Peer Data Objects
+	end note
+
+	HandlerStub <-> ReqStub : P2P Connection is established
+end
+
+
+
+@enduml

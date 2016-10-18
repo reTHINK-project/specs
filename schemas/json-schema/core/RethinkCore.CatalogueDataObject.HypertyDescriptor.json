@@ -3,10 +3,10 @@
 
 	"id": "HypertyDescriptor",
 	"type": "object",
-	"required": ["dataObjectUrls", "hypertyType", "messageSchemaUrl", "constraints"],
+	"required": ["dataObjects", "hypertyType", "messageSchemaUrl", "constraints"],
 	"properties": {
-		"dataObjectUrls": {
-			"$ref": "URL.json#/HypertyCatalogueURLList"
+		"dataObjects": {
+			"$ref": "#/HypertyDataObject"
 		},
 		"hypertyType": {
 			"type": "array",
@@ -46,10 +46,25 @@
 		"policiesUrl": {
 			"type": "string"
 		}
-	}, 
+	},
 	"HypertyConfiguration": {
 		"type": "object",
 		"properties": {
 		}
+	},
+	"HypertyDataObject": {
+		"type": "object",
+		"properties": {
+			"dataObjectURLs": {
+				"type": "string"
+			},
+			"role": {
+				"enum": [
+					"reporter",
+					"observer",
+					"reporter-observer"
+					]
+				}
+			}
 	}
 }
