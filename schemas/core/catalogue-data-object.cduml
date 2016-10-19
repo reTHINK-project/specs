@@ -19,7 +19,6 @@ package CatalogueDataObject <<Rect>> {
 	PROTOSTUB
 	IDP_PROXY
 	HYPERTY_RUNTIME
-	HYPERTY_INTERCEPTOR
 	HYPERTY_DATA_OBJECT
 	}
 
@@ -47,9 +46,6 @@ package CatalogueDataObject <<Rect>> {
 	package HypertyRuntimeDescriptor <<Rect>> {
 	}
 
-	package HypertyInterceptorDescriptor <<Rect>> {
-	}
-
 	package DataObjectSchema <<Rect>> {
 	}
 
@@ -64,7 +60,6 @@ package CatalogueDataObject <<Rect>> {
 	ProtoStubDescriptor.ProtoStubDescriptor .up.|> CatalogueDataObject
 	ProtoStubDescriptor.ProtoStubDescriptor <|.down. IdpProxyDescriptor.IdpProxyDescriptor
 	HypertyRuntimeDescriptor.HypertyRuntimeDescriptor .up.|> CatalogueDataObject
-	HypertyInterceptorDescriptor.HypertyInterceptorDescriptor .up.|> CatalogueDataObject
 	DataObjectSchema.DataObjectSchema .up.|> CatalogueDataObject
 }
 
