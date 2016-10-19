@@ -15,6 +15,7 @@ package RethinkCore <<Rect>> {
 			class RuntimeCapabilities {
 				browser ?: boolean
 				node ?: boolean
+				windowSandbox ?: boolean
 				mic ?: boolean
 				camera ?: boolean
 				sensor ?: boolean
