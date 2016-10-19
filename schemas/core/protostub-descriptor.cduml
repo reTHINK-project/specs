@@ -6,22 +6,40 @@ package RethinkCore <<Rect>> {
 
 		package HypertyRuntimeDescriptor <<Rect>> {
 		}
-		
+
+		package HypertyDescriptor <<Rect>> {
+		}
+
 		package ProtoStubDescriptor <<Rect>> {
 
 			class ProtoStubDescriptor {
-				messageSchema : URL.HypertyCatalogueURL
-				configuration : ProtostubConfiguration
-				constraints : HypertyRuntimeDescriptor.RuntimeCapabilities
+				messageSchema ?: URL.HypertyCatalogueURL
+				configuration ?: ProtostubConfiguration
+				constraints ?: HypertyRuntimeDescriptor.RuntimeCapabilities
+				hypertyType ?: HypertyDescriptor.HypertyResourceType[]
+				dataObjects ?: HypertyDescriptor.HypertyDataObject[]
+				Interworking ?: boolean
+				idpProxy ?: boolean
+				mutualAuthentication ?: MutualAuthenticationAlgorithm
 			}
 
 
 			class ProtostubConfiguration {
 			}
 
+
+			enum MutualAuthenticationAlgorithm {
+			 oidc-rethink
+			 signal
+			}
+
+			ProtoStubDescriptor .up. HypertyDescriptor.HypertyDataObject
+			ProtoStubDescriptor .up. HypertyDescriptor.HypertyResourceType
+
 			ProtoStubDescriptor .. HypertyRuntimeDescriptor.RuntimeCapabilities
 			ProtoStubDescriptor .up.|> CatalogueDataObject.CatalogueDataObject
 			ProtoStubDescriptor *.. ProtostubConfiguration
+			ProtoStubDescriptor .. MutualAuthenticationAlgorithm
 		}
 	}
 }

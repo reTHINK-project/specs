@@ -1,6 +1,4 @@
 
-**Outdated!! See most updated version [here](../core/hyperty-resource)**
-
 ### Hyperty Resource
 
 ![Hyperty Resource Data Object Model](Hyperty-Resource-Data-Object-Model.png)

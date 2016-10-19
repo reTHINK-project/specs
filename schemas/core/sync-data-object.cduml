@@ -1,4 +1,4 @@
-@startuml "../../datamodel/data-objects/data-synch/SyncDataObject.png"
+@startuml "../../datamodel/core/data-synch/SyncDataObject.png"
 
 package SyncDataObject {
 
