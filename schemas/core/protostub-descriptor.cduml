@@ -10,13 +10,16 @@ package RethinkCore <<Rect>> {
 		package HypertyDescriptor <<Rect>> {
 		}
 
+		package HypertyResource <<Rect>> {
+		}
+
 		package ProtoStubDescriptor <<Rect>> {
 
 			class ProtoStubDescriptor {
 				messageSchema ?: URL.HypertyCatalogueURL
 				configuration ?: ProtostubConfiguration
 				constraints ?: HypertyRuntimeDescriptor.RuntimeCapabilities
-				hypertyType ?: HypertyDescriptor.HypertyResourceType[]
+				hypertyType ?: HypertyResource.HypertyResourceType[]
 				dataObjects ?: HypertyDescriptor.HypertyDataObject[]
 				Interworking ?: boolean
 				idpProxy ?: boolean
@@ -34,7 +37,7 @@ package RethinkCore <<Rect>> {
 			}
 
 			ProtoStubDescriptor .up. HypertyDescriptor.HypertyDataObject
-			ProtoStubDescriptor .up. HypertyDescriptor.HypertyResourceType
+			ProtoStubDescriptor .up. HypertyResource.HypertyResourceType
 
 			ProtoStubDescriptor .. HypertyRuntimeDescriptor.RuntimeCapabilities
 			ProtoStubDescriptor .up.|> CatalogueDataObject.CatalogueDataObject
