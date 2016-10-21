@@ -13,6 +13,7 @@ autonumber
 !define SHOW_AuthAtRuntimeA
 !define SHOW_CoreAgentAtRuntimeA
 !define SHOW_CatalogueAtRuntimeA
+!define SHOW_SMAtRuntimeA
 
 !define SHOW_SP1SandboxAtRuntimeA
 !define SHOW_Protostub1AtRuntimeA
@@ -52,12 +53,31 @@ RunUA@A -> RunID@A : new
 create RunAuth@A
 RunUA@A -> RunAuth@A : new
 
+create RunSM@A
+RunUA@A -> RunSM@A : new
+
 create BUS@A
 RunUA@A -> BUS@A : new
 
-RunUA@A -> RunReg@A : init( hypertyRuntimeURL, remoteRegistryURL )
+RunUA@A -> RunReg@A : init( remoteRegistryURL )
 
-group option : ** New!! if runtime is P2P enabled  **
+RunReg@A -> RunReg@A : reuse cached\n RuntimeURL
+
+RunUA@A -> RunSM@A : init( )
+
+loop  Phase 2 New!! for each stored reporter subscription
+
+  RunSM@A -> BUS@A : addListener( DataObjURL\changes, listener)
+
+end
+
+loop Phase 2 New!! for each stored observer subscription
+
+  RunSM@A -> RunSM@A : addListener( DataObjURL\changes, observerListener)
+
+end
+
+group option : Phase 2 New!! if runtime is P2P enabled
 
   group : P2P Handler Stub is loaded (see protostub-load.md)
   end group

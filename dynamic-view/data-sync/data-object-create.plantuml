@@ -27,38 +27,43 @@ Sync1@A -> RunSM@A : Create MSG
 
 RunSM@A <- RunSM@A : policyEngine.authorise()
 
-  RunSM@A <- RunSM@A : registry.registerDataObject()
+  RunSM@A <- RunSM@A : registry.registerDataObject(ObjectURL)
 
-group Allocate Data Object URL
-  RunSM@A -> SP1 : Create Allocation Message
+  RunSM@A <- RunSM@A : registry check if an \n existing registration is cached
 
-  note right
-   Register Data Object
-  end note
+alt no local registration: this is a new Object
+  group Allocate Data Object URL
+    RunSM@A -> SP1 : Create Allocation Message
+
+    note right
+     Register Data Object
+    end note
 
 
-  RunSM@A <- SP1 : Create Allocation Response Message
-end
+    RunSM@A <- SP1 : Create Allocation Response Message
+  end
 
-group Setup Routing Path for the new Data Object
-  RunSM@A -> SP1 : Subscribe Data Object URLs Message
+  group Setup Routing Path for the new Data Object
+    RunSM@A -> SP1 : Subscribe Data Object URLs Message
 
-  note right
-    add listeners to <ObjectUrl>, <ObjectUrl>/subscription,
-    and  <ObjectUrl>/children,
-  end note
+    note right
+      add listeners to <ObjectUrl>, <ObjectUrl>/subscription,
+      and  <ObjectUrl>/children,
+    end note
 
   RunSM@A <- SP1 : subscription Response Message
-end
+  end
 
-group Register Data Object at Domain Registry
-  RunSM@A -> SP1 : Create Data Object Registration at Domain Registry Message
+  group Register Data Object at Domain Registry
+    RunSM@A -> SP1 : Create Data Object Registration at Domain Registry Message
 
-  note right
-    Data Object is registered in the Domain Registry
-  end note
+    note right
+      Data Object is registered in the Domain Registry
+    end note
 
-  RunSM@A <- SP1 : Create Registration Response Message
+    RunSM@A <- SP1 : Create Registration Response Message
+  end
+
 end
 
 Sync1@A <- RunSM@A : Create Response MSG
@@ -86,25 +91,27 @@ opt Hyperty owner / reporter is updated when object observers are added or remov
 
 end
 
-==  Hyperties are notified about new object creation ==
+alt for new data Objects
+  ==  Hyperties are notified about new object creation ==
 
-RunSM@A -> SP1H@1B : Create Msg
+  RunSM@A -> SP1H@1B : Create Msg
 
-opt Invited Hyperties can send provisional responses eg to aknowledge the reception
-	...
+  opt Invited Hyperties can send provisional responses eg to aknowledge the reception
+  	...
 
-  RunSM@A <- SP1H@1B : provisional Response Msg
-  Sync1@A <- RunSM@A : provisional Response Msg
+    RunSM@A <- SP1H@1B : provisional Response Msg
+    Sync1@A <- RunSM@A : provisional Response Msg
 
-end
+  end
 
-opt Invited Hyperties can send responses accepting or not to be observer
-	...
+  opt Invited Hyperties can send responses accepting or not to be observer
+  	...
 
-  RunSM@A <- SP1H@1B : final Response Msg
-  Sync1@A <- RunSM@A : final Response Msg
+    RunSM@A <- SP1H@1B : final Response Msg
+    Sync1@A <- RunSM@A : final Response Msg
 
-	...
+  	...
+  end
 end
 
 @enduml

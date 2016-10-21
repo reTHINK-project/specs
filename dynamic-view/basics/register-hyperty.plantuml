@@ -33,7 +33,9 @@ RunUA@A -> RunReg@A : registerHyperty(\npostMessage,\nHypertyDescriptor )
 
 	end group
 
-	group allocate address for new Hyperty Instance
+	RunReg@A <- RunReg@A : is registration cached?
+
+	alt no registration cached localy: allocate address for new Hyperty Instance
 		RunReg@A <- RunReg@A : resolve protoStub URL
 		RunReg@A -> BUS@A : postMessage(\nRead Msg\nto get hyperty \nAddress Allocation)
 
@@ -53,19 +55,28 @@ RunUA@A -> RunReg@A : registerHyperty(\npostMessage,\nHypertyDescriptor )
 
 		RunReg@A <- BUS@A : postMessage(\nread response \nmessage with\n hyperty Address\n MSG)
 
-	end group
+		group register New Hyperty at SP1 Registry
+			RunReg@A <- RunReg@A : collect Hyperty\nruntime Context data
+			RunReg@A <- RunReg@A : resolve \nprotoStub URL
+			RunReg@A -> BUS@A : postMessage(\nCreate \nhypertyRegistration\n MSG)
 
-	group register Hyperty at SP1 Registry
+			BUS@A -> Proto1@A : postMessage(\ncreate \nhypertyRegistration\n MSG)
+
+			Proto1@A -> SP1 : create\nhypertyRegistration\nSP1 MSG Protocol
+
+		end group
+
+	else update existing Hyperty registration at SP1 Registry
+
 		RunReg@A <- RunReg@A : collect Hyperty\nruntime Context data
 		RunReg@A <- RunReg@A : resolve \nprotoStub URL
-		RunReg@A -> BUS@A : postMessage(\nCreate \nhypertyRegistration\n MSG)
+		RunReg@A -> BUS@A : postMessage(\nUpdate \nhypertyRegistration\n MSG)
 
-		BUS@A -> Proto1@A : postMessage(\ncreate \nhypertyRegistration\n MSG)
+		BUS@A -> Proto1@A : postMessage(\nUpdate \nhypertyRegistration\n MSG)
 
-		Proto1@A -> SP1 : create\nhypertyRegistration\nSP1 MSG Protocol
+		Proto1@A -> SP1 : Update\nhypertyRegistration\nSP1 MSG Protocol
 
-
-	end group
+	end
 
 RunReg@A -> BUS@A : addListener(\n registryListener,\n hypertyURL\status)
 
