@@ -4,9 +4,9 @@
 
 
 node "Management Services" as Man1 {
-	node "Registry" as Server1
-	node "Identity Management" as IdM1
-
+	node "Global\nRegistry" as GReg
+	node "Domain\nRegistry" as DomReg
+	node "Identity\nManagement" as IdM1
 }
 
 node "Service Provider 2" as SP2 {
@@ -14,15 +14,15 @@ node "Service Provider 2" as SP2 {
 	node "Repository\nServer" as Repo2
 }
 
-node "End-User Device 1" as User1 {
+node "End-User\nDevice 1" as User1 {
 	node "Hyperty" as H1
 }
 
-node "End-User Device 2" as User2 {
+node "End-User\nDevice 2" as User2 {
 	node "Hyperty" as H2
 }
 
-node "Network Server" as Net {
+node "Network\nServer" as Net {
 	node "Hyperty" as H3
 }
 
@@ -35,10 +35,15 @@ node "Messaging Node" as msg {
  }
 
 node "Connectors" as Conn {
-	node "IdM\nConnector" as ConnIdM
-	node "Registry\nConnector" as ConnMan
-	node "End-User Device\nConnector" as ConnUser
-	node "Network Server\nConnector" as ConnNet
+	node "outgoing" as ConnOut {
+		node "IdM\nConnector" as ConnIdM
+		node "Global\nRegistry\nConnector" as ConnGReg
+		node "Domain\nRegistry\nConnector" as ConnDomReg
+	}
+	node "incoming (stub endpoints)" as ConnIn {
+		node "End-User Device\nConnector" as ConnUser
+		node "Network Server\nConnector" as ConnNet
+	}
 }
 
 
@@ -52,7 +57,7 @@ node "Core Functionalities" as core {
 
  node "Address Allocation\nManagement" as ID
 
- node "Subscription\nManager" as Sync
+ node "Subscription\nManager" as Sub
 
  }
 
@@ -72,7 +77,7 @@ Msg2 <-left-> Proto1 : communicate
 
  Reg <-up. Bus: session valid?
 
- Sync -up.> Bus: add Sync\nListeners
+ Sub -up.> Bus: add Sub\nListeners
 
  ConnIdM <-up-> IdM1 : authorise
 
@@ -84,8 +89,10 @@ Msg2 <-left-> Proto1 : communicate
  Bus <-up-> ConnNet : communicate
  ConnNet <-up-> H3 : communicate
 
- Bus <-up-> ConnMan : communicate
- ConnMan <-up-> Server1 : communicate
- 	}
+ Bus <-up-> ConnGReg : communicate
+ Bus <-up-> ConnDomReg : communicate
+ ConnGReg <-up-> GReg : communicate
+ ConnDomReg <-up-> DomReg : communicate
+
 
 @enduml
