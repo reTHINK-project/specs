@@ -1,7 +1,7 @@
 Graph Connector Data Model
 --------------------
 
-![Graph Connector Data Model](Graph-Connector-Data-Model.png)
+![Graph Connector Data Model](graph-connector.png)
 
 The Graph Connector handles the user's GUID and serves as a address book/contact list.
 
