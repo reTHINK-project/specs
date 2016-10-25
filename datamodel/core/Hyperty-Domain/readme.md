@@ -34,6 +34,6 @@ The Hyperty Domain data model is mainly described by its name (DomainURL), the a
 
 The domain governance is described by the data schemas used (DomainDataSchemas) as well as by the Business Processes and the Business Policies used to rule the Hyperty Life-cycle and Partnership life-cycle as defined in T1.3.
 
-![HypertyDomain](HypertyDomain.png)
+![HypertyDomain](domain.png)
 
 Figure : Hyperty Domain UML diagram
