@@ -55,8 +55,8 @@ As mentionned above, the communication service providers consists in __3__ compo
 
 ####Domain Registry 
 Domain registry is installable from [here](https://github.com/reTHINK-project/dev-registry-domain/server). As the Domain Registry is necessary to run the messaging node, it has to be installed first. The default port of the domain registry is 4567.
-The default DNS for our domain registry will be: __registry.csp.rethink.com__ .  
-To test if installation is OK: https://registry.csp.rethink.com/live gives a view of the current status of the registry.  
+The default DNS for our domain registry will be: __registry.csp.rethink.com__.  
+__To test if installation is OK: https://registry.csp.rethink.com/live gives a view of the current status of the registry.__  
 
 ####Messaging node
 This is the core plateform. ReTHINK has provided four implementations but only one is necessary to be installed:
@@ -69,52 +69,39 @@ ___WARNING___
  *  _vertx installation_: the node.config.json contains a parameter that will be used during the docker run through an environment variable. The domain parameter must contain the DNS of the full platform (here csp.rethink.com), and it will be used then to build the DNS of the componants (msg-node.csp.rethink.com, registry.csp.rethink.com, etc...). The registry url must be filled here, but it is not sured if it can be tuned.
  * _nodejs installation_: the docker-compose must be configured. If you use the script "start.sh", it will also build the domain registry. The url to provide in the "environment" section is the _domain_ of the plateform (here csp.rethink.com).
 
+__To test if installation is OK: https://msg-node.csp.rethink.com/live gives a view of the current status of the nodejs node.__  
+
 ####Catalogue
 The catalogue is made out of two main components. A broker, that is needed to access the different services, and one or more database. Documentation can be accessed [here](https://github.com/reTHINK-project/dev-catalogue/tree/master/doc).  
-First of all, the broker has to be installed. A dockerhub componant is available. 
+First of all, the broker has to be installed. A dockerhub componant is available.   
 ___WARNING___
  * the catalogue broker has an important parameter to take into account: __default__ . To be able to run an application with a specific messaging node, the default protostub MUST be the one of the installed messaging node. Thus, if you want to use the nodejs messaging node, _-default protocolstub/NodejsProtoStub_ should be included in the "run" commande. For the vertx, _protocolstub/VertxProtoStub_ etc. This is important, because, _once the borker launched, this cannot be changed_. The only way is to remove the broker instance, and to relaunch it.
- * the broker and the databases are communicating 2 ways, using COAP. What does that mean? It means that if you want to deploy them on a testbed behind a firewall or a proxy, you have to take into account COAP. Otherwise you cannont proxy them. This means that the broker and the database MUST be launched with _--net=host_ and that they don't use an already binded port. Here is an example of broker launch command (with -d for background, and the exposed ports):   
-
+ * the broker and the databases are communicating 2 ways, using COAP. What does that mean? It means that if you want to deploy them on a testbed behind a firewall or a proxy, you have to take into account COAP. Otherwise you cannont proxy them. This means that the broker MUST be launched with _--net=host_ and that they don't use an already binded port. Here is an example of broker launch command (with -d for background, and the exposed ports):   
+  
      docker run -it --net=host -d --name="catalogue-broker"  rethink/catalogue-broker -host xxx.xxx.xxx.xxx -h 9011 -hs 9012 -default protocolstub/VertxProtoStub  
 
+An example of catalogue database is provided [here](https://github.com/reTHINK-project/dev-catalogue/tree/master/docker/catalogue-database-reTHINKdefault). It is recommanded to use it for this example (-h is the IP of the current catalogue. Note that it is not known __before__ launching it):
 
- 
-__To be able to run an example, the catalogue database must provide:__ <b>  
- * A reThink runtime  
- * One protostub that allow the usage of the installed messaging node  
- * The Hyperty code and datashema that will be used by the example.</b>    
-A specific database is proposed to run the HelloWorld example.
+     docker run -it -d --name catalogue-db rethink/catalogue-database-reTHINKdefault -h 172.17.0.x -d catalogue.csp.rethink.com  
 
-####Configuration and tests of the CSP
-Configuration of the Messaging node:  
-Domain Registry have to be accessed by the messaging node.  
-Catalogue is only refered by its URL.
-
-
-###Support Services
-
-####Global Registry (Optional)
-The [Global Registry](https://github.com/reTHINK-project/dev-registry-global) is an optional module allowing access to the GUID of users in order to find the services where they are registered.
-Global Registry is exposing two ports: one for the REST insterface, and one for the P2P connections (this second one should be let to 5002).  
-<img src="https://github.com/reTHINK-project/testbeds/blob/master/docs/Testbed-Design/figures/gregdeployment.png" width="400">
-
-####QoS Broker (Optional)
-The Qod broker is usable by the service provider. The plateform and Installation Guide is available here  [Qos](https://github.com/reTHINK-project/dev-qos-support/broker)  
-QoS Broker necessitates to be installed with TURN servers and some configuration. To be used, a CSP has to be referenced in the administration interface of the Broker.
-
-####TURN Server (Optional)
+___WARNING___
+ * The google idpproxy provided is working with an account that authorizes authentication process on a test platform, which probably does not include the one under installation. This means that by default, it is not possible to use google. To be able to do this, you have to:
+  * edit the sourceCode.js of the google idpproxy
+  * change the account and secret of the google account
+  * authorize on this account the use of google auth API (https://console.developers.google.com/apis/), with the authorized redirect URI https://csp.rethink.com.  
+  
+__To test if installation is OK: https://catalogue.csp.rethink.com/ gives a view of the current status of the catalogue node. It also allow to see connected databases and componants__  
+  
 
 ###Application Deployment
 
 ####Hello World
-The Hello World is published in the repository [dev-hello](https://github.com/reTHINK-project/testbeds/tree/dev/dev-hello), and its installation manual is provided there.
-The HelloWorld application is distinguished from the Hyperty HelloWorld which provides the real service.
+The Hello World is published in the repository [dev-hello](https://github.com/reTHINK-project/dev-app), and its installation manual is provided there. It can be deploied simply behind an HTTP server.
 
-To be able to run the new application, using Google ID or any OIDC serveur, you must register this application as a "client" of the IdP.
+___WARNING___
+ *  .well-known/runtime/ must contain the last version of the runtime. It have to be filled with [these files](https://github.com/reTHINK-project/dev-runtime-browser/tree/master/bin)  
+ 
+ 
+When all of this is done you can try to connect on the index.html of the hello-app. First step, you should be able to load the runtime, then to load an hyperty, then to contact hyperties.
 
-Two google accounts are provided for test purpose:
-openidtest10@gmail.com / testOpenID10  
-openidtest20@gmail.com / testOpenID20  
-To use these accounts for authentication, one has to configure in the Google could platform the callback url of the service deployed (accessible throught Internet). URL must begin with ___msg-node.___  (e.g. msg-node.powercommunication.rethink.orange-labs.fr).   
 
