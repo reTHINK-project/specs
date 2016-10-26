@@ -36,8 +36,5 @@ Transversal to these specs we have:
 
 You can also find in this repo a set of [tutorials](tutorials/readme.md) to support the development of Hyperties, Apps and Message Nodes.
 
-In order to setup your own reTHINK Framework, you should install the following components (docker images available):
+In order to setup your own reTHINK Framework, you should install the several components (docker images available). The full process is described in [deployment section](deployment/readme.md). Developers only have to use [toolkit](https://github.com/reTHINK-project/dev-hyperty-toolkit).
 
--	the [Hyperty Catalogue](https://github.com/reTHINK-project/dev-catalogue)
--	the [Hyperty Domain Registry](https://github.com/reTHINK-project/dev-registry-domain)
--	any of the three available Message Nodes: the [Vertx Message Node](https://github.com/reTHINK-project/dev-msg-node-vertx), [Matrix](https://matrix.org/) or [NodeJS](https://nodejs.org/en/).
