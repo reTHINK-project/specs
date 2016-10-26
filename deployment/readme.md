@@ -42,18 +42,13 @@ The catalogue actually consist of two parts: the catalogue-brocker and several c
 * Discovery Service (FFS): under development.
 
 ### Client side components
-* The client side components are included in the runtime. This runtime is downloaded in the browser when the user connects to an application based on the runtime server. Thus, nothing has to be manually installed.
+* The client side components are the runtime and the application. This runtime is downloaded in the browser when the user connects to an application based on reThink. Thus, nothing has to be manually installed.
 
-##Let's rock
-###Identity Provider
-
-ReThink provides two identity providers available: a [Node.js](https://github.com/reTHINK-project/dev-IdPServer) and a [php](https://github.com/reTHINK-project/dev-IdPServer-phpOIDC) one. First one is recommanded (and dockerized).
-These two IdPs are providing OIDC (installation guide is provided in README) and we have implemented IdP Proxy as specified in [ietf WebRTC Security draft](https://tools.ietf.org/html/draft-ietf-rtcweb-security-arch-11).  
-After installing one of these two IdPs, at least two users, Alice and Bob have to be created in the database.
+## installation process
 
 ###Communication Service Provider
 
-As mentionned above, the communication service providers consists in three services.
+As mentionned above, the communication service providers consists in three componants, a messaging node, a domain registry and a catalogue. To have a consistent platform, we 
 
 ####Domain Registry 
 Domain registry is installable from [here](https://github.com/reTHINK-project/dev-registry-domain/server). As the Domain Registry is necessary to run the messaging node, it has to be installed first. The default port of the domain registry is 4567.
