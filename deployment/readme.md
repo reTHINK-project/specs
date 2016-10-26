@@ -2,6 +2,7 @@
 
 This page explains how to install a complete platform to be able to deploy services and applications based on the reThink framework.
 After following this tutorial, you will be able to run the Hello World application available [here](https://github.com/reTHINK-project/testbeds/tree/dev/dev-hello).
+The installation guides can be found in the different folders. We don't provide here the full installation processes, but a view "as a whole", summaries and tips.
 
 ## Components to install
 A complete reThink platform consists on server side componants that are finally deployed in the browser. These componants are showed in the following picture and described hereafter.  
@@ -45,10 +46,12 @@ The catalogue actually consist of two parts: the catalogue-brocker and several c
 * The client side components are the runtime and the application. This runtime is downloaded in the browser when the user connects to an application based on reThink. Thus, nothing has to be manually installed.
 
 ## installation process
+We will first install a CSP, then the application from scratch. To illustrate our text, we will consider that the DNS of the platform is ___csp.rethink.com___
+
 
 ###Communication Service Provider
 
-As mentionned above, the communication service providers consists in three componants, a messaging node, a domain registry and a catalogue. To have a consistent platform, we 
+As mentionned above, the communication service providers consists in __3__ componants. We will install first the domain registry, then the messaging node, and finally the catalogue. 
 
 ####Domain Registry 
 Domain registry is installable from [here](https://github.com/reTHINK-project/dev-registry-domain/server). As the Domain Registry is necessary to run the messaging node, it has to be installed first. The default port of the domain registry is 4567.
