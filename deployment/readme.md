@@ -1,7 +1,7 @@
 # Quick installation guide of the reThink Platform.
 
 This page explains how to install a complete platform to be able to deploy services and applications based on the reThink framework.
-After following this tutorial, you will be able to run the Hello World application available [here](https://github.com/reTHINK-project/testbeds/tree/dev/dev-hello).
+After following this tutorial, you will be able to run the Hello World application available [here](https://github.com/reTHINK-project/testbeds/tree/dev/dev-hello).  
 The installation guides can be found in the different folders. We don't provide here the full installation processes, but a view "as a whole", summaries and tips.
 
 ## Components to install
@@ -55,13 +55,29 @@ As mentionned above, the communication service providers consists in __3__ compo
 
 ####Domain Registry 
 Domain registry is installable from [here](https://github.com/reTHINK-project/dev-registry-domain/server). As the Domain Registry is necessary to run the messaging node, it has to be installed first. The default port of the domain registry is 4567.
+The default DNS for our domain registry will be: __registry.csp.rethink.com__ .  
+To test if installation is OK: https://registry.csp.rethink.com/live gives a view of the current status of the registry.  
 
 ####Messaging node
-This is the first platform to install (core plateform). ReTHINK has provided three implementations: [VertX](https://github.com/reTHINK-project/dev-msg-node-vertx), [Matrix](https://github.com/reTHINK-project/dev-msg-node-matrix) and [NodeJS](https://github.com/reTHINK-project/dev-msg-node-nodejs).  
-Only one is necessary to be installed (currently [VertX](https://github.com/reTHINK-project/dev-msg-node-vertx) is prefered).  
+This is the core plateform. ReTHINK has provided four implementations but only one is necessary to be installed:
+* [VertX](https://github.com/reTHINK-project/dev-msg-node-vertx) 
+* [Matrix](https://github.com/reTHINK-project/dev-msg-node-matrix)
+* [NodeJS](https://github.com/reTHINK-project/dev-msg-node-nodejs)
+* [no matrix](https://github.com/reTHINK-project/dev-msg-node-nomatrix)
+
+___WARNING___
+ *  _vertx installation_: the node.config.json contains a parameter that will be used during the docker run through an environment variable. The domain parameter must contain the DNS of the full platform (here csp.rethink.com), and it will be used then to build the DNS of the componants (msg-node.csp.rethink.com, registry.csp.rethink.com, etc...). The registry url must be filled here, but it is not sured if it can be tuned.
+ * _nodejs installation_: the docker-compose must be configured. If you use the script "start.sh", it will also build the domain registry. The url to provide in the "environment" section is the _domain_ of the plateform (here csp.rethink.com).
 
 ####Catalogue
 The catalogue is made out of two main components. A broker, that is needed to access the different services, and one or more database. Documentation can be accessed [here](https://github.com/reTHINK-project/dev-catalogue/tree/master/doc).  
+First of all, the broker has to be installed. A dockerhub componant is available. 
+___WARNING___
+ * the catalogue broker has an important parameter to take into account: __default__ . To be able to run an application with a specific messaging node, the default protostub MUST be the one of the installed messaging node. Thus, if you want to use the nodejs messaging node, _-default protocolstub/NodejsProtoStub_ should be included in the "run" commande. For the vertx, _protocolstub/VertxProtoStub_ etc. This is important, because, _once the borker launched, this cannot be changed_. The only way is to remove the broker instance, and to relaunch it.
+ * the broker and the databases are communicating 2 ways, using COAP. What does that mean? It means that if you want to deploy them on a testbed behind a firewall or a proxy, you have to take into account COAP. Otherwise you cannont proxy them. This means that the broker and the database MUST be launched with _--net=host_ and that they don't use an already binded port. Here is an example of broker launch command:   
+ ' docker run -it --net=host -d --name="catalogue-broker"  rethink/catalogue-broker -host 161.106.2.20 -h 9011 -hs 9012 -default protocolstub/VertxProtoStub'  
+ * 
+ 
 __To be able to run an example, the catalogue database must provide:__ <b>  
  * A reThink runtime  
  * One protostub that allow the usage of the installed messaging node  
