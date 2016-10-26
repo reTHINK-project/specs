@@ -22,20 +22,24 @@ https free trusted certificates can be obtained on [let's encrypt](https://letse
 
 <img src="https://github.com/reTHINK-project/testbeds/blob/master/docs/Testbed-Design/figures/pfTechView.png" width="350">
 
+
 ### Server side components
 
-* Identity provider (optional).
+* Identity provider (optional): the identity provider is used for user authentication. It is currently possible to use Google account, Microsoft account, and a reThink account provided.
 
-* Communication service provider (CSP). A CSP contains normally 3 building blocks, a Messaging Node, managing signaling part, a registry (called domain registry) and a catalogue. Whether these nodes can be independent or not is not the purpose of this guide. We consider them as a whole for a service provider.
+* Communication service provider (CSP). This is the masterpiece of the reThink plateform. A CSP contains normally 3 building blocks, a Messaging Node, managing signaling part, a registry (called domain registry) and a catalogue. Whether these nodes can be independent or not is not the purpose of this guide. We consider them as a whole for a service provider.  
+The catalogue actually consist of two parts: the catalogue-brocker and several catalogue databases (see [dev-catalogue](https://github.com/reTHINK-project/dev-catalogue) for more details).
 
-**comment Marc:**  The catalogue will actually consist (at least) of two parts.  The catalogue-brocker and the catalogue-database.  For testing, one might also consider the catalogue-test-client, but the latter one is optional.  From the figure, I guess that each component will likely resemble a docker image.  If this is the intend of the image, I would "blow up" the catalogue box a bit and include within it two sub-boxes, namely the catalogue-brocker and the catalogue-database.
-** Comment Simon:** I prefer not to blow up this component in the global view, which try to figure each exposed component used by the service itself, but we can add a more detailed image in the catalogue section.
+* Web application server: A minimum demo is provided by the CSP, and relies on the 3 previous nodes. The Web application server will provide the application. This application will:
+ * be deployed in the brower
+ * download the runtime into the browser
+ * download hyperties code from the catalogue to the runtime
 
-* Web application server: A minimum demo is provided by the CSP, and relies on the 3 previous nodes.
+* Global Registry (optional): the Global Registry (GREG) is a plateform independant from the service provider and thus will be accessed from the runtime independently. Some of them are already deployed. It is not necessary to deploy one on the first steps.
 
-* Global Registry (optional)
-* QoS broker and TURN Servers (Optional)
-* Discovery Service (FFS)
+* QoS broker and TURN Servers (Optional): QoS broker allow to choose the TURN server used for quality of service purpose. As the QoS is managed on the CPE, an extra configuration is necessary and is not mandatory at this step.
+
+* Discovery Service (FFS): under development.
 
 ### Client side components
 * The client side components are included in the runtime. This runtime is downloaded in the browser when the user connects to an application based on the runtime server. Thus, nothing has to be manually installed.
