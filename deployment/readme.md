@@ -1,12 +1,13 @@
 # Quick installation guide of the reThink Platform.
 
 This page explains how to install a complete platform to be able to deploy services and applications based on the reThink framework.
-After following this tutorial, you will be able to run the Hello World application available [here](https://github.com/reTHINK-project/testbeds/tree/dev/dev-hello).  
-The installation guides can be found in the different folders. We don't provide here the full installation processes, but a view "as a whole", summaries and tips.
+After following this tutorial, you will be able to run the Hello World application available [here](https://github.com/reTHINK-project/dev-app).  
+The installation guides can be found in the different folders. We don't provide here the full installation processes, but a view "as a whole", summaries and tips.   
+__Please note that this section is dedicated to an operational plateform__. Developpers should use the [toolkit](https://github.com/reTHINK-project/dev-hyperty-toolkit).   
 
 ## Components to install
 A complete reThink platform consists on server side componants that are finally deployed in the browser. These componants are showed in the following picture and described hereafter.  
-__Please note that this section is dedicated to an operational plateform__. Developpers should use the [toolkit](https://github.com/reTHINK-project/dev-hyperty-toolkit).
+
 All componants are available in Docker images and the prefered host is an ubuntu 14.04.  
 It is recommended that the containers are deployed behind a reverse proxy for several reasons:
  * default DNS is used to access different componants of the platform, adding a prefix. The reverse proxy can easily manage different virtual host thus simplifying access to these componants.
@@ -45,7 +46,7 @@ The catalogue actually consist of two parts: the catalogue-brocker and several c
 ### Client side components
 * The client side components are the runtime and the application. This runtime is downloaded in the browser when the user connects to an application based on reThink. Thus, nothing has to be manually installed.
 
-## installation process
+## Installation process
 We will first install a CSP, then the application from scratch. To illustrate our text, we will consider that the DNS of the platform is ___csp.rethink.com___
 
 
@@ -63,7 +64,7 @@ This is the core plateform. ReTHINK has provided four implementations but only o
 * [VertX](https://github.com/reTHINK-project/dev-msg-node-vertx) 
 * [Matrix](https://github.com/reTHINK-project/dev-msg-node-matrix)
 * [NodeJS](https://github.com/reTHINK-project/dev-msg-node-nodejs)
-* [no matrix](https://github.com/reTHINK-project/dev-msg-node-nomatrix)
+* [no matrix](https://github.com/reTHINK-project/dev-msg-node-nomatrix)  
 
 ___WARNING___
  *  _vertx installation_: the node.config.json contains a parameter that will be used during the docker run through an environment variable. The domain parameter must contain the DNS of the full platform (here csp.rethink.com), and it will be used then to build the DNS of the componants (msg-node.csp.rethink.com, registry.csp.rethink.com, etc...). The registry url must be filled here, but it is not sured if it can be tuned.
@@ -74,7 +75,8 @@ __To test if installation is OK: https://msg-node.csp.rethink.com/live gives a v
 ####Catalogue
 The catalogue is made out of two main components. A broker, that is needed to access the different services, and one or more database. Documentation can be accessed [here](https://github.com/reTHINK-project/dev-catalogue/tree/master/doc).  
 First of all, the broker has to be installed. A dockerhub componant is available.   
-___WARNING___
+
+___WARNING___  
  * the catalogue broker has an important parameter to take into account: __default__ . To be able to run an application with a specific messaging node, the default protostub MUST be the one of the installed messaging node. Thus, if you want to use the nodejs messaging node, _-default protocolstub/NodejsProtoStub_ should be included in the "run" commande. For the vertx, _protocolstub/VertxProtoStub_ etc. This is important, because, _once the borker launched, this cannot be changed_. The only way is to remove the broker instance, and to relaunch it.
  * the broker and the databases are communicating 2 ways, using COAP. What does that mean? It means that if you want to deploy them on a testbed behind a firewall or a proxy, you have to take into account COAP. Otherwise you cannont proxy them. This means that the broker MUST be launched with _--net=host_ and that they don't use an already binded port. Here is an example of broker launch command (with -d for background, and the exposed ports):  
   
@@ -84,7 +86,7 @@ An example of catalogue database is provided [here](https://github.com/reTHINK-p
 
      docker run -it -d --name catalogue-db rethink/catalogue-database-reTHINKdefault -h 172.17.0.x -d catalogue.csp.rethink.com  
 
-___WARNING___
+___WARNING___  
  * The google idpproxy provided is working with an account that authorizes authentication process on a test platform, which probably does not include the one under installation. This means that by default, it is not possible to use google. To be able to do this, you have to:
   * edit the sourceCode.js of the google idpproxy
   * change the account and secret of the google account
@@ -96,9 +98,9 @@ __To test if installation is OK: https://catalogue.csp.rethink.com/ gives a view
 ###Application Deployment
 
 ####Hello World
-The Hello World is published in the repository [dev-hello](https://github.com/reTHINK-project/dev-app), and its installation manual is provided there. It can be deploied simply behind an HTTP server.
+The Hello World is published in the repository [dev-hello](https://github.com/reTHINK-project/dev-app), and its installation manual is provided there. It can be deploied simply behind an HTTP server.  
 
-___WARNING___
+___WARNING___  
  *  .well-known/runtime/ must contain the last version of the runtime. It have to be filled with [these files](https://github.com/reTHINK-project/dev-runtime-browser/tree/master/bin)  
  
  
