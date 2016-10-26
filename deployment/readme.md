@@ -4,6 +4,7 @@ This page explains how to install a complete platform to be able to deploy servi
 After following this tutorial, you will be able to run the Hello World application available [here](https://github.com/reTHINK-project/dev-app).  
 The installation guides can be found in the different folders. We don't provide here the full installation processes, but a view "as a whole", summaries and tips.   
 __Please note that this section is dedicated to an operational plateform__. Developpers should use the [toolkit](https://github.com/reTHINK-project/dev-hyperty-toolkit).   
+If you already know how is the platform, go directly to [Installation Process](#installation-process).
 
 ## Components to install
 A complete reThink platform consists on server side componants that are finally deployed in the browser. These componants are showed in the following picture and described hereafter.  
@@ -16,8 +17,8 @@ It is recommended that the containers are deployed behind a reverse proxy for se
  
 To find proxies you can refer to these folders
  * [nude apache2](https://github.com/reTHINK-project/testbeds/tree/master/docker/apache2-reverse-proxy-baseline)
- * [Managed apache2 with GUI](https://github.com/zorglub42/OSA/)) 
- * nginx is alos an option.
+ * [Managed apache2 with GUI](https://github.com/zorglub42/OSA/) 
+ * nginx is also an option.
  
 https free trusted certificates can be obtained on [let's encrypt](https://letsencrypt.org/).  
 
