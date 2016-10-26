@@ -74,9 +74,11 @@ The catalogue is made out of two main components. A broker, that is needed to ac
 First of all, the broker has to be installed. A dockerhub componant is available. 
 ___WARNING___
  * the catalogue broker has an important parameter to take into account: __default__ . To be able to run an application with a specific messaging node, the default protostub MUST be the one of the installed messaging node. Thus, if you want to use the nodejs messaging node, _-default protocolstub/NodejsProtoStub_ should be included in the "run" commande. For the vertx, _protocolstub/VertxProtoStub_ etc. This is important, because, _once the borker launched, this cannot be changed_. The only way is to remove the broker instance, and to relaunch it.
- * the broker and the databases are communicating 2 ways, using COAP. What does that mean? It means that if you want to deploy them on a testbed behind a firewall or a proxy, you have to take into account COAP. Otherwise you cannont proxy them. This means that the broker and the database MUST be launched with _--net=host_ and that they don't use an already binded port. Here is an example of broker launch command:   
- ' docker run -it --net=host -d --name="catalogue-broker"  rethink/catalogue-broker -host 161.106.2.20 -h 9011 -hs 9012 -default protocolstub/VertxProtoStub'  
- * 
+ * the broker and the databases are communicating 2 ways, using COAP. What does that mean? It means that if you want to deploy them on a testbed behind a firewall or a proxy, you have to take into account COAP. Otherwise you cannont proxy them. This means that the broker and the database MUST be launched with _--net=host_ and that they don't use an already binded port. Here is an example of broker launch command (with -d for background, and the exposed ports):   
+
+     docker run -it --net=host -d --name="catalogue-broker"  rethink/catalogue-broker -host xxx.xxx.xxx.xxx -h 9011 -hs 9012 -default protocolstub/VertxProtoStub  
+
+
  
 __To be able to run an example, the catalogue database must provide:__ <b>  
  * A reThink runtime  
