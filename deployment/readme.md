@@ -80,12 +80,14 @@ First of all, the broker has to be installed. A dockerhub component is available
 ___WARNING___  
  * the catalogue broker has an important parameter to take into account: __default__ . To be able to run an application with a specific messaging node, the default protostub MUST be the one of the installed messaging node. Thus, if you want to use the nodejs messaging node, _-default protocolstub/NodejsProtoStub_ should be included in the "run" commande. For the vertx, _protocolstub/VertxProtoStub_ etc. This is important, because, _once the broker is launched, this cannot be changed_. The only way is to remove the broker instance, and to relaunch it.
  * the broker and the databases are communicating 2 ways, using COAP. What does that mean? It means that if you want to deploy them on a testbed behind a firewall or a proxy, you have to take into account COAP. Otherwise you cannont proxy them. This means that the broker MUST be launched with _--net=host_ and that they don't use an already binded port. Here is an example of broker launch command (with -d for background, and the exposed ports):  
-  
-     docker run -it --net=host -d --name="catalogue-broker"  rethink/catalogue-broker -host xxx.xxx.xxx.xxx -h 9011 -hs 9012 -default protocolstub/VertxProtoStub  
+```
+docker run -it --net=host -d --name="catalogue-broker"  rethink/catalogue-broker -host xxx.xxx.xxx.xxx -h 9011 -hs 9012 -default protocolstub/VertxProtoStub  
+```
 
 An example of catalogue database is provided [here](https://github.com/reTHINK-project/dev-catalogue/tree/master/docker/catalogue-database-reTHINKdefault). It is recommanded to use it for this example (-h is the IP of the current catalogue. Note that it is not known __before__ launching it):
-
-     docker run -it -d --name catalogue-db rethink/catalogue-database-reTHINKdefault -h 172.17.0.x -d catalogue.csp.rethink.com  
+```
+docker run -it -d --name catalogue-db rethink/catalogue-database-reTHINKdefault -h 172.17.0.x -d catalogue.csp.rethink.com  
+```
 
 ___WARNING___  
  * The google idpproxy provided is working with an account that authorizes authentication process on a test platform, which probably does not include the one under installation. This means that by default, it is not possible to use google. To be able to do this, you have to:
