@@ -10,7 +10,6 @@ This doc specifies Messages to be used to manage registrations in the Domain Reg
 -	`<userURL>` is the user address compliant with [UserURL data model](https://github.com/reTHINK-project/dev-service-framework/blob/master/docs/datamodel/core/address/readme.md#user-url-type). Example: `user://example.com/bob`
 -	`<DiscoveredHypertyInstance>` is a JSON object compliant with [HypertyInstance data model](https://github.com/reTHINK-project/dev-service-framework/tree/develop/docs/datamodel/core/hyperty-registry#hyperty-instance).
 -	`<discoveredRegistryDataObjects>` is a JSON object compliant with [HypertyDataObjectInstance data model](https://github.com/reTHINK-project/dev-service-framework/tree/develop/docs/datamodel/core/hyperty-registry#hyperty-instance).
--
 
 #### Registration request
 
