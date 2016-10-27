@@ -23,7 +23,7 @@ To find proxies you can refer to these projects:
 https free trusted certificates can be obtained on [let's encrypt](https://letsencrypt.org/).  
 
 
-<img src="https://github.com/reTHINK-project/testbeds/blob/master/docs/Testbed-Design/figures/pfTechView.png" width="350">
+<img src="https://cloud.githubusercontent.com/assets/10738516/19760714/2f4bfb90-9c33-11e6-9463-a827f5d4ffab.png" width="350">
 
 
 ### Server-side components
