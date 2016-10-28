@@ -65,11 +65,12 @@ This is the core plateform. ReTHINK has provided four implementations but only o
 * [VertX](https://github.com/reTHINK-project/dev-msg-node-vertx) 
 * [Matrix](https://github.com/reTHINK-project/dev-msg-node-matrix)
 * [NodeJS](https://github.com/reTHINK-project/dev-msg-node-nodejs)
-* [no matrix](https://github.com/reTHINK-project/dev-msg-node-nomatrix)  
+* [no Matrix](https://github.com/reTHINK-project/dev-msg-node-nomatrix)  
 
 ___WARNING___
  *  _vertx installation_: the node.config.json contains a parameter that will be used during the docker run through an environment variable. The domain parameter must contain the DNS of the full platform (here csp.rethink.com), and it will be used then to build the DNS of the componants (msg-node.csp.rethink.com, registry.csp.rethink.com, etc...). The registry url must be filled here, but it is not sure if it can be tuned.
  * _nodejs installation_: the docker-compose must be configured. If you use the script "start.sh", it will also build the domain registry. The url to provide in the "environment" section is the _domain_ of the plateform (here csp.rethink.com).
+ * _no Matrix installation_: after building the docker image, the simplest is to use the dockerStart.sh script. Be carefull to enter the good folder for the volume mapping, suppress the parameters _--net=rethink -p 8001:8001_ when used with a proxy. Note also that the default is exposed on HTTP on 8001. The MatrixProtoStub example is showing an URL of WebSocket with wss on 443, which is what the reverse proxy will provide.
 
 __To test if installation is OK: https://msg-node.csp.rethink.com/live gives a view of the current status of the nodejs node.__  
 
