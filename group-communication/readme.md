@@ -57,8 +57,8 @@ These call flows involve `Hyperty conference of Peer A` running on runtime brows
 
 The sequence diagram evolves through the following macro steps:
 
-1. The Hyperty conference server (signaling server) connects to messaging node associated with Runtime Node and registers its instance in it.
-2. The messaging node registers the hyperty and provides back hyperty url to the Hyperty conference server.
+1. The Hyperty conference server (signaling server) connects to messaging node associated with Runtime Node and registers its instance in its CSP domain registry.
+2. The CSP odmian registry registers the hyperty and provides back hyperty url to the Hyperty conference server through the messaging node.
 3. At this point the Hyperty conference server (signaling server) creates a signaling channel, up listening for any incoming message from Peers.
 4. Hyperty conference of Peer A (initiator) queries the messaging node to register its instance.
 5. The Messaging node registers the hyperty and replies back giving it an hyperty url.
@@ -85,7 +85,7 @@ The `Peer conference hyperty` is supposed to be running on runtime browser of us
 
 In the following step-by-step description:
 
-1. First, the `Peer Conference App` will issue a request message to the `Peer conference Hyperty` asking to join a specific room, given that it knows already the `roomId` and the `serverHypertyURL` or it may search for existing Conference servers before it interacts with them. Otherwise, it requests the creation of a new room. Besides, provisioning for options is possible.
+1. First, the `Peer Conference App` will issue a request message to the `Peer conference Hyperty` asking to join a specific room, given that it knows already the `roomId` and the `serverHypertyURL` or it may search for existing Conference server Hyperties instances according to the [hyperty discovery mechanism](https://github.com/reTHINK-project/specs/blob/master/dynamic-view/discovery/hyperty-discovery.md) in order to interacts with them. Otherwise, it requests the creation of a new room. Besides, provisioning for options is possible.
 2. The `Peer Conference hyperty` will get the local description of the peer issuing the request message.
 3. Next, the hyperty will ask the `Syncher` to create communication object schema, for which is reporter(owner). Simultaneously, it's an observer of the room communication object (description will be provided about this Server side communication data object) involved in the communication.
 4. The `Syncher` sends create communication object request to the `Server Conference Hyperty` through the `Message Bus`.
