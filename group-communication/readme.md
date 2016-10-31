@@ -52,8 +52,9 @@ In the following sections call flows between the components of this topology wil
 
 Figure 4, illustrates top level view of how these call flows might look like.
 These call flows involve `Hyperty conference of Peer A` running on runtime browser A, `Hyperty conference of Peer B`, Message Node(just relay no processing), `Media server`, and `Hyperty conference server` running on Runtime Node as signaling server relaying messages between them.
-
+ <p align="center">
 ![../dynamic-view/group-communication/Top-Level-View](../dynamic-view/group-communication/Top-Level-View.png)
+</p>
 <p align="center">
   Figure 4 : Top level view call flows
 </p>
