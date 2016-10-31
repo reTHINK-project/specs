@@ -82,7 +82,7 @@ In this section, we mainly describe the internal logic architecture of the Peers
 
 The `Peer conference hyperty` is supposed to be running on runtime browser of user initiating/joining the conference. This hyperty uses reTHINK communication model [Communication Data Model](https://github.com/reTHINK-project/specs/blob/master/datamodel/data-objects/communication/readme.md) but with an advance feature of handling WebRTC conferencing capabilities as well. These call flows involve `Peer Conference App`, `Peer Conference Hyperty`, `Syncher` , and the `Message Bus`.(see figure 5)
 
-![../dynamic-view/group-communication/Client Conference Hyperty](../dynamic-view/group-communication/Client Conference Hyperty.png)
+![Peer Conference Hyperty](../dynamic-view/group-communication/Peer-Conference-Hyperty.png)
 <p align="center">
   Figure 5 : Peer Conference Hyperty internal architecture
 </p>
@@ -106,7 +106,7 @@ The `server conference hyperty` will be loaded and executed inside Runtime Node.
 <p align="justify">We suppose that this server hyperty is up running waiting for connection incoming requests. This hyperty will have an interesting feature of coordinating multiple data objects, each per room. an orchestrator hyperty.</p>
 
 
-![../dynamic-view/group-communication/Server Conference Hyperty](../dynamic-view/group-communication/Server Conference Hyperty.png)
+![Server Conference Hyperty](../dynamic-view/group-communication/Server-Conference -Hyperty.png)
 <p align="center">
   Figure 6 : Server Conference Hyperty internal architecture
 </p>
