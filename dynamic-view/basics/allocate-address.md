@@ -14,4 +14,4 @@ Steps 3 - 9: If the Runtime Registry returns "Not Found", an address is allocate
 
 Step 10: otherwise, if the Runtime Registry returns an Address, no further address allocation tasks are performed.
 
-Steps 11: the allocated address is returned
+Steps 11: the allocated address is returned with information about if this is a new allocated address or not
