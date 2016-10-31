@@ -3,6 +3,7 @@
 This doc specifies Messages to be used to manage registrations in the Domain Registry, where,
 
 -	`<RegistryDataObject>` is a JSON object compliant with [RegistryDataObject data model](../datamodel/core/hyperty-registry).
+-	`<RegistryDataObjectURL>` is the URL of the entity registered in the domain registry.
 -	`<registry-object-identifier>` is a string that is part of the RegistryDataObject.url to uniquely identify the RegistryDataObject in its domain. In the Hyperty URL example `hyperty://example.com/1234-qwert` , "1234-qwert" is the `<registry-object-identifier>`
 - `<registry-object-type>` is a string that identifies the type of registry object namely "hyperty" or "dataObject".
 -	`<registry-object-url-scheme>` is the URL Scheme used in the RegistryDataObject.url. In this RegistryOject URL example `connection://example.com/1234-qwert` , "connection" is the `<registry-object-url-scheme>`
@@ -54,6 +55,21 @@ Message sent by the Registry Domain server (Connector or Protostub) to Hyperty R
 "to" : "hyperty-runtime://<sp-domain>/<runtime-instance-identifier>/registry",
 "body" : { "code": 200 }
 ```
+
+#### Publish Registration object status changed to disconnected
+
+**New in Phase 2**
+Message sent by the Domain Registry to Message Node.
+
+```
+"id" : 4
+"type" : "update",
+"from" : "domain://registry.<sp-domain>",
+"to" : "<RegistryDataObjectURL>/registration",
+"body" : { "value" : "disconnected", "attribute" : "status" }
+```
+
+
 #### Update Registration to Live
 
 **New in Phase 2**
@@ -76,6 +92,33 @@ Reponse Message sent by the Registry Domain server to Hyperty Runtime Registry f
 "to" : "hyperty-runtime://<sp-domain>/<runtime-instance-identifier>/registry",
 "body" : { "code": 200 }
 ```
+
+#### Publish Registration object status changed to live
+
+**New in Phase 2**
+Message sent by the Domain Registry to Message Node.
+
+```
+"id" : 4
+"type" : "update",
+"from" : "domain://registry.<sp-domain>",
+"to" : "<RegistryDataObjectURL>/registration",
+"body" : { "value" : "live", "attribute" : "status" }
+```
+
+#### Subscribe to receive notifications about registration status changes
+
+**New in Phase 2**
+Message sent to Message Node subscription manager.
+
+```
+"id" : 4
+"type" : "subscribe",
+"from" : "<someone>",
+"to" : "domain://msg-node.<sp-domain>/sm",
+"body" : { "subscribe" : "<RegistryDataObjectURL>/registration" }
+```
+
 
 #### keep registration alive
 

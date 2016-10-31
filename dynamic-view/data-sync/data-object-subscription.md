@@ -4,7 +4,7 @@
 
 To be an Observer of a Data Object, a [Subscription message](../../messages/data-sync-messages.md#hyperty-request-to-be-an-observer) is sent to the local Sync Manager.
 
-The Local Sync Manager adds Observer side listeners and asks the Runtime Registry to check if the Data Object is reachable with a P2P Connection. If not, it [asks its Message Node](../../messages/data-sync-messages.md#data-sync-routing-path-setup-request-at-observer-message-node) to also add the required Listeners for the Data Object.
+The Local Sync Manager adds Observer side listeners and (**Phase 2 New!!**) asks the Runtime Registry to check if the Data Object is reachable with a P2P Connection. If not, it [asks its Message Node](../../messages/data-sync-messages.md#data-sync-routing-path-setup-request-at-observer-message-node) to also add the required Listeners for the Data Object.
 
 As soon as observer side listeners are added for the Data Object, the [Subscription request is sent to the data object subscription URL (DataObjectURL/subscription)](../../messages/data-sync-messages.md#observer-subscription-request-sent-to-data-object-subscription-handler), which is implemented by the Synch Manager of the Reporter.
 
@@ -20,6 +20,7 @@ Optionally, the new Observer listener is added in the Message BUS to be notified
 
 Optionally, it is posted an UPDATE message into the DataObjectObserversURL with information about the new added Observer.
 
+**Phase 2 New!!**
 The Sync Manager asks the Runtime Registry to check whether the data synchronisation can be done through a P2P Connection and if yes to ensure the new observer address is resolvable for such P2P Connection.
 
 As soon as the Subscription is accepted by the Reporter and all required listeners are added, an [OK RESPONSE message is sent back with the most update data object](../../messages/data-sync-messages.md#response-4).

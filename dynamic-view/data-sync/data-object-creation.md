@@ -18,6 +18,6 @@ The new address allocated to the Data Object is returned back to the Reporter wi
 
 **Phase 2 new:** in case this is the resume of a Data Sync Stream, there should no new observer to be invited.
 
-  Step 5: In case the data object creation is authorised, the [data object creation message is sent to invited Observers](../../messages/data-sync-messages.md#observer-invitation) and the Core Policy Engine takes the Hyperty Instance URLs set in the `to` header field, to set as the list of addresses that are previously authorised to be Observer for the new data object.
+  Steps 11 - 15: In case the data object creation is authorised, the [data object creation message is sent to invited Observers](../../messages/data-sync-messages.md#observer-invitation) and the Core Policy Engine takes the Hyperty Instance URLs set in the `to` header field, to set as the list of addresses that are previously authorised to be Observer for the new data object.
 
   Steps 16 - 17: Optionally, invited Observers may [respond e.g. to aknowledge the reception of the invitation and to accept or not the invitation to be an Observer](../../messages/data-sync-messages.md#response-3).
