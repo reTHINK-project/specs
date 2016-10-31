@@ -24,7 +24,7 @@ RunAllocate@A -> RunReg@A : getAddress(\nscheme,\ndescriptor,\n?owner,\n? reuseU
 
 	alt no registration cached locally: allocate address for new Instance
 
-		RunAllocate@A <- RunReg@A : undefined
+		RunAllocate@A <- RunReg@A : not found
 
 		RunAllocate@A -> BUS@A : postMessage(\nRead Msg\nto get hyperty \nAddress Allocation)
 
