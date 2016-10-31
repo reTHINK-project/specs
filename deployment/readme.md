@@ -65,11 +65,12 @@ This is the core plateform. ReTHINK has provided four implementations but only o
 * [VertX](https://github.com/reTHINK-project/dev-msg-node-vertx) 
 * [Matrix](https://github.com/reTHINK-project/dev-msg-node-matrix)
 * [NodeJS](https://github.com/reTHINK-project/dev-msg-node-nodejs)
-* [no matrix](https://github.com/reTHINK-project/dev-msg-node-nomatrix)  
+* [no Matrix](https://github.com/reTHINK-project/dev-msg-node-nomatrix)  
 
 ___WARNING___
  *  _vertx installation_: the node.config.json contains a parameter that will be used during the docker run through an environment variable. The domain parameter must contain the DNS of the full platform (here csp.rethink.com), and it will be used then to build the DNS of the componants (msg-node.csp.rethink.com, registry.csp.rethink.com, etc...). The registry url must be filled here, but it is not sure if it can be tuned.
  * _nodejs installation_: the docker-compose must be configured. If you use the script "start.sh", it will also build the domain registry. The url to provide in the "environment" section is the _domain_ of the plateform (here csp.rethink.com).
+ * _no Matrix installation_: after building the docker image, the simplest is to use the dockerStart.sh script. Be carefull to enter the good folder for the volume mapping, suppress the parameters _--net=rethink -p 8001:8001_ when used with a proxy. Note also that the default is exposed on HTTP on 8001. The MatrixProtoStub example is showing an URL of WebSocket with wss on 443, which is what the reverse proxy will provide.
 
 __To test if installation is OK: https://msg-node.csp.rethink.com/live gives a view of the current status of the nodejs node.__  
 
@@ -78,11 +79,19 @@ The catalogue is made out of two main components. A broker, that is needed to ac
 First of all, the broker has to be installed. A dockerhub component is available.   
 
 ___WARNING___  
- * the catalogue broker has an important parameter to take into account: __default__ . To be able to run an application with a specific messaging node, the default protostub MUST be the one of the installed messaging node. Thus, if you want to use the nodejs messaging node, _-default protocolstub/NodejsProtoStub_ should be included in the "run" commande. For the vertx, _protocolstub/VertxProtoStub_ etc. This is important, because, _once the broker is launched, this cannot be changed_. The only way is to remove the broker instance, and to relaunch it.
  * the broker and the databases are communicating 2 ways, using COAP. What does that mean? It means that if you want to deploy them on a testbed behind a firewall or a proxy, you have to take into account COAP. Otherwise you cannont proxy them. This means that the broker MUST be launched with _--net=host_ and that they don't use an already binded port. Here is an example of broker launch command (with -d for background, and the exposed ports):  
 ```
 docker run -it --net=host -d --name="catalogue-broker"  rethink/catalogue-broker -host xxx.xxx.xxx.xxx -h 9011 -hs 9012 -default protocolstub/VertxProtoStub  
 ```
+ * the catalogue broker has an important parameter to take into account: __default__ . To be able to run an application with a specific messaging node, the default protostub MUST be the one of the installed messaging node. Thus, if you want to use the nodejs messaging node, _-default protocolstub/NodejsProtoStub_ should be included in the "run" commande. For the vertx, _protocolstub/VertxProtoStub_ etc. This is important, because, _once the broker is launched, this cannot be changed_. The only way is to remove the broker instance, and to relaunch it.  
+ I recommand to write such a script (for example in /usr/local/bin) to change easily if you try more than one message node:
+```
+#!/bin/bash
+docker stop catalogue-broker
+docker rm catalogue-broker
+docker run -it --net=host  -d --name="catalogue-broker"  rethink/catalogue-broker -host xxx.xxx.xxx.xxx -h 9011 -hs 9012 -default protocolstub/$1
+```
+where $1 can be MatrixProtoStub, NodejsProtoStub or VertxProtoStub.  
 
 An example of catalogue database is provided [here](https://github.com/reTHINK-project/dev-catalogue/tree/master/docker/catalogue-database-reTHINKdefault). It is recommanded to use it for this example (-h is the IP of the current catalogue. Note that it is not known __before__ launching it):
 ```
