@@ -9,11 +9,13 @@ We can distinguish two topologies :
 
 <p align="justify"> In full mesh WebRTC conference, every peer establishes a connection with the rest of the participant peers. Thus, n*(n-1) number of connections are needed, where n is the number of participant peers. For examples, a full mesh topology of 4 users has 12 connections.(See Figure 1)</p>
 
-<p align="justify">This topology performs well for a small number for participants. Easy to deploy without extra resources(no server is needed).
+This topology performs well for a small number for participants. Easy to deploy without extra resources(no server is needed).
 
-However, it is inefficient for scalable multiparty systems. As the number of participants increases, bandwidth and CPU processing consumption becomes more excessive on client side, which is not scalable, especially for mobile clients.</p>
+However, it is inefficient for scalable multiparty systems. As the number of participants increases, bandwidth and CPU processing consumption becomes more excessive on client side, which is not scalable, especially for mobile clients.
 
-![../dynamic-view/group-communication/Full-Mesh-Topology](../dynamic-view/group-communication/Full-Mesh-Topology.png)
+ <p align="center">
+  ![Mesh-Topology](/dynamic-view/group-communication/Full-Mesh-Topology.png)
+</p>  
 <p align="center">
   Figure 1 : Full Mesh Topology
 </p>
@@ -24,8 +26,9 @@ However, it is inefficient for scalable multiparty systems. As the number of par
 
 This start topology, describes H2H WebRTC group communication between reTHINK users. Therefore, conference hyperties running on runtime browsers will exchange signaling descriptions between each other and the media server through reTHINK edge server(Runtime Node).Particularly, reTHINK Runtime Node [dev-runtime-nodejs](https://github.com/reTHINK-project/dev-runtime-nodejs) is a justified choice for exchanging WebRTC signaling. In addition, Runtime Node is a fully conform with reTHINK specs in term of reliability and security.(See Figure 2)
 
-
-![Star-Topology](../dynamic-view/group-communication/Star Topology.png)
+ <p align="center">
+          ![Star-Topology](../dynamic-view/group-communication/Star Topology.png)
+</p>
 <p align="center">
   Figure 2 : Star Topology
 </p>
