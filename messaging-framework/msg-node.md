@@ -119,6 +119,8 @@ A valid method for the MN to identify a stub connection is to use the "runtimeUR
 
 It is the responsibility of the MN to release resources if the "disconnect" method was invoked on the stub . This is the official indication that the runtime does not need this stub connection anymore and it has released the stub. In the alternative case, that a stub was not sending messages for a longer period, but was also not officially disconnected, it is up to the MN implementation to run a kind of garbage collection mechanism to release stale resources.
 
+For more detailed specification of Protocol Stubs please refer to [Protocol stub specification](https://github.com/reTHINK-project/specs/blob/master/messaging-framework/stub-specification.md).
+
 ### Connectors
 
 Connectors implements protocol stacks used to interoperate with external elements from the domains,. In general there are connectors for outgoing access to components inside or outside the own domain and on the other hand endpoints listening for incoming connections from external entities, like hyperty runtimes on end-user/network- devices.
