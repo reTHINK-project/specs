@@ -41,10 +41,12 @@ The Data model is described in this diagram:
 
 ![Protostub datamodel](https://github.com/reTHINK-project/specs/blob/master/datamodel/core/hyperty-catalogue/Protostub-Descriptor-Data-Object-Model.png)
 
-The attributes which has been included to accomodate with the same data model also the IWstubs are:
-- interworking: this boollean attribute has been introduced in phase 2. It it is true it indicates that the protostub is used to connect with a legacy domain that is not compliant with reTHINK.
+The attributes was included to accomodate with the same data model also the IWstubs are:
+- *interworking*: if this boolean is true it indicates that the protostub is used to connect with a legacy domain that is not compliant with reTHINK.
+- *idpProxy*: this boolean indicates if protostub also provides Idp Proxy features. This may be needed to support interact with legacy domains.  
+- *HypertyDataObjects*: It defines the HypertyDataObjects supported by peers belonging to the domain served by this protostub. To parameter may be useful to interact with a legacy domain which supports several Data Objects to implement different functionality. 
 
-A complete list of the attributes can be consulted [here.](https://github.com/reTHINK-project/specs/tree/master/datamodel/core/hyperty-catalogue)
+A complete list of attributes can be consulted [here.](https://github.com/reTHINK-project/specs/tree/master/datamodel/core/hyperty-catalogue)
 
 ###Token based authentication techniques
 Many Internet-based services expose APIs to be accessed from third-party services. many of these APIs use token-based mechanisms to authenticate the request coming from authorized users.
