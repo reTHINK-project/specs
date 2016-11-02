@@ -4,7 +4,7 @@
 
 The main data flows to support the deployment of protocol stubs required to connect the Hyperty Runtime to a Legacy domain, is presented in the figure below and described in this section.
 
-![Figure @runtime-deploy-protostub: Deploy Protocol Stub](deploy-protostub.png)
+![Figure @runtime-deploy-protostub: Deploy Protocol Stub](deploy-iwstub.png)
 
 Steps 1-3: Several components might initiate de Protocol Stub deploy that can come from the Core Runtime Sandbox (e.g. Runtime Registry) or from other sandbox (e.g. Application). The Protocol Stub deployment may be triggered by the deployment of an Hyperty or by some attempt from a local Hyperty to communicate with a remote Hyperty running in the domain served by the Protocol Stub. In this former case the Runtime Registry would take the initiative to start the Protocol Stub deploy. The Runtime UA only downloads and deploys requested Protocol Stub after checking in the Registry that there is no Protocol Stub available in the Hyperty Runtime. **Phase 2 New!** For the deployment of P2P Requester Stubs, the "p2pconfig" parameter should provided containing the remote [P2P Handler Stub](../../messaging-framework/p2p-msg-delivery,md) instance URL and the "local MN StubURL" connecting to the MN from the remote runtime that will be used for the P2P setup signalling.
 
