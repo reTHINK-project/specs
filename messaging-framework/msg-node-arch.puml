@@ -7,6 +7,7 @@ node "Management Services" as Man1 {
 	node "Global\nRegistry" as GReg
 	node "Domain\nRegistry" as DomReg
 	node "Identity\nManagement" as IdM1
+	node "QoS\nBroker" as QoS
 }
 
 node "Service Provider 2" as SP2 {
@@ -39,6 +40,7 @@ node "Connectors" as Conn {
 		node "IdM\nConnector" as ConnIdM
 		node "Global\nRegistry\nConnector" as ConnGReg
 		node "Domain\nRegistry\nConnector" as ConnDomReg
+		node "QoS Broker\nConnector" as ConnQoS
 	}
 	node "incoming (stub endpoints)" as ConnIn {
 		node "End-User Device\nConnector" as ConnUser
@@ -93,6 +95,8 @@ Msg2 <-left-> Proto1 : communicate
  Bus <-up-> ConnDomReg : communicate
  ConnGReg <-up-> GReg : communicate
  ConnDomReg <-up-> DomReg : communicate
+ ConnQoS <-up-> QoS : communicate
+ Bus <-up-> ConnQoS : communicate
 
 
 @enduml
