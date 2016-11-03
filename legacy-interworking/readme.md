@@ -15,16 +15,18 @@ The same is applicable to other popular services such as Facebook, Slack, Salesf
 
 ###Interworking strategy proposal
 
-The IWStub must be provided by the legacy domain and it must make ReTHINK interoperable with the API or GW deployed in the legacy service to expose service to third parties. For example, in the case of IMS the IWstub must implement the protocol needed to interact with gateway element which translates a web-based signaling protocol and WebRTC media profile in SIP and media profiles compatible with IMS.
+####Who provides the IWstub?
+The IWStub must be provided by the legacy domain and it must make ReTHINK interoperable with the API or GW deployed in the legacy service to expose service to third parties. For example, in the case of IMS the IWstub must implement the protocol needed to interact with gateway element which translates a web-based signaling protocol and WebRTC media profile in SIP and media profiles compatible with IMS. 
 
-The diagram below shows the architeture of the integration of reTHINK with an external service.
+Ideally the IWstub should also be downloaded from a back-end service of the Legacy Domain. If the Legacy Domain does not allow to download it, then it could be loaded from the default domain.
 
-*todo: in the picture below replace "SIPoWS messages" by "Legacy Domain Protocol"*
+####Protocol implemented by the protostub
+IF the runtime is being executed in a browser runtime, it must be taken into consideration that only HTTP or Websocket based protocols can be used (those are the only protocols that a browser can use without adding any additional plugin). If the runtime is being executed in a Node.js runtime (or in any other runtime that can be reated in tehe future) this limitation may not exist.  
+
+####High level diagram
+The diagram below shows a high level architecture of the integration of reTHINK with an external service.
 
 ![alt text](rethink-Legacy-Integration-approach2.png "Legacy domain interworking diagram")
-
-> to define here what is a IWStub ie a protostub that implements the protocol supported by the legacy domain as well as  it implements IDP Proxy functions if the legacy domain protocol is also used for IdM eg Login. Also mention that ideally the IWStun is downloaded from the legacy domain itself. Otherwise the fallback is to be loaded from the default domain (the same way we implement idp-proxy in place of Google for instance).
-
 
 A stated in the introduction the Hyperty will need to be associated to two identities. The Identity Module will handle the authentication against the Identity Provider of the Legacy domain. After a successful authentication normally a token will be provided. This token has to be used from the Protostub to authenticate itself during the registration/login process to the legacy domain. Depending on the Legacy Domain this process may be different, however the case we are describing here should be compatible with the most scenarios.
 
@@ -33,7 +35,20 @@ Once the Identity Module has finished the authentication process, the Hyperty is
 The Hyperty will be able to interact with the legacy domain sending messages to the Protostub as it is done for a regular Message Node. The same way the Hyperty will be able to receive messages from it. The messages received by the Protostub from the legacy domain will also be translated into reTHINK messages (which are described  [here](../messages/legacy-interworking-messages.md)).
 
 ###Technical implementation
-A dynamic view should be provided [here](../dynamic-view/legacy-interworking/readme.md) with MSC diagrams
+
+
+The diagram below shows the deployment process of an IWstub. 
+
+![alt text](../dynamic-view/legacy-interworking/deploy-iwstub.png "Legacy domain IWstub deployment diagram")
+
+The main difference is that the IWstub code is downloaded from a back-end service of the Legacy Domain and the IWstub descriptor is also downloaded from a Catalogue at the Legacy Domain. Alternatively both of them could be downloaded from the Default Domain if it has some kind of agreement with the Legacy Domain.
+
+Another big difference respect to a regular protostub is that normally there will a login or registration process once the protostub is deployed. This will depend on the protocol of the Legacy Domain, for example in the case of SIP networks there will be a registration process. 
+
+
+A complete description of the diagram has been included [here](../dynamic-view/legacy-interworking/readme.md). 
+
+
 
 ###IWstub implementation
 The data model of the Protostub which has been used from it conception in reTHINK has been adapted to be compatible with the IWstub so in terms of data model it is like any other protostub. 
@@ -67,8 +82,10 @@ From this point on, the Hyperty will be able to interact with the IMS network th
 ###IWstub Extensibility Considerations 
 Extending ReTHINK to make it interconnectable with different services which make require to support scenarios and use cases which has not been considered at design time. So 
 
-For example, to implement complex message flows, for example, the SIP call flow needed to implement call transfer, may not be implementable with the current connection Data Object so it may need to be extended in the future. That is why a the dataObjects attribute has been added to the protostub descriptor which includes all the HypertyDataObjects supported by peers belonging to the domain served by this protostub. New HypertyDataObjects may be needed to support new scenarios so the mechanism to interact with Legacy Domains is flexible enough to meet future requirements.
+####Data Object adaptation to meet new scenarios
+ReTHINK internal communication is based on data object synchronization so two hyperties can "talk" to each other if they use a common data object. In order to implement complex message flows (e.g. a SIP call flow needed to implement call transfer) may not be implementable with the current connection Data Object so it may need to be extended in short term. That is why a the dataObjects attribute has been added to the protostub descriptor which includes all the HypertyDataObjects supported by peers belonging to the domain served by this protostub. New HypertyDataObjects may be needed to support new scenarios so the mechanism to interact with Legacy Domains is flexible enough to meet future requirements.
 
+####IdPProxy
 Additionally to the dataObjects a new boolean attribute called idpProxy has been defined to specify if the IWprotostub is also a proxy for the Identity Provider exposed by the Legacy Domain. Allowing the protostub to act as an IdPProxy gives an extra-flexibility which will help to accomodate future Identity management mechanism.
 
 
