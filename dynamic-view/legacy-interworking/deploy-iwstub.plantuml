@@ -76,14 +76,6 @@ RunUA@A <-- RunReg@A : returns null
 
 		RunUA@A <-- RunReg@A : return RuntimeProtoStubURL
 
-		RunUA@A -> GW@LS1 : legacy-protocol-registration(e.g. REGISTER in SIP) 
-		note right
-			at this point it will be necessary to send
-			a token within the request to login the ID
-			of the Hyperty using the Interworking Protostub
-			in the Legacy domain
-		end note
-                RunUA@A <-- GW@LS1 : legacy-protocol-registration-ack(e.g. 200OK to the REGISTER in SIP) 
 	end
 
 == Instantiate Sandbox with Protocol Stub ==
