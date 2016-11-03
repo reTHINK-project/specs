@@ -13,11 +13,11 @@ autonumber
 !define SHOW_CoreRuntimeA
 !define SHOW_MsgBUSAtRuntimeA
 !define SHOW_RegistryAtRuntimeA
+!define SHOW_AllocateAtRuntimeA
 !define SHOW_CoreAgentAtRuntimeA
 !define SHOW_AuthAtRuntimeA
 
 !define SHOW_SP1SandboxAtRuntimeA
-!define SHOW_Protostub1AtRuntimeA
 !define SHOW_ServiceProvider1HypertyAtRuntimeA
 !define SHOW_ServiceProvider1SandboxManagerAtRuntimeA
 
@@ -82,15 +82,28 @@ end
 
 end
 
+== Allocate Address ==
+
+group allocate address (designed at allocate-address.md)
+
+RunUA@A -> RunAllocate@A : allocate( ... )
+
+...
+
+RunUA@A <- RunAllocate@A : hypertyURL
+
+end group
+
+
 == Register Hyperty ==
 
 group register Hyperty (designed at register-hyperty.md)
 
-RunUA@A -> RunReg@A : registerHyperty(\nsandbox,\nHypertyDescriptorURL )
+RunUA@A -> RunReg@A : registerHyperty(\nsandbox,\nHypertyURL,\nHypertyDescriptorURL )
 
 ...
 
-RunUA@A <- RunReg@A : hypertyURL
+RunUA@A <- RunReg@A : registered
 
 end group
 

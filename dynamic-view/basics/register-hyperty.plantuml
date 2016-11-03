@@ -15,13 +15,12 @@ autonumber
 
 !define SHOW_SP1SandboxAtRuntimeA
 !define SHOW_Protostub1AtRuntimeA
-!define SHOW_ServiceProvider1HypertyAtRuntimeA
 
 !define SHOW_SP1
 
 !include ../runtime_objects.plantuml
 
-RunUA@A -> RunReg@A : registerHyperty(\npostMessage,\nHypertyDescriptor )
+RunUA@A -> RunReg@A : registerHyperty(\npostMessage,\nHypertyDescriptor,\nHypertyURL )
 
 	group associate to Identity : see ../identity-management/user-to-hyperty-binding.md
 
@@ -33,43 +32,18 @@ RunUA@A -> RunReg@A : registerHyperty(\npostMessage,\nHypertyDescriptor )
 
 	end group
 
-	RunReg@A <- RunReg@A : is registration cached?
+	RunReg@A <- RunReg@A : is a new registration?
 
-	alt no registration cached localy: allocate address for new Hyperty Instance
-		RunReg@A <- RunReg@A : resolve protoStub URL
-		RunReg@A -> BUS@A : postMessage(\nRead Msg\nto get hyperty \nAddress Allocation)
+	alt yes, request a new registrtaion at Domain Registry
 
-		BUS@A -> Proto1@A : postMessage(\nRead Msg\nto get hyperty \nAddress Allocation)
-
-		Proto1@A -> SP1 : read hyperty\nAddress Allocation\nSP1 MSG Protocol
-
-		group option: connect Protocol Stub to the domain in case it is still not connected yet
-
-		...
-
-		end group
-
-		Proto1@A <- SP1 : read response \nmessage with\n hyperty Address\n SP1 MSG Protocol
-
-		Proto1@A -> BUS@A : postMessage(\nread response \nmessage with\n hyperty Address\n MSG)
-
-		RunReg@A <- BUS@A : postMessage(\nread response \nmessage with\n hyperty Address\n MSG)
-
-		group register New Hyperty at SP1 Registry
-			RunReg@A <- RunReg@A : collect Hyperty\nruntime Context data
-			RunReg@A <- RunReg@A : resolve \nprotoStub URL
 			RunReg@A -> BUS@A : postMessage(\nCreate \nhypertyRegistration\n MSG)
 
 			BUS@A -> Proto1@A : postMessage(\ncreate \nhypertyRegistration\n MSG)
 
 			Proto1@A -> SP1 : create\nhypertyRegistration\nSP1 MSG Protocol
 
-		end group
+	else no, update existing Hyperty registration at Domain Registry
 
-	else update existing Hyperty registration at SP1 Registry
-
-		RunReg@A <- RunReg@A : collect Hyperty\nruntime Context data
-		RunReg@A <- RunReg@A : resolve \nprotoStub URL
 		RunReg@A -> BUS@A : postMessage(\nUpdate \nhypertyRegistration\n MSG)
 
 		BUS@A -> Proto1@A : postMessage(\nUpdate \nhypertyRegistration\n MSG)
@@ -80,6 +54,6 @@ RunUA@A -> RunReg@A : registerHyperty(\npostMessage,\nHypertyDescriptor )
 
 RunReg@A -> BUS@A : addListener(\n registryListener,\n hypertyURL\status)
 
-RunUA@A <- RunReg@A : hypertyURL
+RunUA@A <- RunReg@A : hyperty is registered
 
 @enduml

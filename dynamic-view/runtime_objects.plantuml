@@ -43,6 +43,10 @@
 				participant "Registry" as RunReg@A
 			!endif
 
+			!ifdef SHOW_AllocateAtRuntimeA
+				participant "Address\nAllocation" as RunAllocate@A
+			!endif
+
 			!ifdef SHOW_IdentitiesAtRuntimeA
 				participant "Identity\nModule" as RunID@A
 			!endif

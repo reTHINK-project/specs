@@ -1,0 +1,55 @@
+
+@startuml "allocate-address.png"
+
+autonumber
+
+!define SHOW_RuntimeA
+
+!define SHOW_CoreRuntimeA
+!define SHOW_MsgBUSAtRuntimeA
+!define SHOW_RegistryAtRuntimeA
+!define SHOW_AllocateAtRuntimeA
+
+!define SHOW_SP1SandboxAtRuntimeA
+!define SHOW_Protostub1AtRuntimeA
+
+!define SHOW_SP1
+
+!include ../runtime_objects.plantuml
+
+ -> RunAllocate@A : allocate(\nscheme,\ndescriptor,\n?owner,\n? reuseURL )
+
+
+RunAllocate@A -> RunReg@A : getAddress(\nscheme,\ndescriptor,\n?owner,\n? reuseURL )
+
+	alt no registration cached locally: allocate address for new Instance
+
+		RunAllocate@A <- RunReg@A : not found
+
+		RunAllocate@A -> BUS@A : postMessage(\nRead Msg\nto get hyperty \nAddress Allocation)
+
+		BUS@A -> Proto1@A : postMessage(\nRead Msg\nto get hyperty \nAddress Allocation)
+
+		Proto1@A -> SP1 : read hyperty\nAddress Allocation\nSP1 MSG Protocol
+
+		group option: connect Protocol Stub to the domain in case it is still not connected yet
+
+		...
+
+		end group
+
+		Proto1@A <- SP1 : read response \nmessage with\n hyperty Address\n SP1 MSG Protocol
+
+		Proto1@A -> BUS@A : postMessage(\nread response \nmessage with\n hyperty Address\n MSG)
+
+		RunAllocate@A <- BUS@A : postMessage(\nread response \nmessage with\n hyperty Address\n MSG)
+
+	else a previously allocated Address can be reused
+
+		RunAllocate@A <- RunReg@A : reuseURL
+
+	end
+
+ <- RunAllocate@A : URL
+
+@enduml

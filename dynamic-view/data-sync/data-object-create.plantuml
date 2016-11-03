@@ -7,6 +7,7 @@ autonumber
 !define SHOW_RuntimeA
 
 !define SHOW_CoreRuntimeA
+!define SHOW_AllocateAtRuntimeA
 !define SHOW_SMAtRuntimeA
 !define SHOW_SP1SandboxAtRuntimeA
 !define SHOW_Syncher1AtRuntimeA
@@ -16,10 +17,8 @@ autonumber
 !define SHOW_Runtime1B
 
 !define SHOW_CoreRuntime1B
-!define SHOW_SMAtRuntime1B
 !define SHOW_SP1SandboxAtRuntime1B
 !define SHOW_ServiceProvider1HypertyAtRuntime1B
-!define SHOW_Syncher1AtRuntime1B
 
 !include ../runtime_objects.plantuml
 
@@ -27,21 +26,15 @@ Sync1@A -> RunSM@A : Create MSG
 
 RunSM@A <- RunSM@A : policyEngine.authorise()
 
-  RunSM@A <- RunSM@A : registry.registerDataObject(ObjectURL)
+group Allocate Data Object Address (see ..\basics\allocate-address.md)
+  RunAllocate@A <- RunSM@A : allocate(\nscheme,\ndescriptor,\nowner,\nreuseURL)
 
-  RunSM@A <- RunSM@A : registry check if an \n existing registration is cached
+  ...
 
-alt no local registration: this is a new Object
-  group Allocate Data Object URL
-    RunSM@A -> SP1 : Create Allocation Message
+  RunAllocate@A -> RunSM@A : return address \nwith info if\n new address\nor not
+end
 
-    note right
-     Register Data Object
-    end note
-
-
-    RunSM@A <- SP1 : Create Allocation Response Message
-  end
+alt this is a new Object
 
   group Setup Routing Path for the new Data Object
     RunSM@A -> SP1 : Subscribe Data Object URLs Message
@@ -52,16 +45,6 @@ alt no local registration: this is a new Object
     end note
 
   RunSM@A <- SP1 : subscription Response Message
-  end
-
-  group Register Data Object at Domain Registry
-    RunSM@A -> SP1 : Create Data Object Registration at Domain Registry Message
-
-    note right
-      Data Object is registered in the Domain Registry
-    end note
-
-    RunSM@A <- SP1 : Create Registration Response Message
   end
 
 end
@@ -91,7 +74,20 @@ opt Hyperty owner / reporter is updated when object observers are added or remov
 
 end
 
+RunSM@A <- RunSM@A : registry.registerDataObject(ObjectURL)
+
 alt for new data Objects
+
+  group Register Data Object at Domain Registry
+    RunSM@A -> SP1 : registry: Create Data Object Registration at Domain Registry Message
+
+    note right
+      Data Object is registered in the Domain Registry
+    end note
+
+    RunSM@A <- SP1 : Create Registration Response Message
+  end
+
   ==  Hyperties are notified about new object creation ==
 
   RunSM@A -> SP1H@1B : Create Msg
@@ -112,6 +108,22 @@ alt for new data Objects
 
   	...
   end
+else this is the resume of a data synchronisation Stream
+
+else
+
+group Register Data Object at Domain Registry
+
+  RunSM@A -> SP1 : registry: Update Data Object Registration\n at Domain Registry Message
+
+  note right
+    Data Object registration status is
+     updated in the Domain Registry to "live"
+  end note
+
+  RunSM@A <- SP1 : Update Registration Response Message
+end
+
 end
 
 @enduml

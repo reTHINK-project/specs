@@ -31,8 +31,10 @@ Steps 13-14: In case no sandbox exists, the Runtime UA instantiates a new sandbo
 
 ---
 
-Steps 15 - 16: the new Hyperty is [registered in the Runtime Registry](register-hyperty.md), which returns the Hyperty Instance address (HypertyURL).
+Steps 15 - 16: an [address is allocated to the new Hyperty](allocate-address.md).
 
-Steps 17-19: The Runtime UA requests the Hyperty sandbox to deploy the Hyperty source code, extracting the configuration data from the Hyperty descriptor.
+Steps 17 - 18: the new Hyperty is [registered in the Runtime Registry](register-hyperty.md).
 
-Steps 20-21: the runtime UA adds Hyperty Sandbox listener to the runtime BUS to receive messages targeting the Hyperty URL.
+Steps 19-21: The Runtime UA requests the Hyperty sandbox to deploy the Hyperty source code, extracting the configuration data from the Hyperty descriptor.
+
+Steps 22-23: the runtime UA adds Hyperty Sandbox listener to the runtime BUS to receive messages targeting the Hyperty URL.
