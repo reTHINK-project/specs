@@ -38,8 +38,7 @@ The Address Allocation Management is also responsible for the allocation of mess
 Address Allocation Management functionality must have listeners to receive messages for the following addresses:
 
 ```
-domain://msg-node.<sp-domain>/hyperty-address-allocation
-domain://msg-node.<sp-domain>/object-address-allocation
+domain://msg-node.<sp-domain>/address-allocation
 ```
 
 ### Subscription Manager

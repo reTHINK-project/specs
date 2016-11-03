@@ -63,3 +63,12 @@ The diagram below shows the interconnection diagram which is very similar to the
 From this point on, the Hyperty will be able to interact with the IMS network through the protostub. From the IMS point of view the registered Hyperty is just another User Equipement. To enable voice and video calls the WebRTC gateway would perform the tranlastion between the media with WebRTC profile to a media profile compatible with the IMS network.
 
 ![alt text](rethink-IMS-Integration-approach2.png "IMS interworking diagram")
+
+###IWstub Extensibility Considerations 
+Extending ReTHINK to make it interconnectable with different services which make require to support scenarios and use cases which has not been considered at design time. So 
+
+For example, to implement complex message flows, for example, the SIP call flow needed to implement call transfer, may not be implementable with the current connection Data Object so it may need to be extended in the future. That is why a the dataObjects attribute has been added to the protostub descriptor which includes all the HypertyDataObjects supported by peers belonging to the domain served by this protostub. New HypertyDataObjects may be needed to support new scenarios so the mechanism to interact with Legacy Domains is flexible enough to meet future requirements.
+
+Additionally to the dataObjects a new boolean attribute called idpProxy has been defined to specify if the IWprotostub is also a proxy for the Identity Provider exposed by the Legacy Domain. Allowing the protostub to act as an IdPProxy gives an extra-flexibility which will help to accomodate future Identity management mechanism.
+
+
