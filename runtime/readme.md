@@ -115,6 +115,12 @@ hyperty-runtime://<runtime-instance-identifier>/sm
 
 The Address Allocation manages the allocation of addresses to Hyperties and Data Objects. It tries to reuse as much as possible addresses previously registered in the Runtime Registry. Otherwise it interacts with the Messange Node to allocate new addresses.
 
+The Sync Manager must have listeners to receive messages at:
+
+```
+hyperty-runtime://<runtime-instance-identifier>/address-allocation
+```
+
 #### Graph Connector
 
 The Graph Connector is a local address book maintaining a list of trustful communication users. This functionality is further detailed in deliverable D4.2.
