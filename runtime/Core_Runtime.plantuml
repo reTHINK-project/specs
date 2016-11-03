@@ -26,7 +26,7 @@ node "" as core1 {
 
  node "Policy Engine" as PDP
 
- node "QoS\nUser Agent" as QoS
+ node "Address Allocation" as Address
 
  node "Graph\nConnector" as Graph
 }
@@ -46,7 +46,9 @@ node "" as core1 {
 
  PDP <-left- Bus : authorise
 
- PDP -down-> QoS : set QoS
+ RunUA -down-> Address : allocate
+
+ Sync -right-> Address : allocate
 
  PDP -down-> ID : generate or\n verify assertions
 
