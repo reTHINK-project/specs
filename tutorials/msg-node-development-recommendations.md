@@ -30,6 +30,7 @@ These testcases are focussing on the conformance with the message specification 
 As mentioned before, the MN plays a central role for the experienced/felt performance of applicatons running on top of the rethink framework. Therefore it is important to achieve a high performance for the allocation of addresses and especially for the routing of messages.
 
 For the routing performance there are two main factors of importance:
+
 1. the communication protocol between the Protocol stub and the MN
 2. the MN internal routing mechanism
 
