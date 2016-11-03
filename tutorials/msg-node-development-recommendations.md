@@ -4,7 +4,7 @@ For a general overview and to support initial design decisions for a new impleme
 
 This chapter summarizes the results and the "lessons learned" from the different reference implementations of Message Nodes so far. One important lesson is:
 
-*The Message Nodes play a crucial role for the stability, robustness and the experienced performance of applications developed on top of the rethink infrastructure.*
+**The Message Nodes play a crucial role for the stability, robustness and the experienced performance of applications developed on top of the rethink infrastructure.**
 
 This is because the Message Nodes are the central gateway to access resources of a service providers domain. They are responsible for the allocation of addresses, for the interworking with the domain registry to register and search hyperties and objects and they route messages between such entities.
 
