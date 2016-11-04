@@ -113,31 +113,29 @@ export default class AllocCommon {
       // enable / disable log of received messages
       false);
 
-    let value = { number: numberOfAddressesPerRequest };
     for (var i = 1; i <= max; i++) {
-      if ( withKey ) {
-        value.allocationKey = "allocationKey" + i;
-        this.allocationKeys.push(value.allocationKey);
-      }
-      // create and send the allocation request
-      msg = MessageFactory.createCreateMessageRequest(
-        this.runtimeStubRegistryURL, // from
-        mnAddress, // to
-        value, // body.value
-        "policyURL" // attribute
-      );
-      // not using MessageFactory, because it does not support "scheme"
+      // // create and send the allocation request
+      // msg = MessageFactory.createCreateMessageRequest(
+      //   this.runtimeStubRegistryURL, // from
+      //   mnAddress, // to
+      //   value, // body.value
+      //   "policyURL" // attribute
+      // );
+      // // not using MessageFactory, because it does not support "scheme"
       msg = {
-        // NOTE: According to the spec, id should be a String, but at least Vertx breaks if it really is --> relaxing test
         id: i,
         type: "create",
         from: this.runtimeStubRegistryURL,
         to: mnAddress,
         body: {
-          scheme: "connection",
-          value : value
+          scheme: "connection Steffen",
+          value : { number: numberOfAddressesPerRequest }
         }
       };
+      if ( withKey ) {
+        msg.body.value.allocationKey = "allocationKey" + i;
+        this.allocationKeys.push("allocationKey" + i);
+      }
 
       this.bus.sendStubMsg(msg);
     }
