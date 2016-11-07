@@ -11,26 +11,26 @@ We can distinguish two topologies :
 
 This topology performs well for a small number for participants. Easy to deploy without extra resources(no server is needed).
 
-However, it is inefficient for scalable multiparty systems. As the number of participants increases, bandwidth and CPU processing consumption becomes more excessive on client side, which is not scalable, especially for mobile clients.
+However, it is inefficient for scalable multiparty systems. As the number of participants increases, bandwidth and CPU processing consumption becomes more excessive on peer side, which is not scalable, especially for mobile Peers.
 
  <p align="center">
   ![Mesh-Topology](/dynamic-view/group-communication/Full-Mesh-Topology.png)
 </p>  
 <p align="center">
-  Figure 1 : Full Mesh Topology
+  Figure 1 : Full Mesh Topology for group ommunication
 </p>
 
 ### 1.2  Star topology
 
 <p align="justify">Alternatively, in a star topology, a relay server in the middle will be in charge of establishing peer connections and distributing streams among peers. As result, each peer establishes only one peer connection to the media server independently of the increasing number of peers. Which is very scalable approach. In such way, all the burden and processing is left to the middle server. However, an extra latency will be observed due to the presence of the intermediary server.</p>
 
-This start topology, describes H2H WebRTC group communication between reTHINK users. Therefore, conference hyperties running on runtime browsers will exchange signaling descriptions between each other and the media server through reTHINK edge server(Runtime Node).Particularly, reTHINK Runtime Node [dev-runtime-nodejs](https://github.com/reTHINK-project/dev-runtime-nodejs) is a justified choice for exchanging WebRTC signaling. In addition, Runtime Node is a fully conform with reTHINK specs in term of reliability and security.(See Figure 2)
+This star topology, describes H2H WebRTC group communication between reTHINK users. Therefore, conference hyperties running on runtime browsers will exchange signaling descriptions between each other and the media server through reTHINK edge server(Runtime Node).Particularly, reTHINK Runtime Node [dev-runtime-nodejs](https://github.com/reTHINK-project/dev-runtime-nodejs) is a justified choice for exchanging WebRTC signaling. In addition, Runtime Node is a fully conform with reTHINK specs in term of reliability and security.(See Figure 2)
 
  <p align="center">
           ![Star-Topology](../dynamic-view/group-communication/Star Topology.png)
 </p>
 <p align="center">
-  Figure 2 : Star Topology
+  Figure 2 : Star Topologyfor group communication
 </p>
 
 ## 1.3 Proposal architecture
@@ -62,7 +62,7 @@ These call flows involve `Hyperty conference of Peer A` running on runtime brows
 The sequence diagram evolves through the following macro steps:
 
 1. The Hyperty conference server (signaling server) connects to messaging node associated with Runtime Node and registers its instance in its CSP domain registry.
-2. The CSP odmian registry registers the hyperty and provides back hyperty url to the Hyperty conference server through the messaging node.
+2. The CSP domain registry registers the hyperty and provides back hyperty url to the Hyperty conference server through the messaging node.
 3. At this point the Hyperty conference server (signaling server) creates a signaling channel, up listening for any incoming message from Peers.
 4. Hyperty conference of Peer A (initiator) queries the messaging node to register its instance.
 5. The Messaging node registers the hyperty and replies back giving it an hyperty url.
@@ -113,9 +113,9 @@ The `server conference hyperty` will be loaded and executed inside Runtime Node.
 
 The sequence diagram evolves through the following macro steps:  
 
-1. The Message BUS receives incoming request to create communication object including `roomId` and some options. This message is mainly coming from the messaging node associated with domain where this server application is hosted.  
-2. Next, the server hyperty receives a notification message. Then, it forward this request to the server application.
-3. The server application, will check if the `roomId` is new or not. In case of new room, the server application will request the media server to create room pipeline, and returns an SDP answer to incoming request.
+1. The Message BUS receives incoming request to create communication object including `roomId` and some options. This message is mainly coming from the peer joining the conference room, through the messaging node associated with domain where this server application is hosted.  
+2. Next, the server conference hyperty receives a notification message. Then, it forward this request to the server application.
+3. The server application, it will check if the `roomId` is new or not. Particularly, it will discover in its CSP domain registry for already registered room communication object associated with same roomId ([according to the data object discorvery](https://github.com/reTHINK-project/specs/blob/master/dynamic-view/discovery/hyperty-discovery.md)). In case of new room, the server application will request the media server to create room pipeline, and returns an SDP answer to incoming request.
 4. After, the server hyperty will in its turn request the `Syncher` to subscribe to the Peer hyperty data object that requests to join the room.  
 5. Then, `the server hyperty` will also request `Syncher` to create data communication object associated to this `roomId`. This server communication object is owned by `the server hyperty`. Thus, it's the reporter for this object. Each room has its own communication data object. Bijective relationship. Thus, this communication object maintains several observers hyperties. (Similar to group chat hyperty). Everytime a new room pipeline is created in the media server, the hyperty will create an associated communication data objects.
 
