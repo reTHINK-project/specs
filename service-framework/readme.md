@@ -1,23 +1,30 @@
 Service Framework
 -----------------
 
-*to be reviewed with links to existing documented framework libs. Missing Documentation for Discovery and IdentityManager lib*
+The reTHINK Service Framework provides a comprehensive set of application program interfaces (namly APIs) and JavaScript-based libraries to support the development of Hyperties.  As such, the Service Framework is agnostic with respect to the underlying messaging node, modular in design, and to the widest degree agnostic to devices and their operating systems, such as Android, iOS, Raspberry PI, Linux, or Windows. It features a comprehensive set of application program interfaces (APIs) and JavaScript libraries to facilitate the development of Hyperties within the reTHINK architecture.
 
-The Hyperty Runtime APIs were designed to be Developer friendly and they only have to deal with a few functions namely:
+As such, the reTHINK Service Framework enables the design of the Hyperty Runtime APIs to be developer-friendly, i.e., the latter only have to focus on a few core functionalities, namely:
 
--	MsgBUS.postMessage() that is used to post messages in order to communicate with other remote Hyperty Instances and with back-end reTHINK Support Services
--	Syncher API that is used to communicate through the Reporter-Observer communication pattern
+-	MsgBUS.postMessage() that is used to post messages in order to communicate with other remote Hyperty Instances and with back-end reTHINK Support Services, 
+-	Syncher API that is used to communicate through the Reporter-Observer communication pattern, and potentially
+- the implementation of the hyperty init() function, used to activate the Hyperty Instance with required configuration parameters.
 
-In addition, Hyperty Developers would have to implement the Hyperty API, which is mainly the init() function, used to activate the Hyperty Instance with required configuration parameters, and the postMessage() function that is used to receive messages from the Hyperty Runtime Message BUS.
-
-However, Hyperty Developer would still have to handle with a few tasks that could be automated in order to increase its productivity, namely the setup of data object synchronisation, and the instantiation of Data Objects and Messages according to reTHINK Data Model.
-
-The Hyperty Service Framework is a Software Development Toolkit (SDK) that will feature a comprehensive set of application program interfaces (APIs) and JavaScript libraries to facilitate the development of Hyperties within the reTHINK architecture.
-
-Thus, the Hyperty Service Framework should provide:
+To accomplish this, the Hyperty Service Famework provides:
 
 -	factory functionalities for creating and managing the reTHINK Messages and Data Objects
 -	templates for creating Hyperty Data Objects for the basic specified Hyperty Types (Communication, Identity, Context)
+
+
+
+
+
+
+*to be reviewed with links to existing documented framework libs. Missing Documentation for Discovery and IdentityManager lib*
+
+
+Thus, the Hyperty Service Framework should provide:
+
+
 
 In addition, the Hyperty Service Framework will provide JavaScript libraries to speed up the implementation of conversational services (audio, video, chat, screen sharing) and context enabled services (IoT, context delivery, location). These services will be fully implemented in the scenarios implementation tasks and demonstrated in reTHINK testbes. The requirements from a software perspective have been defined in section 2.4.
 
