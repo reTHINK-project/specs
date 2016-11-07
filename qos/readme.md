@@ -48,6 +48,8 @@ In addition, the LHCB arichitecture allows to provide information about a client
 
 The auxiliary interface *i3* is only required as generalized deployment of the LHCB service allow to deploy the LHCB Broker "as a service" in data centers which put the running LHCB instance behind firewalls and IP proxies. For such a deployment, the public IP address under which the LHCB Broker is accessible has to be know, e.g. by Client B, to contact the LHCB Broker.  This information is provided by the client -- here Client A -- about which Client B want to retrieve link QoS information via interface *i2*.  The local LHCB Library retrieves this information via *i1* from the LHCB Client which in turn retrieves it once via *i3* directly from the broker.  This generalized approach also supports a set-up in which several, different LHCB broker handle diffent users, i.e., a globally / domain-specific unique LHCB broker is not required.
 
+An example dynamic view on the interaction of components is provided [here](../dynamic-view/qos/readme.md).
+
 ### Interface of reTHINK QoS support with the Runtime QoS Agent
 
 *specify the interface of the Runtime QoS Agent here. Currently, only the DIRECT interface of the Runtime QoS Agent with other QoS components is in scope.  This section might actually not appear in this md-file but instead  [here](../dynamic-view/qos/readme.md) with MSC diagrams and the specification of messages would be provided [here](../messages/qos-management-messages.md)*  
