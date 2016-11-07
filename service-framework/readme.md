@@ -22,10 +22,6 @@ This chapter updates the initial specificaiton of the reTHINK Service Framework 
 * Synchronizaiton among Hyperties (Syncer API)
 * Discovery and Identity Manager library, and
 * QoS interface and LHCB library.
-* **xxxx list in summary updates here**
-* **xxx**
-
-*to be reviewed with links to existing documented framework libs. Missing Documentation for Discovery and IdentityManager lib*
 
 
 ### Methodology of Framework Development and Relation to other Work Packages
