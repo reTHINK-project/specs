@@ -34,8 +34,6 @@ The application is using a Quality of Service Broker, that manages a fleet of TU
 
 #### Last Hop Connectivity Broker
 
-*very short description of how TURN supports LHCB.  We focus in this text in general on the Runtime interface, i.e., a detailed description of the backend TURN services will and should be part of the dedicated QoS deliverable.  Just name involved components in general to allow the reader to get a genral idea of the big picture.  Do not include interface specs for interfaces that do not immediately communicate / involve the runtime QoS Agent*
-
 The Last Hop Connectivity Broker (LHCB) aims at providing information about available, alternative (wireless) uplinks of an end-device and the associated current quality of service.  Such information is provided within the reTHINK framework to both, the global QoS reTHINK mechenism provided by the TURN services on an end-to-end scale, and to Hyperties and applications running on the client and wishing to access link information about their current connectivity.  As such, the LHCB provides a supporting means to ensure and retrieve information about the current quality of service.
 
 Besides providing only information about a single, i.e. the local end device, the LHCB's architecture allows for monitoring QoS indicators for a set of devices.  The following figure illustrates the overall LHCB architecture as implemented in reThINK.
