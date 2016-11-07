@@ -297,9 +297,7 @@ url: HypertyURL of the observer.
 
 #### Discovery and Identity Manager library
 
-Hyperty discovery is performed through the Runtime Registry which returns the Hyperty Registry entry containing its Hyperty Runtime URL, the P2P Handler Stub instance URL and the catalogue URL of P2P Requester Stub. It should be possible to rule this discovery according to policies enforced in the MN ie the user should be able to control who is able to have access to its P2P connections. The Runtime Registry saves the returned Hyperty Registry entry.  The following figure provides a dynymic view on hyperty discovery in the runtime:
-
-<img src=discover-hyperty.png />
+Hyperty discovery is performed through the Runtime Registry which returns the Hyperty Registry entry containing its Hyperty Runtime URL, the P2P Handler Stub instance URL and the catalogue URL of P2P Requester Stub. Identities are managed empoying a token-based access. A full dynamic view for discovery and identity management are provided [here](https://github.com/reTHINK-project/specs/tree/master/dynamic-view/discovery) and [here](https://github.com/reTHINK-project/specs/tree/master/dynamic-view/identity-management).
 
 
 #### QoS interface and LHCB library.
