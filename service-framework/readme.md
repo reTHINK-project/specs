@@ -171,6 +171,55 @@ The MessageFactory creates messages according to the [Message Data Model](https:
 
 #### Synchronizaiton among Hyperties (Syncer API)
 
+* data: JSON data for the object
+
+##### Event Handlers
+
+**onResponse**
+
+`onResponse(callback: (event: ReponseEvent) => void): void`
+
+Setup the callback to process response notifications of the child creates. Responses to `DataObject.addChild`
+
+* callback: callback function to receive events
+
+**onChange**
+
+`onChange(callback: (event: ChangeEvent) => void): void`
+
+Setup the callback to process change events from the associated reporter child.
+
+* callback: callback function to receive events
+
+### Methods, Events and Handlers
+Every object have methods, and event handlers to map to a pulling and push scheme.
+Methods fire actions and Handlers react to actions and respond accordingly.
+All events listed on the class diagram are intercepted in an event handler. From a functional perspective, methods like (accept, reject, wait, ...) are responses to an action. Since actions are represented by events, it makes sense that responses are directly related to them. Some rules:
+* All events are inherited from the Event interface
+* All handlers have method signature of "on\<classifier\>(..., callback)"
+
+### SyncStatus
+
+It is used to get and control the status of a DataObject (local, remote, reporter or observer). The interface is not yet implemented, documentation should be updated accordingly from the provided implementation behavior.
+
+
+##### Properties
+status: actual state based on the actions: pause, resume, stop, ...
+
+##### Methods
+pause: should pause the synchronization process, pause the mission of update messages between the reporter/observer link.
+resume: resume the synchronization process from a pause action.
+stop: probably the same as unsubscribe, so maybe this method is outdated.
+
+### SyncSubscription
+
+A reference to a remote observer/subscription, associated to a HypertyURL.
+
+##### Properties
+url: HypertyURL of the observer.
+
+
+
 #### Discovery and Identity Manager library
 
 #### QoS interface and LHCB library.
