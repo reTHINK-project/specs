@@ -1,4 +1,3 @@
-WORK IN PROGRESS...
 
 ## Interworking with Legacy Services
 
@@ -66,8 +65,6 @@ A complete list of attributes can be consulted [here.](https://github.com/reTHIN
 ###Token based authentication techniques
 Many Internet-based services expose APIs to be accessed from third-party services. many of these APIs use token-based mechanisms to authenticate the request coming from authorized users.
 
-[complete with real examples: Slack, Facebook]
-
 The emergence of WebRTC support by most important browser vendors motivated 3GPP to defined token-based strategies to access the IMS network from Web applications. This will allow to use potentially any web browser with WebRTc support to behave as a user Equipment which has been restricted to native SIP clients. In the case of IMS, the authentication provider enabled by the operator (which can be the operator itself) provides a registration token after a correct login. This token based authentication has been designed to open IMS services to Web browser. reTHINK will leverage this token-based authentication feature.  
 
 
@@ -80,7 +77,7 @@ From this point on, the Hyperty will be able to interact with the IMS network th
 ![alt text](rethink-IMS-Integration-approach2.png "IMS interworking diagram")
 
 ###IWstub Extensibility Considerations 
-Extending reTHINK to make it interconnectable with different services which make require to support scenarios and use cases which has not been considered at design time. So 
+Extending reTHINK to make it interconnectable with different services which make require to support scenarios and use cases which has not been considered at design time. So the IWstub has been enriched with attributes not used in regular protostub which enable future extensions. 
 
 ####Data Object adaptation to meet new scenarios
 reTHINK internal communication is based on data object synchronization so two hyperties can "talk" to each other if they use a common data object. In order to implement complex message flows (e.g. a SIP call flow needed to implement call transfer) may not be implementable with the current connection Data Object so it may need to be extended in short term. That is why a the dataObjects attribute has been added to the protostub descriptor which includes all the HypertyDataObjects supported by peers belonging to the domain served by this protostub. New HypertyDataObjects may be needed to support new scenarios so the mechanism to interact with Legacy Domains is flexible enough to meet future requirements.
