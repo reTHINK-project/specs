@@ -24,7 +24,6 @@ autonumber
 
 == Deploy Core Runtime ==
 
-Alice -> CoreRunSP : download App with Core Runtime
 
 create RunUA@A
 App@A -> RunUA@A : new
@@ -67,13 +66,13 @@ RunUA@A -> RunSM@A : init( )
 
 loop  Phase 2 New!! for each stored reporter subscription
 
-  RunSM@A -> BUS@A : addListener( DataObjURL\changes, listener)
+  RunSM@A -> BUS@A : addListener\n( DataObjURL\changes, listener)
 
 end
 
 loop Phase 2 New!! for each stored observer subscription
 
-  RunSM@A -> RunSM@A : addListener( DataObjURL\changes, observerListener)
+  RunSM@A -> RunSM@A : addListener\n( DataObjURL\changes, observerListener)
 
 end
 
@@ -88,7 +87,7 @@ RunUA@A -> BUS@A : postMsg( subscribe P2PHandlerStubURL request message)
     the message delivery path has to be set in the Message Node
   end note
 
-  BUS@A -> Proto1@A : send subscribe P2PHandlerStubURL request message
+  BUS@A -> Proto1@A : send subscribe \nP2PHandlerStubURL \nrequest message
 
 
   group : it performs the Service Provider 1 domain protostub load, see protostub-load.md)
@@ -99,13 +98,13 @@ RunUA@A -> BUS@A : postMsg( subscribe P2PHandlerStubURL request message)
 
   end group
 
-  CoreRunSP <- Proto1@A : send subscribe P2PHandlerStubURL request message
+  CoreRunSP <- Proto1@A : send subscribe \nP2PHandlerStubURL \nrequest message
 
-  CoreRunSP <-- Proto1@A : subscribe P2PHandlerStubURL response message
+  CoreRunSP <-- Proto1@A : subscribe \nP2PHandlerStubURL\n response message
 
-  BUS@A <-- Proto1@A : subscribe P2PHandlerStubURL response message
+  BUS@A <-- Proto1@A : subscribe \nP2PHandlerStubURL\n response message
 
-  RunUA@A <- BUS@A : ontMsg( subscribe P2PHandlerStubURL response message)
+  RunUA@A <- BUS@A : ontMsg( subscribe \nP2PHandlerStubURL \nresponse message)
 
 end group
 

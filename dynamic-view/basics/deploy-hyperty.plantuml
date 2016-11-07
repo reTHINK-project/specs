@@ -27,7 +27,7 @@ autonumber
 !include ../runtime_objects.plantuml
 
 
-RunUA@A <- App@A : loadHyperty\n(HypertyDescriptorURL)
+RunUA@A <- App@A : loadHyperty\n( HypertyDescriptorURL,\n ?AppURL, ?hypertyURL)
 
 == get Hyperty descriptor ==
 
@@ -61,7 +61,7 @@ RunUA@A <-- RunAuth@A : sandboxing Policy returned
 
 alt App and Hyperty executes in the same sandbox
 
-RunUA@A -> RunReg@A : getAppSandbox()
+RunUA@A -> RunReg@A : getAppSandbox(appURL)
 
 RunUA@A <-- RunReg@A : return sandbox
 

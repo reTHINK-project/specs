@@ -4,7 +4,7 @@ The Runtime procedures to deploy a new Hyperty are described in this section.
 
 ![Figure @runtime-deploy-hyperty: Deploy Hyperty](deploy-hyperty.png)
 
-Steps 1 - 5: the Runtime UA is invoked by the App to load a new Hyperty from a specific URL passing its sandbox. The Runtime UA downloads the Hyperty source code, extracting the HypertyDownloadURL from the Hyperty descriptor.
+Steps 1 - 5: the Runtime UA is invoked by the App to load a new Hyperty from a specific URL, (**Phase 2 New!**) passing the App URL and optionally an Hyperty URL to be reused. The Runtime UA downloads the Hyperty source code, extracting the HypertyDownloadURL from the Hyperty descriptor.
 
 Steps 6-7: policies contained in the Hyperty Descriptor, are deployed in the Core Policy Engine.
 
@@ -17,7 +17,7 @@ Steps 8-9: the Runtime UA asks the Policy Engine about Hyperty sandboxing policy
 
 In this situation, the App and the Hyperty are running in the same isolated sandbox which is different from the Hyperty Core Runtime Sandbox.
 
-Steps 10 - 11: The Runtime UA retrieves the App sandbox from the Registry and requests the App sandbox to deploy the Hyperty source code, extracting the configuration data from the Hyperty descriptor. Then the App Sandbox is registered in the Msg Bus to receive messages targeting the new Hyperty.
+Steps 10 - 11: The Runtime UA retrieves the App sandbox from the Registry **(Phase 2 New!) passing the App URL**, and requests the App sandbox to deploy the Hyperty source code, extracting the configuration data from the Hyperty descriptor. Then the App Sandbox is registered in the Msg Bus to receive messages targeting the new Hyperty.
 
 **Hyperty and App deployed in different sandboxes**
 
@@ -27,7 +27,7 @@ Steps 12: The runtime UA should avoid the creation of new sandboxes in case ther
 
 **Sandbox does not exist**
 
-Steps 13-14: In case no sandbox exists, the Runtime UA instantiates a new sandbox through the SandboxFactory interface (not shown) which is registered in the Registry. **Phase 2 New!** The `capabilities` input parameter (see RuntimeSandboxCapabilities type in [Runtime Descriptor](../../datamodel/core/hyperty-catalogue/readme.md#hyperty-runtime-descriptor)) is used to indicate capabilities required eg window capabilities.
+Steps 13-14: In case no sandbox exists, the Runtime UA instantiates a new sandbox through the SandboxFactory interface (not shown) which is registered in the Registry. **Phase 2 New!** The `constraints` input parameter (see RuntimeCapabilities type in [Runtime Descriptor](../../datamodel/core/hyperty-catalogue/readme.md#hyperty-runtime-descriptor)) is used to indicate constraints to be met by the sandbox eg window capabilities.
 
 ---
 
