@@ -124,4 +124,4 @@ In case another participant joins the same room (`identified by roomId`), `the c
 
 #### Note:
 <p align="justify"> The identity of user(reTHINK edge server) behind the conference hyperty is a static default identity asserted locally at runtime. In this case no user interaction is needed. This is temporarly solution, that surely will be optimized in the future. </p>
-Ongoing discussion could be found here [Identity Management at NodeJS](https://github.com/reTHINK-project/specs/issues/17).
+Ongoing discussion could be found here [Identity Management at NodeJS](https://github.com/reTHINK-project/specs/issues/17) and specs wil be provided here [Id Management for conference hyperty](https://github.com/reTHINK-project/specs/blob/master/group-communication/IdM-conference-hyperty.md).
