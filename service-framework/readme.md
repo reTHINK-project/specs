@@ -171,53 +171,70 @@ The MessageFactory creates messages according to the [Message Data Model](https:
 
 #### Synchronizaiton among Hyperties (Syncer API)
 
-* data: JSON data for the object
 
-##### Event Handlers
+The Syncher API provides data object synchronisation among Hyperties as described by the [Reporter-Observer communication pattern](https://github.com/reTHINK-project/dev-hyperty-toolkit/blob/master/docs/tutorials/p2p-data-sync.md).
 
-**onResponse**
+The synchronised Data Objects are JSON data objects that are compliant with [SyncDataObject JSON Schema](../../../schemas/json-schema/data-objects/SyncDataObject.json).
 
-`onResponse(callback: (event: ReponseEvent) => void): void`
+The Syncher API is depicted in the following diagram:
 
-Setup the callback to process response notifications of the child creates. Responses to `DataObject.addChild`
+![Syncher API](SyncherAPI.png)
 
-* callback: callback function to receive events
+The Syncher is a singleton owned by a Hyperty Instance that uses it to communicate with other Hyperty instance through data synchronisation. The Syncher "owns" all DataObjects (DataObject class) used by its Hyperty Instance i.e. DataObject instances (creation, destruction) are managed by the Syncher and not by the Hyperty Instance. Each DataObject is addressed by a URL - ObjectURL - that is used by the [Hyperty Messaging Framework](https://github.com/reTHINK-project/dev-hyperty-toolkit/blob/master/docs/tutorials/hyperty-messaging-framework.md) to correctly route messages required to support the data synchronisation, via the MiniBUS component. When a new Data Object (Reporter or Observed) is created, the Syncher will add listeners in the MiniBus to receive messages targeting the ObjectURL. This means, the Syncher is the end-point associated to ObjectURL and not the Hyperty Instance.
 
-**onChange**
+According to the Reporter-Observer pattern, there are two types of DataObjects that each Syncher can manage:
 
-`onChange(callback: (event: ChangeEvent) => void): void`
+DataObjectReporter - provides functions to handle DataObjects as a Reporter i.e. the data that is written in the object by the DataObject owner, is immediately propagated to all observers. It also handles requests from other Hyperty instance to subscribe (ie request to be an Observer) or to read the Data Object.
 
-Setup the callback to process change events from the associated reporter child.
+DataObjectObserver - provides functions to handle DataObjects as a Observer i.e. it handles a "copy" of the original Data Object which is updated as soon as the Reporter changes. Changes on the DataObject are notified to the Hyperty Instance Observers.
 
-* callback: callback function to receive events
+In addition, DataObjects can be SyncObjectParents with collections of DataObjectChild. Each collection is called DataObjectChildren. Either Reporter (DataObjectReporter) or Observers (DataObjectObserver) can create DataObjectChilds in a certain children collection (`addChild()` function).
 
-### Methods, Events and Handlers
-Every object have methods, and event handlers to map to a pulling and push scheme.
-Methods fire actions and Handlers react to actions and respond accordingly.
-All events listed on the class diagram are intercepted in an event handler. From a functional perspective, methods like (accept, reject, wait, ...) are responses to an action. Since actions are represented by events, it makes sense that responses are directly related to them. Some rules:
-* All events are inherited from the Event interface
-* All handlers have method signature of "on\<classifier\>(..., callback)"
+*todo: add code snippets for each main function*
 
-### SyncStatus
+### Syncher API
 
-It is used to get and control the status of a DataObject (local, remote, reporter or observer). The interface is not yet implemented, documentation should be updated accordingly from the provided implementation behavior.
-
+This is the main class that manages the creation of Data Objects. It is a singleton i.e. only one instance is available per Hyperty instance. It's the owner of all kind of [Data Objects](../../datamodel/data-objects/data-synch) that can be synchronised by the Syncher including Reported Objects (DataObjectReporter) and Observed Objects (DataObjectObserver).
 
 ##### Properties
-status: actual state based on the actions: pause, resume, stop, ...
+* owner: HypertyURL of Syncher's Hyperty instance owner
+* observers: [DataObjectObserver] Array of Observed Objects
+* reporters: [DataObjectReporter] Array of Reported Objects
 
 ##### Methods
-pause: should pause the synchronization process, pause the mission of update messages between the reporter/observer link.
-resume: resume the synchronization process from a pause action.
-stop: probably the same as unsubscribe, so maybe this method is outdated.
 
-### SyncSubscription
+**constructor**
 
-A reference to a remote observer/subscription, associated to a HypertyURL.
+`constructor(owner: HypertyURL, bus: MiniBus, config: Config)`
 
-##### Properties
-url: HypertyURL of the observer.
+Syncher is created one per Hyperty. The parameters are basically the same as the ones that are passed to the Hyperty constructor.
 
+* owner: HypertyURL of Syncher's Hyperty instance owner
+* bus: MiniBus interface to send and receive message, using postMessage and addListener
+* config: Configuration data. The only required field for now is the runtimeURL
+
+**create**
+
+`create(schema: SchemaURL, observers?: [HypertyURL], initialData: JSON): Promise<DataObjectReporter>`
+
+This Method is used to create objects to be reported i.e. the Hyperty Instance plays the Reporter role. The following parameters are used:
+
+* schema: Hyperty Catalogue URL address that can be used to retrieve the JSON-Schema describing the Data Object schema
+* observers: array of Hyperty instances that are invited to be an observer of the new Data Object
+* initialData: data that is used to initialise the new Data Object
+* return: Promise to a new Reporter. The reporter can be accepted or rejected by the PEP
+
+**subscribe**
+
+`subscribe(schema: SchemaURL, url: ObjectURL): Promise<DataObjectObserver>`
+
+This Method is used to subscribe objects to be observed i.e. the Hyperty Instance plays the Observer role. The following parameters are used:
+
+* schema: Hyperty Catalogue URL address that can be used to retrieve the JSON-Schema describing the Data Object schema
+* url: the URL of the Data Object to be observed
+* return: Promise to a new observer if accepted. It's associated with the reporter.
+
+**read**
 
 
 #### Discovery and Identity Manager library
