@@ -1,6 +1,8 @@
 Service Framework
 -----------------
 
+## Overview
+
 The reTHINK Service Framework provides a comprehensive set of application program interfaces (namly APIs) and JavaScript-based libraries to support the development of Hyperties.  As such, the Service Framework is agnostic with respect to the underlying messaging node, modular in design, and to the widest degree agnostic to devices and their operating systems, such as Android, iOS, Raspberry PI, Linux, or Windows. It features a comprehensive set of application program interfaces (APIs) and JavaScript libraries to facilitate the development of Hyperties within the reTHINK architecture.
 
 As such, the reTHINK Service Framework enables the design of the Hyperty Runtime APIs to be developer-friendly, i.e., the latter only have to focus on a few core functionalities, namely:
@@ -14,12 +16,17 @@ To accomplish this, the Hyperty Service Famework provides:
 -	factory functionalities for creating and managing the reTHINK Messages and Data Objects
 -	templates for creating Hyperty Data Objects for the basic specified Hyperty Types (Communication, Identity, Context)
 
+This chapter updates the initial specificaiton of the reTHINK Service Framework as given in [D3.1].  For briefness, unaltered, valid descriptions are cross-referenced and updates and additions are given where appropriate. Those additions and updates focus on
 
-
-
-
+* Service Framework Address and Message Factory
+* Synchronizaiton among Hyperties (Syncer API)
+* Discovery and Identity Manager library, and
+* QoS interface and LHCB library.
+* **xxxx list in summary updates here**
+* **xxx**
 
 *to be reviewed with links to existing documented framework libs. Missing Documentation for Discovery and IdentityManager lib*
+
 
 
 Thus, the Hyperty Service Framework should provide:
@@ -27,6 +34,8 @@ Thus, the Hyperty Service Framework should provide:
 
 
 In addition, the Hyperty Service Framework will provide JavaScript libraries to speed up the implementation of conversational services (audio, video, chat, screen sharing) and context enabled services (IoT, context delivery, location). These services will be fully implemented in the scenarios implementation tasks and demonstrated in reTHINK testbes. The requirements from a software perspective have been defined in section 2.4.
+
+## Methodology of Framework Development and Relation to other Work Packages
 
 A preliminary analysis of functionalities to be provided by the framework will be discussed and a high level capability set for the Framework will be presented in the next sections. For this input from three different areas of the reTHINK project will be examined namely:
 
@@ -72,3 +81,8 @@ In D2.2 Data models were specified from 3 different points of view - the service
 ### Interfaces
 
 D2.2 specified network interfaces (Registry, Catalogue, Identity Management, Messaging service) for performing CRUD operations over various Data Objects. The Proto-on-the-fly and the protocol stubs from the different components could directly be used here without implementing extra functionalities to the Service Framework.
+
+## Service Framework Updates
+
+
+
