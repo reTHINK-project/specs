@@ -1,7 +1,7 @@
 Service Framework
 -----------------
 
-## Overview
+### Overview
 
 The reTHINK Service Framework provides a comprehensive set of application program interfaces (namly APIs) and JavaScript-based libraries to support the development of Hyperties.  As such, the Service Framework is agnostic with respect to the underlying messaging node, modular in design, and to the widest degree agnostic to devices and their operating systems, such as Android, iOS, Raspberry PI, Linux, or Windows. It features a comprehensive set of application program interfaces (APIs) and JavaScript libraries to facilitate the development of Hyperties within the reTHINK architecture.
 
@@ -35,7 +35,7 @@ Thus, the Hyperty Service Framework should provide:
 
 In addition, the Hyperty Service Framework will provide JavaScript libraries to speed up the implementation of conversational services (audio, video, chat, screen sharing) and context enabled services (IoT, context delivery, location). These services will be fully implemented in the scenarios implementation tasks and demonstrated in reTHINK testbes. The requirements from a software perspective have been defined in section 2.4.
 
-## Methodology of Framework Development and Relation to other Work Packages
+### Methodology of Framework Development and Relation to other Work Packages
 
 A preliminary analysis of functionalities to be provided by the framework will be discussed and a high level capability set for the Framework will be presented in the next sections. For this input from three different areas of the reTHINK project will be examined namely:
 
@@ -43,7 +43,7 @@ A preliminary analysis of functionalities to be provided by the framework will b
 -	Data Models as specified in WP2 Task 2.3
 -	Interface Design as specified in WP2 Task 2.4
 
-### Use Cases
+#### Use Cases
 
 D1.1 – “Use Cases and Sustainable Business Models” specified 15 user scenarios from which 5 have been selected as the main scenarios for the development of Hyperties in WP5. Details of these user scenarios can be found in D1.1.
 
@@ -62,7 +62,7 @@ From the above user scenarios specific actors/roles, requirements and use cases 
 
 For the Service Framework focus will be laid on functionalities that are not available on other open source JavaScript libraries.
 
-### Data Models
+#### Data Models
 
 In D2.2 Data models were specified from 3 different points of view - the service provider view, developer view and consumer view. For the Service Framework, focus will be laid only the developer view. The identified data models for the developer's perspective include the following:
 
@@ -78,11 +78,11 @@ In D2.2 Data models were specified from 3 different points of view - the service
 
 **Address Model** : Different address URL has been proposed for the reTHNK platform with respect to the different components. For example user:/// for Idp, hyperty-runtime:/// for the Hyperty Runtime and hyperty:/// for the Hyperty Instance. The Service Framework will provide factory classes for creation of different address URL types.
 
-### Interfaces
+#### Interfaces
 
 D2.2 specified network interfaces (Registry, Catalogue, Identity Management, Messaging service) for performing CRUD operations over various Data Objects. The Proto-on-the-fly and the protocol stubs from the different components could directly be used here without implementing extra functionalities to the Service Framework.
 
-## Service Framework Updates
+### Service Framework Updates
 
 
 
