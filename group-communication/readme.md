@@ -121,3 +121,7 @@ The sequence diagram evolves through the following macro steps:
 
 
 In case another participant joins the same room (`identified by roomId`), `the conference hyperty` mirrors the same behavior from step 9. to 13. (see Figure 6). However, it will not create new communication data object, since it has been already created for the room in question. Instead, the Hyperty will discover in its CSP domain registry for already registered room communication object associated with same roomId ([according to the data object discorvery](https://github.com/reTHINK-project/specs/blob/master/dynamic-view/discovery/hyperty-discovery.md)). Then, it will subscribe this new peer(observer) into the existing room communication data object. Then, as in 4) the conference hyperty will subscribe to new peer data objects. Afterwards, media will start following between peers. `The conference hyperty` will request previously communication controller related to this room to interconnect peers media streams at media server.
+
+#### Note:
+<p align="justify"> The identity of user(reTHINK edge server) behind the conference hyperty is a static default identity asserted locally at runtime. In this case no user interaction is needed. This is temporarly solution, that surely will be optimized in the future. </p>
+Ongoing discussion could be found here [Identity Management at NodeJS](https://github.com/reTHINK-project/specs/issues/17).
