@@ -187,7 +187,7 @@ DataObjectObserver - provides functions to handle DataObjects as a Observer i.e.
 
 In addition, DataObjects can be SyncObjectParents with collections of DataObjectChild. Each collection is called DataObjectChildren. Either Reporter (DataObjectReporter) or Observers (DataObjectObserver) can create DataObjectChilds in a certain children collection (`addChild()` function).
 
-### Syncher API
+##### Syncher API
 
 This is the main class that manages the creation of Data Objects. It is a singleton i.e. only one instance is available per Hyperty instance. It's the owner of all kind of data objects that can be synchronised by the Syncher including Reported Objects (DataObjectReporter) and Observed Objects (DataObjectObserver).
 
@@ -265,32 +265,32 @@ Setup the callback to process change events from the associated reporter child.
 
 * callback: callback function to receive events
 
-### Methods, Events and Handlers
+##### Methods, Events and Handlers
 Every object have methods, and event handlers to map to a pulling and push scheme.
 Methods fire actions and Handlers react to actions and respond accordingly.
 All events listed on the class diagram are intercepted in an event handler. From a functional perspective, methods like (accept, reject, wait, ...) are responses to an action. Since actions are represented by events, it makes sense that responses are directly related to them. Some rules:
 * All events are inherited from the Event interface
 * All handlers have method signature of "on\<classifier\>(..., callback)"
 
-### SyncStatus
+##### SyncStatus
 
 It is used to get and control the status of a DataObject (local, remote, reporter or observer). The interface is not yet implemented, documentation should be updated accordingly from the provided implementation behavior.
 
 **TODO** Maybe some kind of state machine diagram is needed to define better all the status, and the actions that activate the status transitions.
 
-##### Properties
+###### Properties
 status: actual state based on the actions: pause, resume, stop, ...
 
-##### Methods
+###### Methods
 pause: should pause the synchronization process, pause the mission of update messages between the reporter/observer link.
 resume: resume the synchronization process from a pause action.
 stop: probably the same as unsubscribe, so maybe this method is outdated.
 
-### SyncSubscription
+##### SyncSubscription
 
 A reference to a remote observer/subscription, associated to a HypertyURL.
 
-##### Properties
+###### Properties
 url: HypertyURL of the observer.
 
 
