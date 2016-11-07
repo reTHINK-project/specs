@@ -294,6 +294,7 @@ A reference to a remote observer/subscription, associated to a HypertyURL.
 url: HypertyURL of the observer.
 
 
+
 #### Discovery and Identity Manager library
 
 #### QoS interface and LHCB library.
