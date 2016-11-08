@@ -59,6 +59,9 @@ As mentionned above, the communication service providers consists in __3__ compo
 Domain registry is installable from [here](https://github.com/reTHINK-project/dev-registry-domain/server). As the Domain Registry is necessary to run the messaging node, it has to be installed first. The default port of the domain registry is 4567.
 The default DNS for our domain registry will be: __registry.csp.rethink.com__.  
 __To test if installation is OK: https://registry.csp.rethink.com/live gives a view of the current status of the registry.__  
+___WARNING___
+* The urls of the domain users  are encoded to be able to be sent to the domain registry. For apache reverse proxy users the directives _AllowEncodedSlashes On_ AND _ProxyPass_ with _nocanon_.
+
 
 ####Messaging node
 This is the core plateform. ReTHINK has provided four implementations but only one is necessary to be installed:
