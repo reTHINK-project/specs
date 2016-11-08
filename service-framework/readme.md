@@ -7,7 +7,7 @@ The reTHINK Service Framework provides a comprehensive set of application progra
 
 As such, the reTHINK Service Framework enables the design of the Hyperty Runtime APIs to be developer-friendly, i.e., the latter only have to focus on a few core functionalities, namely:
 
--	MsgBUS.postMessage() that is used to post messages in order to communicate with other remote Hyperty Instances and with back-end reTHINK Support Services, 
+-	MsgBUS.postMessage() that is used to post messages in order to communicate with other remote Hyperty Instances and with back-end reTHINK Support Services,
 -	Syncher API that is used to communicate through the Reporter-Observer communication pattern, and potentially
 - the implementation of the hyperty init() function, used to activate the Hyperty Instance with required configuration parameters.
 
@@ -86,7 +86,7 @@ The Address Resource Factory creates the different types of URLs required as spe
 All the attributes below are internally getter/setters functions. In the setter functions value validation will be included.
 
 * ```href``` - It allows to get and set the complete URL string.
-* ```scheme``` - It allows to get and set the scheme of the URL. In traditional URL it defines the protocol for which the URL was intended for. It can be any of the schemes defined in reTHINK: domain, hyperty, hyperty-catalogue, hyperty-runtime, comm, ctxt, acct, user-uuid and user. 
+* ```scheme``` - It allows to get and set the scheme of the URL. In traditional URL it defines the protocol for which the URL was intended for. It can be any of the schemes defined in reTHINK: domain, hyperty, hyperty-catalogue, hyperty-runtime, comm, ctxt, acct, user-uuid and user.
 * ```username``` - It allows to get and set the username of the URL.
 * ```password``` - It allows to get and set the password of the URL.
 * ```host``` - It allows to get and set the host of the URL.
@@ -121,7 +121,7 @@ The Message Class has following class attributes:
 * ```messageBody``` - from the MessageBody data object
 
 ####MessageType (Enumeration)
-``` 
+```
 var MessageType = new enums.Enum("CREATE", "UPDATE", "DELETE", "READ", "SUBSCRIBE", "UNSUBSCRIBE", "RESPONSE");
 ```
 
@@ -132,7 +132,7 @@ var MessageType = new enums.Enum("CREATE", "UPDATE", "DELETE", "READ", "SUBSCRIB
 #####Class CreateMessageBody extends MessageBody
 * ```policyURL``` - URL from where to download the access policy control
 * ```value``` - JSON formatted data to create (TODO: has this been specified on any document so far?)
- 
+
 #####Class ReadMessageBody extends MessageBody
 * ```attribute```- attribute in the object to be read
 * ```value``` - value of the read attribute
@@ -152,7 +152,7 @@ var MessageType = new enums.Enum("CREATE", "UPDATE", "DELETE", "READ", "SUBSCRIB
 Enumeration of all response codes according to RFC7231
 
 #### Class MessageFactory
-The MessageFactory creates messages according to the [Message Data Model](https://github.com/reTHINK-project/specs/tree/master/datamodel) to be sent through the Runtime Message Bus. 
+The MessageFactory creates messages according to the [Message Data Model](https://github.com/reTHINK-project/specs/tree/master/datamodel) to be sent through the Runtime Message Bus.
 
 ####Methods
 * ```constructor(...)```
@@ -294,6 +294,12 @@ url: HypertyURL of the observer.
 #### Discovery and Identity Manager library
 
 Hyperty discovery is performed through the Runtime Registry which returns the Hyperty Registry entry containing its Hyperty Runtime URL, the P2P Handler Stub instance URL and the catalogue URL of P2P Requester Stub. Identities are managed empoying a token-based access. A full dynamic view for discovery and identity management are provided [here](https://github.com/reTHINK-project/specs/tree/master/dynamic-view/discovery) and [here](https://github.com/reTHINK-project/specs/tree/master/dynamic-view/identity-management).
+
+####
+
+#### Runtime Capability Manager
+
+The Runtime Capability Manager handles a JSON data object containing the capabilities of the Hyperty Runtime that will be used to take the most appropriate decisions according to Runtime Capabilities e.g. to select the most appropriate Protostub or Hyperty to be deployed in the runtime. 
 
 
 #### QoS interface and LHCB library.

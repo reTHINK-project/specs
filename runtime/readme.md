@@ -21,9 +21,6 @@ Some more details are provided in the following sections.
 
 As [previously defined, Hyperties](https://github.com/reTHINK-project/dev-service-framework/blob/master/docs/manuals/hyperty.md) cooperate each other via P2P Synchronisation of Hyperty JSON Data Objects supported by the novel [Reporter - Observer communication pattern](https://github.com/reTHINK-project/dev-service-framework/blob/master/docs/manuals/p2p-data-sync.md) and on top of the [Hyperty Messaging Framework](https://github.com/reTHINK-project/dev-service-framework/blob/develop/docs/manuals/hyperty-messaging-framework.md).
 
-#### Hyperty Interceptor
-
-Hyperty Interceptor complements the Core Policy Engine functionality enabling the enforcement of proprietary or closed Policies in the Hyperty Runtime for a specific Hyperty instance.
 
 #### Protocol Stub
 
@@ -130,6 +127,7 @@ The Graph Connector must have listeners to receive messages at:
 ```
 hyperty-runtime://<runtime-instance-identifier>/graph
 ```
+
 
 ### Native Runtime
 
