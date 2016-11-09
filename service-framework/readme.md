@@ -295,11 +295,11 @@ url: HypertyURL of the observer.
 
 Hyperty discovery is performed through the Runtime Registry which returns the Hyperty Registry entry containing its Hyperty Runtime URL, the P2P Handler Stub instance URL and the catalogue URL of P2P Requester Stub. Identities are managed empoying a token-based access. A full dynamic view for discovery and identity management are provided [here](https://github.com/reTHINK-project/specs/tree/master/dynamic-view/discovery) and [here](https://github.com/reTHINK-project/specs/tree/master/dynamic-view/identity-management).
 
-####
+
 
 #### Runtime Capability Manager
 
-The Runtime Capability Manager handles a JSON data object containing the capabilities of the Hyperty Runtime that will be used to take the most appropriate decisions according to Runtime Capabilities e.g. to select the most appropriate Protostub or Hyperty to be deployed in the runtime. 
+The Runtime Capability Manager handles a JSON data object containing the capabilities of the Hyperty Runtime that will be used to take the most appropriate decisions according to Runtime Capabilities e.g. to select the most appropriate Protostub or Hyperty to be deployed in the runtime.
 
 
 #### QoS interface and LHCB library.

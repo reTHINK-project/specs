@@ -32,7 +32,9 @@ The "MessageBody.via" attribute contains a list of all Protostub addresses (Prot
 
 The `MessageBody.source` contains the original creator of the message. Useful e.g. to identify the real source of the response to a one-to-many message delivery ie multiple responses coming from different sources.
 
-The `MessageBody.auth` is used by the policy engine to set the Message was authorised (`true`) or that no policy was found by the Policy Engine to be enforced in this message (`true`).
+The `MessageBody.auth` is used by the policy engine to set the Message was authorised (`true`) or that no policy was found by the Policy Engine to be enforced in this message (`false`).
+
+The `MessageBody.p2p` is used by the Runtime Registry to decide if a P2P Connection Stub should be deployed (`true`) or not (`false`).
 
 #### CreateMessageBody
 

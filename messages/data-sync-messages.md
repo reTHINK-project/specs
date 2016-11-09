@@ -27,10 +27,11 @@ Message sent by the Reporter Syncher Hyperty to Reporter Runtime Sync Manager.
 "type" : "create",
 "from" : "hyperty://<sp-domain>/<hyperty-instance-identifier>",
 "to"   : "hyperty-runtime://<sp-domain>/<hyperty-runtime-instance-identifier>/sm",
-"body" : { "resource" : "<ObjectURL>", "authorise" : [{"HypertyURL"}], "value" : "<json object> , "schema" : "hyperty-catalogue://<sp-domain>/dataObjectSchema/<schema-identifier>" }
+"body" : { "resource" : "<ObjectURL>", "authorise" : [{"HypertyURL"}], "value" : "<json object> , "schema" : "hyperty-catalogue://<sp-domain>/dataObjectSchema/<schema-identifier>", "p2p" : true|false }
 ```
 
-**note:** `"resource"` is present in the body in case the ObjectURL is already known by the reporter eg in a Reporter delegation procedure.
+**note:** `"resource"` is present in the body in case the ObjectURL is already known by the reporter eg to resume a data sync stream or for a Reporter delegation procedure.
+**note2:** `"p2p"` is optional and indicates if the sync data stream should use p2p protostubs.
 
 ###### Response
 
@@ -89,8 +90,10 @@ Message sent by Observer (candidate) Hyperty Instance to the Observer Runtime Sy
 "type" : "subscribe",
 "from" : "hyperty://<observer-sp-domain>/<hyperty-observer-instance-identifier>",
 "to" : "hyperty-runtime://<observer-sp-domain>/<hyperty-observer-runtime-instance-identifier>/sm",
-"body" : { "resource" : "<ObjectURL>" , "schema" : "hyperty-catalogue://<sp-domain>/dataObjectSchema/<schema-identifier>" }
+"body" : { "resource" : "<ObjectURL>" , "schema" : "hyperty-catalogue://<sp-domain>/dataObjectSchema/<schema-identifier>" , "p2p" : true|false }
 ```
+
+**note:** `"p2p"` is optional and indicates if the sync data stream should use p2p protostubs.
 
 ###### Response
 
