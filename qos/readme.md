@@ -11,7 +11,7 @@ The reTHINK architecture enables activating QoS and policy as selectable options
 Several QoS enforcing points and technologies have been envisioned. One of the solutions is based on providing QoS on CPE Broadband and mobile access. The other one is a solution based on network selection (LHCB) in which a client provides information about available "uplinks" (i.e. alternative wired or wireless connections) and associated quality parameters, and in which the client may be requested to switch its connectivity over to an indicated network (interface) providing a certain QoS level.
 
 <img src="https://cloud.githubusercontent.com/assets/10738516/18352706/c3108348-75df-11e6-82a8-66793ed0ca4f.png" width="60%"/>
-  
+
 #### reTHINK TURN services
 
 On the first solution, design of network traffic control has been implemented in the CPE. The general mechanism is the following one:   
@@ -56,7 +56,7 @@ An example dynamic view on the interaction of components is provided [here](../d
 ***This is internal use of the QoS, this has to be designed to be integrated in the runtime. The QoS Agent seems to be the place, even if the logic is rather thin in this runtime.***
 
 The Quality of service depends of the ICE candidate setup. During the buildPeerConnection, the application has to call two methods, and provide its application identifier. This can be implemented in the QoS Agent.
-  
+
     https://broker_URL/getAppropriateTurn
     {
                cspId: applicationclientID,
@@ -65,7 +65,7 @@ The Quality of service depends of the ICE candidate setup. During the buildPeerC
 that returns:  
 
     ["TURN_IP:PORT","identifier"]  
-    
+
 if the application still benefits of the TURN service, otherwise it returns “Unable to get a turn server : data consumption exceeded”  
 
 Then second call should be:  
@@ -74,13 +74,14 @@ Then second call should be:
     {
                 clientId : “identifier”
     }
-    
+
 that returns:  
-	
+
     {"clientId":"identifier","password":"xxxx"}
 
 The resulting object should be:  
 
+```
     RTCPeerConfiguration = {
         iceServers: [
         {
@@ -89,14 +90,16 @@ The resulting object should be:
         ],
         iceTransportPolicy: "relay"
     }  
-        
+```
+
 This object is then used to build the peerconnection with the constraint {'googDscp': true}.   
 
 Example of code:
 
+```
     function buildPeerConstraints(useQos) {
             var options = [];
-            options.push({'DtlsSrtpKeyAgreement': 'true'}); 
+            options.push({'DtlsSrtpKeyAgreement': 'true'});
           	// We add DSCP support in case of QoS needs
            	if (useQos)
     	      {
@@ -104,10 +107,12 @@ Example of code:
     	      }
             return {optional: options};
         }
+```
 
 
 To build the PeerConnection:  
 
+```
         if (useQoS)
        	{
             var turnServer;
@@ -148,7 +153,7 @@ To build the PeerConnection:
 			            console.log('turnServer :');
 			            console.log(turnServer);
 			            console.log("RTCPeerConfiguration"+RTCPeerConfiguration);
-			            
+
 			            //installICE(RTCPeerConfiguration);
 			            iceConfig = RTCPeerConfiguration;
 			            console.log('iceConfig :');
@@ -161,7 +166,7 @@ To build the PeerConnection:
 		    }
 		    });
        	}	    
-	    
+
   	    console.log(iceConfig);
         if (self.debugPrinter) {
             self.debugPrinter("building peer connection to " + otherUser);
@@ -169,6 +174,7 @@ To build the PeerConnection:
 
         try {
             pc = self.createRTCPeerConnection(iceConfig, buildPeerConstraints());
+```
 
 
 **Note:  the final spec should be included (refined) in the dedicated QoS deliverable**
