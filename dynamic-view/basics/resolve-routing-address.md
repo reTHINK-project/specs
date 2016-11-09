@@ -18,8 +18,8 @@ Steps 3: Registry verifies the originator is valid i.e. its Runtime URL has been
 
   **Phase 2 New!** Steps 16 - 17: the P2P Requester Catalogue URL is extracted from the [registry object entry](../../datamodel/core/hyperty-registry) which is used to [deploy-protostub.md](load and deploy the P2P Requester Protocolstub). As soon as the P2P Requester Stub is activated it performs [the P2P Connection Setup](p2p-setup.md) and returns the runtime URL of the new P2P Stub URL to the Message Bus.
 
-  **Phase 2 New!** Steps 18: If it is not possible to use a P2P Connection, the process to [resolve the Message Node protostub Runtime URL ](deploy-protostub.md) is performed.
+  **Phase 2 New!** Steps 18: If it is not possible to use a P2P Connection, the process to [resolve the Message Node protostub Runtime URL ](resolve-msg-node-address.md) is performed.
 
-**Phase 2 New!** Steps 19: If `message.body.p2p = false` or if `message.body.p2p` field does not exist, the process to [resolve the Message Node protostub Runtime URL ](deploy-protostub.md) is performed.
+**Phase 2 New!** Steps 19: If `message.body.p2p = false` or if `message.body.p2p` field does not exist, the process to [resolve the Message Node protostub Runtime URL ](resolve-msg-node-address.md) is performed.
 
-**Phase 2 New!** Steps 20: If there is a P2P Connection registered but not connected yet, this means the P2P connection has started but not finished yet. In this case we must use a MN Stub, the process to [resolve the Message Node protostub Runtime URL ](deploy-protostub.md) is performed. This message could be itself part of the P2P connection signalling process.
+**Phase 2 New!** Steps 20: If there is a P2P Connection registered but not connected yet, this means the P2P connection has started but not finished yet. In this case we must use a MN Stub, the process to [resolve the Message Node protostub Runtime URL ](resolve-msg-node-address.md) is performed. This message could be itself part of the P2P connection signalling process.
