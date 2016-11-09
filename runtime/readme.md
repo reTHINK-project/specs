@@ -96,9 +96,6 @@ The Runtime Catalogue must have listeners to receive messages at:
 hyperty-runtime://<runtime-instance-identifier>/catalogue
 ```
 
-#### Storage Manager
-
-The Storage Manager provides data storage functionalities (write and read) to Core Runtime Components including Runtime Catalogue, Runtime Registry, Sync Manager, Policy Engine and Graph Connector.
 
 #### Sync Manager
 
@@ -112,7 +109,7 @@ hyperty-runtime://<runtime-instance-identifier>/sm
 
 The Address Allocation manages the allocation of addresses to Hyperties and Data Objects. It tries to reuse as much as possible addresses previously registered in the Runtime Registry. Otherwise it interacts with the Messange Node to allocate new addresses.
 
-The Sync Manager must have listeners to receive messages at:
+The Address Allocation must have listeners to receive messages at:
 
 ```
 hyperty-runtime://<runtime-instance-identifier>/address-allocation
