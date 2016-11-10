@@ -97,14 +97,14 @@ Message sent by Observer (candidate) Hyperty Instance to the Observer Runtime Sy
 
 ###### Response
 
-100OK Provisional Response Message sent back by Observer Runtime Sync Manager to Observer Hyperty Instance containing in the body the childrenResources, in case they exist.
+100OK Provisional Response Message sent back by Observer Runtime Sync Manager to Observer Hyperty Instance containing in the body the resources, in case they exist.
 
 ```
 "id" : 1,
 "type" : "response",
 "from" : "hyperty-runtime://<sp-domain>/<hyperty-runtime-instance-identifier>/sm",
 "to" : "hyperty://<sp-domain>/<hyperty-instance-identifier>",
-"body" : { "code" : "100", "childrenResources" : [{"<resource-children-name>"}] }
+"body" : { "code" : "100", "resources" : [{"<resource-children-name>"}] }
 ```
 
 200OK Response Message sent back by Observer Runtime Sync Manager to Observer Hyperty Instance containing in the body the most updated version of Data Object.
@@ -204,7 +204,7 @@ Message sent by Observer Runtime Sync Manager to Data Object Subscription Handle
 "type" : "subscribe",
 "from" : "hyperty-runtime://<observer-sp-domain>/<hyperty-observer-runtime-instance-identifier>/sm",
 "to" : "<ObjectURL>/subscription",
-"body" : {  "subscriber" : "hyperty://<observer-sp-domain>/<hyperty-observer-instance-identifier>" }
+"body" : {  "source" : "hyperty://<observer-sp-domain>/<hyperty-observer-instance-identifier>" }
 ```
 
 ###### Response
@@ -228,7 +228,7 @@ Message sent by Observer Runtime Sync Manager to Data Object Subscription Handle
 "type" : "unsubscribe",
 "from" : "hyperty-runtime://<observer-sp-domain>/<hyperty-observer-runtime-instance-identifier>/sm",
 "to" : "<ObjectURL>/subscription",
-"body" : {  "subscriber" : "hyperty://<observer-sp-domain>/<hyperty-observer-instance-identifier>", "childrenResources" : [{"<resource-children-name>"}] }
+"body" : {  "source" : "hyperty://<observer-sp-domain>/<hyperty-observer-instance-identifier>", "childrenResources" : [{"<resource-children-name>"}] }
 ```
 
 ###### Response
@@ -254,7 +254,7 @@ Message sent by Reporter Runtime Sync Manager to Reporter Message Node to reques
 "type" : "subscribe",
 "from" : "hyperty-runtime://<reporter-sp-domain>/<hyperty-observer-runtime-instance-identifier>/sm",
 "to" : "domain://msg-node.<reporter-sp-domain>/sm",
-"body" : { "subscribe" : ["<ObjectURL>","<ObjectURL>/subscription", "<ObjectURL>/children/<resource-children-name1>", "<ObjectURL>/children/<resource-children-name2>",.. ], "source" : "hyperty-runtime://<reporter-sp-domain>/<hyperty-reporter-runtime-instance-identifier>" }
+"body" : { "resources" : ["<ObjectURL>","<ObjectURL>/subscription", "<ObjectURL>/children/<resource-children-name1>", "<ObjectURL>/children/<resource-children-name2>",.. ], "source" : "hyperty-runtime://<reporter-sp-domain>/<hyperty-reporter-runtime-instance-identifier>" }
 ```
 
 With this message the setup of the routing path is:
@@ -283,7 +283,7 @@ Message sent by Observer Runtime Sync Manager to Observer Message Node to reques
 "type" : "subscribe",
 "from" : "hyperty-runtime://<observer-sp-domain>/<hyperty-observer-runtime-instance-identifier>/sm",
 "to" : "domain://msg-node.<observer-sp-domain>/sm",
-"body" : { "subscribe" : ["<ObjectURL>/changes", "<ObjectURL>/children/<resource-children-name1>", "<ObjectURL>/children/<resource-children-name2>",.. ], "source" : "hyperty-runtime://<observer-sp-domain>/<hyperty-observer-runtime-instance-identifier>" }
+"body" : { "resources" : ["<ObjectURL>/changes", "<ObjectURL>/children/<resource-children-name1>", "<ObjectURL>/children/<resource-children-name2>",.. ], "source" : "hyperty-runtime://<observer-sp-domain>/<hyperty-observer-runtime-instance-identifier>" }
 ```
 
 With this message the setup of the routing path is:
@@ -312,7 +312,7 @@ Message sent by Observer Runtime Sync Manager to Reporter Message Node to reques
 "type" : "subscribe",
 "from" : "hyperty-runtime://<observer-sp-domain>/<hyperty-observer-runtime-instance-identifier>/sm",
 "to" : "domain://msg-node.<reporter-sp-domain>/sm",
-"body" : { "subscribe" : ["<ObjectURL>/changes", "<ObjectURL>/children/<resource-children-name1>", "<ObjectURL>/children/<resource-children-name2>",.. ], "source" : "hyperty-runtime://<observer-sp-domain>/<hyperty-observer-runtime-instance-identifier>" }
+"body" : { "resources" : ["<ObjectURL>/changes", "<ObjectURL>/children/<resource-children-name1>", "<ObjectURL>/children/<resource-children-name2>",.. ], "source" : "hyperty-runtime://<observer-sp-domain>/<hyperty-observer-runtime-instance-identifier>" }
 ```
 
 With this message the setup of the routing path is:
@@ -341,7 +341,7 @@ Message sent by Observer Runtime Sync Manager to Observer Message Node to reques
 "type" : "unsubscribe",
 "from" : "hyperty-runtime://<observer-sp-domain>/<hyperty-observer-runtime-instance-identifier>/sm",
 "to" : "domain://msg-node.<observer-sp-domain>/sm",
-"body" : { "unsubscribe" : ["<ObjectURL>/changes", "<ObjectURL>/children/<resource-children-name1>", "<ObjectURL>/children/<resource-children-name2>",.. ], }
+"body" : { "resources" : ["<ObjectURL>/changes", "<ObjectURL>/children/<resource-children-name1>", "<ObjectURL>/children/<resource-children-name2>",.. ], }
 ```
 
 ###### Response
@@ -366,7 +366,7 @@ Message sent by Observer Runtime Sync Manager to Reporter Message Node to reques
 "type" : "unsubscribe",
 "from" : "hyperty-runtime://<observer-sp-domain>/<hyperty-observer-runtime-instance-identifier>/sm",
 "to" : "domain://msg-node.<reporter-sp-domain>/sm",
-"body" : { "unsubscribe" : ["<ObjectURL>/changes", "<ObjectURL>/children/<resource-children-name1>", "<ObjectURL>/children/<resource-children-name2>",.. ], }
+"body" : { "resources" : ["<ObjectURL>/changes", "<ObjectURL>/children/<resource-children-name1>", "<ObjectURL>/children/<resource-children-name2>",.. ], }
 ```
 
 ###### Response

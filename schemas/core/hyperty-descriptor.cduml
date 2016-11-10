@@ -14,7 +14,7 @@ package RethinkCore <<Rect>> {
 				hypertyType : HypertyResource.HypertyResourceType[]
 				messageSchemaUrl : URL.HypertyCatalogueURL
 				configuration ?: HypertyConfiguration
-				constraints ?: HypertyRuntimeDescriptor.RuntimeHypertyCapabilities
+				constraints ?: HypertyRuntimeDescriptor.RuntimeCapabilities
 				policiesUrl ?: URL.HypertyCatalogueURL
 			}
 

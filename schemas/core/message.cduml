@@ -12,6 +12,7 @@ package Message <<Rect>> {
 
 	class MessageBody {
 		resource ?: URL.URL
+		resources ?: URL.URL[]
 		childrenResources ?: URL.URL[]
 		schema ?: URL.HypertyCatalogueURL
 		idToken ?: Identity.JWT
@@ -58,11 +59,9 @@ package Message <<Rect>> {
 	}
 
 	class SubscribeMessageBody {
-		subscribe ?: URL.URL[]
 	}
 
 	class UnsubscribeMessageBody {
-		unsubscribe ?: URL.URL[]
 	}
 
 	class FowardMessageBody {
