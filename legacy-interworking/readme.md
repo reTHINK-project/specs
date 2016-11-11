@@ -25,7 +25,7 @@ IF the runtime is being executed in a browser runtime, it must be taken into con
 ####High level diagram
 The diagram below shows a high level architecture of the integration of reTHINK with an external service.
 
-![alt text](rethink-Legacy-Integration-approach2.png "Legacy domain interworking diagram")
+![Legacy domain interworking diagram](rethink-Legacy-Integration-approach2.png)
 
 As stated above, the Hyperty will need to be associated to two identities. The Identity Module will handle the authentication against the Identity Provider of the Legacy domain. After a successful authentication normally a token will be provided. This token has to be used from the Protostub to authenticate itself during the registration/login process to the legacy domain. Depending on the Legacy Domain this process may be different, however it should be compatible with the most scenarios.
 
@@ -38,7 +38,7 @@ The Hyperty will be able to interact with the legacy domain sending messages to 
 
 The diagram below shows the deployment process of an IWstub.
 
-![alt text](../dynamic-view/legacy-interworking/deploy-iwstub.png "Legacy domain IWstub deployment diagram")
+![Legacy domain IWstub deployment diagram](../dynamic-view/legacy-interworking/deploy-iwstub.png)
 
 The main difference is that the IWstub code is downloaded from a back-end service of the Legacy Domain and the IWstub descriptor is also downloaded from a Catalogue at the Legacy Domain. Alternatively both of them could be downloaded from the Default Domain if it has some kind of agreement with the Legacy Domain.
 
@@ -71,7 +71,7 @@ The emergence of WebRTC support by most important browser vendors motivated 3GPP
 The diagram below shows the interconnection diagram which is very similar to the generic one previously shown. The IMS gateway will perform a validation of the token obtained from the Identity provider and it will be passed to the gateway element of the IMS network in order to validate the token and register the identity associated to the reTHINK hyperty in the IMS network through the IMS protostub (which is an example of IWstub).
 From this point on, the Hyperty will be able to interact with the IMS network through the protostub. From the IMS point of view the registered Hyperty is just another User Equipement. To enable voice and video calls, the WebRTC gateway would perform the translate between the media with WebRTC profile to a media profile compatible with the IMS network.
 
-![alt text](rethink-IMS-Integration-approach2.png "IMS interworking diagram")
+![IMS interworking diagram](rethink-IMS-Integration-approach2.png)
 
 ###IWstub Extensibility Considerations
 Extending reTHINK to make it inter-operable with different services may require to support scenarios and use cases which has not been considered at design time. So the IWstub has been enriched with attributes not used in regular protostub which enable future extensions.

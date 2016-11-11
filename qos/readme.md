@@ -1,7 +1,5 @@
 ## Quality of Service Control
 
-*to provide here qos related specification defining architectural functionalities and concepts involved. A dynamic view should be provided [here](../dynamic-view/qos/readme.md) with MSC diagrams and the specification of messages would be provided [here](../messages/qos-management-messages.md)*
-
 
 ### Overview
 
@@ -10,15 +8,17 @@
 The reTHINK architecture enables activating QoS and policy as selectable options, via APIs to the service providers. While OTT services have no such choice, and Mobile services automatically provide managed QoS over managed packet network, the reTHINK architecture can deliver QoS ‘on-demand’ over the Internet, selected only where necessary, according to network conditions, user preference and service requirements.
 Several QoS enforcing points and technologies have been envisioned. One of the solutions is based on providing QoS on CPE Broadband and mobile access. The other one is a solution based on network selection (LHCB) in which a client provides information about available "uplinks" (i.e. alternative wired or wireless connections) and associated quality parameters, and in which the client may be requested to switch its connectivity over to an indicated network (interface) providing a certain QoS level.
 
-<img src="https://cloud.githubusercontent.com/assets/10738516/18352706/c3108348-75df-11e6-82a8-66793ed0ca4f.png" width="60%"/>
+![](https://cloud.githubusercontent.com/assets/10738516/18352706/c3108348-75df-11e6-82a8-66793ed0ca4f.png)
 
 #### reTHINK TURN services
 
 On the first solution, design of network traffic control has been implemented in the CPE. The general mechanism is the following one:   
-<img src="https://cloud.githubusercontent.com/assets/10738516/18352611/5f6843c6-75df-11e6-9185-118147e31177.png" width="90%"/>
+
+![](https://cloud.githubusercontent.com/assets/10738516/18352611/5f6843c6-75df-11e6-9185-118147e31177.png)
 
 To use the right TURN server, the general flow is the following:     
-<img src="https://cloud.githubusercontent.com/assets/10738516/18353161/52414b28-75e1-11e6-904c-af307afd1a43.png" width="70%"/>
+
+![](https://cloud.githubusercontent.com/assets/10738516/18353161/52414b28-75e1-11e6-904c-af307afd1a43.png)
 
 •	Step 0: Offline CSP’s provisioning for a certain amount of a data : audio, video, throughput datachannel. The subscriber (CSP) is assigned a unique identifier cspID, it will provide to its clients so they can later be associated to the subscriber by the broker.  
 •	Step 1: The client retrieves from its CSP a communication Web App (including cspID).  
@@ -38,7 +38,7 @@ The Last Hop Connectivity Broker (LHCB) aims at providing information about avai
 
 Besides providing only information about a single, i.e. the local end device, the LHCB's architecture allows for monitoring QoS indicators for a set of devices.  The following figure illustrates the overall LHCB architecture as implemented in reThINK.
 
-<img src="lhcb01.png" />
+![](lhcb01.png)
 
 The LHCB Client is an entity running at the end-device and providing low-system-level access to network interface drivers.  Due to the complexity and close integration with the hosting operating system, the LHCB Client is provided in parallel to the client's runtime environment.
 
@@ -53,6 +53,7 @@ An example dynamic view on the interaction of components is provided [here](../d
 ### Interface of reTHINK QoS support with the Runtime QoS Agent
 
 *specify the interface of the Runtime QoS Agent here. Currently, only the DIRECT interface of the Runtime QoS Agent with other QoS components is in scope.  This section might actually not appear in this md-file but instead  [here](../dynamic-view/qos/readme.md) with MSC diagrams and the specification of messages would be provided [here](../messages/qos-management-messages.md)*  
+
 ***This is internal use of the QoS, this has to be designed to be integrated in the runtime. The QoS Agent seems to be the place, even if the logic is rather thin in this runtime.***
 
 The Quality of service depends of the ICE candidate setup. During the buildPeerConnection, the application has to call two methods, and provide its application identifier. This can be implemented in the QoS Agent.
