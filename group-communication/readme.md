@@ -13,19 +13,19 @@ This topology performs well for a small number for participants. Easy to deploy 
 However, it is inefficient for scalable multiparty systems. As the number of participants increases, bandwidth and CPU processing consumption becomes more excessive on peer side, which is not scalable, especially for mobile Peers.
 
  <p align="center">
-  ![Mesh-Topology](/dynamic-view/group-communication/Full-Mesh-Topology.png)
+  ![Mesh-Topology](Full-Mesh-Topology.png)
 </p>  
 <p align="center">
-  Full Mesh Topology for group ommunication
+  Full Mesh Topology for group communication
 </p>
 
 <p align="justify">Alternatively, in a star topology, a relay server in the middle will be in charge of establishing peer connections and distributing streams among peers. As a result, each peer establishes only one peer connection to the media server independently of the increasing number of peers. Which is very scalable approach. In such way, all the burden and processing is left to the middle server. However, an extra latency will be observed due to the presence of the intermediary server.</p>
 
 This star topology, describes H2H WebRTC group communication between reTHINK users. Therefore, peer conference hyperties running on runtime browsers will exchange signaling descriptions between each other and the media server through reTHINK edge server(Runtime Node).Particularly, reTHINK Runtime Node [dev-runtime-nodejs](https://github.com/reTHINK-project/dev-runtime-nodejs) is a justified choice for exchanging WebRTC signaling. In addition, Runtime Node is a fully conform with reTHINK specs in term of reliability and security.
 
- <p align="center">
-          ![Star-Topology](../dynamic-view/group-communication/Star Topology.png)
-</p>
+<p align="center">
+ ![Star-Topology](Star-Topology.png)
+</p>  
 <p align="center">
   Star Topology for group communication
 </p>
@@ -38,7 +38,7 @@ Three main components are required in this topology : `Peer conference Hyperty` 
 
 
 ![../dynamic-view/group-communication/Multiparty-WebRTC-overall-Archi
-.png](../dynamic-view/group-communication/Multiparty-WebRTC-overall-Archi.png)
+.png](Multiparty-WebRTC-overall-Archi.png)
 <p align="center">
   reTHINK Group cummunication overall architecture
 </p>

@@ -50,10 +50,7 @@ A complete description of the diagram has been included [here](../dynamic-view/l
 
 
 ###IWstub implementation
-The data model of the Protostub which has been used from it conception in reTHINK has been adapted to be compatible with the IWstub so in terms of data model it is like any other protostub.
-The Data model is described in this diagram:
-
-![Protostub datamodel](https://github.com/reTHINK-project/specs/blob/master/datamodel/core/hyperty-catalogue/Protostub-Descriptor-Data-Object-Model.png)
+The data model of the Protostub which has been used from it conception in reTHINK, has been adapted to be compatible with the IWstub so in terms of data model it is like any other protostub.
 
 Several attributes were included to accomodate the same data model to the IWstub:
 - *interworking*: if this boolean is true it indicates that the protostub is used to connect with a legacy domain that is not compliant with reTHINK.
