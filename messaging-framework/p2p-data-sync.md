@@ -1,5 +1,5 @@
-P2P Data Synchronisation: Reporter - Observer Model
----------------------------------------------------
+### P2P Data Synchronisation: Reporter - Observer Model
+
 
 This document gives an overview on how Hyperties cooperate each other through a Data Synchronisation model called Reporter - Observer.
 
@@ -41,11 +41,11 @@ syncher.subscribe(_this._objectDescriptorURL, ObjectUrl).then(function(dataObjec
         });
 ```
 
-### Hyperty Data Object URL address
+#### Hyperty Data Object URL address
 
 The Hyperty Messaging Framework allocates to each new created Hyperty Data Object a Global Unique Identifier URL that is independent from the Hyperty instance creator and from the Hyperty Runtime, in order to support mobility of the Data Object between different Hyperty Runtimes and also to support delegation of the Reporter role to other Hyperty instances. However, at this point Reporter delegation is only supported between Hyperty instances from the same domain.
 
-### Hyperty Data Object Schema
+#### Hyperty Data Object Schema
 
 Each Hyperty Data Object is formally described by a JSON-Schema that is identified by a Catalogue URL. This allows to check whether two different Hyperties are compliant by cross checking each supported Hyperty Data Object schema. At this point the following Hyperty Data Object schemas are defined:
 
@@ -53,7 +53,7 @@ Each Hyperty Data Object is formally described by a JSON-Schema that is identifi
 -	**[Communication Data Schema](../datamodel/communication)** : Hyperties supporting this schema are able to handle different communication types including Textual Chat, Audio, Video, Screen Sharing and File sharing. Such communication can be supported on top of WebRTC protocol streams by using the Connection Data Schema. The URL Scheme for Communication Data Objects is "comm" (example: "comm://example.com/group-chat/rethink201601290617").
 -	**[Context Data Schema](../datamodel/context)** : Hyperties supporting this schema are able to produce or consume Context Data, usually collected from sensors. The URL Scheme for Communication Data Objects is "ctxt" (example: "ctxt://example.com/room/temperature201601290617").
 
-### Parent - Children Resources
+#### Parent - Children Resources
 
 In order to allow use cases like Group Chat where all involved Hyperties are able to write in the Sync Data Object, the Parent - Child Data Sync Objects is introduced.
 
@@ -71,7 +71,7 @@ All other Hyperties observing or reporting the Data Object Parent, will be notif
 
 At this point, Data Object Child can't also be a Data Object Parent of another Sync Data Object, i.e. Hyperty Data Object composition is limited to one level.
 
-### Syncher and Sync Manager
+#### Syncher and Sync Manager
 
 This section, gives an overview on how the Hyperty Data Object synchronisation transparently works on top of the [Hyperty Messaging Framework](readme.md).
 

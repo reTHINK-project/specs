@@ -1,5 +1,4 @@
-Messaging Node Architecture
----------------------------
+#### Messaging Node Functional Architecture
 
 The Messaging Node functional architecture is presented in the figure below and it comprises three main types of functionalities including the Core Functionalities, Connectors and Protocol Stubs.
 
@@ -7,13 +6,13 @@ Compared to the phase 1 version two additional components have been added to the
 
 ![Figure @msg-node-architecture-messaging-node-architecture: Messaging Node Architecture](msg-node-architecture.png)
 
-### Core Functionalities
+##### Core Functionalities
 
-#### Message BUS
+###### Message BUS
 
 The Message BUS routes messages to internal Messaging Node components and external elements by using Connectors or Protocol Stubs. It supports different communication patterns including publish/subscribe and Request/response communication.
 
-#### Policy Engine
+###### Policy Engine
 
 Message nodes are responsible for the interaction of runtimes in their own domain with runtimes from foreign domains by offering protocol stubs to these external runtimes. However the operators of a certain domain need a mechanism to control these domain interactions and to potentially block or limit certain combinations of message exchange.
 
@@ -21,12 +20,12 @@ In order to achieve this, a MN must provide a hook in the message flow that allo
 
 Therefore Policy Engine provides Policy decision and Policy Enforcement functionalities at Domain level for incoming and outgoing messages in cooperation with authentication and authorisation provided by Identity Management functionalities. It also provides authorisation / access control to the Message BUS.
 
-#### Session Management
+###### Session Management
 
 Session Management functionalities are used to control messaging connections to service provider back-end services. For example, when user turns-on the device and connects to its domain, providing credentials as required by Identity Management functionalities. In general, each message should contain a valid token that is
 generated when the client connects to the Messaging Node. It also manages the registry of protocol stubs and connectors supported by the Messaging Nodes to support the routing of messages to these components.
 
-#### Address Allocation Management
+###### Address Allocation Management
 
 As soon as an entity in a runtime wants to be accessible from another runtime, this entity must be addressable. Since a MN is the central message routing point for a domain it is the MNs task to create these addresses and to assign them to the requesting runtime. The resulting internal allocation table stores the relation of the allocated addresses to the stub connections and enables a proper routing of messages between the runtimes.
 
@@ -41,7 +40,7 @@ Address Allocation Management functionality must have listeners to receive messa
 domain://msg-node.<sp-domain>/address-allocation
 ```
 
-### Subscription Manager
+##### Subscription Manager
 
 A core concept in the reTHINK architecture is that Hyperties interact with each other by exchanging and synchronizing their managed data objects based on the [Reporter - Observer pattern](p2p-data-sync.md). The MN supports this concept by allowing observers (Hyperties, running in one or more runtimes) to subscribe for changes of certain allocated data object urls deployed in other runtimes. Whenever a Hyperty runtime reports a change in a monitored data object it sends a change message to the MN. The "to" address of this message will just be the allocated address of the updated data object, not the address of the subscribers directly.
 
@@ -94,7 +93,7 @@ The Subscription Manager functionality must have listeners to receive messages f
 domain://msg-node.<sp-domain>/sm
 ```
 
-### Protocol Stub
+##### Protocol Stub
 
 The basic operation mode of a MN is that it is connected by runtimes directly via the provided protocol stubs. A message received from one runtime will be forwarded to another runtime which must also be directly connected through a stub. This is a classic "triangular" messaging architecture. The triangular message flow looks like this:
 

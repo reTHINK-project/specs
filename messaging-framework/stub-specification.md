@@ -1,6 +1,6 @@
-### Protostub specification
+#### Protostub specification
 
-#### Stub construction and activation
+##### Stub construction and activation
 
 Stubs are provided by different vendors and developers and of course they have different naming conventions. In order to provide a common instantiation scheme a convention was defined additionally to the interface that ProtoStubs have to implement. The convention is that each stub modules must export a default activation function that is used by the runtimes to obtain a stub instance with a given set of parameters.
 
@@ -15,7 +15,7 @@ export default function activate(url, bus, config) {
 
 This activation function hides the internal naming and just returns an object that provides an implementation of the methods defined in the ProtoStub interface. The parameters of this function correspond directly to the previously described parameters of the Stub constructor.
 
-#### Integration with the Messaging Bus of the Runtime
+##### Integration with the Messaging Bus of the Runtime
 
 Protocol stubs are tightly integrated with the messaging bus of the runtime. This integration is bi-directional. A reference to the messaging bus is provided as second paramenter of the stub constructor.
 
@@ -39,7 +39,7 @@ _onWSMessage(msg) {
 }
 ```
 
-#### Auto connect mechanism
+##### Auto connect mechanism
 
 The stubs are expected to support an auto connect mechanism. This is because the runtime will not explicitely invoke the connect method itself. Instead it just sends messages via the messaging bus to the stub and assumes that the stub takes care of its own connection state.
 
@@ -65,7 +65,7 @@ disconnect() {
 }
 ```
 
-#### Connection events
+##### Connection events
 
 The stub must emit a "connect" or "disconnect" message to the bus whenever its connection state changes. The following method can be used to encapsulate this:
 
@@ -94,7 +94,7 @@ _onWSOpen() { this._sendStatus("connected"); }
 _onWSClose() { this._sendStatus("disconnected"); }
 ```
 
-#### The ProtoStub API
+##### The ProtoStub API
 
 The interface that a protocol stub has to implement is kept very small and simple by intent.
 
@@ -112,7 +112,7 @@ new ProtoStub(runtimeProtoStubURL, busPostMessage, configuration)
 | busPostMessage      | Message.Message (???)                     | The runtime BUS postMessage function to be invoked on messages received by the protocol stub.                                                                                         |
 | configuration       | ProtoStubDescriptor.ConfigurationDataList | Configuration data that is retrieved from the protocolStub descriptor. This data is implementation-specific and ensures that the Stub can address and connect its own Messaging Node. |
 
-##### Methods
+###### Methods
 
 
 `connect(identity)`
@@ -162,7 +162,7 @@ This message must be present in order to perform the actual delivery of a messag
 | msg | Message | The original message from the MessageBus |
 
 
-##### Events
+###### Events
 
 A protocol stub emits events to communicate its own connection state to the runtime. Whenever the stub gets connected or disconnected, it uses the "busPostMessage" to send a message to the runtimes message bus. These Event messages are defined as follows:
 

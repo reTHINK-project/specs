@@ -1,5 +1,4 @@
-Hyperty Messaging Framework
----------------------------
+### Hyperty Messaging Framework overview
 
 This document gives an overview on the Messaging Framework technical solution used to support Hyperty's interaction through the higher level [Data Synchronisation Reporter - Observer communication mechanism](p2p-data-sync.md).
 
