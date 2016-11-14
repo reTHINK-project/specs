@@ -80,7 +80,7 @@ Message sent by the Hyperty Runtime Registry function to Registry Domain server.
 "type" : "update",
 "from" : "hyperty-runtime://<sp-domain>/<runtime-instance-identifier>/registry",
 "to" : "domain://registry.<sp-domain>",
-"body" : { "resource": "/<registry-object-type>/<registry-object-identifier>", "value" : "live", "attribute" : "status" }
+"body" : { "resource": "<RegistryDataObjectURL>", "value" : "live", "attribute" : "status" }
 ```
 
 Reponse Message sent by the Registry Domain server to Hyperty Runtime Registry function.
@@ -129,7 +129,7 @@ Message sent by the Hyperty Runtime Registry function to Registry Domain server 
 "type" : "update",
 "from" : "hyperty-runtime://<sp-domain>/<runtime-instance-identifier>/registry",
 "to" : "domain://registry.<sp-domain>",
-"body" : { "resource" : "/<registry-object-url-scheme>/<registry-object-identifier>" }
+"body" : { "resource" : "<RegistryDataObjectURL>" }
 ```
 
 Response Message sent back by the Registry Domain server to Hyperty Runtime Registry function.
