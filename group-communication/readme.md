@@ -23,9 +23,10 @@ However, it is inefficient for scalable multiparty systems. As the number of par
 
 This star topology, describes H2H WebRTC group communication between reTHINK users. Therefore, peer conference hyperties running on runtime browsers will exchange signaling descriptions between each other and the media server through reTHINK edge server(Runtime Node).Particularly, reTHINK Runtime Node [dev-runtime-nodejs](https://github.com/reTHINK-project/dev-runtime-nodejs) is a justified choice for exchanging WebRTC signaling. In addition, Runtime Node is a fully conform with reTHINK specs in term of reliability and security.
 
-<p align="center">
- ![Star-Topology](Star-Topology.png)
+ <p align="center">
+  ![Star-Topology](Star-Topology.png)
 </p>  
+ 
 <p align="center">
   Star Topology for group communication
 </p>
