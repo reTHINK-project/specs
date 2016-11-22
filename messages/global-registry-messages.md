@@ -23,9 +23,9 @@ Response from Global Registry:
 "type" : "response",
 "from" : "global://registry/",
 "to" : "hyperty-runtime://<sp-domain>/<runtime-instance-identifier>/graph-connector",
-"body" : { "description" : "request was performed successfully",
-"code" : 200,
-"value" : <jwt> }
+"body" : { "Message" : "request was performed successfully",
+"Code" : 200,
+"Value" : <jwt> }
 ```
 
 
@@ -51,6 +51,7 @@ Response from Global Registry:
 "type" : "response",
 "from" : "global://registry",
 "to" : "hyperty-runtime://<sp-domain>/<runtime-instance-identifier>/graph-connector",
-"body" : { "description" : "request was performed successfully",
-"code" : 200 }
+"body" : { "Message" : "request was performed successfully",
+"Code" : 200,
+"Value" : "" }
 ```
