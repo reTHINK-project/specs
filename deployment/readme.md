@@ -96,9 +96,9 @@ docker run -it --net=host  -d --name="catalogue-broker"  rethink/catalogue-broke
 ```
 where $1 can be MatrixProtoStub, NodejsProtoStub or VertxProtoStub.  
 
-An example of catalogue database is provided [here](https://github.com/reTHINK-project/dev-catalogue/tree/master/docker/catalogue-database-reTHINKdefault). It is recommanded to use it for this example (-h is the IP of the current catalogue. Note that it is not known __before__ launching it):
+An example of catalogue database is provided [here](https://github.com/reTHINK-project/dev-catalogue/tree/master/docker/catalogue-database-reTHINKdefault). It is recommanded to use it for this example (-h is the IP of the catalogue broker. -ch is the IP of the catalogue database):
 ```
-docker run -it -d --name catalogue-db rethink/catalogue-database-reTHINKdefault -h 172.17.0.x -d catalogue.csp.rethink.com  
+docker run -it -d --name catalogue-db rethink/catalogue-database-reTHINKdefault -h xxx.xxx.xxx.xxx -ch xxx.xxx.xxx.xxx  
 ```
 
 ___WARNING___  
