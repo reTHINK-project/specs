@@ -80,7 +80,7 @@ Message sent by the Hyperty Runtime Registry function to Registry Domain server.
 "type" : "update",
 "from" : "hyperty-runtime://<sp-domain>/<runtime-instance-identifier>/registry",
 "to" : "domain://registry.<sp-domain>",
-"body" : { "resource": "<RegistryDataObjectURL>", "value" : "live", "attribute" : "status" }
+"body" : { "resource": "<RegistryDataObjectURL>", "value" : { "status": "live", "user": <userURL> } }
 ```
 
 Reponse Message sent by the Registry Domain server to Hyperty Runtime Registry function.
