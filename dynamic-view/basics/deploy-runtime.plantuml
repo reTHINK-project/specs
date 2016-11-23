@@ -6,6 +6,8 @@ autonumber
 
 !define SHOW_AppAtRuntimeA
 
+participant "Catalogue App" as RunCatApp
+
 !define SHOW_CoreRuntimeA
 !define SHOW_MsgBUSAtRuntimeA
 !define SHOW_RegistryAtRuntimeA
@@ -24,24 +26,30 @@ autonumber
 
 == Deploy Core Runtime ==
 
+create RunCatApp
+App@A -> RunCatApp : new
+
+App@A -> RunCatApp : getRuntime(RuntimeCatalogueURL)
+
+group option : if most updated version of Runtime source package is not stored locally
+
+  RunCatApp -> CoreRunSP : get RuntimeCatalogueURL
+
+  RunCatApp <-- CoreRunSP : return Runtime descriptor
+
+end group
+
+App@A <-- RunCatApp : return Runtime
 
 create RunUA@A
 App@A -> RunUA@A : new
 
+App@A -> RunUA@A : init
+
+RunUA@A -> RunUA@A : reuse cached\n RuntimeURL
+
 create RunCat@A
-RunUA@A -> RunCat@A : new
-
-RunUA@A -> RunCat@A : getRuntime(RuntimeCatalogueURL)
-
-group option : if most updated version of Runtime source package is not stored locally
-
-  RunCat@A -> CoreRunSP : get RuntimeCatalogueURL
-
-  RunCat@A <-- CoreRunSP : return Runtime descriptor
-
-end group
-
-RunUA@A <-- RunCat@A : return Runtime
+App@A -> RunCat@A : new
 
 create RunReg@A
 RunUA@A -> RunReg@A : new
@@ -57,10 +65,6 @@ RunUA@A -> RunSM@A : new
 
 create BUS@A
 RunUA@A -> BUS@A : new
-
-RunUA@A -> RunReg@A : init( remoteRegistryURL )
-
-RunReg@A -> RunReg@A : reuse cached\n RuntimeURL
 
 RunUA@A -> RunSM@A : init( )
 
@@ -88,7 +92,6 @@ RunUA@A -> BUS@A : postMsg( subscribe P2PHandlerStubURL request message)
   end note
 
   BUS@A -> Proto1@A : send subscribe \nP2PHandlerStubURL \nrequest message
-
 
   group : it performs the Service Provider 1 domain protostub load, see protostub-load.md)
 
