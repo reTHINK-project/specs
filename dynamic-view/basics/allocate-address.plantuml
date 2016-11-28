@@ -19,37 +19,54 @@ autonumber
 
  -> RunAllocate@A : allocate(\nscheme,\ndescriptor,\n?owner,\n? reuseURL )
 
+alt "scheme" is not "Hyperty" and reuseURL does not exist: allocate new address
 
-RunAllocate@A -> RunReg@A : getAddress(\nscheme,\ndescriptor,\n?owner,\n? reuseURL )
+  group allocate new address
+    RunAllocate@A -> BUS@A : postMessage(\nRead Msg\nto get hyperty \nAddress Allocation)
 
-	alt no registration cached locally: allocate address for new Instance
+    BUS@A -> Proto1@A : postMessage(\nRead Msg\nto get hyperty \nAddress Allocation)
 
-		RunAllocate@A <- RunReg@A : not found
+    Proto1@A -> SP1 : read hyperty\nAddress Allocation\nSP1 MSG Protocol
 
-		RunAllocate@A -> BUS@A : postMessage(\nRead Msg\nto get hyperty \nAddress Allocation)
+    group option: connect Protocol Stub to the domain in case it is still not connected yet
 
-		BUS@A -> Proto1@A : postMessage(\nRead Msg\nto get hyperty \nAddress Allocation)
+    ...
 
-		Proto1@A -> SP1 : read hyperty\nAddress Allocation\nSP1 MSG Protocol
+    end group
 
-		group option: connect Protocol Stub to the domain in case it is still not connected yet
+    Proto1@A <- SP1 : read response \nmessage with\n hyperty Address\n SP1 MSG Protocol
 
-		...
+    Proto1@A -> BUS@A : postMessage(\nread response \nmessage with\n hyperty Address\n MSG)
 
-		end group
+    RunAllocate@A <- BUS@A : postMessage(\nread response \nmessage with\n hyperty Address\n MSG)
+  end
 
-		Proto1@A <- SP1 : read response \nmessage with\n hyperty Address\n SP1 MSG Protocol
+else
 
-		Proto1@A -> BUS@A : postMessage(\nread response \nmessage with\n hyperty Address\n MSG)
+  RunAllocate@A -> RunReg@A : getAddress(\nscheme,\ndescriptor,\nowner,\n reuseURL )
 
-		RunAllocate@A <- BUS@A : postMessage(\nread response \nmessage with\n hyperty Address\n MSG)
+  alt address to be reused not found in the Runtime Registry
 
-	else a previously allocated Address can be reused
+  RunAllocate@A <- RunReg@A : not found
 
-		RunAllocate@A <- RunReg@A : reuseURL
+    alt reuseURL does not exist: allocate new Hyperty address
 
-	end
+      group allocate new address
 
- <- RunAllocate@A : URL
+      end
+    <- RunAllocate@A : new URL allocated
+
+    else reuseURL exists: error
+
+
+    <- RunAllocate@A : not found
+    end
+  else address to be reused was found in the Runtime Registry
+
+    RunAllocate@A <- RunReg@A : URL to be reused
+
+    <- RunAllocate@A : URL to be reused
+  end
+end
 
 @enduml
