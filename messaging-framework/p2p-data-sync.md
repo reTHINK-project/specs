@@ -1,15 +1,15 @@
 ### P2P Data Synchronisation: Reporter - Observer Model
 
 
-This document gives an overview on how Hyperties cooperate each other through a Data Synchronisation model called Reporter - Observer.
+This document gives an overview on how Hyperties cooperate with each other through a Data Synchronisation model called Reporter - Observer.
 
 The usage of Observer models in Web Frameworks (eg [ReactiveX](http://reactivex.io/documentation/observable.html)) is becoming very popular. However, current solutions require server-side databases that are not compliant with edge computing Hyperty principles.
 
-Hyperty Reporter - Observer communication pattern goes beyond current solutions by using a P2P data stream synchronisation solution for JSON Data Objects, here called Hyperty Data Object or Sync Data Object. To avoid concurrency inconsistencies among peers, only one peer has granted writing permissions in the Hyperty Data Object - the **Reporter hyperty** - and all the other Hyperty instances only have permissions to read the Hyperty Data Object - the **Observer hyperty**.
+Hyperty Reporter - Observer communication pattern goes beyond current solutions by using a P2P data stream synchronisation solution for JSON Data Objects, here called Hyperty Data Objects or Sync Data Objects. To avoid concurrency inconsistencies among peers, only one peer has been granted writing permissions in the Hyperty Data Object - the **Reporter hyperty** - and all the other Hyperty instances only have permissions to read the Hyperty Data Object - the **Observer hyperty**.
 
 ![Reporter-Observer Communication Pattern](reporter-observer.png)
 
-The API to handle Hyperty Data Objects is extremely simple and fun to use. The Developer of the Hyperty Reporter just has to create the Data Sync object with the Syncher API,
+The API to handle Hyperty Data Objects is extremely simple to use. The Developer of the Hyperty Reporter just has to create the Data Sync object with the Syncher API,
 
 ```
     syncher.create(_this._objectDescriptorURL, [invitedHypertyURL], hello).then(function(dataObjectReporter) {
@@ -43,11 +43,11 @@ syncher.subscribe(_this._objectDescriptorURL, ObjectUrl).then(function(dataObjec
 
 #### Hyperty Data Object URL address
 
-The Hyperty Messaging Framework allocates to each new created Hyperty Data Object a Global Unique Identifier URL that is independent from the Hyperty instance creator and from the Hyperty Runtime, in order to support mobility of the Data Object between different Hyperty Runtimes and also to support delegation of the Reporter role to other Hyperty instances. However, at this point Reporter delegation is only supported between Hyperty instances from the same domain.
+The Hyperty Messaging Framework allocates to each newly created Hyperty Data Object a Global Unique Identifier URL that is independent from the Hyperty instance creator and from the Hyperty Runtime, in order to support mobility of the Data Object between different Hyperty Runtimes and also to support delegation of the Reporter role to other Hyperty instances. However, at this point Reporter delegation is only supported between Hyperty instances from the same domain.
 
 #### Hyperty Data Object Schema
 
-Each Hyperty Data Object is formally described by a JSON-Schema that is identified by a Catalogue URL. This allows to check whether two different Hyperties are compliant by cross checking each supported Hyperty Data Object schema. At this point the following Hyperty Data Object schemas are defined:
+Each Hyperty Data Object is formally described by a JSON-Schema that is identified by a Catalogue URL. This allows to check whether two different Hyperties are compliant by checking each supported Hyperty Data Object schema. At this point the following Hyperty Data Object schemas are defined:
 
 -	**[Connection Data Schema](../datamodel/connection)** : Hyperties supporting this schema are able to handle [WebRTC Peer Connections](https://developer.mozilla.org/en-US/docs/Web/Guide/API/WebRTC/Peer-to-peer_communications_with_WebRTC) between the Hyperty Runtime instances where they are running independently of the signalling protocol used. The URL Scheme for Connection Data Objects is "connection" (example: "connection://example.com/alice/bob201601290617").
 -	**[Communication Data Schema](../datamodel/communication)** : Hyperties supporting this schema are able to handle different communication types including Textual Chat, Audio, Video, Screen Sharing and File sharing. Such communication can be supported on top of WebRTC protocol streams by using the Connection Data Schema. The URL Scheme for Communication Data Objects is "comm" (example: "comm://example.com/group-chat/rethink201601290617").
@@ -55,7 +55,7 @@ Each Hyperty Data Object is formally described by a JSON-Schema that is identifi
 
 #### Parent - Children Resources
 
-In order to allow use cases like Group Chat where all involved Hyperties are able to write in the Sync Data Object, the Parent - Child Data Sync Objects is introduced.
+In order to allow use cases like Group Chat where all involved Hyperties are able to write in the Sync Data Object, the Parent - Child Data Sync Objects are introduced.
 
 A Data Object Child belongs to a Data Object Parent children resource and can be created by any Observer of the Data Object Parent as well as by its Reporter. The Reporter - Observer rules still apply to Data Object Child i.e. there is only one Reporter that can update the Data Object Child, which can be an Observer of the Data Object Parent, as mentioned earlier.
 
