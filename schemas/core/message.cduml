@@ -16,7 +16,7 @@ package Message <<Rect>> {
 		childrenResources ?: URL.URL[]
 		schema ?: URL.HypertyCatalogueURL
 		idToken ?: Identity.JWT
-		accessToken ?: Identity.JWT
+		accessToken ?: string
 		identity ?: Identity.Identity
 		assertedIdentity ?: boolean
 		via ?: URL.URL[]
