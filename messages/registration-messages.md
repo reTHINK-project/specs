@@ -144,12 +144,12 @@ Response Message sent back by the Registry Domain server to Hyperty Runtime Regi
 
 #### Registry Data Object search per User
 
-Message sent by an Hyperty Instance to Registry Domain server to query about all active Hyperty instances associated to a certain user.
+Message sent to Registry Domain server to query about all active Hyperty instances or Data Object instances associated to a certain user.
 
 ```
 "id" : 2,
 "type" : "read",
-"from" : "hyperty://<sp-domain>/<hyperty-instance-identifier>",
+"from" : "hyperty-runtime://<sp-domain>/<runtime-instance-identifier>/registry",
 "to" : "domain://registry.<sp1>"
 "body" : { "resource" : "/<registry-object-url-scheme>/user/<userURL>" }
 ```
@@ -162,9 +162,34 @@ Message sent by Registry Domain server to an Hyperty Instance.
 "id" : 2
 "type" : "response",
 "from" : "domain://registry.<sp-domain>",
-"to" : "hyperty://<sp-domain>/<hyperty-instance-identifier>",
+"to" : "hyperty-runtime://<sp-domain>/<runtime-instance-identifier>/registry",
 "body" : { "code": 200, "value" : ["<discoveredRegistryDataObjects>"] }
 ```
+
+#### Registry Data Object search per GUID
+
+Message sent the Registry Domain server to query about all active Hyperty instances associated to a certain GUID.
+
+```
+"id" : 2,
+"type" : "read",
+"from" : "hyperty-runtime://<sp-domain>/<runtime-instance-identifier>/registry",
+"to" : "domain://registry.<sp1>"
+"body" : { "resource" : "<GuidURL>" }
+```
+
+**Response Message returning the discovered Instances**
+
+Message replied by Registry Domain server.
+
+```
+"id" : 2
+"type" : "response",
+"from" : "domain://registry.<sp-domain>",
+"to" : "hyperty-runtime://<sp-domain>/<runtime-instance-identifier>/registry",
+"body" : { "code": 200, "value" : ["<discoveredRegistryDataObjects>"] }
+```
+
 
 #### Hyperty Instance Query per User and/or per resources and/or per Object Scheme
 
@@ -190,21 +215,21 @@ Message sent by Registry Domain server (Connector or Protostub) to an Hyperty In
 "body" : { "code": 200, "value" : ["<discoveredHypertyInstance>"] }
 ```
 
-#### Hyperty Instance Query per Hyperty URL
+#### Query per Registry Data Object URL
 
 **Phase 2 new!**
 
-Message sent to get a certain Hyperty registry entry
+Message sent to get a certain Domain registry entry, Hyperty instance or Data Object instance.
 
 ```
 "id" : 3,
 "type" : "read",
 "from" : "hyperty-runtime://<sp-domain>/<runtime-instance-identifier>/registry",
 "to" : "domain://registry.<sp1>"
-"body" : { "resource": "/hyperty/<hypertyURL>"}
+"body" : { "resource": "<RegistryDataObjectURL>"}
 ```
 
-**Response Message returning the Hyperty Instances registry entry**
+**Response Message returning the Registry Data Object**
 
 Message replied by Registry Domain server (Connector or Protostub).
 
@@ -213,7 +238,7 @@ Message replied by Registry Domain server (Connector or Protostub).
 "type" : "response",
 "from" : "domain://registry.<sp-domain>",
 "to" :  "hyperty-runtime://<sp-domain>/<runtime-instance-identifier>/registry",
-"body" : { "code": 200, "value" : ["<discoveredHypertyInstance>"] }
+"body" : { "code": 200, "value" : ["<RegistryDataObject>"] }
 ```
 
 #### Registry Not Found Responses
