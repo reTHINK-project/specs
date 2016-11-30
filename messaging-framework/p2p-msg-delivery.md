@@ -1,6 +1,6 @@
 ## P2P Message Delivery
 
-Communication between different Hyperty Runtimes can be supported with peer to peer connections or via a Message Node. In both options a Protostub implementing the most appropriate network protocol stack is used. For example,  JSON over Websockets and  Restfull API Client are good options for Protostubs used to interface with a Message Node, while WebRTC Datachannel is a good option for a Protostub used to directly interface with another Hyperty Runtime. The usage of P2P Protostubs are favored since less resources are spent and Network latency should be better.
+Communication between different Hyperty Runtimes can be supported with peer to peer connections or via a Message Node. In both options a Protostub implementing the most appropriate network protocol stack is used. For example,  JSON over Websockets and  Restfull API Client are good options for Protostubs used to interface with a Message Node, while WebRTC Datachannel is a good option for a Protostub used to directly interface with another Hyperty Runtime. The usage of P2P Protostubs are favored since fewer resources are spent and Network latency should be better.
 
 Protostubs are registered in the Runtime Registry with its own Hyperty Runtime URL e.g. `hyperty-runtime://example.com/runtime-123/protostub-3` and have listeners in the MessageBUS to receive messages targeting its URL.
 
@@ -8,7 +8,7 @@ When the MessageBUS is processing a new message and looking up routing paths for
 
 There are two types of P2P Protostubs:
 
-- P2P Handler Stub: it is deployed as soon as the Runtime is instantiated in order to be ready to receive requests for P2P Connections setup. This Stub playes the [observer](p2p-data-sync.md) role of [Connection Data objects](../datamodel/data-objects/connection) that are created by remote P2P Requesters Stub. The P2P Handler Stub can observe more than one connection data objects ie it can handle several p2p connections to remote runtimes. Each p2p connection would be managed by a connection controller (see Connector hyperty design). As soon as the Runtime is instantiated, the P2P Handler Stub is deployed and the path to receive P2P Data Connection creation requests from P2P Requester Stubs is set.
+- P2P Handler Stub: it is deployed as soon as the Runtime is instantiated in order to be ready to receive requests for P2P Connections setup. This Stub plays the [observer](p2p-data-sync.md) role of [Connection Data objects](../datamodel/data-objects/connection) that are created by remote P2P Requesters Stub. The P2P Handler Stub can observe more than one connection data objects ie it can handle several p2p connections to remote runtimes. Each p2p connection would be managed by a connection controller (see Connector hyperty design). As soon as the Runtime is instantiated, the P2P Handler Stub is deployed and the path to receive P2P Data Connection creation requests from P2P Requester Stubs is set.
 - P2P Requester Stub : it is deployed to setup a p2p connection with a remote runtime  P2P Handler Stub. It plays the [reporter]([observer](p2p-data-sync.md)) role for a single [Connection Data object](../datamodel/data-objects/connection) object instance.
 
 These P2P Protostubs are provisioned in the catalogue.
