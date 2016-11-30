@@ -8,6 +8,7 @@ This doc specifies Messages to be used to manage registrations in the Domain Reg
 - `<registry-object-type>` is a string that identifies the type of registry object namely "hyperty" or "dataObject".
 -	`<registry-object-url-scheme>` is the URL Scheme used in the RegistryDataObject.url. In this RegistryOject URL example `connection://example.com/1234-qwert` , "connection" is the `<registry-object-url-scheme>`
 -	`<userURL>` is the user address compliant with [UserURL data model](https://github.com/reTHINK-project/dev-service-framework/blob/master/docs/datamodel/core/address/readme.md#user-url-type). Example: `user://example.com/bob`
+-	`<guidURL>` is the user guid address compliant with [User GUID URL data model](https://github.com/reTHINK-project/dev-service-framework/blob/master/docs/datamodel/core/address/readme.md#user-url-type). Example: `user-guid://1234456678dsgdjahsdg`
 -	`<DiscoveredHypertyInstance>` is a JSON object compliant with [HypertyInstance data model](https://github.com/reTHINK-project/dev-service-framework/tree/develop/docs/datamodel/core/hyperty-registry#hyperty-instance).
 -	`<discoveredRegistryDataObjects>` is a JSON object compliant with [HypertyDataObjectInstance data model](https://github.com/reTHINK-project/dev-service-framework/tree/develop/docs/datamodel/core/hyperty-registry#hyperty-instance).
 
