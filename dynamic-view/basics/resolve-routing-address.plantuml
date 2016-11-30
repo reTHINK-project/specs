@@ -58,13 +58,13 @@ else :unregistered P2P Protocol Stub
 
 		RunReg@A <-RunReg@A : extract \nHyperty Runtime URL\ncheck existing p2p connections
 
-		alt p2pRequester exists with same Handler URL
+		alt p2pRequester exists with same Hyperty Runtime URL
 
-			RunReg@A <-RunReg@A : add message.to \nto existing p2pRequester
+			RunReg@A <-RunReg@A : add message.to \nto existing \np2p connection
 
-			RunReg@A -> BUS@A : return existing \nP2PRequesterStub URL
+			RunReg@A -> BUS@A : return existing \nP2PStub URL
 
-		else there is no p2p connection with same Handler URL
+		else there is no p2p connection with same Hyperty Runtime URL
 
 			RunReg@A -> RunReg@A : check p2p is to be used
 
@@ -88,6 +88,8 @@ else :unregistered P2P Protocol Stub
 
 				group P2P Connection setup
 				end
+
+				RunReg@A -> RunReg@A : set status "connected"
 
 				alt :P2P Connection was successfuly established
 
