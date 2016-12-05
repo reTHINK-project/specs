@@ -83,9 +83,16 @@ end
 group option : Phase 2 New!! if runtime is P2P enabled
 
   group : P2P Handler Stub is loaded (see protostub-load.md)
+
+    RunUA@A -> RunUA@A : p2pConfig.isHandlerStub = true
+
+    RunUA@A -> RunUA@A : loadStub( domain , p2pConfig )
+
+    ...
+
   end group
 
-RunUA@A -> BUS@A : postMsg( subscribe P2PHandlerStubURL request message)
+  RunUA@A -> BUS@A : postMsg( subscribe P2PHandlerStubURL request message)
 
   note right
     the message delivery path has to be set in the Message Node

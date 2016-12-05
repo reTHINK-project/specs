@@ -22,7 +22,17 @@ autonumber
 
 -> RunUA@A : loadStub( sp-domain,\n p2pConfig )
 
-RunUA@A -> RunReg@A : discoverStub( sp-domain )
+RunUA@A -> RunUA@A : check p2pConfig
+
+alt is not a p2pStub
+	RunUA@A -> RunReg@A : discoverStub( sp-domain )
+else p2pConfig.isHandlerStub = false
+
+	RunUA@A -> RunUA@A : extract runtimeURL \nfrom p2pConfig.p2pHandler
+	RunUA@A -> RunReg@A : discoverP2PStub( runtimeURL )
+else p2pConfig.isHandlerStub = true
+	RunUA@A -> RunReg@A : discoverP2PStub( )
+end
 
 alt Stub Not Available in Registry
 
@@ -47,10 +57,40 @@ RunUA@A <-- RunReg@A : returns null
 
 	RunUA@A <-- SP1 : return protostub.js
 
+  == get Sandbox for the Stub ==
+
+	RunUA@A -> RunReg@A : getSandboxURL( domain )
+
+
+	alt not sandbox registered for this domain
+
+		RunUA@A <-- RunReg@A : return NOt Found
+
+		create Sand1@A
+		RunUA@A -> Sand1@A : new( capabilities )
+
+		RunUA@A <-- Sand1@A : return sandboxInstance
+
+	else
+		RunUA@A <-- RunReg@A : return sandbox
+
+	end
+
+
 	== get protocol stub URL ==
 
 	group Protocol Stub instance is registered
-		RunUA@A -> RunReg@A : registerStub(sp-domain)
+		RunUA@A -> RunReg@A : registerStub(stubId, sandbox, p2pConfig)
+
+		alt stubId = runtime URL and p2pConfig.isHandlerStub = false ie it is P2P Requester Stub
+			RunReg@A -> RunReg@A : register P2P Stub(stubId)
+		else stubId = runtime URL and p2pConfig.isHandlerStub = true ie it is P2P Handler Stub
+			RunReg@A -> RunReg@A : register P2P Handler Stub
+		else Stub is for a Message Node
+			RunReg@A -> RunReg@A : register MN Stub(stubId)
+		end
+
+		RunReg@A -> RunReg@A : generateStubURL()
 
 		note right
 			protostub can be generated locally
@@ -59,27 +99,13 @@ RunUA@A <-- RunReg@A : returns null
 			since it only has to be reached by Runtime components
 		end note
 
-		RunReg@A -> RunReg@A : generateStubURL(sp-domain)
-
-		opt Protocol Stub instance is registered in the remote Domain Registry
-		...
-		end
-
 		RunReg@A -> BUS@A : addListener(\n registryListener,\n RuntimeProtoStubURL\status)
 
 		RunUA@A <-- RunReg@A : return RuntimeProtoStubURL
 	end
 
-== Instantiate Sandbox with Protocol Stub ==
+== deploy Protocol Stub in the sandbox ==
 
-	create Sand1@A
-	RunUA@A -> Sand1@A : new( msgBus, capabilities )
-
-	RunUA@A <-- Sand1@A : return sandboxInstance
-
-	RunUA@A -> RunReg@A : registerSandbox\n( sandboxInstance, domainURL )
-
-	RunUA@A <-- RunReg@A : return RuntimeSandboxURL
 
 	RunUA@A -> Sand1@A : deployComponent( protostub.js, RuntimeProtoStubURL,configuration )
 
