@@ -169,7 +169,7 @@ Message sent by Registry Domain server to an Hyperty Instance.
 
 #### Registry Data Object search per GUID
 
-Message sent the Registry Domain server to query about all active Hyperty instances associated to a certain GUID.
+Message sent the Registry Domain server to query about all active Registered instances associated to a certain GUID.
 
 ```
 "id" : 2,

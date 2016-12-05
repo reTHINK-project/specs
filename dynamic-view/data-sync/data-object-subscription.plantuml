@@ -27,88 +27,116 @@ autonumber
 !include ../runtime_objects.plantuml
 
 
-== Hyperty requests to be Observer of new Data Object ==
-
-== Start adding listeners on Observer side ==
+== listeners are added on Observer side ==
 
 Sync1@1B -> Sync1@1B : Minibus.Addlisteners(\nDataObjURL\changes,\nSyncherListener)
 
-Sync1@1B -> RunSM@1B : Subscribe Msg
+Sync1@1B -> Sync1@1B : is there an observer object\n stored locally?
 
-RunSM@1B -> RunSM@1B : subscription exists?
+alt yes, this object is already stored locally, lets get the most updated version.
 
-note right
-	this the resume of a data sync stream
-end note
+	Sync1@1B -> Sync1@A : Read Msg
 
-alt new subscription
-
-	RunSM@1B -> RunSM@1B : bus.addListener(\nDataObjURL\changes URL, \nObserverSandboxListener)
-
-	RunSM@1B -> RunSM@1B : registry.getP2PStubSandbox(\nDataObjURL)
-
-	alt : No p2p Stub available
-		== Set Routing Path at Observer Msg Node ==
-
-		RunSM@1B -> SM@SP2 : Subscribe Msg
-
-		SM@SP2 -> SM@SP2 : add Listeners
-
-		RunSM@1B <- SM@SP2 : OK Subscribe Response Msg
-
-		== Set Routing Path at Reporter Msg Node ==
-
-		RunSM@1B -> SM@SP1 : Subscribe Msg
-
-		SM@SP1 -> SM@SP1 : add Listeners
-
-		RunSM@1B <- SM@SP1 : OK Subscribe Response Msg
-
-	end
-
-	== Requests Reporter Sync Manager to Subscribe ==
-
-	RunSM@1B -> RunSM@A : Subscribe Msg
-
-	RunSM@A <- RunSM@A :	check subscriber\n has been already authorised
-
-	opt Authorisation policies requires to check data object is registered
-
-		RunSM@A -> RunSM@A : registry.\ndiscoverDataObject(\n DataObj URL )
-
-	end
-
-	RunSM@A -> RunSM@A : bus.addListener(\nDataObjURL\changes URL\n, listener)
+	Sync1@1B <- Sync1@A : Read Response Msg with most updated Data Object
 
 	note right
-		Listeners of new observers are added into message bus,
-		 to receive updates about changes in the data object
+		FFS: At this point The subscribe message is not sent to sync manager
+		since it is assumed it has already added the required listeners
+		when it was instantiated by the RuntimeUA
+		But we should further study whether it is better to resume subscriptions
+		at sync manager only when demanded by syncher.
+		In this way it is ensured listeners are already added at the minibus
+		when updates reach the syncher sandbox.
+		However, since the runtime is connected to MN as soon as the Hyperty is
+		registered, it is not ensured updates won't reach the msg bus before
+		the minibus listeners are added.
+		note: for inter-domain resume of subscriptions, the deployment of the
+		foreigner MN stub was already performed by the READ message sent in step 3
 	end note
 
-	opt
-		RunSM@A -> RunSM@A : bus.postMessage(\n Update Message\nfor DataObjectObservers )
+else no, this object is not stored locally. We have to subscribe it.
+
+	Sync1@1B -> RunSM@1B : Subscribe Msg
+
+	RunSM@1B -> RunSM@1B : subscription exists\n ie is this the resume \nof a data sync stream?
+
+	alt it is the resume of a data sync stream: a new subscription is needed
+
+		Sync1@1B -> Sync1@A : Read Msg
+
+		Sync1@1B <- Sync1@A : Read Response Msg with most updated Data Object
+
+
+	else it is not the resume of a data sync stream: a new subscription is needed
+
+		RunSM@1B -> RunSM@1B : bus.addListener(\nDataObjURL\changes URL, \nObserverSandboxListener)
+
+		RunSM@1B -> RunSM@1B : registry.getP2PStubSandbox(\nDataObjURL)
+
+		alt : No p2p Stub available
+			== Set Routing Path at Observer Msg Node ==
+
+			RunSM@1B -> SM@SP2 : Subscribe Msg
+
+			SM@SP2 -> SM@SP2 : add Listeners
+
+			RunSM@1B <- SM@SP2 : OK Subscribe Response Msg
+
+			== Set Routing Path at Reporter Msg Node ==
+
+			RunSM@1B -> SM@SP1 : Subscribe Msg
+
+			SM@SP1 -> SM@SP1 : add Listeners
+
+			RunSM@1B <- SM@SP1 : OK Subscribe Response Msg
+
+		end
+
+		== Requests Reporter Sync Manager to Subscribe ==
+
+		RunSM@1B -> RunSM@A : Subscribe Msg
+
+		RunSM@A <- RunSM@A :	check subscriber\n has been already authorised
+
+		opt Authorisation policies requires to check data object is registered
+
+			RunSM@A -> RunSM@A : registry.\ndiscoverDataObject(\n DataObj URL )
+
+		end
+
+		RunSM@A -> RunSM@A : bus.addListener(\nDataObjURL\changes URL\n, listener)
 
 		note right
-			the DataObjectObservers resource is updated
-			with information about the new Hyperty observer
-			thus, if Hyperty owner is listening on this resource
-			it will be informed about the new Observer.
+			Listeners of new observers are added into message bus,
+			 to receive updates about changes in the data object
 		end note
 
+		opt
+			RunSM@A -> RunSM@A : bus.postMessage(\n Update Message\nfor DataObjectObservers )
+
+			note right
+				the DataObjectObservers resource is updated
+				with information about the new Hyperty observer
+				thus, if Hyperty owner is listening on this resource
+				it will be informed about the new Observer.
+			end note
+
+		end
+
+		RunSM@A -> RunSM@A : registry\n.p2pConnetion(message)
+
+		note right
+			registry checks if message was sent via a P2P Stub and if yes it adds its originator into the corresponding P2P Connection entry
+		end note
+
+		RunSM@A -> RunSM@1B : OK Subscribe\nResponse Message
 	end
 
-	RunSM@A -> RunSM@A : registry\n.p2pConnetion(message)
+	== Observer Side Sync Manager confirms Subscription ==
 
-	note right
-		registry checks if message was sent via a P2P Stub and if yes it adds its originator into the corresponding P2P Connection entry
-	end note
+	Sync1@1B <- RunSM@1B : Subscribe Response Msg \n w/ Data Objs
 
-	RunSM@A -> RunSM@1B : OK Subscribe\nResponse Message
 end
-
-== Observer Side Sync Manager confirms Subscription ==
-
-Sync1@1B <- RunSM@1B : Subscribe Response Msg \n w/ Data Objs
 
 newpage
 
