@@ -1,4 +1,4 @@
-**Outdated!! See most updated version [here](../core/data-synch)**
+**Outdated!! See most updated version [here](../../core/data-synch)**
 
 
 ### Sync Data Object Model
