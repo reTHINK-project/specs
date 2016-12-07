@@ -13,7 +13,7 @@ Steps 3: Registry verifies the originator is valid i.e. its Runtime URL has been
 
 **Phase 2 New!** Steps 7 : in case no p2pConnection is registered for the requested "message.to" it looks for an existing p2p connection registered for the same remote Hyperty Runtime URL since each P2P Connection entry should contain the remote runtime URL, executing Hyperty URLs and reporting data object URLs. The first task is to check if the registry entry for "message.to" is locally stored in the runtime registry.
 
-  **Phase 2 New!** Steps 8 - 13: If not found, it queries the Domain Registry for it, using a [Read Request Message](../../messages/registration-messages.md#hyperty-instance-query-per-hyperty-url).
+  **Phase 2 New!** Steps 8 - 13: If not found, it queries the Domain Registry for it, using a [Read Request Message](../../messages/registration-messages.md#query-per-registry-data-object-url).
 
   **Phase 2 New!** Steps 14 - 16: the Hyperty Runtime URL is extracted from the registry entry and it looks for an existing registered p2p Connection with the same Hyperty Runtime URL. If found, the "message.to" is associated to the existing p2p connection stub and its URL is returned.
 
