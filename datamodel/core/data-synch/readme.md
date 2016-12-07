@@ -1,6 +1,6 @@
 ### Sync Data Object Model
 
-The SyncDataObject Model is used to specify the JSON format used in the [Reporter-Observer data synchronisation communication mechanism](../../manuals/p2p-data-sync.md) used to support Hyperty Interoperability at run time.
+The SyncDataObject Model is used to specify the JSON format used in the [Reporter-Observer data synchronisation communication mechanism](../../../messaging-framework/p2p-data-sync.md) used to support Hyperty Interoperability at run time.
 
 #### SyncObject
 
