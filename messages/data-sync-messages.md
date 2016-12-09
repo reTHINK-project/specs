@@ -27,11 +27,12 @@ Message sent by the Reporter Syncher Hyperty to Reporter Runtime Sync Manager.
 "type" : "create",
 "from" : "hyperty://<sp-domain>/<hyperty-instance-identifier>",
 "to"   : "hyperty-runtime://<sp-domain>/<hyperty-runtime-instance-identifier>/sm",
-"body" : { "resource" : "<ObjectURL>", "authorise" : [{"HypertyURL"}], "value" : "<json object> , "schema" : "hyperty-catalogue://<sp-domain>/dataObjectSchema/<schema-identifier>", "p2p" : true|false }
+"body" : { "resource" : "<ObjectURL>", "authorise" : [{"HypertyURL"}], "value" : "<json object> , "schema" : "hyperty-catalogue://<sp-domain>/dataObjectSchema/<schema-identifier>", "p2p" : true|false, "store" : true|false }
 ```
 
 **note:** `"resource"` is present in the body in case the ObjectURL is already known by the reporter eg to resume a data sync stream or for a Reporter delegation procedure.
 **note2:** `"p2p"` is optional and indicates if the sync data stream should use p2p protostubs.
+**note3:** `"store"` is optional and indicates if the sync data object should be stored localy by the sync manager.
 
 ###### Response
 
@@ -117,9 +118,9 @@ Message sent by Observer (candidate) Hyperty Instance to the Observer Runtime Sy
 "to" : "hyperty://<observer-sp-domain>/<hyperty-observer-instance-identifier>",
 "body" : { "code" : "2XX", "value" : "<data object>"  }
 ```
-#### Query the Sync Manager about subscribed Objects
+#### Query the Sync Manager about Observer and Reporter Objects to be resumed
 
-Read Message sent by Reader Hyperty to Data Object URL.
+Read Message sent by Observer Hyperty to local Sync Manager.
 
 ```
 "id" : 1,
@@ -128,26 +129,26 @@ Read Message sent by Reader Hyperty to Data Object URL.
 "to" : "hyperty-runtime://<observer-sp-domain>/<hyperty-observer-runtime-instance-identifier>/sm"
 ```
 
-##### Successful Read Response with Subscribed Data Objects
+##### Successful Read Response with Data Objects to be resumed as Observers and Reporters
 
 Successful Read Response Message from Synch Manager to Observer Hyperty with temporary local stored subscribed data objects.
 
 ```
 "id" : 1,
 "type" : "response",
-"from" : "<ObjectURL>",
-"to" : "hyperty://<sp-domain>/<hyperty-reader-identifier>",
-"body" : { "code" : "100" , "value" : [<data object>] }
+"from" : "hyperty-runtime://<observer-sp-domain>/<hyperty-observer-runtime-instance-identifier>/sm",
+"to" : "hyperty://<sp-domain>/<hyperty-observer-identifier>",
+"body" : { "code" : "100" , "value" : { "observers" : [<data object>] , "reporters" : [<data object>] } }
 ```
 
-Successful Read Response Message from Synch Manager to Observer Hyperty with final up to data subscribed data objects .
+Successful Read Response Message from Synch Manager to Hyperty with final updated data object.
 
 ```
 "id" : 1,
 "type" : "response",
-"from" : "<ObjectURL>",
-"to" : "hyperty://<sp-domain>/<hyperty-reader-identifier>",
-"body" : { "code" : "200" , "value" : [<data object>] }
+"from" : "hyperty-runtime://<observer-sp-domain>/<hyperty-observer-runtime-instance-identifier>/sm",
+"to" : "hyperty://<sp-domain>/<hyperty-observer-identifier>",
+"body" : { "code" : "200" , "value" : <data object> }
 ```
 
 ##### Not Found Read Response
@@ -157,8 +158,8 @@ Not Found Read Response Message from Synch Manager to Observer Hyperty.
 ```
 "id" : 1,
 "type" : "response",
-"from" : "<ObjectURL>",
-"to" : "hyperty://<sp-domain>/<hyperty-reader-identifier>",
+"from" : "hyperty-runtime://<observer-sp-domain>/<hyperty-observer-runtime-instance-identifier>/sm",
+"to" : "hyperty://<sp-domain>/<hyperty-observer-identifier>",
 "body" : { "code" : "404" , "description" : "not found" }
 ```
 

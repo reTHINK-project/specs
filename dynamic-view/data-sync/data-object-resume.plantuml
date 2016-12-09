@@ -1,0 +1,61 @@
+
+
+@startuml "data-object-resume.png"
+
+autonumber
+
+
+!define SHOW_RuntimeA
+
+!define SHOW_CoreRuntimeA
+!define SHOW_SMAtRuntimeA
+!define SHOW_SP1SandboxAtRuntimeA
+!define SHOW_Syncher1AtRuntimeA
+
+!define SHOW_Runtime1B
+
+!define SHOW_CoreRuntime1B
+!define SHOW_SMAtRuntime1B
+!define SHOW_SP1SandboxAtRuntime1B
+!define SHOW_Syncher1AtRuntime1B
+
+!include ../runtime_objects.plantuml
+
+== check if there are data stream sync objects to be resumed ==
+
+Sync1@1B -> RunSM@1B : Read Msg
+
+RunSM@1B -> RunSM@1B : are there stored\n subscribed data objects
+
+
+alt yes
+
+	Sync1@1B <-- RunSM@1B : temporary response \nwith local stored objects
+
+	== listeners are added on Hyperty side ==
+
+	loop for each observer object to be resumed
+		Sync1@1B -> Sync1@1B : Minibus.Addlisteners(\nDataObjURL\changes,\nSyncherListener)
+	end
+
+	loop for each reporter object to be resumed
+		Sync1@1B -> Sync1@1B : Minibus.Addlisteners(\nDataObjURL,\nSyncherListener)
+	end
+
+	Sync1@1B -> Sync1@1B : onResume()
+
+== lets get the most updated version ==
+
+	loop for each object to be resumed
+		RunSM@1B -> Sync1@A : Read Msg
+
+		RunSM@1B <-- Sync1@A : Read Response Msg \nwith most updated Data Object
+
+		Sync1@1B <-- RunSM@1B : final response with \nmost updated stored objects
+	end
+else no, data objects to be resumed
+	Sync1@1B <-- RunSM@1B : not found response
+
+end
+
+@enduml
