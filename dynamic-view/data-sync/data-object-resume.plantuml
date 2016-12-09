@@ -67,13 +67,12 @@ alt yes
 
 == lets get the most updated version ==
 
-	loop for each not updated object to be resumed
+	loop for each resumed Observer Object
 
-		Sync1@1B -> Sync1@A : Read Msg
-		Sync1@1B <-- Sync1@A : Read Response Msg \nwith most updated Data Object
+		ObserverObject -> Sync1@A : Read Msg
+		ObserverObject <-- Sync1@A : Read Response Msg \nwith most updated Data Object
 
-		Sync1@1B -> ObserverObject : onChanges()
-		Sync1@1B -> ReporterObject : onChanges()
+		ObserverObject -> ObserverObject : onChanges()
 	end
 else no, data objects to be resumed
 	Sync1@1B <-- RunSM@1B : not found response

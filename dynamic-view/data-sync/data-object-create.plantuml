@@ -27,14 +27,13 @@ Sync1@A -> RunSM@A : Create MSG
 RunSM@A <- RunSM@A : policyEngine.authorise()
 
 group Allocate Data Object Address (see ..\basics\allocate-address.md)
-  RunAllocate@A <- RunSM@A : allocate(\nscheme,\ndescriptor,\nowner,\nreuseURL)
+  RunAllocate@A <- RunSM@A : allocate(\nscheme,\ndescriptor,\nowner )
 
   ...
 
-  RunAllocate@A -> RunSM@A : return address \nwith info if\n new address\nor not
+  RunAllocate@A -> RunSM@A : return address
 end
 
-alt this is a new Object
 
   group Setup Routing Path for the new Data Object
     RunSM@A -> SP1 : Subscribe Data Object URLs Message
@@ -47,7 +46,6 @@ alt this is a new Object
   RunSM@A <- SP1 : subscription Response Message
   end
 
-end
 
 Sync1@A <- RunSM@A : Create Response MSG
 
@@ -74,18 +72,20 @@ opt Hyperty owner / reporter is updated when object observers are added or remov
 
 end
 
-RunSM@A <- RunSM@A : registry.registerDataObject(ObjectURL)
-
-alt for new data Objects
 
   group Register Data Object at Domain Registry
-    RunSM@A -> SP1 : registry: Create Data Object Registration at Domain Registry Message
+
+    RunSM@A <- RunSM@A : registry.registerDataObject(ObjectURL)
+
+    RunSM@A -> RunSM@A : registry: bus.addListener(\n<ObjectURL>/status, \nRegistryListener )
+
+    RunSM@A -> SP1 : Create Registration Data Object Message
 
     note right
       Data Object is registered in the Domain Registry
     end note
 
-    RunSM@A <- SP1 : Create Registration Response Message
+    RunSM@A <-- SP1 : Create Registration Response Message
   end
 
   ==  Hyperties are notified about new object creation ==
@@ -108,22 +108,6 @@ alt for new data Objects
 
   	...
   end
-else this is the resume of a data synchronisation Stream
 
-else
-
-group Register Data Object at Domain Registry
-
-  RunSM@A -> SP1 : registry: Update Data Object Registration\n at Domain Registry Message
-
-  note right
-    Data Object registration status is
-     updated in the Domain Registry to "live"
-  end note
-
-  RunSM@A <- SP1 : Update Registration Response Message
-end
-
-end
 
 @enduml
