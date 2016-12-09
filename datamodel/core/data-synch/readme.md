@@ -8,6 +8,8 @@ Is the abstract class for any data object to synchronised.
 
 **url** is the DataObject URL which scheme is defined in the json-schema descriptor of the DataObject
 
+**cseq** is an integer that is incremented every time the object is updated. To be used to order changes in the object when needed. Useful when sync streams are resumed by Observers.
+
 **Reporter** contains the Reporter Hyperty URL
 
 **schema** contains the CatalogueURL for the JSON Schema describing the Sync Object

@@ -45,7 +45,7 @@ Syncher is created one per Hyperty. The parameters are basically the same as the
 
 **create**
 
-`create(schema: SchemaURL, observers?: [HypertyURL], initialData: JSON): Promise<DataObjectReporter>`
+`create(schema: SchemaURL, observers?: [HypertyURL], initialData: JSON, store: boolean): Promise<DataObjectReporter>`
 
 This Method is used to create objects to be reported i.e. the Hyperty Instance plays the Reporter role. The following parameters are used:
 
@@ -54,6 +54,8 @@ This Method is used to create objects to be reported i.e. the Hyperty Instance p
 * observers: array of Hyperty instances that are invited to be an observer of the new Data Object
 
 * initialData: data that is used to initialise the new Data Object
+
+* store (optional): if true the object is stored in the runtime and by a data backup service.
 
 * return: Promise to a new Reporter. The reporter can be accepted or rejected by the PEP
 
@@ -66,6 +68,8 @@ This Method is used to subscribe objects to be observed i.e. the Hyperty Instanc
 * schema: Hyperty Catalogue URL address that can be used to retrieve the JSON-Schema describing the Data Object schema
 
 * url: the URL of the Data Object to be observed
+
+* store (optional): if true the object is stored in the runtime and by a data backup service (if allowed by the reporter).
 
 * return: Promise to a new observer if accepted. It's associated with the reporter.
 
@@ -94,6 +98,14 @@ Setup the callback to process invitations to be an Observer or to be notified so
 `onResume(callback: (event: ResumeEvent) => void): void`
 
 Setup the callback to process the Resume of Data Syncronisation for previously subscribed DataObjectObservers or previously created DataObjectReporters. Should be called when the syncher is instantiated by the Hyperty and DataObjects localy stored by the Syncher are found.
+
+* callback: callback function to receive the event.
+
+**onExecute**
+
+`onResume(callback: (event: ExecuteEvent) => void): void`
+
+Setup the callback to process the request from an observer to execute a write action in the object. Useful for Context (IoT) Data Objects featuring actuator features.
 
 * callback: callback function to receive the event.
 

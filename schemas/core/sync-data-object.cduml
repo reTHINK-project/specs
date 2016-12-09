@@ -4,6 +4,7 @@ package SyncDataObject {
 
 	class SyncDataObject {
 		url : URL.URL
+		cseq : integer
 		reporter : URL.HypertyURL
 		schema : URL.HypertyCatalogueURL
 		name : string
