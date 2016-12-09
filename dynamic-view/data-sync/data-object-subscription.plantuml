@@ -31,47 +31,6 @@ autonumber
 
 Sync1@1B -> Sync1@1B : Minibus.Addlisteners(\nDataObjURL\changes,\nSyncherListener)
 
-== check if this is the resume of a data stream sync ==
-
-Sync1@1B -> RunSM@1B : Read Msg
-
-RunSM@1B -> RunSM@1B : are there stored\n subscribed data objects
-
-
-alt yes, it is the resume of a data sync stream
-
-	alt
-		Sync1@1B <-- RunSM@1B : temporary response with local stored objects
-	end
-
-== lets get the most updated version ==
-
-	RunSM@1B -> Sync1@A : Read Msg
-
-	RunSM@1B <-- Sync1@A : Read Response Msg with most updated Data Object
-
-	Sync1@1B <-- RunSM@1B : final response with most updated stored objects
-
-
-	note right
-		FFS: At this point The subscribe message is not sent to sync manager
-		since it is assumed it has already added the required listeners
-		when it was instantiated by the RuntimeUA
-		But we should further study whether it is better to resume subscriptions
-		at sync manager only when demanded by syncher.
-		In this way it is ensured listeners are already added at the minibus
-		when updates reach the syncher sandbox.
-		However, since the runtime is connected to MN as soon as the Hyperty is
-		registered, it is not ensured updates won't reach the msg bus before
-		the minibus listeners are added.
-		note: for inter-domain resume of subscriptions, the deployment of the
-		foreigner MN stub was already performed by the READ message sent in step 3
-	end note
-
-else no, this object is not stored locally. We have to subscribe it.
-
-	Sync1@1B <-- RunSM@1B : response no subscriptions found
-
 	Sync1@1B -> RunSM@1B : Subscribe Msg
 
 	alt subscribed object is to be stored localy
@@ -146,7 +105,6 @@ else no, this object is not stored locally. We have to subscribe it.
 
 	Sync1@1B <- RunSM@1B : Subscribe Response Msg \n w/ Data Objs
 
-end
 
 newpage
 

@@ -4,6 +4,7 @@
 
 autonumber
 
+!define SHOW_SP2
 
 !define SHOW_RuntimeA
 
@@ -16,6 +17,7 @@ autonumber
 
 !define SHOW_CoreRuntime1B
 !define SHOW_SMAtRuntime1B
+!define SHOW_RegistryAtRuntime1B
 !define SHOW_SP1SandboxAtRuntime1B
 !define SHOW_Syncher1AtRuntime1B
 
@@ -30,22 +32,35 @@ RunSM@1B -> RunSM@1B : are there stored\n subscribed data objects
 
 alt yes
 
+
+
 	Sync1@1B <-- RunSM@1B : response with\n local stored objects
 
 	== listeners are added on Hyperty side ==
 
 	loop for each observer object to be resumed
-		Sync1@1B -> Sync1@1B : Minibus.Addlisteners(\nDataObjURL\changes,\nSyncherListener)
-
 		create ObserverObject
 		Sync1@1B -> ObserverObject : new()
+
+		Sync1@1B -> Sync1@1B : Minibus.Addlisteners(\nDataObjURL\changes,\nSyncherListener)
 	end
 
 	loop for each reporter object to be resumed
-		Sync1@1B -> Sync1@1B : Minibus.Addlisteners(\nDataObjURL,\nSyncherListener)
-
 		create ReporterObject
 		Sync1@1B -> ReporterObject : new()
+
+		Sync1@1B -> Sync1@1B : Minibus.Addlisteners(\nDataObjURL,\nSyncherListener)
+
+		Sync1@1B -> RunReg@1B : send Update Message to <objectUrl>/status
+
+			RunReg@1B -> SP2 : registry: Update Data Object Registration\n at Domain Registry Message
+
+			note right
+				Data Object registration status is
+				 updated in the Domain Registry to "live"
+			end note
+
+			RunReg@1B <-- SP2 : Update Registration Response Message
 	end
 
 	Sync1@1B -> Sync1@1B : onResume()
@@ -53,8 +68,8 @@ alt yes
 == lets get the most updated version ==
 
 	loop for each not updated object to be resumed
-		Sync1@1B -> Sync1@A : Read Msg
 
+		Sync1@1B -> Sync1@A : Read Msg
 		Sync1@1B <-- Sync1@A : Read Response Msg \nwith most updated Data Object
 
 		Sync1@1B -> ObserverObject : onChanges()

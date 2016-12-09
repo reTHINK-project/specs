@@ -118,41 +118,7 @@ Message sent by Observer (candidate) Hyperty Instance to the Observer Runtime Sy
 "to" : "hyperty://<observer-sp-domain>/<hyperty-observer-instance-identifier>",
 "body" : { "code" : "2XX", "value" : "<data object>"  }
 ```
-#### Query the Sync Manager about Observer and Reporter Objects to be resumed
 
-Read Message sent by Observer Hyperty to local Sync Manager.
-
-```
-"id" : 1,
-"type" : "read",
-"from" : "hyperty://<sp-domain>/<hyperty-observer-identifier>",
-"to" : "hyperty-runtime://<observer-sp-domain>/<hyperty-observer-runtime-instance-identifier>/sm"
-```
-
-##### Successful Read Response with Data Objects to be resumed as Observers and Reporters
-
-Successful Read Response Message from Synch Manager to Observer Hyperty with temporary local stored subscribed data objects.
-
-```
-"id" : 1,
-"type" : "response",
-"from" : "hyperty-runtime://<observer-sp-domain>/<hyperty-observer-runtime-instance-identifier>/sm",
-"to" : "hyperty://<sp-domain>/<hyperty-observer-identifier>",
-"body" : { "code" : "200" , "value" : { "observers" : [<data object>] , "reporters" : [<data object>] } }
-```
-
-
-##### Not Found Read Response
-
-Not Found Read Response Message from Synch Manager to Observer Hyperty.
-
-```
-"id" : 1,
-"type" : "response",
-"from" : "hyperty-runtime://<observer-sp-domain>/<hyperty-observer-runtime-instance-identifier>/sm",
-"to" : "hyperty://<sp-domain>/<hyperty-observer-identifier>",
-"body" : { "code" : "404" , "description" : "not found" }
-```
 
 
 ##### Data Object Unsubscription request by Observer Hyperty
@@ -501,6 +467,42 @@ Message sent by Child Object Reporter Hyperty to Data Object Parent Children Han
 "body" : { "resource" : "hyperty://<sp-domain>/<hyperty-child-reporter-identifier>#<1>" }
 ```
 
+#### Query the Sync Manager about Observer and Reporter Objects to be resumed
+
+Read Message sent by Observer Hyperty to local Sync Manager.
+
+```
+"id" : 1,
+"type" : "read",
+"from" : "hyperty://<sp-domain>/<hyperty-observer-identifier>",
+"to" : "hyperty-runtime://<observer-sp-domain>/<hyperty-observer-runtime-instance-identifier>/sm"
+```
+
+##### Successful Read Response with Data Objects to be resumed as Observers and Reporters
+
+Successful Read Response Message from Synch Manager to Observer Hyperty with temporary local stored subscribed data objects.
+
+```
+"id" : 1,
+"type" : "response",
+"from" : "hyperty-runtime://<observer-sp-domain>/<hyperty-observer-runtime-instance-identifier>/sm",
+"to" : "hyperty://<sp-domain>/<hyperty-observer-identifier>",
+"body" : { "code" : "200" , "value" : { "observers" : [<data object>] , "reporters" : [<data object>] } }
+```
+
+
+##### Not Found Read Response
+
+Not Found Read Response Message from Synch Manager to Observer Hyperty.
+
+```
+"id" : 1,
+"type" : "response",
+"from" : "hyperty-runtime://<observer-sp-domain>/<hyperty-observer-runtime-instance-identifier>/sm",
+"to" : "hyperty://<sp-domain>/<hyperty-observer-identifier>",
+"body" : { "code" : "404" , "description" : "not found" }
+```
+
 #### Data Object Read
 
 Read Message sent by Reader Hyperty to Data Object URL.
@@ -524,28 +526,6 @@ Successful Read Response Message from Reporter Hyperty to Reader Hyperty.
 "body" : { "code" : "2XX" , "value" : "<data object>" }
 ```
 
-#### Query the Sync Manager about subscribed Objects
-
-Read Message sent by Reader Hyperty to Data Object URL.
-
-```
-"id" : 1,
-"type" : "read",
-"from" : "hyperty://<sp-domain>/<hyperty-reader-identifier>",
-"to" : "<ObjectURL>"
-```
-
-##### Successful Read Response with Data Object
-
-Successful Read Response Message from Reporter Hyperty to Reader Hyperty.
-
-```
-"id" : 1,
-"type" : "response",
-"from" : "<ObjectURL>",
-"to" : "hyperty://<sp-domain>/<hyperty-reader-identifier>",
-"body" : { "code" : "2XX" , "value" : "<data object>" }
-```
 
 ##### Unauthorised Read Response
 
