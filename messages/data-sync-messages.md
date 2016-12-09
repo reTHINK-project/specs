@@ -138,18 +138,9 @@ Successful Read Response Message from Synch Manager to Observer Hyperty with tem
 "type" : "response",
 "from" : "hyperty-runtime://<observer-sp-domain>/<hyperty-observer-runtime-instance-identifier>/sm",
 "to" : "hyperty://<sp-domain>/<hyperty-observer-identifier>",
-"body" : { "code" : "100" , "value" : { "observers" : [<data object>] , "reporters" : [<data object>] } }
+"body" : { "code" : "200" , "value" : { "observers" : [<data object>] , "reporters" : [<data object>] } }
 ```
 
-Successful Read Response Message from Synch Manager to Hyperty with final updated data object.
-
-```
-"id" : 1,
-"type" : "response",
-"from" : "hyperty-runtime://<observer-sp-domain>/<hyperty-observer-runtime-instance-identifier>/sm",
-"to" : "hyperty://<sp-domain>/<hyperty-observer-identifier>",
-"body" : { "code" : "200" , "value" : <data object> }
-```
 
 ##### Not Found Read Response
 
