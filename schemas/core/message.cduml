@@ -23,6 +23,7 @@ package Message <<Rect>> {
 		source ?: URL.URL
 		auth ?: boolean
 		p2p ?: boolean
+		store ?: boolean
 	}
 
 	class CreateMessageBody {

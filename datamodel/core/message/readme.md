@@ -36,6 +36,8 @@ The `MessageBody.auth` is used by the policy engine to set the Message was autho
 
 The `MessageBody.p2p` is used by the Runtime Registry to decide if a P2P Connection Stub should be deployed (`true`) or not (`false`).
 
+The `MessageBody.store` is used to decide if data associated with the message should be stored (`true`) or not (`false`).
+
 #### CreateMessageBody
 
 ##### value

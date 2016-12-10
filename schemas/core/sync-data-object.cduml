@@ -11,6 +11,8 @@ package SyncDataObject {
 		description ?: string
 		tags ?: string[]
 		resources ?: HypertyResource.HypertyResourceType[]
+		observerStorage ?: boolean
+		public ?: boolean
 	}
 
 	class SyncObjectParent {

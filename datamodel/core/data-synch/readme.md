@@ -20,6 +20,12 @@ Is the abstract class for any data object to synchronised.
 
 **tags** strings that can be used to classify the data object (optional)
 
+**resources**
+
+**observerStorage** is a boolean used by the Sync Manager of the Observer runtime to decide if Observer can store (`true`) or not (`false`) the data object.
+
+**public** is a boolean used by the Hyperty handling reading requests to decide who can read the Object.
+
 **SyncObjectParent**
 
 Is an Abstract class for composite SyncObject. It can either contain a set of containers of Childs called  SyncObjectChildren or a list of Childs (SyncOjectChild).
