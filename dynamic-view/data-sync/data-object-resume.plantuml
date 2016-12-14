@@ -34,6 +34,15 @@ alt yes
 
 	loop for each Observer object to be resumed
 			RunSM@1B -> RunSM@1B : bus.addListener\n( DataObjURL/changes, observerLSandboxListener)
+
+			RunSM@1B -> RunSM@1B : RuntimeCatalogue.getDataSchemeResource()
+
+			alt if any children in the data schema
+				loop each children
+					RunSM@1B -> RunSM@1B : bus.addListener\n( DataObjURL\children\<children-name>, observerLSandboxListener)
+				end
+			end
+
 	end
 
 	Sync1@1B <-- RunSM@1B : response with\n local stored\nObserver objects
@@ -45,9 +54,15 @@ alt yes
 		Sync1@1B -> ObserverObject : new()
 
 		Sync1@1B -> Sync1@1B : Minibus.Addlisteners(\nDataObjURL\changes,\nSyncherListener)
+
+		alt if any children in the data schema
+			loop each children
+				Sync1@1B -> Sync1@1B : Minibus.Addlisteners(\nDataObjURL\children\<children-name>,\nSyncherListener)
+			end
+		end
 	end
 
-	Sync1@1B -> Sync1@1B : onObserversResume()
+	Sync1@1B -> Sync1@1B : onObserversResume(observers)
 
 == lets get the most updated version ==
 
@@ -74,6 +89,15 @@ alt yes
 
 	loop for each Reporter object to be resumed
 			RunSM@1B -> RunSM@1B : bus.addListener\n( DataObjURL/subscription, listener)
+
+			RunSM@1B -> RunSM@1B : RuntimeCatalogue.getDataSchemeResource()
+
+			alt if any children in the data schema
+				loop each children
+					RunSM@1B -> RunSM@1B : bus.addListener\n( DataObjURL\children\<children-name>, reporterSandboxListener)
+				end
+			end
+
 	end
 
 	Sync1@1B <-- RunSM@1B : response with\n local stored \nreporter objects
@@ -87,6 +111,14 @@ alt yes
 
 		Sync1@1B -> Sync1@1B : Minibus.Addlisteners(\nDataObjURL,\nSyncherListener)
 
+		RunSM@1B -> RunSM@1B : RuntimeCatalogue.getDataSchemeResource()
+
+		alt if any children in the data schema
+			loop each children
+				RunSM@1B -> RunSM@1B : bus.addListener\n( DataObjURL\children\<children-name>, reporterListener)
+			end
+		end
+
 		Sync1@1B -> RunReg@1B : send Update Message to <objectUrl>\status
 
 			RunReg@1B -> SP2 : registry: Update Data Object Registration\n at Domain Registry Message
@@ -99,7 +131,7 @@ alt yes
 			RunReg@1B <-- SP2 : Update Registration Response Message
 	end
 
-	Sync1@1B -> Sync1@1B : onReportersResume()
+	Sync1@1B -> Sync1@1B : onReportersResume(reporters)
 
 else no Reporter data objects to be resumed
 	Sync1@1B <-- RunSM@1B : not found response

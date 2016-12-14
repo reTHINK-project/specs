@@ -93,17 +93,25 @@ Setup the callback to process invitations to be an Observer or to be notified so
 
 * callback: callback function to receive events
 
-**onResume**
+**onObserversResume**
 
-`onResume(callback: (event: ResumeEvent) => void): void`
+`onObserversResume(callback: (observers: [DataObjectObserver]) => void): void`
 
-Setup the callback to process the Resume of Data Syncronisation for previously subscribed DataObjectObservers or previously created DataObjectReporters. Should be called when the syncher is instantiated by the Hyperty and DataObjects localy stored by the Syncher are found.
+Setup the callback to process the Resume of Data Syncronisation for previously subscribed DataObjectObservers. Should be called when the syncher is instantiated by the Hyperty and Data Observer Objects to be resumed are found.
+
+* callback: callback function to receive the event.
+
+**onReportersResume**
+
+`onReportersResume(callback: (reporters: [DataObjectReporter]) => void): void`
+
+Setup the callback to process the Resume of Data Syncronisation for previously created DataObjectReporters. Should be called when the syncher is instantiated by the Hyperty and Data Reporter Objects to be resumed are found.
 
 * callback: callback function to receive the event.
 
 **onExecute**
 
-`onResume(callback: (event: ExecuteEvent) => void): void`
+`onExecute(callback: (event: ExecuteEvent) => void): void`
 
 Setup the callback to process the request from an observer to execute a write action in the object. Useful for Context (IoT) Data Objects featuring actuator features.
 
