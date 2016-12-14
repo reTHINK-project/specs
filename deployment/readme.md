@@ -1,4 +1,16 @@
 # Quick installation guide of the reThink Platform.
+# Table of Contents
+1. [Components to install](#components-to-install)
+ 1. [Server-side components](#server-side-components)
+ 2. [Client-side components](#client-side-components)
+2. [Installation process](#installation-process)
+ 1. [Communication Service Provider](#communication-service-provider)
+   1. [Domain Registry](#domain-registry)
+    2. [Messaging node](#messaging-node)
+    3. [Catalogue](#catalogue)
+ 2. [Application Deployment](#application-deployment)
+   1. [Hello World](#hello-world)
+ 
 
 This page explains how to install a complete platform to be able to deploy services and applications based on the reThink framework.
 After following this tutorial, you will be able to run the Hello World application available [here](https://github.com/reTHINK-project/dev-app).  
