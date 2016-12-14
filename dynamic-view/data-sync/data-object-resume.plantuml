@@ -25,14 +25,20 @@ autonumber
 
 == check if there are data stream sync objects to be resumed ==
 
-Sync1@1B -> RunSM@1B : Read Msg
+Sync1@1B -> RunSM@1B : Subscribe Msg
 
 RunSM@1B -> RunSM@1B : are there stored\n subscribed data objects
 
 
 alt yes
 
-
+	loop for each object to be resumed
+		alt reporters to be resumed
+			RunSM@1B -> RunSM@1B : bus.addListener\n( DataObjURL/subscription, listener)
+		else observers to be resumed
+			RunSM@1B -> RunSM@1B : bus.addListener\n( DataObjURL/changes, observerLSandboxListener)
+		end
+	end
 
 	Sync1@1B <-- RunSM@1B : response with\n local stored objects
 
@@ -51,7 +57,7 @@ alt yes
 
 		Sync1@1B -> Sync1@1B : Minibus.Addlisteners(\nDataObjURL,\nSyncherListener)
 
-		Sync1@1B -> RunReg@1B : send Update Message to <objectUrl>/status
+		Sync1@1B -> RunReg@1B : send Update Message to <objectUrl>\status
 
 			RunReg@1B -> SP2 : registry: Update Data Object Registration\n at Domain Registry Message
 

@@ -15,6 +15,7 @@ where,
 -	`<ObjectURL>` is any valid [Data Object URL](https://github.com/reTHINK-project/dev-service-framework/blob/master/docs/datamodel/address/readme.md) including CommunicationURL, ConnectionURL and ContextURL. Example: `"comm://example.com/<alice>/123456"`
 -	`<json object>` is the Data Object instance itself
 -	`<ChildDataObject>` is a Child Data Object instance itself
+- `<User-Identity>` is a [User JSON Object](https://github.com/reTHINK-project/specs/tree/master/datamodel/core/user-identity) that identifies the user associated with the Hyperty sending the message.
 
 #### Synchronisation Management by Syncher Reporter
 
@@ -84,7 +85,7 @@ Response Message sent back by Reporter Runtime Sync Manager to Object Reporter H
 
 ##### Hyperty request to be an Observer
 
-Message sent by Observer (candidate) Hyperty Instance to the Observer Runtime Sync Manager.
+Message sent by Observer (candidate) Hyperty Instance to the Observer Runtime Sync Manager to subscribe a new Object.
 
 ```
 "id" : 1,
@@ -95,7 +96,7 @@ Message sent by Observer (candidate) Hyperty Instance to the Observer Runtime Sy
 ```
 
 **note:** `"p2p"` is optional and indicates if the sync data stream should use p2p protostubs.
-**note1:** `"store"` is optional and indicates if the sync data object should should be stored localy by the sync manager.
+**note1:** `"store"` is optional and indicates if the sync data object should be stored localy by the sync manager.
 
 ###### Response
 
@@ -119,7 +120,56 @@ Message sent by Observer (candidate) Hyperty Instance to the Observer Runtime Sy
 "body" : { "code" : "2XX", "value" : "<data object>"  }
 ```
 
+##### Hyperty request to resume Subscriptions
 
+###### Resume Subscriptions for the same Hyperty URL
+
+Message sent by Observer Hyperty Instance to the Observer Runtime Sync Manager to resume Object subscriptions for this Hyperty.
+
+```
+"id" : 1,
+"type" : "subscribe",
+"from" : "hyperty://<observer-sp-domain>/<hyperty-observer-instance-identifier>",
+"to" : "hyperty-runtime://<observer-sp-domain>/<hyperty-observer-runtime-instance-identifier>/sm"
+```
+
+###### Resume Subscriptions for a certain user and data schema independently of the Hyperty URL.
+
+Message sent by Observer Hyperty Instance to the Observer Runtime Sync Manager to resume Object subscriptions for this Hyperty.
+
+```
+"id" : 1,
+"type" : "subscribe",
+"from" : "hyperty://<observer-sp-domain>/<hyperty-observer-instance-identifier>",
+"to" : "hyperty-runtime://<observer-sp-domain>/<hyperty-observer-runtime-instance-identifier>/sm"
+"body" : { "identity" : "<User-Identity>" , "schema" : "hyperty-catalogue://<sp-domain>/dataObjectSchema/<schema-identifier>" , "p2p" : true|false , "store" : true|false}
+```
+
+**note:** `"p2p"` is optional and indicates if the sync data stream should use p2p protostubs.
+**note1:** `"store"` is optional and indicates if the sync data object should be stored localy by the sync manager.
+
+
+###### Responses
+
+200OK Response Message sent back by Observer Runtime Sync Manager to Observer Hyperty Instance containing in the body stored Data Object Observers.
+
+```
+"id" : 1,
+"type" : "response",
+"from" : "hyperty-runtime://<observer-sp-domain>/<hyperty-observer-runtime-instance-identifier>/sm",
+"to" : "hyperty://<observer-sp-domain>/<hyperty-observer-instance-identifier>",
+"body" : { "code" : "2XX", "value" : [<data object>]  }
+```
+
+404 Not Found Response Message sent back by Observer Runtime Sync Manager to Observer Hyperty Instance in case no Subscriptions were found for this Hyperty.
+
+```
+"id" : 1,
+"type" : "response",
+"from" : "hyperty-runtime://<observer-sp-domain>/<hyperty-observer-runtime-instance-identifier>/sm",
+"to" : "hyperty://<observer-sp-domain>/<hyperty-observer-instance-identifier>",
+"body" : { "code" : "404", "description" : "not found"  }
+```
 
 ##### Data Object Unsubscription request by Observer Hyperty
 
@@ -467,41 +517,6 @@ Message sent by Child Object Reporter Hyperty to Data Object Parent Children Han
 "body" : { "resource" : "hyperty://<sp-domain>/<hyperty-child-reporter-identifier>#<1>" }
 ```
 
-#### Query the Sync Manager about Observer and Reporter Objects to be resumed
-
-Read Message sent by Observer Hyperty to local Sync Manager.
-
-```
-"id" : 1,
-"type" : "read",
-"from" : "hyperty://<sp-domain>/<hyperty-observer-identifier>",
-"to" : "hyperty-runtime://<observer-sp-domain>/<hyperty-observer-runtime-instance-identifier>/sm"
-```
-
-##### Successful Read Response with Data Objects to be resumed as Observers and Reporters
-
-Successful Read Response Message from Synch Manager to Observer Hyperty with temporary local stored subscribed data objects.
-
-```
-"id" : 1,
-"type" : "response",
-"from" : "hyperty-runtime://<observer-sp-domain>/<hyperty-observer-runtime-instance-identifier>/sm",
-"to" : "hyperty://<sp-domain>/<hyperty-observer-identifier>",
-"body" : { "code" : "200" , "value" : { "observers" : [<data object>] , "reporters" : [<data object>] } }
-```
-
-
-##### Not Found Read Response
-
-Not Found Read Response Message from Synch Manager to Observer Hyperty.
-
-```
-"id" : 1,
-"type" : "response",
-"from" : "hyperty-runtime://<observer-sp-domain>/<hyperty-observer-runtime-instance-identifier>/sm",
-"to" : "hyperty://<sp-domain>/<hyperty-observer-identifier>",
-"body" : { "code" : "404" , "description" : "not found" }
-```
 
 #### Data Object Read
 

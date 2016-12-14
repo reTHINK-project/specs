@@ -66,19 +66,6 @@ RunUA@A -> RunSM@A : new
 create BUS@A
 RunUA@A -> BUS@A : new
 
-RunUA@A -> RunSM@A : init( )
-
-loop  Phase 2 New!! for each stored reporter subscription
-
-  RunSM@A -> BUS@A : addListener\n( DataObjURL\changes, listener)
-
-end
-
-loop Phase 2 New!! for each stored observer subscription
-
-  RunSM@A -> RunSM@A : addListener\n( DataObjURL\changes, observerListener)
-
-end
 
 group option : Phase 2 New!! if runtime is P2P enabled
 
