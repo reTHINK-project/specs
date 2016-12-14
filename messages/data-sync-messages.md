@@ -21,7 +21,7 @@ where,
 
 ##### Hyperty Data Object Creation
 
-Message sent by the Reporter Syncher Hyperty to Reporter Runtime Sync Manager.
+Message sent by the Reporter Syncher Hyperty to Reporter Runtime Sync Manager to create a new Object.
 
 ```
 "id"   : 1,
@@ -55,6 +55,57 @@ Reporter Runtime Sync Manager forwards to the Reporter Syncher Hyperty, Response
 "from" : "<ObjectURL>/subscription",
 "to"   : "<ObjectURL>",
 "body" : { "code" : "1XX\2XX" , "source" : "hyperty://<sp-domain>/<hyperty-observer-instance-identifier>" }
+```
+
+##### Hyperty Reporter Data Object resume
+
+###### Resume Reporter Data Objects for the same Hyperty URL
+
+Message sent by Reporter Hyperty Instance to the Reporter Runtime Sync Manager to resume Reporter Objects for this Hyperty.
+
+```
+"id" : 1,
+"type" : "create",
+"from" : "hyperty://<observer-sp-domain>/<hyperty-observer-instance-identifier>",
+"to" : "hyperty-runtime://<observer-sp-domain>/<hyperty-observer-runtime-instance-identifier>/sm"
+```
+
+###### Resume Reporter Data Objects for a certain user and data schema independently of the Hyperty URL.
+
+Message sent by Reporter Hyperty Instance to the Observer Runtime Sync Manager to resume Reporter Objects for a certain user and data schema independently of the Hyperty URL.
+
+```
+"id" : 1,
+"type" : "create",
+"from" : "hyperty://<observer-sp-domain>/<hyperty-observer-instance-identifier>",
+"to" : "hyperty-runtime://<observer-sp-domain>/<hyperty-observer-runtime-instance-identifier>/sm"
+"body" : { "identity" : "<User-Identity>" , "schema" : "hyperty-catalogue://<sp-domain>/dataObjectSchema/<schema-identifier>" , "p2p" : true|false , "store" : true|false}
+```
+
+**note:** `"p2p"` is optional and indicates if the sync data stream should use p2p protostubs.
+**note1:** `"store"` is optional and indicates if the sync data object should be stored localy by the sync manager.
+
+
+###### Responses
+
+200OK Response Message sent back by Reporter Runtime Sync Manager to Reporter Hyperty Instance containing in the body stored Data Object Reporters.
+
+```
+"id" : 1,
+"type" : "response",
+"from" : "hyperty-runtime://<observer-sp-domain>/<hyperty-observer-runtime-instance-identifier>/sm",
+"to" : "hyperty://<observer-sp-domain>/<hyperty-observer-instance-identifier>",
+"body" : { "code" : "2XX", "value" : [<data object>]  }
+```
+
+404 Not Found Response Message sent back by Reporter Runtime Sync Manager to Reporter Hyperty Instance in case no Reporter Data Object were found.
+
+```
+"id" : 1,
+"type" : "response",
+"from" : "hyperty-runtime://<observer-sp-domain>/<hyperty-observer-runtime-instance-identifier>/sm",
+"to" : "hyperty://<observer-sp-domain>/<hyperty-observer-instance-identifier>",
+"body" : { "code" : "404", "description" : "not found"  }
 ```
 
 ##### Delete Data Object requested by Reporter
@@ -135,7 +186,7 @@ Message sent by Observer Hyperty Instance to the Observer Runtime Sync Manager t
 
 ###### Resume Subscriptions for a certain user and data schema independently of the Hyperty URL.
 
-Message sent by Observer Hyperty Instance to the Observer Runtime Sync Manager to resume Object subscriptions for this Hyperty.
+Message sent by Observer Hyperty Instance to the Observer Runtime Sync Manager to resume Object subscriptions for a certain user and data schema independently of the HypertyURL.
 
 ```
 "id" : 1,
