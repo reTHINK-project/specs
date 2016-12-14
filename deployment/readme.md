@@ -10,6 +10,7 @@
     3. [Catalogue](#catalogue)
  2. [Application Deployment](#application-deployment)
    1. [Hello World](#hello-world)
+    2. [Complete setup](#complete-setup)
  
 
 This page explains how to install a complete platform to be able to deploy services and applications based on the reThink framework.
@@ -127,8 +128,11 @@ __To test if installation is OK: https://catalogue.csp.rethink.com/ gives a view
 ####Hello World
 The Hello World is published in the repository [dev-hello](https://github.com/reTHINK-project/dev-app), and its installation manual is provided there. It can be deploied simply behind an HTTP server.  
 
+####Complete Setup
+After all these steps, application should be running. Last verifications:  
 ___WARNING___  
- *  .well-known/runtime/ must contain the last version of the runtime. It have to be filled with [these files](https://github.com/reTHINK-project/dev-runtime-browser/tree/master/bin)  
+ * The Browser Runtime has to be uploaded from .well-known/runtime/ must contain the last version of the runtime. It have to be filled with [these files](https://github.com/reTHINK-project/dev-runtime-browser/tree/master/bin)  (rethink.js, index.html, core.js, context-service.js, identities-gui.js, policies-gui.js)
+ * The Core Runtime has to be deployed in the catalogue. The core runtime is the Runtime.js file [here](https://github.com/reTHINK-project/dev-runtime-core/tree/master/dist). Its hould be accessible on CSP catalogue: https://catalogue.csp.rethink.com/.well-known/runtime/Runtime .
  
  
 When all of this is done you can try to connect on the index.html of the hello-app. First step, you should be able to load the runtime, then to load an hyperty, then to contact hyperties.
