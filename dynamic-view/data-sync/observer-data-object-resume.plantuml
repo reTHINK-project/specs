@@ -1,0 +1,102 @@
+
+
+@startuml "observer-data-object-resume.png"
+
+autonumber
+
+!define SHOW_SP2
+
+!define SHOW_RuntimeA
+
+!define SHOW_CoreRuntimeA
+!define SHOW_SMAtRuntimeA
+!define SHOW_SP1SandboxAtRuntimeA
+!define SHOW_Syncher1AtRuntimeA
+
+!define SHOW_Runtime1B
+
+!define SHOW_CoreRuntime1B
+!define SHOW_SMAtRuntime1B
+!define SHOW_RegistryAtRuntime1B
+!define SHOW_SP1SandboxAtRuntime1B
+!define SHOW_Syncher1AtRuntime1B
+
+!include ../runtime_objects.plantuml
+
+
+Sync1@1B -> Sync1@1B : resumeObservers(criteria)
+
+Sync1@1B -> RunSM@1B : Subscribe Msg
+
+RunSM@1B -> RunSM@1B : resume criteria?
+
+alt resume for the same HypertyURL
+
+	RunSM@1B -> RunSM@1B : storageManager.get("syncManager.observers.<hypertyUrl>")
+
+else resume for the same associated Identity
+
+	RunSM@1B -> RunSM@1B : storageManager.get("syncManager.observers.<IdentityUrl>")
+
+else others
+
+end
+
+
+
+== check if there are Observer objects to be resumed ==
+
+RunSM@1B -> RunSM@1B : are there stored\n subscribed data objects
+
+
+alt yes
+
+	loop for each Observer object to be resumed
+			RunSM@1B -> RunSM@1B : bus.addListener\n( DataObjURL/changes, observerLSandboxListener)
+
+			RunSM@1B -> RunSM@1B : RuntimeCatalogue.getDataSchemeResource()
+
+			alt if any children in the data schema
+				loop each children
+					RunSM@1B -> RunSM@1B : bus.addListener\n( DataObjURL\children\<children-name>, observerLSandboxListener)
+				end
+			end
+
+	end
+
+	Sync1@1B <-- RunSM@1B : response with\n local stored\nObserver objects
+
+	== listeners are added on Hyperty side ==
+
+	loop for each observer object to be resumed
+		create ObserverObject
+		Sync1@1B -> ObserverObject : new()
+
+		Sync1@1B -> Sync1@1B : Minibus.Addlisteners(\nDataObjURL\changes,\nSyncherListener)
+
+		alt if any children in the data schema
+			loop each children
+				Sync1@1B -> Sync1@1B : Minibus.Addlisteners(\nDataObjURL\children\<children-name>,\nSyncherListener)
+			end
+		end
+	end
+
+	Sync1@1B -> Sync1@1B : onObserversResume(observers)
+
+== lets get the most updated version ==
+
+	loop for each resumed Observer Object
+
+		ObserverObject -> Sync1@A : Read Msg
+		ObserverObject <-- Sync1@A : Read Response Msg \nwith most updated Data Object
+
+		ObserverObject -> ObserverObject : onChanges()
+	end
+else no, Observer data objects to be resumed
+	Sync1@1B <-- RunSM@1B : not found response
+
+end
+
+
+
+@enduml

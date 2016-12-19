@@ -11,6 +11,10 @@ Procedures to Manage Hyperty Data Objects
 
 ### [Management of Hyperty Data Object Child](data-object-child.md)
 
+### [Data Sync Observers Resume](observers-data-object-resume.md)
+
+### [Data Sync Reporters Resume](reporters-data-object-resume.md)
+
 ### [Hyperty Data Object Reporter delegation](data-object-reporter-delegation.md)
 
 *not implemented yet*

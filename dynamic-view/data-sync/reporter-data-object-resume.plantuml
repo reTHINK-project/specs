@@ -1,6 +1,6 @@
 
 
-@startuml "data-object-resume.png"
+@startuml "reporter-data-object-resume.png"
 
 autonumber
 
@@ -23,64 +23,51 @@ autonumber
 
 !include ../runtime_objects.plantuml
 
-== check if there are Observer objects to be resumed ==
 
-Sync1@1B -> RunSM@1B : Subscribe Msg
-
-RunSM@1B -> RunSM@1B : are there stored\n subscribed data objects
-
-
-alt yes
-
-	loop for each Observer object to be resumed
-			RunSM@1B -> RunSM@1B : bus.addListener\n( DataObjURL/changes, observerLSandboxListener)
-
-			RunSM@1B -> RunSM@1B : RuntimeCatalogue.getDataSchemeResource()
-
-			alt if any children in the data schema
-				loop each children
-					RunSM@1B -> RunSM@1B : bus.addListener\n( DataObjURL\children\<children-name>, observerLSandboxListener)
-				end
-			end
-
-	end
-
-	Sync1@1B <-- RunSM@1B : response with\n local stored\nObserver objects
-
-	== listeners are added on Hyperty side ==
-
-	loop for each observer object to be resumed
-		create ObserverObject
-		Sync1@1B -> ObserverObject : new()
-
-		Sync1@1B -> Sync1@1B : Minibus.Addlisteners(\nDataObjURL\changes,\nSyncherListener)
-
-		alt if any children in the data schema
-			loop each children
-				Sync1@1B -> Sync1@1B : Minibus.Addlisteners(\nDataObjURL\children\<children-name>,\nSyncherListener)
-			end
-		end
-	end
-
-	Sync1@1B -> Sync1@1B : onObserversResume(observers)
-
-== lets get the most updated version ==
-
-	loop for each resumed Observer Object
-
-		ObserverObject -> Sync1@A : Read Msg
-		ObserverObject <-- Sync1@A : Read Response Msg \nwith most updated Data Object
-
-		ObserverObject -> ObserverObject : onChanges()
-	end
-else no, Obserevr data objects to be resumed
-	Sync1@1B <-- RunSM@1B : not found response
-
-end
+Sync1@1B -> Sync1@1B : resumeReporters(criteria)
 
 == check if there are Reporter objects to be resumed ==
 
 Sync1@1B -> RunSM@1B : Create Msg
+
+RunSM@1B -> RunSM@1B : resume criteria?
+
+alt resume for the same HypertyURL
+
+	RunSM@1B -> RunSM@1B : storageManager.get("syncManager.reporters.<hypertyUrl>")
+
+else resume for the same associated Identity
+
+	RunSM@1B -> RunSM@1B : storageManager.isBackup()
+
+	alt true : there is databackup
+
+	RunSM@1B -> RunSM@1B : storageManager.get("syncManager.reporters.<IdentityUrl>")
+
+
+	else false : no databackup
+
+		RunSM@1B -> RunReg@1B : read Registered Data Objects
+
+		SP2 <- RunReg@1B : read Registered Data Objects
+
+		SP2 --> RunReg@1B : return Registered Data Objects
+
+		RunSM@1B <-- RunReg@1B : return Registered Data Objects
+
+		loop for each returned ObjectUrl
+
+			RunSM@1B -> RunSM@1B : storageManager.get("syncManager.reporters.<ObjectUrl>")
+
+		end
+
+	end
+
+else others
+
+end
+
+
 
 RunSM@1B -> RunSM@1B : are there stored\n Reporter data objects
 
@@ -111,11 +98,9 @@ alt yes
 
 		Sync1@1B -> Sync1@1B : Minibus.Addlisteners(\nDataObjURL,\nSyncherListener)
 
-		RunSM@1B -> RunSM@1B : RuntimeCatalogue.getDataSchemeResource()
-
 		alt if any children in the data schema
 			loop each children
-				RunSM@1B -> RunSM@1B : bus.addListener\n( DataObjURL\children\<children-name>, reporterListener)
+				Sync1@1B -> Sync1@1B : bus.addListener\n( DataObjURL\children\<children-name>, reporterListener)
 			end
 		end
 

@@ -145,14 +145,14 @@ Response Message sent back by the Registry Domain server to Hyperty Runtime Regi
 
 #### Registry Data Object search per User
 
-Message sent to Registry Domain server to query about all active Hyperty instances or Data Object instances associated to a certain user.
+Message sent to Registry Domain server to query about all active Hyperty instances or Data Object instances associated to a certain user. If
 
 ```
 "id" : 2,
 "type" : "read",
 "from" : "hyperty-runtime://<sp-domain>/<runtime-instance-identifier>/registry",
 "to" : "domain://registry.<sp1>"
-"body" : { "resource" : "/<registry-object-url-scheme>/user/<userURL>" }
+"body" : { "resource" : "/<registry-object-url-scheme>/user/<userURL>", "criteria" : { "scheme": <registry-object-url-scheme> } }
 ```
 
 **Response Message returning the discovered Hyperty Instances**
@@ -176,7 +176,7 @@ Message sent the Registry Domain server to query about all active Registered ins
 "type" : "read",
 "from" : "hyperty-runtime://<sp-domain>/<runtime-instance-identifier>/registry",
 "to" : "domain://registry.<sp1>"
-"body" : { "resource" : "<GuidURL>" }
+"body" : { "resource" : "<GuidURL>", "criteria" : { "scheme": <registry-object-url-scheme> } }
 ```
 
 **Response Message returning the discovered Instances**
