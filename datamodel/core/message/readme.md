@@ -54,6 +54,10 @@ URL from where access policy control can be downloaded. Examples:
 
 Policy to be enforced by Monitor component colocated with Connector sandbox?
 
+##### resume
+
+Used for data sync resume procedures for data object reporters.
+
 #### ResponseMessageBody
 
 ##### Code
@@ -120,7 +124,10 @@ Contains the name of method to be invoked and an array and an Array of objects t
 
 #### SubscribeMessageBody
 
-Optional attribute `subscribe` is a list of URLs to be subscribed to.
+##### resume
+
+Used for data sync resume procedures for data object observers.
+
 
 #### UnsubscribeMessageBody
 

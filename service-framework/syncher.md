@@ -45,7 +45,7 @@ Syncher is created one per Hyperty. The parameters are basically the same as the
 
 **create**
 
-`create(schema: SchemaURL, observers?: [HypertyURL], initialData: JSON, store: boolean): Promise<DataObjectReporter>`
+`create(schema: SchemaURL, observers?: [HypertyURL], initialData: JSON, store?: boolean, p2p?: boolean): Promise<DataObjectReporter>`
 
 This Method is used to create objects to be reported i.e. the Hyperty Instance plays the Reporter role. The following parameters are used:
 
@@ -55,13 +55,15 @@ This Method is used to create objects to be reported i.e. the Hyperty Instance p
 
 * initialData: data that is used to initialise the new Data Object
 
-* store (optional): if true the object is stored in the runtime and by a data backup service.
+* store (optional): if true the object is stored in the runtime and by a data backup service (if enabled).
+
+* p2p (optional): if true the object data sync uses p2p data connections.
 
 * return: Promise to a new Reporter. The reporter can be accepted or rejected by the PEP
 
 **subscribe**
 
-`subscribe(schema: SchemaURL, url: ObjectURL): Promise<DataObjectObserver>`
+`subscribe(schema: SchemaURL, url: ObjectURL, store?: boolean, p2p?: boolean): Promise<DataObjectObserver>`
 
 This Method is used to subscribe objects to be observed i.e. the Hyperty Instance plays the Observer role. The following parameters are used:
 
@@ -69,7 +71,9 @@ This Method is used to subscribe objects to be observed i.e. the Hyperty Instanc
 
 * url: the URL of the Data Object to be observed
 
-* store (optional): if true the object is stored in the runtime and by a data backup service (if allowed by the reporter).
+* store (optional): if true the object is stored in the runtime and by a data backup service (if enabled and allowed by the reporter ).
+
+* p2p (optional): if true the object data sync uses p2p data connections.
 
 * return: Promise to a new observer if accepted. It's associated with the reporter.
 

@@ -30,6 +30,7 @@ package Message <<Rect>> {
 		policy ?: URL.URL
 		authorise ?: URL.URL[]
 		value : string
+		resume ?: boolean
 	}
 
 	class UpdateMessageBody {
@@ -60,6 +61,7 @@ package Message <<Rect>> {
 	}
 
 	class SubscribeMessageBody {
+		resume ?: boolean
 	}
 
 	class UnsubscribeMessageBody {

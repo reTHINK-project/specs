@@ -67,7 +67,8 @@ Message sent by Reporter Hyperty Instance to the Reporter Runtime Sync Manager t
 "id" : 1,
 "type" : "create",
 "from" : "hyperty://<observer-sp-domain>/<hyperty-observer-instance-identifier>",
-"to" : "hyperty-runtime://<observer-sp-domain>/<hyperty-observer-runtime-instance-identifier>/sm"
+"to" : "hyperty-runtime://<observer-sp-domain>/<hyperty-observer-runtime-instance-identifier>/sm",
+"body" : { "resume" : true }
 ```
 
 ###### Resume Reporter Data Objects for a certain user and data schema independently of the Hyperty URL.
@@ -78,11 +79,12 @@ Message sent by Reporter Hyperty Instance to the Observer Runtime Sync Manager t
 "id" : 1,
 "type" : "create",
 "from" : "hyperty://<observer-sp-domain>/<hyperty-observer-instance-identifier>",
-"to" : "hyperty-runtime://<observer-sp-domain>/<hyperty-observer-runtime-instance-identifier>/sm"
-"body" : { "identity" : "<User-Identity>" , "schema" : "hyperty-catalogue://<sp-domain>/dataObjectSchema/<schema-identifier>" , "p2p" : true|false , "store" : true|false}
+"to" : "hyperty-runtime://<observer-sp-domain>/<hyperty-observer-runtime-instance-identifier>/sm",
+"body" : { "identity" : "<User-Identity>" , "schema" : "hyperty-catalogue://<sp-domain>/dataObjectSchema/<schema-identifier>" , "p2p" : true|false , "store" : true|false, "resume" : true }
 ```
 
 **note:** `"p2p"` is optional and indicates if the sync data stream should use p2p protostubs.
+
 **note1:** `"store"` is optional and indicates if the sync data object should be stored localy by the sync manager.
 
 
@@ -181,7 +183,8 @@ Message sent by Observer Hyperty Instance to the Observer Runtime Sync Manager t
 "id" : 1,
 "type" : "subscribe",
 "from" : "hyperty://<observer-sp-domain>/<hyperty-observer-instance-identifier>",
-"to" : "hyperty-runtime://<observer-sp-domain>/<hyperty-observer-runtime-instance-identifier>/sm"
+"to" : "hyperty-runtime://<observer-sp-domain>/<hyperty-observer-runtime-instance-identifier>/sm",
+"body" : { "resume" : true }
 ```
 
 ###### Resume Subscriptions for a certain user and data schema independently of the Hyperty URL.
@@ -193,10 +196,11 @@ Message sent by Observer Hyperty Instance to the Observer Runtime Sync Manager t
 "type" : "subscribe",
 "from" : "hyperty://<observer-sp-domain>/<hyperty-observer-instance-identifier>",
 "to" : "hyperty-runtime://<observer-sp-domain>/<hyperty-observer-runtime-instance-identifier>/sm"
-"body" : { "identity" : "<User-Identity>" , "schema" : "hyperty-catalogue://<sp-domain>/dataObjectSchema/<schema-identifier>" , "p2p" : true|false , "store" : true|false}
+"body" : { "identity" : "<User-Identity>" , "schema" : "hyperty-catalogue://<sp-domain>/dataObjectSchema/<schema-identifier>" , "p2p" : true|false , "store" : true|false, "resume" : true}
 ```
 
 **note:** `"p2p"` is optional and indicates if the sync data stream should use p2p protostubs.
+
 **note1:** `"store"` is optional and indicates if the sync data object should be stored localy by the sync manager.
 
 
