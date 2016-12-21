@@ -77,11 +77,20 @@ alt yes
 	loop for each Reporter object to be resumed
 			RunSM@1B -> RunSM@1B : bus.addListener\n( DataObjURL/subscription, listener)
 
+			loop for each subscription
+				RunSM@1B -> RunSM@1B :bus.addPublish(DataObjURL/changes);
+			end
+
 			RunSM@1B -> RunSM@1B : RuntimeCatalogue.getDataSchemeResource()
 
 			alt if any children in the data schema
 				loop each children
 					RunSM@1B -> RunSM@1B : bus.addListener\n( DataObjURL\children\<children-name>, reporterSandboxListener)
+
+					loop for each subscription
+						RunSM@1B -> RunSM@1B : bus.addPublish(DataObjURL\children\<children-name>);
+					end
+
 				end
 			end
 
