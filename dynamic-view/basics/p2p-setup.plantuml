@@ -27,6 +27,8 @@ box "Bob Device" #LightRed
 
 	participant "MessageBus" as Bus@B
 
+	participant "Registry" as Reg@B
+
 	participant "P2P Handler\nStub" as HandlerStub
 
 	participant "P2P Connection\nObj Observer" as Conn@B
@@ -71,6 +73,17 @@ group : WebRTC Connection setup
 	BobMNStub@B -> Bus@B: postMgs(\ncreate connection)
 
 	HandlerStub <- Bus@B: postMgs(\ncreate connection)
+
+	HandlerStub -> Reg@B: postMgs(\nnew p2p connection event)
+
+	Reg@B -> Reg@B: create new p2pConnection
+
+	note left
+		to avoid the trigger of a second
+		 p2p connection setup from the
+		 called side when request messages
+		 are sent to from handler to requester
+	end note
 
 	create Conn@B
 	HandlerStub -> Conn@B: new

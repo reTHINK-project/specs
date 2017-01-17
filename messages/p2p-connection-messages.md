@@ -94,6 +94,20 @@ With this message the P2P Handler Stub invoke `minibus.addListener( <p2p-connect
 "body" : { "code" : "2XX" }
 ```
 
+##### New P2P Connection event
+
+Event to notify the Registry there is a new P2P Connection.
+
+```
+"id" : 3,
+"type" : "create",
+"from" : "<P2PHandlerStubURL>",
+"to" :  "<P2PHandlerStubURL>/status",
+"body" : { "value" : "created", "resource" : <remoteRuntimeURL> }
+```
+
+
+
 ##### Subscribe for Registry changes
 
 Request to receive notifications about changes in a remote Runtime Registry.

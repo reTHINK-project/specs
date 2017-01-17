@@ -32,5 +32,5 @@ Message to publish Protocol Stub Status
 "from" : "hyperty-runtime://sp1/protostub/123",
 "to" : "hyperty-runtime://sp1/protostub/123/status",
 
-"body" : { "value" : "LIVE" }
+"body" : { "value" : "live" }
 ```

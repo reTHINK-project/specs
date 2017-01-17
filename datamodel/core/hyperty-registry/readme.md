@@ -16,7 +16,7 @@ Each of these objects share a common set of data:
 -	URL: address to reach the instance. The URL type will depend on the Registry Data Object class eg for Hyperty Instance it will be HypertyURL (see below)
 -	descriptor: a link to the Catalogue from where the descriptor of the instance can be retrieved
 -	the starting date and the last time the Instance was modified. The dates format must be compliant with [ISO8601](https://en.wikipedia.org/wiki/ISO_8601)
--	status: the instance status (Created, Live or Dead)
+-	status: the instance status ("created", "live", "disconnected" or "dead")
 - expires: period of time in seconds about how long a registry entry is "alive" without receiving an update message.
 -	stubs: the protocol stubs descriptor (including the deployable protocol stub package) that can be used to reach the registered Object including Hyperty Instance, Hyperty Runtime and Data Objects. The protocol stub can be used to reach the Object instance through a Message Node or directly connect to the Object Instance runtime (full P2P connection)
 -	stubsConfiguration: configuration data required when deploying stubs used for P2P connections.
