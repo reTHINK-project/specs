@@ -4,6 +4,15 @@ The Runtime procedures to deploy a new Hyperty are described in this section.
 
 ![Figure @runtime-deploy-hyperty: Deploy Hyperty](deploy-hyperty.png)
 
+TODO: the loadHyperty should have the following:
+
+```javascript
+// hypertyCatalogueURL -  hyperty-catalogue://<domain>/.well-known/hyperty/<name of hyperty>
+// resuseURL - default = false | Possible options: true | false | hyperty://<domain>/<id>
+// appURL 
+loadHyperty(hypertyCatalogueURL, reuseURL = false, appURL)
+```
+
 Steps 1 - 5: the Runtime UA is invoked by the App to load a new Hyperty from a specific URL, (**Phase 2 New!**) passing the App URL and optionally an Hyperty URL to be reused. The Runtime UA downloads the Hyperty source code, extracting the HypertyDownloadURL from the Hyperty descriptor.
 
 Steps 6-7: policies contained in the Hyperty Descriptor, are deployed in the Core Policy Engine.
