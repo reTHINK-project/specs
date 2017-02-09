@@ -11,6 +11,8 @@ This doc specifies Messages to be used to manage registrations in the Domain Reg
 -	`<guidURL>` is the user guid address compliant with [User GUID URL data model](https://github.com/reTHINK-project/dev-service-framework/blob/master/docs/datamodel/core/address/readme.md#user-url-type). Example: `user-guid://1234456678dsgdjahsdg`
 -	`<DiscoveredHypertyInstance>` is a JSON object compliant with [HypertyInstance data model](https://github.com/reTHINK-project/dev-service-framework/tree/develop/docs/datamodel/core/hyperty-registry#hyperty-instance).
 -	`<discoveredRegistryDataObjects>` is a JSON object compliant with [HypertyDataObjectInstance data model](https://github.com/reTHINK-project/dev-service-framework/tree/develop/docs/datamodel/core/hyperty-registry#hyperty-instance).
+-	`<filter>` is an optional string that identifies how to filter search results. If not present, all results are returned. Possible values:
+  - `idp-identifier` : only entries registered with User URL matching the `idp-identifier` provided in the query
 
 #### Registration request
 
@@ -81,7 +83,7 @@ Message sent by the Hyperty Runtime Registry function to Registry Domain server.
 "type" : "update",
 "from" : "hyperty-runtime://<sp-domain>/<runtime-instance-identifier>/registry",
 "to" : "domain://registry.<sp-domain>",
-"body" : { "resource": "<RegistryDataObjectURL>", "value" : { "status": "live", "user": <userURL> } }
+"body" : { "resource": "<RegistryDataObjectURL>", "value" : { "status": "live", "user": <userURL>, "p2pHandler": <p2pHandlerStubURL>} }
 ```
 
 Reponse Message sent by the Registry Domain server to Hyperty Runtime Registry function.
@@ -192,7 +194,7 @@ Message replied by Registry Domain server.
 ```
 
 
-#### Hyperty Instance Query per User and/or per resources and/or per Object Scheme
+#### Hyperty Instance Query per User URL and/or per resources and/or per Object Scheme
 
 Message sent by an Hyperty Instance to Registry Domain server to query about all active instances associated to a certain user for some types of Hyperty Resources and data schemes.
 
@@ -202,6 +204,30 @@ Message sent by an Hyperty Instance to Registry Domain server to query about all
 "from" : "hyperty://<sp-domain>/<hyperty-instance-identifier>",
 "to" : "domain://registry.<sp1>"
 "body" : { "resource": "/<registry-object-url-scheme>/user/<userURL>", "criteria" : { "resources": ["<resources>"], "dataSchemes": ["<schema>"] }}
+```
+
+**Response Message returning the discovered Hyperty Instances**
+
+Message sent by Registry Domain server (Connector or Protostub) to an Hyperty Instance.
+
+```
+"id" : 2
+"type" : "response",
+"from" : "domain://registry.<sp-domain>",
+"to" : "hyperty://<sp-domain>/<hyperty-instance-identifier>",
+"body" : { "code": 200, "value" : ["<discoveredHypertyInstance>"] }
+```
+
+#### Hyperty Instance Query per User IDP Identifier and/or per resources and/or per Object Scheme
+
+Message sent by an Hyperty Instance to Registry Domain server to query about all active instances associated to a certain user IDP identifier eg email, for some types of Hyperty Resources and data schemes.
+
+```
+"id" : 2,
+"type" : "read",
+"from" : "hyperty://<sp-domain>/<hyperty-instance-identifier>",
+"to" : "domain://registry.<sp1>",
+"body" : { "resource": "/<registry-object-url-scheme>/idp-identifier/<idp-identifier>", "criteria" : { "resources": ["<resources>"], "dataSchemes": ["<schema>"], "filter": "<filter>" }}
 ```
 
 **Response Message returning the discovered Hyperty Instances**
@@ -226,7 +252,7 @@ Message sent to get a certain Domain registry entry, Hyperty instance or Data Ob
 "id" : 3,
 "type" : "read",
 "from" : "hyperty-runtime://<sp-domain>/<runtime-instance-identifier>/registry",
-"to" : "domain://registry.<sp1>"
+"to" : "domain://registry.<sp1>",
 "body" : { "resource": "<RegistryDataObjectURL>"}
 ```
 

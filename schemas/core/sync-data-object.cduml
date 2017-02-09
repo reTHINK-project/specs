@@ -13,6 +13,7 @@ package SyncDataObject {
 		resources ?: HypertyResource.HypertyResourceType[]
 		observerStorage ?: boolean
 		public ?: boolean
+		mutualAuthentication ?: boolean
 	}
 
 	class SyncObjectParent {

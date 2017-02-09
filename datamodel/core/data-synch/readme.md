@@ -26,6 +26,8 @@ Is the abstract class for any data object to synchronised.
 
 **public** is a boolean used by the Hyperty handling reading requests to decide who can read the Object.
 
+**mutualAuthentication** is a boolean used by the Policy Engine to decide if the Object sync data flows should be encrypted (true) or not (false).
+
 **SyncObjectParent**
 
 Is an Abstract class for composite SyncObject. It can either contain a set of containers of Childs called  SyncObjectChildren or a list of Childs (SyncOjectChild).

@@ -21,7 +21,7 @@ Request by P2P Handler Runtime UA to its domain Message Node Subscription Manage
 "type" : "subscribe",
 "from" : "hyperty-runtime://<p2p-handler-sp-domain>/<p2p-handler-runtime-instance-identifier>/ua",
 "to" : "domain://msg-node.<p2p-handler-sp-domain>/sm",
-"body" : { "subscribe" : ["<P2PHandlerStubURL>"], "source" : "hyperty-runtime://<p2p-handler-sp-domain>/<p2p-handler-runtime-instance-identifier>" }
+"body" : { "subscribe" : ["<P2PHandlerStubURL>"], "source" : "hyperty-runtime://<p2p-handler-sp-domain>/p2phandler/<p2p-handler-instance-identifier>" }
 ```
 
 With this message the setup of the routing path is:
@@ -65,7 +65,62 @@ Message sent by P2P Handler Runtime UA to P2P Handler Message Node to request th
 "body" : { "code" : "2XX" }
 ```
 
+
+
 #### Registration
+
+##### Set P2P Requester routing path
+
+Request by P2P Requester Registry to its domain Message Node Subscription Manager to add the routing path to P2P Requester stub.
+
+```
+"id" : 1,
+"type" : "subscribe",
+"from" : "hyperty-runtime://<p2p-requester-sp-domain>/<p2p-requester-runtime-instance-identifier>/registry",
+"to" : "domain://msg-node.<p2p-requester-sp-domain>/sm",
+"body" : { "subscribe" : ["<P2PRequesterStubURL>"], "source" : "hyperty-runtime://<p2p-requester-sp-domain>/p2prequester/<p2p-requester-identifier>" }
+```
+
+With this message the setup of the routing path is:
+
+1- who is subscribing: `body.source` or `from` in case there is no `body.source`
+2- what to subscribe: `body.subscribe` ie a list of URLs to be subscribed to
+
+###### Response
+
+200OK Response Message sent back by Message Node to P2P Handler Stub Runtime User Agent.
+
+```
+"id" : 1,
+"type" : "response",
+"from" : "domain://msg-node.<p2p-requester-sp-domain>/sm",
+"to" : "hyperty-runtime://<p2p-requester-sp-domain>/<p2p-requester-runtime-instance-identifier>/registry",
+"body" : { "code" : "2XX" }
+```
+
+##### Request to remove P2P Handler Routing Path at P2P Handler Message Node
+
+Message sent by P2P Handler Runtime UA to P2P Handler Message Node to request the removal of the P2P Handler Routing Path.
+
+```
+"id" : 2,
+"type" : "unsubscribe",
+"from" : "hyperty-runtime://<p2p-requester-sp-domain>/<p2p-requester-runtime-instance-identifier>/registry",
+"to" : "domain://msg-node.<p2p-requester-sp-domain>/sm",
+"body" : { "unsubscribe" : ["<P2PRequesterStubURL>"] }
+```
+
+###### Response
+
+200OK Response Message sent back by Message Node to Observer Runtime Sync Manager.
+
+```
+"id" : 2,
+"type" : "response",
+"from" : "domain://msg-node.<p2p-requester-sp-domain>/sm",
+"to" : "hyperty-runtime://<p2p-requester-sp-domain>/<p2p-requester-runtime-instance-identifier>/registry",
+"body" : { "code" : "2XX" }
+```
 
 ##### Add Handler listener to minibus for new P2P Connection
 
@@ -101,12 +156,22 @@ Event to notify the Registry there is a new P2P Connection.
 ```
 "id" : 3,
 "type" : "create",
-"from" : "<P2PHandlerStubURL>",
-"to" :  "<P2PHandlerStubURL>/status",
+"from" : "<P2PStubURL>",
+"to" :  "<P2PStubURL>/status",
 "body" : { "value" : "created", "resource" : <remoteRuntimeURL> }
 ```
 
+##### P2P Connection Update event
 
+Event to notify the Registry P2P Connection status changed.
+
+```
+"id" : 3,
+"type" : "update",
+"from" : "<P2PStubURL>",
+"to" :  "<P2PStubURL>/status",
+"body" : { "value" : "in-progress|live|failed|disconnected", "resource" : <remoteRuntimeURL> }
+```
 
 ##### Subscribe for Registry changes
 

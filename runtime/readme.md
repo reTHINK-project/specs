@@ -50,6 +50,13 @@ The Core Policy Engine provides Policy decision and Policy Enforcement functiona
 
 The verification or generation of identity assertions, to get valid Access tokens, are two examples of actions ruled by policies.
 
+The Policy Engine must have listeners to receive messages at:
+
+```
+hyperty-runtime://<runtime-instance-identifier>/pep
+```
+
+
 #### Runtime Registry
 
 The Runtime Registry handles the registration of all available runtime components including Core components, Service Provider Sandboxes and each component executing in each sandbox like Hyperty Instances, Protocol Stubs, Hyperty Inteceptors and Applications.
