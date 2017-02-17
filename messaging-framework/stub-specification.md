@@ -28,7 +28,7 @@ this._bus.addListener('*', (msg) => {
 });
 ```
 
-Whenever now the stub receives a message via this listener callback it sends it forward (in this case via a Websocke connection) to its MN.
+Whenever the stub receives a message through this listener callback it invokes its own implementation specific functionality to potentially anaylyze, process and finally send an outgoing message to its MN (either the un-modified or a transformed message, depending on the MN type). In the code example above it would just forward them via a websocket connection.
 
 For every message that is received from the MN, the stub forwards this message to the bus like shown here:
 
@@ -38,10 +38,11 @@ _onWSMessage(msg) {
   this._deliver(JSON.parse(msg.data));
 }
 ```
+Also messages received from a MN might be anaylyzed, processed and potentially transformed by the Stub before they are delivered to the runtimes message bus, depending on the MN type.
 
 ##### Auto connect mechanism
 
-The stubs are expected to support an auto connect mechanism. This is because the runtime will not explicitely invoke the connect method itself. Instead it just sends messages via the messaging bus to the stub and assumes that the stub takes care of its own connection state.
+The stubs are expected to support an auto connect mechanism. This is because the runtime will not explicitely trigger the stub connection process itself by invoking a "connect" method. Instead it just sends messages via the messaging bus to the stub and assumes that the stub takes care of its own connection state.
 
 A simple approach to implement this behavior in the stub is to maintain a flag that indicates whether the connection to the MN shall be kept open or not. This flag could be set to TRUE, as soon as the first message is being sent and to FALSE if the stub receives a "disconnect" command from the runtime. If for instance a network problem causes an interruption of the connection between stub and MN, the stub would attempt to re-connect as soon as the next message shall be sent.
 
@@ -60,14 +61,14 @@ If there is an explicit invocation of the "disconnect" method of the stub the st
 
 ```
 disconnect() {
-  this._ws.close();
   this._assumeOpen = false;
+  this._ws.close();
 }
 ```
 
-##### Connection events
+##### Connection events (TODO: update to same event-types as used for the P2P stubs?)
 
-The stub must emit a "connect" or "disconnect" message to the bus whenever its connection state changes. The following method can be used to encapsulate this:
+In order to synchronize the state of the stubs with the runtime, each stub is expected to emit status messages to the bus whenever its connection state changes. The following method can be used to encapsulate this:
 
 ```
 _sendStatus(value, reason) {
@@ -84,7 +85,8 @@ _sendStatus(value, reason) {
 this._bus.postMessage(msg); }
 ```
 
-The expected "value" parameter is either "connected" or "disconnected". Optionally a reason can be specified that will be placed int the body of the message.
+The Message is of type "update". Its "from" attribute must be the runtimeProtoStubURL that was provided as first parameter of the constructor. The "to" attribute is the runtimeProtoStubURL extended with "/status".
+The expected "value" parameter is either "connected" or "disconnected". Optionally a reason can be specified that will be placed in the body of the message.
 
 If the connection to the MN is established via a Websocket, then the sending of the corresponding event messages can be triggered in the "open" and "close" handlers of the Websocket.
 
@@ -98,7 +100,7 @@ _onWSClose() { this._sendStatus("disconnected"); }
 
 The interface that a protocol stub has to implement is kept very small and simple by intent.
 
-A protocolStub is constructed with a set of parameters that ensures that the stub can be uniquely identified, can connect to its backend Messaging Node and can communicate with the messaging bus in the runtime.
+A protocolStub is constructed with a set of parameters that ensures that the stub can be uniquely identified, connect to its backend Messaging Node and can communicate with the messaging bus in the runtime.
 
 ```
 new ProtoStub(runtimeProtoStubURL, busPostMessage, configuration)
