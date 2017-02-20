@@ -16,7 +16,7 @@ The Hyperty Concept is introduced [here](hyperty.md) as a secure user associated
 -	*User association* : A Hyperty instance is associated to a “User” (e.g. Human beings, physical objects, physical spaces, organizations) through an Identity, even if this User can be anonymous in some cases.
 -	*Data Synchronization Communication*: Hyperties interact with each other through data synch objects by using the Reporter – Observer communication pattern.
 -	*Protocol Agnostic*: Through the protocol-on-the-fly concept, Hyperties are network protocol agnostic. In other words, the data synchronization communication between Hyperties is not dependent on a specific network protocol. Communication is accomplished via a common data schema that describes the data synch objects used.
--	*GUI independent*: Hyperty should not provide Graphical User Interfaces. *to be clarified*
+-	*GUI independent*: Hyperty should not provide Graphical User Interfaces.
 -	*APIs*: A Hyperty can expose Javascript APIs within the runtime environment that can to be used by web applications
 
 While designing and specifying service logics, it should be noted that Hyperties are not suitable for all use cases. In some case, making use of a simple reusable JavaScript file as library may suffice. The next section explains the criteria under which the decision to use a Hyperty or not could apply.
@@ -27,10 +27,9 @@ These are guidelines to help developers decide if they should provide specific s
 
 * Is the feature delivery directly associated with a "User" (e.g. Human beings, physical objects, physical spaces, organizations)?
 * Does the feature delivery involve communication between "Users"?
-* Is the feature modular and reusable on different applications?
-* Can the feature be delivered and developed by different stakeholders (i.e domain specific implementation)?
+* Can the feature be delivered in cross-domain scenarios (i.e interoperability with other domains)?
 
-If the answers to the above questions are "YES" then most likely, you should go for the Hyperty Concept. Some examples are:
+If at least you have one "YES" answers to the above questions then most likely, you should go for the Hyperty Concept. Some examples are:
 
 * Video Chat between human beings;
 * a Human-being or a Data Analysis service collecting data from sensors in a Room.
@@ -41,15 +40,15 @@ The reTHINK Service Framework is what you want to look at next. The Service Fram
 
 ### Getting Started
 
-So you have decided for the Hyperty Concept and now ask yourself where to start. This section describes the basic steps any developer needs to undertake to develop Hyperties.
+So you have decided for the Hyperty Concept and now ask yourself where to start. This section describes the basic steps any developer needs to undertake to develop Hyperties. The source code of the Hello World Hyperty used as example, can be found [here](https://github.com/reTHINK-project/dev-hyperty/tree/master/src/hello-world)
 
-1) Install the Service Framework
+1) Clone the [Hyperty Toolkit Repo](https://github.com/reTHINK-project/dev-hyperty-toolkit/blob/master/README.md), the [Hyperty Repo](https://github.com/reTHINK-project/dev-hyperty) and Install the toolkit:
 
 ```
 npm install
-jspm install 
 ```
 
+Create a new folder for your Hyperty at `src` folder and work there.
 
 2) Select or specify the descriptor of the Hyperty Data Objects in json-schema. Let's assume we define a simple Hello Hyperty object:
 
@@ -124,3 +123,42 @@ syncher.subscribe(_this._objectDescriptorURL, ObjectUrl).then(function(dataObjec
           console.info(dataObjectObserver);
         });
 ```
+
+9) Define the Hyperty descritor. The most important attributes are:
+
+* constraints to be fullfilled by the Runtime, in this case the only constraint is to be executed in a browser: `browser: true`
+* hypertyType or the schemes of the data objet: `"hypertyType": ["hello"]`
+* the catalogue URL of the data object schemas supported by the Hyperty, in this case: `"dataObjects": ["https://%domain%/.well-known/dataschema/HelloWorldDataSchema"]`
+
+The complete descriptor is:
+
+```
+{
+  "language": "javascript",
+  "signature": "",
+  "configuration": {},
+  "constraints": {
+    "browser": true
+  },
+  "hypertyType": [
+    "hello"
+  ],
+  "dataObjects": [
+    "https://%domain%/.well-known/dataschema/HelloWorldDataSchema"
+  ]
+}
+```
+
+10) develop an App to test your Hyperty by using the [template used in "dev-hyperty" repo](https://github.com/reTHINK-project/dev-hyperty/tree/master/examples/hello-world).
+
+11) test and run your Hyperty,
+
+start the toolkit for browser:
+
+`npm run start:browser`
+
+Open `https://catalogue.localhost/` and accept certificate
+
+Open `https://localhost/` and select your Hyperty to be tested
+
+Any changes performed in your Hyperty source code will be automaticaly loaded by the toolkit to be tested.
