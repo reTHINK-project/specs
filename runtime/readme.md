@@ -1,7 +1,15 @@
 Runtime Architecture
 --------------------
 
-The main Hyperty Runtime architecture is comprised by different types of components that, for security reasons, are executed in isolated sandboxes. Thus, components downloaded from a specific Service Provider (e.g. Service Provider 1) are executed in sandboxes that are different from the sandboxes used to execute components downloaded from another service provider (e.g. Service Provider 2). In addition, for the same Service Provider, and also for security reasons, protocol stubs and Hyperties are isolated from each other and executed in different sandboxes. Communication between components running in different sandboxes is only possible through messages exchanged through a Message Bus functionality provided by the Core Sandbox. On the other hand, the Protocol Stub provides the bridge for the Hyperty Runtime to communicate with associated Service Provider. For example, in Figure below, protostub1 is the only way that Hyperty instances have to communicate with Service Provider 1. In general, in the Core Sandbox, all required functionalities to support the deployment, execution and maintenance of components downloaded from service providers, are executed. Core components are, ideally, natively part of the device runtime. However, to support existing platforms including Browsers and Mobile Operating Systems, to minimise the need to install new applications, the existing device native runtime functionalities (e.g. JavaScript engine) are distinguished from the Hyperty Core Runtime functionalities. In such situations, the Hyperty Core Runtime components are downloaded from the Hyperty Runtime Service Provider and are executed in an isolated core sandbox.
+The Hyperty Runtime provides all required functionalities to securely manage the life-cycle of Hyperties, only consuming back-end support services when strictly required.
+
+The Hyperty Runtime was designed to support the execution of multiple untrusted software components, namely Applications, Hyperties, ProtoStubs, and Hyperty Core Runtime components. Therefore, to provide for the overall system security, it is necessary to ensure that different components execute in isolation from each other and to restrict their communication path to take place through secure channels.
+
+To enforce isolation, the Hyperty Runtime implements a sandboxing mechanism which confines components downloaded from different service providers to independent sandboxes. Applications and Hyperties may or may not run within the same sandbox depending on their trust level. If they are downloaded from the same Service Provider, it is assumed that they trust each other and that they can share the same sandbox. Otherwise, Hyperties and Application run in different sandboxes. On the other hand, Protocol Stubs and Hyperties live in separate sandboxes even if they are distributed by the same Service Provider. To preserve compatibility with existing device native runtimes, Hyperty Core Runtime components are downloaded from the Hyperty Runtime Service Provider and executed in a sandbox named Core Sandbox. The Core Sandbox is responsible for the deployment, execution, and supervision of components downloaded from Service Providers.
+
+Communication between components residing in different sandboxes is possible only through messages exchanged via the Message Bus component located in the Core Sandbox. To communicate with a Service Provider, a Hyperty must first send a message to the Protocol Stub associated with that Service Provider; the Protocol Stub plays the role of a bridge between the Hyperty Runtime and the Service Provider. If Hyperty and Application share the same sandbox, they can communicate directly through a local API, otherwise they have to exchange messages through the Message Bus.
+
+For example, in Figure below, protostub1 is the only way that Hyperty instances have to communicate with Service Provider 1. In general, in the Core Sandbox, all required functionalities to support the deployment, execution and maintenance of components downloaded from service providers, are executed. Core components are, ideally, natively part of the device runtime. However, to support existing platforms including Browsers and Mobile Operating Systems, to minimise the need to install new applications, the existing device native runtime functionalities (e.g. JavaScript engine) are distinguished from the Hyperty Core Runtime functionalities. In such situations, the Hyperty Core Runtime components are downloaded from the Hyperty Runtime Service Provider and are executed in an isolated core sandbox.
 
 ![High Level Runtime Architecture with trusted Hyperties](Runtime_Architecture_high_level.png)
 
@@ -19,12 +27,17 @@ Some more details are provided in the following sections.
 
 #### Hyperty
 
-As [previously defined, Hyperties](https://github.com/reTHINK-project/dev-service-framework/blob/master/docs/manuals/hyperty.md) cooperate each other via P2P Synchronisation of Hyperty JSON Data Objects supported by the novel [Reporter - Observer communication pattern](https://github.com/reTHINK-project/dev-service-framework/blob/master/docs/manuals/p2p-data-sync.md) and on top of the [Hyperty Messaging Framework](https://github.com/reTHINK-project/dev-service-framework/blob/develop/docs/manuals/hyperty-messaging-framework.md).
+[Hyperties](../tutorials/hyperty.md) is a new service paradigm designed according to [Decentralised Communication principles](../messaging-framework/readme.md).
+It follows Microservices architectural patterns, i.e. Hyperties are independently deployable components.
+Each hyperty provides a small set of business capabilities, using the smart endpoints and dumb pipes philosophy.
+On the other side, Hyperties follow emerging Edge and Fog computing paradigms as opposed to more popular Cloud Computing and they are executed as much as possible in end-users devices.
+
+Hyperties are dynamically deployed from the Runtime Catalogue, when required by Applications. Each Hyperty instance is registered in the Runtime Registry.
 
 
 #### Protocol Stub
 
-The Protocol Stub implements a protocol stack to be used to communicate with the Service Provider's backend servers (including Messaging Server or other functionalities like IdM) according to [Protocol on the Fly](https://github.com/reTHINK-project/dev-service-framework/blob/develop/docs/manuals/hyperty-messaging-framework.md#protocol-on-the-fly-protofly-and-protostubs) concept.
+The Protocol Stub implements a protocol stack to be used to communicate with the Service Provider's backend servers (including Messaging Server or other functionalities) according to [Protocol on the Fly](../messaging-framework/protofly.md) concept.
 
 Protocol stubs are only reachable through the Message BUS. In this way it is ensured that all messages received and sent goes through the message bus where policies can be enforced and additional data can be added or changed including identity tokens.
 
@@ -34,19 +47,19 @@ The Core Runtime components are depicted in Figure below.
 
 ![Runtime Core Architecture](Core_Runtime.png)
 
-Runtime Core components should be as much as possible independent on the Runtime type. They should be deployed once and executed at the background. The next time the runtime is started there should be no need to download the core runtime again unless there is a new version. Runtime core components instances should be shared by different Apps and Hyperty instances.
+Runtime Core components should be as much as possible independent from the Runtime type. They should be deployed once and executed at the background. The next time the runtime is started there should be no need to download the core runtime again unless there is a new version. Runtime core components instances should be shared by different Apps and Hyperty instances.
 
-The Core Runtime is provided by a specific Service Provider (the Core Runtime Service Provider) that handles a Catalogue service to with Runtime Descriptors and a Registry service to handle the registration of Runtime instances.
+The Core Runtime is provided by a specific Service Provider (the Core Runtime Service Provider) that handles a Catalogue service with Runtime Descriptors and a Registry service to handle the registration of Runtime instances.
 
 #### Message BUS
 
-The Message Bus Supports local message communication in a loosely coupled manner between Service Provider sandboxes including Hyperty Instances, Protocol Stubs and Policy Enforcers. Messages are routed to listeners previously added by the Runtime User Agent, to valid Runtime URL addresses handled by the Runtime Registry functionality.
+The Message Bus Supports local message communication in a loosely coupled manner between Service Provider sandboxes including Hyperty Instances and Protocol Stubs. Messages are routed to listeners previously added by the Runtime User Agent, to valid Runtime URL addresses handled by the Runtime Registry functionality.
 
-Access to Message Bus is subject to authorisation to prevent cross origin attacks / spy from malicious downloaded code including Hyperties, Protocol Stubs or Policy Enforcers.
+Access to Message Bus is subject to authorisation by the Policy Engine, to prevent cross origin attacks / spy from malicious downloaded code including Hyperties and Protocol Stubs.
 
-#### Core Policy Engine
+#### Policy Engine
 
-The Core Policy Engine provides Policy decision and Policy Enforcement functionalities for incoming and outgoing messages from / to Service Provider sandboxes, according to Policies downloaded and stored locally when associated Hyperties are deployed by the Runtime User Agent. It also provides authorisation / access control to the Message BUS.
+The Policy Engine provides Policy decision and Policy Enforcement functionalities for incoming and outgoing messages from / to Service Provider sandboxes, according to Policies downloaded and stored locally when associated Hyperties are deployed by the Runtime User Agent. It also provides authorisation / access control to the Message BUS.
 
 The verification or generation of identity assertions, to get valid Access tokens, are two examples of actions ruled by policies.
 
@@ -59,11 +72,9 @@ hyperty-runtime://<runtime-instance-identifier>/pep
 
 #### Runtime Registry
 
-The Runtime Registry handles the registration of all available runtime components including Core components, Service Provider Sandboxes and each component executing in each sandbox like Hyperty Instances, Protocol Stubs, Hyperty Inteceptors and Applications.
+The Runtime Registry handles the registration of all available runtime components including Core components, Service Provider Sandboxes and each component executing in each sandbox like Hyperty Instances, Protocol Stubs, IdP Proxies and Applications.
 
-The Runtime Registry handles the allocation of Runtime URL addresses for all these components and manages its status.
-
-In addition, the Runtime Registry ensures synchronisation with Back-end Service Provider's Domain Registry.
+In addition, the Runtime Registry ensures synchronisation with Back-end Service Provider's Domain Registry or other runtimes connected with P2P Connections.
 
 The Runtime Registry must have listeners to receive messages at:
 
@@ -85,7 +96,7 @@ hyperty-runtime://<runtime-instance-identifier>/idm
 
 #### Runtime User Agent
 
-The Runtime User Agent, manages Core Sandbox components including its download, deployment and update from Core Runtime Provider. It also handles Device bootstrap and the deployment and update of Service Provider sandboxes including Hyperties, Protocol Stubs and Policy Enforcers, via the Runtime Catalogue.
+The Runtime User Agent, manages Core Sandbox components including its download, deployment and update from Core Runtime Provider. It also handles Device bootstrap and the deployment and update of Service Provider sandboxes including Hyperties, Protocol Stubs and IdP Proxies, via the Runtime Catalogue.
 
 The Runtime User Agent must have listeners to receive messages at:
 
@@ -114,7 +125,7 @@ hyperty-runtime://<runtime-instance-identifier>/sm
 
 #### Address Allocation
 
-The Address Allocation manages the allocation of addresses to Hyperties and Data Objects. It tries to reuse as much as possible addresses previously registered in the Runtime Registry. Otherwise it interacts with the Messange Node to allocate new addresses.
+The Address Allocation manages the allocation of addresses to Hyperties and Data Objects. It reuses possible addresses previously registered in the Runtime Registry when requested by the business logic. Otherwise it interacts with the Messange Node to allocate new addresses.
 
 The Address Allocation must have listeners to receive messages at:
 
@@ -124,7 +135,7 @@ hyperty-runtime://<runtime-instance-identifier>/address-allocation
 
 #### Graph Connector
 
-The Graph Connector is a local address book maintaining a list of trustful communication users. This functionality is further detailed in deliverable D4.2.
+The Graph Connector is a local address book maintaining a list of trustful communication users. It also provides functionalities to manage User GUIDs.
 
 The Graph Connector must have listeners to receive messages at:
 
@@ -132,6 +143,15 @@ The Graph Connector must have listeners to receive messages at:
 hyperty-runtime://<runtime-instance-identifier>/graph
 ```
 
+#### Discovery
+
+The Discovery provides different types of search for Hyperties and Data Objects which is used by the Discovery lib provided in the Service Framework.
+
+The Discovery component must have listeners to receive messages at:
+
+```
+hyperty-runtime://<runtime-instance-identifier>/discovery
+```
 
 ### Native Runtime
 

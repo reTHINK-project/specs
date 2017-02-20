@@ -29,6 +29,8 @@ node "" as core1 {
  node "Address Allocation" as Address
 
  node "Graph\nConnector" as Graph
+
+ node "Discovery" as Discovery
 }
 
 
@@ -56,6 +58,12 @@ node "" as core1 {
 
  Reg <-up- Bus: resolve\nmessage
 
+ Discovery <-up- Bus: discover
+
+ Discovery -right-> Graph: search \nGlobal\n Registry
+
+ Discovery -left-> Reg: search
+
  Sync <-down- Bus: manage\nsync
 
  RunUA -> Bus : add listener
@@ -68,7 +76,11 @@ node "" as core1 {
 
 RepUA -up-> CatI : query and\n download \nCatalogue\n Objects
 
+
+
 rt -[hidden]up- SP
+
+Discovery -[hidden]right- ID
 
 SPSand -[hidden]up- CatI
 
