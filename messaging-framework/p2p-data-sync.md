@@ -1,4 +1,4 @@
-### P2P Data Synchronisation: Reporter - Observer Model
+## P2P Data Synchronisation: Reporter - Observer Model
 
 
 This document gives an overview on how Hyperties cooperate with each other through a Data Synchronisation model called Reporter - Observer.
@@ -18,13 +18,13 @@ Full interoperability is achieved between two service instances by only having t
 
 To be noted that, conceptually, more complex semantic interoperability and data synchronization technologies, like Semantic Web and Operational Transformation, can be used.
 
-#### Data Object URL address
+### Data Object URL address
 
 Data Objects addresses follow [Information-centric networking](https://irtf.org/icnrg) design principles to support Data Object portability (between Communication end-points) and group communication.
 These characteristics are supported by the usage virtual addresses separately allocated to Data Objects, which are agnostic of the network addresses and the execution environment.
 
 
-#### Data Object Schema
+### Data Object Schema
 
 Each Data Object is formally described by a JSON-Schema that is identified by a Catalogue URL. This allows to check whether two different services are compliant by checking each supported Data Object schema. At this point the following Data Object schemas are defined:
 
@@ -32,7 +32,7 @@ Each Data Object is formally described by a JSON-Schema that is identified by a 
 -	**[Communication Data Schema](../datamodel/data-objects/communication)** : services supporting this schema are able to handle different communication types including Textual Chat, Audio, Video, Screen Sharing and File sharing. Such communication can be supported on top of WebRTC protocol streams by using the Connection Data Schema. The URL Scheme for Communication Data Objects is "comm" (example: "comm://example.com/group-chat/rethink201601290617").
 -	**[Context Data Schema](../datamodel/context)** : services supporting this schema are able to produce or consume Context Data, usually collected from sensors. The URL Scheme for Communication Data Objects is "ctxt" (example: "ctxt://example.com/room/temperature201601290617").
 
-#### Parent - Children Resources
+### Parent - Children Resources
 
 In order to allow use cases like Group Chat where all involved services are able to write in the Sync Data Object, the Parent - Child Data Sync Objects are introduced.
 
@@ -48,7 +48,7 @@ All other services observing or reporting the Data Object Parent, will be notifi
 
 At this point, Data Object Child can't also be a Data Object Parent of another Sync Data Object, i.e. Data Object composition is limited to one level.
 
-#### Syncher and Sync Manager
+### Syncher and Sync Manager
 
 This section, gives an overview on how the Data Object synchronisation transparently works on top of the [Messaging Framework](readme.md).
 

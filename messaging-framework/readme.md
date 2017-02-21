@@ -1,4 +1,4 @@
-### Decentralized Messaging Framework overview
+## Decentralized Messaging Framework overview
 
 This document gives an overview on a Decentraized Messaging Framework technical solution that is used by the higher level [Data Synchronisation Reporter - Observer communication mechanism](p2p-data-sync.md).
 
