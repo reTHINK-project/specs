@@ -56,7 +56,7 @@ Response Message sent back from the Identity Management (IDP Proxy).
 "body" : { "code": 200, "value" : <JWT Token> }
 ```
 
-#### generate Assertion
+#### validate Assertion
 
 Message sent by the Identity Module function to Identity Management (IDP Proxy) to validate an Identity Assertion.
 
@@ -104,8 +104,30 @@ Message sent by the Identity Module function to Application Sandbox to hide admi
 
 ```
 "id" : 4
-"type" : "read",
+"type" : "READ",
 "from" : "hyperty://<hyperty-connector>/<hyperty-instance-identifier>",
 "to" : "hyperty-runtime://<runtime-domain>/<runtime-instance-identifier>/idm",
 "body" : { "resource" : "." , "criteria" : "hyperty = hyperty://<hyperty-connector>/<hyperty-instance-identifier>" }
+```
+
+#### Deploy Identity Module GUI
+
+Request made by the identity-gui to the identity module for deploying the gui.
+
+```
+"id" : 5
+"type" : "EXECUTE",
+"from" : "hyperty-runtime://<runtime-domain>/<runtime-instance-identifier>/identity-gui",
+"to" : "hyperty-runtime://<runtime-domain>/<runtime-instance-identifier>/idm",
+"body" : { "resource": "identity", "method": "deployGUI", "params": {} }
+```
+
+Response by the identity module to the identity-gui.
+
+```
+"id" : 5
+"type" : "RESPONSE",
+"from" : "hyperty-runtime://<runtime-domain>/<runtime-instance-identifier>/idm",
+"to" : "hyperty-runtime://<runtime-domain>/<runtime-instance-identifier>/identity-gui",
+"body" : { "type": "execute", "value": {}, "code": 200}
 ```
