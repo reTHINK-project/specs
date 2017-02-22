@@ -9,6 +9,9 @@ This doc specifies Messages to be used to manage identities, where,
 -	`<origin-value>` is a JSON object compliant with ...
 -	`<usernameHint-value>` is a JSON object compliant with ...
 -	`<assertion-value>` is a JSON object compliant with ...
+- `<identity-values>` is a JSON object compliant with ...
+- `<idp-values>` is a JSON object compliant with ...
+- `<email-value>` is a JSON object compliant with ...
 
 #### Relying Party Login
 
@@ -119,7 +122,7 @@ Request made by the identity-gui to the identity module for deploying the gui.
 "type" : "EXECUTE",
 "from" : "hyperty-runtime://<runtime-domain>/<runtime-instance-identifier>/identity-gui",
 "to" : "hyperty-runtime://<runtime-domain>/<runtime-instance-identifier>/idm",
-"body" : { "resource": "identity", "method": "deployGUI", "params": {} }
+"body" : { "resource" : "identity" , "method" : "deployGUI" , "params" : {} }
 ```
 
 Response by the identity module to the identity-gui.
@@ -129,5 +132,49 @@ Response by the identity module to the identity-gui.
 "type" : "RESPONSE",
 "from" : "hyperty-runtime://<runtime-domain>/<runtime-instance-identifier>/idm",
 "to" : "hyperty-runtime://<runtime-domain>/<runtime-instance-identifier>/identity-gui",
-"body" : { "type": "execute", "value": {}, "code": 200}
+"body" : { "type" : "execute" , "value" : {} , "code" : 200}
+```
+
+#### Get Identities To Choose From
+
+Request made by the identity-gui to the identity module for the identities available to choose.
+
+```
+"id" : 6
+"type" : "EXECUTE",
+"from" : "hyperty-runtime://<runtime-domain>/<runtime-instance-identifier>/identity-gui",
+"to" : "hyperty-runtime://<runtime-domain>/<runtime-instance-identifier>/idm",
+"body" : { "resource" : "identity" , "method" : "getIdentitiesToChoose" , "params" : {} }
+```
+
+Response by the identity module to the identity-gui.
+
+```
+"id" : 6
+"type" : "RESPONSE",
+"from" : "hyperty-runtime://<runtime-domain>/<runtime-instance-identifier>/idm",
+"to" : "hyperty-runtime://<runtime-domain>/<runtime-instance-identifier>/identity-gui",
+"body" : { "type" : "execute" , "value" : { ["identities" : "<identity-values>"] , ["idps" : "<idp-values>"] } , "code" : 200}
+```
+
+#### Unregister One Identity
+
+Request made by the identity-gui to the identity module for for unregistering one identity.
+
+```
+"id" : 7
+"type" : "EXECUTE",
+"from" : "hyperty-runtime://<runtime-domain>/<runtime-instance-identifier>/identity-gui",
+"to" : "hyperty-runtime://<runtime-domain>/<runtime-instance-identifier>/idm",
+"body" : { "resource" : "identity" , "method" : "unregisterIdentity" , "params" : { ["email" : "<email-value>" ] } }
+```
+
+Response by the identity module to the identity-gui.
+
+```
+"id" : 7
+"type" : "RESPONSE",
+"from" : "hyperty-runtime://<runtime-domain>/<runtime-instance-identifier>/idm",
+"to" : "hyperty-runtime://<runtime-domain>/<runtime-instance-identifier>/identity-gui",
+"body" : { "type" : "execute" , "value" : { } , "code" : 200}
 ```
