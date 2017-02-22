@@ -10,8 +10,13 @@ This doc specifies Messages to be used to manage identities, where,
 -	`<usernameHint-value>` is a JSON object compliant with ...
 -	`<assertion-value>` is a JSON object compliant with ...
 - `<identity-values>` is a JSON object compliant with ...
+- `<identity-value>` is a JSON object compliant with ...
 - `<idp-values>` is a JSON object compliant with ...
 - `<email-value>` is a JSON object compliant with ...
+- `<idp-domain>` is a JSON object compliant with ...
+- `<keypair-value>` is a JSON object compliant with ...
+- `<urlreceived-value>` is a JSON object compliant with ...
+- `<result-value>` is a JSON object compliant with ...
 
 #### Relying Party Login
 
@@ -46,7 +51,7 @@ Message sent by the Identity Module function to Identity Management (IDP Proxy) 
 "type" : "EXECUTE",
 "from" : "hyperty-runtime://<runtime-domain>/<runtime-instance-identifier>/idm",
 "to" : "domain-idp://<idp-domain>",
-"body" : { "resource" : "/identity/<user identifier>", "method" : "generateAssertion" , "params" : { ["contents" : "<contents-value>", "origin" : "<origin-value>", "usernameHint" : "<usernameHint-value>"] }
+"body" : { "resource" : "/identity/<user identifier>", "method" : "generateAssertion" , "params" : { ["contents" : "<contents-value>", "origin" : "<origin-value>", "usernameHint" : "<usernameHint-value>" , "ipDomain" : "<idp-domain>" ] }
 ```
 
 Response Message sent back from the Identity Management (IDP Proxy).
@@ -56,7 +61,7 @@ Response Message sent back from the Identity Management (IDP Proxy).
 "type" : "RESPONSE",
 "from" : "domain-idp://<idp-domain>",
 "to" : "hyperty-runtime://<runtime-domain>/<runtime-instance-identifier>/idm",
-"body" : { "code": 200, "value" : <JWT Token> }
+"body" : { "code": 200, "value" : "<assertion-value>" }
 ```
 
 #### validate Assertion
@@ -132,7 +137,7 @@ Response by the identity module to the identity-gui.
 "type" : "RESPONSE",
 "from" : "hyperty-runtime://<runtime-domain>/<runtime-instance-identifier>/idm",
 "to" : "hyperty-runtime://<runtime-domain>/<runtime-instance-identifier>/identity-gui",
-"body" : { "type" : "execute" , "value" : {} , "code" : 200}
+"body" : { "type" : "execute" , "value" : {} , "code" : 200 }
 ```
 
 #### Get Identities To Choose From
@@ -154,12 +159,12 @@ Response by the identity module to the identity-gui.
 "type" : "RESPONSE",
 "from" : "hyperty-runtime://<runtime-domain>/<runtime-instance-identifier>/idm",
 "to" : "hyperty-runtime://<runtime-domain>/<runtime-instance-identifier>/identity-gui",
-"body" : { "type" : "execute" , "value" : { ["identities" : "<identity-values>"] , ["idps" : "<idp-values>"] } , "code" : 200}
+"body" : { "type" : "execute" , "value" : { ["identities" : "<identity-values>" , "idps" : "<idp-values>"] } , "code" : 200 }
 ```
 
 #### Unregister One Identity
 
-Request made by the identity-gui to the identity module for for unregistering one identity.
+Request made by the identity-gui to the identity module for unregistering one identity.
 
 ```
 "id" : 7
@@ -176,5 +181,93 @@ Response by the identity module to the identity-gui.
 "type" : "RESPONSE",
 "from" : "hyperty-runtime://<runtime-domain>/<runtime-instance-identifier>/idm",
 "to" : "hyperty-runtime://<runtime-domain>/<runtime-instance-identifier>/identity-gui",
-"body" : { "type" : "execute" , "value" : { } , "code" : 200}
+"body" : { "type" : "execute" , "value" : { } , "code" : 200 }
+```
+
+#### Generate RSA Key Pair
+
+Request made by the identity-gui to the identity module for generating a new RSA compliant key pair.
+
+```
+"id" : 8
+"type" : "EXECUTE",
+"from" : "hyperty-runtime://<runtime-domain>/<runtime-instance-identifier>/identity-gui",
+"to" : "hyperty-runtime://<runtime-domain>/<runtime-instance-identifier>/idm",
+"body" : { "resource" : "identity" , "method" : "generateRSAKeyPair" , "params" : { } }
+```
+
+Response by the identity module to the identity-gui.
+
+```
+"id" : 8
+"type" : "RESPONSE",
+"from" : "hyperty-runtime://<runtime-domain>/<runtime-instance-identifier>/idm",
+"to" : "hyperty-runtime://<runtime-domain>/<runtime-instance-identifier>/identity-gui",
+"body" : { "type" : "execute" , "value" : "<keypair-value>" , "code" : 200 }
+```
+
+#### Send a Generate Assertion Message To IdP Proxy
+
+Request made by the identity-gui to the identity module for sending a generateAssertion message to the IdP Proxy.
+
+```
+"id" : 9
+"type" : "EXECUTE",
+"from" : "hyperty-runtime://<runtime-domain>/<runtime-instance-identifier>/identity-gui",
+"to" : "hyperty-runtime://<runtime-domain>/<runtime-instance-identifier>/idm",
+"body" : { "resource" : "identity" , "method" : "sendGenerateMessage" , "params" : { [ "contents" : "<contents-value>", "origin" : "<origin-value>", "usernameHint" : "<usernameHint-value>", "ipDomain" : "<idp-domain>" ] } }
+```
+
+Response by the identity module to the identity-gui.
+
+```
+"id" : 9
+"type" : "RESPONSE",
+"from" : "hyperty-runtime://<runtime-domain>/<runtime-instance-identifier>/idm",
+"to" : "hyperty-runtime://<runtime-domain>/<runtime-instance-identifier>/identity-gui",
+"body" : { "type" : "execute" , "value" : "<assertion-value>" , "code" : 200 }
+```
+
+#### Open Identity Selection Pop-up
+
+Request made by the identity-gui to the identity module for opening the identity selection pop-up.
+
+```
+"id" : 10
+"type" : "EXECUTE",
+"from" : "hyperty-runtime://<runtime-domain>/<runtime-instance-identifier>/identity-gui",
+"to" : "hyperty-runtime://<runtime-domain>/<runtime-instance-identifier>/idm",
+"body" : { "resource" : "identity" , "method" : "openPopup" , "params" : { [ "urlreceived" : "<urlreceived-value>" ] } }
+```
+
+Response by the identity module to the identity-gui.
+
+```
+"id" : 10
+"type" : "RESPONSE",
+"from" : "hyperty-runtime://<runtime-domain>/<runtime-instance-identifier>/idm",
+"to" : "hyperty-runtime://<runtime-domain>/<runtime-instance-identifier>/identity-gui",
+"body" : { "type" : "execute" , "value" : "<url-value>" , "code" : 200 }
+```
+
+#### Store One Identity 
+
+Request made by the identity-gui to the identity module for storing one identity.
+
+```
+"id" : 11
+"type" : "EXECUTE",
+"from" : "hyperty-runtime://<runtime-domain>/<runtime-instance-identifier>/identity-gui",
+"to" : "hyperty-runtime://<runtime-domain>/<runtime-instance-identifier>/idm",
+"body" : { "resource" : "identity" , "method" : "storeIdentity" , "params" : { [ "result" : "<result-value>" , "keyPair" : "<keypair-value>" ] } }
+```
+
+Response by the identity module to the identity-gui.
+
+```
+"id" : 11
+"type" : "RESPONSE",
+"from" : "hyperty-runtime://<runtime-domain>/<runtime-instance-identifier>/idm",
+"to" : "hyperty-runtime://<runtime-domain>/<runtime-instance-identifier>/identity-gui",
+"body" : { "type" : "execute" , "value" : "<identity-value>" , "code" : 200 }
 ```
