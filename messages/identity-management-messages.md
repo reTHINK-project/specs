@@ -22,7 +22,7 @@ This doc specifies Messages to be used to manage identities, where,
 Message sent by the Identity Module function to Identity Management (IDP Proxy) to generate an Identity Assertion.
 
 ```
-"id" : 2
+"id" : 1
 "type" : "EXECUTE",
 "from" : "hyperty-runtime://<runtime-domain>/<runtime-instance-identifier>/idm",
 "to" : "domain-idp://<idp-domain>",
@@ -32,7 +32,7 @@ Message sent by the Identity Module function to Identity Management (IDP Proxy) 
 Response Message sent back from the Identity Management (IDP Proxy).
 
 ```
-"id" : 2
+"id" : 1
 "type" : "RESPONSE",
 "from" : "domain-idp://<idp-domain>",
 "to" : "hyperty-runtime://<runtime-domain>/<runtime-instance-identifier>/idm",
@@ -44,7 +44,7 @@ Response Message sent back from the Identity Management (IDP Proxy).
 Message sent by the Identity Module function to Identity Management (IDP Proxy) to validate an Identity Assertion.
 
 ```
-"id" : 3
+"id" : 2
 "type" : "EXECUTE",
 "from" : "hyperty-runtime://<runtime-domain>/<runtime-instance-identifier>/idm",
 "to" : "domain-idp://<idp-domain>",
@@ -54,43 +54,11 @@ Message sent by the Identity Module function to Identity Management (IDP Proxy) 
 Response Message sent back from the Identity Management (IDP Proxy).
 
 ```
-"id" : 3
+"id" : 2
 "type" : "RESPONSE",
 "from" : "domain-idp://<idp-domain>",
 "to" : "hyperty-runtime://<runtime-domain>/<runtime-instance-identifier>/idm",
 "body" : { "code": 200, "value" : "<boolean?>" }
-```
-
-#### Hide / Unhide Identity Module admin page
-
-Message sent by the Identity Module function to Application Sandbox to unhide admin page.
-
-```
-"id" : 3
-"type" : "EXECUTE",
-"from" : "hyperty-runtime://<runtime-domain>/<runtime-instance-identifier>/idm",
-"to" : "hyperty-runtime://<runtime-domain>/<runtime-instance-identifier>/gui-manager",
-"body" : { "method" : "unhideAdminPage" }
-```
-
-Message sent by the Identity Module function to Application Sandbox to hide admin page.
-
-```
-"id" : 3
-"type" : "EXECUTE",
-"from" : "hyperty-runtime://<runtime-domain>/<runtime-instance-identifier>/idm",
-"to" : "hyperty-runtime://<runtime-domain>/<runtime-instance-identifier>/gui-manager",
-"body" : { "method" : "hideAdminPage" }
-```
-
-#### Get Identity Associated to Hyperty Instance
-
-```
-"id" : 4
-"type" : "READ",
-"from" : "hyperty://<hyperty-connector>/<hyperty-instance-identifier>",
-"to" : "hyperty-runtime://<runtime-domain>/<runtime-instance-identifier>/idm",
-"body" : { "resource" : "." , "criteria" : "hyperty = hyperty://<hyperty-connector>/<hyperty-instance-identifier>" }
 ```
 
 #### Deploy Identity Module GUI
@@ -98,7 +66,7 @@ Message sent by the Identity Module function to Application Sandbox to hide admi
 Request made by the identity-gui to the identity module for deploying the gui.
 
 ```
-"id" : 5
+"id" : 3
 "type" : "EXECUTE",
 "from" : "hyperty-runtime://<runtime-domain>/<runtime-instance-identifier>/identity-gui",
 "to" : "hyperty-runtime://<runtime-domain>/<runtime-instance-identifier>/idm",
@@ -108,7 +76,7 @@ Request made by the identity-gui to the identity module for deploying the gui.
 Response by the identity module to the identity-gui.
 
 ```
-"id" : 5
+"id" : 3
 "type" : "RESPONSE",
 "from" : "hyperty-runtime://<runtime-domain>/<runtime-instance-identifier>/idm",
 "to" : "hyperty-runtime://<runtime-domain>/<runtime-instance-identifier>/identity-gui",
@@ -120,7 +88,7 @@ Response by the identity module to the identity-gui.
 Request made by the identity-gui to the identity module for the identities available to choose.
 
 ```
-"id" : 6
+"id" : 4
 "type" : "EXECUTE",
 "from" : "hyperty-runtime://<runtime-domain>/<runtime-instance-identifier>/identity-gui",
 "to" : "hyperty-runtime://<runtime-domain>/<runtime-instance-identifier>/idm",
@@ -130,7 +98,7 @@ Request made by the identity-gui to the identity module for the identities avail
 Response by the identity module to the identity-gui.
 
 ```
-"id" : 6
+"id" : 4
 "type" : "RESPONSE",
 "from" : "hyperty-runtime://<runtime-domain>/<runtime-instance-identifier>/idm",
 "to" : "hyperty-runtime://<runtime-domain>/<runtime-instance-identifier>/identity-gui",
@@ -142,7 +110,7 @@ Response by the identity module to the identity-gui.
 Request made by the identity-gui to the identity module for unregistering one identity.
 
 ```
-"id" : 7
+"id" : 5
 "type" : "EXECUTE",
 "from" : "hyperty-runtime://<runtime-domain>/<runtime-instance-identifier>/identity-gui",
 "to" : "hyperty-runtime://<runtime-domain>/<runtime-instance-identifier>/idm",
@@ -152,7 +120,7 @@ Request made by the identity-gui to the identity module for unregistering one id
 Response by the identity module to the identity-gui.
 
 ```
-"id" : 7
+"id" : 5
 "type" : "RESPONSE",
 "from" : "hyperty-runtime://<runtime-domain>/<runtime-instance-identifier>/idm",
 "to" : "hyperty-runtime://<runtime-domain>/<runtime-instance-identifier>/identity-gui",
@@ -164,7 +132,7 @@ Response by the identity module to the identity-gui.
 Request made by the identity-gui to the identity module for generating a new RSA compliant key pair.
 
 ```
-"id" : 8
+"id" : 6
 "type" : "EXECUTE",
 "from" : "hyperty-runtime://<runtime-domain>/<runtime-instance-identifier>/identity-gui",
 "to" : "hyperty-runtime://<runtime-domain>/<runtime-instance-identifier>/idm",
@@ -174,7 +142,7 @@ Request made by the identity-gui to the identity module for generating a new RSA
 Response by the identity module to the identity-gui.
 
 ```
-"id" : 8
+"id" : 6
 "type" : "RESPONSE",
 "from" : "hyperty-runtime://<runtime-domain>/<runtime-instance-identifier>/idm",
 "to" : "hyperty-runtime://<runtime-domain>/<runtime-instance-identifier>/identity-gui",
@@ -186,7 +154,7 @@ Response by the identity module to the identity-gui.
 Request made by the identity-gui to the identity module for sending a generateAssertion message to the IdP Proxy.
 
 ```
-"id" : 9
+"id" : 7
 "type" : "EXECUTE",
 "from" : "hyperty-runtime://<runtime-domain>/<runtime-instance-identifier>/identity-gui",
 "to" : "hyperty-runtime://<runtime-domain>/<runtime-instance-identifier>/idm",
@@ -196,7 +164,7 @@ Request made by the identity-gui to the identity module for sending a generateAs
 Response by the identity module to the identity-gui.
 
 ```
-"id" : 9
+"id" : 7
 "type" : "RESPONSE",
 "from" : "hyperty-runtime://<runtime-domain>/<runtime-instance-identifier>/idm",
 "to" : "hyperty-runtime://<runtime-domain>/<runtime-instance-identifier>/identity-gui",
@@ -208,7 +176,7 @@ Response by the identity module to the identity-gui.
 Request made by the identity-gui to the identity module for opening the identity selection pop-up.
 
 ```
-"id" : 10
+"id" : 8
 "type" : "EXECUTE",
 "from" : "hyperty-runtime://<runtime-domain>/<runtime-instance-identifier>/identity-gui",
 "to" : "hyperty-runtime://<runtime-domain>/<runtime-instance-identifier>/idm",
@@ -218,7 +186,7 @@ Request made by the identity-gui to the identity module for opening the identity
 Response by the identity module to the identity-gui.
 
 ```
-"id" : 10
+"id" : 8
 "type" : "RESPONSE",
 "from" : "hyperty-runtime://<runtime-domain>/<runtime-instance-identifier>/idm",
 "to" : "hyperty-runtime://<runtime-domain>/<runtime-instance-identifier>/identity-gui",
@@ -230,7 +198,7 @@ Response by the identity module to the identity-gui.
 Request made by the identity-gui to the identity module for storing one identity.
 
 ```
-"id" : 11
+"id" : 9
 "type" : "EXECUTE",
 "from" : "hyperty-runtime://<runtime-domain>/<runtime-instance-identifier>/identity-gui",
 "to" : "hyperty-runtime://<runtime-domain>/<runtime-instance-identifier>/idm",
@@ -240,7 +208,7 @@ Request made by the identity-gui to the identity module for storing one identity
 Response by the identity module to the identity-gui.
 
 ```
-"id" : 11
+"id" : 9
 "type" : "RESPONSE",
 "from" : "hyperty-runtime://<runtime-domain>/<runtime-instance-identifier>/idm",
 "to" : "hyperty-runtime://<runtime-domain>/<runtime-instance-identifier>/identity-gui",
