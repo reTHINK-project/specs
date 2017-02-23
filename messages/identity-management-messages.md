@@ -4,7 +4,6 @@ Identity Management Messages
 This doc specifies Messages to be used to manage identities, where,
 
 
--	`<login-scope>` is a JSON object compliant with ...
 -	`<contents-value>` is a JSON object compliant with ...
 -	`<origin-value>` is a JSON object compliant with ...
 -	`<usernameHint-value>` is a JSON object compliant with ...
@@ -17,30 +16,6 @@ This doc specifies Messages to be used to manage identities, where,
 - `<keypair-value>` is a JSON object compliant with ...
 - `<urlreceived-value>` is a JSON object compliant with ...
 - `<result-value>` is a JSON object compliant with ...
-
-#### Relying Party Login
-
-Message sent by the Identity Module function to Identity Management (IDP Proxy) to trigger a Relying Party login. The GUI to support this login will be provided by the IDP Proxy, probably a windows downloaded from the IDP.
-(since the login will be handled by the IDP Proxy this message is an RPC to execute the login)
-
-```
-"id" : 1
-"type" : "EXECUTE",
-"from" : "hyperty-runtime://<runtime-domain>/<runtime-instance-identifier>/idm",
-"to" : "domain-idp://<idp-domain>",
-"body" : { "resource" : "/identity/<user identifier>", "method" : "login" , "params" : { ["scope" : "<login-scope>"] }
-```
-
-Response Message sent back from the Identity Management (IDP Proxy).
-
-```
-"id" : 1
-"type" : "RESPONSE",
-"from" : "domain-idp://<idp-domain>",
-"to" : "hyperty-runtime://<runtime-domain>/<runtime-instance-identifier>/idm",
-"body" : { "code": 200, "value": "<JWT Token>" }
-```
-
 
 #### generate Assertion
 
