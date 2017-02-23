@@ -15,7 +15,6 @@ This doc specifies Messages to be used to manage identities, where,
 - `<idp-domain>` is a JSON object compliant with ...
 - `<keypair-value>` is a JSON object compliant with ...
 - `<urlreceived-value>` is a JSON object compliant with ...
-- `<result-value>` is a JSON object compliant with ...
 
 #### generate Assertion
 
@@ -202,7 +201,7 @@ Request made by the identity-gui to the identity module for storing one identity
 "type" : "EXECUTE",
 "from" : "hyperty-runtime://<runtime-domain>/<runtime-instance-identifier>/identity-gui",
 "to" : "hyperty-runtime://<runtime-domain>/<runtime-instance-identifier>/idm",
-"body" : { "resource" : "identity" , "method" : "storeIdentity" , "params" : { [ "result" : "<result-value>" , "keyPair" : "<keypair-value>" ] } }
+"body" : { "resource" : "identity" , "method" : "storeIdentity" , "params" : { [ "assertion" : "<assertion-value>" , "keyPair" : "<keypair-value>" ] } }
 ```
 
 Response by the identity module to the identity-gui.
