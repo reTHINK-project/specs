@@ -6,7 +6,7 @@ This doc specifies the Messages to be used when interacting with the Discovery c
 
 Querying the Domain Registry with a user identifier (either in `url` or `email format`). Optionally also with types of hyperties schemas 
 (e.g. `comasdm`), types of hyperties resources (e.g. `chat`) and domain of the registry to search. See method [discoverHyperty(user, 
-schema, resources, domain)](https://github.com/reTHINK-project/dev-runtime-core/blob/discovery-integration/src/discovery/Discovery.js#L194)
+schema, resources, domain)](https://github.com/reTHINK-project/dev-runtime-core/blob/discovery-integration/src/discovery/Discovery.js#L186)
 in [Discovery component](https://github.com/reTHINK-project/dev-runtime-core/blob/discovery-integration/src/discovery/Discovery.js) for example. 
 
 Request to Discovery component:
@@ -33,7 +33,7 @@ Response from Discovery component:
 
 Querying the Domain Registry with a user email (`email format`). Optionally also with domain of the registry to search. See 
 method [discoverHypertyPerUser(email, domain)]
-(https://github.com/reTHINK-project/dev-runtime-core/blob/discovery-integration/src/discovery/Discovery.js#L315) in 
+(https://github.com/reTHINK-project/dev-runtime-core/blob/discovery-integration/src/discovery/Discovery.js#L299) in 
 [Discovery](https://github.com/reTHINK-project/dev-runtime-core/blob/discovery-integration/src/discovery/Discovery.js) for example.
 
 Request to Discovery component:
@@ -60,7 +60,7 @@ Response from Discovery component:
 
 Querying the Domain Registry with a user email (`email format`). Optionally also with domain of the registry to search. See 
 method [discoverHypertiesPerUser(email, domain)]
-(https://github.com/reTHINK-project/dev-runtime-core/blob/discovery-integration/src/discovery/Discovery.js#L387) in 
+(https://github.com/reTHINK-project/dev-runtime-core/blob/discovery-integration/src/discovery/Discovery.js#L371) in 
 [Discovery](https://github.com/reTHINK-project/dev-runtime-core/blob/discovery-integration/src/discovery/Discovery.js) for example.
 
 Request to Discovery component:
@@ -87,7 +87,7 @@ Response from Discovery component:
 
 Querying the Domain Registry with a dataObject URL. Optionally also with domain of the registry to search. See method 
 [discoverDataObjectPerURL(url, domain)]
-(https://github.com/reTHINK-project/dev-runtime-core/blob/discovery-integration/src/discovery/Discovery.js#L429) in 
+(https://github.com/reTHINK-project/dev-runtime-core/blob/discovery-integration/src/discovery/Discovery.js#L413) in 
 [Discovery](https://github.com/reTHINK-project/dev-runtime-core/blob/discovery-integration/src/discovery/Discovery.js) for example.
 
 Request to Discovery component:
@@ -115,7 +115,7 @@ Response from Discovery component:
 Querying the Domain Registry with a dataObject name. Optionally also with types of dataObject schemas 
 (e.g. `comasdm`), types of dataObject resources (e.g. `chat`) and domain of the registry to search. See method 
 [discoverDataObjectPerName(name, schema, resources, domain)]
-(https://github.com/reTHINK-project/dev-runtime-core/blob/discovery-integration/src/discovery/Discovery.js#L465) in 
+(https://github.com/reTHINK-project/dev-runtime-core/blob/discovery-integration/src/discovery/Discovery.js#L449) in 
 [Discovery](https://github.com/reTHINK-project/dev-runtime-core/blob/discovery-integration/src/discovery/Discovery.js) for example.
 
 Request to Discovery component:
@@ -142,7 +142,7 @@ Response from Discovery component:
 
 Querying the Discovery Service with a user identifier (i.e. profile data). 
 See method [discoverGUIDPerUserIdentifier(userIdentifier)]
-(https://github.com/reTHINK-project/dev-runtime-core/blob/discovery-integration/src/discovery/Discovery.js#L278) in 
+(https://github.com/reTHINK-project/dev-runtime-core/blob/discovery-integration/src/discovery/Discovery.js#L265) in 
 [Discovery](https://github.com/reTHINK-project/dev-runtime-core/blob/discovery-integration/src/discovery/Discovery.js) for example.
 
 Request to Discovery component:
@@ -169,7 +169,7 @@ Response from Discovery component:
 
 Querying the Global Registry with a GUID. 
 See method [discoverUserIdsPerGUID(guid)]
-(https://github.com/reTHINK-project/dev-runtime-core/blob/discovery-integration/src/discovery/Discovery.js#L238) in 
+(https://github.com/reTHINK-project/dev-runtime-core/blob/discovery-integration/src/discovery/Discovery.js#L229) in 
 [Discovery](https://github.com/reTHINK-project/dev-runtime-core/blob/discovery-integration/src/discovery/Discovery.js) for example.
 
 Request to Discovery component:
@@ -197,7 +197,7 @@ Response from Discovery component:
 First, querying the Global Registry with a GUID and then querying the Domain Registry with the associated uIDs. Optionally also 
 with types of hyperties schemas (e.g. `comasdm`) and types of hyperties resources (e.g. `chat`).
 See method [discoverHypertiesPerGUID(guid, schema, resources)]
-(https://github.com/reTHINK-project/dev-runtime-core/blob/discovery-integration/src/discovery/Discovery.js#L133) in 
+(https://github.com/reTHINK-project/dev-runtime-core/blob/discovery-integration/src/discovery/Discovery.js#L128) in 
 [Discovery](https://github.com/reTHINK-project/dev-runtime-core/blob/discovery-integration/src/discovery/Discovery.js) for example.
 
 Request to Discovery component:
@@ -226,7 +226,7 @@ First, querying the Discovery Service with a user identifier (i.e. profile data)
 GUIDs and then querying the Domain Registry with the associated uIDs. Optionally also 
 with types of hyperties schemas (e.g. `comasdm`) and types of hyperties resources (e.g. `chat`).
 See method [ discoverHypertiesPerUserIdentifier(userIdentifier, schema, resources)]
-(https://github.com/reTHINK-project/dev-runtime-core/blob/discovery-integration/src/discovery/Discovery.js#L57) in 
+(https://github.com/reTHINK-project/dev-runtime-core/blob/discovery-integration/src/discovery/Discovery.js#L56) in 
 [Discovery](https://github.com/reTHINK-project/dev-runtime-core/blob/discovery-integration/src/discovery/Discovery.js) for example.
 
 Request to Discovery component:
