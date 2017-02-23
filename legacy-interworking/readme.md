@@ -52,6 +52,8 @@ A complete description of the diagram has been included [here](../dynamic-view/l
 ###IWstub implementation
 The data model of the Protostub which has been used from it conception in reTHINK, has been adapted to be compatible with the IWstub so in terms of data model it is like any other protostub.
 
+The main difference respect to a regular protostub is that the IWprotostub is associated to an identity. Further details are descibed in the [interworking stub development guide](developemlegacy-interworking/interworking-stubs-development.md).
+
 Several attributes were included to accomodate the same data model to the IWstub:
 - *interworking*: if this boolean is true it indicates that the protostub is used to connect with a legacy domain that is not compliant with reTHINK.
 - *idpProxy*: this boolean indicates if protostub also provides Idp Proxy features. This may be needed to support interact with legacy domains.  
@@ -78,6 +80,7 @@ Extending reTHINK to make it inter-operable with different services may require 
 
 ####Data Object adaptation to meet new scenarios
 reTHINK internal communication is based on data object synchronization so two hyperties can "talk" to each other if they use a common data object. In order to implement complex message flows (e.g. a SIP call flow needed to implement call transfer) may not be implementable with the current connection Data Object so it may need to be extended in short term. That is why a the dataObjects attribute has been added to the protostub descriptor which includes all the HypertyDataObjects supported by peers belonging to the domain served by this protostub. New HypertyDataObjects or extensions to HypertyDataObjects may be needed to support new scenarios in order to be flexible enough to meet future requirements.
+For example, the legacy IMS protostub should be able to notify the hyperty that the call has been cancelled or hangup without deleting the synchornized object. This could be implemented by adding additional fields to the object.  
 
 ####IdP Proxy
 Additionally to the dataObjects a new boolean attribute called idpProxy has been defined to specify if the IWstub is also a proxy for the Identity Provider exposed by the Legacy Domain. Allowing the IWstub to act as an IdPProxy gives an extra flexibility which will help to accommodate future Identity management mechanisms.
