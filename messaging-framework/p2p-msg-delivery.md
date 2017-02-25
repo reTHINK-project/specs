@@ -17,7 +17,7 @@ Hyperties that are deployed in a P2P enabled runtime, are registered in the Doma
 
 ![P2P Protostubs](p2p-protostub.png)
 
-The P2P Connections status follows the state machine specified below. *todo: apply the same state machine to all protostubs*. The changes of P2P Connections status are notified to `<P2PStubURL>/status` address which should be processed by the Runtime Registry to keep the P2P Connections List updated.
+The P2P Connections status follows the state machine specified below. The changes of P2P Connections status are notified to `<P2PStubURL>/status` address which should be processed by the Runtime Registry to keep the P2P Connections List updated.
 
 ![P2P Connection State Machine](p2p-connection-state-machine.png)
 

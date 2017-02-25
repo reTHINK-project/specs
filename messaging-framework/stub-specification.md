@@ -66,7 +66,16 @@ disconnect() {
 }
 ```
 
-### Connection events (TODO: update to same event-types as used for the P2P stubs?)
+### State Machine
+
+The Protostub status follows the state machine specified below.
+The "Deployment" states are handled by the RuntimeUA Core component while the "Connection" states are handle by the Protostub itself.
+The changes of Protostub Connection status are notified to `<runtimeProtoStubURL>/status`  address as described below which should be processed by the Runtime Registry to keep the Protostubs List updated.
+
+![ProtoStub State Machine](protostub-state-machine.png)
+
+
+### Connection events
 
 In order to synchronize the state of the stubs with the runtime, each stub is expected to emit status messages to the bus whenever its connection state changes. The following method can be used to encapsulate this:
 
@@ -86,15 +95,18 @@ this._bus.postMessage(msg); }
 ```
 
 The Message is of type "update". Its "from" attribute must be the runtimeProtoStubURL that was provided as first parameter of the constructor. The "to" attribute is the runtimeProtoStubURL extended with "/status".
-The expected "value" parameter is either "connected" or "disconnected". Optionally a reason can be specified that will be placed in the body of the message.
+
+The expected "value" parameter should be set according to state machine above. Optionally a reason can be specified that will be placed in the body of the message.
 
 If the connection to the MN is established via a Websocket, then the sending of the corresponding event messages can be triggered in the "open" and "close" handlers of the Websocket.
 
 ```
-_onWSOpen() { this._sendStatus("connected"); }
+_onWSOpen() { this._sendStatus("live"); }
 
 _onWSClose() { this._sendStatus("disconnected"); }
 ```
+
+
 
 ### The ProtoStub API
 
