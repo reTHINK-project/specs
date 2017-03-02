@@ -14,7 +14,7 @@ Request to Discovery component:
 ```
 "id"   : 1
 "type" : "read",
-"from" : "hyperty-runtime://<sp-domain>/<runtime-instance-identifier>",
+"from" : "hyperty://<sp-domain>/<hyperty-instance-identifier>",
 "to"   : "runtime://<sp-domain>/<runtime-instance-identifier>/discovery/",
 "body" : { "resource" : <userIdentifier>, "criteria" : { "resources" : <resources>, "dataSchemes" : <schema>} }
 ```
@@ -25,7 +25,7 @@ Response from Discovery component:
 "id"   : 1
 "type" : "response",
 "from" : "runtime://<sp-domain>/<runtime-instance-identifier>/discovery/",
-"to"   : "hyperty-runtime://<sp-domain>/<runtime-instance-identifier>",
+"to"   : "hyperty://<sp-domain>/<hyperty-instance-identifier>",
 "body" : { "code" : 200, "value" : <hypertiesObjects> }
 ```
 
@@ -35,10 +35,9 @@ Not Found Response from Discovery component:
 "id"   : 1
 "type" : "response",
 "from" : "runtime://<sp-domain>/<runtime-instance-identifier>/discovery/",
-"to"   : "hyperty-runtime://<sp-domain>/<runtime-instance-identifier>",
+"to"   : "hyperty://<sp-domain>/<hyperty-instance-identifier>",
 "body" : { "code" : 404, "description" : "Not Found" }
 ```
-
 
 #### Discover Hyperty by User Email
 
@@ -52,7 +51,7 @@ Request to Discovery component:
 ```
 "id"   : 2
 "type" : "read",
-"from" : "hyperty-runtime://<sp-domain>/<runtime-instance-identifier>",
+"from" : "hyperty://<sp-domain>/<hyperty-instance-identifier>",
 "to"   : "runtime://<sp-domain>/<runtime-instance-identifier>/discovery/",
 "body" : { "resource" : <email> }
 ```
@@ -63,8 +62,18 @@ Response from Discovery component:
 "id"   : 2
 "type" : "response",
 "from" : "runtime://<sp-domain>/<runtime-instance-identifier>/discovery/",
-"to"   : "hyperty-runtime://<sp-domain>/<runtime-instance-identifier>",
+"to"   : "hyperty://<sp-domain>/<hyperty-instance-identifier>",
 "body" : { "code" : 200, "value" : <hypertyObject> }
+```
+
+Not Found Response from Discovery component:
+
+```
+"id"   : 2
+"type" : "response",
+"from" : "runtime://<sp-domain>/<runtime-instance-identifier>/discovery/",
+"to"   : "hyperty://<sp-domain>/<hyperty-instance-identifier>",
+"body" : { "code" : 404, "description" : "Not Found" }
 ```
 
 #### Discover Hyperties by User Email
@@ -79,7 +88,7 @@ Request to Discovery component:
 ```
 "id"   : 3
 "type" : "read",
-"from" : "hyperty-runtime://<sp-domain>/<runtime-instance-identifier>",
+"from" : "hyperty://<sp-domain>/<hyperty-instance-identifier>",
 "to"   : "runtime://<sp-domain>/<runtime-instance-identifier>/discovery/",
 "body" : { "resource" : <email> }
 ```
@@ -90,8 +99,18 @@ Response from Discovery component:
 "id"   : 3
 "type" : "response",
 "from" : "runtime://<sp-domain>/<runtime-instance-identifier>/discovery/",
-"to"   : "hyperty-runtime://<sp-domain>/<runtime-instance-identifier>",
+"to"   : "hyperty://<sp-domain>/<hyperty-instance-identifier>",
 "body" : { "code" : 200, "value" : <hypertiesObjects> }
+```
+
+Not Found Response from Discovery component:
+
+```
+"id"   : 3
+"type" : "response",
+"from" : "runtime://<sp-domain>/<runtime-instance-identifier>/discovery/",
+"to"   : "hyperty://<sp-domain>/<hyperty-instance-identifier>",
+"body" : { "code" : 404, "description" : "Not Found" }
 ```
 
 #### Discover DataObjects by URL
@@ -106,7 +125,7 @@ Request to Discovery component:
 ```
 "id"   : 4
 "type" : "read",
-"from" : "hyperty-runtime://<sp-domain>/<runtime-instance-identifier>",
+"from" : "hyperty://<sp-domain>/<hyperty-instance-identifier>",
 "to"   : "runtime://<sp-domain>/<runtime-instance-identifier>/discovery/",
 "body" : { "resource" : <url> }
 ```
@@ -117,8 +136,18 @@ Response from Discovery component:
 "id"   : 4
 "type" : "response",
 "from" : "runtime://<sp-domain>/<runtime-instance-identifier>/discovery/",
-"to"   : "hyperty-runtime://<sp-domain>/<runtime-instance-identifier>",
+"to"   : "hyperty://<sp-domain>/<hyperty-instance-identifier>",
 "body" : { "code" : 200, "value" : <dataObject> }
+```
+
+Not Found Response from Discovery component:
+
+```
+"id"   : 4
+"type" : "response",
+"from" : "runtime://<sp-domain>/<runtime-instance-identifier>/discovery/",
+"to"   : "hyperty://<sp-domain>/<hyperty-instance-identifier>",
+"body" : { "code" : 404, "description" : "Not Found" }
 ```
 
 #### Discover DataObjects by Name
@@ -134,7 +163,7 @@ Request to Discovery component:
 ```
 "id"   : 5
 "type" : "read",
-"from" : "hyperty-runtime://<sp-domain>/<runtime-instance-identifier>",
+"from" : "hyperty://<sp-domain>/<hyperty-instance-identifier>",
 "to"   : "runtime://<sp-domain>/<runtime-instance-identifier>/discovery/",
 "body" : { "resource" : <name>, "criteria" : { "resources" : <resources>, "dataSchemes" : <schema>} }
 ```
@@ -145,8 +174,18 @@ Response from Discovery component:
 "id"   : 5
 "type" : "response",
 "from" : "runtime://<sp-domain>/<runtime-instance-identifier>/discovery/",
-"to"   : "hyperty-runtime://<sp-domain>/<runtime-instance-identifier>",
+"to"   : "hyperty://<sp-domain>/<hyperty-instance-identifier>",
 "body" : { "code" : 200, "value" : <dataObject> }
+```
+
+Not Found Response from Discovery component:
+
+```
+"id"   : 1
+"type" : "response",
+"from" : "runtime://<sp-domain>/<runtime-instance-identifier>/discovery/",
+"to"   : "hyperty://<sp-domain>/<hyperty-instance-identifier>",
+"body" : { "code" : 404, "description" : "Not Found" }
 ```
 
 #### Discover GUID by User Identifier
@@ -161,7 +200,7 @@ Request to Discovery component:
 ```
 "id"   : 6
 "type" : "read",
-"from" : "hyperty-runtime://<sp-domain>/<runtime-instance-identifier>",
+"from" : "hyperty://<sp-domain>/<hyperty-instance-identifier>",
 "to"   : "runtime://<sp-domain>/<runtime-instance-identifier>/discovery/",
 "body" : { "resource" : <userIdentifier> }
 ```
@@ -172,8 +211,18 @@ Response from Discovery component:
 "id"   : 6
 "type" : "response",
 "from" : "runtime://<sp-domain>/<runtime-instance-identifier>/discovery/",
-"to"   : "hyperty-runtime://<sp-domain>/<runtime-instance-identifier>",
+"to"   : "hyperty://<sp-domain>/<hyperty-instance-identifier>",
 "body" : { "code" : 200, "value" : <guids> }
+```
+
+Not Found Response from Discovery component:
+
+```
+"id"   : 1
+"type" : "response",
+"from" : "runtime://<sp-domain>/<runtime-instance-identifier>/discovery/",
+"to"   : "hyperty://<sp-domain>/<hyperty-instance-identifier>",
+"body" : { "code" : 404, "description" : "Not Found" }
 ```
 
 #### Discover uIDs by GUID
@@ -188,7 +237,7 @@ Request to Discovery component:
 ```
 "id"   : 7
 "type" : "read",
-"from" : "hyperty-runtime://<sp-domain>/<runtime-instance-identifier>",
+"from" : "hyperty://<sp-domain>/<hyperty-instance-identifier>",
 "to"   : "runtime://<sp-domain>/<runtime-instance-identifier>/discovery/",
 "body" : { "resource" : <guid> }
 ```
@@ -199,8 +248,18 @@ Response from Discovery component:
 "id"   : 7
 "type" : "response",
 "from" : "runtime://<sp-domain>/<runtime-instance-identifier>/discovery/",
-"to"   : "hyperty-runtime://<sp-domain>/<runtime-instance-identifier>",
+"to"   : "hyperty://<sp-domain>/<hyperty-instance-identifier>",
 "body" : { "code" : 200, "value" : <uIDs> }
+```
+
+Not Found Response from Discovery component:
+
+```
+"id"   : 1
+"type" : "response",
+"from" : "runtime://<sp-domain>/<runtime-instance-identifier>/discovery/",
+"to"   : "hyperty://<sp-domain>/<hyperty-instance-identifier>",
+"body" : { "code" : 404, "description" : "Not Found" }
 ```
 
 #### Discover Hyperties by GUID
@@ -216,7 +275,7 @@ Request to Discovery component:
 ```
 "id"   : 7
 "type" : "read",
-"from" : "hyperty-runtime://<sp-domain>/<runtime-instance-identifier>",
+"from" : "hyperty://<sp-domain>/<hyperty-instance-identifier>",
 "to"   : "runtime://<sp-domain>/<runtime-instance-identifier>/discovery/",
 "body" : { "resource" : <guid>, "criteria" : { "resources" : <resources>, "dataSchemes" : <schema>} }
 ```
@@ -227,8 +286,18 @@ Response from Discovery component:
 "id"   : 7
 "type" : "response",
 "from" : "runtime://<sp-domain>/<runtime-instance-identifier>/discovery/",
-"to"   : "hyperty-runtime://<sp-domain>/<runtime-instance-identifier>",
+"to"   : "hyperty://<sp-domain>/<hyperty-instance-identifier>",
 "body" : { "code" : 200, "value" : <hypertiesObjects> }
+```
+
+Not Found Response from Discovery component:
+
+```
+"id"   : 1
+"type" : "response",
+"from" : "runtime://<sp-domain>/<runtime-instance-identifier>/discovery/",
+"to"   : "hyperty://<sp-domain>/<hyperty-instance-identifier>",
+"body" : { "code" : 404, "description" : "Not Found" }
 ```
 
 #### Discover Hyperties by User Identifier
@@ -245,7 +314,7 @@ Request to Discovery component:
 ```
 "id"   : 7
 "type" : "read",
-"from" : "hyperty-runtime://<sp-domain>/<runtime-instance-identifier>",
+"from" : "hyperty://<sp-domain>/<hyperty-instance-identifier>",
 "to"   : "runtime://<sp-domain>/<runtime-instance-identifier>/discovery/",
 "body" : { "resource" : <userIdentifier>, "criteria" : { "resources" : <resources>, "dataSchemes" : <schema>} }
 ```
@@ -256,6 +325,16 @@ Response from Discovery component:
 "id"   : 7
 "type" : "response",
 "from" : "runtime://<sp-domain>/<runtime-instance-identifier>/discovery/",
-"to"   : "hyperty-runtime://<sp-domain>/<runtime-instance-identifier>",
+"to"   : "hyperty://<sp-domain>/<hyperty-instance-identifier>",
 "body" : { "code" : 200, "value" : <hypertiesObjects> }
+```
+
+Not Found Response from Discovery component:
+
+```
+"id"   : 1
+"type" : "response",
+"from" : "runtime://<sp-domain>/<runtime-instance-identifier>/discovery/",
+"to"   : "hyperty://<sp-domain>/<hyperty-instance-identifier>",
+"body" : { "code" : 404, "description" : "Not Found" }
 ```
