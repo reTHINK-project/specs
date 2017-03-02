@@ -63,7 +63,7 @@ Response from Discovery component:
 "type" : "response",
 "from" : "runtime://<sp-domain>/<runtime-instance-identifier>/discovery/",
 "to"   : "hyperty://<sp-domain>/<hyperty-instance-identifier>",
-"body" : { "code" : 200, "value" : ["<discoveredHypertyInstance>"] }
+"body" : { "code" : 200, "value" : "<discoveredHypertyInstance>" }
 ```
 
 Not Found Response from Discovery component:
