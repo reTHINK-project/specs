@@ -16,7 +16,7 @@ Request to Discovery component:
 "type" : "read",
 "from" : "hyperty://<sp-domain>/<hyperty-instance-identifier>",
 "to"   : "runtime://<sp-domain>/<runtime-instance-identifier>/discovery/",
-"body" : { "resource" : <userIdentifier>, "criteria" : { "resources" : <resources>, "dataSchemes" : <schema>} }
+"body" : { "resource" : "/<registry-object-url-scheme>/user/<userURL>", "criteria" : { "resources" : ["<resources>"], "dataSchemes" : ["<schema>"] } }
 ```
 
 Response from Discovery component:
