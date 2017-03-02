@@ -3,9 +3,7 @@
 package Communication <<Rect>> {
 
 	class Communication {
-		scheme = "comm"
 		startingTime : date
-		lastModified : date
 		duration ?: date
 		status : CommunicationStatus
 		participants ?: Participant[]

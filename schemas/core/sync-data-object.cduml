@@ -5,7 +5,10 @@ package SyncDataObject {
 	class SyncDataObject {
 		url : URL.URL
 		cseq : integer
+		created : date
+		lastModified ?: date
 		reporter : URL.HypertyURL
+		runtime : URL.HypertyRuntimeURL
 		schema : URL.HypertyCatalogueURL
 		name : string
 		description ?: string

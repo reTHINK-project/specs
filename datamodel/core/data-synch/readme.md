@@ -1,5 +1,8 @@
 ### Sync Data Object Model
 
+
+![Sync Data Object Model](SyncDataObject.png)
+
 The SyncDataObject Model is used to specify the JSON format used in the [Reporter-Observer data synchronisation communication mechanism](../../../messaging-framework/p2p-data-sync.md) used to support Hyperty Interoperability at run time.
 
 #### SyncObject
@@ -14,13 +17,19 @@ Is the abstract class for any data object to synchronised.
 
 **schema** contains the CatalogueURL for the JSON Schema describing the Sync Object
 
+**runtimeUrl** contains the RuntimeURL where the Sync Object is hosted
+
+**created** data object creation time
+
+**lastModified** last time the data object was changed
+
 **name** is an identifier of the Data Object that is used for discovery purposes
 
 **description** textual description of the data object (optional)
 
 **tags** strings that can be used to classify the data object (optional)
 
-**resources**
+**resources** ??
 
 **observerStorage** is a boolean used by the Sync Manager of the Observer runtime to decide if Observer can store (`true`) or not (`false`) the data object.
 
@@ -28,16 +37,22 @@ Is the abstract class for any data object to synchronised.
 
 **mutualAuthentication** is a boolean used by the Policy Engine to decide if the Object sync data flows should be encrypted (true) or not (false).
 
-**SyncObjectParent**
+#### SyncObjectParent
 
 Is an Abstract class for composite SyncObject. It can either contain a set of containers of Childs called  SyncObjectChildren or a list of Childs (SyncOjectChild).
 
 
 
-**SyncObjectChildren** contains the **children** attribute that is a list of SyncObjectChild URLs
+#### SyncObjectChildren
 
-**SyncObjectChild** is a SyncObject that can be created by an observer of the SyncObjectParent.
+Contains the **children** attribute that is a list of SyncObjectChild URLs
 
+#### SyncObjectChild
 
+Is a SyncObject that can be created by an observer of the SyncObjectParent.
 
-![Sync Data Object Model](SyncDataObject.png)
+The **url** attribute inherited from SyncDataObject class contains, `<SyncObjectParentURL>/children/<childreName>/<reporter-instance-indentifier>#<cseq>` where,
+
+ `<reporter-instance-indentifier>` is the path from the Hyperty URL of the Reporter, ie the creator, of the SyncObjectChild. Note that HypertyURL is `hyperty://<domain>/<reporter-instance-indentifier`.
+
+ `<cseq>` is an integer that is incremented everytime a new SyncObjectChild is create by the same Hyperty.
