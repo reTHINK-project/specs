@@ -53,7 +53,7 @@ Request to Discovery component:
 "type" : "read",
 "from" : "hyperty://<sp-domain>/<hyperty-instance-identifier>",
 "to"   : "runtime://<sp-domain>/<runtime-instance-identifier>/discovery/",
-"body" : { "resource" : <email> }
+"body" : { "resource" : "<email>" }
 ```
 
 Response from Discovery component:
@@ -90,7 +90,7 @@ Request to Discovery component:
 "type" : "read",
 "from" : "hyperty://<sp-domain>/<hyperty-instance-identifier>",
 "to"   : "runtime://<sp-domain>/<runtime-instance-identifier>/discovery/",
-"body" : { "resource" : <email> }
+"body" : { "resource" : "<email>" }
 ```
 
 Response from Discovery component:
@@ -181,7 +181,7 @@ Response from Discovery component:
 Not Found Response from Discovery component:
 
 ```
-"id"   : 1
+"id"   : 5
 "type" : "response",
 "from" : "runtime://<sp-domain>/<runtime-instance-identifier>/discovery/",
 "to"   : "hyperty://<sp-domain>/<hyperty-instance-identifier>",
@@ -202,7 +202,7 @@ Request to Discovery component:
 "type" : "read",
 "from" : "hyperty://<sp-domain>/<hyperty-instance-identifier>",
 "to"   : "runtime://<sp-domain>/<runtime-instance-identifier>/discovery/",
-"body" : { "resource" : <userIdentifier> }
+"body" : { "resource" : "<userIdentifier>" }
 ```
 
 Response from Discovery component:
@@ -218,7 +218,7 @@ Response from Discovery component:
 Not Found Response from Discovery component:
 
 ```
-"id"   : 1
+"id"   : 6
 "type" : "response",
 "from" : "runtime://<sp-domain>/<runtime-instance-identifier>/discovery/",
 "to"   : "hyperty://<sp-domain>/<hyperty-instance-identifier>",
@@ -255,7 +255,7 @@ Response from Discovery component:
 Not Found Response from Discovery component:
 
 ```
-"id"   : 1
+"id"   : 7
 "type" : "response",
 "from" : "runtime://<sp-domain>/<runtime-instance-identifier>/discovery/",
 "to"   : "hyperty://<sp-domain>/<hyperty-instance-identifier>",
@@ -293,7 +293,7 @@ Response from Discovery component:
 Not Found Response from Discovery component:
 
 ```
-"id"   : 1
+"id"   : 7
 "type" : "response",
 "from" : "runtime://<sp-domain>/<runtime-instance-identifier>/discovery/",
 "to"   : "hyperty://<sp-domain>/<hyperty-instance-identifier>",
@@ -316,7 +316,7 @@ Request to Discovery component:
 "type" : "read",
 "from" : "hyperty://<sp-domain>/<hyperty-instance-identifier>",
 "to"   : "runtime://<sp-domain>/<runtime-instance-identifier>/discovery/",
-"body" : { "resource" : <userIdentifier>, "criteria" : { "resources" : ["<resources>"], "dataSchemes" : ["<schema>"] }}
+"body" : { "resource" : "<userIdentifier>", "criteria" : { "resources" : ["<resources>"], "dataSchemes" : ["<schema>"] }}
 ```
 
 Response from Discovery component:
@@ -332,7 +332,7 @@ Response from Discovery component:
 Not Found Response from Discovery component:
 
 ```
-"id"   : 1
+"id"   : 7
 "type" : "response",
 "from" : "runtime://<sp-domain>/<runtime-instance-identifier>/discovery/",
 "to"   : "hyperty://<sp-domain>/<hyperty-instance-identifier>",
