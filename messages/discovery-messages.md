@@ -29,6 +29,17 @@ Response from Discovery component:
 "body" : { "code" : 200, "value" : <hypertiesObjects> }
 ```
 
+Not Found Response from Discovery component:
+
+```
+"id"   : 1
+"type" : "response",
+"from" : "runtime://<sp-domain>/<runtime-instance-identifier>/discovery/",
+"to"   : "hyperty-runtime://<sp-domain>/<runtime-instance-identifier>",
+"body" : { "code" : 404, "description" : "Not Found" }
+```
+
+
 #### Discover Hyperty by User Email
 
 Querying the Domain Registry with a user email (`email format`). Optionally also with domain of the registry to search. See 
