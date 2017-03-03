@@ -81,7 +81,7 @@ Request to Discovery component:
 "type" : "read",
 "from" : "hyperty://<sp-domain>/<hyperty-instance-identifier>",
 "to"   : "runtime://<sp-domain>/<runtime-instance-identifier>/discovery/",
-"body" : { "resource" : "/<registry-object-type>/name/"<RegistryDataObjectName>", "criteria" : { "resources" : ["<resources>"], "dataSchemes" : ["<schema>"] }}
+"body" : { "resource" : "/<registry-object-type>/name/<dataObjtName>", "criteria" : { "resources" : ["<resources>"], "dataSchemes" : ["<schema>"] }}
 ```
 
 Response from Discovery component:
