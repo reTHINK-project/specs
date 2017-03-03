@@ -78,7 +78,7 @@ Not Found Response from Discovery component:
 #### Discover DataObject by DataObject Name
 
 Querying the Domain Registry with a dataObject name. Optionally also with types of dataObject schemas 
-(e.g. `comasdm`), types of dataObject resources (e.g. `chat`) and domain of the registry to search.
+(e.g. `comasdm`), types of dataObject resources (e.g. `chat`).
 
 Request to Discovery component:
 
@@ -112,8 +112,7 @@ Not Found Response from Discovery component:
 
 #### Discover Hyperties/DataObjects by GUID
 
-First, querying the Global Registry with a GUID and then querying the Domain Registry with the associated uIDs. Optionally also 
-with types of hyperties schemas (e.g. `comasdm`) and types of hyperties resources (e.g. `chat`).
+First, querying the Global Registry with a GUID and then querying the Domain Registry with the associated uIDs. Optionally also with types of hyperties/dataObjects schemas (e.g. `comasdm`) and types of hyperties/dataObjects resources (e.g. `chat`).
 
 Request to Discovery component:
 
@@ -148,8 +147,8 @@ Not Found Response from Discovery component:
 #### Discover Hyperties/DataObjects by Profile Data
 
 First, querying the Discovery Service with some Profile Data (i.e. username). Second, querying Global Registry with the associated
-GUIDs and then querying the Domain Registry with the associated uIDs. Optionally also 
-with types of hyperties schemas (e.g. `comasdm`) and types of hyperties resources (e.g. `chat`).
+GUIDs and then querying the Domain Registry with the associated uIDs. Optionally also with types of hyperties/dataObjects schemas (e.g. `comasdm`) and types of hyperties/dataObjects resources (e.g. `chat`).
+
 
 Request to Discovery component:
 
