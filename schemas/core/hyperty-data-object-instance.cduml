@@ -5,7 +5,7 @@ package RegistryDataObject <<Rect>> {
 	package HypertyDataObjectInstance <<Rect>> {
 
 		class HypertyDataObjectInstance {
-			owner : URL.HypertyURL
+			reporter : URL.HypertyURL
 			resources : HypertyResource.HypertyResourceType[]
 			name : string
 			description ?: string
