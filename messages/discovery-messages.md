@@ -2,7 +2,7 @@
 
 This doc specifies the Messages to be used when interacting with the Discovery component integrated in runtime core, where,
 
-* `<userIdentifier>` can be the user address compliant with UserURL data model. Example: user://example.com/bob. Or can be a email address. Example: bob@example.com.
+* `<userIdentifier>` can be the user address compliant with UserURL data model. Example: user://example.com/bob. Or can be a email address. 
 
 * `<discoveredRegistryObjects>` can be a JSON object compliant with HypertyInstance data model or a JSON object compliant with HypertyDataObjectInstance data model.
 
