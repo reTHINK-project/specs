@@ -2,24 +2,32 @@
 
 This doc specifies the Messages to be used when interacting with the Discovery component integrated in runtime core.
 
-#### Discover Hyperties
+#### Discover Hyperties/DataObjects Per User URL or Email
 
 Querying the Domain Registry with a user identifier (either in `url` or `email format`). Optionally also with types of hyperties schemas 
 (e.g. `comasdm`), types of hyperties resources (e.g. `chat`) and domain of the registry to search. See method [discoverHyperty(user, 
 schema, resources, domain)](https://github.com/reTHINK-project/dev-runtime-core/blob/discovery-integration/src/discovery/Discovery.js#L186)
 in [Discovery component](https://github.com/reTHINK-project/dev-runtime-core/blob/discovery-integration/src/discovery/Discovery.js) for example. 
 
-Request to Discovery component:
-
+Request to Discovery component (`URL`):
 ```
 "id"   : 1
 "type" : "read",
 "from" : "hyperty://<sp-domain>/<hyperty-instance-identifier>",
 "to"   : "runtime://<sp-domain>/<runtime-instance-identifier>/discovery/",
-"body" : { "resource" : "/<registry-object-url-scheme>/user/<userURL>", "criteria" : { "resources" : ["<resources>"], "dataSchemes" : ["<schema>"] }}
+"body" : { "resource" : "/hyperty/user/<userURL>", "criteria" : { "resources" : ["<resources>"], "dataSchemes" : ["<schema>"] }}
 ```
 
-Response from Discovery component:
+Request to Discovery component (`EMAIL`):
+```
+"id"   : 1
+"type" : "read",
+"from" : "hyperty://<sp-domain>/<hyperty-instance-identifier>",
+"to"   : "runtime://<sp-domain>/<runtime-instance-identifier>/discovery/",
+"body" : { "resource" : "<email>", "criteria" : { "resources" : ["<resources>"], "dataSchemes" : ["<schema>"] }}
+```
+
+Response from Discovery component (`Hyperties`):
 
 ```
 "id"   : 1
@@ -33,80 +41,6 @@ Not Found Response from Discovery component:
 
 ```
 "id"   : 1
-"type" : "response",
-"from" : "runtime://<sp-domain>/<runtime-instance-identifier>/discovery/",
-"to"   : "hyperty://<sp-domain>/<hyperty-instance-identifier>",
-"body" : { "code" : 404, "description" : "Not Found" }
-```
-
-#### Discover Hyperty by User Email
-
-Querying the Domain Registry with a user email (`email format`). Optionally also with domain of the registry to search. See 
-method [discoverHypertyPerUser(email, domain)]
-(https://github.com/reTHINK-project/dev-runtime-core/blob/discovery-integration/src/discovery/Discovery.js#L299) in 
-[Discovery](https://github.com/reTHINK-project/dev-runtime-core/blob/discovery-integration/src/discovery/Discovery.js) for example.
-
-Request to Discovery component:
-
-```
-"id"   : 2
-"type" : "read",
-"from" : "hyperty://<sp-domain>/<hyperty-instance-identifier>",
-"to"   : "runtime://<sp-domain>/<runtime-instance-identifier>/discovery/",
-"body" : { "resource" : "<email>" }
-```
-
-Response from Discovery component:
-
-``` 
-"id"   : 2
-"type" : "response",
-"from" : "runtime://<sp-domain>/<runtime-instance-identifier>/discovery/",
-"to"   : "hyperty://<sp-domain>/<hyperty-instance-identifier>",
-"body" : { "code" : 200, "value" : "<discoveredHypertyInstance>" }
-```
-
-Not Found Response from Discovery component:
-
-```
-"id"   : 2
-"type" : "response",
-"from" : "runtime://<sp-domain>/<runtime-instance-identifier>/discovery/",
-"to"   : "hyperty://<sp-domain>/<hyperty-instance-identifier>",
-"body" : { "code" : 404, "description" : "Not Found" }
-```
-
-#### Discover Hyperties by User Email
-
-Querying the Domain Registry with a user email (`email format`). Optionally also with domain of the registry to search. See 
-method [discoverHypertiesPerUser(email, domain)]
-(https://github.com/reTHINK-project/dev-runtime-core/blob/discovery-integration/src/discovery/Discovery.js#L371) in 
-[Discovery](https://github.com/reTHINK-project/dev-runtime-core/blob/discovery-integration/src/discovery/Discovery.js) for example.
-
-Request to Discovery component:
-
-```
-"id"   : 3
-"type" : "read",
-"from" : "hyperty://<sp-domain>/<hyperty-instance-identifier>",
-"to"   : "runtime://<sp-domain>/<runtime-instance-identifier>/discovery/",
-"body" : { "resource" : "<email>" }
-```
-
-Response from Discovery component:
-
-```
-"id"   : 3
-"type" : "response",
-"from" : "runtime://<sp-domain>/<runtime-instance-identifier>/discovery/",
-"to"   : "hyperty://<sp-domain>/<hyperty-instance-identifier>",
-"body" : { "code" : 200, "value" : ["<discoveredHypertyInstance>"] }
-```
-
-Not Found Response from Discovery component:
-
-```
-"id"   : 3
 "type" : "response",
 "from" : "runtime://<sp-domain>/<runtime-instance-identifier>/discovery/",
 "to"   : "hyperty://<sp-domain>/<hyperty-instance-identifier>",
@@ -182,80 +116,6 @@ Not Found Response from Discovery component:
 
 ```
 "id"   : 5
-"type" : "response",
-"from" : "runtime://<sp-domain>/<runtime-instance-identifier>/discovery/",
-"to"   : "hyperty://<sp-domain>/<hyperty-instance-identifier>",
-"body" : { "code" : 404, "description" : "Not Found" }
-```
-
-#### Discover GUID by User Identifier
-
-Querying the Discovery Service with a user identifier (i.e. profile data). 
-See method [discoverGUIDPerUserIdentifier(userIdentifier)]
-(https://github.com/reTHINK-project/dev-runtime-core/blob/discovery-integration/src/discovery/Discovery.js#L265) in 
-[Discovery](https://github.com/reTHINK-project/dev-runtime-core/blob/discovery-integration/src/discovery/Discovery.js) for example.
-
-Request to Discovery component:
-
-```
-"id"   : 6
-"type" : "read",
-"from" : "hyperty://<sp-domain>/<hyperty-instance-identifier>",
-"to"   : "runtime://<sp-domain>/<runtime-instance-identifier>/discovery/",
-"body" : { "resource" : "<userIdentifier>" }
-```
-
-Response from Discovery component:
-
-```
-"id"   : 6
-"type" : "response",
-"from" : "runtime://<sp-domain>/<runtime-instance-identifier>/discovery/",
-"to"   : "hyperty://<sp-domain>/<hyperty-instance-identifier>",
-"body" : { "code" : 200, "value" : ["<GuidURL>"] }
-```
-
-Not Found Response from Discovery component:
-
-```
-"id"   : 6
-"type" : "response",
-"from" : "runtime://<sp-domain>/<runtime-instance-identifier>/discovery/",
-"to"   : "hyperty://<sp-domain>/<hyperty-instance-identifier>",
-"body" : { "code" : 404, "description" : "Not Found" }
-```
-
-#### Discover uIDs by GUID
-
-Querying the Global Registry with a GUID. 
-See method [discoverUserIdsPerGUID(guid)]
-(https://github.com/reTHINK-project/dev-runtime-core/blob/discovery-integration/src/discovery/Discovery.js#L229) in 
-[Discovery](https://github.com/reTHINK-project/dev-runtime-core/blob/discovery-integration/src/discovery/Discovery.js) for example.
-
-Request to Discovery component:
-
-```
-"id"   : 7
-"type" : "read",
-"from" : "hyperty://<sp-domain>/<hyperty-instance-identifier>",
-"to"   : "runtime://<sp-domain>/<runtime-instance-identifier>/discovery/",
-"body" : { "resource" : "<GuidURL>" }
-```
-
-Response from Discovery component:
-
-```
-"id"   : 7
-"type" : "response",
-"from" : "runtime://<sp-domain>/<runtime-instance-identifier>/discovery/",
-"to"   : "hyperty://<sp-domain>/<hyperty-instance-identifier>",
-"body" : { "code" : 200, "value" : ["/<registry-object-url-scheme>/user/<userURL>", "<domain>"] }
-```
-
-Not Found Response from Discovery component:
-
-```
-"id"   : 7
 "type" : "response",
 "from" : "runtime://<sp-domain>/<runtime-instance-identifier>/discovery/",
 "to"   : "hyperty://<sp-domain>/<hyperty-instance-identifier>",
