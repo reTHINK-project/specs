@@ -43,7 +43,7 @@ Not Found Response from Discovery component:
 
 #### Discover Hyperty/DataObject by DataObject/Hyperty URL
 
-Querying the Domain Registry with a instance URL (Hyperty or DataObject). 
+Querying the Domain Registry with a registry object URL (Hyperty or DataObject). 
 
 Request to Discovery component:
 
