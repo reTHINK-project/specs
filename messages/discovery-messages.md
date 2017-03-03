@@ -56,7 +56,7 @@ Response from Discovery component:
 "type" : "response",
 "from" : "runtime://<sp-domain>/<runtime-instance-identifier>/discovery/",
 "to"   : "hyperty://<sp-domain>/<hyperty-instance-identifier>",
-"body" : { "code" : 200, "value" : "<RegistryObject>" }
+"body" : { "code" : 200, "value" : "<RegistryDataObject>" }
 ```
 
 Not Found Response from Discovery component:
@@ -91,7 +91,7 @@ Response from Discovery component:
 "type" : "response",
 "from" : "runtime://<sp-domain>/<runtime-instance-identifier>/discovery/",
 "to"   : "hyperty://<sp-domain>/<hyperty-instance-identifier>",
-"body" : { "code" : 200, "value" : ["<RegistryDataObject>"] }
+"body" : { "code" : 200, "value" : "<RegistryDataObject>" }
 ```
 
 Not Found Response from Discovery component:
