@@ -2,11 +2,22 @@
 
 This doc specifies the Messages to be used when interacting with the Discovery component integrated in runtime core, where,
 
-* `<userIdentifier>` can be the user address compliant with UserURL data model. Example: user://example.com/bob. Or can be a email address. 
+* `<userIdentifier>` can be the user address compliant with UserURL data model. Example: user://example.com/bob. Or can be a email address.
+
+* `<registry-object-type>` is either `dataobject` or `hyperty`
+
+* `<registry-object-url>` is either `dataobject` or `hyperty` URL.
+
+   Hyperty URL example: `hyperty://mydomain/12345-qwert`
+
+   Data Object URL example: `comm://mydomain/12345-qwert`
 
 * `<discoveredRegistryObjects>` can be a JSON object compliant with HypertyInstance data model or a JSON object compliant with HypertyDataObjectInstance data model.
 
-* `<profiledata>` is an identifier present on the profile of the user in Discovery Service component.
+* `<user-profile-attribute-name>` is an attribute present on the profile of the user in Discovery Service component.
+
+* `<user-profile-attribute-value>` is a value of an attribute present on the profile of the user in Discovery Service component.
+
 
 #### Discover Hyperties/DataObjects by User URL or Email
 
@@ -43,7 +54,7 @@ Not Found Response from Discovery component:
 
 #### Discover Hyperty/DataObject by DataObject/Hyperty URL
 
-Querying the Domain Registry with a registry object URL (Hyperty or DataObject). 
+Querying the Domain Registry with a registry object URL (Hyperty or DataObject).
 
 Request to Discovery component:
 
@@ -52,7 +63,7 @@ Request to Discovery component:
 "type" : "read",
 "from" : "hyperty://<sp-domain>/<hyperty-instance-identifier>",
 "to"   : "runtime://<sp-domain>/<runtime-instance-identifier>/discovery/",
-"body" : { "resource" : "/<registry-object-type>/url/<registry-object-url-scheme>" }
+"body" : { "resource" : "<registry-object-url>" }
 ```
 
 Response from Discovery component:
@@ -77,7 +88,7 @@ Not Found Response from Discovery component:
 
 #### Discover DataObject by DataObject Name
 
-Querying the Domain Registry with a dataObject name. Optionally also with types of dataObject schemas 
+Querying the Domain Registry with a dataObject name. Optionally also with types of dataObject schemas
 (e.g. `comasdm`), types of dataObject resources (e.g. `chat`).
 
 Request to Discovery component:
@@ -157,7 +168,7 @@ Request to Discovery component:
 "type" : "read",
 "from" : "hyperty://<sp-domain>/<hyperty-instance-identifier>",
 "to"   : "runtime://<sp-domain>/<runtime-instance-identifier>/discovery/",
-"body" : { "resource" : "/<registry-object-type>/profiledata/<profiledata>", "criteria" : { "resources" : ["<resources>"], "dataSchemes" : ["<schema>"] }}
+"body" : { "resource" : "/<registry-object-type>/user/userprofile/<user-profile-attribute-name>/<user-profile-attribute-value>", "criteria" : { "resources" : ["<resources>"], "dataSchemes" : ["<schema>"] }}
 ```
 
 Response from Discovery component:
