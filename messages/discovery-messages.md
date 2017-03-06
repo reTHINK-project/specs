@@ -121,6 +121,41 @@ Not Found Response from Discovery component:
 "body" : { "code" : 404, "description" : "Not Found" }
 ```
 
+#### Discover DataObject by Reporter 
+
+Querying the Domain Registry with a reporter url (hyperty). Optionally also with types of dataObject schemas
+(e.g. `comasdm`), types of dataObject resources (e.g. `chat`).
+
+Request to Discovery component:
+
+```
+"id"   : 5
+"type" : "read",
+"from" : "hyperty://<sp-domain>/<hyperty-instance-identifier>",
+"to"   : "runtime://<sp-domain>/<runtime-instance-identifier>/discovery/",
+"body" : { "resource" : "/<registry-object-type>/reporter/<registry-object-url>", "criteria" : { "resources" : ["<resources>"], "dataSchemes" : ["<schema>"] }}
+```
+
+Response from Discovery component:
+
+```
+"id"   : 5
+"type" : "response",
+"from" : "runtime://<sp-domain>/<runtime-instance-identifier>/discovery/",
+"to"   : "hyperty://<sp-domain>/<hyperty-instance-identifier>",
+"body" : { "code" : 200, "value" : "["<discoveredRegistryObjects>"]" }
+```
+
+Not Found Response from Discovery component:
+
+```
+"id"   : 5
+"type" : "response",
+"from" : "runtime://<sp-domain>/<runtime-instance-identifier>/discovery/",
+"to"   : "hyperty://<sp-domain>/<hyperty-instance-identifier>",
+"body" : { "code" : 404, "description" : "Not Found" }
+```
+
 #### Discover Hyperties/DataObjects by GUID
 
 First, querying the Global Registry with a GUID and then querying the Domain Registry with the associated uIDs. Optionally also with types of hyperties/dataObjects schemas (e.g. `comasdm`) and types of hyperties/dataObjects resources (e.g. `chat`).
