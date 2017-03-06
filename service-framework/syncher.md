@@ -45,7 +45,7 @@ Syncher is created one per Hyperty. The parameters are basically the same as the
 
 **create**
 
-`create(schema: SchemaURL, observers?: [HypertyURL], initialData: JSON, store?: boolean, p2p?: boolean): Promise<DataObjectReporter>`
+`create(schema: SchemaURL, observers?: [HypertyURL], initialData: JSON, store?: boolean, p2p?: boolean, identity?: Identity.MessageBodyIdentity): Promise<DataObjectReporter>`
 
 This Method is used to create objects to be reported i.e. the Hyperty Instance plays the Reporter role. The following parameters are used:
 
@@ -59,11 +59,13 @@ This Method is used to create objects to be reported i.e. the Hyperty Instance p
 
 * p2p (optional): if true the object data sync uses p2p data connections.
 
+* identity (optional): information about the identity of the user associated with the Reporter. Useful when the reporter is used in an [Interworking Protostub](../legacy-interworking/interworking-stubs-development.md).
+
 * return: Promise to a new Reporter. The reporter can be accepted or rejected by the PEP
 
 **subscribe**
 
-`subscribe(schema: SchemaURL, url: ObjectURL, store?: boolean, p2p?: boolean): Promise<DataObjectObserver>`
+`subscribe(schema: SchemaURL, url: ObjectURL, store?: boolean, p2p?: boolean, identity?: Identity.MessageBodyIdentity): Promise<DataObjectObserver>`
 
 This Method is used to subscribe objects to be observed i.e. the Hyperty Instance plays the Observer role. The following parameters are used:
 
@@ -74,6 +76,8 @@ This Method is used to subscribe objects to be observed i.e. the Hyperty Instanc
 * store (optional): if true the object is stored in the runtime and by a data backup service (if enabled and allowed by the reporter ).
 
 * p2p (optional): if true the object data sync uses p2p data connections.
+
+* identity (optional): information about the identity of the user associated with the Observer. Useful when the Observer is used in an [Interworking Protostub](../legacy-interworking/interworking-stubs-development.md)
 
 * return: Promise to a new observer if accepted. It's associated with the reporter.
 
@@ -130,6 +134,8 @@ Child objects can be created from a Reporter or Observer and are shared between 
 * childId: URL address for a child, related to an ObjectURL
 
 * data: JSON data for the object
+
+* identity (optional): information about the identity of the user associated with the Reporter of the DataObjectChild. Useful when the Data Child creator is used in an [Interworking Protostub](../legacy-interworking/interworking-stubs-development.md)
 
 ##### Event Handlers
 
