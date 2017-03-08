@@ -26,6 +26,7 @@ package Identity <<Rect>> {
 		assertion : string
 		idp : URL.URL
 		scope : string
+		expirationDate : date
 	}
 
 	note top : compliant with WebRTC\n RTCIdentityAssertionResult
