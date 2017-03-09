@@ -14,8 +14,6 @@ This doc specifies the Messages to be used when interacting with the Discovery c
 
 * `<discoveredRegistryObjects>` can be a JSON object compliant with HypertyInstance data model or a JSON object compliant with HypertyDataObjectInstance data model.
 
-* `<user-profile-attribute-name>` is an attribute present on the profile of the user in Discovery Service component.
-
 * `<user-profile-attribute-value>` is a value of an attribute present on the profile of the user in Discovery Service component.
 
 
@@ -203,7 +201,7 @@ Request to Discovery component:
 "type" : "read",
 "from" : "hyperty://<sp-domain>/<hyperty-instance-identifier>",
 "to"   : "runtime://<sp-domain>/<runtime-instance-identifier>/discovery/",
-"body" : { "resource" : "/<registry-object-type>/user/userprofile/<user-profile-attribute-name>/<user-profile-attribute-value>", "criteria" : { "resources" : ["<resources>"], "dataSchemes" : ["<schema>"] }}
+"body" : { "resource" : "/<registry-object-type>/userprofile/<user-profile-attribute-value>", "criteria" : { "resources" : ["<resources>"], "dataSchemes" : ["<schema>"] }}
 ```
 
 Response from Discovery component:
