@@ -61,7 +61,7 @@ Request to Discovery component:
 "type" : "read",
 "from" : "hyperty://<sp-domain>/<hyperty-instance-identifier>",
 "to"   : "runtime://<sp-domain>/<runtime-instance-identifier>/discovery/",
-"body" : { "resource" : "<registry-object-url>" }
+"body" : { "resource" : "/<registry-object-type>/url/<registry-object-url>" }
 ```
 
 Response from Discovery component:
