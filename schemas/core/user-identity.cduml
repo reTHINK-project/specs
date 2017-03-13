@@ -23,10 +23,9 @@ package Identity <<Rect>> {
 	}
 
 	class IdAssertion {
-		assertion : string
+		assertion : JWT
 		idp : URL.URL
 		scope : string
-		expirationDate : date
 	}
 
 	note top : compliant with WebRTC\n RTCIdentityAssertionResult
