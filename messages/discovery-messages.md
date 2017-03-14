@@ -84,7 +84,7 @@ Not Found Response from Discovery component:
 "body" : { "code" : 404, "description" : "Not Found" }
 ```
 
-#### Discover DataObject by DataObject Name
+#### Discover DataObjects by DataObject Name
 
 Querying the Domain Registry with a dataObject name. Optionally also with types of dataObject schemas
 (e.g. `comasdm`), types of dataObject resources (e.g. `chat`).
@@ -119,7 +119,7 @@ Not Found Response from Discovery component:
 "body" : { "code" : 404, "description" : "Not Found" }
 ```
 
-#### Discover DataObject by Reporter 
+#### Discover DataObjects by Reporter 
 
 Querying the Domain Registry with a reporter url (hyperty). Optionally also with types of dataObject schemas
 (e.g. `comasdm`), types of dataObject resources (e.g. `chat`).
