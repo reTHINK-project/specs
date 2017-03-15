@@ -1,4 +1,4 @@
-@startuml "../../datamodel/data-objects/connection/Connection-Data-Object-Model.png"
+@startuml "../../datamodel/data-objects/connection/Connection-Data-Object-Model-new.png"
 
 package Connection <<Rect>> {
 
@@ -6,13 +6,6 @@ package Connection <<Rect>> {
 		scheme = "connection"
 		status : string
 		owner : URL.UserURL
-		peer : URL.ConnectionURL
-	}
-
-  	class OwnerPeer {
-	}
-
-	class Peer {
 	}
 
 	class IceCandidate {
@@ -43,20 +36,12 @@ package Connection <<Rect>> {
 	    disconnected
 	    closed
 	}
-	
+
 	Connection -up-|> SyncDataObject.SyncDataObject
-	Peer -up-|> SyncDataObject.SyncDataObject
 
-	Connection *--> "1" OwnerPeer
-	Connection ..> "1" Peer
-
-	Peer *--> "1" IceCandidates
-	Peer *--> "1" ConnectionDescription
-	Peer *--> "1" RtpTransportParameters
-
-	OwnerPeer *--> "1" IceCandidates
-	OwnerPeer *--> "1" ConnectionDescription
-	OwnerPeer *--> "1" RtpTransportParameters
+	Connection *--> "1" IceCandidates
+	Connection *--> "1" ConnectionDescription
+	Connection *--> "1" RtpTransportParameters
 
 	IceCandidates -down-> RTCIceConnectionState
 	IceCandidates *--> IceCandidate
