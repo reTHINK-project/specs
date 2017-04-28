@@ -64,7 +64,7 @@ The catalogue actually consist of two parts: the catalogue-brocker and several c
 We will first install a CSP, then the application from scratch. To illustrate our text, we will consider that the DNS of the platform is ___csp.rethink.com___
 
 
-###Communication Service Provider
+### Communication Service Provider
 
 As mentionned above, the communication service providers consists in __3__ componants. We will install first the domain registry, then the messaging node, and finally the catalogue. 
 
@@ -76,7 +76,7 @@ ___WARNING___
 * The urls of the domain users  are encoded to be able to be sent to the domain registry. For apache reverse proxy users the directives _AllowEncodedSlashes On_ AND _ProxyPass_ with _nocanon_.
 
 
-####Messaging node
+#### Messaging node
 This is the core plateform. ReTHINK has provided four implementations but only one is necessary to be installed:
 * [VertX](https://github.com/reTHINK-project/dev-msg-node-vertx) 
 * [Matrix](https://github.com/reTHINK-project/dev-msg-node-matrix)
@@ -90,7 +90,7 @@ ___WARNING___
 
 __To test if installation is OK: https://msg-node.csp.rethink.com/live gives a view of the current status of the nodejs node.__  
 
-####Catalogue
+#### Catalogue
 The catalogue is made out of two main components. A broker, that is needed to access the different services, and one or more databases. Documentation can be accessed [here](https://github.com/reTHINK-project/dev-catalogue/tree/master/doc).  
 First of all, the broker has to be installed. A dockerhub component is available.   
 
@@ -123,12 +123,12 @@ ___WARNING___
 __To test if installation is OK: https://catalogue.csp.rethink.com/ gives a view of the current status of the catalogue node. It also allow to see connected databases and componants__  
   
 
-###Application Deployment
+### Application Deployment
 
-####Hello World
+#### Hello World
 The Hello World is published in the repository [dev-hello](https://github.com/reTHINK-project/dev-app), and its installation manual is provided there. It can be deploied simply behind an HTTP server.  
 
-####Complete Setup
+#### Complete Setup
 After all these steps, application should be running. Last verifications:  
 ___WARNING___  
  * The Browser Runtime has to be uploaded from .well-known/runtime/ must contain the last version of the runtime. It have to be filled with [these files](https://github.com/reTHINK-project/dev-runtime-browser/tree/master/bin)  (rethink.js, index.html, core.js, context-service.js, identities-gui.js, policies-gui.js)
