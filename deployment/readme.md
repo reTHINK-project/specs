@@ -1,16 +1,16 @@
 # Quick installation guide of the reThink Platform.
 # Table of Contents
 1. [Components to install](#components-to-install)
- 1. [Server-side components](#server-side-components)
- 2. [Client-side components](#client-side-components)
+   1. [Server-side components](#server-side-components)
+   2. [Client-side components](#client-side-components)
 2. [Installation process](#installation-process)
- 1. [Communication Service Provider](#communication-service-provider)
-   1. [Domain Registry](#domain-registry)
-    2. [Messaging node](#messaging-node)
-    3. [Catalogue](#catalogue)
- 2. [Application Deployment](#application-deployment)
-   1. [Hello World](#hello-world)
-    2. [Complete setup](#complete-setup)
+   1. [Communication Service Provider](#communication-service-provider)
+      1. [Domain Registry](#domain-registry)
+      2. [Messaging node](#messaging-node)
+      3. [Catalogue](#catalogue)
+   2. [Application Deployment](#application-deployment)
+      1. [Hello World](#hello-world)
+      2. [Complete setup](#complete-setup)
  
 
 This page explains how to install a complete platform to be able to deploy services and applications based on the reThink framework.
@@ -68,7 +68,7 @@ We will first install a CSP, then the application from scratch. To illustrate ou
 
 As mentionned above, the communication service providers consists in __3__ componants. We will install first the domain registry, then the messaging node, and finally the catalogue. 
 
-####Domain Registry 
+#### Domain Registry 
 Domain registry is installable from [here](https://github.com/reTHINK-project/dev-registry-domain/server). As the Domain Registry is necessary to run the messaging node, it has to be installed first. The default port of the domain registry is 4567.
 The default DNS for our domain registry will be: __registry.csp.rethink.com__.  
 __To test if installation is OK: https://registry.csp.rethink.com/live gives a view of the current status of the registry.__  
