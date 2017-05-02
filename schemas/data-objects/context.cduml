@@ -73,6 +73,7 @@ package Context <<Rect>> {
 	AVAILABILITY
 	USER_ACTIVITY
 	USER_COMMUNICATION
+	ACTIVITY
 	}
 
 	enum ContextUnit {
@@ -126,8 +127,9 @@ package Context <<Rect>> {
 	CUMULATIVE_NUMBER_OF_HEART_BEATS
 	STEPS
 	PRES
-	ACT
+	USER_ACT
 	COMM
+	ACT_STATUS
 	}
 
 note bottom : to be updated
@@ -166,6 +168,13 @@ note bottom : to be updated
 	 OUT_AUDIO_COMM_FAILED
 	 IN_VIDEO_COMM_FAILED
 	 OUT_VIDEO_COMM_FAILED
+	}
+
+	enum ActivityStatus {
+	 PLANNED
+	 ACTIVE
+	 IDLE
+	 COMPLETE
 	}
 
 	class Actions <<Children>> {
@@ -207,6 +216,7 @@ note bottom : to be updated
 	ContextValue .down.> AvailabilityStatus : for Availability Context
 	ContextValue .down.> UserActivity : for UserActivity Context
 	ContextValue .down.> UserCommunication : for UserCommunication Context
+	ContextValue .down.> Activity : for Activity Context
 
 	ContextValue -right- ContextUnitName
 	ContextValue -left- ContextUnit

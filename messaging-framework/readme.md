@@ -52,5 +52,6 @@ More detailed descriptions about Decentralized Messaging Framework can be found 
 
 * [Protocol on-the-fly](protofly.md) mechanism
 * [Message Node](msg-node.md) functional description
-* [Peer to peer Message Delivery](p2p-msg-delivery.md) procedure
+* [Protostub specification](stub-specification.md)
 * [Data Synchronisation Reporter - Observer communication mechanism](p2p-data-sync.md)
+* [Peer to peer Message Delivery](p2p-msg-delivery.md) procedure

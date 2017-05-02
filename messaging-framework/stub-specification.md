@@ -151,7 +151,11 @@ The connect method establishes the connection between the protocol stub and the 
 
 `_filter(msg)`
 
-This message must be present in order to avoid message cycles for messages beeing sent out to the MN. It is used to filter out messages that have been sent already via the protocol stub, by checking a "via" field in the message body. If this field exists and equals the stubs runtimeProtoStubURL then this message must return false, otherwise true.
+This message must be present in order to avoid message cycles in two situations:
+* for messages beeing sent out to the MN.
+* for messages beeing delivered to the Runtime MessageBus.
+
+It is used to filter out messages that have been sent already via the protocol stub, by checking a "via" field in the message body. If this field exists and equals the stubs runtimeProtoStubURL then this message must return false, otherwise true.
 
 *Parameters:*
 

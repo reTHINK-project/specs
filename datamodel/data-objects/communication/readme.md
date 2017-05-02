@@ -50,10 +50,10 @@ Parent Communication Data Object:
   "status" : "open",
   "children" : ["resources"],
   "participants" : {
-    "hypert://mydomain/56789-gfdjhlfdf" : {
+    "user://myidp/me@mail.com" : {
       "identity" : { ... }
     },
-    "hypert://otherdomain/gfdjhlfdf-56789" : {
+    "user://myotheridp/meagain@net.com" : {
       "identity" : { ... }
     }
   }
@@ -65,7 +65,7 @@ Static Children Data Object:
 ```
 {
   "parent" : "communication",
-  "listener" : "resource",
+  "listener" : "resources",
   "type" : "HypertyResource"
 }
 ```
