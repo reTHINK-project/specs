@@ -1,16 +1,16 @@
 # Quick installation guide of the reThink Platform.
 # Table of Contents
 1. [Components to install](#components-to-install)
- 1. [Server-side components](#server-side-components)
- 2. [Client-side components](#client-side-components)
+   1. [Server-side components](#server-side-components)
+   2. [Client-side components](#client-side-components)
 2. [Installation process](#installation-process)
- 1. [Communication Service Provider](#communication-service-provider)
-   1. [Domain Registry](#domain-registry)
-    2. [Messaging node](#messaging-node)
-    3. [Catalogue](#catalogue)
- 2. [Application Deployment](#application-deployment)
-   1. [Hello World](#hello-world)
-    2. [Complete setup](#complete-setup)
+   1. [Communication Service Provider](#communication-service-provider)
+      1. [Domain Registry](#domain-registry)
+      2. [Messaging node](#messaging-node)
+      3. [Catalogue](#catalogue)
+   2. [Application Deployment](#application-deployment)
+      1. [Hello World](#hello-world)
+      2. [Complete setup](#complete-setup)
  
 
 This page explains how to install a complete platform to be able to deploy services and applications based on the reThink framework.
@@ -64,11 +64,11 @@ The catalogue actually consist of two parts: the catalogue-brocker and several c
 We will first install a CSP, then the application from scratch. To illustrate our text, we will consider that the DNS of the platform is ___csp.rethink.com___
 
 
-###Communication Service Provider
+### Communication Service Provider
 
 As mentionned above, the communication service providers consists in __3__ componants. We will install first the domain registry, then the messaging node, and finally the catalogue. 
 
-####Domain Registry 
+#### Domain Registry 
 Domain registry is installable from [here](https://github.com/reTHINK-project/dev-registry-domain/server). As the Domain Registry is necessary to run the messaging node, it has to be installed first. The default port of the domain registry is 4567.
 The default DNS for our domain registry will be: __registry.csp.rethink.com__.  
 __To test if installation is OK: https://registry.csp.rethink.com/live gives a view of the current status of the registry.__  
@@ -76,7 +76,7 @@ ___WARNING___
 * The urls of the domain users  are encoded to be able to be sent to the domain registry. For apache reverse proxy users the directives _AllowEncodedSlashes On_ AND _ProxyPass_ with _nocanon_.
 
 
-####Messaging node
+#### Messaging node
 This is the core plateform. ReTHINK has provided four implementations but only one is necessary to be installed:
 * [VertX](https://github.com/reTHINK-project/dev-msg-node-vertx) 
 * [Matrix](https://github.com/reTHINK-project/dev-msg-node-matrix)
@@ -90,7 +90,7 @@ ___WARNING___
 
 __To test if installation is OK: https://msg-node.csp.rethink.com/live gives a view of the current status of the nodejs node.__  
 
-####Catalogue
+#### Catalogue
 The catalogue is made out of two main components. A broker, that is needed to access the different services, and one or more databases. Documentation can be accessed [here](https://github.com/reTHINK-project/dev-catalogue/tree/master/doc).  
 First of all, the broker has to be installed. A dockerhub component is available.   
 
@@ -123,12 +123,12 @@ ___WARNING___
 __To test if installation is OK: https://catalogue.csp.rethink.com/ gives a view of the current status of the catalogue node. It also allow to see connected databases and componants__  
   
 
-###Application Deployment
+### Application Deployment
 
-####Hello World
+#### Hello World
 The Hello World is published in the repository [dev-hello](https://github.com/reTHINK-project/dev-app), and its installation manual is provided there. It can be deploied simply behind an HTTP server.  
 
-####Complete Setup
+#### Complete Setup
 After all these steps, application should be running. Last verifications:  
 ___WARNING___  
  * The Browser Runtime has to be uploaded from .well-known/runtime/ must contain the last version of the runtime. It have to be filled with [these files](https://github.com/reTHINK-project/dev-runtime-browser/tree/master/bin)  (rethink.js, index.html, core.js, context-service.js, identities-gui.js, policies-gui.js)

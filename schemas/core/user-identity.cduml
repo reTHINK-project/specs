@@ -23,7 +23,7 @@ package Identity <<Rect>> {
 	}
 
 	class IdAssertion {
-		assertion : string
+		assertion : JWT
 		idp : URL.URL
 		scope : string
 	}

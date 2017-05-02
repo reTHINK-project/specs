@@ -14,14 +14,12 @@ This doc specifies the Messages to be used when interacting with the Discovery c
 
 * `<discoveredRegistryObjects>` can be a JSON object compliant with HypertyInstance data model or a JSON object compliant with HypertyDataObjectInstance data model.
 
-* `<user-profile-attribute-name>` is an attribute present on the profile of the user in Discovery Service component.
-
 * `<user-profile-attribute-value>` is a value of an attribute present on the profile of the user in Discovery Service component.
 
 
 #### Discover Hyperties/DataObjects by User URL or Email
 
-Querying the Domain Registry with a user identifier (either in `url` or `email format`). Optionally also with types of hyperties/dataObjects schemas (e.g. `comasdm`) and types of hyperties/dataObjects resources (e.g. `chat`).
+Querying the Domain Registry with a user identifier (either in `url` or `email format`). Optionally also with types of hyperties/dataObjects schemas (e.g. `comasdm`), types of hyperties/dataObjects resources (e.g. `chat`) and domain.
 
 Request to Discovery component:
 ```
@@ -29,7 +27,7 @@ Request to Discovery component:
 "type" : "read",
 "from" : "hyperty://<sp-domain>/<hyperty-instance-identifier>",
 "to"   : "runtime://<sp-domain>/<runtime-instance-identifier>/discovery/",
-"body" : { "resource" : "/<registry-object-type>/user/<userIdentifier>", "criteria" : { "resources" : ["<resources>"], "dataSchemes" : ["<schema>"] }}
+"body" : { "resource" : "/<registry-object-type>/user/<userIdentifier>", "criteria" : { "resources" : ["<resources>"], "dataSchemes" : ["<schema>"], "domain" : "domain" }}
 ```
 
 Response from Discovery component:
@@ -63,7 +61,7 @@ Request to Discovery component:
 "type" : "read",
 "from" : "hyperty://<sp-domain>/<hyperty-instance-identifier>",
 "to"   : "runtime://<sp-domain>/<runtime-instance-identifier>/discovery/",
-"body" : { "resource" : "<registry-object-url>" }
+"body" : { "resource" : "/<registry-object-type>/url/<registry-object-url>", "criteria": {"domain" : "domain" }}
 ```
 
 Response from Discovery component:
@@ -86,7 +84,7 @@ Not Found Response from Discovery component:
 "body" : { "code" : 404, "description" : "Not Found" }
 ```
 
-#### Discover DataObject by DataObject Name
+#### Discover DataObjects by DataObject Name
 
 Querying the Domain Registry with a dataObject name. Optionally also with types of dataObject schemas
 (e.g. `comasdm`), types of dataObject resources (e.g. `chat`).
@@ -98,7 +96,7 @@ Request to Discovery component:
 "type" : "read",
 "from" : "hyperty://<sp-domain>/<hyperty-instance-identifier>",
 "to"   : "runtime://<sp-domain>/<runtime-instance-identifier>/discovery/",
-"body" : { "resource" : "/<registry-object-type>/name/<dataObjtName>", "criteria" : { "resources" : ["<resources>"], "dataSchemes" : ["<schema>"] }}
+"body" : { "resource" : "/<registry-object-type>/name/<dataObjtName>", "criteria" : { "resources" : ["<resources>"], "dataSchemes" : ["<schema>"], "domain" : "domain" }}
 ```
 
 Response from Discovery component:
@@ -108,7 +106,42 @@ Response from Discovery component:
 "type" : "response",
 "from" : "runtime://<sp-domain>/<runtime-instance-identifier>/discovery/",
 "to"   : "hyperty://<sp-domain>/<hyperty-instance-identifier>",
-"body" : { "code" : 200, "value" : "<RegistryDataObject>" }
+"body" : { "code" : 200, "value" : ["<discoveredRegistryObjects>"] }
+```
+
+Not Found Response from Discovery component:
+
+```
+"id"   : 5
+"type" : "response",
+"from" : "runtime://<sp-domain>/<runtime-instance-identifier>/discovery/",
+"to"   : "hyperty://<sp-domain>/<hyperty-instance-identifier>",
+"body" : { "code" : 404, "description" : "Not Found" }
+```
+
+#### Discover DataObjects by Reporter 
+
+Querying the Domain Registry with a reporter url (hyperty). Optionally also with types of dataObject schemas
+(e.g. `comasdm`), types of dataObject resources (e.g. `chat`).
+
+Request to Discovery component:
+
+```
+"id"   : 5
+"type" : "read",
+"from" : "hyperty://<sp-domain>/<hyperty-instance-identifier>",
+"to"   : "runtime://<sp-domain>/<runtime-instance-identifier>/discovery/",
+"body" : { "resource" : "/<registry-object-type>/reporter/<registry-object-url>", "criteria" : { "resources" : ["<resources>"], "dataSchemes" : ["<schema>"], "domain" : "domain" }}
+```
+
+Response from Discovery component:
+
+```
+"id"   : 5
+"type" : "response",
+"from" : "runtime://<sp-domain>/<runtime-instance-identifier>/discovery/",
+"to"   : "hyperty://<sp-domain>/<hyperty-instance-identifier>",
+"body" : { "code" : 200, "value" : ["<discoveredRegistryObjects>"] }
 ```
 
 Not Found Response from Discovery component:
@@ -168,7 +201,7 @@ Request to Discovery component:
 "type" : "read",
 "from" : "hyperty://<sp-domain>/<hyperty-instance-identifier>",
 "to"   : "runtime://<sp-domain>/<runtime-instance-identifier>/discovery/",
-"body" : { "resource" : "/<registry-object-type>/user/userprofile/<user-profile-attribute-name>/<user-profile-attribute-value>", "criteria" : { "resources" : ["<resources>"], "dataSchemes" : ["<schema>"] }}
+"body" : { "resource" : "/<registry-object-type>/userprofile/<user-profile-attribute-value>", "criteria" : { "resources" : ["<resources>"], "dataSchemes" : ["<schema>"] }}
 ```
 
 Response from Discovery component:
