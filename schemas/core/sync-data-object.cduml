@@ -2,21 +2,25 @@
 
 package SyncDataObject {
 
-	class SyncDataObject {
+	class SyncObject {
 		url : URL.URL
-		cseq : integer
 		created : date
-		lastModified ?: date
 		reporter : URL.HypertyURL
 		runtime : URL.HypertyRuntimeURL
 		schema : URL.HypertyCatalogueURL
 		name : string
+		data : SyncData
 		description ?: string
 		tags ?: string[]
 		resources ?: HypertyResource.HypertyResourceType[]
 		observerStorage ?: boolean
 		public ?: boolean
 		mutualAuthentication ?: boolean
+	}
+
+	class SyncData {
+		cseq : integer
+		lastModified ?: date
 	}
 
 	class SyncObjectParent {
@@ -29,24 +33,18 @@ package SyncDataObject {
 		listener : string
 		type : SyncObjectChild
 		childrenUrls ?: URL.URL[]
-		observerPermissions ?: ObserverPermission
 	}
 
 	class SyncObjectChild {
 	parent : URL.URL
 	}
 
-	enum ObserverPermission {
-	WRITE
-	WRITE_READ
-	READ
-	}
+	SyncObjectParent .up.|> SyncObject
+	SyncObjectChild .up.|> SyncObject
 
-	SyncObjectParent .up.|> SyncDataObject
-	SyncObjectChild .up.|> SyncDataObject
-
-	SyncObjectParent .down.> "0..*" SyncObjectChildren
+	SyncObject "1" .down.> "1" SyncData
 	SyncObjectParent .down.> "0..*" SyncObjectChild
 	SyncObjectChildren .down.> "1..*" SyncObjectChild : ChildId
+	SyncObjectParent .down.> "0..*" SyncObjectChildren
 }
 @enduml
