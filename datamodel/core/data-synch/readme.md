@@ -29,7 +29,7 @@ Is the abstract class for any data object to be synchronized. It contains metada
 
 **observerStorage** is a boolean used by the Sync Manager of the Observer runtime to decide if Observer can store (`true`) or not (`false`) the data object.
 
-**public** is a boolean used by the Hyperty handling reading requests to decide who can read the Object.
+**publicObservation** is a boolean used by the Hyperty handling reading requests to decide who can read the Object.
 
 **mutualAuthentication** is a boolean used by the Policy Engine to decide if the Object sync data flows should be encrypted (true) or not (false).
 

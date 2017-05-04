@@ -119,7 +119,7 @@ Message sent to Message Node subscription manager.
 "type" : "subscribe",
 "from" : "<someone>",
 "to" : "domain://msg-node.<sp-domain>/sm",
-"body" : { "subscribe" : "<RegistryDataObjectURL>/registration" }
+"body" : { "subscribe" : ["<RegistryDataObjectURL>/registration"] }
 ```
 
 

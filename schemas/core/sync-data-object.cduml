@@ -14,7 +14,7 @@ package SyncDataObject {
 		tags ?: string[]
 		resources ?: HypertyResource.HypertyResourceType[]
 		observerStorage ?: boolean
-		public ?: boolean
+		publicObservation ?: boolean
 		mutualAuthentication ?: boolean
 	}
 
