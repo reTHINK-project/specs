@@ -2,14 +2,14 @@
 
 package SyncDataObject {
 
-	class SyncObject {
+	class SyncMetadata {
 		url : URL.URL
 		created : date
 		reporter : URL.HypertyURL
 		runtime : URL.HypertyRuntimeURL
 		schema : URL.HypertyCatalogueURL
 		name : string
-		data : SyncData
+		data : SyncObject
 		description ?: string
 		tags ?: string[]
 		resources ?: HypertyResource.HypertyResourceType[]
@@ -18,33 +18,34 @@ package SyncDataObject {
 		mutualAuthentication ?: boolean
 	}
 
-	class SyncData {
+	class SyncObject {
 		cseq : integer
 		lastModified ?: date
 	}
 
-	class SyncObjectParent {
+	class SyncParentMetadata {
+		childrenObjects : SyncObjectChildren{}
 		children ?: string[]
 		childUrls ?: URL.URL[]
 	}
 
 	class SyncObjectChildren <<Children>> {
-		parent : string
+		parent : URL.URL
 		listener : string
-		type : SyncObjectChild
+		children: SyncChildMetadata{}
+		type : SyncChildMetadata
 		childrenUrls ?: URL.URL[]
 	}
 
-	class SyncObjectChild {
+	class SyncChildMetadata {
 	parent : URL.URL
 	}
 
-	SyncObjectParent .up.|> SyncObject
-	SyncObjectChild .up.|> SyncObject
+	SyncParentMetadata .up.|> SyncMetadata
+	SyncChildMetadata .up.|> SyncMetadata
 
-	SyncObject "1" .down.> "1" SyncData
-	SyncObjectParent .down.> "0..*" SyncObjectChild
-	SyncObjectChildren .down.> "1..*" SyncObjectChild : ChildId
-	SyncObjectParent .down.> "0..*" SyncObjectChildren
+	SyncMetadata "1" .down.> "1" SyncObject
+	SyncObjectChildren *.down.> "1..*" SyncChildMetadata : ChildId
+	SyncParentMetadata *.down.> "1..*" SyncObjectChildren
 }
 @enduml

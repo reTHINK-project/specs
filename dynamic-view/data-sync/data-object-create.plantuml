@@ -46,14 +46,6 @@ end
   RunSM@A <- SP1 : subscription Response Message
   end
 
-
-Sync1@A <- RunSM@A : Create Response MSG
-
-		note right
-			Hyperty owner is informed
-			 about new DataObject URL
-		end note
-
 RunSM@A -> RunSM@A : bus.addListener\n( SMListener, \n<ObjectURL>/subscription )
 
 note right
@@ -88,7 +80,16 @@ end
     RunSM@A <-- SP1 : Create Registration Response Message
   end
 
-  ==  Hyperties are notified about new object creation ==
+  Sync1@A <- RunSM@A : Create Response MSG
+
+  		note right
+  			Hyperty owner is informed
+  			 about new DataObject URL
+		  end note
+
+  ==  Hyperties are invited to be observers of the new object ==
+
+  Sync1@A -> RunSM@A : Create MSG
 
   RunSM@A -> SP1H@1B : Create Msg
 

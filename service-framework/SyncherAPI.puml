@@ -1,0 +1,137 @@
+@startuml
+
+interface SyncSubscription {
+  url: HypertyURL
+}
+
+interface SyncStatus {
+  status: on | paused | waiting
+  pause(): void
+  resume(): void
+  stop(): void
+}
+
+class Syncher {
+  owner: HypertyInstance
+  __
+  constructor(owner: HypertyURL, bus: MiniBus, config: Config)
+  create(schema: SchemaURL, observers?: [HypertyURL], initialData?: JSON, store?: boolean, p2p?: boolean, name: string, identity?: Identity.MessageBodyIdentity, metadata?: object,): Promise<DataObjectReporter>
+  subscribe(schema: SchemaURL, url: ObjectURL, store?: boolean, p2p?: boolean, mutual?: boolean, identity?: Identity.MessageBodyIdentity): Promise<DataObjectObserver>
+  read(url: ObjectURL): Promise<JSON>
+  resumeReporters(criteria?: ResumeCriteria)
+  resumeObservers(criteria?: ResumeCriteria)
+  __ event handlers __
+  onNotification(callback: (event: CreateEvent | DeleteEvent) => void): void
+  onObservers(callback: (event: observers: [DataObjectObserver]) => void): void
+  onReporters(callback: (event: reporters: [DataObjectReporter]) => void): void
+}
+
+class DataObject {
+  owner: HypertyInstance
+  syncObj: Core.SyncDataObject.SyncObject
+  metadata: Core.SyncDataObject.SyncMetadata
+  childrenObjects: dataObjectChild{}
+  __
+  addChild(children: string, initialData: JSON, identity?: Identity.MessageBodyIdentity): Promise<DataObjectChild>
+  resumeChildrens(childrens: Object)
+  __ event handlers __
+  onChange(filter: string, callback: (event: ChangeEvent) => void): void
+  onAddChild(callback: (event: CreateEvent) => void): void
+}
+
+class DataObjectChild {
+  owner: HypertyInstance
+  parentObject: DataObject
+  syncObj: Core.SyncDataObject.SyncObject
+  metadata: Core.SyncDataObject.SyncMetadata
+  __
+  delete()
+  __ event handlers __
+  onResponse(callback: (event: ReponseEvent) => void): void
+  onChange(callback: (event: ChangeEvent) => void): void
+}
+
+class DataObjectReporter {
+  inviteObservers(observers: [HypertyURL]): void
+  __ event handlers __
+  onSubscription(callback: (event: SubscribeEvent | UnSubscribeEvent) => void): void
+  onResponse(callback: (event: ReponseEvent) => void): void
+  onRead(callback: (event: ReponseEvent) => void): void
+}
+
+class DataObjectObserver {
+__
+unsubscribe()
+}
+
+interface Event {
+  identity: ?Identity.Identity
+  url: URL
+  type: create | delete | subscribe | unsubscribe | response | change
+}
+
+interface CreateEvent {
+  from: HypertyURL
+  value: JSON
+  schema?: SchemaURL
+  ack(type): void
+}
+
+interface DeleteEvent {
+  object: DataObjectObserver
+}
+
+interface SubscribeEvent {
+  accept(): SyncSubscription
+  reject(reason): void
+}
+
+interface UnSubscribeEvent {
+  object: SyncSubscription
+}
+
+interface ResponseEvent {
+  code: int
+  source?: HypertyURL
+}
+
+interface ChangeEvent {
+  cType: update | add | delete
+  oType: object | array
+  field: string /*separated dot path*/
+  data?: value | [value]
+}
+
+interface ReadEvent {
+  accept(): void
+  reject(reason): void
+}
+
+CreateEvent --|> Event
+DeleteEvent --|> Event
+SubscribeEvent --|> Event
+UnSubscribeEvent --|> Event
+ResponseEvent --|> Event
+ChangeEvent --|> Event
+ReadEvent --|> Event
+
+SyncSubscription --|> SyncStatus
+
+DataObject --|> SyncStatus
+DataObject *--"*" DataObjectChild:childrenObjects
+
+DataObjectObserver ---|> DataObject
+
+DataObjectReporter ---|> DataObject
+DataObjectReporter *--"*" SyncSubscription:subscriptions
+
+Syncher *--"*" DataObjectReporter:reporters
+Syncher *--"*" DataObjectObserver:observers
+
+DataObjectChild -[hidden]down- DeleteEvent
+DataObjectChild -[hidden]down- CreateEvent
+DataObjectChild -[hidden]down- SubscribeEvent
+DataObjectChild -[hidden]down- UnSubscribeEvent
+DataObjectChild -[hidden]down- ResponseEvent
+
+@enduml
