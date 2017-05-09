@@ -45,7 +45,7 @@ package SyncDataObject {
 	SyncChildMetadata .up.|> SyncMetadata
 
 	SyncMetadata "1" .down.> "1" SyncObject
-	SyncObjectChildren *.down.> "1..*" SyncChildMetadata : ChildId
+	SyncObjectChildren *.down.> "1..*" SyncChildMetadata 
 	SyncParentMetadata *.down.> "1..*" SyncObjectChildren
 }
 @enduml
