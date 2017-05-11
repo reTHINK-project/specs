@@ -15,7 +15,7 @@ DataObjectReporter - provides functions to handle DataObjects as a Reporter i.e.
 
 DataObjectObserver - provides functions to handle DataObjects as a Observer i.e. it handles a "copy" of the original Data Object which is updated as soon as the Reporter changes. Changes on the DataObject are notified to the Hyperty Instance Observers.
 
-In addition, DataObjects can be SyncObjectParents with collections of DataObjectChild. Each collection is called DataObjectChildren. Either Reporter (DataObjectReporter) or Observers (DataObjectObserver) can create DataObjectChilds in a certain children collection (`addChild()` function).
+In addition, DataObjects can handle  Children Object with collections of DataObjectChild. Either Reporter (DataObjectReporter) or Observers (DataObjectObserver) can create DataObjectChilds in a certain children collection (`addChild()` function).
 
 ### Syncher API
 
@@ -45,7 +45,7 @@ Syncher is created one per Hyperty. The parameters are basically the same as the
 
 **create**
 
-`create(schema: SchemaURL, observers?: [HypertyURL], initialData: JSON, store?: boolean, p2p?: boolean, identity?: Identity.MessageBodyIdentity): Promise<DataObjectReporter>`
+`create(schema: SchemaURL, observers?: [HypertyURL], initialData?: JSON, store?: boolean, p2p?: boolean, name: string, identity?: Identity.MessageBodyIdentity, metadata?: SyncDataObject.SyncMetadata): Promise<DataObjectReporter>`
 
 This Method is used to create objects to be reported i.e. the Hyperty Instance plays the Reporter role. The following parameters are used:
 
@@ -59,13 +59,17 @@ This Method is used to create objects to be reported i.e. the Hyperty Instance p
 
 * p2p (optional): if true the object data sync uses p2p data connections.
 
+* name (optional): the mandatory name of the Data Object. If not present, a default `data object without name` will be given
+
 * identity (optional): information about the identity of the user associated with the Reporter. Useful when the reporter is used in an [Interworking Protostub](../legacy-interworking/interworking-stubs-development.md).
+
+* metadata (optional): all remaining optional metadata about the Data Object
 
 * return: Promise to a new Reporter. The reporter can be accepted or rejected by the PEP
 
 **subscribe**
 
-`subscribe(schema: SchemaURL, url: ObjectURL, store?: boolean, p2p?: boolean, identity?: Identity.MessageBodyIdentity): Promise<DataObjectObserver>`
+`subscribe(schema: SchemaURL, url: ObjectURL, store?: boolean, p2p?: boolean, mutual?: boolean, identity?: Identity.MessageBodyIdentity): Promise<DataObjectObserver>`
 
 This Method is used to subscribe objects to be observed i.e. the Hyperty Instance plays the Observer role. The following parameters are used:
 

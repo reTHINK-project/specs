@@ -15,7 +15,7 @@ class Syncher {
   owner: HypertyInstance
   __
   constructor(owner: HypertyURL, bus: MiniBus, config: Config)
-  create(schema: SchemaURL, observers?: [HypertyURL], initialData?: JSON, store?: boolean, p2p?: boolean, name: string, identity?: Identity.MessageBodyIdentity, metadata?: object,): Promise<DataObjectReporter>
+  create(schema: SchemaURL, observers?: [HypertyURL], initialData?: JSON, store?: boolean, p2p?: boolean, name: string, identity?: Identity.MessageBodyIdentity, metadata?: SyncDataObject.SyncMetadata): Promise<DataObjectReporter>
   subscribe(schema: SchemaURL, url: ObjectURL, store?: boolean, p2p?: boolean, mutual?: boolean, identity?: Identity.MessageBodyIdentity): Promise<DataObjectObserver>
   read(url: ObjectURL): Promise<JSON>
   resumeReporters(criteria?: ResumeCriteria)
@@ -28,11 +28,11 @@ class Syncher {
 
 class DataObject {
   owner: HypertyInstance
-  syncObj: Core.SyncDataObject.SyncObject
-  metadata: Core.SyncDataObject.SyncMetadata
-  childrenObjects: dataObjectChild{}
+  syncObj: SyncDataObject.SyncObject
+  metadata: SyncDataObject.SyncMetadata
+  childrenObjects: DataObjectChild{}
   __
-  addChild(children: string, initialData: JSON, identity?: Identity.MessageBodyIdentity): Promise<DataObjectChild>
+  addChild(children: string, initialData: JSON, identity?: Identity.MessageBodyIdentity, metadata?: SyncDataObject.SyncMetadata): Promise<DataObjectChild>
   resumeChildrens(childrens: Object)
   __ event handlers __
   onChange(filter: string, callback: (event: ChangeEvent) => void): void
@@ -42,8 +42,8 @@ class DataObject {
 class DataObjectChild {
   owner: HypertyInstance
   parentObject: DataObject
-  syncObj: Core.SyncDataObject.SyncObject
-  metadata: Core.SyncDataObject.SyncMetadata
+  syncObj: SyncDataObject.SyncObject
+  metadata: SyncDataObject.SyncMetadata
   __
   delete()
   __ event handlers __
