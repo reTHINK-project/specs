@@ -3,21 +3,9 @@
 package Context <<Rect>> {
 
 	class Context {
-		url : URL.ContextURL
-		reporter : URL.HypertyURL
-		schema : URL.HypertyCatalogueURL
-		name : string
-		scheme = "context"
 		id: string
-		description ?: string
-		time?: date
 		unit?: ContextUnit
-		version?: integer
 		values: ContextValue[]
-		tag?: string
-		children ?: string[]
-		childUrls ?: URL.URL[]
-		address ?: URL.HypertyRuntimeURL
 	}
 
 	enum ContextUnitName {
@@ -177,46 +165,25 @@ note bottom : to be updated
 	 COMPLETE
 	}
 
-	class Actions <<Children>> {
-		parent = "context"
-		listener = "<actions>"
-		type = "<Action>"
-		observerPermissions = "write"
-	}
-
-	class Action <<SyncObjectChild>> {
-		type ?: HypertyResource.HypertyResourceType
-		url : URL.URL
-		reporter : URL.HypertyURL
-		schema : URL.HypertyCatalogueURL
-		id: string
-		type : HypertyResource.HypertyResourceType
-		description ?: string
+	class Action {
+		type?: HypertyResource.HypertyResourceType
 		time?: date
 		unit?: ContextUnit
-		version?: integer
 		values: ContextValue[]
-		tag?: string
 	}
-
-
 
 	Context *-- "1..*" ContextValue
 
-	Context -up-|> SyncDataObject.SyncObjectParent
-	Actions -up-|> SyncDataObject.SyncObjectChildren
-	Action -up-|> SyncDataObject.SyncObjectChild
-	Context -up-|> SyncDataObject.SyncObjectChild
-	Context .left. Actions
-	Action .. Actions
-	ContextValue -up-> HypertyResource.HypertyResourceType
-	ContextValue -up-> URL.HypertyRuntimeURL
-
+	Context -up-|> SyncDataObject.SyncObject
+	Action -up-|> SyncDataObject.SyncObject
+	Action *-- "1..*" ContextValue
+	Context .left. Action
 
 	ContextValue .down.> AvailabilityStatus : for Availability Context
 	ContextValue .down.> UserActivity : for UserActivity Context
 	ContextValue .down.> UserCommunication : for UserCommunication Context
 	ContextValue .down.> Activity : for Activity Context
+	ContextValue .down.> ActivityStatus : for Activity Status Context
 
 	ContextValue -right- ContextUnitName
 	ContextValue -left- ContextUnit
