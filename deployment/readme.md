@@ -43,7 +43,7 @@ https free trusted certificates can be obtained on [let's encrypt](https://letse
 
 * Identity provider (optional): the identity provider is used for user authentication. It is currently possible to use Google account, Microsoft account, and a reThink account provided.
 
-* Communication service provider (CSP). This is the masterpiece of the reThink platform. A CSP typically contains 3 building blocks: a Messaging Node, managing signaling part, a Registry (called domain registry) and a Catalogue. Whether these nodes can be independent or not is not the purpose of this guide. We consider them as a whole for a service provider.  
+* Communication service provider (CSP). This is the masterpiece of the reThink platform. A CSP typically contains 3 building blocks: a Messaging Node, managing messaging delivery, a Registry (called domain registry) and a Catalogue. Whether these nodes can be independent or not is not the purpose of this guide. We consider them as a whole for a service provider.  
 The catalogue actually consist of two parts: the catalogue-brocker and several catalogue databases (see [dev-catalogue](https://github.com/reTHINK-project/dev-catalogue) for more details).
 
 * Web application server: A minimum demo is provided by the CSP, and relies on the 3 previous nodes. The Web application server will provide the application. This application will:
@@ -66,10 +66,10 @@ We will first install a CSP, then the application from scratch. To illustrate ou
 
 ### Communication Service Provider
 
-As mentionned above, the communication service providers consists in __3__ componants. We will install first the domain registry, then the messaging node, and finally the catalogue. 
+As mentionned above, the communication service providers consists in __3__ components. We will install first the domain registry, then the messaging node, and finally the catalogue. 
 
 #### Domain Registry 
-Domain registry is installable from [here](https://github.com/reTHINK-project/dev-registry-domain/server). As the Domain Registry is necessary to run the messaging node, it has to be installed first. The default port of the domain registry is 4567.
+Domain registry is installable from [here](https://github.com/reTHINK-project/dev-registry-domain). As the Domain Registry is necessary to run the messaging node, it has to be installed first. The default port of the domain registry is 4567.
 The default DNS for our domain registry will be: __registry.csp.rethink.com__.  
 __To test if installation is OK: https://registry.csp.rethink.com/live gives a view of the current status of the registry.__  
 ___WARNING___
