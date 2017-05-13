@@ -32,7 +32,7 @@ where:
 
   **registry** for Domain Registry functional element
 
-**<functionality-identifier>:** identifies a specific functionality of a functional element. At this stage only applicable to [Messaging Nodes functionalities](../../../specs/msg-node/readme.md).
+**<functionality-identifier>:** identifies a specific functionality of a functional element. At this stage only applicable to [Messaging Nodes functionalities](../../../messaging-framework/msg-node.md).
 
 **examples**
 
