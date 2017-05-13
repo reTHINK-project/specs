@@ -1,6 +1,6 @@
 #### Resolve Routing Address
 
-This section describes how the Runtime Registry procedures to resolve a routing address during the [Message Routing process](bus-msg-routing).
+This section describes how the Runtime Registry procedures to resolve a routing address during the [Message Routing process](bus-msg-routing.md).
 
 
 ![Address Resolution](resolve-routing-address.png)
