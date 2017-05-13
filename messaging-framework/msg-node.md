@@ -85,7 +85,7 @@ If the MN later on receives a message from a reporting Hyperty that its data mod
 
 Note that the "from" and "to" fields just contain the <ObjectURL> and the "to"-field has the suffix "/changes". When the MN receives such a message, it must look up for all subscribed listeners to this <ObjectURL> and forward the message to them.
 
-A more detailed specification can be found at [Data sync messages](https://github.com/reTHINK-project/dev-service-framework/blob/d3.2-working-docs/docs/specs/messages/data-sync-messages.md).
+A more detailed specification can be found at [Data sync messages](../messages/data-sync-messages.md).
 The Subscription Manager functionality must have listeners to receive messages for the following addresses:
 
 ```
