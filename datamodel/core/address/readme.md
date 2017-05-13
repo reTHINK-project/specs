@@ -211,7 +211,7 @@ In case the runtime components are provided by google.
 
 ### Hyperty Instance Address
 
-The Hyperty URL is used to identify [Hyperty Instance Data Objects](../hyperty-instance/readme.md) in the Registry.
+The Hyperty URL is used to identify [Hyperty Instance Data Objects](../hyperty-registry/readme.md) in the Registry.
 
 Usage examples:
 
@@ -232,7 +232,7 @@ In case the Hyperty instance is registered at "meo.pt" domain:
 
 #### Communication / Conversation Address
 
-The URL Communication address is used to identify a [communication data object](../communication/readme.md).
+The URL Communication address is used to identify a [communication data object](../../data-objects/communication/readme.md).
 
 Usage examples:
 
@@ -248,7 +248,6 @@ For cross domain communications, it is used the "csp domain" from the communicat
 
 **open issue 1:** do we need a rule to correlate the same communication instance using URLs from different CSPs eg for settlement purposes?
 
-**open issue 2:** do we need separate schemes for [Connection Data Object](../communication/readme.md#connection) and [Hyperty Resources](../communication/readme.md#hyperty-resource)
 
 **example**
 
@@ -258,7 +257,7 @@ In case the Communication is provided by "telekom.de":
 
 #### Context Address
 
-The URL Communication address is used to identify a [Context data object](../context/readme.md).
+The URL Communication address is used to identify a [Context data object](../../data-objects/context/readme.md).
 
 Usage examples:
 
