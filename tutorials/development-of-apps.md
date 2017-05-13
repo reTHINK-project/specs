@@ -117,4 +117,4 @@ The identity management is normally coupled to the service logic and there are m
 
 #### Admin GUIs
 
-With rethink, you get some services like identity management or policy management. Some of this services can be configured by the user of your application. Rethink injects an iframe on your application that contains the administration GUIs. As an example, you can take a look at [policy manangement administration GUI](https://github.com/reTHINK-project/specs/blob/master/policy-management/user-interface.md).
+With rethink, you get some services like identity management or policy management. Some of this services can be configured by the user of your application. Rethink injects an iframe on your application that contains the administration GUIs. As an example, you can take a look at [policy manangement administration GUI](../policy-management/runtime/user-interface.md).
