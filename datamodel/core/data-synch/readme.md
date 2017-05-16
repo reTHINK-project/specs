@@ -7,6 +7,10 @@ The SyncDataObject Model is used to specify the JSON format used in the [Reporte
 
 #### SyncObject
 
+Is the abstract class for any data object to be synchronized.
+
+#### SyncMetadata
+
 Is the abstract class for any data object to be synchronized. It contains metadata about the object to be synchronised and the data itself.
 
 **url** is the DataObject URL which scheme is defined in the json-schema descriptor of the DataObject
@@ -15,9 +19,13 @@ Is the abstract class for any data object to be synchronized. It contains metada
 
 **schema** contains the CatalogueURL for the JSON Schema describing the Sync Object
 
-**runtimeUrl** contains the RuntimeURL where the Sync Object is hosted
+**runtime** contains the RuntimeURL where the Sync Object is hosted
 
 **created** data object creation time
+
+**lastModified** last time the data object was changed
+
+**version** is an integer that is incremented every time the object is updated. To be used to order changes in the object when needed. Useful when sync streams are resumed by Observers.
 
 **name** is an identifier of the Data Object that is used for discovery purposes
 
@@ -33,31 +41,27 @@ Is the abstract class for any data object to be synchronized. It contains metada
 
 **mutualAuthentication** is a boolean used by the Policy Engine to decide if the Object sync data flows should be encrypted (true) or not (false).
 
+
 #### SyncData
 
-Is the abstract class for the actual data to be synchronized. Besides the real data to be synchronised it contains:
+Is the abstract class for the actual data to be synchronized.
 
-**lastModified** last time the data object was changed
+#### SyncParentMetadata
 
-**cseq** is an integer that is incremented every time the object is updated. To be used to order changes in the object when needed. Useful when sync streams are resumed by Observers.
-
-
-#### SyncObjectParent
-
-Is an Abstract class for composite SyncObject. It can either contain a set of containers of Childs called  SyncObjectChildren or a list of Childs (SyncOjectChild).
-
-
+Is an Abstract class for composite SyncMetadata. It contains one or more containers of Childs called childrenObjects of type SyncObjectChildren.
 
 #### SyncObjectChildren
 
-Contains the **children** attribute that is a list of SyncObjectChild URLs
+Contains a collection of SyncChildMetadata objects as **children** attribute.
 
 #### SyncObjectChild
 
-Is a SyncObject that can be created by an observer of the SyncObjectParent.
+Is a SyncMetadata that can be created by an observer of the SyncParent.
 
-The **url** attribute inherited from SyncDataObject class contains, `<SyncObjectParentURL>/children/<childreName>/<reporter-instance-indentifier>#<cseq>` where,
+The **url** attribute inherited from SyncDataObject class contains, `<SyncObjectParentURL>/children/<childreName>/<reporter-instance-indentifier>#<childId>` where,
 
  `<reporter-instance-indentifier>` is the path from the Hyperty URL of the Reporter, ie the creator, of the SyncObjectChild. Note that HypertyURL is `hyperty://<domain>/<reporter-instance-indentifier`.
 
- `<cseq>` is an integer that is incremented everytime a new SyncObjectChild is create by the same Hyperty.
+ `<childId>` is an integer that is incremented everytime a new SyncObjectChild is create by the same Hyperty.
+
+The **parent** attribute contains the SyncParentMetadata url.

@@ -5,7 +5,7 @@ This document gives an overview on how Hyperties cooperate with each other throu
 
 While the [Protocol on-the-fly](protofly.md) provides transport interoperability without requiring the standardization of messaging protocols, the Reporter - Observer communication pattern enables semantic interoperability between Services without having to standardize Service APIs.
 
-It extends existing Observable communication patterns \cite{rx} by using a P2P data stream synchronization solution for programmatic Objects e.g. JSON Objects, hereafter simply called Data Objects.
+It extends existing Observable communication patterns by using a P2P data stream synchronization solution for programmatic Objects e.g. JSON Objects, hereafter simply called Data Objects.
 
 To avoid concurrency inconsistencies among peers, only one peer is granted writing permissions to the Data Object - the Reporter service - and all the other service instances only have permissions to read the Data Object - the Observers.
 
@@ -21,7 +21,7 @@ To be noted that, conceptually, more complex semantic interoperability and data 
 ### Data Object URL address
 
 Data Objects addresses follow [Information-centric networking](https://irtf.org/icnrg) design principles to support Data Object portability (between Communication end-points) and group communication.
-These characteristics are supported by the usage virtual addresses separately allocated to Data Objects, which are agnostic of the network addresses and the execution environment.
+These characteristics are supported by the usage of virtual addresses separately allocated to Data Objects, which are agnostic of the network addresses and the execution environment.
 
 
 ### Data Object Schema

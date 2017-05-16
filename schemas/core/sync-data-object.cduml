@@ -4,7 +4,9 @@ package SyncDataObject {
 
 	class SyncMetadata {
 		url : URL.URL
+		version: integer
 		created : date
+		lastModified : date
 		reporter : URL.HypertyURL
 		runtime : URL.HypertyRuntimeURL
 		schema : URL.HypertyCatalogueURL
@@ -19,8 +21,6 @@ package SyncDataObject {
 	}
 
 	class SyncObject {
-		cseq : integer
-		lastModified ?: date
 	}
 
 	class SyncParentMetadata {
@@ -45,7 +45,7 @@ package SyncDataObject {
 	SyncChildMetadata .up.|> SyncMetadata
 
 	SyncMetadata "1" .down.> "1" SyncObject
-	SyncObjectChildren *.down.> "1..*" SyncChildMetadata 
+	SyncObjectChildren *.down.> "1..*" SyncChildMetadata
 	SyncParentMetadata *.down.> "1..*" SyncObjectChildren
 }
 @enduml

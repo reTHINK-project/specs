@@ -6,19 +6,11 @@ The Communication Data Model is used to model the reTHINK Communications.
 
 **starting time:** when communication is opened the first time
 
-**last modified:** last change in the communication like new participant added or last message sent
-
 **duration:** period of time between the first "OPEN" status and the last "CLOSED" status.
 
 **status:** status of the communication. See CommunicationStatus below
 
 **participants:** list of participants in the Communication (see below)
-
-**qos:** *to be provided*
-
-**resources:** list of HypertyResourceTypes supported by the communication. See below
-
-**children = ["resources"]:** defines the Communication children (SyncObjectChildren) where all HypertyResources are shared DataObjectChild of a Communication.
 
 
 #### CommunicationStatus
@@ -39,16 +31,8 @@ Parent Communication Data Object:
 
 ```
 {
-  "url" : "comm://mydomain/1234-qwert",
-  "cseq" : 2,
-  "reporter" : "hypert://mydomain/56789-gfdjhlfdf",
-  "schema" : "hyperty-catalogue://catalogue.mydomain/.well-known/dataschema/communication",
-  "name" : "vacations plan",
-  "created" : "Thu Mar 02 2017 16:30:09 GMT+0000",
   "startingTime" : "Thu Mar 02 2017 16:32:19 GMT+0000",
-  "lastModified" : "Thu Mar 02 2017 17:23:43 GMT+0000",
   "status" : "open",
-  "children" : ["resources"],
   "participants" : {
     "user://myidp/me@mail.com" : {
       "identity" : { ... }
@@ -74,12 +58,6 @@ Chat Message Example:
 
 ```
 {
-  "url" : "comm://mydomain/1234-qwert/children/resources/56789-gfdjhlfdf#3",
-  "cseq" : 2,
-  "reporter" : "hypert://mydomain/56789-gfdjhlfdf",
-  "schema" : "hyperty-catalogue://catalogue.mydomain/.well-known/dataschema/communication",
-  "name" : "some chat message name",
-  "created" : "Thu Mar 02 2017 16:36:09 GMT+0000",
   "type" : "chat",
   "content" : "hello, this is my message"
 }
@@ -89,14 +67,8 @@ File Example:
 
 ```
 {
-  "url" : "comm://mydomain/1234-qwert/children/resources/56789-gfdjhlfdf#2",
-  "cseq" : 1,
-  "reporter" : "hypert://mydomain/56789-gfdjhlfdf",
-  "schema" : "hyperty-catalogue://catalogue.mydomain/.well-known/dataschema/communication",
-  "name" : "My favourite city",
   "type" : "file",
   "mimetype" : "image/jpeg"
-  "created" : "Thu Mar 02 2017 18:36:09 GMT+0000",
   "content" : "ÿØÿàJFIFHHÿáÒExifMM*.."
 }
 ```

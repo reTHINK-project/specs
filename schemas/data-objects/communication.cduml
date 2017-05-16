@@ -7,8 +7,6 @@ package Communication <<Rect>> {
 		duration ?: date
 		status : CommunicationStatus
 		participants ?: Participant[]
-		qos ?: CommunicationQuality
-		children = ["resources"]
 	}
 
 	class Resources <<Children>> {
@@ -33,15 +31,12 @@ package Communication <<Rect>> {
 		status ?: ParticipantStatus
 	}
 
-	class CommunicationQuality {
-	}
 
-	Communication -up-|> SyncDataObject.SyncObjectParent
+	Communication -up-|> SyncDataObject.SyncParentMetadata
 	Resources -up-|> SyncDataObject.SyncObjectChildren
 	Communication .. CommunicationStatus
 	Communication .left. Resources
 	Communication *.. Participant
-	Communication *.. CommunicationQuality
 	Participant .. ParticipantStatus
 	Participant ..> HypertyResource.HypertyResource
 	Participant ..> Identity.Identity
