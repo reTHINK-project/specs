@@ -2,7 +2,7 @@
 
 This document describes the main workflows used to control communications by using the reTHINK Framework.
 
-![Main reTHINK Communication Control data flows](reThink Comm Setup.png)
+![Main reTHINK Communication Control data flows](reThink-comm-setup.png)
 
 Let's take the classic "Alice calls Bob" example to shortly illustrate the main workflows of reTHINK communication management.
 In this example, Alice and Bob are subscribers of different Communication Service Providers (CSP) i.e. it is a cross domain communication.
