@@ -41,14 +41,18 @@ describe('connect / disconnect spec', function() {
     let bus = new Bus( (m, num) => {
       switch (num) {
         case 1:
-          util.expectConnected(m, runtimeStubURL);
+        case 2:
+          util.expectStubSuccessSequence(m, runtimeStubURL, num);
+          break;
+        case 3:
+          util.expectStubSuccessSequence(m, runtimeStubURL, num);
           stub.disconnect();
           break;
 
-        case 2:
-          util.expectDisconnected(m, runtimeStubURL);
+        case 4:
+          util.expectStubDisconnected(m, runtimeStubURL);
           done();
-        break;
+          break;
         default:
       }
     },

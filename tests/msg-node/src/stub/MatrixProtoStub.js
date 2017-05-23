@@ -47,6 +47,7 @@ class MatrixProtoStub {
         this._sendWSMsg(msg);
     });
     this._assumeOpen = false;
+    this._sendStatus("created");
   }
 
   /**
@@ -68,6 +69,7 @@ class MatrixProtoStub {
 
       // connect if not initialized or in CLOSED state
       if ( (! this._ws) || this._ws.readyState === 3) {
+        this._sendStatus("in-progress");
         // create socket to the MN
         this._ws = new WebSocket(this._configuration.messagingnode + "?runtimeURL=" + encodeURIComponent(this._runtimeURL));
         this._ws.onmessage = (m) => { this._onWSMessage(m) };
@@ -108,11 +110,12 @@ class MatrixProtoStub {
     // the close of the websocket will be initiated from server side
     this._sendWSMsg({
       cmd: "disconnect",
-      data: {
+      body: {
         runtimeURL: this._runtimeURL
       }
     });
     this._assumeOpen = false;
+    this._ws.close();
   }
 
   /**
@@ -127,9 +130,12 @@ class MatrixProtoStub {
   }
 
   _sendWSMsg(msg) {
+    // console.log("+[MatrixProtoStub] [_sendWSMsg] ", msg);
     if ( this._filter(msg) ) {
       if ( this._assumeOpen ) {
         this.connect().then( () => {
+          // 2017-03-08: adding via header also to outgoing messages
+          msg.body.via = this._runtimeProtoStubURL;
           this._ws.send(JSON.stringify(msg));
         });
       }
@@ -148,13 +154,13 @@ class MatrixProtoStub {
     if (reason) {
       msg.body.desc = reason;
     }
-
+    // console.log("+[MatrixProtoStub] [_sendStatus]", msg);
     this._bus.postMessage(msg);
   }
 
 
   _onWSOpen() {
-    this._sendStatus("connected");
+    this._sendStatus("live");
   }
 
   /**
@@ -170,17 +176,20 @@ class MatrixProtoStub {
 
   // parse msg and forward it locally to miniBus
   _onWSMessage(msg) {
-    this._deliver(JSON.parse(msg.data));
-    // this._bus.postMessage(JSON.parse(msg.data));
+    // 2017-03-08: filter also incoming messages for via header
+    if ( this._filter(msg) ) {
+      this._deliver(JSON.parse(msg.data));
+    }
   }
 
   _onWSClose() {
-    //console.log("+[MatrixProtoStub] [_onWSClose] websocket closed");
+    // console.log("+[MatrixProtoStub] [_onWSClose] websocket closed");
     this._sendStatus("disconnected");
   }
 
   _onWSError(err) {
     // console.log("+[MatrixProtoStub] [_onWSError] websocket error: " + err);
+    this._sendStatus("failed", err);
   }
 }
 

@@ -37,7 +37,7 @@ describe('object address-allocation spec', function() {
 
   let runtimeURL     = "runtime://" + stubConfig.domain + "/1";
   let runtimeStubURL = 'hyperty-runtime://' + stubConfig.domain + '/protostub/1';
-  let msgNodeAddress = "domain://msg-node." + stubConfig.domain + "/object-address-allocation";
+  let msgNodeAddress = "domain://msg-node." + stubConfig.domain + "/address-allocation";
   let address;
   let addresses;
   let allocationKey = runtimeStubURL + "/objectAllocationKey";
@@ -49,7 +49,11 @@ describe('object address-allocation spec', function() {
     let bus = new Bus( (m, num) => {
       switch (num) {
         case 1:
-          util.expectConnected(m, runtimeStubURL);
+        case 2:
+          util.expectStubSuccessSequence(m, runtimeStubURL, num);
+          break;
+        case 3:
+          util.expectStubSuccessSequence(m, runtimeStubURL, num);
 
           // not using MessageFactory, because it does not support "scheme"
           msg = {
@@ -68,7 +72,7 @@ describe('object address-allocation spec', function() {
           bus.sendStubMsg(msg);
           break;
 
-        case 2:
+        case 4:
           // this message is expected to be the allocation response
           expect(m.id).to.eql("1");
           expect(m.type.toLowerCase()).to.eql("response");
@@ -100,7 +104,11 @@ describe('object address-allocation spec', function() {
     let bus = new Bus( (m, num) => {
       switch (num) {
         case 1:
-          util.expectConnected(m, runtimeStubURL);
+        case 2:
+          util.expectStubSuccessSequence(m, runtimeStubURL, num);
+          break;
+        case 3:
+          util.expectStubSuccessSequence(m, runtimeStubURL, num);
 
           // delete the single object allocation
           msg = {
@@ -116,7 +124,7 @@ describe('object address-allocation spec', function() {
           bus.sendStubMsg(msg);
           break;
 
-        case 2:
+        case 4:
           // this message is expected to be the delete response
           expect(m.id).to.eql("2");
           expect(m.type.toLowerCase()).to.eql("response");
@@ -144,7 +152,11 @@ describe('object address-allocation spec', function() {
     let bus = new Bus( (m, num) => {
       switch (num) {
         case 1:
-          util.expectConnected(m, runtimeStubURL);
+        case 2:
+          util.expectStubSuccessSequence(m, runtimeStubURL, num);
+          break;
+        case 3:
+          util.expectStubSuccessSequence(m, runtimeStubURL, num);
 
           // allocate addresses without an allocationKey
           // not using MessageFactory, because it does not support "scheme"
@@ -164,7 +176,7 @@ describe('object address-allocation spec', function() {
           bus.sendStubMsg(msg);
           break;
 
-        case 2:
+        case 4:
           // this message is expected to be the allocation response
           expect(m.id).to.eql(msg.id);
           expect(m.type.toLowerCase()).to.eql("response");
@@ -173,7 +185,6 @@ describe('object address-allocation spec', function() {
           expect(m.body.code).to.eql(200);
           expect(m.body.value.allocated.length).to.be(3);
           addresses = m.body.value.allocated;
-          console.log("got addresses: ", addresses);
 
           stub.disconnect();
           done();
@@ -197,7 +208,12 @@ describe('object address-allocation spec', function() {
       switch (num) {
         // NOTE: According to the spec, id should be a String, but at least Vertx breaks if it really is --> relaxing test
         case 1:
-          util.expectConnected(m, runtimeStubURL);
+        case 2:
+          util.expectStubSuccessSequence(m, runtimeStubURL, num);
+          break;
+        case 3:
+          util.expectStubSuccessSequence(m, runtimeStubURL, num);
+
           // delete the allocation of address block
           msg = MessageFactory.createDeleteMessageRequest(
             runtimeStubURL + "/registry/allocation", // from
@@ -208,7 +224,7 @@ describe('object address-allocation spec', function() {
           bus.sendStubMsg(msg);
           break;
 
-        case 2:
+        case 4:
           // this message is expected to be the delete response
           expect(m.id).to.eql(msg.id);
           expect(m.type.toLowerCase()).to.eql("response");
@@ -236,7 +252,11 @@ describe('object address-allocation spec', function() {
     let bus = new Bus( (m, num) => {
       switch (num) {
         case 1:
-          util.expectConnected(m, runtimeStubURL);
+        case 2:
+          util.expectStubSuccessSequence(m, runtimeStubURL, num);
+          break;
+        case 3:
+          util.expectStubSuccessSequence(m, runtimeStubURL, num);
 
           // allocate addresses with an allocationKey
           msg = MessageFactory.createCreateMessageRequest(
@@ -251,7 +271,7 @@ describe('object address-allocation spec', function() {
           bus.sendStubMsg(msg);
           break;
 
-        case 2:
+        case 4:
           // this message is expected to be the allocation response
           expect(m.id).to.eql(msg.id);
           expect(m.type.toLowerCase()).to.eql("response");
@@ -280,7 +300,11 @@ describe('object address-allocation spec', function() {
     let bus = new Bus( (m, num) => {
       switch (num) {
         case 1:
-          util.expectConnected(m, runtimeStubURL);
+        case 2:
+          util.expectStubSuccessSequence(m, runtimeStubURL, num);
+          break;
+        case 3:
+          util.expectStubSuccessSequence(m, runtimeStubURL, num);
 
           // delete the allocation of address block by allocationKey
           msg = MessageFactory.createDeleteMessageRequest(
@@ -291,7 +315,7 @@ describe('object address-allocation spec', function() {
           );
           bus.sendStubMsg(msg);
           break;
-        case 2:
+        case 4:
           // this message is expected to be the delete response
           expect(m.id).to.eql(msg.id);
           expect(m.type.toLowerCase()).to.eql("response");
