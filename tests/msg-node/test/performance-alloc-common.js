@@ -39,8 +39,7 @@ export default class AllocCommon {
     this.allocationKeys = [];
     this.runtimeURL = "runtime://" + this.domain + "/1";
     this.runtimeStubRegistryURL = 'hyperty-runtime://' + this.domain + '/protostub/1/registry/allocation"';
-    this.hypertyAllocationAddress = "domain://msg-node." + this.domain + "/hyperty-address-allocation";
-    this.objectAllocationAddress  = "domain://msg-node." + this.domain + "/object-address-allocation";
+    this.allocationAddress = "domain://msg-node." + this.domain + "/address-allocation";
   }
 
   prepare(done) {
@@ -49,7 +48,11 @@ export default class AllocCommon {
     this.bus = new Bus((m, num) => {
         switch (num) {
           case 1:
-            this.util.expectConnected(m, this.runtimeStubRegistryURL);
+          case 2:
+            this.util.expectStubSuccessSequence(m, this.runtimeStubRegistryURL, num);
+            break;
+          case 3:
+            this.util.expectStubSuccessSequence(m, this.runtimeStubRegistryURL, num);
             console.timeEnd("prepare");
             done();
           default:
@@ -67,7 +70,7 @@ export default class AllocCommon {
     let msg;
 
     this.bus.setStubMsgHandler((m, num) => {
-        this.util.expectDisconnected(m, this.runtimeStubRegistryURL);
+        this.util.expectStubDisconnected(m, this.runtimeStubRegistryURL);
         done();
       },
       // enable / disable log of received messages
@@ -80,7 +83,6 @@ export default class AllocCommon {
     let msg;
     let count = 0;
     let start = Date.now();
-    let mnAddress = (type === "hyperty") ? this.hypertyAllocationAddress : this.objectAllocationAddress;
     //console.time(type + "," + max + "," + numberOfAddressesPerRequest + "," + withKey);
     console.time("test");
 
@@ -89,7 +91,7 @@ export default class AllocCommon {
 
         // this message is expected to be the allocation response
         expect(m.type.toLowerCase()).to.eql("response");
-        expect(m.from).to.eql(mnAddress);
+        expect(m.from).to.eql(this.allocationAddress);
         expect(m.to).to.eql(this.runtimeStubRegistryURL);
         expect(m.body.code).to.eql(200);
         expect(m.body.value.allocated.length).to.be(numberOfAddressesPerRequest);
@@ -117,7 +119,7 @@ export default class AllocCommon {
       // // create and send the allocation request
       // msg = MessageFactory.createCreateMessageRequest(
       //   this.runtimeStubRegistryURL, // from
-      //   mnAddress, // to
+      //   this.allocationAddress, // to
       //   value, // body.value
       //   "policyURL" // attribute
       // );
@@ -126,9 +128,9 @@ export default class AllocCommon {
         id: i,
         type: "create",
         from: this.runtimeStubRegistryURL,
-        to: mnAddress,
+        to: this.allocationAddress,
         body: {
-          scheme: "connection Steffen",
+          scheme: type,
           value : { number: numberOfAddressesPerRequest }
         }
       };
@@ -146,7 +148,6 @@ export default class AllocCommon {
     let msg;
     let count = 0;
     let numberOfAddressesPerRequest = withKey ? 3 : -1;
-    let mnAddress = (type === "hyperty") ? this.hypertyAllocationAddress : this.objectAllocationAddress;
     let start = Date.now();
 
     this.bus.setStubMsgHandler((m, num) => {
@@ -154,7 +155,7 @@ export default class AllocCommon {
 
         // this message is expected to be the allocation response
         expect(m.type.toLowerCase()).to.eql("response");
-        expect(m.from).to.eql(mnAddress);
+        expect(m.from).to.eql(this.allocationAddress);
         expect(m.to).to.eql(this.runtimeStubRegistryURL);
         expect(m.body.code).to.eql(200);
 
@@ -180,7 +181,7 @@ export default class AllocCommon {
         // create and send the de-allocation request
         msg = MessageFactory.createDeleteMessageRequest(
           this.runtimeStubRegistryURL, // from
-          mnAddress, // to
+          this.allocationAddress, // to
           this.addresses[i], // body.childrenResources
           "attribute" // attribute
         );
@@ -192,7 +193,7 @@ export default class AllocCommon {
         // create and send the de-allocation request
         msg = MessageFactory.createDeleteMessageRequest(
           this.runtimeStubRegistryURL, // from
-          mnAddress, // to
+          this.allocationAddress, // to
           this.allocationKeys[i], // body.resource
           "attribute" // attribute
         );

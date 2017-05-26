@@ -70,7 +70,11 @@ describe('messaging object update performance for different number of subscriber
     busReporter = new Bus( (m, num) => {
       switch (num) {
         case 1:
-          util.expectConnected(m, runtimeStubURLReporter);
+        case 2:
+          util.expectStubSuccessSequence(m, runtimeStubURLReporter, num);
+          break;
+        case 3:
+          util.expectStubSuccessSequence(m, runtimeStubURLReporter, num);
 
           // not using MessageFactory, because it does not support "scheme"
           let msg = {
@@ -78,7 +82,7 @@ describe('messaging object update performance for different number of subscriber
             id: 1,
             type: "create",
             from: runtimeStubURLReporter + "/registry/allocation",
-            to: msgNodeAddress + "/object-address-allocation",
+            to: msgNodeAddress + "/address-allocation",
             body: {
               scheme: "connection",
               value : {
@@ -89,11 +93,11 @@ describe('messaging object update performance for different number of subscriber
           busReporter.sendStubMsg(msg);
           break;
 
-        case 2:
+        case 4:
           // this message is expected to be the allocation response
           expect(m.id).to.eql("1");
           expect(m.type.toLowerCase()).to.eql("response");
-          expect(m.from).to.eql(msgNodeAddress + "/object-address-allocation");
+          expect(m.from).to.eql(msgNodeAddress + "/address-allocation");
           expect(m.to).to.eql(runtimeStubURLReporter + "/registry/allocation");
           expect(m.body.code).to.eql(200);
           expect(m.body.value.allocated.length).to.be(1);
@@ -123,7 +127,11 @@ describe('messaging object update performance for different number of subscriber
       bus = new Bus( (m, num) => {
         switch (num) {
           case 1:
-            util.expectConnected(m, runtimeStubURLSubscriber + "/" + index);
+          case 2:
+            util.expectStubSuccessSequence(m, runtimeStubURLSubscriber + "/" + index, num);
+            break;
+          case 3:
+          util.expectStubSuccessSequence(m, runtimeStubURLSubscriber + "/" + index, num);
 
             // NOTE: there is no support for a SubscribeMessageBody in the MessageFactory --> creating msg manually
             msg = {
@@ -133,14 +141,14 @@ describe('messaging object update performance for different number of subscriber
               from: runtimeStubURLSubscriber + "/" + index + "/sm",
               to: msgNodeAddress + "/sm",
               body: {
-                subscribe: [address + "/changes", address + "/children/name1"],
+                resources: [address + "/changes", address + "/children/name1"],
                 source : runtimeStubURLSubscriber + index
               }
             };
             bus.sendStubMsg(msg);
             break;
 
-          case 2:
+          case 4:
             // this message is expected to be the subscription response
             expect(m.id).to.eql("2");
             expect(m.type.toLowerCase()).to.eql("response");
@@ -171,7 +179,7 @@ describe('messaging object update performance for different number of subscriber
     return new Promise((resolve, reject) => {
       bus.setStubMsgHandler((m, num) => {
         switch (num) {
-          case 3:
+          case 5:
             if ((index % 100) == 0 )
               console.log("event: " + index + " from: " + m.from);
             expect(m.type.toLowerCase()).to.eql("update");

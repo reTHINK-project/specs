@@ -36,7 +36,7 @@ describe('messaging performance for different message sizes and iterations', fun
   let stubConfig = stubLoader.config;
   let util = new Util(stubLoader.stubType);
 
-  let msgNodeAddress = "domain://msg-node." + stubConfig.domain + "/hyperty-address-allocation";
+  let msgNodeAddress = "domain://msg-node." + stubConfig.domain + "/address-allocation";
   let address2;
   let address1;
 
@@ -57,7 +57,11 @@ describe('messaging performance for different message sizes and iterations', fun
     bus1 = new Bus((m, num) => {
         switch (num) {
           case 1:
-            util.expectConnected(m, runtimeStubURL1);
+          case 2:
+            util.expectStubSuccessSequence(m, runtimeStubURL1, num);
+            break;
+          case 3:
+            util.expectStubSuccessSequence(m, runtimeStubURL1, num);
 
             // delete the allocation of address from tc 1
             msg = MessageFactory.createCreateMessageRequest(
@@ -71,7 +75,7 @@ describe('messaging performance for different message sizes and iterations', fun
             bus1.sendStubMsg(msg);
             break;
 
-          case 2:
+          case 4:
             // shortened test
             expect(m.type.toLowerCase()).to.eql("response");
             expect(m.body.code).to.eql(200);
@@ -82,12 +86,16 @@ describe('messaging performance for different message sizes and iterations', fun
         }
       },
       // enable / disable log of received messages
-      false);
+      true);
 
     bus2 = new Bus((m, num) => {
         switch (num) {
           case 1:
-            util.expectConnected(m, runtimeStubURL2);
+          case 2:
+            util.expectStubSuccessSequence(m, runtimeStubURL2, num);
+            break;
+          case 3:
+            util.expectStubSuccessSequence(m, runtimeStubURL2, num);
 
             // allocate address
             msg = MessageFactory.createCreateMessageRequest(
@@ -101,7 +109,7 @@ describe('messaging performance for different message sizes and iterations', fun
             bus2.sendStubMsg(msg);
             break;
 
-          case 2:
+          case 4:
             // shortened test
             expect(m.type.toLowerCase()).to.eql("response");
             expect(m.body.code).to.eql(200);

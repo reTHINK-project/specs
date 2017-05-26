@@ -59,7 +59,11 @@ describe('subscription and syncher spec', function() {
     busReporter = new Bus( (m, num) => {
       switch (num) {
         case 1:
-          util.expectConnected(m, runtimeStubURLReporter);
+        case 2:
+          util.expectStubSuccessSequence(m, runtimeStubURLReporter, num);
+          break;
+        case 3:
+          util.expectStubSuccessSequence(m, runtimeStubURLReporter, num);
 
           // not using MessageFactory, because it does not support "scheme"
           let msg = {
@@ -67,7 +71,7 @@ describe('subscription and syncher spec', function() {
             id: 1,
             type: "create",
             from: runtimeStubURLReporter + "/registry/allocation",
-            to: msgNodeAddress + "/object-address-allocation",
+            to: msgNodeAddress + "/address-allocation",
             body: {
               scheme: "connection",
               value : {
@@ -78,11 +82,11 @@ describe('subscription and syncher spec', function() {
           busReporter.sendStubMsg(msg);
           break;
 
-        case 2:
+        case 4:
           // this message is expected to be the allocation response
           expect(m.id).to.eql("1");
           expect(m.type.toLowerCase()).to.eql("response");
-          expect(m.from).to.eql(msgNodeAddress + "/object-address-allocation");
+          expect(m.from).to.eql(msgNodeAddress + "/address-allocation");
           expect(m.to).to.eql(runtimeStubURLReporter + "/registry/allocation");
           expect(m.body.code).to.eql(200);
           expect(m.body.value.allocated.length).to.be(1);
@@ -109,7 +113,11 @@ describe('subscription and syncher spec', function() {
     busSubscriber = new Bus( (m, num) => {
       switch (num) {
         case 1:
-          util.expectConnected(m, runtimeStubURLSubscriber);
+        case 2:
+          util.expectStubSuccessSequence(m, runtimeStubURLSubscriber, num);
+          break;
+        case 3:
+          util.expectStubSuccessSequence(m, runtimeStubURLSubscriber, num);
 
           // NOTE: there is no support for a SubscribeMessageBody in the MessageFactory --> creating msg manually
           msg = {
@@ -119,14 +127,14 @@ describe('subscription and syncher spec', function() {
             from: runtimeStubURLSubscriber + "/sm",
             to: msgNodeAddress + "/sm",
             body: {
-              subscribe: [address + "/changes", address + "/children/name1"],
+              resources: [address + "/changes", address + "/children/name1"],
               source : runtimeStubURLSubscriber
             }
           };
           busSubscriber.sendStubMsg(msg);
           break;
 
-        case 2:
+        case 4:
           // this message is expected to be the subscription response
           expect(m.id).to.eql("2");
           expect(m.type.toLowerCase()).to.eql("response");
@@ -153,7 +161,11 @@ describe('subscription and syncher spec', function() {
     busSubscriber2 = new Bus( (m, num) => {
       switch (num) {
         case 1:
-          util.expectConnected(m, runtimeStubURLSubscriber2);
+        case 2:
+          util.expectStubSuccessSequence(m, runtimeStubURLSubscriber2, num);
+          break;
+        case 3:
+          util.expectStubSuccessSequence(m, runtimeStubURLSubscriber2, num);
 
           // NOTE: there is no support for a SubscribeMessageBody in the MessageFactory --> creating msg manually
           msg = {
@@ -163,13 +175,13 @@ describe('subscription and syncher spec', function() {
             from: runtimeStubURLSubscriber2 + "/sm",
             to: msgNodeAddress + "/sm",
             body: {
-              subscribe: [address + "/changes", address + "/children/name1"]
+              resources: [address + "/changes", address + "/children/name1"]
             }
           };
           busSubscriber2.sendStubMsg(msg);
           break;
 
-        case 2:
+        case 4:
           // this message is expected to be the subscription response
           expect(m.id).to.eql("2");
           expect(m.type.toLowerCase()).to.eql("response");
@@ -195,7 +207,7 @@ describe('subscription and syncher spec', function() {
 
     busSubscriber.setStubMsgHandler((m, num) => {
       switch (num) {
-        case 3:
+        case 5:
           // this message is expected to be the incoming update msg
           expect(m.id).to.eql("1");
           expect(m.type.toLowerCase()).to.eql("update");
@@ -212,7 +224,7 @@ describe('subscription and syncher spec', function() {
 
     busSubscriber2.setStubMsgHandler((m, num) => {
       switch (num) {
-        case 3:
+        case 5:
           // this message is expected to be the incoming update msg
           expect(m.id).to.eql("1");
           expect(m.type.toLowerCase()).to.eql("update");
@@ -250,7 +262,7 @@ describe('subscription and syncher spec', function() {
 
     busSubscriber.setStubMsgHandler((m, num) => {
       switch (num) {
-        case 4:
+        case 6:
           // this message is expected to be the unsubscribe response
           expect(m.id).to.eql("3");
           expect(m.type.toLowerCase()).to.eql("response");
@@ -266,7 +278,7 @@ describe('subscription and syncher spec', function() {
 
     busSubscriber2.setStubMsgHandler((m, num) => {
       switch (num) {
-        case 4:
+        case 6:
           // this message is expected to be the unsubscribe response
           expect(m.id).to.eql("3");
           expect(m.type.toLowerCase()).to.eql("response");
@@ -289,7 +301,7 @@ describe('subscription and syncher spec', function() {
       from: runtimeStubURLSubscriber + "/sm",
       to: msgNodeAddress + "/sm",
       body: {
-        unsubscribe: [address + "/changes", address + "/children/name1"]
+        resources: [address + "/changes", address + "/children/name1"]
       }
     };
     msg2 = {
@@ -299,7 +311,7 @@ describe('subscription and syncher spec', function() {
       from: runtimeStubURLSubscriber2 + "/sm",
       to: msgNodeAddress + "/sm",
       body: {
-        unsubscribe: [address + "/changes", address + "/children/name1"]
+        resources: [address + "/changes", address + "/children/name1"]
       }
     };
 

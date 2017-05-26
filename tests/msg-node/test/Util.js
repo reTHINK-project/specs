@@ -21,24 +21,45 @@
 * limitations under the License.
 **/
 
+const STUB_STATE = {
+  CREATED     : "created",
+  IN_PROGRESS : "in-progress",
+  LIVE        : "live",
+  FAILED      : "failed",
+  DISCONNECTED: "disconnected"
+}
+
 export default class Util {
+
 
   constructor(mnType) {
     this.mnType = mnType;
   }
 
-  expectConnected(m, runtimeStubURL) {
-    expect(m.type).to.eql("update");
-    expect(m.from).to.eql(runtimeStubURL);
-    expect(m.to).to.eql(runtimeStubURL + "/status");
-    expect(m.body.value).to.eql("connected");
+  expectStubSuccessSequence(m, runtimeStubURL, index) {
+    switch (index) {
+      case 1:
+        this.expectStubStatus(m, runtimeStubURL, STUB_STATE.CREATED);
+        break;
+      case 2:
+        this.expectStubStatus(m, runtimeStubURL, STUB_STATE.IN_PROGRESS);
+        break;
+      case 3:
+        this.expectStubStatus(m, runtimeStubURL, STUB_STATE.LIVE);
+        break;
+      default:
+    }
   }
 
-  expectDisconnected(m, runtimeStubURL) {
+  expectStubDisconnected(m, runtimeStubURL) {
+    this.expectStubStatus(m, runtimeStubURL, STUB_STATE.DISCONNECTED);
+  }
+
+  expectStubStatus(m, runtimeStubURL, status) {
     expect(m.type).to.eql("update");
     expect(m.from).to.eql(runtimeStubURL);
     expect(m.to).to.eql(runtimeStubURL + "/status");
-    expect(m.body.value).to.eql("disconnected");
+    expect(m.body.value).to.eql(status);
   }
 
   log(msg, value) {
