@@ -13,18 +13,24 @@ Simple bus API to send and receive messages:
 
 `addListener(url, listener)` that is used to register a listener to receive message when `msg.to === url`.
 
+Full documentation [here](https://doc.esdoc.org/github.com/reTHINK-project/dev-runtime-core/class/src/bus/Bus.js~Bus.html)
 
 **Syncher**
 
 The	[Syncher API](syncher.md) that is used to synchronise data among Hyperties by using the Reporter-Observer communication pattern.
 
+Full documentation [here](https://doc.esdoc.org/github.com/reTHINK-project/dev-service-framework/class/src/syncher/Syncher.js~Syncher.html)
+
 **Discovery**
 
-The [Discovery library](discovery.md) allows the discovery of remote Hyperties or Data Objects by using different criteria.
+The Discovery library allows the discovery of remote Hyperties or Data Objects by using different criteria.
+Full documentation [here](https://doc.esdoc.org/github.com/reTHINK-project/dev-service-framework/class/src/discovery/Discovery.js~Discovery.html).
 
 **Identity Manager**
 
 The [Identity Manager library](identity-manager.md) retrieves information about Identities associated to Hyperties.
+Full documentation [here](https://doc.esdoc.org/github.com/reTHINK-project/dev-service-framework/class/src/identityManager/IdentityManager.js~IdentityManager.html).
+
 
 **Other Useful APIs:**
 
