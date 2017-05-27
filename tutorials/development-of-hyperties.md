@@ -4,9 +4,6 @@ Hyperty Development
 This document provides guidelines for developers of Hyperties. It is recommended that you have already read:
 
 -	[An Overview of the Hyperty Concept](hyperty.md)
--	[An Overview of the Hyperty Messaging Framework](hyperty-messaging-framework.md)
--	[An overview on how Hyperties cooperate with each other through a Data Synchronisation model called Reporter - Observer](p2p-data-sync.md)
--	[An overview on the Hyperty Security and Trust Model](hyperty-trust.md)
 
 ### Hyperty Concept
 
