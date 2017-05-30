@@ -57,7 +57,7 @@ describe('connect / disconnect spec', function() {
       }
     },
     // enable / disable log of received messages
-    false);
+    true);
 
     stub = stubLoader.activateStub(runtimeStubURL, bus, runtimeURL);
     stub.connect();

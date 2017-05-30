@@ -83,6 +83,8 @@ export default class AllocCommon {
     let msg;
     let count = 0;
     let start = Date.now();
+    this.addresses = [];
+    this.allocationKeys = [];
     //console.time(type + "," + max + "," + numberOfAddressesPerRequest + "," + withKey);
     console.time("test");
 
@@ -116,14 +118,8 @@ export default class AllocCommon {
       false);
 
     for (var i = 1; i <= max; i++) {
-      // // create and send the allocation request
-      // msg = MessageFactory.createCreateMessageRequest(
-      //   this.runtimeStubRegistryURL, // from
-      //   this.allocationAddress, // to
-      //   value, // body.value
-      //   "policyURL" // attribute
-      // );
-      // // not using MessageFactory, because it does not support "scheme"
+      // create and send the allocation request
+      // not using MessageFactory, because it does not support "scheme"
       msg = {
         id: i,
         type: "create",

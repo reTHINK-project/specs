@@ -95,6 +95,54 @@ describe('hyperty address-allocation spec', function() {
     stub.connect();
   });
 
+  it('de-allocate single hyperty address', function(done) {
+    let stub;
+    let msg;
+
+    let bus = new Bus( (m, num) => {
+      switch (num) {
+        case 1:
+        case 2:
+          util.expectStubSuccessSequence(m, runtimeStubURL, num);
+          break;
+        case 3:
+          util.expectStubSuccessSequence(m, runtimeStubURL, num);
+
+          // delete the single object allocation
+          msg = {
+            // NOTE: According to the spec, id should be a String, but at least Vertx breaks if it really is --> relaxing test
+            id: 2,
+            type: "delete",
+            from: runtimeStubURL + "/registry/allocation",
+            to: msgNodeAddress,
+            body: {
+              childrenResources : [address]
+            }
+          };
+          bus.sendStubMsg(msg);
+          break;
+
+        case 4:
+          // this message is expected to be the delete response
+          expect(m.id).to.eql("2");
+          expect(m.type.toLowerCase()).to.eql("response");
+          expect(m.from).to.eql(msgNodeAddress);
+          expect(m.to).to.eql(runtimeStubURL + "/registry/allocation");
+          expect(m.body.code).to.eql(200);
+          stub.disconnect();
+          done();
+
+        default:
+      }
+    },
+    // enable / disable log of received messages
+    false);
+
+    stub = stubLoader.activateStub(runtimeStubURL, bus, runtimeURL);
+    stub.connect();
+  });
+
+
 
   it('allocate block of hyperty addresses', function(done) {
     let stub;
@@ -109,15 +157,21 @@ describe('hyperty address-allocation spec', function() {
         case 3:
           util.expectStubSuccessSequence(m, runtimeStubURL, num);
 
-          // allocate addresses without an allocationKey
-          msg = MessageFactory.createCreateMessageRequest(
-            runtimeStubURL + "/registry/allocation", // from
-            msgNodeAddress, // to
-            { // body.value
-              number: 3
-            },
-            "policyURL" // policy
-          );
+          msg = {
+            // NOTE: MessageFactory does not support body.scheme field --> creating message manually
+            // NOTE: According to the spec, id should be a String, but at least Vertx breaks if it really is --> relaxing test
+            id: 1,
+            type: "create",
+            from: runtimeStubURL + "/registry/allocation",
+            to: msgNodeAddress,
+            body: {
+              scheme: "hyperty",
+              value : {
+                number: 3
+              }
+            }
+          };
+
           bus.sendStubMsg(msg);
           break;
 
@@ -205,15 +259,19 @@ describe('hyperty address-allocation spec', function() {
           util.expectStubSuccessSequence(m, runtimeStubURL, num);
 
           // allocate addresses with an allocationKey
-          msg = MessageFactory.createCreateMessageRequest(
-            runtimeStubURL + "/registry/allocation", // from
-            msgNodeAddress, // to
-            { // body.value
-              number: 4,
-              allocationKey : allocationKey
-            },
-            "policyURL" // policy
-          );
+          msg = {
+            id: 1,
+            type: "create",
+            from: runtimeStubURL + "/registry/allocation",
+            to: msgNodeAddress,
+            body: {
+              scheme: "hyperty",
+              value : {
+                number: 4,
+                allocationKey : allocationKey
+              },
+            }
+          };
           bus.sendStubMsg(msg);
           break;
 

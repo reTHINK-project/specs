@@ -30,7 +30,7 @@ let ServiceFramework = require('service-framework');
 let MessageFactory = new ServiceFramework.MessageFactory(false, {});
 
 describe('messaging object update performance for different number of subscribers', function() {
-  this.timeout(1000000);
+  this.timeout(10000);
 
   let stubLoader = new StubLoader();
   let stubConfig = stubLoader.config;
@@ -46,6 +46,7 @@ describe('messaging object update performance for different number of subscriber
 
   let runtimeURLSubscriber     = "runtime://" + stubConfig.domain + "/Subscriber";
   let runtimeStubURLSubscriber = 'hyperty-runtime://' + stubConfig.domain + '/protostub/Subscriber';
+  let numEvents = 0;
 
   // credits for stringFill3 go to: http://www.webreference.com/programming/javascript/jkm3/3.html
   let stringFill3 = (x, n) => {
@@ -164,6 +165,7 @@ describe('messaging object update performance for different number of subscriber
             );
             break;
           default:
+            reject();
         }
       },
       // enable / disable log of received messages
@@ -180,8 +182,9 @@ describe('messaging object update performance for different number of subscriber
       bus.setStubMsgHandler((m, num) => {
         switch (num) {
           case 5:
-            if ((index % 100) == 0 )
-              console.log("event: " + index + " from: " + m.from);
+            numEvents+= 1;
+            if ((index % 1) == 0 )
+              console.log("event: " + index + ", number: " + numEvents + " from: " + m.from);
             expect(m.type.toLowerCase()).to.eql("update");
             expect(m.from).to.eql(address);
             expect(m.to).to.eql(address + "/changes");
@@ -202,6 +205,7 @@ describe('messaging object update performance for different number of subscriber
     let subscribePromises = [];
     let eventPromises = [];
     let start, end;
+    numEvents = 0;
 
     // subscribe N listeners --> receive promise for each
     for (var i = 0; i < n; i++) {
@@ -212,6 +216,7 @@ describe('messaging object update performance for different number of subscriber
     }
 
     Promise.all( subscribePromises ).then( (subscribeResults) => {
+      console.log("all subscriptions done");
 
       // install event-checker in each subscriber --> receive promise for each
       for (var i = 0; i < subscribeResults.length; i++) {
