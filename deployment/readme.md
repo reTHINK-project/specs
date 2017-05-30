@@ -31,10 +31,10 @@ It is recommended that the containers are deployed behind a reverse proxy for se
 
 * [apache2](https://httpd.apache.org/)
 * or [nginx](https://www.nginx.com/) instead of apache2
-* reverse proxy compatible with apache or nginx
+* reverse proxy
 * [docker-compose](https://docs.docker.com/compose/install/)
 
-If you choose a default apache2 server, for each sub-domain you need to use a config file, where you config the reverse proxy, you can check [here](https://github.com/reTHINK-project/specs/tree/master/deployment/registry-ssl.conf) a config for registry component. 
+If you choose a default apache2 server, for each sub-domain you need to use a config file, where you config the reverse proxy, you can check [here](https://github.com/reTHINK-project/specs/tree/master/deployment/registry-ssl.conf) a config for registry component.
 
 https free trusted certificates can be obtained on [let's encrypt](https://letsencrypt.org/).  
 
@@ -49,13 +49,13 @@ We will first install a CSP, then the application from scratch. To illustrate ou
 
 ### Communication Service Provider
 
-As mentionned above, the communication service providers consists in __3__ components. We will install first the domain registry, then the messaging node, and finally the catalogue. 
+As mentionned above, the communication service providers consists in __3__ components. We will install first the domain registry, then the messaging node, and finally the catalogue.
 
 
 
 On next steps, we will build a docker-compose file, for each component we will build a service.
 
-#### Domain Registry 
+#### Domain Registry
 Domain registry is installable with a [docker image](https://hub.docker.com/r/rethink/registry-domain-server/). As the Domain Registry is necessary to run the messaging node, it has to be running first. The default port of the domain registry is 4567.
 The default DNS for our domain registry will be: __registry.csp.rethink.com__.  
 
@@ -87,13 +87,13 @@ ___WARNING___
 
 #### Messaging node
 This is the core plateform. ReTHINK has provided four implementations but only one is necessary to be installed:
-* [VertX](https://github.com/reTHINK-project/dev-msg-node-vertx) 
+* [VertX](https://github.com/reTHINK-project/dev-msg-node-vertx)
 * [Matrix](https://github.com/reTHINK-project/dev-msg-node-matrix)
 * [NodeJS](https://github.com/reTHINK-project/dev-msg-node-nodejs)
 * [no Matrix](https://github.com/reTHINK-project/dev-msg-node-nomatrix)  
 
 ___WARNING___
-*  _vertx installation_: the node.config.json contains a parameter that will be used during the docker run through an environment variable. The domain parameter must contain the DNS of the full platform (here csp.rethink.com), and it will be used then to build the DNS of the componants (msg-node.csp.rethink.com, registry.csp.rethink.com, etc...). The registry url must be filled here, but it is not sure if it can be tuned. To install you can use [docker image](https://hub.docker.com/r/rethink/msg-node-vertx/) 
+*  _vertx installation_: the node.config.json contains a parameter that will be used during the docker run through an environment variable. The domain parameter must contain the DNS of the full platform (here csp.rethink.com), and it will be used then to build the DNS of the componants (msg-node.csp.rethink.com, registry.csp.rethink.com, etc...). The registry url must be filled here, but it is not sure if it can be tuned. To install you can use [docker image](https://hub.docker.com/r/rethink/msg-node-vertx/)
 *  _nodejs installation_: the docker-compose must be configured. If you use the script "start.sh", it will also build the domain registry. The url to provide in the "environment" section is the _domain_ of the plateform (here csp.rethink.com).
 *  _no Matrix installation_: after building the docker image, the simplest is to use the dockerStart.sh script. Be carefull to enter the good folder for the volume mapping, suppress the parameters _--net=rethink -p 8001:8001_ when used with a proxy. Note also that the default is exposed on HTTP on 8001. The MatrixProtoStub example is showing an URL of WebSocket with wss on 443, which is what the reverse proxy will provide.
 
@@ -125,7 +125,7 @@ __To test if installation is OK: https://msg-node.csp.rethink.com/live gives a v
 
 #### Catalogue
 The catalogue is made out of two main components. A broker, that is needed to access the different services, and one or more databases. You can use this [database](https://github.com/reTHINK-project/testbeds/tree/master/nodes/PT-node/production), that should be possible to use on a production mode. Documentation can be accessed [here](https://github.com/reTHINK-project/dev-catalogue/tree/master/doc).  
-First of all, the broker has to be installed. A dockerhub [image](https://hub.docker.com/r/rethink/catalogue-broker/) is available. 
+First of all, the broker has to be installed. A dockerhub [image](https://hub.docker.com/r/rethink/catalogue-broker/) is available.
 
 ```
 broker component for docker-compose file
