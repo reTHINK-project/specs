@@ -1,7 +1,7 @@
 
 let configuration = {
-  domain : "ua.pt",
-  url : "wss://ua.pt:9090/ws"
+  domain : "localhost",
+  url : "wss://localhost:9090/ws"
 }
 
 export default configuration;
