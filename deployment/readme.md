@@ -28,7 +28,7 @@ It is recommended that the containers are deployed behind a reverse proxy for se
 * All components are using different ports, using a reverse proxy is useful to allow using classical ports
 * It is recommanded that the certificates are managed on the front reverse proxy.
 
-
+Some tools/servers to install:
 * [apache2](https://httpd.apache.org/)
 * or [nginx](https://www.nginx.com/) instead of apache2
 * reverse proxy
