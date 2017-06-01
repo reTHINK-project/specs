@@ -193,3 +193,7 @@ When all of this is done you can try to connect on the index.html of the hello-a
 
 Here is a view of the technical flows involved:
 <img src="https://cloud.githubusercontent.com/assets/10738516/19762069/b2b01b38-9c38-11e6-99c9-03f79e353b4e.png" width="700"/>
+
+### Integration with IMS
+
+You should follow this [guide](https://github.com/reTHINK-project/specs/blob/master/deployment/ims-deployment.md) to integrate your application with IMS.
