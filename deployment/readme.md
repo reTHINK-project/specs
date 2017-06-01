@@ -53,7 +53,8 @@ As mentionned above, the communication service providers consists in __3__ compo
 
 
 
-On next steps, we will build a docker-compose file, for each component we will build a service.
+On next steps, we will build a docker-compose file, for each component we will build a service. 
+Your docker-compose file, should be something like [this](https://github.com/reTHINK-project/specs/tree/master/deployment/docker-compose.yml), at the end of this steps. After it run ```docker-compose up -d ```
 
 #### Domain Registry
 Domain registry is installable with a [docker image](https://hub.docker.com/r/rethink/registry-domain-server/). As the Domain Registry is necessary to run the messaging node, it has to be running first. The default port of the domain registry is 4567.
@@ -166,9 +167,6 @@ ___WARNING___
 
 __To test if installation is OK: https://catalogue.csp.rethink.com/ gives a view of the current status of the catalogue node. It also allow to see connected databases and componants__  
 
-
-
-Full docker-compose file, should be something like [this](https://github.com/reTHINK-project/specs/tree/master/deployment/docker-compose.yml)
 
 ```
 On directory of docker-compose.yml file you should have catalogue-database folder with all objects, after this run command
