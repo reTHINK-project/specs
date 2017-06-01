@@ -31,7 +31,7 @@ It is recommended that the containers are deployed behind a reverse proxy for se
 Some tools/servers to install:
 * [apache2](https://httpd.apache.org/)
 * or [nginx](https://www.nginx.com/) instead of apache2
-* reverse proxy
+* [reverse proxy](https://www.digitalocean.com/community/tutorials/how-to-use-apache-as-a-reverse-proxy-with-mod_proxy-on-ubuntu-16-04) in case of on apache2
 * [docker-compose](https://docs.docker.com/compose/install/)
 
 If you choose a default apache2 server, for each sub-domain you need to use a config file, where you config the reverse proxy, you can check [here](https://github.com/reTHINK-project/specs/tree/master/deployment/registry-ssl.conf) a config for registry component.
