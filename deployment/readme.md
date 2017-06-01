@@ -11,6 +11,7 @@
    2. [Application Deployment](#application-deployment)
       1. [Hello World](#hello-world)
       2. [Complete setup](#complete-setup)
+   3. 1. [Integration with IMS](#integration-with-ims)
 
 
 This page explains how to install a complete platform to be able to deploy services and applications based on the reThink framework.
