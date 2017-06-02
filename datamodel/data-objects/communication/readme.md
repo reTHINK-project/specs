@@ -12,6 +12,17 @@ The Communication Data Model is used to model the reTHINK Communications.
 
 **participants:** list of participants in the Communication (see below)
 
+#### participant
+
+**domain:** the domain of the participant
+
+**status:** the status of the participant in the communication (see below)
+
+**hypertyURL:** the Hyperty URL of the participant
+
+**identity:** Information about the participant identity as defined by the User Identity model
+
+**resources:** a list of Hyperty Resources supported by the Hyperty used by the participant as defined by the HypertyResource model
 
 #### CommunicationStatus
 
@@ -35,7 +46,10 @@ Parent Communication Data Object:
   "status" : "open",
   "participants" : {
     "user://myidp/me@mail.com" : {
-      "identity" : { ... }
+      "hypertyURL": "hyperty://example.com/dfdjkfhkjshf-dhkfdjkfhs",
+      "domain": "example.com",
+      "resources": ['chat','file'],
+      "identity": { ... }
     },
     "user://myotheridp/meagain@net.com" : {
       "identity" : { ... }

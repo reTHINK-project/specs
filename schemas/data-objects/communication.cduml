@@ -29,6 +29,9 @@ package Communication <<Rect>> {
 
 	class Participant {
 		status ?: ParticipantStatus
+		hypertyURL: hypertyURL
+		resources: HypertyResource[]
+		identity: Identity.Identity
 	}
 
 
