@@ -86,7 +86,7 @@ describe('messaging performance for different message sizes and iterations', fun
         }
       },
       // enable / disable log of received messages
-      true);
+      false);
 
     bus2 = new Bus((m, num) => {
         switch (num) {

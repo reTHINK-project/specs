@@ -26,7 +26,7 @@ import AllocUtil from './performance-alloc-common.js';
 
 
 describe('Hyperty address allocation performance for different numbers of addresses', function() {
-  this.timeout(100000);
+  this.timeout(30000);
 
   let allocUtil = new AllocUtil();
 

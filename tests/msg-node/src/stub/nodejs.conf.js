@@ -1,7 +1,7 @@
 
 let configuration = {
   domain: "localhost",
-  url : "ws://localhost:9091"
+  url : "wss://localhost:9090"
 }
 
 export default configuration;

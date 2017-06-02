@@ -3,7 +3,7 @@
 
 module.exports = function(config) {
   config.set({
-    browserNoActivityTimeout: 10000,
+    browserNoActivityTimeout: 30000,
 
     // base path that will be used to resolve all patterns (eg. files, exclude)
     basePath: '',
@@ -20,16 +20,16 @@ module.exports = function(config) {
       'src/stub/**/*.js',
       // 'test/**/*.spec.js',
       // ******* conformance tests
-      'test/**/connect.spec.js',
+      // 'test/**/connect.spec.js',
       // 'test/**/hyperty-allocation.spec.js',
       // 'test/**/object-allocation.spec.js',
       // 'test/**/subscription.spec.js',
-      'test/**/registration.spec.js',
-      // ******* performance tests
+      // 'test/**/registration-hyperty.spec.js',
+      // // ******* performance tests
       // 'test/**/performance-alloc-hyperties.spec.js',
       // 'test/**/performance-alloc-objects.spec.js',
       // 'test/**/performance-hyp-messages.spec.js',
-      // 'test/**/performance-publish.spec.js',
+      'test/**/performance-publish.spec.js',
     ],
 
     proxies: {
@@ -68,7 +68,7 @@ module.exports = function(config) {
 
     // level of logging
     // possible values: config.LOG_DISABLE || config.LOG_ERROR || config.LOG_WARN || config.LOG_INFO || config.LOG_DEBUG
-    logLevel: config.LOG_DEBUG,
+    logLevel: config.LOG_INFO,
 
     // enable / disable watching file and executing tests whenever any file changes
     autoWatch: true,

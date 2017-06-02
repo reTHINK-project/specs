@@ -20,12 +20,12 @@ module.exports = function(config) {
       'src/stub/**/*.js',
       // 'test/**/*.spec.js',
       // ******* conformance tests
-      // 'test/**/connect.spec.js',
-      // 'test/**/hyperty-allocation.spec.js',
-      // 'test/**/object-allocation.spec.js',
-      // 'test/**/subscription.spec.js',
+      'test/**/connect.spec.js',
+      'test/**/hyperty-allocation.spec.js',
+      'test/**/object-allocation.spec.js',
+      'test/**/subscription.spec.js',
       'test/**/registration.spec.js',
-      // ******* performance tests
+      // // ******* performance tests
       // 'test/**/performance-alloc-hyperties.spec.js',
       // 'test/**/performance-alloc-objects.spec.js',
       // 'test/**/performance-hyp-messages.spec.js',
@@ -90,7 +90,7 @@ module.exports = function(config) {
 
     // Continuous Integration mode
     // if true, Karma captures browsers, runs the tests and exits
-    singleRun: true
+    singleRun: false
   });
 
 };
