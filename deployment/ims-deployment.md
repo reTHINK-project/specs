@@ -50,7 +50,10 @@ You should follow [the most recent guide](http://sailsjs.com/documentation/conce
 
 ### The Sip Server
 
-The selected *Sip Server* for this deployment was [Kamailio](https://www.kamailio.org/w/). For various installation guidelines, see the wiki documentation portal: [https://www.kamailio.org/wiki](https://www.kamailio.org/wiki).
+The selected *Sip Server* for this deployment was [Kamailio](https://www.kamailio.org/w/).
+In order to install it is recommended to use the official packages in Debian. Alternatively the installation can be performed by following the [official installation guide](https://www.kamailio.org/wiki/install/4.4.x/git)
+
+**Debian packages to be installed:** kamailio, kamailio-tls-modules, kamailio-utils-modules and kamailio-autheph-modules
 
 #### Ephemeral module
 
@@ -101,4 +104,6 @@ Code:
     }
 
 ### The Media Server
-WebRTC-enabled endpoints will use a special WebRTC profile for media which requires the support of DTLS-SRTP and ICE. Those features are typically not supportted by MRF in the IMS core so a media server is required to translate from WebRTC media profile to the standard media profile supported by the MRF. This also may require transcoding. 
+WebRTC-enabled endpoints will use a special WebRTC profile for media which requires the support of DTLS-SRTP and ICE. Those features are typically not supportted by MRF in the IMS core so a media server is required to translate from WebRTC media profile to the standard media profile supported by the MRF. 
+
+The proposed server for the integration is FreeSWITCH. It can also be used for transcoding tasks, for example if the WebRTC leg of the call is established using Opus coded which is not commonly supported by IMS cores. 
