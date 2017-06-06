@@ -29,11 +29,11 @@ Request Example
 
 ### The ims URI
 
-*The Ephemeral authentication provider server* will return *The Sip server* URI. In the installation process you should provide this URI in the configuration section.
+*The Ephemeral authentication provider server* will return *The Sip server* URI along with temporary IMS credentials which will be used to register the IMSstub in the Kamailio instance. This registration can be relayed to another server, e.g. an IMS core. In the installation process you should provide this URI in the configuration section.
 
 ## Installation
 
-### The Ephemeral Authentication Prvider Server
+### The Ephemeral Authentication Provider Server
 
 #### Source code
 
@@ -101,3 +101,4 @@ Code:
     }
 
 ### The Media Server
+WebRTC-enabled endpoints will use a special WebRTC profile for media which requires the support of DTLS-SRTP and ICE. Those features are typically not supportted by MRF in the IMS core so a media server is required to translate from WebRTC media profile to the standard media profile supported by the MRF. This also may require transcoding. 
