@@ -119,7 +119,7 @@ As there is returned value in the body of the response message, we can thus also
 ```json
 {
   "target": {
-    "msgType": {"equals": "addressAllocation"}
+    "msgType": {"equals": "addressAllocation"},
     "actType": {"equals": "response"}
   },
   "condition": {
