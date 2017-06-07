@@ -281,11 +281,11 @@ We have evaluated the performance of our policy evaluation language by comparing
 
 ![](./images/scale_effect.jpg)
 
-**Fig. 5 Effect of the number of sibling rules **
+**Fig. 5 Effect of the number of sibling rules**
 
 
 
-![	](./images/depth_effect.jpg)
+![](./images/depth_effect.jpg)
 
 **Fig. 6 Effect of the number of nesting layers**
 
@@ -307,7 +307,7 @@ First and foremost, clarify what policies are needed and what to achieve with th
 
 Generally speaking, rules with similar *targets* (for similar purposes) are put in the same policy, and similar policies are put in the same policy set. When managing policies, it is important to classify carefully different rules and policies in order to form a well structured and layered policy set. Policies could be classified in many ways depending on your policy needs. For instance, in previous examples, most of rules use *msgType* and *actType* in order to index right policies for targeted messages. In such case, we can accordingly construct policies and policy sets based on these two attributes in the *target* fields of rules:
 
-![](./images/policies.png)
+![](./images/policies.PNG)
 
 **- Properly Utilize Logical Operators**
 
