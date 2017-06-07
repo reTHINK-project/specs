@@ -341,7 +341,7 @@ Actually as you might already noticed, in the examples above, there are policies
   "condition": [
     {"addrAllastMin": {"moreThan": 50}},
     {"time": {"between": "23:00:00 01:00:00"}}
-  ]
+  ],
   "effect": "deny"
 }
 ```
