@@ -30,8 +30,8 @@ JACPoL contains three structural elements, namely Policy Set, Policy, and Rule. 
 
 **Fig. 3 JACPoL Structure**
 
-- A **rule** element defines the target elements to which the rule is applied and details conditions to apply the rule and has three components such as target, effect, and condition. A target element specifies the resources, subjects, actions and the environment to which the rule is applied. A condition element shows the conditions to apply the rule and a effect is the consequence of the rule as either permit or deny.
-- A **policy** is the set of rules which are combined with some algorithms. These algorithms are called rule-combining algorithms. For instance "Permit Override" algorithm allows the policy to evaluate to "Permit" if any rule in the policy evaluates to "Permit". A policy also contains target elements which shows the subjects, resources, actions, environment that policy is applied.
+- A **rule** element defines the target elements to which the rule is applied and details conditions to apply the rule and has three components such as target, effect, and condition. A target element specifies the resources, subjects, actions and the environment to which the rule is applied. A condition element shows the conditions to apply the rule and an effect is the consequence of the rule as either permit or deny.
+- A **policy** is the set of rules which are combined with some algorithms. These algorithms are called rule-combining algorithms. For instance "Permit Override" algorithm allows the policy to evaluate to "Permit" if any rule in the policy evaluates to "Permit". A policy also contains target elements which show the subjects, resources, actions, environment that policy is applied.
 - A **policy set** consists of Policies combined with policy-combined algorithm. It has also target like a Policy.
 
 Fig. 4 is an example rule: for messages that are of registration msgType and read actType, if the requested resource is user://gmail.com/chiang.zju and the requester is he.johen@gmail.com, then deny.
