@@ -45,6 +45,9 @@ describe('hyperty registration spec', function() {
   let dataScheme = 'TestSchema';
   let testresource = "testresource";
 
+  let busSubscriber;
+  let stubSubscriber;
+
 
   it('allocate and register address', function(done) {
     let stub;
@@ -245,8 +248,8 @@ describe('hyperty registration spec', function() {
           // this message is expected to be the registration response
           expect(m.id).to.eql(msg.id);
           expect(m.type.toLowerCase()).to.eql("response");
-          expect(m.from).to.eql(mnRegistryAddress);
-          expect(m.to).to.eql(runtimeURL + "/registry");
+          expect(m.from).to.eql(msg.to);
+          expect(m.to).to.eql(msg.from);
           expect(m.body.code).to.eql(expectedCode);
 
           stub.disconnect();
@@ -275,6 +278,88 @@ describe('hyperty registration spec', function() {
     testMessage(done, msg, 200);
   });
 
+
+  it('subscribe for registration status updates', function(done) {
+    let msg;
+    // connect separate stub/bus to MN and subscribe for registration status updates
+    busSubscriber = new Bus( (m, num) => {
+      switch (num) {
+        case 1:
+        case 2:
+          util.expectStubSuccessSequence(m, runtimeStubURL, num);
+          break;
+        case 3:
+          util.expectStubSuccessSequence(m, runtimeStubURL, num);
+          msg =  {
+            id: 1,
+            type: "subscribe",
+            from: runtimeURL + "/registry",
+            to: "domain://msg-node." + stubConfig.domain + "/sm",
+            body: {
+              resources: [address + "/registration"]
+            }
+          }
+          busSubscriber.sendStubMsg(msg);
+          break;
+
+        case 4:
+          // this message is expected to be the registration response
+          expect(m.id).to.eql(msg.id);
+          expect(m.type.toLowerCase()).to.eql("response");
+          expect(m.from).to.eql(msg.to);
+          expect(m.to).to.eql(msg.from);
+          expect(m.body.code).to.eql(200);
+
+          // don't disconnect
+          done();
+        default:
+      }
+    },
+    // enable / disable log of received messages
+    false);
+    stubSubscriber = stubLoader.activateStub(runtimeStubURL, busSubscriber, runtimeURL);
+    stubSubscriber.connect();
+  });
+
+
+  it('receive registration status updates', function(done) {
+    // connect separate stub/bus to MN and subscribe for registration status updates
+    busSubscriber.setStubMsgHandler((m, num) => {
+      switch (num) {
+        case 5:
+          // this message is expected to be the incoming update msg
+          expect(m.id).to.eql("1");
+          expect(m.type.toLowerCase()).to.eql("update");
+          expect(m.from).to.eql(address);
+          expect(m.to).to.eql(address + "/changes");
+          expect(m.body.attribute).to.eql("status");
+          expect(m.body.value).to.eql("disconnected");
+
+          busSubscriber.disconnect();
+          done();
+        default:
+      }
+    },
+    // enable / disable log of received messages
+    false);
+
+    // update status to disconnected
+    let msg = {
+      id: 1,
+      type: "update",
+      from: runtimeURL + "/registry",
+      to: mnRegistryAddress,
+      body: {
+        resource: address,
+        value : "disconnected",
+        attribute : "status"
+      }
+    }
+    // invoke testMessage with faked done method
+    testMessage(()=>{}, msg, 200);
+  });
+
+
   it('unregister hyperty address', function(done) {
     let msg = {
       id: 1,
@@ -289,4 +374,5 @@ describe('hyperty registration spec', function() {
     }
     testMessage(done, msg, 200);
   });
+
 });
