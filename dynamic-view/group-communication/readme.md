@@ -2,9 +2,7 @@
 
 
 The main main call flows involve `Hyperty conference of Peer A` running on runtime browser A, `Hyperty conference of Peer B`, Message Node(just relay no processing), `Media server`, and `Hyperty conference` running on Runtime Node as signaling server relaying messages between them.
- <p align="center">
-![../dynamic-view/group-communication/Top-Level-View](Top-Level-View.png)
-</p>
+![Top Level View Calls](Top-Level-View.png)
 <p align="center">
   Top level view call flows
 </p>

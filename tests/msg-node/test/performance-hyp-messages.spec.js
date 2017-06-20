@@ -26,9 +26,6 @@ import StubLoader from './StubLoader.js';
 import Bus from './Bus.js';
 import Util from './Util.js';
 
-let ServiceFramework = require('service-framework');
-let MessageFactory = new ServiceFramework.MessageFactory(false, {});
-
 describe('messaging performance for different message sizes and iterations', function() {
   this.timeout(100000);
 
@@ -63,15 +60,26 @@ describe('messaging performance for different message sizes and iterations', fun
           case 3:
             util.expectStubSuccessSequence(m, runtimeStubURL1, num);
 
-            // delete the allocation of address from tc 1
-            msg = MessageFactory.createCreateMessageRequest(
-              runtimeStubURL1 + "/registry/allocation", // from
-              msgNodeAddress, // to
-              {
-                number: 1
-              }, // body.value
-              "policyURL" // attribute
-            );
+            msg = {
+              id: 1,
+              type: "create",
+              from: runtimeStubURL1 + "/registry/allocation",
+              to: msgNodeAddress,
+              body: {
+                scheme: "hyperty",
+                value : {
+                  number: 1
+                }
+              }
+            };
+            // msg = MessageFactory.createCreateMessageRequest(
+            //   runtimeStubURL1 + "/registry/allocation", // from
+            //   msgNodeAddress, // to
+            //   {
+            //     number: 1
+            //   }, // body.value
+            //   "policyURL" // attribute
+            // );
             bus1.sendStubMsg(msg);
             break;
 
@@ -98,14 +106,26 @@ describe('messaging performance for different message sizes and iterations', fun
             util.expectStubSuccessSequence(m, runtimeStubURL2, num);
 
             // allocate address
-            msg = MessageFactory.createCreateMessageRequest(
-              runtimeStubURL1 + "/registry/allocation", // from
-              msgNodeAddress, // to
-              {
-                number: 1
-              }, // body.value
-              "policyURL" // attribute
-            );
+            msg = {
+              id: 1,
+              type: "create",
+              from: runtimeStubURL2 + "/registry/allocation",
+              to: msgNodeAddress,
+              body: {
+                scheme: "hyperty",
+                value : {
+                  number: 1
+                }
+              }
+            };
+            // msg = MessageFactory.createCreateMessageRequest(
+            //   runtimeStubURL1 + "/registry/allocation", // from
+            //   msgNodeAddress, // to
+            //   {
+            //     number: 1
+            //   }, // body.value
+            //   "policyURL" // attribute
+            // );
             bus2.sendStubMsg(msg);
             break;
 
@@ -157,12 +177,24 @@ describe('messaging performance for different message sizes and iterations', fun
 
     for (var i = 1; i <= max; i++) {
       // let the Reporter publish an update to the object
-      msg = MessageFactory.createCreateMessageRequest(
-        address1, // from
-        address2, // to
-        { data: payload + i }, // body.value
-        "policyURL" // attribute
-      );
+      msg = {
+        id: 1,
+        type: "create",
+        from: address1,
+        to: address2,
+        body: {
+          scheme: "hyperty",
+          value : {
+            data: payload + i
+          }
+        }
+      };
+      // msg = MessageFactory.createCreateMessageRequest(
+      //   address1, // from
+      //   address2, // to
+      //   { data: payload + i }, // body.value
+      //   "policyURL" // attribute
+      // );
       // console.log("sending msg number: " + i);
       // send msg via stub 1
       bus1.sendStubMsg(msg);

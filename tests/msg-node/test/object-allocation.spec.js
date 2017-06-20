@@ -26,9 +26,6 @@ import StubLoader  from './StubLoader.js';
 import Bus         from './Bus.js';
 import Util        from './Util.js';
 
-let ServiceFramework = require('service-framework');
-let MessageFactory = new ServiceFramework.MessageFactory(false,{});
-
 describe('object address-allocation spec', function() {
 
   let stubLoader = new StubLoader();
@@ -214,13 +211,16 @@ describe('object address-allocation spec', function() {
         case 3:
           util.expectStubSuccessSequence(m, runtimeStubURL, num);
 
-          // delete the allocation of address block
-          msg = MessageFactory.createDeleteMessageRequest(
-            runtimeStubURL + "/registry/allocation", // from
-            msgNodeAddress, // to
-            addresses, // body.childrenResources
-            "attribute" // attribute
-          );
+          msg = {
+            // NOTE: According to the spec, id should be a String, but at least Vertx breaks if it really is --> relaxing test
+            id: 2,
+            type: "delete",
+            from: runtimeStubURL + "/registry/allocation",
+            to: msgNodeAddress,
+            body: {
+              childrenResources : [addresses]
+            }
+          };
           bus.sendStubMsg(msg);
           break;
 
@@ -259,15 +259,29 @@ describe('object address-allocation spec', function() {
           util.expectStubSuccessSequence(m, runtimeStubURL, num);
 
           // allocate addresses with an allocationKey
-          msg = MessageFactory.createCreateMessageRequest(
-            runtimeStubURL + "/registry/allocation", // from
-            msgNodeAddress, // to
-            { // body.value
-              number: 4,
-              allocationKey : allocationKey
-            },
-            "policyURL" // policy
-          );
+          msg = {
+            id: 1,
+            type: "create",
+            from: runtimeStubURL + "/registry/allocation",
+            to: msgNodeAddress,
+            body: {
+              scheme: "connection",
+              value : {
+                number: 4,
+                allocationKey : allocationKey
+              },
+            }
+          };
+          //
+          // msg = MessageFactory.createCreateMessageRequest(
+          //   runtimeStubURL + "/registry/allocation", // from
+          //   msgNodeAddress, // to
+          //   { // body.value
+          //     number: 4,
+          //     allocationKey : allocationKey
+          //   },
+          //   "policyURL" // policy
+          // );
           bus.sendStubMsg(msg);
           break;
 
@@ -307,12 +321,15 @@ describe('object address-allocation spec', function() {
           util.expectStubSuccessSequence(m, runtimeStubURL, num);
 
           // delete the allocation of address block by allocationKey
-          msg = MessageFactory.createDeleteMessageRequest(
-            runtimeStubURL + "/registry/allocation", // from
-            msgNodeAddress, // to
-            allocationKey, // body.resource
-            "attribute" // attribute
-          );
+          msg = {
+            id: 2,
+            type: "delete",
+            from: runtimeStubURL + "/registry/allocation",
+            to: msgNodeAddress,
+            body: {
+              resource : allocationKey
+            }
+          };
           bus.sendStubMsg(msg);
           break;
         case 4:

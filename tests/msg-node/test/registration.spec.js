@@ -26,16 +26,14 @@ import StubLoader  from './StubLoader.js';
 import Bus         from './Bus.js';
 import Util        from './Util.js';
 
-let ServiceFramework = require('service-framework');
-let MessageFactory = new ServiceFramework.MessageFactory(false,{});
-
 describe('hyperty registration spec', function() {
 
   let stubLoader = new StubLoader();
   let stubConfig = stubLoader.config;
   let util = new Util();
 
-  let runtimeURL = 'hyperty-runtime://' + stubConfig.domain + '/1';
+  // let runtimeURL = 'hyperty-runtime://' + stubConfig.domain + '/1';
+  let runtimeURL = 'runtime://' + stubConfig.domain + '/1';
   let runtimeStubURL = 'hyperty-runtime://' + stubConfig.domain + '/protostub/1';
   let msgNodeAddress = "domain://msg-node." + stubConfig.domain + "/address-allocation";
   let mnRegistryAddress = "domain://registry." + stubConfig.domain;
@@ -44,6 +42,9 @@ describe('hyperty registration spec', function() {
   let hypertyDescriptorURL = 'http://' + stubConfig.domain + '/RegistrationTestHyperty';
   let dataScheme = 'TestSchema';
   let testresource = "testresource";
+
+  let busSubscriber;
+  let stubSubscriber;
 
 
   it('allocate and register address', function(done) {
@@ -85,21 +86,42 @@ describe('hyperty registration spec', function() {
           expect(m.body.value.allocated.length).to.be(1);
           address = m.body.value.allocated[0];
 
-          msg = MessageFactory.createCreateMessageRequest(
-            runtimeURL + "/registry", // from runtime, not hyperty
-            mnRegistryAddress, // to
-            {
-              url: address,
-              descriptor: hypertyDescriptorURL,
-              user: userId,
-              expires: 3600,
-              status: "live",
-              dataSchemes : [dataScheme],
-              resources : [testresource],
-              runtime : runtimeURL
-            }, // body.value
-            "policyURL" // policyURL
-          );
+
+          msg = {
+            id: 1,
+            type: "create",
+            from: runtimeURL + "/registry",
+            to: mnRegistryAddress,
+            body: {
+              value: {
+                url: address,
+                descriptor: hypertyDescriptorURL,
+                user: userId,
+                expires: 3600,
+                status: "live",
+                dataSchemes : [dataScheme],
+                resources : [testresource],
+                runtime : runtimeURL
+              }, // body.value
+              policyURL : "policyURL" // body.policyURL
+            }
+          };
+
+          // msg = MessageFactory.createCreateMessageRequest(
+          //   runtimeURL + "/registry", // from runtime, not hyperty
+          //   mnRegistryAddress, // to
+          //   {
+          //     url: address,
+          //     descriptor: hypertyDescriptorURL,
+          //     user: userId,
+          //     expires: 3600,
+          //     status: "live",
+          //     dataSchemes : [dataScheme],
+          //     resources : [testresource],
+          //     runtime : runtimeURL
+          //   }, // body.value
+          //   "policyURL" // policyURL
+          // );
           bus.sendStubMsg(msg);
           break;
 
@@ -245,8 +267,8 @@ describe('hyperty registration spec', function() {
           // this message is expected to be the registration response
           expect(m.id).to.eql(msg.id);
           expect(m.type.toLowerCase()).to.eql("response");
-          expect(m.from).to.eql(mnRegistryAddress);
-          expect(m.to).to.eql(runtimeURL + "/registry");
+          expect(m.from).to.eql(msg.to);
+          expect(m.to).to.eql(msg.from);
           expect(m.body.code).to.eql(expectedCode);
 
           stub.disconnect();
@@ -275,6 +297,88 @@ describe('hyperty registration spec', function() {
     testMessage(done, msg, 200);
   });
 
+
+  it('subscribe for registration status updates', function(done) {
+    let msg;
+    // connect separate stub/bus to MN and subscribe for registration status updates
+    busSubscriber = new Bus( (m, num) => {
+      switch (num) {
+        case 1:
+        case 2:
+          util.expectStubSuccessSequence(m, runtimeStubURL, num);
+          break;
+        case 3:
+          util.expectStubSuccessSequence(m, runtimeStubURL, num);
+          msg =  {
+            id: 1,
+            type: "subscribe",
+            from: runtimeURL + "/registry",
+            to: "domain://msg-node." + stubConfig.domain + "/sm",
+            body: {
+              resources: [address + "/registration"]
+            }
+          }
+          busSubscriber.sendStubMsg(msg);
+          break;
+
+        case 4:
+          // this message is expected to be the registration response
+          expect(m.id).to.eql(msg.id);
+          expect(m.type.toLowerCase()).to.eql("response");
+          expect(m.from).to.eql(msg.to);
+          expect(m.to).to.eql(msg.from);
+          expect(m.body.code).to.eql(200);
+
+          // don't disconnect
+          done();
+        default:
+      }
+    },
+    // enable / disable log of received messages
+    false);
+    stubSubscriber = stubLoader.activateStub(runtimeStubURL, busSubscriber, runtimeURL);
+    stubSubscriber.connect();
+  });
+
+
+  it('receive registration status updates', function(done) {
+    // connect separate stub/bus to MN and subscribe for registration status updates
+    busSubscriber.setStubMsgHandler((m, num) => {
+      switch (num) {
+        case 5:
+          // this message is expected to be the incoming update msg
+          expect(m.id).to.eql("1");
+          expect(m.type.toLowerCase()).to.eql("update");
+          expect(m.from).to.eql(address);
+          expect(m.to).to.eql(address + "/changes");
+          expect(m.body.attribute).to.eql("status");
+          expect(m.body.value).to.eql("disconnected");
+
+          busSubscriber.disconnect();
+          done();
+        default:
+      }
+    },
+    // enable / disable log of received messages
+    false);
+
+    // update status to disconnected
+    let msg = {
+      id: 1,
+      type: "update",
+      from: runtimeURL + "/registry",
+      to: mnRegistryAddress,
+      body: {
+        resource: address,
+        value : "disconnected",
+        attribute : "status"
+      }
+    }
+    // invoke testMessage with faked done method
+    testMessage(()=>{}, msg, 200);
+  });
+
+
   it('unregister hyperty address', function(done) {
     let msg = {
       id: 1,
@@ -289,4 +393,5 @@ describe('hyperty registration spec', function() {
     }
     testMessage(done, msg, 200);
   });
+
 });
