@@ -19,7 +19,6 @@
   },
   "homepage": "https://github.com/reTHINK-project/testbeds/dev/mntest#readme",
   "dependencies": {
-    "service-framework": "github:rethink-project/dev-service-framework#master"
   },
   "devDependencies": {
     "babel-plugin-add-module-exports": "^0.1.2",

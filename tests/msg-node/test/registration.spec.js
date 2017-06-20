@@ -26,16 +26,14 @@ import StubLoader  from './StubLoader.js';
 import Bus         from './Bus.js';
 import Util        from './Util.js';
 
-let ServiceFramework = require('service-framework');
-let MessageFactory = new ServiceFramework.MessageFactory(false,{});
-
 describe('hyperty registration spec', function() {
 
   let stubLoader = new StubLoader();
   let stubConfig = stubLoader.config;
   let util = new Util();
 
-  let runtimeURL = 'hyperty-runtime://' + stubConfig.domain + '/1';
+  // let runtimeURL = 'hyperty-runtime://' + stubConfig.domain + '/1';
+  let runtimeURL = 'runtime://' + stubConfig.domain + '/1';
   let runtimeStubURL = 'hyperty-runtime://' + stubConfig.domain + '/protostub/1';
   let msgNodeAddress = "domain://msg-node." + stubConfig.domain + "/address-allocation";
   let mnRegistryAddress = "domain://registry." + stubConfig.domain;
@@ -88,21 +86,42 @@ describe('hyperty registration spec', function() {
           expect(m.body.value.allocated.length).to.be(1);
           address = m.body.value.allocated[0];
 
-          msg = MessageFactory.createCreateMessageRequest(
-            runtimeURL + "/registry", // from runtime, not hyperty
-            mnRegistryAddress, // to
-            {
-              url: address,
-              descriptor: hypertyDescriptorURL,
-              user: userId,
-              expires: 3600,
-              status: "live",
-              dataSchemes : [dataScheme],
-              resources : [testresource],
-              runtime : runtimeURL
-            }, // body.value
-            "policyURL" // policyURL
-          );
+
+          msg = {
+            id: 1,
+            type: "create",
+            from: runtimeURL + "/registry",
+            to: mnRegistryAddress,
+            body: {
+              value: {
+                url: address,
+                descriptor: hypertyDescriptorURL,
+                user: userId,
+                expires: 3600,
+                status: "live",
+                dataSchemes : [dataScheme],
+                resources : [testresource],
+                runtime : runtimeURL
+              }, // body.value
+              policyURL : "policyURL" // body.policyURL
+            }
+          };
+
+          // msg = MessageFactory.createCreateMessageRequest(
+          //   runtimeURL + "/registry", // from runtime, not hyperty
+          //   mnRegistryAddress, // to
+          //   {
+          //     url: address,
+          //     descriptor: hypertyDescriptorURL,
+          //     user: userId,
+          //     expires: 3600,
+          //     status: "live",
+          //     dataSchemes : [dataScheme],
+          //     resources : [testresource],
+          //     runtime : runtimeURL
+          //   }, // body.value
+          //   "policyURL" // policyURL
+          // );
           bus.sendStubMsg(msg);
           break;
 

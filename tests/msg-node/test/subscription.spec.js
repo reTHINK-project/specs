@@ -26,8 +26,6 @@ import StubLoader  from './StubLoader.js';
 import Bus         from './Bus.js';
 import Util        from './Util.js';
 
-let ServiceFramework = require('service-framework');
-let MessageFactory = new ServiceFramework.MessageFactory(false,{});
 
 describe('subscription and syncher spec', function() {
 
@@ -242,14 +240,16 @@ describe('subscription and syncher spec', function() {
     false);
 
     // let the Reporter publish an update to the object
-    msg = MessageFactory.createUpdateMessageRequest(
-      address,
-      address + "/changes", // to
-      "new Value",  // attribute value
-      null,
-      "changedAttribute" // attribute name
-    );
-
+    msg = {
+      id: 1,
+      type: "update",
+      from: address,
+      to: address + "/changes",
+      body: {
+        attribute: "changedAttribute",
+        value : "new Value"
+      }
+    };
     // send update msg via the Reporters stub
     busReporter.sendStubMsg(msg);
 
@@ -337,14 +337,16 @@ describe('subscription and syncher spec', function() {
       false);
 
     // let the Reporter publish an update to the object
-    msg = MessageFactory.createUpdateMessageRequest(
-      address,
-      address + "/changes", // to
-      "a second new Value",  // attribute value
-      null,
-      "changedAttribute" // attribute name
-    );
-
+    msg = {
+      id: 2,
+      type: "update",
+      from: address,
+      to: address + "/changes",
+      body: {
+        atrribute: "changedAttribute",
+        value : "a second new Value"
+      }
+    };
     // send update msg via the Reporters stub
     busReporter.sendStubMsg(msg);
 

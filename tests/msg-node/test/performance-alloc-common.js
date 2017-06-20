@@ -24,8 +24,6 @@
 import Bus from './Bus.js';
 import Util from './Util.js';
 import StubLoader from './StubLoader.js';
-let ServiceFramework = require('service-framework');
-let MessageFactory = new ServiceFramework.MessageFactory(false, {});
 
 export default class AllocCommon {
 
@@ -175,24 +173,44 @@ export default class AllocCommon {
           numberOfAddressesPerRequest = this.addresses[i].length;
 
         // create and send the de-allocation request
-        msg = MessageFactory.createDeleteMessageRequest(
-          this.runtimeStubRegistryURL, // from
-          this.allocationAddress, // to
-          this.addresses[i], // body.childrenResources
-          "attribute" // attribute
-        );
+        msg = {
+          id: 2,
+          type: "delete",
+          from: this.runtimeStubRegistryURL,
+          to: this.allocationAddress,
+          body: {
+            childrenResources : [this.addresses[i]],
+            attribute : "attribute"
+          }
+        };
+        // msg = MessageFactory.createDeleteMessageRequest(
+        //   this.runtimeStubRegistryURL, // from
+        //   this.allocationAddress, // to
+        //   this.addresses[i], // body.childrenResources
+        //   "attribute" // attribute
+        // );
         this.bus.sendStubMsg(msg);
       }
     }
     else {
       for (var i = 0; i < this.allocationKeys.length; i++ ) {
         // create and send the de-allocation request
-        msg = MessageFactory.createDeleteMessageRequest(
-          this.runtimeStubRegistryURL, // from
-          this.allocationAddress, // to
-          this.allocationKeys[i], // body.resource
-          "attribute" // attribute
-        );
+        msg = {
+          id: 2,
+          type: "delete",
+          from: this.runtimeStubRegistryURL,
+          to: this.allocationAddress,
+          body: {
+            resource : [this.allocationKeys[i]],
+            attribute : "attribute"
+          }
+        };
+        // msg = MessageFactory.createDeleteMessageRequest(
+        //   this.runtimeStubRegistryURL, // from
+        //   this.allocationAddress, // to
+        //   this.allocationKeys[i], // body.resource
+        //   "attribute" // attribute
+        // );
         this.bus.sendStubMsg(msg);
       }
     }

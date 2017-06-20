@@ -26,9 +26,6 @@ import StubLoader from './StubLoader.js';
 import Bus from './Bus.js';
 import Util from './Util.js';
 
-let ServiceFramework = require('service-framework');
-let MessageFactory = new ServiceFramework.MessageFactory(false, {});
-
 describe('messaging object update performance for different number of subscribers', function() {
   this.timeout(10000);
 
@@ -244,13 +241,23 @@ describe('messaging object update performance for different number of subscriber
       });
 
       // let the Reporter publish an update to the object
-      let msg = MessageFactory.createUpdateMessageRequest(
-        address,
-        address + "/changes", // to
-        payload,  // attribute value
-        null,
-        "changedAttribute" // attribute name
-      );
+      let msg = {
+        id: 1,
+        type: "update",
+        from: address,
+        to: address + "/changes",
+        body: {
+          attribute: "changedAttribute",
+          value : payload
+        }
+      };
+      // let msg = MessageFactory.createUpdateMessageRequest(
+      //   address,
+      //   address + "/changes", // to
+      //   payload,  // attribute value
+      //   null,
+      //   "changedAttribute" // attribute name
+      // );
 
       // send update msg via the Reporters stub
       start = Date.now();
