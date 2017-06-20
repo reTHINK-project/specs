@@ -6,7 +6,7 @@
 
 ![Policy Engine Architecture](./images/arch.png)
 
-**Fig. 1 Policy Engine Architecture**
+**Fig. 1 - Policy Engine Architecture**
 
 The Policy Enforcement Point (PEP) is the component in charge of intercepting communication messages and protecting targeted resources by requesting an authorization decision from a Policy Decision Point (PDP) and enforcing that decision. The PDP sits at the very core of the policy engine architecture. It implements the policy description language and evaluation logic. Its purpose is to evaluate authorization requests coming from the PEP against the policies loaded from the Policy Retrieval Point (PRP). The PDP then returns a decision – either of Permit, Deny, or Not Applicable. 
 
@@ -16,7 +16,7 @@ Fig. 2 shows the sequence diagram indicating communication pattern between compo
 
 ![](./images/PE_sequence_diagram.png)
 
-**Fig. 2 Sequence Diagram**
+**Fig. 2 - Sequence Diagram**
 
 For more details concerning the policy engine design and implementation please refer to the README file [here](https://github.com/reTHINK-project/dev-msg-node-nodejs/tree/master/src/main/components/policyEngine) [2] in the policy engine folder of the Node.js MN source code repo.
 
@@ -28,7 +28,7 @@ JACPoL contains three structural elements, namely Policy Set, Policy, and Rule. 
 
 ![](./images/pdl_structure.png)
 
-**Fig. 3 JACPoL Structure**
+**Fig. 3 - JACPoL Structure**
 
 - A **rule** element defines the target elements to which the rule is applied and details conditions to apply the rule and has three components such as target, effect, and condition. A target element specifies the resources, subjects, actions and the environment to which the rule is applied. A condition element shows the conditions to apply the rule and an effect is the consequence of the rule as either permit or deny.
 - A **policy** is the set of rules which are combined with some algorithms. These algorithms are called rule-combining algorithms. For instance "Permit Override" algorithm allows the policy to evaluate to "Permit" if any rule in the policy evaluates to "Permit". A policy also contains target elements which show the subjects, resources, actions, environment that policy is applied.
@@ -38,7 +38,7 @@ Fig. 4 is an example rule: for messages that are of registration msgType and rea
 
 ![](./images/example.png)
 
-**Fig. 4 An Example Rule**
+**Fig. 4 - An Example Rule**
 
 JACPoL provides a simple, flexible, scalable, and expressive attribute-based access control capability, and at the same time supports obligations or advice to enable a set of network management and security features. The detailed syntax and semantics of JACPoL can be found [here](https://github.com/reTHINK-project/dev-msg-node-nodejs/tree/master/src/main/components/policyEngine/prp/policy) [3].
 
@@ -46,7 +46,7 @@ JACPoL provides a simple, flexible, scalable, and expressive attribute-based acc
 
 ### 2. Methodology Overview
 
-This section introduces methodology and setup for the evaluation of the policy engine. The evaluation is separated into two parts: first is the conformance evaluation to assess the effectiveness of the policy engine with respect to the requirements of reTHINK framework; second is the performance evaluation to test the policy evaluation language in terms of a set of criteria such as processing delay, etc. For conformance evaluation, we choose the Connector hyperty for demonstration, analyze in details about the signaling messages and phases based on communication sequence diagram. As a result, we have identified for this use case a set of policy control points (PCPs) available for the deployment of different policies. The subsequent section would provide a concrete view of the policies that could be effectively deployed based on these PCPs. For performance evaluation, we  assess the policy language in comparison with the standardized XACML policy language. We conduct repeated tests in order to get reliable results that reflect real performance.
+This section introduces methodology and setup for the evaluation of the policy engine. The evaluation is separated into three parts: first is the conformance evaluation to assess the effectiveness of the policy engine with respect to the requirements of reTHINK framework; second is the performance evaluation to test the policy evaluation language in terms of a set of criteria such as processing delay, etc; third is the comparison evaluation, where we comprehensively compare the policy engine with the one for the runtime developed by INESC. For conformance evaluation, we choose the Connector hyperty for demonstration, analyze in details about the signaling messages and phases based on communication sequence diagram. As a result, we have identified for this use case a set of policy control points (PCPs) available for the deployment of different policies. The subsequent section would provide a concrete view of the policies that could be effectively deployed based on these PCPs. For performance evaluation, we  assess the policy language in comparison with the standardized XACML policy language. We conduct repeated tests in order to get reliable results that reflect real performance. For comparison evaluation, we compare key features of the two policy engines in order to clarify their differences in terms of their design and implementation.
 
 
 
@@ -108,7 +108,7 @@ In addition, we can also use policies to limit the maximum number of address all
   "condition": {
     "addrAllastMin": {"moreThan": 50}
   },
-  "effect": "deny",
+  "effect": "deny"
 }
 ```
 
@@ -281,19 +281,88 @@ We have evaluated the performance of our policy evaluation language by comparing
 
 ![](./images/scale_effect.jpg)
 
-**Fig. 5 Effect of the number of sibling rules**
+**Fig. 5 - Effect of the number of sibling rules**
 
 
 
 ![](./images/depth_effect.jpg)
 
-**Fig. 6 Effect of the number of nesting layers**
+**Fig. 6 - Effect of the number of nesting layers**
 
 Each test was repeated 1000 times conducted on a Windows 10 PC with 16G memory and a 2.6GHz Intel core i7-6700HQ processor. From the results we can see that JACPoL is more efficient and scalable and evaluated with less latency than XACML thanks to its JSON syntax and well-defined semantics.
 
 
 
-### 5. Conclusions and recommendations
+### 5. Comparison Evaluation 
+
+In this section we compare our policy engine with the runtime policy engine developed by INESC.  We summarize the comparison in the table as below:
+
+
+|                        | [Runtime Policy Engine (INESC)](https://github.com/reTHINK-project/dev-runtime-core/tree/develop/src/policy) | [CSP Policy Engine (IMT-TB)](https://github.com/reTHINK-project/dev-msg-node-nodejs/tree/master/src/main/components/policyEngine) |
+| ---------------------- | :--------------------------------------: | :--------------------------------------: |
+| Programming Language   |                 Node.js                  |                 Node.js                  |
+| Environment            |               Runtime Core               |              Messaging Node              |
+| Administrative Domain  |                 End User                 |                   CSP                    |
+| Policy Management      |             Locally Defined              |           Remotely Maintained            |
+| Policy Language Syntax |                   JSON                   |                   JSON                   |
+| Architecture           |                 PDP/PEP                  |             PDP/PEP/PRP/PIP              |
+| Access Control Scheme  |                   ABAC                   |                   ABAC                   |
+| User Interface         |                   Yes                    |                    No                    |
+| Complex Rule           |              Partly Support              |                 Support                  |
+| Obligation             |                 Support                  |                 Support                  |
+| Context Awareness      |                   Yes                    |                   Yes                    |
+| Policy Readability     |                  Medium                  |                   High                   |
+| Policy Expressiveness  |                  Medium                  |                   High                   |
+| Policy Index           |              Partly Support              |                 Support                  |
+
+
+
+As we can see, the two policy engines have the following features in common:
+
+- Both are developed in Node.js.
+- Both policy languages follow JSON syntax.
+- Both employ ABAC access control scheme.
+- Both support obligation and are context sensible.
+- Both adopt PEP/PDP architecture.
+
+On the other hand, they have following differences:
+
+- They are designed for different use cases: one is in the runtime browser for the end user and the other is in the backend component for the CSP.
+- The runtime policies are managed locally through a user web interface, while the CSP policies are maintained remotely in a repository.
+- In addition to PDP, PEP components, the CSP policy engine has additional modules such as PIP and PRP.
+- The CSP policy engine does not have a web UI.
+- The runtime policy engine does not fully support complex rule or policy index, which would be illustrated further in the subsequent paragraphs.
+- At last, although both use JSON syntax, the CSP policy language semantics is more expressive and readable than the runtime policy language.
+
+In the following text we compare policy specification languages of the two policy engines. Please refer to here for more information about [the runtime policy language](https://github.com/reTHINK-project/specs/blob/master/policy-management/runtime/policy-specification-language.md) [5] and here for [the CSP policy language](https://github.com/reTHINK-project/dev-msg-node-nodejs/tree/master/src/main/components/policyEngine/prp/policy) [3]. 
+
+
+
+**Readability.** Given the rule as below for example, we can see that for the same rule, the CSP policy language is more readable than the runtime policy.
+
+<img src="./images/examplerule.png" width="940" height="360" />
+
+**Fig. 7 - A runtime rule example (upper) and a CSP rule example (lower) to verify working hours.**
+
+
+
+**Expressiveness.** From the above example we can see both policy language can express complex condition using logical operators (AND, OR, NOT) to combine constraints on multiple attributes. However, in addition to that, the CSP policy language also support the following semantics that the runtime policy language does not support:
+
+```json
+{"sumOf x y": {"not": {"anyOf": [
+        {"between": "j k"},  
+        {"equals": "z"}]}}}
+```
+
+in which the string "sumOf x y" is an *attribute condition*. The keyword *sumOf* defines a function to compute the sum of attributes *x* and *y*, which is to be evaluated by the subsequent *condition expression*. Please note that a parameter like *j, k* or *z* can also possibly be another attribute instead of an explicit value. In this sense, we can see that the CSP policy language can do more flexible examination on the attributes using various operations.
+
+
+
+**Scalability.** Both policy languages support rule index using a *target* field to verify the applicability of a given rule. However, the runtime policy language does not include this concept for policy index, which may cause it less scalable and not efficient.
+
+
+
+### 6. Conclusions and recommendations
 
 As we can see from above, the policy engine fulfils access control requirements of reTHINK and at the same time provides good performance results.
 
@@ -350,8 +419,10 @@ Such kind of combination can reduce policy index and process time for a message,
 
 
 
-### 6. References
+### 7. References
 
 - [1] reTHINK Node.js Messaging Node Github Repo. https://github.com/reTHINK-project/dev-msg-node-nodejs
-- [2] reTHINK Policy Engine Github Repo. https://github.com/reTHINK-project/dev-msg-node-nodejs/tree/master/src/main/components/policyEngine
-- [3] reTHINK Policy Language. https://github.com/reTHINK-project/dev-msg-node-nodejs/tree/master/src/main/components/policyEngine/prp/policy
+- [2] reTHINK CSP Policy Engine Github Repo. https://github.com/reTHINK-project/dev-msg-node-nodejs/tree/master/src/main/components/policyEngine
+- [3] reTHINK CSP Policy Language. https://github.com/reTHINK-project/dev-msg-node-nodejs/tree/master/src/main/components/policyEngine/prp/policy
+- [4] reTHINK Runtime Policy Engine Github Repo. https://github.com/reTHINK-project/dev-runtime-core/tree/develop/src/policy
+- [5] reTHINK Runtime Policy Language. https://github.com/reTHINK-project/specs/blob/master/policy-management/runtime/policy-specification-language.md
