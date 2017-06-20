@@ -23,7 +23,7 @@ If the user connects to a service, he authenticates with his IdP, and reaches a 
 ## Implementations
 Two implementations have been provided during the reTHINK project.
 
-### IDModule
+### IdModule
 The first implementation is the one embedded in the reThink core runtime, called IdModule. The IdModule considered the implementation of the IdP-Proxy as mandatory. As no actual IdP implements this specification yet, the IdP-Proxy has been implemented and deployed in the catalogue of the reTHINK service. This is of course for demonstration purpose, as the Service Provider is not considered as a secured entity, and thus cannot assert an Identity on behalf of the Identity Provider. But this implementation works with Google SignIn.
 
 ### Browser extension
