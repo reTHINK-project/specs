@@ -12,6 +12,11 @@ The following tests allow to verify the usage of these concepts to support adhoc
 
 * Interoperability with legacy services, i.e., between one Hyperty and some non-reTHINK service.
 
+For each of these tests, the latency will be measured for two scenarios:
+
+1. when communication occurs for the first time between the two peers. In this situation, the protocol stub and the Idp Proxy has to be downloaded from the catalogue and deployed in the runtime.
+1. it is not the first time the communication occurs between the two peers. In this situation, the protocol stub and the Idp Proxy is cached locally and does not have to be downloaded from the catalogue.
+
 ### Tests Setup
 
 Interoperability tests can be performed partially locally or fully using back-end services like the ones provided by reTHINK testbeds. In both options two Google accounts are required.
