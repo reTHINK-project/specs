@@ -16,6 +16,6 @@ Optionally, it is posted an UPDATE message into the DataObjectObserversURL with 
 
 The unsubscription confirmation is sent back with a [RESPONSE message](../../messages/data-sync-messages.md#response-5).
 
-As soon as the local Sync Manager receives the unsubscription response it removes the Observer listener from the Message Bus and [sends to its Domain Sync Manager an Unsubscribe message](../../messages/data-sync-messages.md#equest-to-remove-data-sync-routing-path-at-observer-message-node) to also remove listeners from the Message Node.
+As soon as the local Sync Manager receives the unsubscription response it removes the Observer listener from the Message Bus and [sends to its Domain Sync Manager an Unsubscribe message](../../messages/data-sync-messages.md#request-to-remove-data-sync-routing-path-at-observer-message-node) to also remove listeners from the Message Node.
 
 As soon as the local Sync Manager receives the unsubscription confirmation from the domain, it [sends back to the Observer the unsubscription response](../../messages/data-sync-messages.md#unsubscription-response).
