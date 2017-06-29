@@ -10,6 +10,8 @@ register and use discovery and addressbook
 
 ### Addressbook
 
+[image](https://github.com/reTHINK-project/specs/blob/master/tests/discovery/ab-details.png)
+
 ### Global Registry
 
 ### Domain Registry
