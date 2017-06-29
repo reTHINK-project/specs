@@ -1,14 +1,10 @@
 # IMaDS
 
-show funtionality to be used by the USER (not developer) step by step with screenshots
+This section describes the usage of components involved in the IMaDS discovery and registry framework. This includes registration with discovery services, using the Addressbook application, and using the framework to connect to a contact.
 
-register and use discovery and addressbook
+## Discovery
 
-## Testbed Setup
-
-### Discovery
-
-### Addressbook
+## Addressbook
 
 The Addressbook is a web based application included in the ReThink runtime that allows users to maintain one's identity. The Addressbook is reachable in the browser at localhost. The main screen shows a list of contacts and means to query for and add users:
 
