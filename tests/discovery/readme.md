@@ -10,8 +10,10 @@ register and use discovery and addressbook
 
 ### Addressbook
 
-[image](https://github.com/reTHINK-project/specs/blob/master/tests/discovery/ab-details.png)
+![Addressbook Main Screen](https://github.com/reTHINK-project/specs/blob/master/tests/discovery/ab-main.png)
+![Addressbook Details](https://github.com/reTHINK-project/specs/blob/master/tests/discovery/ab-details.png)
+![Addressbook Info](https://github.com/reTHINK-project/specs/blob/master/tests/discovery/ab-info.png)
+![Addressbook Query](https://github.com/reTHINK-project/specs/blob/master/tests/discovery/ab-query.png)
+![Addressbook Result](https://github.com/reTHINK-project/specs/blob/master/tests/discovery/ab-result.png)
 
-### Global Registry
-
-### Domain Registry
+![Discovery Result](https://github.com/reTHINK-project/specs/blob/master/tests/discovery/ab-result.png)
