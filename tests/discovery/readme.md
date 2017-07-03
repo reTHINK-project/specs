@@ -8,7 +8,11 @@ This section describes the usage of components involved in the IMaDS discovery a
 
 The Addressbook is a web based application included in the ReThink runtime that allows users to maintain one's identity. The Addressbook is reachable in the browser at localhost. The main screen shows a list of contacts and means to query for and add users:
 
-![Addressbook Main Screen](https://github.com/reTHINK-project/specs/blob/master/tests/discovery/ab-main.png)
+![Addressbook Create GUID](https://github.com/reTHINK-project/specs/blob/master/tests/discovery/ab-main.png)
+
+At first use, a new GUID needs to be created and registered in the Global Registry service. This is automated via the option "generate GUID" in the "Account"-menu. The process registers a new GUID and publishes it in in the Global Registry service along with information specified in the registration process.
+
+![Addressbook Info](https://github.com/reTHINK-project/specs/blob/master/tests/discovery/ab-createguid.png)
 
 To view and edit one's contact details, users can use the "get my information" function that displays a dialog with all details of the user's account. Changes can be made directly in the dialog and the changed account details can be directly sent to the Global Registry:
 
