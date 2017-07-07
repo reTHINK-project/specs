@@ -1,6 +1,6 @@
 # IMaDS
 
-This section describes the usage of components involved in the IMaDS discovery and registry framework. Using the IMaDS framework, users can connect to other users' devices using a immutable GUID. The framework uses three components, being Discovery, Global Registry, and Domain Registry, while the ReThink runtime provides a GUI component to store and manage contacts in an addressbook application.
+This section describes the usage of components involved in the IMaDS discovery and registry framework [1][2]. Using the IMaDS framework, users can connect to other users' devices using a immutable GUID. The framework uses three components, being Discovery, Global Registry, and Domain Registry, while the ReThink runtime provides a GUI component to store and manage contacts in an addressbook application.
 
 The Addressbook is a web based application included in the ReThink runtime that allows users to create and maintain one's identity. The Addressbook is reachable in the browser at localhost as part of the admin interface of the ReThink runtime. Its main screen shows a list of contacts and means to query for and add users:
 
@@ -43,3 +43,8 @@ RICARDO PLEASE ADD SOME CONTENT HERE
 While the example described above covers manual discovery and handling of user identifiers,resolving is usually carried out automatically. Here, a user specifies a GUID to contact, e.g. selected from the Addressbook application, which he wants to connect to, e.g. call. The IMaDS framework then automatically resolves a GUID to the user's UserIDs and further to this user's active Hyperty instances. Following this process, a connection is automatically initialized between two users.
 
 A typical usage scenario of the IMaDS services comprise a user Alice, who wants to connect to another user Bob, who is registered in one or more service domains. If required, Alice would query the Discovery component to search for Bob using facts that describe Bob. By resolving Bob’s GUID via the Global Registry, she receives a list of service domains Bob is registered with. As each UserID in the returned dataset also comprises information about the respective service provider’s Domain Registry, Alice can now query the Domain Registry for Bob’s communication endpoint and establish a connection.
+
+## References
+
+ * [[1]: Friese, Ingo, et al. "Cross-Domain Discovery of Communication Peers. Identity Mapping and Discovery Services (IMaDS)." arXiv preprint arXiv:1704.08957 (2017).](https://arxiv.org/abs/1704.08957)
+ * [[2]: Javed, Ibrahim Tariq, et al. "Cross-domain identity and discovery framework for web calling services." Annals of Telecommunications (2017): 1-10.](https://link.springer.com/article/10.1007/s12243-017-0587-2)
