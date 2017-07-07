@@ -37,6 +37,10 @@ Step two:
 The Firefox extension that is managing ID Cards in the browser appears and proposes the identities formerly registered:  
 ![extension](https://user-images.githubusercontent.com/10738516/27957661-b7b19a2c-631f-11e7-8de4-3c6c691f7196.png)  
 Step 3 : If the user clicks on the identity and he is not yet authenticated, it is redirected on the IdPProvier:
+![oidc](https://user-images.githubusercontent.com/10738516/27957935-fe0f1d90-6320-11e7-9d46-e6db5b6f76d6.png)
+Step 4: The user is automatically logged in the service. Note that if he as already authenticated, the Step 3 is skipped.
+![logged](https://user-images.githubusercontent.com/10738516/27957980-3fd134de-6321-11e7-829f-2a8dde3caf2f.png)
+
 
 
 ## Future work
