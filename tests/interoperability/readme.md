@@ -95,7 +95,7 @@ This test will require having two Slack accounts in some team (https://slack.com
 
 Step 1: Open a third Browser window in some Slack team with your first Slack account.
 
-![Slack Home](sca-chat.PNG)
+![Slack Home](slack.PNG)
 
 Step 2: In your previously SCA Context window click to add a new participant. Insert the slack user account used in the previous step and its slack domain and click to invite.
 
