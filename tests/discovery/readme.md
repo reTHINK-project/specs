@@ -50,7 +50,7 @@ The Discovery library allows the discovery of remote Hyperties or Data Objects b
 
 Basically, this query translates the profile data into GUIDs by querying the Discovery Service. Then, for each found GUID is executed a query to the Global Registry to get all the user IDs and domains associated. Finally, is executed a query to the Domain Registry for each user ID to get the registered Hyperties or Data Objects.
 
-The methodology used to evaluate the Discovery library was to develop a web application that loads an Hyperty programmed to use the discovery by profile data. For the web application work properly and discover, in this case, the Hyperties associated to the profile data, we had to create an account in Discovery Service with a GUID registered in our Global Registry instance. Then, we started to do the tests, collecting four types of measures for each execution:
+The methodology used to evaluate the Discovery library was to develop a web application that loads an Hyperty programmed to use the discovery by profile data. For the web application work properly and discover, in this case, the Hyperties associated to the profile data, we had to create an account in Discovery Service with a GUID registered in our Global Registry instance. Then, we started to do the tests, collecting four types of measures in each execution:
 
   * Time necessary to complete a query to the Discovery Service;
   * Time necessary to complete a query to the Global Registry;
