@@ -49,45 +49,45 @@ The cross-domain interoperability test with different protocols allows to test h
 
 Step 1: Open one browser window at `https://rethink-project.github.io/dev-smart-contextual-assistance-app/` and select "Connector Hyperty". A window will be opened asking you to select the Identity Provider to be used.
 
-![Select your Identity Provider](select-idp.png)
+![Select your Identity Provider](select-idp.PNG)
 
 Select Google and request to login,
 
-![Ask to Login with Google](login-btn.png)
+![Ask to Login with Google](login-btn.PNG)
 
 and authenticate with your first Google account:
 
-![Login with Google Account](google-login.png)
+![Login with Google Account](google-login.PNG)
 
 Give some time to load the runtime and Hyperties used by the Smart Contextual Application. When loaded you should see the following window:
 
-![Smart Contextual Home](sca-app-home.png)
+![Smart Contextual Home](sca-app-home.PNG)
 
 Step 3: Open a second browser window in anonymous mode at `https://rethink-dev.tlabscloud.com/`. The procedure to select an IdP and login with your second Google account, should be performed. Again, give some time to load the runtime and Hyperties used by the Call Center Application. When loaded you should see the following window:
 
-![Call Center Home](callcenter-app.png)
+![Call Center Home](callcenter-app.PNG)
 
 Step 4: Go back to the SCA App home opened window and click to create a new context:
 
-![SCA Context Creation](context-creation.png)
+![SCA Context Creation](context-creation.PNG)
 
 Step 5: Click in the new created context and you will get into the new, but empty context environment. Click into "Add Contact" to start the party:
 
-![SCA Add Contact](sca-add-contact.png)
+![SCA Add Contact](sca-add-contact.PNG)
 
 A new user interface will show up where you should provide information about the user you want to invite, in this case the one using the Call Center App. Insert the email address you have used for your second Google account and the `https://rethink.tlabscloud.com/` domain. Click invite.
 
-![SCA Invite User](sca-invite-user.png)
+![SCA Invite User](sca-invite-user.PNG)
 
 Step 6: The new user should join the SCA new context and in the second window a chat window will be opened.
 
-![Call Center user joined the SCA new context](callcenter-invited.png)
+![Call Center user joined the SCA new context](callcenter-invited.PNG)
 
 Step 7: Both users can exchange messages:
 
-![Call Center user chat with SCA user](callcenter-chat.png)
+![Call Center user chat with SCA user](callcenter-chat.PNG)
 
-![SCA user chat with Call Center user](sca-chat.png)
+![SCA user chat with Call Center user](sca-chat.PNG)
 
 #### Group Chat interoperability with Slack legacy service
 
@@ -95,23 +95,23 @@ This test will require having two Slack accounts in some team (https://slack.com
 
 Step 1: Open a third Browser window in some Slack team with your first Slack account.
 
-![Slack Home](sca-chat.png)
+![Slack Home](sca-chat.PNG)
 
 Step 2: In your previously SCA Context window click to add a new participant. Insert the slack user account used in the previous step and its slack domain and click to invite.
 
-![Slack Home](sca-add-slack-user.png)
+![Slack Home](sca-add-slack-user.PNG)
 
 Step 3: A window will be opened asking you to select the Slack team where the invited user is, your Slack identifier as well as asking you authorisation to use it.
 
-![Slack Authorisation](slack-authorise.png)
+![Slack Authorisation](slack-authorise.PNG)
 
 Step 4: The Slack user should be added as the third participant to the Context. Now the three users can exchange messages among them. The user from the reTHINK SCA Application, chat with users from the reTHINK Call Center App and legacy Slack application:
 
-![SCA user chat with Call Center user and Slack user](sca-chat-slack-callcenter.png)
+![SCA user chat with Call Center user and Slack user](sca-chat-slack-callcenter.PNG)
 
 The user from the reTHINK Call Center App, chat with users from reTHINK SCA Application and legacy Slack application:
 
-![Call Center user, chat with SCA user and Slack user](callcenter-chat-slack.png)
+![Call Center user, chat with SCA user and Slack user](callcenter-chat-slack.PNG)
 
 The user from the legacy Slack application, chat with the reTHINK Call Center App user and with the reTHINK SCA Application user:
 
@@ -123,11 +123,11 @@ This test will show how two users using different Applications, different Hypert
 
 Step 1: In your previously SCA Context window, select the contact using the Call Center Application. Click to call the Call Center user with video:
 
-![SCA user calls the Call Center user](sca-calling-callcenter.png)
+![SCA user calls the Call Center user](sca-calling-callcenter.PNG)
 
 On the Call Center side an incoming call notification shows up with information about the SCA calling user:
 
-![Incoming Call to Call Center user](callcenter-incomingcall.png)
+![Incoming Call to Call Center user](callcenter-incomingcall.PNG)
 
 Step 2: The Call Center user accepts the incoming call and a Video communication is established between the Call Center user:
 
@@ -135,7 +135,7 @@ Step 2: The Call Center user accepts the incoming call and a Video communication
 
 and the SCA user:
 
-![SCA Video Communication with Call Center user](sca-callcenter-call.png)
+![SCA Video Communication with Call Center user](sca-callcenter-call.PNG)
 
 ##### Call Setup latency
 
