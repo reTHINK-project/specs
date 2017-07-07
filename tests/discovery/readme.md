@@ -14,7 +14,7 @@ To view and edit one's contact details, users can use the "get my information" f
 
 ![Addressbook Info](https://github.com/reTHINK-project/specs/blob/master/tests/discovery/ab-info.png)
 
-When selecting contacts in the Addressbook, available information for the selected contact is shown. This includes the username and ids: 
+When selecting contacts in the Addressbook, available information for the selected contact is shown. This includes the username and ids:
 
 ![Addressbook Details](https://github.com/reTHINK-project/specs/blob/master/tests/discovery/ab-details.png)
 
@@ -43,6 +43,31 @@ RICARDO PLEASE ADD SOME CONTENT HERE
 While the example described above covers manual discovery and handling of user identifiers,resolving is usually carried out automatically. Here, a user specifies a GUID to contact, e.g. selected from the Addressbook application, which he wants to connect to, e.g. call. The IMaDS framework then automatically resolves a GUID to the user's UserIDs and further to this user's active Hyperty instances. Following this process, a connection is automatically initialized between two users.
 
 A typical usage scenario of the IMaDS services comprise a user Alice, who wants to connect to another user Bob, who is registered in one or more service domains. If required, Alice would query the Discovery component to search for Bob using facts that describe Bob. By resolving Bob’s GUID via the Global Registry, she receives a list of service domains Bob is registered with. As each UserID in the returned dataset also comprises information about the respective service provider’s Domain Registry, Alice can now query the Domain Registry for Bob’s communication endpoint and establish a connection.
+
+### Discovery lib evaluation
+
+The Discovery library allows the discovery of remote Hyperties or Data Objects by using different criteria. To evaluate this component was used the most complex query available that discover Hyperties or Data Objects by profile data. These profile data is related to the information that could be written in the user account at Discovery Service.
+
+Basically, this query translates the profile data into GUIDs by querying the Discovery Service. Then, for each found GUID is executed a query to the Global Registry to get all the user IDs and domains associated. Finally, is executed a query to the Domain Registry for each user ID to get the registered Hyperties or Data Objects.
+
+The methodology used to evaluate the Discovery library was to develop a web application that loads an Hyperty programmed to use the discovery by profile data. For the web application work properly and discover, in this case, the Hyperties associated to the profile data, we had to create an account in Discovery Service with a GUID registered in our Global Registry instance. Then, we started to do the tests, collecting four types of measures for each execution:
+
+  * Time necessary to complete a query to the Discovery Service;
+  * Time necessary to complete a query to the Global Registry;
+  * Time necessary to complete a query to the Domain Registry;
+  * Total time spend in the discovery by profile data.
+
+All tests consisted in one hundred executions of the discovery by profile data, and in each execution we collected all the necessary measures. Below is a chart for each type of measure, having been used the cumulative distribution function (CDF). The variable "n" represents the number of concurrent requests per execution.
+
+![Discovery Service](./discovery%20lib%20evaluation/Discovery%20Service.png)
+
+![Global Registry](./discovery%20lib%20evaluation/Global%20Registry.png)
+
+![Domain Registry](./discovery%20lib%20evaluation/Domain%20Registry.png)
+
+![Complete Query](./discovery%20lib%20evaluation/Complete%20Query.png)
+
+
 
 ## References
 
