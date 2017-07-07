@@ -1,5 +1,4 @@
 ## Interoperability Tests
-*to be completed*
 
 This documents provides guidelines to perform interoperability tests with reTHINK framework.
 Before you go ahead with these tests it is recommended to be familiar with main reTHINK concepts enabling full interoperability among services without having to standardize protocols or service APIs, as described *here (link to startup concepts wiki page)*.
@@ -46,98 +45,112 @@ In this setup environment, one of the domains is installed as `localhost`. This 
 
 The cross-domain interoperability test with different protocols allows to test how two domains using different messaging communication protocols, i.e. using two different Messaging Nodes implementations can interoperate without having to agree in advance on the protocol to be used.
 
-#### WebRTC Audio and Video interoperability test
-
-Step 1: Open one browser window at `https://hysmart.rethink.ptinovacao.pt/` and select "Connector Hyperty"
-
-*insert picture showing pop menu with connector hyperty*
-
-Step 2: A window will be opened asking you to select the Identity Provider to be used. Select Google and authenticate with your first Google account.
-
-*insert pictures showing Google Idp selection*
-
-*insert pictures showing Google login*
-
-Step 3: Open a second browser window in anonymous mode at `https://rethink.tlabscloud.com/` and also select "Connector Hyperty"
-
-*insert picture showing pop menu with connector hyperty*
-
-Step 4: Similar to step 2 but now your second Google account is used.
-
-*insert pictures showing Google Idp selection*
-
-*insert pictures showing Google login*
-
-Step 5: In the first opened Window, insert the email address you have used for your second Google account and the `https://rethink.tlabscloud.com/` domain. Click to discover WebRTC hyperties registered with such identity and at tlabs domain.
-
-*insert pictures showing email and domain used for discovery*
-
-Step 6: The Hyperty instance running in the second window should be discovered and its metadata including the Hyperty URL address should be displayed. Click to call the discovered Hyperty.
-
-*insert pictures showing discovered Hyperty*
-
-Step 7: An incoming call notification should popup in the second window.
-
-*insert pictures showing incoming call*
-
-Step 8: An WebRTC Audio and Video communication is established
-
-*insert pictures showing connected call*
-
 #### Group Chat interoperability test
 
-Step 1: Open one browser window at `https://hysmart.rethink.ptinovacao.pt/` and select "Group Chat Manager Hyperty"
+Step 1: Open one browser window at `https://rethink-project.github.io/dev-smart-contextual-assistance-app/` and select "Connector Hyperty". A window will be opened asking you to select the Identity Provider to be used.
 
-*insert picture showing pop menu with connector hyperty*
+![Select your Identity Provider](select-idp.png)
 
-Step 2: A window will be opened asking you to select the Identity Provider to be used. Select Google and authenticate with your first Google account.
+Select Google and request to login,
 
-*insert pictures showing Google Idp selection*
+![Ask to Login with Google](login-btn.png)
 
-*insert pictures showing Google login*
+and authenticate with your first Google account:
 
-Step 3: Open a second browser window in anonymous mode at `https://rethink.tlabscloud.com/` and also select "Group Chat Manager Hyperty"
+![Login with Google Account](google-login.png)
 
-*insert picture showing pop menu with connector hyperty*
+Give some time to load the runtime and Hyperties used by the Smart Contextual Application. When loaded you should see the following window:
 
-Step 4: Similar to step 2 but now your second Google account is used.
+![Smart Contextual Home](sca-app-home.png)
 
-*insert pictures showing Google Idp selection*
+Step 3: Open a second browser window in anonymous mode at `https://rethink-dev.tlabscloud.com/`. The procedure to select an IdP and login with your second Google account, should be performed. Again, give some time to load the runtime and Hyperties used by the Call Center Application. When loaded you should see the following window:
 
-*insert pictures showing Google login*
+![Call Center Home](callcenter-app.png)
 
-Step 5: In the first opened Window, click to create a new Group Chat. Insert the name for your Group Chat and invite as participant the used registered in the second window by inserting the email address you have used for your second Google account and the `https://rethink.tlabscloud.com/` domain. Click to create the Group Chat.
+Step 4: Go back to the SCA App home opened window and click to create a new context:
 
-*insert pictures showing the window to create the Group Chat*
+![SCA Context Creation](context-creation.png)
 
-Step 6: The Group Chat should be created and the Hyperty instance running in the second window should join as participant.
+Step 5: Click in the new created context and you will get into the new, but empty context environment. Click into "Add Contact" to start the party:
 
-*insert pictures showing created group chat on both windows*
+![SCA Add Contact](sca-add-contact.png)
 
-Step 7: Both users can exchange messages
+A new user interface will show up where you should provide information about the user you want to invite, in this case the one using the Call Center App. Insert the email address you have used for your second Google account and the `https://rethink.tlabscloud.com/` domain. Click invite.
 
-*insert pictures showing exchanged chat messages*
+![SCA Invite User](sca-invite-user.png)
+
+Step 6: The new user should join the SCA new context and in the second window a chat window will be opened.
+
+![Call Center user joined the SCA new context](callcenter-invited.png)
+
+Step 7: Both users can exchange messages:
+
+![Call Center user chat with SCA user](callcenter-chat.png)
+
+![SCA user chat with Call Center user](sca-chat.png)
 
 #### Group Chat interoperability with Slack legacy service
 
-This test will require having two Slack accounts in some team. It is assumed the Group Chat created in the previous test, is still open.
+This test will require having two Slack accounts in some team (https://slack.com/). It is assumed the SCA Context and the Call Center Group Chat created in the previous test, is still open.
 
 Step 1: Open a third Browser window in some Slack team with your first Slack account.
 
-*insert picture showing slack interface*
+![Slack Home](sca-chat.png)
 
-Step 2: In your first browser window click to add a new participant. Insert the slack user account used in the previous step and its slack domain and click to invite.
+Step 2: In your previously SCA Context window click to add a new participant. Insert the slack user account used in the previous step and its slack domain and click to invite.
 
-*insert picture showing window to invite the Slack user*
+![Slack Home](sca-add-slack-user.png)
 
 Step 3: A window will be opened asking you to select the Slack team where the invited user is, your Slack identifier as well as asking you authorisation to use it.
 
-*insert pictures showing Slack login/Auth window*
+![Slack Authorisation](slack-authorise.png)
 
-Step 4: The Slack user should be added as the third participant to the Group Chat.
+Step 4: The Slack user should be added as the third participant to the Context. Now the three users can exchange messages among them. The user from the reTHINK SCA Application, chat with users from the reTHINK Call Center App and legacy Slack application:
 
-*insert pictures showing slack participant added to group chat on both 3 windows*
+![SCA user chat with Call Center user and Slack user](sca-chat-slack-callcenter.png)
 
-Step 5: The 3 users can exchange messages among them
+The user from the reTHINK Call Center App, chat with users from reTHINK SCA Application and legacy Slack application:
 
-*insert pictures showing exchanged chat messages*
+![Call Center user, chat with SCA user and Slack user](callcenter-chat-slack.png)
+
+The user from the legacy Slack application, chat with the reTHINK Call Center App user and with the reTHINK SCA Application user:
+
+![Slack user chat with SCA user and Call Center user](slack-chat-sca-callcenter.png)
+
+#### WebRTC Audio and Video interoperability test
+
+This test will show how two users using different Applications, different Hyperties from different domains, each one using different protocols, are able to call each other. It is assumed the SCA Context and the Call Center Group Chat created in the previous test, is still open.
+
+Step 1: In your previously SCA Context window, select the contact using the Call Center Application. Click to call the Call Center user with video:
+
+![SCA user calls the Call Center user](sca-calling-callcenter.png)
+
+On the Call Center side an incoming call notification shows up with information about the SCA calling user:
+
+![Incoming Call to Call Center user](callcenter-incomingcall.png)
+
+Step 2: The Call Center user accepts the incoming call and a Video communication is established between the Call Center user:
+
+![Call Center Video Communication with SCA user](callcenter-sca-call.png)
+
+and the SCA user:
+
+![SCA Video Communication with Call Center user](sca-callcenter-call.png)
+
+##### Call Setup latency
+
+The Call Setup latency was measured for the call established between the DT Call Center Application hosted in Berlin, Germany, and the SCA Application hosted in Aveiro (Portugal):
+
+**Incoming Call Notification Time**
+
+Min: 501 milliseconds
+Max: 599 milliseconds
+Average: 536 milliseconds
+
+**Call Setup Time**
+
+Min: 940 milliseconds
+Max: 1140 milliseconds
+Average: 1062 milliseconds
+
+Taking into account the two services were hosted at different countries with using different protocol stubs, which means during these procedures it was required to load and instantiate different protostubs into the runtime, we consider these results as very encouraging.
