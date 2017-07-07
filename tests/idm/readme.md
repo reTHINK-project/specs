@@ -24,14 +24,20 @@ If the user connects to a service, he authenticates with his IdP, and reaches a 
 Two implementations have been provided during the reTHINK project.
 
 ### IdModule
-The first implementation is the one embedded in the reThink core runtime, called IdModule. The IdModule considered the implementation of the IdP-Proxy as mandatory. As no actual IdP implements this specification yet, the IdP-Proxy has been implemented and deployed in the catalogue of the reTHINK service. This is of course for demonstration purpose, as the Service Provider is not considered as a secured entity, and thus cannot assert an Identity on behalf of the Identity Provider. But this implementation works with Google SignIn.
+The first implementation is the one embedded in the reThink core runtime, called IdModule. The IdModule considered the implementation of the IdP-Proxy as mandatory. As no actual IdP implements this specification yet, the IdP-Proxy has been implemented and deployed in the catalogue of the reTHINK service. This is of course for demonstration purpose, as the Service Provider is not considered as a secured entity, and thus cannot assert an Identity on behalf of the Identity Provider. But this implementation works with Google SignIn.  
 The following picture shows the interface of the ID Module as it appears in the runtime.  
 ![idmodule](https://user-images.githubusercontent.com/10738516/27957576-505abd36-631f-11e7-8a05-1512b83c0a09.png)  
 
 ### Browser extension
 A second implementation of the Identity Module is based on the browser extension. It supposes that the browser is responsible to manage user identity, and uses the IdP-Proxy as a proof of authentication for the browser. Here again, as no actual IdP provides the IdP-Proxy, we have developped two implementations of the IdP-Proxy with OpenID Connect protocol. The difference of this implementation is decoupled from the core framework, and thus can be used by the application, regardless of the use of the framework or not, stating that even if no hyperty is loaded, the user is usually authenticated in the service.  
-The folloing picture is showing the Firefox extension that is managing ID Cards in the browser:  
+This extension is callable by a single "Connect" button replacing the numerous current "XXX" Connect.
+Step one: go to the application home page and click the "Connect" button.  
+![accueil](https://user-images.githubusercontent.com/10738516/27957881-a8234fbe-6320-11e7-809e-7d87824b02d9.png)  
+Step two:
+The Firefox extension that is managing ID Cards in the browser appears and proposes the identities formerly registered:  
 ![extension](https://user-images.githubusercontent.com/10738516/27957661-b7b19a2c-631f-11e7-8de4-3c6c691f7196.png)  
+Step 3 : If the user clicks on the identity and he is not yet authenticated, it is redirected on the IdPProvier:
+
 
 ## Future work
 As described above, we provided two approaches of the identity management that are complementary.
