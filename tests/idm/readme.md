@@ -49,9 +49,6 @@ The Firefox extension that is managing ID Cards in the browser appears and propo
 ## Future work
 As described above, we provided two approaches of the identity management that are complementary.
 It was not possible to integrate both due to lack of time.
-For future integration, runtime IdModule must implement an API that can take an identity hint as an input.
-Currently, there is no possibility for the application to give this hint to the core runtime IdModule.
-The consequence is that the application cannot control the identity used by the hyperties.
-As the runtime needs an authentication too, there may be a double authentication, and the identity on the application and on the runtime may differ.
-This constitues a terrible user experience.
+For future integration, runtime IdModule API has evolved in such a way it that can take an identity hint as an input. If this hint is not used the application cannot control the identity used by the hyperties.
+As the runtime needs an authentication too, there may be a double authentication, and the identity on the application and on the runtime may differ which is not an optimal user experience in most of the cases.
 Another important point is the possibility to add negotiation between peers, to allow IdP restriction and security level to a conversation. This feature is described in [Corre et al. paper](https://link.springer.com/chapter/10.1007%2F978-3-319-60131-1_27) and is implemented for demonstration purpose, but not integrated in the core runtime.
