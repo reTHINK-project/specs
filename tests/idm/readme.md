@@ -30,7 +30,7 @@ The following picture shows the interface of the ID Module as it appears in the 
 
 ### Browser extension
 A second implementation of the Identity Module is based on the browser extension. It supposes that the browser is responsible to manage user identity, and uses the IdP-Proxy as a proof of authentication for the browser. Here again, as no actual IdP provides the IdP-Proxy, we have developped two implementations of the IdP-Proxy with OpenID Connect protocol. The difference of this implementation is decoupled from the core framework, and thus can be used by the application, regardless of the use of the framework or not, stating that even if no hyperty is loaded, the user is usually authenticated in the service.  
-This extension is callable by a single "Connect" button replacing the numerous current "XXX" Connect.  
+This extension is callable by a single "Connect" button replacing the numerous current "XXX" Connect (Facebook, Google, twitter...).  
 *Step one*: go to the application home page and click the "Connect" button.  
 ![accueil](https://user-images.githubusercontent.com/10738516/27957881-a8234fbe-6320-11e7-809e-7d87824b02d9.png)  
 
