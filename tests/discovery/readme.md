@@ -105,21 +105,21 @@ A typical usage scenario of the IMaDS services comprise a user Alice, who wants 
 
 ### Discovery lib evaluation
 
-The runtime communicates with the Discovery Service, Global Registry and Domain Registry using the Discovery Lib, a runtime library that provides a single API for accessing the 3 services. The Discovery library allows the discovery of remote Hyperties or Data Objects by using different criteria. To evaluate this component, the most complex query available, that discovers Hyperties or Data Objects by profile data, was used. This query translates the profile data into GUIDs by querying the Discovery Service. Then, for each found GUID, it executs a query to the Global Registry to get all the user IDs and domains associated. Finally, for each user ID and (Service Provider) domain pair, a query to the corresponding Domain Registry is executed, to get the registered Hyperties or Data Objects.
+The runtime communicates with the Discovery Service, Global Registry and Domain Registry using the Discovery Lib, a runtime library that provides a single API for accessing the 3 services. The Discovery library allows the discovery of remote Hyperties or Data Objects by using different criteria. To evaluate this component, the most complex query available was used, which discovers Hyperties or Data Objects by profile data. This query translates the profile data into GUIDs by querying the Discovery Service. Then, for each found GUID, it executs a query to the Global Registry to get all the user IDs and domains associated. Finally, for each user ID and (Service Provider) domain pair, a query to the corresponding Domain Registry is executed, to get the registered Hyperties or Data Objects.
 
 The goal of these tests is evaluate the performance of the combined IMaDS from the point of view of the user, by querying all three, in succession, from the runtime.
 
-The methodology used to evaluate the Discovery library was to develop a web application that loads an Hyperty programmed to use the discovery service using profile data. For the web application work properly and discover the Hyperties associated to the profile data, we had to create an account in the Discovery Service with a GUID registered in the Global Registry instance. A Service Provider domain and a user ID were associated to that GUID and an hyperty registered in the associated Domain Registry. Then, we started to do the tests, collecting four types of measures in each execution:
+The methodology used to evaluate the Discovery library was to develop a web application that loads an Hyperty programmed to use the discovery service using profile data. For the web application to work properly and discover the Hyperties associated to the profile data, we had to create an account in the Discovery Service with a GUID registered in the Global Registry. A Service Provider domain and an user ID were associated to that GUID and an hyperty registered in the associated Domain Registry. Then, we run the tests, collecting four metrics in each execution:
 
   * Time necessary to complete a query to the Discovery Service;
   * Time necessary to complete a query to the Global Registry;
   * Time necessary to complete a query to the Domain Registry;
-  * Total time spend in the discovery by profile data.
+  * Total time spend in the discovery by profile data: sum of the previous three steps.
 
-The tests consisted in one hundred executions of the discovery by profile data, and in each execution we collected all the necessary measures. The client was run on MacBook Pro, using the Chrome Browser, connected to INESC-ID's network. The Domain Registry was a part of Altice Labs test bed. The Discovery Service is the one provided by T-Labs. The Global Registry is the one shared by all testbeds and it was interfaced via Altice Labs testbed. 
+The tests were repeated one hundred times. The client was run on a MacBook Pro, using the Chrome Browser, connected to INESC-ID's network. The Domain Registry was a part of Altice Labs test bed. The Discovery Service is the one provided by T-Labs. The Global Registry is the one shared by all testbeds and it was interfaced via Altice Labs testbed. 
 
 In order to test the performance, we varied the number of concurrent requests, using 1, 2, 5, and 10. As this is run from a single runtime, concurrent requests are not expected to be frequent and 10 concurrent requests is a very unlikely event.
-Below is a chart for each measurement. Results are presents as a cumulative distribution function (CDF), with a line for each number of concurrent requests (n).
+Below is a chart for each metric. Results are presents as a cumulative distribution function (CDF), with a line for each number of concurrent requests (n).
 
 ![Discovery Service](./discovery%20lib%20evaluation/Discovery%20Service.png)
 
@@ -132,7 +132,7 @@ Below is a chart for each measurement. Results are presents as a cumulative dist
 As expected, the higher the number of concurrent requests, the longer the reply time.
 We can also observe that the Domain Registry provides the fastest response. This was expected as this is the component that has to handle the highest number of queries and update requests. As such, it was designed to be highly performant.
 The Global Registry's respose time is slightly higher as expected. This is due to the fact that the Global Registry has to contact several peers of the DHT in order to provide the reply. However, as the number of peers grows, the respose time is expected to only grow logarithmically.
-The Discovery time takes the longest to respond and is the greatest contribuitor to the overall query time.
+The Discovery time takes the longest to respond and is the greatest contribuitor to the overall query time. This is partly due to the fact of this server being the most distante.
 
 We can also observe that for all the services, the 80% fastest queries lay within a small time band, showing a very consistent response time. A greater variability is observable in the 10% slowest queries.
 
