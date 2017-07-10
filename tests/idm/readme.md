@@ -52,17 +52,21 @@ When a user first interacts with reTHINK, the landing page (shown bellow) allows
 
 ![Example of reTHINK Landing Page](./gui-images/1-guilanding.png)
 
-Whether the user was automatically promps to the Identity Management GUI, or the user manually selected the Identity GUI via the small wheel icon, both interactions will show the Identities Page to the user (shown bellow). This page consists of a single "Add an identity" button, which allows the user to start the identity selection and authentication process used in reTHINK.
+Whether the user was automatically promps to the Identity Management GUI, or the user manually selected the Identity GUI via the small wheel icon, both interactions will show the Identities Page to the user (shown bellow). This page consists of a single "Add an Identity" button, which allows the user to start the identity selection and authentication process used in reTHINK.
 
 ![Identities GUI Page](./gui-images/2-idgui.png)
 
-### Selecting Identity Provider
+### Login in
+
+When the user clicks the "Add an Identity" button shown in the previous section, a list of available Identity Providers in shown (see bellow). The user then proceeds by selecting the Identity Provider from which to login.
 
 ![IdP Selection Page](./gui-images/3-idpgui.png)
 
-### Logging In
+After the Identity Provider selection is finished, the Login page is presented (see bellow). On this page, the user can select a different Identity Provider via the "Add an Identity" button, thus overwriting the Identity Provider selection concluded before, and the user can also proceed with the authentication procedure by clicking the "Login" button.
 
 ![Login Page](./gui-images/4-logingui.png)
+
+When the "Login" button is pressed, a new window controlled by the Identity Provider (i.e. reTHINK does not control the content displayed inside this window) is shown to the user (see bellow). On this Pop-up window, the user authenticates against the selected Identity Provider using the provided login form.
 
 ![Login Pop-up](./gui-images/5-popup.png)
 
