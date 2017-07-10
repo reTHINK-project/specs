@@ -108,12 +108,12 @@ it is possible for the IdM method to loses its thread processing time to another
 the processor later on to conclude the task. The time the method is interrupted is accounted in the total
 time the method takes.
 
-![Fig5Eval-images/IdM_Fig5png)
+![Fig5](./Eval-images/IdM_Fig5.png)
 
 **Figure 5 - Time each component takes to send multiple messages simultaneously (1
 to 10 messages)**
 
-![Fig6](./Eval-images/IdM_Fig6png)
+![Fig6](./Eval-images/IdM_Fig6.png)
 
 **Figure 6 - Time each component takes to send multiple messages simultaneously (1
 to 50 messages)**
@@ -139,7 +139,7 @@ it expectedly takes more time.
 
 ![Tab4](./Eval-images/IdM_Tab4.png)
 
-** Table 4 - Total time each message takes to send, individually and all together, using the Altice Labs Message Node (Time in milliseconds)**
+**Table 4 - Total time each message takes to send, individually and all together, using the Altice Labs Message Node (Time in milliseconds)**
 
 From these results it is possible to conclude that the biggest bottleneck in the transmission of messages is the network latency, and that the performance of the IdM is only slightly affected when sending multiple messages at the same time.
 
