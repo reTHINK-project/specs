@@ -46,7 +46,7 @@ The Identity Module supports a Graphical User Interface (GUI) for identity manag
 * Login, using the specified Identity Provider, via an Identity Provider controlled Window that will pop-up to the user;
 * Remove the identity from the identities' list.
 
-### Landing Page
+### 1. Landing Page
 
 When a user first interacts with reTHINK, the landing page (shown bellow) allows for two distinct interactions. The first is selecting the small wheel icon in the right upper corner. The second is selecting an Hyperty from the List of Hyperties. The former allows the user to select between the Policies GUI and Identity Management GUI, while the last automatically shows the Identity Management GUI to the user for identity selection.
 
@@ -56,7 +56,7 @@ Whether the user was automatically promps to the Identity Management GUI, or the
 
 ![Identities GUI Page](./gui-images/2-idgui.png)
 
-### Login in
+### 2. Login in
 
 When the user clicks the "Add an Identity" button shown in the previous section, a list of available Identity Providers in shown (see bellow). The user then proceeds by selecting the Identity Provider from which to login.
 
@@ -70,13 +70,25 @@ When the "Login" button is pressed, a new window controlled by the Identity Prov
 
 ![Login Pop-up](./gui-images/5-popup.png)
 
-### Authenticated Identities
+### 3. After Authentication
+
+After the authentication process in concluded, the user may be presented with one of the following pages:
+* A page correponding to the selected Hyperty ([seen here](#authenticated-identity-in-hyperty)). This page is shown if the user was automatically redirected to the Identity GUI after selecting an Hyperty in step 1 ([Landing Page](#1-landing-page)).
+* A page containing a list of all the authentiated identities in the runtime ([seen here](#listing-and-removing-authenticated-identities)). This page is shown if the user manually selected the Identity GUI in step 1 ([Landing Page](#1-landing-page));
+
+#### Authenticated Identity in Hyperty
+
+If the user was automatically redirected to the Identity GUI after selecting an Hyperty to use, then this user will be redirected back to the Hyperty page (shown bellow) after the authentication process is over. This allows for the authentication process to be integrated seamlessly to the Hyperty selection flow. 
 
 ![Authenticated User Page](./gui-images/6-authenticated.png)
 
-### Removing Identities
+#### Listing and Removing Authenticated Identities
+
+If the user manually selected the Identity GUI, then this user will be presented with a list of all the authenticated identities in the runtime. Furthermore, this list also allows removing authenticated identities from the runtime. To remove an authenticated identity the user must select the "Remove" button associated with the identity he wishes to remove.
 
 ![Remove User Page](./gui-images/7-removegui.png)
+
+This page, containing the list of authenticated identities, is also accessible at any moment by selecting the Identity GUI, as is described in the [Landing Page](#1-landing-page) section.
 
 ## Future work
 As described above, we provided two approaches of the identity management that are complementary.
