@@ -20,7 +20,7 @@ The following describes the two implemented mechanisms for identity management, 
 ### IdModule
 The embedded identity management mechanism is the core component responsible for the identity management and the establishment of secure channels between runtimes in reTHINK. For the interaction with the IdP an IdP-Proxy is required, providing the particular interface methods for each particular IdP. As defined by W3C and IETF this IdP-Proxy should be provided by the IdP itself. However, since this is a novel approach and the most commonly IdP do not provide IdP for JS, the IdP-Proxies can be retrieved either from the IdP (when available) or from the reTHIK catalog.
 
-For component isolation, the user does not directly interface directly with the IDModule. The user selection and management within the embedded identity management is performed via the Identity Management GUI, described below. Additioanlly, and to improve the user experience, the IdModule allows for the identity to be selected by the application by providing a dedicated API. The application is able to call for the creation of an Hyperty with or without selection the user to be associated. If no ID is defined, the GUI is called automatically to request the ID selection from the user.
+For component isolation, the user does not directly interface directly with the IdModule. The user selection and management within the embedded identity management is performed via the Identity Management GUI, described below. Additioanlly, and to improve the user experience, the IdModule allows for the identity to be selected by the application by providing a dedicated API. The application is able to call for the creation of an Hyperty with or without selection the user to be associated. If no ID is defined, the GUI is called automatically to request the ID selection from the user.
 
 In order to support the use of identities managed by the browser itself, the IdModule also supports a browser extension in order for the Identity Token to be obtained via the browser.
  
@@ -96,11 +96,7 @@ This page, containing the list of authenticated identities, also becomes accessi
 
 ## Evaluation
 
-The evaluation of the IDModule is presentd in ![IDModule Evaluation](./IdMEvaluation.md).
+The evaluation of the IdModule is presentd in ![IDModule Evaluation](./IdMEvaluation.md).
 
 ## Future work
-As described above, we provided two approaches of the identity management that are complementary.
-It was not possible to integrate both due to lack of time.
-For future integration, runtime IdModule API has evolved in such a way it that can take an identity hint as an input. If this hint is not used the application cannot control the identity used by the hyperties.
-As the runtime needs an authentication too, there may be a double authentication, and the identity on the application and on the runtime may differ which is not an optimal user experience in most of the cases.
-Another important point is the possibility to add negotiation between peers, to allow IdP restriction and security level to a conversation. This feature is described in [Corre et al. paper](https://link.springer.com/chapter/10.1007%2F978-3-319-60131-1_27) and is implemented for demonstration purpose, but not integrated in the core runtime.
+Future integration can consist in the adding the negotiation between peers, to allow IdP restriction and security level to a conversation. This feature is described in [Corre et al. paper](https://link.springer.com/chapter/10.1007%2F978-3-319-60131-1_27) and is implemented for demonstration purpose, but not integrated in the core runtime.
