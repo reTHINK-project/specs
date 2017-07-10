@@ -13,7 +13,6 @@ To view and edit one's contact details, users can use the "get my information" f
 ![Addressbook Info](https://github.com/reTHINK-project/specs/blob/master/tests/discovery/ab-info.png)
 
 When selecting contacts in the Addressbook, available information for the selected contact is shown. This includes the username and ids:
-
 ![Addressbook Details](https://github.com/reTHINK-project/specs/blob/master/tests/discovery/ab-details.png)
 
 hThe Addressbook further allows to search for users either by a known GUID or arbitrary contact details:
@@ -25,7 +24,7 @@ The DISCOVERY SERVICE further provides a standalone web interface to enable user
 Source of query results:
 Search results are profiles that are written by the user that want to be found. Results are not crawled or scanned in the Internet. Every user that wants to be found or that wants his devices to be found can create one or many profiles within the discovery service.
 These profiles stay fully under user control.
-
+'
 Policy-based visibility
 Every profile can be configured with a certain visibility. So the owner of a profile can configure which user or which group of users can see his profile.
 
@@ -35,7 +34,7 @@ Web-GUI
 The reTHINK discovery has a Web-Interface for users that want to use reTHINK discovery with their browser like they are used to from a classic search-engine. Furthermore the web-GUI enables to create and manage profile accounts.
 
 ![Discovery GUI search mask](https://github.com/reTHINK-project/specs/blob/master/tests/discovery/reTHINK_mask.png)
-
+'
 1) Plain web search
 The user can go to the reTHINK Discovery Website as shown in Figure 1 and search for users or devices. The search results are so called profiles. They have a headline and some text for description. They might have hashtags describing certain topics, communities, locations etc.. Profiles can also contain communication endpoints like e-mail address, phone number, websites, facebook- or linkedin profile URLs.
 
@@ -54,6 +53,15 @@ To search eg. for "Hans Telekom" call
 GET https://rethink.tlabscloud.com/discovery/rest/discover/lookup?searchquery=Hans+Telekom
 The answer is a JSON Object like for Example:
 
+```
+{ 
+"instanceID":"telekom1", 
+"responseCode":201, 
+"searchString":"Hans+Schmitt", 
+"results": [ 
+{ 
+
+```
 { 
 "instanceID":"telekom1", 
 "responseCode":201, 
