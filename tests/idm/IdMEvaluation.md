@@ -34,6 +34,7 @@ For the mutual authentication protocol, the time each phase of the protocol take
 so they do not share the same resources provided by the browser. The tested protocol starts with a message sent from Alice to Bob and is divided in 6 phases, being the phase 1, 3, 4 and 6 on Alice’s device, and the phase 2 and 5 on Bob’s device.
 
 The Figure 2 illustrates the average times that each phase of the mutual authentication protocol. As expected, the most demanding phases are phase 3 + 4 and phase 5. It is in these phases that the operations with asymmetric encryption used to validate the identities and to encrypt the secrets occur.
+![Fig2](./Eval-images/IdM_Fig2.png)
 
 **Figure 2 - Search times using hashtables**
 
@@ -43,14 +44,24 @@ take are minimal. It is in the phase 3 + 4 and phase 5 that the largest time-con
 found, since it is where the heaviest asymmetric operations are made, such as asymmetric encryption
 and digital signature. Those times can be disregarded when compared to the total time including the
 round trip time (of about 48 milliseconds using a localhost Message Node).
+![Tab1](./Eval-images/IdM_Tab1.png)
 
 **Table 1 – Time and percentage of each phase**
+To evaluate possible extreme usage scenarios for this protocol, the time required to perform multiple
+the mutual authentication processes simultaneously was evaluated, as depicted in Figure 3. From the
+values obtained it is possible to observe that the values grow linearly and do not introduce a bottleneck
+to the reTHINK framework.
+![Fig3](./Eval-images/IdM_Fig3.png)
+
+**Figure 3 – Search times using hashtables**
+
 
 The above evaluation does not contemplate the round trip time. Since a public Message Node is
 required, its time must also be taken into account. To evaluate the impact of this node in the reTHINK
 framework a Message Node was defined to run in a localhost environment. Table 2 illustrates the
 total time of the mutual authentication execution including the round trip time imposed by the messages
 exchanged itself.
+![Tab2](./Eval-images/IdM_Tab2.png)
 
 **Table 2 - Time of the mutual authentication several times an its round trip time**
 
@@ -78,6 +89,7 @@ increment to the time required to process the messages with the increase of the 
 obtained values suggest, that the IdM does not introduce a bottleneck or a considerable decrease in
 performance, taking into consideration the total time taken from both Runtime Core’s A and B to process
 the messages. 
+![Fig4](./Eval-images/IdM_Fig4.png)
 
 **Figure 4 - Time of each component for different sizes**
 
@@ -92,13 +104,12 @@ simultaneously. This linear increase is due to the fact that browsers do not pos
 it is possible for the IdM method to loses its thread processing time to another method, only regarding
 the processor later on to conclude the task. The time the method is interrupted is accounted in the total
 time the method takes.
-
-[]
+![Fig5Eval-images/IdM_Fig5png)
 
 **Figure 5 - Time each component takes to send multiple messages simultaneously (1
 to 10 messages)**
+![Fig6](./Eval-images/IdM_Fig6png)
 
-[]
 **Figure 6 - Time each component takes to send multiple messages simultaneously (1
 to 50 messages)**
 
@@ -110,6 +121,7 @@ trip times, independently of the number of messages sent. From the results it is
 that the latency increases with the increase of the messages sent simultaneously, resulting in a sub
 linear increase. Despite this increase with number of messages sent simultaneously, the total delay is
 relatively low, even for multiple messages.
+![Tab3](./Eval-images/IdM_Tab3.png)
 
 **Table 3 - Total time each message takes to send, individually and all together, using the localhost Message Node (Time in milliseconds)**
 
@@ -118,12 +130,14 @@ public Message Node located in the Altice Labs servers. The values are depicted 
 values suggest that the times for both Runtime Cores and A and B IdMs remains similar independently
 of the Message Node used, where the biggest difference is in the round trip time, where in this last test
 it expectedly takes more time. 
+![Tab4](./Eval-images/IdM_Tab4.png)
 
 ** Table 4 - Total time each message takes to send, individually and all together, using the Altice Labs Message Node (Time in milliseconds)**
 
 From these results it is possible to conclude that the biggest bottleneck in the transmission of messages is the network latency, and that the performance of the IdM is only slightly affected when sending multiple messages at the same time.
 
 Making a deeper analysis of the IdM times, the IdM times were decomposed on the following aspects: initial vector (IV) generation, encryption using AES, message authentication and encoding, for the IdM A and the opposite, for the IdM B. The values depicted in Figure 7 suggest that when sending multiple messages simultaneously the values that tend to increase are related to the encryption and hash computation. The IV generation and the encode/decode steps are barely noticeable. It is also possible to observe that both A and B IdM take approximately the same to process a message, for the same number of messages sent simultaneously.
+![Fig7](./Eval-images/IdM_Fig7.png)
 
 **Figure 7 - Methods times used for A and B IdM’s**
 
