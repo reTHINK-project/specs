@@ -21,6 +21,7 @@ hThe Addressbook further allows to search for users either by a known GUID or ar
 ![Addressbook Query](https://github.com/reTHINK-project/specs/blob/master/tests/discovery/ab-query.png)
 
 The DISCOVERY SERVICE further provides a standalone web interface to enable users and other services to search for users. People are used to use search engines like google when they want to find information about a certain topic. In the same way they can search for persons or also devices in reTHINK. They formulate a search query like “Michael Mueller T-Labs” or “reTHINK Project” in order to find one or more so called profiles of a person or a device. Although this service is easy to use like a classic search engine there are fundamental differences.
+
 Source of query results:
 Search results are profiles that are written by the user that want to be found. Results are not crawled or scanned in the Internet. Every user that wants to be found or that wants his devices to be found can create one or many profiles within the discovery service.
 These profiles stay fully under user control.
@@ -33,10 +34,11 @@ Interfaces
 Web-GUI
 The reTHINK discovery has a Web-Interface for users that want to use reTHINK discovery with their browser like they are used to from a classic search-engine. Furthermore the web-GUI enables to create and manage profile accounts.
 
+![Discovery GUI search mask](https://github.com/reTHINK-project/specs/blob/master/tests/discovery/reTHINK_mask.png)
+
 1) Plain web search
 The user can go to the reTHINK Discovery Website as shown in Figure 1 and search for users or devices. The search results are so called profiles. They have a headline and some text for description. They might have hashtags describing certain topics, communities, locations etc.. Profiles can also contain communication endpoints like e-mail address, phone number, websites, facebook- or linkedin profile URLs.
 
-![Discovery GUI search mask](https://github.com/reTHINK-project/specs/blob/master/tests/discovery/reTHINK_mask.png)
 ![Discovery GUI search results](https://github.com/reTHINK-project/specs/blob/master/tests/discovery/reTHINK_search_results.png)
 
 2) Create an own account
@@ -52,10 +54,37 @@ To search eg. for "Hans Telekom" call
 GET https://rethink.tlabscloud.com/discovery/rest/discover/lookup?searchquery=Hans+Telekom
 The answer is a JSON Object like for Example:
 
+{ 
+"instanceID":"telekom1", 
+"responseCode":201, 
+"searchString":"Hans+Schmitt", 
+"results": [ 
+{ 
+"resultNo":0, 
+"instanceID":"telekom1", 
+"hashtags":"T-Labs Telekom", 
+"description":"Hans Testprofile text text text", 
+"rethinkID":"REAyDT-tYQI2u1km9LgYj05zb1hLmy__XlIN5B1LWUQ", 
+"headline":"Hans", 
+"contacts":"Hans.Schmitt@telekom.de", 
+"hasrethinkID":"true", 
+"hyperties": [ 
+{ 
+"url":"hyperty=hyperty%3A%2F%2Frethink-dev.tlabscloud.com%2Fd2aad579-a213-4400-9e24-af2b23dbaed8", 
+"userID":"uid=user:\\gmail.com\hans.schmitt",
+ "media":"VIDEO",
+ "provider":"Deutsche Telekom" 
+}, 
+{ 
+"url":"hyperty=hyperty%3A%2F%2Frethink-dev.tlabscloud.com%2Fb71cd853-f657-4b6a-919b-07916bd3d50e",
+ "userID":"uid=user:\\gmail.com\hans.schmitt",
+ "media":"VIDEO", 
+"provider":"Deutsche Telekom" 
+} 
+]
+ } ] }
 
-INGO PLEASE ADD SOME CONTENT HERE
-- Rest interface for other services
-- User webinterface
+The result contains beside the profile content the instanceID. This instanceID is used to distinguish between different Discovery service instances. Furthermore the endpoint of all hyperties that are currently running are shown including supported media type and the regarded service provider as well as the used identity aka. userID.
 
 In case the GUID is not known, the Discovery service of the ReThink framework can be queried. Here, all found contacts matching the search query are returned and can be added directly to the contact list:
 
