@@ -60,14 +60,6 @@ The answer is a JSON Object like for Example:
 "searchString":"Hans+Schmitt", 
 "results": [ 
 { 
-
-```
-{ 
-"instanceID":"telekom1", 
-"responseCode":201, 
-"searchString":"Hans+Schmitt", 
-"results": [ 
-{ 
 "resultNo":0, 
 "instanceID":"telekom1", 
 "hashtags":"T-Labs Telekom", 
@@ -92,6 +84,7 @@ The answer is a JSON Object like for Example:
 ]
  } ] }
 
+```
 The result contains beside the profile content the instanceID. This instanceID is used to distinguish between different Discovery service instances. Furthermore the endpoint of all hyperties that are currently running are shown including supported media type and the regarded service provider as well as the used identity aka. userID.
 
 In case the GUID is not known, the Discovery service of the ReThink framework can be queried. Here, all found contacts matching the search query are returned and can be added directly to the contact list:
