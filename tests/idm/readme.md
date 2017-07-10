@@ -18,8 +18,11 @@ When an Hyperty connects to a service, the runtime authenticates itself towards 
 The following describes the two implemented mechanisms for identity management, the one embedded in the reThink core runtime (IdModule) and Browser extension.
 
 ### IdModule
-The first implementation is the one embedded in the reThink core runtime, called IdModule. The IdModule considered the implementation of the IdP-Proxy as mandatory. As no actual IdP implements this specification yet, the IdP-Proxy has been implemented and deployed in the catalogue of the reTHINK service. This is of course for demonstration purpose, as the Service Provider is not considered as a secured entity, and thus cannot assert an Identity on behalf of the Identity Provider. But this implementation works with Google SignIn.  
-The following picture shows the interface of the ID Module as it appears in the runtime.  
+The embedded identity management mechanism is the core component responsible for the identity management and the establishment of secure channels between runtimes in reTHINK. For the interaction with the IdP an IdP-Proxy is required, providing the particular interface methods for each particular IdP. As defined by W3C and IETF this IdP-Proxy should be provided by the IdP itself. However, since this is a novel approach and the most commonly IdP do not provide IdP for JS, the IdP-Proxies can be retrieved either from the IdP (when available) or from the reTHIK catalog.
+To improve the user experience, the IdModule allows for the identity to be selected by the application by providing a dedicated API. The application is able to call for the creation of an Hyperty with or without selection the user to be associated. If no ID is defined, the GUI is called automatically to request the ID selection from the user.
+In order to support the use of identities managed by the browser itself, the IdModule also supports a browser extension in order for the Identity Token to be obtained via the browser.
+ 
+The following illustrate the GUI for user selection and the interaction with a IdP (in tis case Google SignIn).  
 ![idmodule](https://user-images.githubusercontent.com/10738516/27957576-505abd36-631f-11e7-8a05-1512b83c0a09.png)  
 
 ### Browser extension
@@ -89,6 +92,10 @@ If the user manually selected the Identity Management GUI, then this user will b
 ![Remove User Page](./gui-images/7-removegui.png)
 
 This page, containing the list of authenticated identities, also becomes accessible by selecting the Identity GUI, as is described in the [Landing Page](#1-landing-page) section, after adding at least one identity.
+
+
+## Evaluation
+
 
 ## Future work
 As described above, we provided two approaches of the identity management that are complementary.
