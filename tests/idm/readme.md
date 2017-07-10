@@ -20,7 +20,7 @@ The following describes the two implemented mechanisms for identity management, 
 ### IdModule
 The embedded identity management mechanism is the core component responsible for the identity management and the establishment of secure channels between runtimes in reTHINK. For the interaction with the IdP an IdP-Proxy is required, providing the particular interface methods for each particular IdP. As defined by W3C and IETF this IdP-Proxy should be provided by the IdP itself. However, since this is a novel approach and the most commonly IdP do not provide IdP for JS, the IdP-Proxies can be retrieved either from the IdP (when available) or from the reTHIK catalog.
 
-For component isolation, the user does not directly interface directly with the IdModule. The user selection and management within the embedded identity management is performed via the Identity Management GUI, described below. Additioanlly, and to improve the user experience, the IdModule allows for the identity to be selected by the application by providing a dedicated API. The application is able to call for the creation of an Hyperty with or without selection the user to be associated. If no ID is defined, the GUI is called automatically to request the ID selection from the user.
+For component isolation, the user does not directly interface directly with the IdModule. The user selection and management within the embedded identity management is performed via the Identity Management GUI, described below. Additioanlly, and to improve the user experience, the IdModule allows for the identity to be selected by the application by providing a dedicated API. The application is able to call for the creation of an Hyperty with or without selection the user to be associated. If no ID is defined, the GUI is called automatically to request the ID selection from the user, as illustrated bellow in the Identity Management GUI description.
 
 In order to support the use of identities managed by the browser itself, the IdModule also supports a browser extension in order for the Identity Token to be obtained via the browser.
  
@@ -42,9 +42,9 @@ The Firefox extension that is managing ID Cards in the browser appears and propo
 
 ![logged](https://user-images.githubusercontent.com/10738516/27958332-d76ac034-6322-11e7-99ad-753106fc66ba.png)  
 
-## Identity Management GUI
+#  Functional Testing Procedures
 
-The Identity Module supports a Graphical User Interface (GUI) for identity management inside the reTHINK runtime. This GUI enables the user to:
+The following describes Functional Testing Procedures to test the usage of the Id Module. This is accomplished using the functionalities provided by the GUI to perform the identity management inside the reTHINK runtime. This GUI enables the user to:
 1. Select the Identity Provider from which to login;
 2. Login, using the specified Identity Provider (IdP), via an IdP controlled Window that will pop-up to the user, and
 3. Remove an identity from the list of authenticated identities.
