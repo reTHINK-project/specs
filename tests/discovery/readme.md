@@ -30,17 +30,17 @@ Every profile can be configured with a certain visibility. So the owner of a pro
 
 Interfaces
 
-Web-GUI
+Web-GUI:
 The reTHINK discovery has a Web-Interface for users that want to use reTHINK discovery with their browser like they are used to from a classic search-engine. Furthermore the web-GUI enables to create and manage profile accounts.
 
 ![Discovery GUI search mask](https://github.com/reTHINK-project/specs/blob/master/tests/discovery/reTHINK_mask.png)
 '
-1) Plain web search
-The user can go to the reTHINK Discovery Website as shown in Figure 1 and search for users or devices. The search results are so called profiles. They have a headline and some text for description. They might have hashtags describing certain topics, communities, locations etc.. Profiles can also contain communication endpoints like e-mail address, phone number, websites, facebook- or linkedin profile URLs.
+1) Plain web search:
+The user can go to the reTHINK Discovery Website and search for users or devices. The search results are so called profiles. They have a headline and some text for description. They might have hashtags describing certain topics, communities, locations etc.. Profiles can also contain communication endpoints like e-mail address, phone number, websites, facebook- or linkedin profile URLs.
 
 ![Discovery GUI search results](https://github.com/reTHINK-project/specs/blob/master/tests/discovery/reTHINK_search_results.png)
 
-2) Create an own account
+2) Create an own account:
 Every user has the possibility to create an own account with the reTHINK discovery service. 
 
 ![Discovery GUI profile registration mask](https://github.com/reTHINK-project/specs/blob/master/tests/discovery/reTHINK_register_mask.png)
@@ -48,7 +48,7 @@ Every user has the possibility to create an own account with the reTHINK discove
 
 REST-API
 
-TThe discovery service offers a REST-API for search queries. The interface can be "pinged" by e.g GET https://rethink.tlabscloud.com/discovery/rest/discover 
+The discovery service offers also a REST-API for search queries. That can be used from other services or applications. The interface can be "pinged" by e.g GET https://rethink.tlabscloud.com/discovery/rest/discover 
 To search eg. for "Hans Telekom" call 
 GET https://rethink.tlabscloud.com/discovery/rest/discover/lookup?searchquery=Hans+Telekom
 The answer is a JSON Object like for Example:
@@ -85,7 +85,7 @@ The answer is a JSON Object like for Example:
  } ] }
 
 ```
-The result contains beside the profile content the instanceID. This instanceID is used to distinguish between different Discovery service instances. Furthermore the endpoint of all hyperties that are currently running are shown including supported media type and the regarded service provider as well as the used identity aka. userID.
+The result contains beside the content also the instanceID. This instanceID is used to distinguish between different Discovery service instances. Furthermore the endpoint of all hyperties that are currently running are shown including supported media type and the regarded service provider as well as the used identity aka. userID.
 
 In case the GUID is not known, the Discovery service of the ReThink framework can be queried. Here, all found contacts matching the search query are returned and can be added directly to the contact list:
 
