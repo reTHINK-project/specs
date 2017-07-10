@@ -48,7 +48,11 @@ The Identity Module supports a Graphical User Interface (GUI) for identity manag
 
 ### Landing Page
 
+When a user first interacts with reTHINK, the landing page (shown bellow) allows for two distinct interactions. The first is selecting the small wheel icon in the right upper corner. The second is selecting an Hyperty from the List of Hyperties. The former allows the user to select between the Policies GUI and Identity Management GUI, while the last automatically shows the Identity Management GUI to the user for identity selection.
+
 ![Example of reTHINK Landing Page](./gui-images/1-guilanding.png)
+
+Whether the user was automatically promps to the Identity Management GUI, or the user manually selected the Identity GUI via the small wheel icon, both interactions will show the Identities Page to the user (shown bellow). This page consists of a single "Add an identity" button, which allows the user to start the identity selection and authentication process used in reTHINK.
 
 ![Identities GUI Page](./gui-images/2-idgui.png)
 
