@@ -38,6 +38,11 @@ The reTHINK discovery has a Web-Interface for users that want to use reTHINK dis
 The user can go to the reTHINK Discovery Website as shown in Figure 1 and search for users or devices. The search results are so called profiles. They have a headline and some text for description. They might have hashtags describing certain topics, communities, locations etc.. Profiles can also contain communication endpoints like e-mail address, phone number, websites, facebook- or linkedin profile URLs.
 As an additional button within the profile there is a “reTHINK” button. If this kind of button is in the profile this means the owner of this profile has a “reTHINK”-ID (a.k.a GUID). When the button is grey there is either no valid GUID or there is no current hyperty of available. When the button is blue the user can "mouse over" the button and a pop up menu starts showing a list of current available hyperties as shown in Figure 2. Every link shows supported media and the brand or company name. If the system is properly configured the user gets connected with the selected party.
 
+![Discovery GUI search mask](https://github.com/reTHINK-project/specs/blob/master/tests/discovery/reTHINK_mask.png)
+![Discovery GUI search results](https://github.com/reTHINK-project/specs/blob/master/tests/discovery/reTHINK_search results.png)
+
+
+
 2) Create an own account
 Every user has the possibility to create an own account with the reTHINK discovery service. Press LOGIN button in the upper right corner. Then press REGISTER button. Now opens up a Web-Formular shown in Figure 3 to fill in:
 Headline: The headline field is mandatory and should be a meaningful name for the profile.
