@@ -25,7 +25,7 @@ Source of query results:
 Search results are profiles that are written by the user that want to be found. Results are not crawled or scanned in the Internet. Every user that wants to be found or that wants his devices to be found can create one or many profiles within the discovery service.
 These profiles stay fully under user control.
 
-Policy-based visibility
+Policy-based visibility:
 Every profile can be configured with a certain visibility. So the owner of a profile can configure which user or which group of users can see his profile.
 
 Interfaces
