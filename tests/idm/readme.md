@@ -39,6 +39,36 @@ The Firefox extension that is managing ID Cards in the browser appears and propo
 
 ![logged](https://user-images.githubusercontent.com/10738516/27958332-d76ac034-6322-11e7-99ad-753106fc66ba.png)  
 
+## Identities GUI
+
+The Identity Module supports a Graphical User Interface (GUI) for identity management inside reTHINK. This GUI enables the user to:
+* Select the Identity Provider from which to login;
+* Login, using the specified Identity Provider, via an Identity Provider controlled Window that will pop-up to the user;
+* Remove the identity from the identities' list.
+
+### Landing Page
+
+![Example of reTHINK Landing Page](./gui-images/1-guilanding.png)
+
+![Identities GUI Page](./gui-images/2-idgui.png)
+
+### Selecting Identity Provider
+
+![IdP Selection Page](./gui-images/3-idpgui.png)
+
+### Logging In
+
+![Login Page](./gui-images/4-logingui.png)
+
+![Login Pop-up](./gui-images/5-popup.png)
+
+### Authenticated Identities
+
+![Authenticated User Page](./gui-images/6-authenticated.png)
+
+### Removing Identities
+
+![Remove User Page](./gui-images/7-removegui.png)
 
 ## Future work
 As described above, we provided two approaches of the identity management that are complementary.
