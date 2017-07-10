@@ -96,6 +96,7 @@ This page, containing the list of authenticated identities, also becomes accessi
 
 ## Evaluation
 
+The evaluation of the IDModule is presentd in [IDModule Evaluation](./IdMEvaluation.md).
 
 ## Future work
 As described above, we provided two approaches of the identity management that are complementary.
