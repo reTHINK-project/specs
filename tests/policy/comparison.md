@@ -33,17 +33,17 @@ As we can see, the two policy engines have the following features in common:
 On the other hand, they have following differences:
 
 - The PoliTHINK was designed to be used in the runtime browser for the end user and in the backend Message Node for the CSP, while the JACPoL is limited to be used in the backend component for the CSP.
-- The runtime policies are managed locally through a user web interface, while the CSP policies are maintained remotely in a repository.
-- In addition to PDP, PEP components, the CSP policy engine has additional modules such as PIP and PRP.
-- The CSP policy engine does not have a web UI.
-- The runtime policy engine does not fully support complex rule or policy index, which would be illustrated further in the subsequent paragraphs.
-- At last, although both use JSON syntax, the CSP policy language semantics is more expressive and readable than the runtime policy language.
+- The PoliTHINK policies are managed locally through a user web interface, while the JACPoL policies are maintained remotely in a repository.
+- In addition to PDP, PEP components, the JACPoL policy engine has additional modules such as PIP and PRP.
+- The JACPoL policy engine does not have a web UI.
+- The PoliTHINK policy engine does not fully support complex rule or policy index, which would be illustrated further in the subsequent paragraphs.
+- At last, although both use JSON syntax, the JACPoL policy language semantics is more expressive and readable than the PoliTHINK policy language.
 
 In the following text we compare policy specification languages of the two policy engines. Please refer to here for more information about [the runtime policy language](https://github.com/reTHINK-project/specs/blob/master/policy-management/runtime/policy-specification-language.md) [5] and here for [the CSP policy language](https://github.com/reTHINK-project/dev-msg-node-nodejs/tree/master/src/main/components/policyEngine/prp/policy) [3].
 
 
 
-**Readability.** Given the rule as below for example, we can see that for the same rule, the CSP policy language is more readable than the runtime policy.
+**Readability.** Given the rule as below for example, we can see that for the same rule, the JACPoL policy language is more readable than the PoliTHINK policy.
 
 <img src="./images/examplerule.png" width="940" height="360" />
 
@@ -63,4 +63,4 @@ in which the string "sumOf x y" is an *attribute condition*. The keyword *sumOf*
 
 
 
-**Scalability.** Both policy languages support rule index using a *target* field to verify the applicability of a given rule. However, the runtime policy language does not include this concept for policy index, which may cause it less scalable and not efficient.
+**Scalability.** Both policy languages support rule index using a *target* field to verify the applicability of a given rule. However, the PoliTHINK policy language does not include this concept for policy index, which may cause it less scalable and not efficient.
