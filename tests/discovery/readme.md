@@ -18,11 +18,50 @@ When selecting contacts in the Addressbook, available information for the select
 
 ![Addressbook Details](https://github.com/reTHINK-project/specs/blob/master/tests/discovery/ab-details.png)
 
-The Addressbook further allows to search for users either by a known GUID or arbitrary contact details:
+hThe Addressbook further allows to search for users either by a known GUID or arbitrary contact details:
 
 ![Addressbook Query](https://github.com/reTHINK-project/specs/blob/master/tests/discovery/ab-query.png)
 
-The Discoevry service further provides a standalone web interface to enable users and other services to search for users.
+The DISCOVERY SERVICE further provides a standalone web interface to enable users and other services to search for users. People are used to use search engines like google when they want to find information about a certain topic. In the same way they can search for persons or also devices in reTHINK. They formulate a search query like “Michael Mueller T-Labs” or “reTHINK Project” in order to find one or more so called profiles of a person or a device. Although this service is easy to use like a classic search engine there are fundamental differences.
+
+Source of query results:
+Search results are profiles that are written by the user that want to be found. Results are not crawled or scanned in the Internet. Every user that wants to be found or that wants his devices to be found can create one or many profiles within the discovery service.
+These profiles stay fully under user control.
+Policy-based visibility
+Every profile can be configured with a certain visibility. So the owner of a profile can configure which user or which group of users can see his profile.
+Interfaces
+
+Web-GUI
+The reTHINK discovery has a Web-Interface for users that want to use reTHINK discovery with their browser like they are used to from a classic search-engine. Furthermore the web-GUI enables to create and manage profile accounts.
+
+1) Plain web search
+The user can go to the reTHINK Discovery Website as shown in Figure 1 and search for users or devices. The search results are so called profiles. They have a headline and some text for description. They might have hashtags describing certain topics, communities, locations etc.. Profiles can also contain communication endpoints like e-mail address, phone number, websites, facebook- or linkedin profile URLs.
+As an additional button within the profile there is a “reTHINK” button. If this kind of button is in the profile this means the owner of this profile has a “reTHINK”-ID (a.k.a GUID). When the button is grey there is either no valid GUID or there is no current hyperty of available. When the button is blue the user can "mouse over" the button and a pop up menu starts showing a list of current available hyperties as shown in Figure 2. Every link shows supported media and the brand or company name. If the system is properly configured the user gets connected with the selected party.
+
+2) Create an own account
+Every user has the possibility to create an own account with the reTHINK discovery service. Press LOGIN button in the upper right corner. Then press REGISTER button. Now opens up a Web-Formular shown in Figure 3 to fill in:
+Headline: The headline field is mandatory and should be a meaningful name for the profile.
+Description: The description is also mandatory and should explain what the profile is about.
+reTHINK ID: The reTHINK ID is an Identifier used to find current communication channels to reTHINK users(a.k.a GUID)
+Contact Information: Here the user can put URLs that point to social networks or to the company homepage. (Please use full URLs e.g. http://www.my_company.com/) Also e-mail addresses, phone numbers and many other things can be inserted here.
+Visibility: Here the user can choose between different visibility options:
+•	all - means this profile is visible from all over the web
+•	reTHINK - means that the profile is visible for all users that have an account at reTHINK discovery
+•	Favorites - Ones the account is created and the user is logged in he can mark profiles of other users as favorites. With the visibility option all my Favorites only those Favorites can see the profile. This option is a good way to create closed or private user groups.
+Tags: Here the user can add certain tags about topics, locations etc..
+Username: The username is mandatory. It is not shown in the profile.
+Password: Here the user should provide a password
+Now press the save button. If no error occurs a user is created with a first profile.
+A user can have many profiles with different visibilities. Profiles can be added, changed or deleted. When the last profile is deleted the user is deleted automatically. 
+
+
+REST-API
+
+TThe discovery service offers a REST-API for search queries. The interface can be "pinged" by e.g GET https://rethink.tlabscloud.com/discovery/rest/discover 
+To search eg. for "Hans Telekom" call 
+GET https://rethink.tlabscloud.com/discovery/rest/discover/lookup?searchquery=Hans+Telekom
+The answer is a JSON Object like for Example:
+
 
 INGO PLEASE ADD SOME CONTENT HERE
 - Rest interface for other services
