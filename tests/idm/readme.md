@@ -11,23 +11,79 @@ The identity is verified by validating the Public key contained within the Ident
 The connection between the IdM and the IdP is performed using a DTLS handshake during the WebRTC connection setup, ensuring that authenticated person is the one that has opened the peer connection. This prevent man in the middle attack from the service provider.
 
 #### Use cases
-The main use case the establishment of a secure communication channel between peers and assuring the identity of each one. Of course this can be generalized in the communication with objects, with some trustful authentication services. 
+The main use case the establishment of a secure communication channel between peers and assuring the identity of each one. Of course this can be generalized in the communication with objects, with some trustful authentication services.
 When an Hyperty connects to a service, the runtime authenticates itself towards the destination runtime using the Identity Token obtained from the selected IdP, based on the identity selected by the user. Upon a successful mutual authentication session keys are also established, which are used to establish the secure communication channel between the connecting peers. This identity selection and ID Token usage is supported by two main mechanisms. One embedded in the reThink core runtime, called IdModule and a second one called Browser extension.
 
-#### Implementation
+### Implementation
 The following describes the two implemented mechanisms for identity management, the one embedded in the reThink core runtime (IdModule) and Browser extension.
 
-##### IdModule
+#### IdModule
 The embedded identity management mechanism is the core component responsible for the identity management and the establishment of secure channels between runtimes in reTHINK. For the interaction with the IdP an IdP-Proxy is required, providing the particular interface methods for each particular IdP. As defined by W3C and IETF this IdP-Proxy should be provided by the IdP itself. However, since this is a novel approach and the most commonly IdP do not provide IdP for JS, the IdP-Proxies can be retrieved either from the IdP (when available) or from the reTHIK catalog.
 
 For component isolation, the user does not directly interface directly with the IdModule. The user selection and management within the embedded identity management is performed via the Identity Management GUI, described below. Additioanlly, and to improve the user experience, the IdModule allows for the identity to be selected by the application by providing a dedicated API. The application is able to call for the creation of an Hyperty with or without selection the user to be associated. If no ID is defined, the GUI is called automatically to request the ID selection from the user, as illustrated bellow in the Identity Management GUI description.
 
 In order to support the use of identities managed by the browser itself, the IdModule also supports a browser extension in order for the Identity Token to be obtained via the browser.
- 
 
-##### Browser extension
+
+#### Browser extension
 A second implementation of the Identity Module is based on the browser extension. It supposes that the browser is responsible to manage user identity, and uses the IdP-Proxy as a proof of authentication for the browser. Here again, as no actual IdP provides the IdP-Proxy, we have developped two implementations of the IdP-Proxy with OpenID Connect protocol. The difference of this implementation is decoupled from the core framework, and thus can be used by the application, regardless of the use of the framework or not, stating that even if no hyperty is loaded, the user is usually authenticated in the service.  
 This extension is callable by a single "Connect" button replacing the numerous current "XXX" Connect (Facebook, Google, twitter...).  
+
+### Functional Testing Procedures
+
+#### IdModule Functional Testing Procedures
+
+The following describes Functional Testing Procedures to test the usage of the Id Module. This is accomplished using the functionalities provided by the GUI to perform the identity management inside the reTHINK runtime. This GUI enables the user to:
+1. Select the Identity Provider from which to login;
+2. Login, using the specified Identity Provider (IdP), via an IdP controlled Window that will pop-up to the user, and
+3. Remove an identity from the list of authenticated identities.
+
+##### Landing Page
+
+When a user first interacts with reTHINK, the landing page (shown bellow) allows for two distinct interactions. The first is selecting the small wheel icon at the right upper corner. The second is selecting an Hyperty from the List of Hyperties. The former allows the user to select between the Policies GUI and Identity Management GUI, while the last automatically shows the Identity Management GUI to the user for identity selection.
+
+![Example of reTHINK Landing Page](./gui-images/1-guilanding.png)
+
+Whether the user was automatically promped to the Identity Management GUI, or the user manually selected the Identity GUI via the small wheel icon, both interactions will show the Identities Page to the user (shown bellow). This page consists of a single "Add an Identity" button, which allows the user to start the identity selection and authentication process used in reTHINK.
+
+![Identities GUI Page](./gui-images/2-idgui.png)
+
+##### Login in
+
+When the user clicks the "Add an Identity" button shown in the previous [section](#1-landing-page), a list of available Identity Providers in shown (see bellow). The user then proceeds by selecting the IdP from which he whishes to login.
+
+![IdP Selection Page](./gui-images/3-idpgui.png)
+
+After the IdP selection is finished, the Login page is presented (see bellow). On this page, the user can select a different IdP via the "Add an Identity" button, thus overwriting the Identity Provider selected before, and the user can also proceed with the authentication process by clicking the "Login" button.
+
+![Login Page](./gui-images/4-logingui.png)
+
+When the "Login" button is pressed, a new window, controlled by the Identity Provider (i.e. reTHINK does not control the content displayed inside this window), is shown to the user (see bellow). On this Pop-up window, the user authenticates against the selected Identity Provider using the provided login form.
+
+![Login Pop-up](./gui-images/5-popup.png)
+
+##### After Authentication
+
+After the authentication process in concluded, the user may be presented with one of the following pages:
+* A page correponding to the selected Hyperty ([seen here](#authenticated-identity-in-hyperty)). This page is shown if the user was automatically redirected to the Identity Management GUI after selecting an Hyperty in step 1 ([Landing Page](#1-landing-page)).
+* A page containing a list of all the authentiated identities in the runtime ([seen here](#listing-and-removing-authenticated-identities)). This page is shown if the user manually selected the Identity Management GUI in step 1 ([Landing Page](#1-landing-page));
+
+###### Authenticated Identity in Hyperty
+
+If the user was automatically redirected to the Identity Management GUI after selecting an Hyperty, then this user will be redirected back to the Hyperty page (shown bellow) after the authentication process is over. This allows for the authentication process to be integrated seamlessly in the Hyperty selection flow.
+
+![Authenticated User Page](./gui-images/6-authenticated.png)
+
+###### Listing and Removing Authenticated Identities
+
+If the user manually selected the Identity Management GUI, then this user will be presented with a list of al authenticated identities in the runtime. Furthermore, this list also allows users to remove authenticated identities from the runtime. To remove an authenticated identity the user must select the "Remove" button associated with the identity he wishes to remove.
+
+![Remove User Page](./gui-images/7-removegui.png)
+
+This page, containing the list of authenticated identities, also becomes accessible by selecting the Identity GUI, as is described in the [Landing Page](#1-landing-page) section, after adding at least one identity.
+
+#### Browser Extension Functional Testing Procedures
+
 *Step one*: go to the application home page and click the "Connect" button.  
 ![accueil](https://user-images.githubusercontent.com/10738516/27957881-a8234fbe-6320-11e7-809e-7d87824b02d9.png)  
 
@@ -42,61 +98,6 @@ The Firefox extension that is managing ID Cards in the browser appears and propo
 
 ![logged](https://user-images.githubusercontent.com/10738516/27958332-d76ac034-6322-11e7-99ad-753106fc66ba.png)  
 
-####  Functional Testing Procedures
+### Non functional Evaluation
 
-The following describes Functional Testing Procedures to test the usage of the Id Module. This is accomplished using the functionalities provided by the GUI to perform the identity management inside the reTHINK runtime. This GUI enables the user to:
-1. Select the Identity Provider from which to login;
-2. Login, using the specified Identity Provider (IdP), via an IdP controlled Window that will pop-up to the user, and
-3. Remove an identity from the list of authenticated identities.
-
-##### 1. Landing Page
-
-When a user first interacts with reTHINK, the landing page (shown bellow) allows for two distinct interactions. The first is selecting the small wheel icon at the right upper corner. The second is selecting an Hyperty from the List of Hyperties. The former allows the user to select between the Policies GUI and Identity Management GUI, while the last automatically shows the Identity Management GUI to the user for identity selection.
-
-![Example of reTHINK Landing Page](./gui-images/1-guilanding.png)
-
-Whether the user was automatically promped to the Identity Management GUI, or the user manually selected the Identity GUI via the small wheel icon, both interactions will show the Identities Page to the user (shown bellow). This page consists of a single "Add an Identity" button, which allows the user to start the identity selection and authentication process used in reTHINK.
-
-![Identities GUI Page](./gui-images/2-idgui.png)
-
-##### 2. Login in
-
-When the user clicks the "Add an Identity" button shown in the previous [section](#1-landing-page), a list of available Identity Providers in shown (see bellow). The user then proceeds by selecting the IdP from which he whishes to login.
-
-![IdP Selection Page](./gui-images/3-idpgui.png)
-
-After the IdP selection is finished, the Login page is presented (see bellow). On this page, the user can select a different IdP via the "Add an Identity" button, thus overwriting the Identity Provider selected before, and the user can also proceed with the authentication process by clicking the "Login" button.
-
-![Login Page](./gui-images/4-logingui.png)
-
-When the "Login" button is pressed, a new window, controlled by the Identity Provider (i.e. reTHINK does not control the content displayed inside this window), is shown to the user (see bellow). On this Pop-up window, the user authenticates against the selected Identity Provider using the provided login form.
-
-![Login Pop-up](./gui-images/5-popup.png)
-
-##### 3. After Authentication
-
-After the authentication process in concluded, the user may be presented with one of the following pages:
-* A page correponding to the selected Hyperty ([seen here](#authenticated-identity-in-hyperty)). This page is shown if the user was automatically redirected to the Identity Management GUI after selecting an Hyperty in step 1 ([Landing Page](#1-landing-page)).
-* A page containing a list of all the authentiated identities in the runtime ([seen here](#listing-and-removing-authenticated-identities)). This page is shown if the user manually selected the Identity Management GUI in step 1 ([Landing Page](#1-landing-page));
-
-###### Authenticated Identity in Hyperty
-
-If the user was automatically redirected to the Identity Management GUI after selecting an Hyperty, then this user will be redirected back to the Hyperty page (shown bellow) after the authentication process is over. This allows for the authentication process to be integrated seamlessly in the Hyperty selection flow. 
-
-![Authenticated User Page](./gui-images/6-authenticated.png)
-
-###### Listing and Removing Authenticated Identities
-
-If the user manually selected the Identity Management GUI, then this user will be presented with a list of al authenticated identities in the runtime. Furthermore, this list also allows users to remove authenticated identities from the runtime. To remove an authenticated identity the user must select the "Remove" button associated with the identity he wishes to remove.
-
-![Remove User Page](./gui-images/7-removegui.png)
-
-This page, containing the list of authenticated identities, also becomes accessible by selecting the Identity GUI, as is described in the [Landing Page](#1-landing-page) section, after adding at least one identity.
-
-
-#### Evaluation
-
-The evaluation of the IdModule is presentd in ![IDModule Evaluation](./IdMEvaluation.md).
-
-#### Future work
-Future integration can consist in the adding the negotiation between peers, to allow IdP restriction and security level to a conversation. This feature is described in [Corre et al. paper](https://link.springer.com/chapter/10.1007%2F978-3-319-60131-1_27) and is implemented for demonstration purpose, but not integrated in the core runtime.
+The non-functional evaluation of the IdModule is presented in [IDModule Evaluation](IdMEvaluation.md).

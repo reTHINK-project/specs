@@ -1,4 +1,4 @@
-#### Comparison Evaluation
+### Comparison Evaluation
 
 In this section, PoliTHINK and JACPoL Policy Engines are compared.  We summarize the comparison in the table as below:
 
