@@ -45,15 +45,16 @@ The following describes Functional Testing Procedures to test the usage of the I
 
 When a user first interacts with reTHINK, an Identity selection page is displayed.
 
-![Identity Selection Page](./gui-images/2-idgui.png)
-
 In case the Hyperty Toolkit is used (for example, the [Hybroker Hyperty Toolkit](https://hybroker.rethink.ptinovacao.pt/) shown below) the user has to select an Hyperty from the List of Hyperties.
 
 ![Hyperty Toolkit Home](./gui-images/1-guilanding.png)
 
 Anytime, the user can select the small wheel icon at the right upper corner to access the Runtime Administration page that allows the user to select between the Policies GUI and Identity Management GUI, while the last automatically shows the Identity Management GUI to the user for identity selection.
 
-Whether the user was automatically prompted to the Identity Management GUI, or the user manually selected the Identity GUI via the small wheel icon, both interactions will show the Identities Page to the user (shown bellow). This page consists of a single "Add an Identity" button, which allows the user to start the identity selection and authentication process used in reTHINK.
+Whether the user was automatically prompted to the Identity Management GUI, or the user manually selected the Identity GUI via the small wheel icon, both interactions will show the Identities Page to the user (shown below). This page consists of a single "Add an Identity" button, which allows the user to start the identity selection and authentication process used in reTHINK.
+
+![Identity Selection Page](./gui-images/2-idgui.png)
+
 
 
 ##### Login in
