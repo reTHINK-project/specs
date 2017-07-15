@@ -1,13 +1,13 @@
-## Interoperability Tests
+## Interoperability Evaluation
 
 This documents provides guidelines to perform interoperability tests with reTHINK framework.
-Before you go ahead with these tests it is recommended to be familiar with main reTHINK concepts enabling full interoperability among services without having to standardize protocols or service APIs, as described *here (link to startup concepts wiki page)*.
+Before you go ahead with these tests it is recommended to be familiar with main reTHINK concepts enabling full interoperability among services without having to standardize protocols or service APIs, as described [here](https://rethink-project.github.io/Concepts).
 
 The following tests allow to verify the usage of these concepts to support adhoc interoperability (i.e. interoperability between endpoints without previous knowledge) at different levels:
 
-* Interoperability between two reTHINK different domains using different Messaging Nodes implementations including Protostubs but using the same Hyperty implementations.
+* Interoperability between two different reTHINK domains using different Messaging Nodes implementations including Protostubs but using the same Hyperty implementations.
 
-* Interoperability between two reTHINK different domains using different Messaging Nodes implementations including Protostubs and different Hyperty implementations.
+* Interoperability between two different reTHINK domains using different Messaging Nodes implementations including Protostubs and different Hyperty implementations.
 
 * Interoperability with legacy services, i.e., between one Hyperty and some non-reTHINK service.
 
@@ -22,7 +22,7 @@ Interoperability tests can be performed partially locally or fully using back-en
 
 #### Interoperability Tests Setup with remote domains
 
-This is the simplest setup environment where no service has to be installed locally. Only standard Browsers are required. The usage of Chrome or Firefox *(which versions?)* are recommended.
+This is the simplest setup environment where no service has to be installed locally. Only standard Browsers are required. The usage of Chrome or Firefox are recommended.
 The *hysmart* testbed from Altice Labs using the [vertx](https://github.com/reTHINK-project/dev-msg-node-vertx) Messaging Node implementation and the *Tlabs* using the [Matrix based Messaging Node](https://github.com/reTHINK-project/dev-msg-node-matrix), are used in these guidelines but any reTHINK compliant testbed can be used. Just follow the [Quick Installation Guide for reTHINK Framework](https://github.com/reTHINK-project/specs/blob/master/deployment/readme.md) to deploy your own reTHINK domain or testbed.
 
 
@@ -41,13 +41,11 @@ In this setup environment, one of the domains is installed as `localhost`. This 
   * [NodeJS](https://github.com/reTHINK-project/dev-msg-node-nodejs)
   * [no Matrix](https://github.com/reTHINK-project/dev-msg-node-nomatrix)  
 
-### Cross-domain with different protocols
+### Cross-domain interoperability test with Group Chat
 
-The cross-domain interoperability test with different protocols allows to test how two domains using different messaging communication protocols, i.e. using two different Messaging Nodes implementations can interoperate without having to agree in advance on the protocol to be used.
+The Group Chat cross-domain interoperability test allows to test how two domains using different messaging communication protocols, i.e. using two different Messaging Nodes implementations can interoperate without having to agree in advance on the protocol to be used. Both domains use the same [Group Chat Manager Hyperty implementation](https://github.com/reTHINK-project/dev-hyperty/tree/develop/docs/group-chat-manager). Before you start performing this, pls ensure you have two valid Google accounts to be used.
 
-#### Group Chat interoperability test
-
-Step 1: Open one browser window at `https://rethink-project.github.io/dev-smart-contextual-assistance-app/` and select "Connector Hyperty". A window will be opened asking you to select the Identity Provider to be used.
+Step 1: Open one browser window at `https://rethink-project.github.io/dev-smart-contextual-assistance-app/`. A window will be opened asking you to select the Identity Provider to be used.
 
 ![Select your Identity Provider](select-idp.PNG)
 
@@ -89,7 +87,9 @@ Step 7: Both users can exchange messages:
 
 ![SCA user chat with Call Center user](sca-chat.PNG)
 
-#### Group Chat interoperability with Slack legacy service
+### Group Chat interoperability with Slack legacy service
+
+The Group Chat interoperability with Slack legacy service test allows to test how one full reTHINK compliant domain can interoperate with another domain that is not reTHINK compliant without having to agree in advance on the protocol to be used. The Hyperty implementation is also agnostic of the legacy domains it can interoperate with.
 
 This test will require having two Slack accounts in some team (https://slack.com/). It is assumed the SCA Context and the Call Center Group Chat created in the previous test, is still open.
 
@@ -117,9 +117,11 @@ The user from the legacy Slack application, chat with the reTHINK Call Center Ap
 
 ![Slack user chat with SCA user and Call Center user](slack-chat-sca-callcenter.png)
 
-#### WebRTC Audio and Video interoperability test
+### WebRTC Audio and Video interoperability test
 
-This test will show how two users using different Applications, different Hyperties from different domains, each one using different protocols, are able to call each other. It is assumed the SCA Context and the Call Center Group Chat created in the previous test, is still open.
+This test will show how two users using different Applications, different Hyperties from different domains, each one using different protocols, are able to call each other. The Call Center Application uses the [DTWebRTC Hyperty](https://github.com/reTHINK-project/dev-hyperty/tree/develop/docs/dtwebrtc) while the SCA uses the [Connector Hyperty](https://github.com/reTHINK-project/dev-hyperty/tree/develop/docs/connector).
+
+It is assumed the SCA Context and the Call Center Group Chat created in the previous test, is still open.
 
 Step 1: In your previously SCA Context window, select the contact using the Call Center Application. Click to call the Call Center user with video:
 
@@ -137,20 +139,14 @@ and the SCA user:
 
 ![SCA Video Communication with Call Center user](sca-callcenter-call.PNG)
 
-##### Call Setup latency
+### End-to-end Interoperability Performance evaluation
 
-The Call Setup latency was measured for the call established between the DT Call Center Application hosted in Berlin, Germany, and the SCA Application hosted in Aveiro (Portugal):
+The Call Setup latency was measured for the call established between the DT Call Center Application hosted in Berlin, (Germany) and the SCA Application hosted in Aveiro (Portugal):
 
-**Incoming Call Notification Time**
+| **Test**                    | **Average Time (ms)**          | **Minimum Time (ms)** | **Maximum Time (ms)** |
+| :---------------------------| :----------------------------: | :-------------------: | :-------------------: |
+| Incoming Call Notification Time  |            501            |             599       |      536              |
+| Call Setup Time                  |            940            |          1140         |     1052              |
 
-Min: 501 milliseconds
-Max: 599 milliseconds
-Average: 536 milliseconds
 
-**Call Setup Time**
-
-Min: 940 milliseconds
-Max: 1140 milliseconds
-Average: 1062 milliseconds
-
-Taking into account the two services were hosted at different countries with using different protocol stubs, which means during these procedures it was required to load and instantiate different protostubs into the runtime, we consider these results as very encouraging.
+We consider these results very encouraging. It should be highlighted the two services were hosted at different countries, each one using different Protostubs, which means during these procedures it was required to load and instantiate different Protostubs into the runtime.
