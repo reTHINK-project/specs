@@ -41,19 +41,24 @@ The following describes Functional Testing Procedures to test the usage of the I
 2. Login, using the specified Identity Provider (IdP), via an IdP controlled Window that will pop-up to the user, and
 3. Remove an identity from the list of authenticated identities.
 
-##### Landing Page
+##### Identity Selection
 
-When a user first interacts with reTHINK, the landing page (shown bellow) allows for two distinct interactions. The first is selecting the small wheel icon at the right upper corner. The second is selecting an Hyperty from the List of Hyperties. The former allows the user to select between the Policies GUI and Identity Management GUI, while the last automatically shows the Identity Management GUI to the user for identity selection.
+When a user first interacts with reTHINK, an Identity selection page is displayed.
 
-![Example of reTHINK Landing Page](./gui-images/1-guilanding.png)
+![Identity Selection Page](./gui-images/2-idgui.png)
 
-Whether the user was automatically promped to the Identity Management GUI, or the user manually selected the Identity GUI via the small wheel icon, both interactions will show the Identities Page to the user (shown bellow). This page consists of a single "Add an Identity" button, which allows the user to start the identity selection and authentication process used in reTHINK.
+In case the Hyperty Toolkit is used (for example, the [Hybroker Hyperty Toolkit](https://hybroker.rethink.ptinovacao.pt/) shown below) the user has to select an Hyperty from the List of Hyperties.
 
-![Identities GUI Page](./gui-images/2-idgui.png)
+![Hyperty Toolkit Home](./gui-images/1-guilanding.png)
+
+Anytime, the user can select the small wheel icon at the right upper corner to access the Runtime Administration page that allows the user to select between the Policies GUI and Identity Management GUI, while the last automatically shows the Identity Management GUI to the user for identity selection.
+
+Whether the user was automatically prompted to the Identity Management GUI, or the user manually selected the Identity GUI via the small wheel icon, both interactions will show the Identities Page to the user (shown bellow). This page consists of a single "Add an Identity" button, which allows the user to start the identity selection and authentication process used in reTHINK.
+
 
 ##### Login in
 
-When the user clicks the "Add an Identity" button shown in the previous [section](#1-landing-page), a list of available Identity Providers in shown (see bellow). The user then proceeds by selecting the IdP from which he whishes to login.
+When the user clicks the "Add an Identity" button shown in the previous [section](#identity-selection), a list of available Identity Providers in shown (see bellow). The user then proceeds by selecting the IdP from which he whishes to login.
 
 ![IdP Selection Page](./gui-images/3-idpgui.png)
 
@@ -68,22 +73,24 @@ When the "Login" button is pressed, a new window, controlled by the Identity Pro
 ##### After Authentication
 
 After the authentication process in concluded, the user may be presented with one of the following pages:
-* A page correponding to the selected Hyperty ([seen here](#authenticated-identity-in-hyperty)). This page is shown if the user was automatically redirected to the Identity Management GUI after selecting an Hyperty in step 1 ([Landing Page](#1-landing-page)).
-* A page containing a list of all the authentiated identities in the runtime ([seen here](#listing-and-removing-authenticated-identities)). This page is shown if the user manually selected the Identity Management GUI in step 1 ([Landing Page](#1-landing-page));
 
-###### Authenticated Identity in Hyperty
+* A page corresponding to the selected Hyperty (e.g. by using the Hyperty Toolkit) or Application ([seen here](#authenticated-identity). This page is shown if the user was automatically redirected to the Identity Management GUI after selecting an Hyperty in step 1 ([Landing Page](#identity-selection)).
 
-If the user was automatically redirected to the Identity Management GUI after selecting an Hyperty, then this user will be redirected back to the Hyperty page (shown bellow) after the authentication process is over. This allows for the authentication process to be integrated seamlessly in the Hyperty selection flow.
+* A page containing a list of all the authentiated identities in the runtime ([seen here](#identity-management -administration-page)). This page is shown if the user manually selected the Identity Management GUI in step 1 ([Identity Selection](#identity-selection));
 
-![Authenticated User Page](./gui-images/6-authenticated.png)
+###### Authenticated Identity
 
-###### Listing and Removing Authenticated Identities
+If the user was automatically redirected to the Identity Management GUI, after the authentication process is over, this user will be redirected to the Application page or back to the Hyperty Toolkit page (shown bellow) . This allows for the authentication process to be integrated seamlessly in the Hyperty used by the Application.
+
+![Authenticated User with the Connector Hyperty demo Page provided by the Hyperty Toolkit](./gui-images/6-authenticated.png)
+
+###### Identity Management Administration page
 
 If the user manually selected the Identity Management GUI, then this user will be presented with a list of al authenticated identities in the runtime. Furthermore, this list also allows users to remove authenticated identities from the runtime. To remove an authenticated identity the user must select the "Remove" button associated with the identity he wishes to remove.
 
 ![Remove User Page](./gui-images/7-removegui.png)
 
-This page, containing the list of authenticated identities, also becomes accessible by selecting the Identity GUI, as is described in the [Landing Page](#1-landing-page) section, after adding at least one identity.
+This page, containing the list of authenticated identities, also becomes accessible by selecting the Identity GUI, as is described in the [Identity Selection](#identity-selection) section, after adding at least one identity.
 
 #### Browser Extension Functional Testing Procedures
 
