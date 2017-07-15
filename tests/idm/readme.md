@@ -79,13 +79,13 @@ After the authentication process in concluded, the user may be presented with on
 
 * A page containing a list of all the authentiated identities in the runtime ([seen here](#identity-management -administration-page)). This page is shown if the user manually selected the Identity Management GUI in step 1 ([Identity Selection](#identity-selection));
 
-###### Authenticated Identity
+##### Authenticated Identity
 
 If the user was automatically redirected to the Identity Management GUI, after the authentication process is over, this user will be redirected to the Application page or back to the Hyperty Toolkit page (shown bellow) . This allows for the authentication process to be integrated seamlessly in the Hyperty used by the Application.
 
 ![Authenticated User with the Connector Hyperty demo Page provided by the Hyperty Toolkit](./gui-images/6-authenticated.png)
 
-###### Identity Management Administration page
+##### Identity Management Administration page
 
 If the user manually selected the Identity Management GUI, then this user will be presented with a list of al authenticated identities in the runtime. Furthermore, this list also allows users to remove authenticated identities from the runtime. To remove an authenticated identity the user must select the "Remove" button associated with the identity he wishes to remove.
 
