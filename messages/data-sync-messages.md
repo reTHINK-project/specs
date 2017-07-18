@@ -134,6 +134,31 @@ Response Message sent back by Reporter Runtime Sync Manager to Object Reporter H
 "body" : { "code" : "200" }
 ```
 
+##### Unsubscribe Object requested by Reporter
+
+Message sent by Object Reporter Hyperty to Observer Hyperty requesting to unsubscribe the Data Object.
+
+```
+"id"   : "7",
+"type" : "unsubscribe",
+"from" : "hyperty://<sp-domain>/<hyperty-instance-identifier>",
+"to"   : "hyperty://<observer-sp-domain>/<hyperty-observer-instance-identifier>",
+"body" : { "resource" : "<ObjectURL>" }
+```
+
+###### Response
+
+Response Message sent back by Observer Hyperty to Object Reporter Hyperty.
+
+```
+"id"   : "7",
+"type" : "response",
+"to"   : "hyperty://<observer-sp-domain>/<hyperty-observer-instance-identifier>",
+"to"   : "hyperty://<sp-domain>/<hyperty-instance-identifier>",
+"body" : { "code" : "200" }
+```
+
+
 #### Synchronisation Management by Syncher Observer
 
 ##### Hyperty request to be an Observer
