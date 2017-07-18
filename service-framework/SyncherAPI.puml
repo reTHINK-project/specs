@@ -53,6 +53,7 @@ class DataObjectChild {
 
 class DataObjectReporter {
   inviteObservers(observers: [HypertyURL]): void
+  unsubscribe(observer: HypertyURL): Promise
   __ event handlers __
   onSubscription(callback: (event: SubscribeEvent | UnSubscribeEvent) => void): void
   onResponse(callback: (event: ReponseEvent) => void): void
