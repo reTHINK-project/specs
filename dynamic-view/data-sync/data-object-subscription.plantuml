@@ -41,9 +41,18 @@ Sync1@1B -> Sync1@1B : Minibus.Addlisteners(\nDataObjURL\changes,\nSyncherListen
 
 		RunSM@1B -> RunSM@1B : bus.addListener(\nDataObjURL\changes URL, \nObserverSandboxListener)
 
-		RunSM@1B -> RunSM@1B : registry.getP2PStubSandbox(\nDataObjURL)
 
-		alt : No p2p Stub available
+		alt p2p = true
+			RunSM@1B -> RunSM@1B : loader.loadStub(p2pConfig)
+
+		else : p2p = false
+			== Check if p2p connection already exists to Reporter runtime ==
+
+			RunSM@1B -> RunSM@1B : registry.getP2PConnection(reporterRuntimeURL)
+
+		else : No p2p connection available
+
+
 			== Set Routing Path at Observer Msg Node ==
 
 			RunSM@1B -> SM@SP2 : Subscribe Msg

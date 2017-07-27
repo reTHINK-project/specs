@@ -6,7 +6,10 @@ To be an Observer of a Data Object, a [Subscription message](../../messages/data
 
 (**Phase 2 New!!**) The Local Sync Manager checks if this is an existing subscription and if yes, this means this is a request to resume a data sync stream and nothing else has to be done.
 
-If this is a new subscription, the Local Sync Manager adds Observer side listeners and (**Phase 2 New!!**) asks the Runtime Registry to check if the Data Object is reachable with a P2P Connection. If not, it [asks its Message Node](../../messages/data-sync-messages.md#data-sync-routing-path-setup-request-at-observer-message-node) to also add the required Listeners for the Data Object.
+If this is a new subscription, the Local Sync Manager adds Observer side listeners.
+
+**Phase 2 New!!** If a P2P Data Sync is requested (`message.body.p2p = true`) it asks the runtime loader to load it (`Loader.loadStub(p2pConfig)`). Otherwise, it requests the Registry for any existing p2p connection targeting the remote reporter runtime, in order to avoid the usage of the Message Node.
+If no p2p connection exists, it [asks its Message Node](../../messages/data-sync-messages.md#data-sync-routing-path-setup-request-at-observer-message-node) to also add the required Listeners for the Data Object.
 
 As soon as observer side listeners are added for the Data Object, the [Subscription request is sent to the data object subscription URL (DataObjectURL/subscription)](../../messages/data-sync-messages.md#observer-subscription-request-sent-to-data-object-subscription-handler), which is implemented by the Synch Manager of the Reporter.
 
