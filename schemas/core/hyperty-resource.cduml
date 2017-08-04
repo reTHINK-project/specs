@@ -8,7 +8,9 @@ package HypertyResource <<Rect>> {
 		direction ?: ResourceDirection
 		author ?: URL.UserURL
 		content ?: object
-		contentUrl ?: URL.URL
+		contentUrl ?: URL.URL[]
+		preview ?: object
+		size ?: integer
 		player ?: URL.HypertyCatalogueURL
 	}
 
