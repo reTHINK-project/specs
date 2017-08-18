@@ -28,7 +28,7 @@ Message sent by the Reporter Syncher Hyperty to Reporter Runtime Sync Manager to
 "type" : "create",
 "from" : "hyperty://<sp-domain>/<hyperty-instance-identifier>",
 "to"   : "hyperty-runtime://<sp-domain>/<hyperty-runtime-instance-identifier>/sm",
-"body" : { "resource" : "<ObjectURL>", "authorise" : [{"HypertyURL"}], "value" : "<json object> , "schema" : "hyperty-catalogue://<sp-domain>/dataObjectSchema/<schema-identifier>", "p2p" : true|false, "store" : true|false }
+"body" : { "resource" : "<ObjectURL>", "value" : "<json object> , "schema" : "hyperty-catalogue://<sp-domain>/dataObjectSchema/<schema-identifier>", "p2p" : true|false, "store" : true|false }
 ```
 
 **note:** `"resource"` is present in the body in case the ObjectURL is already known by the reporter eg to resume a data sync stream or for a Reporter delegation procedure.
@@ -45,6 +45,33 @@ Reporter Runtime Sync Manager Response Message sent to the Reporter Syncher Hype
 "from" : "hyperty-runtime://<sp-domain>/<hyperty-runtime-instance-identifier>/sm",
 "to"   : "hyperty://<sp-domain>/<hyperty-instance-identifier>",
 "body" : { "code" : "200", "resource" : "<ObjectURL>", "childrenResources" : [{"<resource-children-name>"}] }
+```
+
+##### Reporter invites Observers
+
+Message sent by the Reporter Syncher Hyperty to Reporter Runtime Sync Manager to invite observers.
+
+```
+"id"   : 1,
+"type" : "create",
+"from" : "hyperty://<sp-domain>/<hyperty-instance-identifier>",
+"to"   : "hyperty-runtime://<sp-domain>/<hyperty-runtime-instance-identifier>/sm",
+"body" : { "resource" : "<ObjectURL>", "authorise" : [{"HypertyURL"}], "value" : "<json object> , "schema" : "hyperty-catalogue://<sp-domain>/dataObjectSchema/<schema-identifier>", "p2p" : true|false, "store" : true|false }
+```
+
+**note1:** `"p2p"` is optional and indicates if the sync data stream should use p2p protostubs.
+**note2:** `"store"` is optional and indicates if the sync data object should be stored localy by the sync manager.
+
+###### Response
+
+Reporter Runtime Sync Manager Response Message sent to the Reporter Syncher Hyperty to confirm Hyperty was invited to be an observer.
+
+```
+"id"   : 1,
+"type" : "response",
+"from" : "hyperty-runtime://<sp-domain>/<hyperty-runtime-instance-identifier>/sm",
+"to"   : "hyperty://<sp-domain>/<hyperty-instance-identifier>",
+"body" : { "code" : "200" }
 ```
 
 Reporter Runtime Sync Manager forwards to the Reporter Syncher Hyperty, Response Messages sent by invited Observer Hyperties.
