@@ -1,0 +1,50 @@
+@startuml "../../datamodel/data-objects/communication/Communication-Data-Object-Model.png"
+
+package Communication <<Rect>> {
+
+	class Communication {
+		startingTime : date
+		duration ?: date
+		status : CommunicationStatus
+		participants ?: Participant[]
+	}
+
+	class Resources <<Children>> {
+		parent = "communication"
+		listener = "resources"
+		type = "HypertyResource"
+	}
+
+
+	enum CommunicationStatus {
+		OPEN
+		PENDING
+		CLOSED
+		PAUSED
+		FAILED
+	}
+
+	enum ParticipantStatus {
+	}
+
+	class Participant {
+		status ?: ParticipantStatus
+		hypertyURL: hypertyURL
+		resources: HypertyResource[]
+		identity: Identity.Identity
+	}
+
+
+	Communication -up-|> SyncDataObject.SyncParentMetadata
+	Resources -up-|> SyncDataObject.SyncObjectChildren
+	Communication .. CommunicationStatus
+	Communication .left. Resources
+	Communication *.. Participant
+	Participant .. ParticipantStatus
+	Participant ..> HypertyResource.HypertyResource
+	Participant ..> Identity.Identity
+
+	HypertyResource ..> Connection.Connection : transportedBy
+}
+
+@enduml

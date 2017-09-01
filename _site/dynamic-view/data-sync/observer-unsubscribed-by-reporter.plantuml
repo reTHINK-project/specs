@@ -1,0 +1,48 @@
+
+
+@startuml "observer-unsubscribed-by-reporter.png"
+
+autonumber
+
+
+!define SHOW_RuntimeA
+
+!define SHOW_CoreRuntimeA
+!define SHOW_SMAtRuntimeA
+!define SHOW_SP1SandboxAtRuntimeA
+!define SHOW_Syncher1AtRuntimeA
+
+!define SHOW_Runtime1B
+
+!define SHOW_CoreRuntime1B
+!define SHOW_SMAtRuntime1B
+!define SHOW_SP1SandboxAtRuntime1B
+!define SHOW_Syncher1AtRuntime1B
+
+!include ../runtime_objects.plantuml
+
+
+== Hyperty Reporter requests the Observer to unsubscribe the Data Object ==
+
+Sync1@A -> Sync1@1B : Unsubscribe Msg
+
+Sync1@A -> Sync1@1B : 200 OK response msg
+
+
+group Observer unsubscribe Object at data-object-unsubscription.md
+
+RunSM@1B <- Sync1@1B : Unsubscribe Msg
+
+...
+
+RunSM@1B -> Sync1@1B : 200 OK response Msg
+
+	note left
+		Unsubscription request sent by reporter
+		triggers the unsubscription process at observer side
+	end note
+
+end
+
+
+@enduml

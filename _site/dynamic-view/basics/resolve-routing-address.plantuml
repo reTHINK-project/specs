@@ -1,0 +1,154 @@
+
+
+@startuml "resolve-routing-address.png"
+
+autonumber
+
+!define SHOW_RuntimeA
+
+!define SHOW_CoreRuntimeA
+!define SHOW_MsgBUSAtRuntimeA
+!define SHOW_RegistryAtRuntimeA
+
+!define SHOW_SP1SandboxAtRuntimeA
+!define SHOW_Protostub1AtRuntimeA
+
+!define SHOW_SP1
+
+!include ../runtime_objects.plantuml
+
+-> BUS@A : postMsg(message)
+
+RunReg@A <- BUS@A : resolve(message.to)
+
+RunReg@A -> RunReg@A  : verify source(association Id Token)
+
+RunReg@A -> RunReg@A  : resolve target address
+
+alt message.to URL Scheme = "domain" | "global"
+
+
+	group resolve MN Stub URL (see resolve-msg-node-address.md)
+
+		...
+		RunReg@A -> BUS@A : return(ResolvedMessage\nwith MN Stub URL)
+
+		note right
+			this means the target address in not in the runtime
+			but in the backend and no P2P can be used
+		end note
+	end
+
+else
+
+	RunReg@A -> RunReg@A  : look for P2P Connection
+
+	alt :P2P Connection is registered and active
+
+		RunReg@A -> BUS@A : return(P2P Stub URL)
+
+	else :unregistered P2P Protocol Stub
+
+			RunReg@A -> RunReg@A  : searchLocalCache(message.to)
+
+			alt : no registry in the local cache
+
+					BUS@A <- RunReg@A : postMessage(\n READ Message \nto discover Hyperties)
+
+					note right
+						No registry entry cache for message.to.
+						It has to be retrieved from the Domain Registry
+					end note
+
+					BUS@A -> Proto1@A : postMessage(\n READ Message \nto discover Hyperties)
+
+					Proto1@A -> SP1 : discover Hyperties\n with SP1 MSG Protocol
+
+					Proto1@A <- SP1 : discovered Hyperties\n with SP1 MSG Protocol
+
+					BUS@A <- Proto1@A : postMessage(\n RESPONSE Message \nwith discovered Hyperties)
+
+					RunReg@A <- BUS@A : postMessage(\n RESPONSE Message \nwith discovered Hyperties)
+
+			end
+
+			RunReg@A <-RunReg@A : extract \nHyperty Runtime URL\ncheck existing p2p connections
+
+			alt p2pRequester exists with same Hyperty Runtime URL
+
+				RunReg@A <-RunReg@A : add message.to \nto existing \np2p connection
+
+				RunReg@A -> BUS@A : return existing \nP2PStub URL
+
+			else there is no p2p connection with same Hyperty Runtime URL
+
+				RunReg@A -> RunReg@A : check p2p is to be used
+
+				note right
+					todo: use policy engine to decide p2p is to be used
+					eg for favorite peers
+				end note
+
+				alt : p2p is to be used
+
+					RunReg@A -> RunReg@A : create p2p connection entry\n with status "connecting"
+
+					note right
+						there is no p2p connection. starting creating one
+					end note
+
+					RunReg@A <-RunReg@A : extract P2P \nRequester Catalogue URL
+
+					group deploy P2P Protocol Stub
+					end
+
+					group P2P Connection setup
+					end
+
+					RunReg@A -> RunReg@A : set status "connected"
+
+					alt :P2P Connection was successfuly established
+
+						RunReg@A -> BUS@A : return(new P2P Stub URL)
+
+					else : P2P Connection failed
+
+						group resolve MN Stub URL (see resolve-msg-node-address.md)
+
+							...
+							RunReg@A -> BUS@A : return(ResolvedMessage\nwith MN Stub URL)
+						end
+					end
+				end
+
+			else p2p connection is not to be used
+
+				group resolve MN Stub URL (see resolve-msg-node-address.md)
+
+					...
+
+					RunReg@A -> BUS@A : return(ResolvedMessage\nwith new MN Stub URL)
+
+				end
+			end
+
+	else :P2P connection is registered but not connected yet
+
+		group resolve MN Stub URL (see resolve-msg-node-address.md)
+
+			...
+			RunReg@A -> BUS@A : return(ResolvedMessage\nwith MN Stub URL)
+
+			note right
+				this means the P2P connection has started but not finished yet.
+				In this case we must use a MN Stub.
+				This message could be itself part of the P2P connection signalling process.
+				see all the process above in group "resolve MN Stub URL"
+			end note
+		end
+
+	end
+end
+
+
+@enduml

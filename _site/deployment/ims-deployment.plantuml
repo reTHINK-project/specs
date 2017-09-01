@@ -1,0 +1,27 @@
+@startuml
+
+node auth [ 
+Authentication Server 
+====
+
+====
+<b>ephemeral key generator
+]
+node sip [
+Sip Server 
+====
+
+====
+<b>kamailio
+]
+node media [ 
+Media Server 
+====
+
+====
+<b>FreeSwitch
+]
+
+sip -- media
+
+@enduml

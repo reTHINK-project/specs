@@ -1,0 +1,88 @@
+footer {
+  background: $black;
+  text-align: center;
+  padding-top: 48px;
+  padding-bottom: 55px;
+  h2 {
+    color: $title_color;
+    &:before {
+    position: static;
+    }
+  }
+  p {
+    // font-size: 13px;
+    // line-height: 25px;
+    // color: #919191;
+  }
+  a {
+    color: #595959;
+  }
+  .subscribe {
+    margin-bottom: 120px;
+    float: left;
+    p {
+      font-size: 1.125rem; /* 18/16 */
+      color: #FFFFFF;
+    }
+    .btn-submit {
+      padding: 15px 35px;
+      border: none;
+      background-color: $blue;
+      font-size: 15px;
+      font-weight: 600;
+      height: 50px;
+      color: #333333;
+    }
+    .form-control {
+      width: 100%;
+      padding: 24px 10px;
+    }
+  }
+  .footer-menu {
+
+    img {
+      display: inline;
+    }
+
+    p, a {
+      font-style: 14px;
+      color: white;
+      font-weight: 600;
+      text-align: left;
+
+    }
+    h5 {
+      font-size: 16px;
+      color: $blue;
+      text-align: left;
+      font-weight: 600;
+
+      @media (max-width: 768px) {
+        text-align: center;
+      }
+    }
+
+  }
+  .social-media-list {
+    float: left;
+    width: 100%;
+    margin-top: 60px;
+  }
+  .footer-footer {
+
+    border-top: 1px solid $blue;
+    padding-top: 20px;
+    ul {
+      @media (max-width: 768px) {
+        display: inline-block;
+        li {
+          text-align: center;
+        }
+      }
+      display: block;
+      text-align: left;
+      width: 100%;
+    }
+  }
+
+}

@@ -1,0 +1,76 @@
+@startuml "user-identity-assertion.png"
+autonumber
+
+box "Bob Device Runtime"
+        participant "Id Module" as idm
+        participant "Policy\nEngine" as pep
+        participant "Msg BUS" as msgbus
+        participant "Registry" as registry
+        participant "RuntimeUA" as runUA
+end box
+box "Alice's IdP Proxy Sandbox"
+        participant "Identity Proxy" as idpproxy
+end box
+box "Bob's Service Provider Sandbox"
+        participant "Alice's\n Hyperty" as hyperty
+        participant "Alice's \nService Provider\n Protostub" as stub
+end box
+participant "Bob's\nService Provider" as backend
+participant "Alice's\nIdentity service Provider" as idp
+
+backend  -> stub     : Message + IdToken
+note right
+        Alice's IdAssertion received through
+        Message Node of Bob's Service Provider.
+end note
+
+stub  -> msgbus      : Message + IdToken
+msgbus   -> pep     : authorise(Message + IdToken)
+pep   -> pep     : assert Idtoken?
+pep   -> idm     : validate(Idtoken)
+
+msgbus   <- idm     : postMessage(Create Validation Request Message )
+msgbus   -> registry     : resolve(IDP URL)
+runUA  <- registry     : loadIdpProxy(IDP URL)
+runUA  -> idp         : Get well-known IdpProxy URL
+runUA  <- idp         : IdP Proxy returned
+create idpproxy
+runUA  -> idpproxy    : <<create>>\n new IdPProxy(proxy)
+
+note over idp
+        May be two different server
+        (repository and verify backend)
+        but are shown here as the same
+        participant.
+end note
+
+runUA  -> registry     : return IdP Proxy SandboxURL
+
+msgbus   <- registry     : return IdP Proxy SandboxURL
+
+msgbus   -> idpproxy    : postMessage(Create Validation Request Message )
+idpproxy -> idp         : Verify(IdToken)
+idp      -> idpproxy    : Verified(IdAssertion, validity)
+idpproxy -> msgbus      : postMessage(Response to Validation Request Message )
+msgbus   -> idm     : postMessage(Response to Validation Request Message )
+note over runUA
+        Received and validated IdAssertion
+        could be stored for future reference.
+        (e.g. last known assertion)
+end note
+
+pep   <- idm     : return validated(Identity)
+
+pep   <- pep     : add IdAssertion to Message Body
+
+pep  -> msgbus      : postMessage(Message + IdAssertion)
+msgbus   -> hyperty     : postMessage(Message + IdAssertion)
+
+opt Refresh Trust
+end
+
+opt Negotiate Trust
+end
+
+
+@enduml

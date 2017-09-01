@@ -1,0 +1,76 @@
+
+@startuml "p2p-registration-for-handler.png"
+
+autonumber
+
+box "Alice Device" #LightBlue
+
+	participant "MessageBus" as Bus@A
+
+	participant "Registry" as Reg@A
+
+	participant "P2P Requester\nStub" as ReqStub
+
+end box
+
+box "Bob Device" #LightRed
+	participant "P2P Handler\nStub" as HandlerStub
+
+	participant "Handler Minibus" as handlerMiniBus
+
+	participant "MessageBus" as Bus@B
+
+	participant "Registry" as Reg@B
+
+end box
+
+
+group 	#######################################################  P2P Connection Setup (see p2p-setup.md) 
+
+end
+
+	HandlerStub -> Reg@B: postMessage(\np2p connection is established)
+
+	Reg@B -> Reg@B: generate \np2p-connectionUrl
+
+	Reg@B -> Bus@B: addListener(\n"p2p-connection-URL",\n handlerSandbox.postMsg)
+
+	group Add listener to Handler minibus
+		Reg@B -> Bus@B: postMessage(\nSubscribe p2p-connection-URL)
+
+		HandlerStub <- Bus@B: postMessage(\nSubscribe p2p-connection-URL)
+
+		HandlerStub -> handlerMiniBus: addListener(\n"p2p-connection-URL",\n handlerStub.postMsg)
+
+	end
+
+	Reg@B -> Reg@B: update p2p connection\n status to connected
+
+	opt : Subscribe to be updated about Hyperties and Objects executing in the remote Runtime
+		Reg@B -> Bus@B: postMessage(\nSubscribe remote Runtime Registry)
+
+		HandlerStub <- Bus@B: postMessage(\nSubscribe <RegistryAddress>/changes)
+
+		HandlerStub -> ReqStub: postMessage(\nSubscribe <RegistryAddress>/changes)
+
+		ReqStub -> Bus@A: postMessage(\nSubscribe <RegistryAddress>/changes)
+
+		Reg@A <- Bus@A: postMessage(\nSubscribe <RegistryAddress>/changes)
+
+		Reg@A -> Bus@A: addListener(\n<RegistryAddress>/changes, requesterSandbox.postMsg)
+
+		Reg@A -> Bus@A: postMessage(\nSubscribe Response \nw/ registered components)
+
+		ReqStub <- Bus@A: postMessage(\nSubscribe Response \nw/ registered components)
+
+		ReqStub -> HandlerStub: postMessage(\nSubscribe Response \nw/ registered components)
+
+		Bus@B <- HandlerStub: postMessage(\nSubscribe Response \nw/ registered components)
+
+		Reg@B <- Bus@B: postMessage(\nSubscribe Response \nw/ registered components)
+	end
+
+
+
+
+@enduml

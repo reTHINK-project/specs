@@ -1,0 +1,178 @@
+html {
+  font-size: 16px;
+}
+
+/*--
+	Common Css
+--*/
+body {
+  font-family: $secondary_font;
+  -webkit-font-smoothing: antialiased;
+
+  overflow-x: hidden;
+}
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: $primary_font;
+  color: $black;
+}
+
+h1 {
+  font-size: 1.625rem; /* 26/16 */
+  font-weight: 100;
+  color: $title_color;
+}
+
+h2 {
+  font-size: 1.875rem; /* 30/16 */
+  font-weight: 600;
+  position: relative;
+  font-family: $primary_font;
+  padding-top: 25px;
+  padding-bottom: 20px;
+  &:before {
+    content: " ";
+    width: 134px;
+    height: 3px;
+    position: absolute;
+    top: 0;
+    background-color: $h2_line_color;
+  }
+}
+h3 {
+  font-size: 28px;
+  font-weight: 300;
+}
+p {
+  font-size: 1.125rem; /* 18/16 */
+  line-height: 28px;
+}
+ul {
+  padding: 0;
+  margin: 0;
+  list-style: none;
+}
+a,
+a:active,
+a:focus,
+a:active {
+  text-decoration: none !important;
+}
+.section-title {
+  margin-bottom: 70px;
+}
+.section-title.center-title {
+  h2 {
+    margin: 0;
+    text-align: center;
+    &:before {
+    left:calc(50% - 68px); // 68px = 134/2 from title line
+  }
+}
+}
+.section-title p {
+  font-style: italic;
+  font-size: 1rem;
+}
+
+.no-gutter [class*='col-'] {
+    padding-right:0;
+    padding-left:0;
+}
+
+.social-icons {
+  margin: 0 5px;
+  display: inline-block;
+}
+
+.social-icons a {
+  display: block;
+  width: 54px;
+  height: 54px;
+  border: 3px solid $blue;
+  border-radius: 27px;
+  line-height: 41px;
+  text-align: center;
+  font-size: 2rem;
+
+  transition: all 300ms;
+
+  &:hover{
+    border-color: white;
+    .icon>svg path {
+
+      fill: white;
+    }
+  }
+
+  .icon {
+    padding: 0;
+    width: 30px;
+    height: 30px;
+    display: inline-block;
+  }
+
+  .icon>svg path {
+    transition: all 300ms;
+    fill: $blue;
+  }
+}
+
+
+/*--
+	Main Start
+--*/
+
+main {
+  padding-top: 102px;
+}
+
+section .main-content {
+  padding-top: 60px;
+  padding-bottom: 60px;
+}
+
+#global-header {
+  background: url("../img/slider-bg.jpg") no-repeat;
+  background-size: cover;
+  padding-top: 30px;
+  padding-bottom: 20px;
+  position: relative;
+  background-position: center;
+
+  &:before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    width: 100%;
+    height: 100%;
+    background: $black;
+    opacity: 0.8;
+  }
+
+  .block {
+    color: #E3E3E4;
+    margin: 0 auto;
+    text-align: center;
+
+    h1 {
+      font-weight: 500;
+      font-size: 2.813rem; /* 45/16 */
+      padding-bottom: 10px;
+      margin-top: 0;
+      text-transform: capitalize;
+    }
+    p {
+      font-size: 1rem; /* 16/16 */
+      font-weight: 300;
+      word-spacing: 3px;
+    }
+  }
+}

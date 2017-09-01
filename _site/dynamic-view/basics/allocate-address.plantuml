@@ -1,0 +1,72 @@
+
+@startuml "allocate-address.png"
+
+autonumber
+
+!define SHOW_RuntimeA
+
+!define SHOW_CoreRuntimeA
+!define SHOW_MsgBUSAtRuntimeA
+!define SHOW_RegistryAtRuntimeA
+!define SHOW_AllocateAtRuntimeA
+
+!define SHOW_SP1SandboxAtRuntimeA
+!define SHOW_Protostub1AtRuntimeA
+
+!define SHOW_SP1
+
+!include ../runtime_objects.plantuml
+
+ -> RunAllocate@A : allocate(\nscheme,\ndescriptor,\n?owner,\n? reuseURL )
+
+alt "scheme" is not "Hyperty" and reuseURL does not exist: allocate new address
+
+  group allocate new address
+    RunAllocate@A -> BUS@A : postMessage(\nRead Msg\nto get hyperty \nAddress Allocation)
+
+    BUS@A -> Proto1@A : postMessage(\nRead Msg\nto get hyperty \nAddress Allocation)
+
+    Proto1@A -> SP1 : read hyperty\nAddress Allocation\nSP1 MSG Protocol
+
+    group option: connect Protocol Stub to the domain in case it is still not connected yet
+
+    ...
+
+    end group
+
+    Proto1@A <- SP1 : read response \nmessage with\n hyperty Address\n SP1 MSG Protocol
+
+    Proto1@A -> BUS@A : postMessage(\nread response \nmessage with\n hyperty Address\n MSG)
+
+    RunAllocate@A <- BUS@A : postMessage(\nread response \nmessage with\n hyperty Address\n MSG)
+  end
+
+else
+
+  RunAllocate@A -> RunReg@A : getAddress(\nscheme,\ndescriptor,\nowner,\n reuseURL )
+
+  alt address to be reused not found in the Runtime Registry
+
+  RunAllocate@A <- RunReg@A : not found
+
+    alt reuseURL does not exist: allocate new Hyperty address
+
+      group allocate new address
+
+      end
+    <- RunAllocate@A : new URL allocated
+
+    else reuseURL exists: error
+
+
+    <- RunAllocate@A : not found
+    end
+  else address to be reused was found in the Runtime Registry
+
+    RunAllocate@A <- RunReg@A : URL to be reused
+
+    <- RunAllocate@A : URL to be reused
+  end
+end
+
+@enduml

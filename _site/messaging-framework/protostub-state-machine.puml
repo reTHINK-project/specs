@@ -1,0 +1,26 @@
+@startuml
+
+state Deployment {
+  state "deployment-failed" as deploymentError
+  [*] --> deploying : loader.loadStub()\n is invoked
+
+  deploying --> deployed : loader.loadStub()\n is resolved
+  deploying --> deploymentError : loader.loadStub()\n is rejected eg timeout
+  deploymentError --> [*]
+  deployed -right-> Connection
+}
+
+state Connection {
+  state "in-progress" as inprogress
+
+  [*] --> created : protostub constructor\n is executed
+  created --> inprogress : protostub.connect()\n invoked
+  inprogress --> live : connection\n established
+  inprogress --> failed : connection establishement\n failed
+  live --> disconnected : connection\n closed
+  disconnected --> live : connection\n reestablished
+  disconnected --> [*]
+  failed --> [*]
+}
+
+@enduml

@@ -1,0 +1,598 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no, maximum-scale=1, minimum-scale=1">
+
+  <title>JACPoL Policy Engine Assessment</title>
+  <meta name="description" content="reTHINK Framework provides the tools to build a global real-time decentralized communication infra-structure where services are inherently inter-operable.">
+
+  <link rel="canonical" href="http://localhost:4000/tests/policy/jacpol/">
+  <link rel="alternate" type="application/rss+xml" title="reThink Project" href="/feed.xml">
+  
+  <link rel="apple-touch-icon" sizes="57x57" href="/assets/apple-icon-57x57.png">
+  <link rel="apple-touch-icon" sizes="60x60" href="/assets/apple-icon-60x60.png">
+  <link rel="apple-touch-icon" sizes="72x72" href="/assets/apple-icon-72x72.png">
+  <link rel="apple-touch-icon" sizes="76x76" href="/assets/apple-icon-76x76.png">
+  <link rel="apple-touch-icon" sizes="114x114" href="/assets/apple-icon-114x114.png">
+  <link rel="apple-touch-icon" sizes="120x120" href="/assets/apple-icon-120x120.png">
+  <link rel="apple-touch-icon" sizes="144x144" href="/assets/apple-icon-144x144.png">
+  <link rel="apple-touch-icon" sizes="152x152" href="/assets/apple-icon-152x152.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/apple-icon-180x180.png">
+  <link rel="icon" type="image/png" sizes="192x192" href="/assets/android-icon-192x192.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="96x96" href="/assets/favicon-96x96.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/assets/favicon-16x16.png">
+  <link rel="manifest" href="/manifest.json">
+  <meta name="msapplication-TileColor" content="#ffffff">
+  <meta name="msapplication-TileImage" content="/assets/ms-icon-144x144.png">
+  <meta name="theme-color" content="#ffffff">
+  
+  <!-- CSS -->
+  <link rel="stylesheet" href="/assets/main.css">
+  <link rel="stylesheet" href="/css/owl.carousel.css" />
+  <link rel="stylesheet" href="/css/bootstrap.min.css" />
+  <link rel="stylesheet" href="/css/font-awesome.min.css" />
+  <link rel="stylesheet" href="/css/airspace.css" />
+  <link rel="stylesheet" href="/css/style.css" />
+  <link rel="stylesheet" href="/css/ionicons.min.css" />
+  <link rel="stylesheet" href="/css/animate.css" />
+  <link rel="stylesheet" href="/css/responsive.css" />
+  <link rel="stylesheet" href="/css/syntax.css" />
+  <link rel="stylesheet" href="/css/prism.css" />
+
+  <link rel="stylesheet" href="/css/rethink.css" />
+
+  <!-- Js -->
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+  <script>window.jQuery || document.write('<script src="js/vendor/jquery-1.10.2.min.js"><\/script>')</script>
+  <script src="/js/bootstrap.min.js"></script>
+  <script src="/js/owl.carousel.min.js"></script>
+  <script src="/js/plugins.js"></script>
+  <script src="/js/min/waypoints.min.js"></script>
+  <script src="/js/jquery.counterup.js"></script>
+  <script src="/js/prism.js"></script>
+
+  <script src="/js/main.js"></script>
+
+  <!--
+  /*
+   * Airspace
+   * Ported to Jekyll by Andrew Lee
+   * https://github.com/luminousrubyist/airspace-jekyll
+   * Designed and Developed by ThemeFisher
+   * https://themefisher.com/
+   *
+   */
+  -->
+
+  
+</head>
+
+
+  <body>
+
+    <!-- Header Start -->
+<header class="sticky-top" role="banner">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12">
+        <!-- header Nav Start -->
+        <nav class="navbar navbar-default">
+          <div class="container-fluid">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+              
+              
+              <a class="site-title" title="This is the starting point for new rethinkers" href="/"><img src="/img/logo.png" alt="reThink Project"></a>
+            </div>
+
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+              
+                <ul class="nav navbar-nav navbar-right">
+                  
+                    
+                    
+                    <li><a class="page-link" href="/documentation/">Documentation</a></li>
+                    
+                  
+                </ul>
+              
+            </div><!-- /.navbar-collapse -->
+          </div><!-- /.container-fluid -->
+        </nav>
+      </div>
+    </div>
+  </div>
+</header><!-- header close -->
+
+
+    <main class="main-content" role="content" aria-label="Content">
+      <!-- Slider Start -->
+<section id="global-header">
+  <div class="container">
+      <div class="row">
+          <div class="col-md-12">
+              <div class="block">
+                  <h1>JACPoL Policy Engine Assessment</h1>
+                  <p></p>
+              </div>
+          </div>
+      </div>
+  </div>
+</section>
+
+<section>
+  <div class="container main-content">
+    <h3 id="jacpol-policy-engine-assessment">JACPoL Policy Engine Assessment</h3>
+
+<h4 id="introduction">Introduction</h4>
+
+<p><strong>Policy Engine.</strong> The policy engine follows PEP/PDP architecture, and is currently implemented in the <a href="https://github.com/reTHINK-project/dev-msg-node-nodejs">Node.js-based messaging node</a> [1] of reThink project. However, by simply invoking the interface of PEP, it is possible to migrate the policy engine to other components of the reTHINK framework. Fig. 1 below indicates the overall architecture of the policy engine.</p>
+
+<p><img src="/tests/policy/images/arch.png" alt="Fig. 1 - Policy Engine Architecture" /></p>
+
+<p>The Policy Enforcement Point (PEP) is the component in charge of intercepting communication messages and protecting targeted resources by requesting an authorization decision from a Policy Decision Point (PDP) and enforcing that decision. The PDP sits at the very core of the policy engine architecture. It implements the policy description language and evaluation logic. Its purpose is to evaluate authorization requests coming from the PEP against the policies loaded from the Policy Retrieval Point (PRP). The PDP then returns a decision – either of Permit, Deny, or Not Applicable.</p>
+
+<p>Fig. 2 shows the sequence diagram indicating communication pattern between components of the policy engine.</p>
+
+<p><img src="/tests/policy/images/PE_sequence_diagram.png" alt="Fig. 2 - Sequence Diagram" /></p>
+
+<p>For more details concerning the policy engine design and implementation please refer to the README file <a href="https://github.com/reTHINK-project/dev-msg-node-nodejs/tree/master/src/main/components/policyEngine">here</a> [2] in the policy engine folder of the Node.js MN source code repo.</p>
+
+<p><strong>JACPoL Policy Language.</strong> JACPoL is a simple but expressive JSON-based language to specify policies. It is specifically designed for turning the needs of access control into meaningful policies that can govern whether and where a request should be blocked, filter which elements of the returned resource it can contain, and constrain the values that can be set for properties. The reTHINK policies are expressed using JACPoL that is tailored to the requirements of reTHINK framework. Policies following this language use a rich vocabulary that gives the ability to configure end user or service provider configurations in an expressive and flexible way.</p>
+
+<p>JACPoL contains three structural elements, namely Policy Set, Policy, and Rule. The fields of each element and the relationships between them are presented in Fig. 3 as below.</p>
+
+<p><img src="/tests/policy/images/pdl_structure.png" alt="Fig. 3 - JACPoL Structure" /></p>
+
+<ul>
+  <li>A <strong>rule</strong> element defines the target elements to which the rule is applied and details conditions to apply the rule and has three components such as target, effect, and condition. A target element specifies the resources, subjects, actions and the environment to which the rule is applied. A condition element shows the conditions to apply the rule and an effect is the consequence of the rule as either permit or deny.</li>
+  <li>A <strong>policy</strong> is the set of rules which are combined with some algorithms. These algorithms are called rule-combining algorithms. For instance “Permit Override” algorithm allows the policy to evaluate to “Permit” if any rule in the policy evaluates to “Permit”. A policy also contains target elements which show the subjects, resources, actions, environment that policy is applied.</li>
+  <li>A <strong>policy set</strong> consists of Policies combined with policy-combined algorithm. It has also target like a Policy.</li>
+</ul>
+
+<p>Fig. 4 is an example rule: for messages that are of registration msgType and read actType, if the requested resource is user://gmail.com/chiang.zju and the requester is he.johen@gmail.com, then deny.</p>
+
+<p><img src="/tests/policy/images/example.png" alt="Fig. 4 - An Example Rule" /></p>
+
+<p>JACPoL provides a simple, flexible, scalable, and expressive attribute-based access control capability, and at the same time supports obligations or advice to enable a set of network management and security features. The detailed syntax and semantics of JACPoL can be found <a href="https://github.com/reTHINK-project/dev-msg-node-nodejs/tree/master/src/main/components/policyEngine/prp/policy">here</a> [3].</p>
+
+<h4 id="methodology-overview">Methodology Overview</h4>
+
+<p>This section introduces methodology and setup for the evaluation of the policy engine. The evaluation is separated into two parts: first is the conformance evaluation to assess the effectiveness of the policy engine with respect to the requirements of reTHINK framework; second is the performance evaluation to test the policy evaluation language in terms of a set of criteria such as processing delay, etc. For conformance evaluation, we choose the Connector hyperty for demonstration, analyze in details about the signaling messages and phases based on communication sequence diagram. As a result, we have identified for this use case a set of policy control points (PCPs) available for the deployment of different policies. The subsequent section would provide a concrete view of the policies that could be effectively deployed based on these PCPs. For performance evaluation, we  assess the policy language in comparison with the standardized XACML policy language. We conduct repeated tests in order to get reliable results that reflect real performance. For comparison evaluation, we compare key features of the two policy engines in order to clarify their differences in terms of their design and implementation.</p>
+
+<h4 id="conformance-evaluation">Conformance Evaluation</h4>
+
+<p>The connector hyperty is one of the hyperties that are available on the reTHINK testbed. It provides services like user search and WebRTC call. When running on the user device runtime, the hyperty represents for the user as a live instance providing communication services within the reTHINK framework.</p>
+
+<h5 id="message-node-functionalities-and-policing-requirements">Message Node Functionalities and Policing Requirements</h5>
+
+<p>The Node.js based Messaging Node is one of the reference implementations of the CSP Messaging services in the reTHINK Architecture. The role of Messaging Nodes in the reTHINK Architecture is described in detail in <a href="https://github.com/reTHINK-project/specs/blob/master/messaging-framework/readme.md">Hyperty Messaging Framework</a>. Overall, as part of CSP backend services, it interacts with other rethink CSP backend components like the CSP domain registry, CSP catalogue.</p>
+
+<p>The message node is responsible for the message delivery at domain level, which is based on a simple message router functionality that performs a lookup for listeners registered to receive the message. The message is posted to all found listeners, which can be other routers/message nodes or the final recipient end-point. Thus, the reThink messaging framework is comprised by a network of routers/message nodes where each router/message node only knows adjacent registered routers/message nodes or end-points. Meanwhile, listeners are programmatically registered and unregistered by routing management functionalities, which take their decisions according to a higher level view of the routing network.</p>
+
+<p>Message nodes are responsible for the interaction of runtimes that might belong to different administrative domains by offering protocol stubs to these external runtimes. The domain operators need a mechanism to control these domain interactions and to potentially block or limit certain combinations of message exchange. In order to achieve this, a MN must provide a hook in the message flow that allows applying policy-based decisions to the routing. These policies must be manageable by the domain Policy Manager. Therefore a Policy Engine provides Policy Decision and Policy Enforcement functionalities at Domain level for incoming and outgoing messages in cooperation with authentication and authorization provided by Identity Management functionalities. It also provides authorization / access control to the Message BUS.</p>
+
+<p>Overall, the policy engine supports a message node to accomplish the following operations:</p>
+
+<ul>
+  <li>Policy-based inter/intra domain routing.</li>
+  <li>Policy-based functioning and access control of the message node components and support services (including address allocation and subscription management).</li>
+  <li>Policy-based functioning (part of) and access control of reTHINK backend services (including Domain Registry, Global Registry and Identity Management support services).</li>
+</ul>
+
+<h5 id="policy-control-points-and-conformable-policing-examples">Policy Control Points and Conformable Policing Examples</h5>
+
+<p>In this section we analyze the connector hyperty use case step by step from the initiation of the call. We assume that the runtime has been downloaded from the right catalogue according to the configuration of the testbed (environment variables), and the Protostub and then the hyperty have been also loaded from the catalogue.</p>
+
+<p><strong>Phase 1. Hyperty registration</strong></p>
+
+<p><img src="/tests/policy/images/callflows4.png" alt="callflows" /></p>
+
+<p>The first observed message is sent from the runtime to the address allocation manager of the messaging node to request for an address for the just loaded Connector hyperty. Thus the first PCP can be identified for the policy-based control (deny/permit) of this procedure on the message node. At this point, the policy for example can limit the number of requested addresses as expressed below for PCP 1.</p>
+
+<ul>
+  <li>Example 1: for messages of <em>addressAllocation</em> msgType and <em>create</em> actType, if the requested number of addresses is more than 1, then deny.</li>
+</ul>
+
+<div class="language-json highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"target"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"msgType"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="nt">"equals"</span><span class="p">:</span><span class="w"> </span><span class="s2">"addressAllocation"</span><span class="p">},</span><span class="w">
+    </span><span class="nt">"actType"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="nt">"equals"</span><span class="p">:</span><span class="w"> </span><span class="s2">"create"</span><span class="p">}</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="nt">"condition"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"valueNumber"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="nt">"moreThan"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">}</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="nt">"effect"</span><span class="p">:</span><span class="w"> </span><span class="s2">"deny"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+</div>
+
+<p>In addition, we can also use policies to limit the maximum number of address allocation requests from the same runtime within a period.</p>
+
+<ul>
+  <li>Example 2: for messages of <em>adddressAllocation</em> msgType and <em>create</em> actType, if the <em>runtime</em> has reached the allowed maximum number of requests (50) within a minute, then deny.</li>
+</ul>
+
+<div class="language-json highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"target"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"msgType"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="nt">"equals"</span><span class="p">:</span><span class="w"> </span><span class="s2">"addressAllocation"</span><span class="p">},</span><span class="w">
+    </span><span class="nt">"actType"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="nt">"equals"</span><span class="p">:</span><span class="w"> </span><span class="s2">"create"</span><span class="p">}</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="nt">"condition"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"addrAllastMin"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="nt">"moreThan"</span><span class="p">:</span><span class="w"> </span><span class="mi">50</span><span class="p">}</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="nt">"effect"</span><span class="p">:</span><span class="w"> </span><span class="s2">"deny"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+</div>
+
+<p>As there is returned value in the body of the response message, we can thus also define policies at this point to control the returned value.</p>
+
+<ul>
+  <li>Example 3: for messages of <em>addressAllocation</em> msgType and <em>response</em> actType, if the allocated number of addresses is more than 1, then permit, but limit the number of allocated addresses to 1.</li>
+</ul>
+
+<div class="language-json highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"target"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"msgType"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="nt">"equals"</span><span class="p">:</span><span class="w"> </span><span class="s2">"addressAllocation"</span><span class="p">},</span><span class="w">
+    </span><span class="nt">"actType"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="nt">"equals"</span><span class="p">:</span><span class="w"> </span><span class="s2">"response"</span><span class="p">}</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="nt">"condition"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"valueAllocate"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="nt">"moreThan"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">}</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="nt">"effect"</span><span class="p">:</span><span class="w"> </span><span class="s2">"permit"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"obligations"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="nt">"limitByNumberOfEntries"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="nt">"valueAllocated"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">}}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+</div>
+
+<p><img src="/tests/policy/images/callflows5.png" alt="callflows" /></p>
+
+<p>The next message is to register the new hyperty to the domain registry with all the necessary information such as its address, user url, runtime url, etc.. Some policies can be to examine the content of the registry entry, or the validity of the requested service for the given user. <strong>Please note</strong> that the functionality-specific policies are better to be deployed on the policy engine of the corresponding reTHINK backend component instead of the message node. For example, a policy as below should be normally deployed on the policy engine of the domain registry:</p>
+
+<ul>
+  <li>Example 4: for messages that are of <em>registration</em> msgType and <em>create</em> actType, if the user has reached the predefined maximum number of hyperties that it can register (100 for example), or the <em>expires</em> value is larger than 3600, then deny.</li>
+</ul>
+
+<div class="language-json highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"target"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"msgType"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="nt">"equals"</span><span class="p">:</span><span class="w"> </span><span class="s2">"registration"</span><span class="p">},</span><span class="w">
+    </span><span class="nt">"actType"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="nt">"equals"</span><span class="p">:</span><span class="w"> </span><span class="s2">"create"</span><span class="p">}</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="nt">"condition"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="nt">"userRegistries"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="nt">"moreThan"</span><span class="p">:</span><span class="w"> </span><span class="mi">100</span><span class="p">}},</span><span class="w">
+    </span><span class="p">{</span><span class="nt">"valueExpires"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="nt">"moreThan"</span><span class="p">:</span><span class="w"> </span><span class="mi">3600</span><span class="p">}}</span><span class="w">
+  </span><span class="p">],</span><span class="w">
+  </span><span class="nt">"effect"</span><span class="p">:</span><span class="w"> </span><span class="s2">"deny"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+</div>
+
+<p><strong>However</strong>, it is possible that some part of the policies (e.g., generic policy-based routing and access control) related to reThink backend services could be deployed on the edge (message node) to release these central servers from numerous invalid requests. For example, back to this use case, an apparently invalid registry request can be dropped directly by the message node at PCP 2 instead of being forwarded to the domain registry:</p>
+
+<ul>
+  <li>Example 5: for messages that are of <em>registration</em> msgType and <em>create</em> actType, if the <em>value</em> field does not exists, then deny.</li>
+</ul>
+
+<div class="language-json highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"target"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"msgType"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="nt">"equals"</span><span class="p">:</span><span class="w"> </span><span class="s2">"registration"</span><span class="p">},</span><span class="w">
+    </span><span class="nt">"actType"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="nt">"equals"</span><span class="p">:</span><span class="w"> </span><span class="s2">"create"</span><span class="p">}</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="nt">"condition"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="nt">"bodyValue"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="nt">"exists"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">}},</span><span class="w">
+  </span><span class="nt">"effect"</span><span class="p">:</span><span class="w"> </span><span class="s2">"deny"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+</div>
+
+<p>In addition, there might be needs to limit a user to use only a set of hyperties that are defined in the service agreement.</p>
+
+<ul>
+  <li>Example 6: for messages that are of <em>registration</em> msgType and <em>create</em> actType, if the source user tries to register a hyperty that is not Connector, DTWebRTC, or GroupChat, then permit.</li>
+</ul>
+
+<div class="language-json highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"target"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"msgType"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="nt">"equals"</span><span class="p">:</span><span class="w"> </span><span class="s2">"registration"</span><span class="p">},</span><span class="w">
+    </span><span class="nt">"actType"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="nt">"equals"</span><span class="p">:</span><span class="w"> </span><span class="s2">"create"</span><span class="p">}</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="nt">"condition"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="nt">"valueDescriptor"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="nt">"not"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="nt">"like"</span><span class="p">:[</span><span class="s2">"*/Connector"</span><span class="p">,</span><span class="s2">"*/DTWebRTC"</span><span class="p">,</span><span class="s2">"*/GroupChat"</span><span class="p">]}}},</span><span class="w">
+  </span><span class="nt">"effect"</span><span class="p">:</span><span class="w"> </span><span class="s2">"permit"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+</div>
+
+<p>For PCP 3, as the response message does not contain any other value except for the returned code, there is no point in blocking or modifying the message. Therefore, we did not see any meaningful policy which could be deployed at this point.</p>
+
+<p>Then, another user also tries to register the same hyperty at another device following the same procedure.</p>
+
+<p><strong>Phase 2. Intra-domain User Discovery</strong></p>
+
+<p>After that, the two users should have their hyperties loaded and ready. Now we assume that the user <em>chiang.zju</em> tries to call the other user <em>he.johen</em>.</p>
+
+<p><img src="./images/callflows10.png" alt="" /></p>
+
+<p>First, as we can see the figure above, the caller would send a request of read type to the domain registry to search for the available hyperties of the callee with specific criteria. In return, the domain registry replies with a list of hyperties of the callee that satisfies the criteria. As there might be cases that sometimes the callee wants to configure itself invisible to all others for a specific period of time, we can thus have some policies as examples below for PCP 4:</p>
+
+<ul>
+  <li>Example 7: for messages that are of <em>registration</em> msgType and <em>read</em> actType, if the targeted <em>resource</em> is user <em>user://gmail.com/chiang.zju</em> and if it is weekends or between 9 PM and 6 AM of weekdays, then deny.</li>
+</ul>
+
+<div class="language-json highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"target"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"msgType"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="nt">"equals"</span><span class="p">:</span><span class="w"> </span><span class="s2">"registration"</span><span class="p">},</span><span class="w">
+    </span><span class="nt">"actType"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="nt">"equals"</span><span class="p">:</span><span class="w"> </span><span class="s2">"read"</span><span class="p">}</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="nt">"condition"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"resource"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="nt">"equals"</span><span class="p">:</span><span class="w"> </span><span class="s2">"user://gmail.com/chiang.zju"</span><span class="p">},</span><span class="w">
+    </span><span class="nt">"anyOf"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+      </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"time"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="nt">"between"</span><span class="p">:</span><span class="w"> </span><span class="s2">"21:00:00 06:00:00"</span><span class="p">},</span><span class="w">
+        </span><span class="nt">"weekday"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="nt">"not"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="nt">"in"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"saturday"</span><span class="p">,</span><span class="s2">"sunday"</span><span class="p">]}}</span><span class="w">
+      </span><span class="p">},</span><span class="w">
+      </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"weekday"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="nt">"in"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"saturday"</span><span class="p">,</span><span class="s2">"sunday"</span><span class="p">]}</span><span class="w">
+      </span><span class="p">}</span><span class="w">
+    </span><span class="p">]</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="nt">"effect"</span><span class="p">:</span><span class="w"> </span><span class="s2">"deny"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+</div>
+
+<p>Or if the caller is blacklisted by the callee:</p>
+
+<ul>
+  <li>Example 8: for messages that are of <em>registration</em> msgType and <em>read</em> actType, if the targeted <em>resource</em> is user <em>user://gmail.com/chiang.zju</em> and the source user is <em>he.johen@gmail.com</em>, then deny.</li>
+</ul>
+
+<div class="language-json highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"target"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"msgType"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="nt">"equals"</span><span class="p">:</span><span class="w"> </span><span class="s2">"registration"</span><span class="p">},</span><span class="w">
+    </span><span class="nt">"actType"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="nt">"equals"</span><span class="p">:</span><span class="w"> </span><span class="s2">"read"</span><span class="p">}</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="nt">"condition"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"resource"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="nt">"equals"</span><span class="p">:</span><span class="w"> </span><span class="s2">"user://gmail.com/chiang.zju"</span><span class="p">},</span><span class="w">
+    </span><span class="nt">"srcUsername"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="nt">"equals"</span><span class="p">:</span><span class="w"> </span><span class="s2">"he.johen@gmail.com"</span><span class="p">}</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="nt">"effect"</span><span class="p">:</span><span class="w"> </span><span class="s2">"deny"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+</div>
+
+<p>At PCP 5, the policy engine could intercept the returned message which contains a list of hyperties of the callee from domain registry. The policy examples described above could also be implemented at this point:</p>
+
+<ul>
+  <li>Example 9: for messages that are of <em>registration</em> msgType and <em>response</em> actType, if the <em>valueUser</em> is <em>user://gmail.com/chiang.zju</em> and the <em>dstUsername</em> is <em>he.johen@gmail.com</em>, then deny.</li>
+</ul>
+
+<div class="language-json highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="w">
+   </span><span class="nt">"target"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"msgType"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="nt">"equals"</span><span class="p">:</span><span class="w"> </span><span class="s2">"registration"</span><span class="p">},</span><span class="w">
+    </span><span class="nt">"actType"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="nt">"equals"</span><span class="p">:</span><span class="w"> </span><span class="s2">"response"</span><span class="p">}</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="nt">"condition"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"valueUser"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="nt">"equals"</span><span class="p">:</span><span class="w"> </span><span class="s2">"user://gmail.com/chiang.zju"</span><span class="p">},</span><span class="w">
+    </span><span class="nt">"dstUsername"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="nt">"equals"</span><span class="p">:</span><span class="w"> </span><span class="s2">"he.johen@gmail.com"</span><span class="p">}</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="nt">"effect"</span><span class="p">:</span><span class="w"> </span><span class="s2">"deny"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+</div>
+
+<p>Additionally, we can also deploy other policies with more sophisticated manipulation based on the content of the returned value. For example, the callee may only want some of its hyperties, or a specific hyperty visible to the caller.</p>
+
+<ul>
+  <li>Example 10: for messages that are of <em>registration</em> msgType and <em>response</em> actType, if the <em>valueUser</em> is <em>user://gmail.com/chiang.zju</em> and the <em>dstUsername</em> is <em>he.johen@gmail.com</em>, then permit, but only keep the Connector hyperty in the returned list.</li>
+</ul>
+
+<div class="language-json highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="w">
+   </span><span class="nt">"target"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"msgType"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="nt">"equals"</span><span class="p">:</span><span class="w"> </span><span class="s2">"registration"</span><span class="p">},</span><span class="w">
+    </span><span class="nt">"actType"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="nt">"equals"</span><span class="p">:</span><span class="w"> </span><span class="s2">"response"</span><span class="p">}</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="nt">"condition"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"valueUser"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="nt">"equals"</span><span class="p">:</span><span class="w"> </span><span class="s2">"user://gmail.com/chiang.zju"</span><span class="p">},</span><span class="w">
+    </span><span class="nt">"dstUsername"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="nt">"equals"</span><span class="p">:</span><span class="w"> </span><span class="s2">"he.johen@gmail.com"</span><span class="p">}</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="nt">"effect"</span><span class="p">:</span><span class="w"> </span><span class="s2">"permit"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"obligations"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="nt">"limitByConditionOfEntries"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="nt">"bodyValue"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="nt">"descriptor"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="nt">"like"</span><span class="p">:</span><span class="w"> </span><span class="s2">"*/Connector"</span><span class="p">}}}}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+</div>
+
+<p>Until now we have provided sufficient examples on how the reTHINK PDL is implemented to realize different policing requirements for reTHINK.</p>
+
+<h4 id="performance-evaluation">Performance Evaluation</h4>
+
+<p>We have evaluated the performance of our policy evaluation language by comparing it with a common policy language XACML. We examine their vertical and horizontal scalabilities respectively in terms of the number of nesting layers (depth) and the number of sibling rules (scale).</p>
+
+<p><img src="/tests/policy/images/scale_effect.jpg" alt="Fig. 5 - Effect of the number of sibling rules" /></p>
+
+<p><img src="/tests/policy/images/depth_effect.jpg" alt="Fig. 6 - Effect of the number of nesting layers" /></p>
+
+<p>Each test was repeated 1000 times conducted on a Windows 10 PC with 16G memory and a 2.6GHz Intel core i7-6700HQ processor. From the results we can see that JACPoL is more efficient and scalable and evaluated with less latency than XACML thanks to its JSON syntax and well-defined semantics.</p>
+
+<h4 id="conclusions-and-recommendations">Conclusions and recommendations</h4>
+
+<p>As we can see from above, the policy engine fulfils access control requirements of reTHINK and at the same time provides good performance results.</p>
+
+<p>In practical application, policies are not a list of independent rules, as it would bring difficulties and inefficiency to policy indexing and management, and a bad design would even introduce conflicts between different rules. On the other hand, a good design of policies, would not only improve the performance of policy engine, but also ease the management work of policies for the administrator. In this section, we provide some guidelines that could be followed when designing policies based on reTHINK PDL.</p>
+
+<p><strong>- Clarify Policing Needs</strong></p>
+
+<p>First and foremost, clarify what policies are needed and what to achieve with these policies, with a clear list of all the rules that is planned to be deployed.</p>
+
+<p><strong>- Classify Policies &amp; Rules</strong></p>
+
+<p>Generally speaking, rules with similar <em>targets</em> (for similar purposes) are put in the same policy, and similar policies are put in the same policy set. When managing policies, it is important to classify carefully different rules and policies in order to form a well structured and layered policy set. Policies could be classified in many ways depending on your policy needs. For instance, in previous examples, most of rules use <em>msgType</em> and <em>actType</em> in order to index right policies for targeted messages. In such case, we can accordingly construct policies and policy sets based on these two attributes in the <em>target</em> fields of rules:</p>
+
+<p><img src="./images/policies.PNG" alt="" /></p>
+
+<p><strong>- Properly Utilize Logical Operators</strong></p>
+
+<p>Actually as you might already noticed, in the examples above, there are policies which have similar (same) <em>target</em> fields. In these cases, rules which have the same <em>target</em> field can be possibly combined into one rule with their <em>condition</em> fields connected by logical operators (<em>AND</em>, <em>OR</em>, <em>NOT</em>). For example a combination could be done for the two rules as below:</p>
+
+<ul>
+  <li>Rule 1:</li>
+</ul>
+
+<div class="language-json highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"target"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="nt">"msgType"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="nt">"equals"</span><span class="p">:</span><span class="w"> </span><span class="s2">"addressAllocation"</span><span class="p">}},</span><span class="w">
+  </span><span class="nt">"condition"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="nt">"time"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="nt">"between"</span><span class="p">:</span><span class="w"> </span><span class="s2">"23:00:00 01:00:00"</span><span class="p">}},</span><span class="w">
+  </span><span class="nt">"effect"</span><span class="p">:</span><span class="w"> </span><span class="s2">"deny"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+</div>
+
+<ul>
+  <li>Rule 2:</li>
+</ul>
+
+<div class="language-json highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"target"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="nt">"msgType"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="nt">"equals"</span><span class="p">:</span><span class="w"> </span><span class="s2">"addressAllocation"</span><span class="p">}},</span><span class="w">
+  </span><span class="nt">"condition"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="nt">"addrAllastMin"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="nt">"moreThan"</span><span class="p">:</span><span class="w"> </span><span class="mi">50</span><span class="p">}},</span><span class="w">
+  </span><span class="nt">"effect"</span><span class="p">:</span><span class="w"> </span><span class="s2">"deny"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+</div>
+
+<ul>
+  <li>Combined Rule:</li>
+</ul>
+
+<div class="language-json highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"target"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="nt">"msgType"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="nt">"equals"</span><span class="p">:</span><span class="w"> </span><span class="s2">"addressAllocation"</span><span class="p">}},</span><span class="w">
+  </span><span class="nt">"condition"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="nt">"addrAllastMin"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="nt">"moreThan"</span><span class="p">:</span><span class="w"> </span><span class="mi">50</span><span class="p">}},</span><span class="w">
+    </span><span class="p">{</span><span class="nt">"time"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="nt">"between"</span><span class="p">:</span><span class="w"> </span><span class="s2">"23:00:00 01:00:00"</span><span class="p">}}</span><span class="w">
+  </span><span class="p">],</span><span class="w">
+  </span><span class="nt">"effect"</span><span class="p">:</span><span class="w"> </span><span class="s2">"deny"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+</div>
+
+<p>Such kind of combination can reduce policy index and process time for a message, and also globally make policies simpler and shorter. Therefore, a proper utilization of logical operators in <em>target</em> and <em>condition</em> fields is important when designing policies.</p>
+
+  </div>
+</section>
+
+    </main>
+
+    <!-- footer Start -->
+<footer>
+  <div class="container">
+    <div class="row">
+      <div class="subscribe col-md-8 col-md-offset-2">
+        <h2>Keep in touch with us</h2>
+<p>The passage continues to see frequent usage, with Lorem Ipsum text appearing often in print, graphic and web designs.</p>
+
+<!-- <form class="form-inline">
+  <div class="form-group col-md-9 col-sm-9">
+    <input type="email" class="form-control" id="inputEmail" placeholder="Enter your email to update">
+  </div>
+  <div class="form-group col-md-3 col-sm-3">
+  <button type="submit" class="btn btn-submit">SUBMIT</button>
+  </div>
+</form> -->
+<ul class="social-media-list">
+  
+  <li class="social-icons"><a target="_blank" title="reTHINK-project" href="https://github.com/reTHINK-project">
+  <span class="icon icon--github"><svg viewBox="0 0 16 16" width="100%" height="100%"><path fill="#828282" d="M7.999,0.431c-4.285,0-7.76,3.474-7.76,7.761 c0,3.428,2.223,6.337,5.307,7.363c0.388,0.071,0.53-0.168,0.53-0.374c0-0.184-0.007-0.672-0.01-1.32 c-2.159,0.469-2.614-1.04-2.614-1.04c-0.353-0.896-0.862-1.135-0.862-1.135c-0.705-0.481,0.053-0.472,0.053-0.472 c0.779,0.055,1.189,0.8,1.189,0.8c0.692,1.186,1.816,0.843,2.258,0.645c0.071-0.502,0.271-0.843,0.493-1.037 C4.86,11.425,3.049,10.76,3.049,7.786c0-0.847,0.302-1.54,0.799-2.082C3.768,5.507,3.501,4.718,3.924,3.65 c0,0,0.652-0.209,2.134,0.796C6.677,4.273,7.34,4.187,8,4.184c0.659,0.003,1.323,0.089,1.943,0.261 c1.482-1.004,2.132-0.796,2.132-0.796c0.423,1.068,0.157,1.857,0.077,2.054c0.497,0.542,0.798,1.235,0.798,2.082 c0,2.981-1.814,3.637-3.543,3.829c0.279,0.24,0.527,0.713,0.527,1.437c0,1.037-0.01,1.874-0.01,2.129 c0,0.208,0.14,0.449,0.534,0.373c3.081-1.028,5.302-3.935,5.302-7.362C15.76,3.906,12.285,0.431,7.999,0.431z"/></svg>
+</span>
+</a>
+</li>
+  
+
+  
+  <li class="social-icons"><a target="_blank" title="rethink_eu" href="https://twitter.com/rethink_eu">
+  <span class="icon icon--twitter"><svg viewBox="0 0 16 16" width="100%" height="100%"><path fill="#828282" d="M15.969,3.058c-0.586,0.26-1.217,0.436-1.878,0.515c0.675-0.405,1.194-1.045,1.438-1.809c-0.632,0.375-1.332,0.647-2.076,0.793c-0.596-0.636-1.446-1.033-2.387-1.033c-1.806,0-3.27,1.464-3.27,3.27 c0,0.256,0.029,0.506,0.085,0.745C5.163,5.404,2.753,4.102,1.14,2.124C0.859,2.607,0.698,3.168,0.698,3.767 c0,1.134,0.577,2.135,1.455,2.722C1.616,6.472,1.112,6.325,0.671,6.08c0,0.014,0,0.027,0,0.041c0,1.584,1.127,2.906,2.623,3.206 C3.02,9.402,2.731,9.442,2.433,9.442c-0.211,0-0.416-0.021-0.615-0.059c0.416,1.299,1.624,2.245,3.055,2.271 c-1.119,0.877-2.529,1.4-4.061,1.4c-0.264,0-0.524-0.015-0.78-0.046c1.447,0.928,3.166,1.469,5.013,1.469 c6.015,0,9.304-4.983,9.304-9.304c0-0.142-0.003-0.283-0.009-0.423C14.976,4.29,15.531,3.714,15.969,3.058z"/></svg>
+</span>
+</a>
+</li>
+  
+
+  
+  <li class="social-icons"><a target="_blank" title="rethink-project" href="https://rethink-project.slack.com">
+  <span class="icon icon--slack">﻿<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 32 32" version="1.1" width="100%" height="100%">
+<path style=" " d="M 17.65625 3 C 17.375 2.976563 17.0625 3.03125 16.78125 3.125 C 15.652344 3.503906 15.058594 4.714844 15.4375 5.84375 L 16.34375 8.5 L 11.21875 10.21875 L 10.375 7.65625 C 9.996094 6.527344 8.785156 5.933594 7.65625 6.3125 C 6.523438 6.691406 5.902344 7.902344 6.28125 9.03125 L 7.125 11.5625 L 4.46875 12.46875 C 3.339844 12.847656 2.746094 14.089844 3.125 15.21875 C 3.503906 16.347656 4.714844 16.941406 5.84375 16.5625 L 8.5 15.6875 L 10.21875 20.78125 L 7.65625 21.625 C 6.527344 22.003906 5.933594 23.214844 6.3125 24.34375 C 6.691406 25.476563 7.902344 26.097656 9.03125 25.71875 L 11.5625 24.875 L 12.46875 27.53125 C 12.847656 28.660156 14.089844 29.253906 15.21875 28.875 C 16.347656 28.496094 16.941406 27.285156 16.5625 26.15625 L 15.6875 23.5 L 20.78125 21.78125 L 21.625 24.34375 C 22.003906 25.472656 23.214844 26.066406 24.34375 25.6875 C 25.476563 25.308594 26.097656 24.097656 25.71875 22.96875 L 24.875 20.4375 L 27.53125 19.53125 C 28.660156 19.152344 29.253906 17.910156 28.875 16.78125 C 28.496094 15.652344 27.285156 15.058594 26.15625 15.4375 L 23.5 16.3125 L 21.78125 11.21875 L 24.34375 10.375 C 25.472656 9.996094 26.066406 8.785156 25.6875 7.65625 C 25.308594 6.527344 24.097656 5.902344 22.96875 6.28125 L 20.4375 7.125 L 19.53125 4.46875 C 19.246094 3.621094 18.496094 3.066406 17.65625 3 Z M 17.6875 12.59375 L 19.40625 17.6875 L 14.3125 19.40625 L 12.59375 14.3125 Z "/>
+</svg>
+</span>
+</a>
+</li>
+  
+</ul>
+
+      </div>
+    </div>
+    <div class="row footer-footer">
+      <div class="footer-menu col-md-6 col-xs-12">
+        <div class="col-md-2 col-xs-2" >
+          <img width="60" height="41px" src="/img/ue-logo.jpg" alt="Img">
+        </div>
+        <div class="col-md-10 col-xs-10" >
+          <p>reTHINK Framework provides the tools to build a global real-time decentralized communication infra-structure where services are inherently inter-operable.
+</p>
+        </div>
+      </div>
+      <div class="footer-menu col-md-6 col-xs-12">
+      <div class="row">
+
+  <div class="col-sm-4 col-xs-12 ">
+    <h5>ABOUT RETHINK</h5>
+    <ul>
+      
+        <li><a title= " About reThink " href=" https://rethink-project.github.io/ ">About reThink</a></li>
+      
+        <li><a title= " Partners " href=" https://rethink-project.github.io/ ">Partners</a></li>
+      
+        <li><a title= " Approach " href=" https://rethink-project.github.io/ ">Approach</a></li>
+      
+    </ul>
+  </div>
+  <div class="col-sm-4 col-xs-12">
+    <h5>  PUBLICATIONS </h5>
+    <ul>
+      
+        <li><a title= " Deliverables " href=" https://rethink-project.github.io/ ">Deliverables</a></li>
+      
+        <li><a title= " Press " href=" https://rethink-project.github.io/ ">Press</a></li>
+      
+        <li><a title= " Conferences and Journals " href=" https://rethink-project.github.io/ ">Conferences and Journals</a></li>
+      
+    </ul>
+  </div>
+
+  <div class="col-sm-4 col-xs-12">
+    <h5>  STAY TUNED </h5>
+    <ul>
+      
+        <li><a title= " News " href=" https://rethink-project.github.io/ ">News</a></li>
+      
+        <li><a title= " Newsletter " href=" https://rethink-project.github.io/ ">Newsletter</a></li>
+      
+    </ul>
+  </div>
+
+</div>
+
+      </div>
+    </div>
+  </div>
+</footer>
+
+
+  </body>
+
+</html>

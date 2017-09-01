@@ -1,0 +1,77 @@
+
+
+@startuml "data-object-delete.png"
+
+autonumber
+
+!define SHOW_RuntimeA
+
+!define SHOW_CoreRuntimeA
+!define SHOW_SMAtRuntimeA
+!define SHOW_SP1SandboxAtRuntimeA
+!define SHOW_Syncher1AtRuntimeA
+
+!define SHOW_SP1
+!define SHOW_SMAtSP1
+
+!define SHOW_Runtime1B
+
+!define SHOW_CoreRuntime1B
+!define SHOW_SMAtRuntime1B
+!define SHOW_SP1SandboxAtRuntime1B
+!define SHOW_ServiceProvider1HypertyAtRuntime1B
+!define SHOW_Syncher1AtRuntime1B
+
+!include ../runtime_objects.plantuml
+
+Sync1@A -> RunSM@A : Delete MSG
+
+RunSM@A <- RunSM@A : policyEngine.authorise()
+
+RunSM@A -> RunSM@A : subscriptionListener.remove()
+
+== Observers are notified about object delete ==
+
+loop each Observer (via bus pub-sub)
+
+  RunSM@A -> Sync1@1B : Delete Msg
+
+  RunSM@A <- Sync1@1B : Delete Response Msg
+
+  == listeners removed at Observer side to receive data object updates ==
+
+  Sync1@1B -> RunSM@1B : Unsubscribe Msg
+
+  RunSM@1B -> RunSM@1B : listener.remove()
+
+  RunSM@1B -> SM@SP1 : Unsubscribe Msg
+
+  SM@SP1 -> SM@SP1 : removeListeners
+
+end
+
+loop each Observer
+
+  RunSM@A -> RunSM@A : observerListener.remove()
+
+end
+
+RunSM@A <- RunSM@A : registry.unregisterDataObject()
+
+ note right
+ 	DataObject URL is deallocated
+	 and its URL is unreachable in its domain
+	 (listeners removed at event/msg bus)
+ end note
+
+Sync1@A <- RunSM@A : Delete Response MSG
+
+
+loop for each observersListener
+
+	RunSM@A -> RunSM@A : observersListener.remove()
+
+end
+
+
+@enduml

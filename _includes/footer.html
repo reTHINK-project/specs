@@ -1,0 +1,23 @@
+<!-- footer Start -->
+<footer>
+  <div class="container">
+    <div class="row">
+      <div class="subscribe col-md-8 col-md-offset-2">
+        {% include subscribe.html %}
+      </div>
+    </div>
+    <div class="row footer-footer">
+      <div class="footer-menu col-md-6 col-xs-12">
+        <div class="col-md-2 col-xs-2" >
+          <img width="60" height="41px" src="{{ 'img/ue-logo.jpg'  | relative_url }}" alt="Img">
+        </div>
+        <div class="col-md-10 col-xs-10" >
+          <p>{{ site.description | escape }}</p>
+        </div>
+      </div>
+      <div class="footer-menu col-md-6 col-xs-12">
+      {% include footer-menu.html %}
+      </div>
+    </div>
+  </div>
+</footer>

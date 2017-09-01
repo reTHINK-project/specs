@@ -1,0 +1,55 @@
+/*--
+	Header Start
+--*/
+header {
+  background: $header_bg_color;
+  padding: 10px 10px;
+
+  .navbar {
+    margin-bottom: 0px;
+    border: 0px;
+  }
+
+  .navbar-brand {
+  }
+
+  .navbar-default {
+    background: none;
+    border: 0px;
+
+    .navbar-toggle {
+
+      &:focus,
+      &:hover {
+        background-color: $menu_color_hover;
+        border-color: $menu_color_border;
+
+        .icon-bar {
+           background-color: $menu_color;
+        }
+      }
+
+    }
+
+    .navbar-nav {
+      padding-top: 10px;
+
+      li a {
+        color: $menu_color;
+        padding: 10px 26px;
+        font-size: $menu_item_size;
+        text-transform: uppercase;
+
+        &:hover {
+          color: $menu_color_hover;
+        }
+
+        &:active {
+          color: $menu_color_hover;
+          text-decoration: underline;
+        }
+
+      }
+    }
+  }
+}

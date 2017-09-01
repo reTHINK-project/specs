@@ -1,0 +1,51 @@
+@startuml "../../datamodel/core/data-synch/SyncDataObject.png"
+
+package SyncDataObject {
+
+	class SyncMetadata {
+		url : URL.URL
+		version: integer
+		created : date
+		lastModified : date
+		reporter : URL.HypertyURL
+		runtime : URL.HypertyRuntimeURL
+		schema : URL.HypertyCatalogueURL
+		name : string
+		data : SyncObject
+		description ?: string
+		tags ?: string[]
+		resources ?: HypertyResource.HypertyResourceType[]
+		observerStorage ?: boolean
+		publicObservation ?: boolean
+		mutualAuthentication ?: boolean
+	}
+
+	class SyncObject {
+	}
+
+	class SyncParentMetadata {
+		childrenObjects : SyncObjectChildren{}
+		children ?: string[]
+		childUrls ?: URL.URL[]
+	}
+
+	class SyncObjectChildren <<Children>> {
+		parent : URL.URL
+		listener : string
+		children: SyncChildMetadata{}
+		type : SyncChildMetadata
+		childrenUrls ?: URL.URL[]
+	}
+
+	class SyncChildMetadata {
+	parent : URL.URL
+	}
+
+	SyncParentMetadata .up.|> SyncMetadata
+	SyncChildMetadata .up.|> SyncMetadata
+
+	SyncMetadata "1" .down.> "1" SyncObject
+	SyncObjectChildren *.down.> "1..*" SyncChildMetadata
+	SyncParentMetadata *.down.> "1..*" SyncObjectChildren
+}
+@enduml

@@ -1,0 +1,102 @@
+
+
+@startuml "bus-msg-routing.png"
+
+autonumber
+
+!define SHOW_RuntimeA
+
+!define SHOW_CoreRuntimeA
+!define SHOW_MsgBUSAtRuntimeA
+!define SHOW_RegistryAtRuntimeA
+!define SHOW_IdentitiesAtRuntimeA
+!define SHOW_AuthAtRuntimeA
+!define SHOW_CatalogueAtRuntimeA
+
+
+!include ../runtime_objects.plantuml
+
+ BUS@A <- : postMsg(message)
+
+group resolve-routing-address
+
+  RunReg@A <- BUS@A : resolve(message.to)
+
+	...
+
+	RunReg@A --> BUS@A : return(ResolvedURL)
+
+end
+
+	RunAuth@A <- BUS@A : authorise(message)
+
+  alt token required
+    RunAuth@A -> RunID@A : getToken( message.from\nmessage.to )
+
+
+      RunID@A -> RunReg@A : isLegacy( message.to )
+
+        note right
+          check if message is targeting a legacy endpoint
+          or a fully reTHINK compliant endpoint
+        end note
+
+      alt Protostub descriptor is not cached localy
+
+        RunReg@A -> RunCat@A : getProtostubDescritor( CatalogueURL )
+
+        RunReg@A <- RunCat@A : return protostubDescritor
+
+      end
+
+      RunReg@A -> RunReg@A : check protostubDescritor.interworking
+
+      alt protostubDescritor.interworking == true
+
+        RunID@A <- RunReg@A : true
+
+        RunID@A -> RunID@A : getAccessToken( )
+
+      else protostubDescritor.interworking == false or does not exist
+
+        RunID@A <- RunReg@A : false
+
+        RunID@A -> RunID@A : getIdToken( )
+
+      end
+
+    RunAuth@A <- RunID@A : return Token
+
+  else verify token
+
+    RunAuth@A -> RunID@A : decrypt ( message )
+    RunID@A -> RunID@A : validateIdentity( )
+    RunID@A -> RunID@A : validateData( )
+    RunAuth@A <- RunID@A : return message\n(decrypted and validated)
+  end
+
+	RunAuth@A -> RunAuth@A : apply authz Policies
+
+	alt Message Routing authorised
+		RunAuth@A -> BUS@A : authorised
+	else error
+
+		RunAuth@A -> BUS@A : final error
+
+		alt Error : unknown source
+
+		else Error : target not found
+
+		else Error : not associated with Identity
+
+		else Error : blocked by source policy
+
+		else Error : blocked by target policy
+		end
+	end
+
+
+BUS@A ->  : send msg
+
+
+@enduml

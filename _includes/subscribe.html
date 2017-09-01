@@ -1,0 +1,24 @@
+<h2>Keep in touch with us</h2>
+<p>The passage continues to see frequent usage, with Lorem Ipsum text appearing often in print, graphic and web designs.</p>
+
+<!-- <form class="form-inline">
+  <div class="form-group col-md-9 col-sm-9">
+    <input type="email" class="form-control" id="inputEmail" placeholder="Enter your email to update">
+  </div>
+  <div class="form-group col-md-3 col-sm-3">
+  <button type="submit" class="btn btn-submit">SUBMIT</button>
+  </div>
+</form> -->
+<ul class="social-media-list">
+  {% if site.github_username %}
+  <li class="social-icons">{% include icon-github.html username=site.github_username %}</li>
+  {% endif %}
+
+  {% if site.twitter_username %}
+  <li class="social-icons">{% include icon-twitter.html username=site.twitter_username %}</li>
+  {% endif %}
+
+  {% if site.slack_channel %}
+  <li class="social-icons">{% include icon-slack.html channel=site.slack_channel %}</li>
+  {% endif %}
+</ul>
