@@ -7,27 +7,22 @@ layout: default
   <div class="sidebar col-sm-3">
     {% assign navurl = page.url | remove: 'index.html' %}
 
-    {% assign docs_by_category = site.pages | where: 'layout', 'documentation' %}
+    {% assign docs_by_category = site.pages %}
 
     {% for ident in site.category_order %}
-
-      {% assign category = docs_by_category | where: "name", ident | first %}
-      {{ category }}
-      <p class="category">{{ category.name }}</p>
-      {% if category.items.size > 0 %}
+      <p class="category">{{ ident }}</p>
       <ul>
-      {% assign items = category.items  %}
-      {% for item in items %}
-      <li>
-        {% if item.url == navurl %}
-          <a href="{{ item.url | relative_url }}" class="active doc-link" role="link">  {{ item.title }} </a>
-        {% else %}
-          <a href="{{ item.url | relative_url }}" class="doc-link" role="link">  {{ item.title }} </a>
-        {% endif %}
-      </li>
-      {% endfor %}
+        {% assign category = docs_by_category | where: "category", ident %}
+        {% for item in category %}
+          <li>
+            {% if item.url == navurl %}
+              <a href="{{ item.url | relative_url }}" class="active doc-link" role="link">  {{ item.title }} </a>
+            {% else %}
+              <a href="{{ item.url | relative_url }}" class="doc-link" role="link">  {{ item.title }} </a>
+            {% endif %}
+          </li>
+        {% endfor %}
       </ul>
-      {% endif %}
     {% endfor %}
   </div>
 
