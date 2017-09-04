@@ -1,0 +1,59 @@
+
+
+@startuml "resolve-msg-node-address.png"
+
+autonumber
+
+!define SHOW_RuntimeA
+
+!define SHOW_CoreRuntimeA
+!define SHOW_MsgBUSAtRuntimeA
+!define SHOW_RegistryAtRuntimeA
+
+!define SHOW_SP1SandboxAtRuntimeA
+!define SHOW_Protostub1AtRuntimeA
+
+!define SHOW_SP1
+
+!include ../runtime_objects.plantuml
+
+group resolve routing address (see resolve-routing-address.md)
+
+	...
+
+		group resolve MN Stub URL
+
+			RunReg@A -> RunReg@A : look for MN Protostub
+
+			alt : MN Protostub is registered
+
+				RunReg@A -> BUS@A : return(ResolvedMessage\nwith MN Stub URL)
+
+			else : MN Protostub is not registered
+
+				group : deploy MN Protocol Stub
+
+					RunReg@A -> RunReg@A : derive Catalogue Protocolstub\n Well-known URI from domain
+
+					note right
+						No MN Protocol Stub exists. It has to be deployed. see deploy-protostub.md
+					end note
+
+
+					RunReg@A -> RunReg@A : start protostub deploy
+					...
+
+				end
+
+			RunReg@A -> BUS@A : return(ResolvedMessage\nwith new MN Stub URL)
+
+			end
+
+		end
+		...
+
+end
+
+
+
+@enduml

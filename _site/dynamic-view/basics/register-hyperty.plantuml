@@ -1,0 +1,59 @@
+
+@startuml "register-hyperty.png"
+
+autonumber
+
+!define SHOW_RuntimeA
+
+!define SHOW_AppAtRuntimeA
+
+!define SHOW_CoreRuntimeA
+!define SHOW_MsgBUSAtRuntimeA
+!define SHOW_RegistryAtRuntimeA
+!define SHOW_IdentitiesAtRuntimeA
+!define SHOW_CoreAgentAtRuntimeA
+
+!define SHOW_SP1SandboxAtRuntimeA
+!define SHOW_Protostub1AtRuntimeA
+
+!define SHOW_SP1
+
+!include ../runtime_objects.plantuml
+
+RunUA@A -> RunReg@A : registerHyperty(\npostMessage,\nHypertyDescriptor,\nHypertyURL )
+
+	group associate to Identity : see ../identity-management/user-to-hyperty-binding.md
+
+		RunID@A <- RunReg@A : get Identity
+
+		... ...
+
+		RunReg@A <- RunReg@A : set Identity
+
+	end group
+
+	RunReg@A <- RunReg@A : is a new registration?
+
+	alt yes, request a new registrtaion at Domain Registry
+
+			RunReg@A -> BUS@A : postMessage(\nCreate \nhypertyRegistration\n MSG)
+
+			BUS@A -> Proto1@A : postMessage(\ncreate \nhypertyRegistration\n MSG)
+
+			Proto1@A -> SP1 : create\nhypertyRegistration\nSP1 MSG Protocol
+
+	else no, update existing Hyperty registration at Domain Registry
+
+		RunReg@A -> BUS@A : postMessage(\nUpdate \nhypertyRegistration\n MSG)
+
+		BUS@A -> Proto1@A : postMessage(\nUpdate \nhypertyRegistration\n MSG)
+
+		Proto1@A -> SP1 : Update\nhypertyRegistration\nSP1 MSG Protocol
+
+	end
+
+RunReg@A -> BUS@A : addListener(\n registryListener,\n hypertyURL\status)
+
+RunUA@A <- RunReg@A : hyperty is registered
+
+@enduml

@@ -1,0 +1,59 @@
+/*---------------------------------------------
+					Index Start
+-----------------------------------------------*/
+/*--
+	Slider Start
+--*/
+#slider {
+  background: #000 url("../img/slider-bg.jpg") no-repeat;
+  background-size: cover;
+  background-attachment: fixed;
+  background-position: center center;
+  padding: 100px 0 280px 0;
+  position: relative;
+}
+
+#slider:before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(to bottom, rgba(0, 0, 0, 1), #000);
+  opacity: 0.7;
+}
+#slider .block {
+  color: #E3E3E4;
+}
+#slider .block h1 {
+
+  @media (max-width: 768px) {
+    font-size: 3.125rem;  /* 50/16 */
+    line-height: 3.125rem;  /* 50/16 */
+    text-align: center;
+  }
+
+  text-align: left;
+  font-weight: 100;
+  font-size: 5rem; /* 80/16 */
+  line-height: 5rem;
+  padding-bottom: 45px;
+
+
+
+}
+#slider .block p {
+
+  @media (max-width: 768px) {
+    font-size: 1.25rem; /* 20/16 */
+    line-height: normal;  /* 23/16 */
+  }
+
+  font-size: 1.4375rem; /* 23/16 */
+  line-height: 1.4375rem; /* 23/16 */
+  font-family: $secondary_font;
+  font-weight: 600;
+}

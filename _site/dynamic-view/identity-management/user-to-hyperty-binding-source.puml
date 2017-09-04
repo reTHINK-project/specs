@@ -1,0 +1,52 @@
+@startuml user-to-hyperty-binding-scheme.png
+
+autonumber
+actor Alice #red
+box "Alice's Device Core Runtime" #LightGrey
+participant RuntimeUA
+participant Registry
+participant IdModule
+participant PolicyEngine
+end box
+box "Service Provider 1 Sandbox at Alice Device" #LightGrey
+
+group register-hyperty procedure
+
+  RuntimeUA -> Registry: registerHyperty(  )
+end
+
+== Associate hyperty instance with user identity ==
+
+Registry -> IdModule : getIdentities
+
+Registry <- IdModule : Identities returned
+
+opt Policy Enforcer is requested\n to authorise ID Selection
+
+PolicyEngine <- Registry: authoriseIDHypertyBind\n(Identities)
+
+PolicyEngine <- PolicyEngine: apply policies
+
+alt IdModule has more than one Identity\nloaded and user has to select one.
+
+Alice <- PolicyEngine: request to select Identity
+
+Alice -> PolicyEngine: return selected Identity
+
+end
+
+PolicyEngine -> Registry: return authorised Identity
+
+end
+
+Registry -> IdModule: getIDToken(Identifier, scope)
+
+Registry <- IdModule: ID Token returned
+
+Registry -> Registry : bindIdentity(HypertyURL, IDToken)
+
+end box
+
+
+
+@enduml

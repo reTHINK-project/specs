@@ -1,1 +1,104 @@
-theme: jekyll-theme-architect
+# Welcome to Jekyll!
+#
+# This config file is meant for settings that affect your whole blog, values
+# which you are expected to set up once and rarely edit after that. If you find
+# yourself editing this file very often, consider using Jekyll's data files
+# feature for the data you need to update frequently.
+#
+# For technical reasons, this file is *NOT* reloaded automatically when you use
+# 'bundle exec jekyll serve'. If you change this file, please restart the server process.
+
+name: reThink
+
+# Site settings
+# These are used to personalize your new site. If you look in the HTML files,
+# you will see them accessed via {{ site.title }}, {{ site.email }}, and so on.
+# You can create any custom variable you would like, and they will be accessible
+# in the templates via {{ site.myvariable }}.
+title: reThink Project
+subtitle: This is the starting point for new rethinkers
+email: your-email@example.com
+description: > # this means to ignore newlines until "baseurl:"
+  reTHINK Framework provides the tools to build a global
+  real-time decentralized communication infra-structure
+  where services are inherently inter-operable.
+
+baseurl: "" # the subpath of your site, e.g. /blog
+url: "" # the base hostname & protocol for your site, e.g. http://example.com
+twitter_username: rethink_eu
+github_username:  reTHINK-project
+slack_channel: rethink-project
+
+logo: "/img/logo.png"
+
+# Github configuration
+github: [metadata]
+
+# Build settings
+markdown: kramdown
+theme: minima
+
+plugins:
+  - jekyll-feed
+  - jekyll-seo-tag
+  - jekyll-sitemap
+  - jekyll-avatar
+  - jekyll-github-metadata
+
+kramdown:
+  input: GFM
+  hard_wrap: false
+
+sass:
+  style: compressed
+  sass_dir: _sass
+
+# If you want to link only specific pages in your header, uncomment
+# this and add the path to the pages in order as they should show up
+header_pages:
+- documentation.md
+
+# Site permalink settings
+permalink: /:title/
+# End
+
+# # Collections settings
+# collections:
+#   documentation:
+#     output: true
+#     permalink: /:collection/:path
+# # End
+
+category_order:
+  - 'datamodel'
+  - 'deployment'
+  - 'dynamic-view'
+  - 'group-communication'
+  - 'legacy-interworking'
+  - 'messages'
+  - 'messaging-framework'
+  - 'policy-management'
+  - 'qos'
+  - 'runtime'
+  - 'schemas'
+  - 'service-framework'
+  - 'service'
+  - 'tests'
+  - 'trust-management'
+  - 'tutorials'
+
+# Exclude from processing.
+# The following items will not be processed, by default. Create a custom list
+# to override the default setting.
+exclude:
+  - node_modules
+  - vendor/bundle/
+  - vendor/cache/
+  - vendor/gems/
+  - vendor/ruby/
+  - "/vendor/"
+  - "Gemfile"
+  - "Gemfile.lock"
+  - "README.md"
+  - "LICENSE.md"
+  - "*.gemspec"

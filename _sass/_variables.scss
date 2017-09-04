@@ -1,0 +1,30 @@
+//
+// title: raleway thin, 60pt, rgb(0,222, 255)
+//
+// Google Fonts
+@import url(//fonts.googleapis.com/css?family=Raleway:100,300,400,600);
+@import url(//fonts.googleapis.com/css?family=Open+Sans:400,300,600);
+
+// Font Variables
+$primary_font: 'Raleway', serif;
+$secondary_font: 'Open Sans', sans-serif;
+
+$blue: #00deff;
+$blue1: #007c8e;
+$black: #000;
+$white: #fff;
+$gray: #ebebeb;
+
+// Colors
+$title_color: $blue;  // rgb(0,222, 255);
+$subtitle_color: $black; // rgb(0, 0, 0);
+$h2_line_color: $blue;
+
+// Header
+$header_bg_color: $black;
+
+// Menu
+$menu_item_size: 1rem !default;
+$menu_color: $white;
+$menu_color_hover: $blue;
+$menu_color_border: $blue1;

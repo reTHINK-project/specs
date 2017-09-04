@@ -1,0 +1,136 @@
+
+
+@startuml "reporter-data-object-resume.png"
+
+autonumber
+
+!define SHOW_SP2
+
+!define SHOW_RuntimeA
+
+!define SHOW_CoreRuntimeA
+!define SHOW_SMAtRuntimeA
+!define SHOW_SP1SandboxAtRuntimeA
+!define SHOW_Syncher1AtRuntimeA
+
+!define SHOW_Runtime1B
+
+!define SHOW_CoreRuntime1B
+!define SHOW_SMAtRuntime1B
+!define SHOW_RegistryAtRuntime1B
+!define SHOW_SP1SandboxAtRuntime1B
+!define SHOW_Syncher1AtRuntime1B
+
+!include ../runtime_objects.plantuml
+
+
+Sync1@1B -> Sync1@1B : resumeReporters(criteria)
+
+== check if there are Reporter objects to be resumed ==
+
+Sync1@1B -> RunSM@1B : Create Msg
+
+RunSM@1B -> RunSM@1B : resume criteria?
+
+alt resume for the same HypertyURL
+
+	RunSM@1B -> RunSM@1B : storageManager.get("syncManager.reporters.<hypertyUrl>")
+
+else resume for the same associated Identity
+
+	RunSM@1B -> RunSM@1B : storageManager.isBackup()
+
+	alt true : there is databackup
+
+	RunSM@1B -> RunSM@1B : storageManager.get("syncManager.reporters.<IdentityUrl>")
+
+
+	else false : no databackup
+
+		RunSM@1B -> RunReg@1B : read Registered Data Objects
+
+		SP2 <- RunReg@1B : read Registered Data Objects
+
+		SP2 --> RunReg@1B : return Registered Data Objects
+
+		RunSM@1B <-- RunReg@1B : return Registered Data Objects
+
+		loop for each returned ObjectUrl
+
+			RunSM@1B -> RunSM@1B : storageManager.get("syncManager.reporters.<ObjectUrl>")
+
+		end
+
+	end
+
+else others
+
+end
+
+
+
+RunSM@1B -> RunSM@1B : are there stored\n Reporter data objects
+
+
+alt yes
+
+	loop for each Reporter object to be resumed
+			RunSM@1B -> RunSM@1B : bus.addListener\n( DataObjURL/subscription, listener)
+
+			loop for each subscription
+				RunSM@1B -> RunSM@1B :bus.addPublish(DataObjURL/changes);
+			end
+
+			RunSM@1B -> RunSM@1B : RuntimeCatalogue.getDataSchemeResource()
+
+			alt if any children in the data schema
+				loop each children
+					RunSM@1B -> RunSM@1B : bus.addListener\n( DataObjURL\children\<children-name>, reporterSandboxListener)
+
+					loop for each subscription
+						RunSM@1B -> RunSM@1B : bus.addPublish(DataObjURL\children\<children-name>);
+					end
+
+				end
+			end
+
+	end
+
+	Sync1@1B <-- RunSM@1B : response with\n local stored \nreporter objects
+
+	== listeners are added on Hyperty side ==
+
+
+	loop for each reporter object to be resumed
+		create ReporterObject
+		Sync1@1B -> ReporterObject : new()
+
+		Sync1@1B -> Sync1@1B : Minibus.Addlisteners(\nDataObjURL,\nSyncherListener)
+
+		alt if any children in the data schema
+			loop each children
+				Sync1@1B -> Sync1@1B : bus.addListener\n( DataObjURL\children\<children-name>, reporterListener)
+			end
+		end
+
+		Sync1@1B -> RunReg@1B : send Update Message to <objectUrl>\status
+
+			RunReg@1B -> SP2 : registry: Update Data Object Registration\n at Domain Registry Message
+
+			note right
+				Data Object registration status is
+				 updated in the Domain Registry to "live"
+			end note
+
+			RunReg@1B <-- SP2 : Update Registration Response Message
+	end
+
+	Sync1@1B -> Sync1@1B : onReportersResume(reporters)
+
+else no Reporter data objects to be resumed
+	Sync1@1B <-- RunSM@1B : not found response
+
+end
+
+
+@enduml

@@ -1,0 +1,102 @@
+
+
+@startuml "msg-node-architecture.png"
+
+
+node "Management Services" as Man1 {
+	node "Global\nRegistry" as GReg
+	node "Domain\nRegistry" as DomReg
+	node "Identity\nManagement" as IdM1
+	node "QoS\nBroker" as QoS
+}
+
+node "Service Provider 2" as SP2 {
+	node "Messaging\nNode" as Msg2
+	node "Repository\nServer" as Repo2
+}
+
+node "End-User\nDevice 1" as User1 {
+	node "Hyperty" as H1
+}
+
+node "End-User\nDevice 2" as User2 {
+	node "Hyperty" as H2
+}
+
+node "Network\nServer" as Net {
+	node "Hyperty" as H3
+}
+
+node "Messaging Node" as msg {
+
+
+ node "ProtoStub\nSandbox" as Proto1Sand {
+
+	 node "SP2 ProtoStub" as Proto1
+ }
+
+node "Connectors" as Conn {
+	node "outgoing" as ConnOut {
+		node "IdM\nConnector" as ConnIdM
+		node "Global\nRegistry\nConnector" as ConnGReg
+		node "Domain\nRegistry\nConnector" as ConnDomReg
+		node "QoS Broker\nConnector" as ConnQoS
+	}
+	node "incoming (stub endpoints)" as ConnIn {
+		node "End-User Device\nConnector" as ConnUser
+		node "Network Server\nConnector" as ConnNet
+	}
+}
+
+
+node "Core Functionalities" as core {
+
+ node "*            Message      BUS                *" as Bus
+
+ node "Policy Engine" as BusPEP
+
+ node "Session Manager" as Reg
+
+ node "Address Allocation\nManagement" as ID
+
+ node "Subscription\nManager" as Sub
+
+ }
+
+Repo2 ..down-> Proto1: provide
+
+Msg2 <-left-> Proto1 : communicate
+
+ Bus <-right-> Proto1
+
+ BusPEP ..right-> Bus : enforce
+
+ ConnIdM ..down-> BusPEP : authorise
+
+ BusPEP .down-> Reg
+
+ Reg .left. ID
+
+ Reg <-up. Bus: session valid?
+
+ Sub -up.> Bus: add Sub\nListeners
+
+ ConnIdM <-up-> IdM1 : authorise
+
+ Bus <-up-> ConnUser : communicate
+ ConnUser <-up-> H1 : communicate
+
+ ConnUser <-up-> H2 : communicate
+
+ Bus <-up-> ConnNet : communicate
+ ConnNet <-up-> H3 : communicate
+
+ Bus <-up-> ConnGReg : communicate
+ Bus <-up-> ConnDomReg : communicate
+ ConnGReg <-up-> GReg : communicate
+ ConnDomReg <-up-> DomReg : communicate
+ ConnQoS <-up-> QoS : communicate
+ Bus <-up-> ConnQoS : communicate
+
+
+@enduml

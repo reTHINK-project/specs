@@ -1,0 +1,10 @@
+@startuml
+
+HypertyDefined --> HypertyProvisioned : publish
+HypertyDefined :
+HypertyProvisioned --> HypertyDefined : remove
+HypertyProvisioned --> HypertyProvisioned : update
+HypertyProvisioned --> HypertyInstancied : deploy(on user request)
+HypertyInstancied --> HypertyInstancied : register / unregister / monitor / charge
+
+@enduml
