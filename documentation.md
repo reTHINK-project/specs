@@ -1,7 +1,7 @@
 ---
 layout: documentation
 title: Documentation
-permalink: /specs/documentation/
+permalink: /documentation/
 ---
 
 ## what you want to say about documentation
