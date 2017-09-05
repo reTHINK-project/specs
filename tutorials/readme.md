@@ -1,3 +1,11 @@
+---
+layout: documentation
+title: Tutorials
+category: tutorials
+---
+
+Tutorials
+------------------
 ## Tutorials
 
 

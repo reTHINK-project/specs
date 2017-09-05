@@ -1,3 +1,11 @@
+---
+layout: documentation
+title: Quality of Service Control
+category: qos
+---
+
+Quality of Service Control
+------------------
 ## Quality of Service Control
 
 

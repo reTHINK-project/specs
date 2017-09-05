@@ -1,3 +1,11 @@
+---
+layout: documentation
+title: Trust Management and Security
+category: trust-management
+---
+
+Trust Management and Security
+------------------
 ## Trust Management and Security
 
 This document gives an overview on the Hyperty Trust Model as well as on Hyperty Sandbox runtime execution environment.

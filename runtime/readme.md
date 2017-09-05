@@ -1,4 +1,12 @@
+---
+layout: documentation
+title: Runtime Architecture
+category: runtime
+---
+
 Runtime Architecture
+------------------
+#Runtime Architecture
 --------------------
 
 The Hyperty Runtime provides all required functionalities to securely manage the life-cycle of Hyperties, only consuming back-end support services when strictly required.
