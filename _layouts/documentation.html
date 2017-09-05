@@ -8,10 +8,10 @@ layout: default
     {% assign navurl = page.url | remove: 'index.html' %}
 
     {% assign docs_by_category = site.pages %}
-
+    <ul>
     {% for ident in site.category_order %}
       <!-- <p class="category">{{ ident }}</p> -->
-      <ul>
+
         {% assign category = docs_by_category | where: "category", ident %}
         {% for item in category %}
           <li>
@@ -22,8 +22,9 @@ layout: default
             {% endif %}
           </li>
         {% endfor %}
-      </ul>
+
     {% endfor %}
+    </ul>
   </div>
 
   <div class="main col-sm-9">
