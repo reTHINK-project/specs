@@ -11,7 +11,7 @@ layout: default
 
     {% for ident in site.category_order %}
     <h1>{{ ident }}</h1>
-      <p class="category">{{ ident }}</p>
+      <a href="{{ ident.title.path }}" class="category">{{ ident.title }}</a>
       <ul>
         {% assign category = docs_by_category | where: "category", ident %}
         {% for item in category %}
