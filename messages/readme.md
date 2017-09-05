@@ -1,3 +1,11 @@
+---
+layout: documentation
+title: reTHINK Framework Messages Specification
+category: messages
+---
+
+reTHINK Framework Messages Specification
+------------------
 ## reTHINK Framework Messages Specification
 
 All Messages specified below, are compliant with [reTHINK Resource Oriented Message Model](../datamodel/core/message).

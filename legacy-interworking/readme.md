@@ -1,4 +1,11 @@
+---
+layout: documentation
+title: Interworking with Legacy Services
+category: legacy-interworking
+---
 
+Interworking with Legacy Services
+------------------
 ## Interworking with Legacy Services
 
 ###Introduction

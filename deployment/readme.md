@@ -1,7 +1,7 @@
 ---
 layout: documentation
 title: Quick installation guide of the reThink Platform
-category: datamodel
+category: deployment
 ---
 
 Quick installation guide of the reThink Platform

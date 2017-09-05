@@ -58,9 +58,8 @@ sass:
 header_pages:
 - documentation.md
 
-
 # Site permalink settings
-permalink: /specs/:title/
+permalink: /:title/
 # End
 
 # # Collections settings

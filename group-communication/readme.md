@@ -1,3 +1,12 @@
+---
+layout: documentation
+title: Multiparty WebRTC Communication
+category: group-communication
+---
+
+Multiparty WebRTC Communication
+------------------
+
 ## Multiparty WebRTC Communication
 The goal of this document is to provide specifications for enabling WebRTC group communication in reTHINK (aka WebRTC Multiparty). Furthermore, an ongoing discussions about these specs can be found here [WebRTC Multiparty #106](https://github.com/reTHINK-project/dev-runtime-core/issues/106#issuecomment-245019063).
 
@@ -26,7 +35,7 @@ This star topology, describes H2H WebRTC group communication between reTHINK use
  <p align="center">
   ![Star-Topology](Star-Topology.png)
 </p>  
- 
+
 <p align="center">
   Star Topology for group communication
 </p>
