@@ -70,7 +70,7 @@ permalink: /:title/
 # # End
 
 category_order:
-  - 'datamodel'
+  - title: 'datamodel'
     path: /specs/datamodel/
   - 'deployment'
   - 'dynamic-view'
