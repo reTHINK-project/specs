@@ -59,7 +59,7 @@ header_pages:
 - documentation.md
 
 # Site permalink settings
-permalink: /:title/
+permalink: specs/:title/
 # End
 
 # # Collections settings
