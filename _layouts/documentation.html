@@ -11,18 +11,10 @@ layout: default
     <h2>{{ site.category_order }}</h2>
     {% for ident in site.category_order %}
     <h1>{{ ident }}</h1>
-      <a href="{{ ident.title.path }}" class="category">{{ ident.title }}</a>
       <ul>
-        {% assign category = docs_by_category | where: "category", ident %}
-        {% for item in category %}
-          <li>
-            {% if item.url == navurl %}
-              <a href="{{ item.url | relative_url }}" class="active doc-link" role="link">  {{ item.title }} </a>
-            {% else %}
-              <a href="{{ item.url | relative_url }}" class="doc-link" role="link">  {{ item.title }} </a>
-            {% endif %}
-          </li>
-        {% endfor %}
+        <li>
+          <a href="{{ ident.title.path }}" class="category active doc-link" role="link">{{ ident.title }}</a>
+        </li>
       </ul>
     {% endfor %}
   </div>
