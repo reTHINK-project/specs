@@ -15,10 +15,10 @@ layout: default
         {% assign category = docs_by_category | where: "category", ident %}
         {% for item in category %}
           <li>
-            {% if item.url == navurl %}
-              <a href="{{ item.url | relative_url }}" class="active doc-link" role="link">  {{ item.title }} </a>
+            {% if item.path == navurl %}
+              <a href="{{ item.path | relative_url }}" class="active doc-link" role="link">  {{ item.title }} </a>
             {% else %}
-              <a href="{{ item.url | relative_url }}" class="doc-link" role="link">  {{ item.title }} </a>
+              <a href="{{ item.path | relative_url }}" class="doc-link" role="link">  {{ item.title }} </a>
             {% endif %}
           </li>
         {% endfor %}

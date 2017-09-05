@@ -71,6 +71,7 @@ permalink: /:title/
 
 category_order:
   - 'datamodel'
+    path: /specs/datamodel/
   - 'deployment'
   - 'dynamic-view'
   - 'group-communication'
