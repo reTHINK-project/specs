@@ -10,7 +10,7 @@ layout: default
     {% assign docs_by_category = site.pages %}
 
     {% for ident in site.category_order %}
-      <p class="category">{{ ident }}</p>
+      <!-- <p class="category">{{ ident }}</p> -->
       <ul>
         {% assign category = docs_by_category | where: "category", ident %}
         {% for item in category %}
