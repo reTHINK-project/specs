@@ -1,15 +1,21 @@
-### Sync Data Object Model
+---
+layout: documentation
+title: Data Object
+category: datamodel
+---
 
+Data Object Synchronisation Model
+------------------
 
 ![Sync Data Object Model](SyncDataObject.png)
 
 The SyncDataObject Model is used to specify the JSON format used in the [Reporter-Observer data synchronisation communication mechanism](../../../messaging-framework/p2p-data-sync.md) used to support Hyperty Interoperability at run time.
 
-#### SyncObject
+## SyncObject
 
 Is the abstract class for any data object to be synchronized.
 
-#### SyncMetadata
+## SyncMetadata
 
 Is the abstract class for any data object to be synchronized. It contains metadata about the object to be synchronised and the data itself.
 
@@ -42,19 +48,19 @@ Is the abstract class for any data object to be synchronized. It contains metada
 **mutualAuthentication** is a boolean used by the Policy Engine to decide if the Object sync data flows should be encrypted (true) or not (false).
 
 
-#### SyncData
+## SyncData
 
 Is the abstract class for the actual data to be synchronized.
 
-#### SyncParentMetadata
+## SyncParentMetadata
 
 Is an Abstract class for composite SyncMetadata. It contains one or more containers of Childs called childrenObjects of type SyncObjectChildren.
 
-#### SyncObjectChildren
+## SyncObjectChildren
 
 Contains a collection of SyncChildMetadata objects as **children** attribute.
 
-#### SyncObjectChild
+## SyncObjectChild
 
 Is a SyncMetadata that can be created by an observer of the SyncParent.
 

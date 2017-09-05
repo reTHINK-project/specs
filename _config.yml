@@ -15,15 +15,15 @@ name: reThink
 # you will see them accessed via {{ site.title }}, {{ site.email }}, and so on.
 # You can create any custom variable you would like, and they will be accessible
 # in the templates via {{ site.myvariable }}.
-title: reThink Project
-subtitle: This is the starting point for new rethinkers
-email: your-email@example.com
+title: reThink Framework Specifications
+subtitle: Worldwide real-time decentralized communication infra-structure
+email: github@rethink-project.eu
 description: > # this means to ignore newlines until "baseurl:"
   reTHINK Framework provides the tools to build a global
   real-time decentralized communication infra-structure
   where services are inherently inter-operable.
 
-baseurl: "" # the subpath of your site, e.g. /blog
+baseurl: "/specs" # the subpath of your site, e.g. /blog
 url: "" # the base hostname & protocol for your site, e.g. http://example.com
 twitter_username: rethink_eu
 github_username:  reTHINK-project
@@ -70,22 +70,15 @@ permalink: /specs/:title/
 # # End
 
 category_order:
-  - 'datamodel'
-  - 'deployment'
-  - 'dynamic-view'
-  - 'group-communication'
-  - 'legacy-interworking'
-  - 'messages'
-  - 'messaging-framework'
-  - 'policy-management'
-  - 'qos'
-  - 'runtime'
-  - 'schemas'
-  - 'service-framework'
-  - 'service'
-  - 'tests'
-  - 'trust-management'
   - 'tutorials'
+  - 'datamodel'
+  - 'service-framework'
+  - 'messaging-framework'
+  - 'runtime'
+  - 'trust-management'
+  - 'deployment'
+  - 'basic-procedures'
+  - 'messages'
 
 # Exclude from processing.
 # The following items will not be processed, by default. Create a custom list

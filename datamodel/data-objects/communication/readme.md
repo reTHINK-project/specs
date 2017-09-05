@@ -1,3 +1,9 @@
+---
+layout: documentation
+title: Communication
+category: datamodel
+---
+
 ### Communication Data Model
 
 ![Communication Data Object Model](Communication-Data-Object-Model.png)

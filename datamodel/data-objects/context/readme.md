@@ -1,3 +1,8 @@
+---
+layout: documentation
+title: Context
+category: datamodel
+---
 ## Context Data Object Model
 
 *To be compliant with [SENML](https://tools.ietf.org/html/draft-jennings-core-senml-01)*

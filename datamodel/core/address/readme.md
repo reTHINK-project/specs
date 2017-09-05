@@ -1,7 +1,7 @@
 ---
 layout: documentation
-title: 'Address Model'
-category: datamodel;
+title: Address
+category: datamodel
 ---
 
 ## reTHINK Address Model

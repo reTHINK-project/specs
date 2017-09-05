@@ -1,3 +1,9 @@
+---
+layout: documentation
+title: Connection
+category: datamodel
+---
+
 ### Connection
 
 ![Connection Data Object Model](Connection-Data-Object-Model.png)

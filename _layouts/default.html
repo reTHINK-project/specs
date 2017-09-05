@@ -8,7 +8,8 @@
     {% include header.html %}
 
     <div class="row">
-      <div class="sidebar col-sm-3">
+
+  <!--    <div class="sidebar col-sm-3">
         {% assign navurl = page.url | remove: 'index.html' %}
 
         {% assign docs_by_category = site.pages %}
@@ -16,7 +17,7 @@
         {% for ident in site.category_order %}
           <!-- <p class="category">{{ ident }}</p> -->
 
-            {% assign category = docs_by_category | where: "category", ident %}
+          <!--  {% assign category = docs_by_category | where: "category", ident %}
             {% for item in category %}
               <li>
                 {% if item.url == navurl %}
@@ -29,7 +30,7 @@
 
         {% endfor %}
         </ul>
-      </div>
+      </div> -->
       <div class="main col-sm-9">
         <main class="main-content" role="content" aria-label="Content">
           {{ content }}

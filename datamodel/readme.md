@@ -1,7 +1,6 @@
 ---
 layout: documentation
 title: reTHINK data Model
-category: datamodel
 ---
 
 reTHINK Data Model

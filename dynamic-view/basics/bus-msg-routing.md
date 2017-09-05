@@ -1,3 +1,9 @@
+---
+layout: documentation
+title: Message Routing
+category: basic-procedures
+---
+
 #### Message Routing in Message BUS
 
 The Runtime procedures to route a message by the Runtime BUS are described in this section.

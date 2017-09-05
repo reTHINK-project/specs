@@ -1,3 +1,9 @@
+---
+layout: documentation
+title: Hyperty Registry
+category: datamodel
+---
+
 Registry Data Model
 -------------------
 

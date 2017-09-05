@@ -1,7 +1,6 @@
 ---
 layout: documentation
 title: Hyperty Domain
-category: datamodel
 ---
 
 Hyperty Domain

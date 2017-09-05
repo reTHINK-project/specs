@@ -1,6 +1,6 @@
 ---
-layout: page
-title: 'Spec Repository'
+layout: documentation
+title: 'reTHINK Specifications'
 ---
 
 # reTHINK Framework Specifications

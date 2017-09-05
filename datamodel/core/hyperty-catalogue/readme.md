@@ -1,3 +1,9 @@
+---
+layout: documentation
+title: Hyperty Catalogue
+category: datamodel
+---
+
 Catalogue Data Model
 --------------------
 

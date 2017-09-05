@@ -1,3 +1,9 @@
+---
+layout: documentation
+title: Message
+category: datamodel
+---
+
 Message Model
 -------------
 

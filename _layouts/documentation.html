@@ -3,31 +3,30 @@ layout: default
 ---
 
 <!-- Slider Start -->
-<!-- <div class="row">
+<!--<div class="row">-->
   <div class="sidebar col-sm-3">
     {% assign navurl = page.url | remove: 'index.html' %}
 
     {% assign docs_by_category = site.pages %}
-    <ul style="padding-top: 25px;">
+
     {% for ident in site.category_order %}
-
-
+      <p class="category">{{ ident }}</p>
+      <ul>
         {% assign category = docs_by_category | where: "category", ident %}
         {% for item in category %}
           <li>
             {% if item.url == navurl %}
-              <a href="/specs{{ item.url | relative_url }}" class="active doc-link" role="link">  {{ item.title }} </a>
+              <a href="{{ item.url | relative_url }}" class="active doc-link" role="link">  {{ item.title }} </a>
             {% else %}
-              <a href="/specs{{ item.url | relative_url }}" class="doc-link" role="link">  {{ item.title }} </a>
+              <a href="{{ item.url | relative_url }}" class="doc-link" role="link">  {{ item.title }} </a>
             {% endif %}
           </li>
         {% endfor %}
-
+      </ul>
     {% endfor %}
-    </ul>
-  </div> -->
+  </div>
 
-  <div class="main col-sm-12">
+  <div class="main col-sm-9">
     <section id="global-header">
       <div class="">
           <div class="row">

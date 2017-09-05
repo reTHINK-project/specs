@@ -1,3 +1,9 @@
+---
+layout: documentation
+title: Hyperty Resource
+category: datamodel
+---
+
 
 ### Hyperty Resource
 
