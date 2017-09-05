@@ -102,7 +102,7 @@
                   
                     
                     
-                    <li><a class="page-link" href="/documentation/">Documentation</a></li>
+                    <li><a class="page-link" href="/specs/documentation/">Documentation</a></li>
                     
                   
                 </ul>
@@ -116,8 +116,210 @@
 </header><!-- header close -->
 
 
-    <main class="main-content" role="content" aria-label="Content">
-      <!-- Slider Start -->
+    <div class="row">
+      <div class="sidebar col-sm-3">
+        
+
+        
+        <ul style="padding-top: 25px;">
+        
+          <!-- <p class="category">datamodel</p> -->
+
+            
+            
+              <li>
+                
+                  <a href="/specs/datamodel/core/Hyperty-Domain/readme/" class="doc-link" role="link">  Hyperty Domain </a>
+                
+              </li>
+            
+              <li>
+                
+                  <a href="/specs/datamodel/readme/" class="doc-link" role="link">  reTHINK data Model </a>
+                
+              </li>
+            
+
+        
+          <!-- <p class="category">deployment</p> -->
+
+            
+            
+              <li>
+                
+                  <a href="/specs/deployment/readme/" class="doc-link" role="link">  Quick installation guide of the reThink Platform </a>
+                
+              </li>
+            
+
+        
+          <!-- <p class="category">dynamic-view</p> -->
+
+            
+            
+              <li>
+                
+                  <a href="/specs/dynamic-view/readme/" class="doc-link" role="link">  dynamic-view title </a>
+                
+              </li>
+            
+
+        
+          <!-- <p class="category">group-communication</p> -->
+
+            
+            
+              <li>
+                
+                  <a href="/specs/group-communication/readme/" class="doc-link" role="link">  Multiparty WebRTC Communication </a>
+                
+              </li>
+            
+
+        
+          <!-- <p class="category">legacy-interworking</p> -->
+
+            
+            
+              <li>
+                
+                  <a href="/specs/legacy-interworking/readme/" class="doc-link" role="link">  Interworking with Legacy Services </a>
+                
+              </li>
+            
+
+        
+          <!-- <p class="category">messages</p> -->
+
+            
+            
+              <li>
+                
+                  <a href="/specs/messages/readme/" class="doc-link" role="link">  reTHINK Framework Messages Specification </a>
+                
+              </li>
+            
+
+        
+          <!-- <p class="category">messaging-framework</p> -->
+
+            
+            
+              <li>
+                
+                  <a href="/specs/messaging-framework/readme/" class="doc-link" role="link">  Decentralized Messaging Framework overview </a>
+                
+              </li>
+            
+
+        
+          <!-- <p class="category">policy-management</p> -->
+
+            
+            
+              <li>
+                
+                  <a href="/specs/policy-management/readme/" class="doc-link" role="link">  Policy Management Title </a>
+                
+              </li>
+            
+
+        
+          <!-- <p class="category">qos</p> -->
+
+            
+            
+              <li>
+                
+                  <a href="/specs/qos/readme/" class="doc-link" role="link">  Quality of Service Control </a>
+                
+              </li>
+            
+
+        
+          <!-- <p class="category">runtime</p> -->
+
+            
+            
+              <li>
+                
+                  <a href="/specs/runtime/readme/" class="doc-link" role="link">  Runtime Architecture </a>
+                
+              </li>
+            
+
+        
+          <!-- <p class="category">schemas</p> -->
+
+            
+            
+              <li>
+                
+                  <a href="/specs/schemas/readme/" class="doc-link" role="link">  Schemas title </a>
+                
+              </li>
+            
+
+        
+          <!-- <p class="category">service-framework</p> -->
+
+            
+            
+              <li>
+                
+                  <a href="/specs/service-framework/readme/" class="doc-link" role="link">  Service Framework </a>
+                
+              </li>
+            
+
+        
+          <!-- <p class="category">service</p> -->
+
+            
+            
+
+        
+          <!-- <p class="category">tests</p> -->
+
+            
+            
+              <li>
+                
+                  <a href="/specs/tests/readme/" class="doc-link" role="link">  Tests Title </a>
+                
+              </li>
+            
+
+        
+          <!-- <p class="category">trust-management</p> -->
+
+            
+            
+              <li>
+                
+                  <a href="/specs/trust-management/readme/" class="doc-link" role="link">  Trust Management and Security </a>
+                
+              </li>
+            
+
+        
+          <!-- <p class="category">tutorials</p> -->
+
+            
+            
+              <li>
+                
+                  <a href="/specs/tutorials/readme/" class="doc-link" role="link">  Tutorials </a>
+                
+              </li>
+            
+
+        
+        </ul>
+      </div>
+      <div class="main col-sm-9">
+        <main class="main-content" role="content" aria-label="Content">
+          <!-- Slider Start -->
 <section id="global-header">
   <div class="container">
       <div class="row">
@@ -184,7 +386,7 @@ These characteristics are supported by the usage of virtual addresses separately
 
 <h3 id="syncher-and-sync-manager">Syncher and Sync Manager</h3>
 
-<p>This section, gives an overview on how the Data Object synchronisation transparently works on top of the <a href="/messaging-framework/">Messaging Framework</a>.</p>
+<p>This section, gives an overview on how the Data Object synchronisation transparently works on top of the <a href="/messaging-framework/readme/">Messaging Framework</a>.</p>
 
 <p>The Data Object synchronisation is provided by two components in the Runtime:</p>
 
@@ -192,7 +394,7 @@ These characteristics are supported by the usage of virtual addresses separately
 
 <p>The <a href="https://github.com/reTHINK-project/dev-runtime-core/blob/master/src/syncher/SyncherManager.js">Runtime Sync Manager</a> is a Core Runtime Component, which is in charge of handling authorisation requests to create Sync Data Objects from Reporters and subscription requests to Sync Data Objects from Observers. As soon as authorisation is granted the Sync Manager handles all required MessageBUS listeners in order to setup the Data Sync Stream routing path among Reporters and Observers. I.e., the Runtime Sync Manager provides a Messaging Framework Routing Manager functionality.</p>
 
-<p>The <a href="https://github.com/reTHINK-project/dev-service-framework/blob/master/src/syncher/Syncher.js">Message Node Sync Manager</a> is a Message Node functionality, which is in charge of handling requests from Runtime Sync Managers in order to setup the Data Sync Stream routing path between the Reporter Runtime and Observers Runtimes. I.e., the Message Node Sync Manager also provides a <a href="/messaging-framework/">Messaging Framework</a> Routing Manager functionality..</p>
+<p>The <a href="https://github.com/reTHINK-project/dev-service-framework/blob/master/src/syncher/Syncher.js">Message Node Sync Manager</a> is a Message Node functionality, which is in charge of handling requests from Runtime Sync Managers in order to setup the Data Sync Stream routing path between the Reporter Runtime and Observers Runtimes. I.e., the Message Node Sync Manager also provides a <a href="/messaging-framework/readme/">Messaging Framework</a> Routing Manager functionality..</p>
 
 <p><img src="/messaging-framework/sync-routing-management.png" alt="Routing Management for Hyperty Data Syncronisation" /></p>
 
@@ -201,8 +403,9 @@ These characteristics are supported by the usage of virtual addresses separately
   </div>
 </section>
 
-    </main>
-
+        </main>
+      </div>
+    </div>
     <!-- footer Start -->
 <footer>
   <div class="container">

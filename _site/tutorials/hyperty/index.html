@@ -102,7 +102,7 @@
                   
                     
                     
-                    <li><a class="page-link" href="/documentation/">Documentation</a></li>
+                    <li><a class="page-link" href="/specs/documentation/">Documentation</a></li>
                     
                   
                 </ul>
@@ -116,8 +116,210 @@
 </header><!-- header close -->
 
 
-    <main class="main-content" role="content" aria-label="Content">
-      <!-- Slider Start -->
+    <div class="row">
+      <div class="sidebar col-sm-3">
+        
+
+        
+        <ul style="padding-top: 25px;">
+        
+          <!-- <p class="category">datamodel</p> -->
+
+            
+            
+              <li>
+                
+                  <a href="/specs/datamodel/core/Hyperty-Domain/readme/" class="doc-link" role="link">  Hyperty Domain </a>
+                
+              </li>
+            
+              <li>
+                
+                  <a href="/specs/datamodel/readme/" class="doc-link" role="link">  reTHINK data Model </a>
+                
+              </li>
+            
+
+        
+          <!-- <p class="category">deployment</p> -->
+
+            
+            
+              <li>
+                
+                  <a href="/specs/deployment/readme/" class="doc-link" role="link">  Quick installation guide of the reThink Platform </a>
+                
+              </li>
+            
+
+        
+          <!-- <p class="category">dynamic-view</p> -->
+
+            
+            
+              <li>
+                
+                  <a href="/specs/dynamic-view/readme/" class="doc-link" role="link">  dynamic-view title </a>
+                
+              </li>
+            
+
+        
+          <!-- <p class="category">group-communication</p> -->
+
+            
+            
+              <li>
+                
+                  <a href="/specs/group-communication/readme/" class="doc-link" role="link">  Multiparty WebRTC Communication </a>
+                
+              </li>
+            
+
+        
+          <!-- <p class="category">legacy-interworking</p> -->
+
+            
+            
+              <li>
+                
+                  <a href="/specs/legacy-interworking/readme/" class="doc-link" role="link">  Interworking with Legacy Services </a>
+                
+              </li>
+            
+
+        
+          <!-- <p class="category">messages</p> -->
+
+            
+            
+              <li>
+                
+                  <a href="/specs/messages/readme/" class="doc-link" role="link">  reTHINK Framework Messages Specification </a>
+                
+              </li>
+            
+
+        
+          <!-- <p class="category">messaging-framework</p> -->
+
+            
+            
+              <li>
+                
+                  <a href="/specs/messaging-framework/readme/" class="doc-link" role="link">  Decentralized Messaging Framework overview </a>
+                
+              </li>
+            
+
+        
+          <!-- <p class="category">policy-management</p> -->
+
+            
+            
+              <li>
+                
+                  <a href="/specs/policy-management/readme/" class="doc-link" role="link">  Policy Management Title </a>
+                
+              </li>
+            
+
+        
+          <!-- <p class="category">qos</p> -->
+
+            
+            
+              <li>
+                
+                  <a href="/specs/qos/readme/" class="doc-link" role="link">  Quality of Service Control </a>
+                
+              </li>
+            
+
+        
+          <!-- <p class="category">runtime</p> -->
+
+            
+            
+              <li>
+                
+                  <a href="/specs/runtime/readme/" class="doc-link" role="link">  Runtime Architecture </a>
+                
+              </li>
+            
+
+        
+          <!-- <p class="category">schemas</p> -->
+
+            
+            
+              <li>
+                
+                  <a href="/specs/schemas/readme/" class="doc-link" role="link">  Schemas title </a>
+                
+              </li>
+            
+
+        
+          <!-- <p class="category">service-framework</p> -->
+
+            
+            
+              <li>
+                
+                  <a href="/specs/service-framework/readme/" class="doc-link" role="link">  Service Framework </a>
+                
+              </li>
+            
+
+        
+          <!-- <p class="category">service</p> -->
+
+            
+            
+
+        
+          <!-- <p class="category">tests</p> -->
+
+            
+            
+              <li>
+                
+                  <a href="/specs/tests/readme/" class="doc-link" role="link">  Tests Title </a>
+                
+              </li>
+            
+
+        
+          <!-- <p class="category">trust-management</p> -->
+
+            
+            
+              <li>
+                
+                  <a href="/specs/trust-management/readme/" class="doc-link" role="link">  Trust Management and Security </a>
+                
+              </li>
+            
+
+        
+          <!-- <p class="category">tutorials</p> -->
+
+            
+            
+              <li>
+                
+                  <a href="/specs/tutorials/readme/" class="doc-link" role="link">  Tutorials </a>
+                
+              </li>
+            
+
+        
+        </ul>
+      </div>
+      <div class="main col-sm-9">
+        <main class="main-content" role="content" aria-label="Content">
+          <!-- Slider Start -->
 <section id="global-header">
   <div class="container">
       <div class="row">
@@ -138,14 +340,14 @@
 <p>This document provides an overview about the Hyperty concept and it should be the starting point for any new developer. After this document, all developers should also read:</p>
 
 <ul>
-  <li>the <a href="/messaging-framework/">Hyperty Messaging Framework overview</a></li>
+  <li>the <a href="/messaging-framework/readme/">Hyperty Messaging Framework overview</a></li>
   <li>the <a href="/messaging-framework/p2p-data-sync/">Reporter - Observer Data Synchronisation model</a></li>
-  <li>the <a href="/trust-management/">Hyperty Trust and Security Model</a></li>
+  <li>the <a href="/trust-management/readme/">Hyperty Trust and Security Model</a></li>
 </ul>
 
-<p>Hyperties are software modules that are maintained by service providers’ catalogues, hence can be accepted as trusted software that is well maintained and secure. These modules follow <a href="http://martinfowler.com/articles/microservices.html">Microservices</a>  architectural patterns  meaning they are independently deployable components each one providing a small set of business capabilities, using the smart endpoints and dumb pipes philosophy i.e. Hyperties don’t depend on complex and sophisticated communication middleware like Enterprise Service BUS (ESB). Instead, Hyperties rely on a very light but powerful <a href="/messaging-framework/">Messaging Framework</a> concept). On the other side, Hyperties follow emerging <a href="https://en.wikipedia.org/wiki/Edge_computing">Edge</a> and <a href="https://en.wikipedia.org/wiki/Fog_computing">Fog</a> computing paradigms as opposed to more popular Cloud Computing. Hyperties can also be executed in Network Servers for specific Business Capabilities (e.g. Media Servers) or when End-user devices don’t have enough capabilities in terms of computing resources and/or power.</p>
+<p>Hyperties are software modules that are maintained by service providers’ catalogues, hence can be accepted as trusted software that is well maintained and secure. These modules follow <a href="http://martinfowler.com/articles/microservices.html">Microservices</a>  architectural patterns  meaning they are independently deployable components each one providing a small set of business capabilities, using the smart endpoints and dumb pipes philosophy i.e. Hyperties don’t depend on complex and sophisticated communication middleware like Enterprise Service BUS (ESB). Instead, Hyperties rely on a very light but powerful <a href="/messaging-framework/readme/">Messaging Framework</a> concept). On the other side, Hyperties follow emerging <a href="https://en.wikipedia.org/wiki/Edge_computing">Edge</a> and <a href="https://en.wikipedia.org/wiki/Fog_computing">Fog</a> computing paradigms as opposed to more popular Cloud Computing. Hyperties can also be executed in Network Servers for specific Business Capabilities (e.g. Media Servers) or when End-user devices don’t have enough capabilities in terms of computing resources and/or power.</p>
 
-<p>Currently, Hyperties are programmed in Javascript but in future it is expected the launch of <a href="/runtime/">Hyperty Runtimes</a> supporting more programming languages like Go and Java.</p>
+<p>Currently, Hyperties are programmed in Javascript but in future it is expected the launch of <a href="/runtime/readme/">Hyperty Runtimes</a> supporting more programming languages like Go and Java.</p>
 
 <p><img src="/tutorials/hyperty-concept1.png" alt="Hyperty Concept and Edge Computing" /></p>
 
@@ -165,7 +367,7 @@ This identity provider delivers authentication tokens, which are sent to any inv
 This independent ID would be used for any participating service and users will be free to change service providers, where the subscription changes do not affect user reachability.
 On enquiry, these IdPs vouch for users’ authenticity and return the URL of the users’ domain, which enables finding destination users.
 The users’ identities are based on their personal and confidential data, which is verified by other solicited data, but such private information is only divulged under user-controlled privacy rules.
-More information is provided in <a href="/trust-management/">the Hyperty Security and Trust Model document</a>.</p>
+More information is provided in <a href="/trust-management/readme/">the Hyperty Security and Trust Model document</a>.</p>
 
 <p><strong>Write once, deploy anywhere</strong></p>
 
@@ -184,8 +386,9 @@ This means, billions of devices are already Hyperty enabled and ready to partici
   </div>
 </section>
 
-    </main>
-
+        </main>
+      </div>
+    </div>
     <!-- footer Start -->
 <footer>
   <div class="container">
