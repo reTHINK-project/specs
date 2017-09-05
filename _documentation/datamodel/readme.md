@@ -2,6 +2,7 @@
 layout: documentation
 title: reTHINK data Model
 category: datamodel
+permalink: /specs/datamodel/readme/
 ---
 
 reTHINK Data Model
