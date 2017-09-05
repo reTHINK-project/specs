@@ -17,6 +17,9 @@
 <loc>http://localhost:4000/datamodel/readme/</loc>
 </url>
 <url>
+<loc>http://localhost:4000/deployment/readme/</loc>
+</url>
+<url>
 <loc>http://localhost:4000/datamodel/data-objects/communication/data-synch-communication-model/</loc>
 </url>
 <url>
@@ -300,9 +303,6 @@
 </url>
 <url>
 <loc>http://localhost:4000/datamodel/data-objects/hyperty-resource/</loc>
-</url>
-<url>
-<loc>http://localhost:4000/deployment/</loc>
 </url>
 <url>
 <loc>http://localhost:4000/dynamic-view/basics/</loc>
