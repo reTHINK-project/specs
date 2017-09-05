@@ -121,7 +121,11 @@ a:active {
     fill: $blue;
   }
 }
-
+.leftlist {
+  ul {
+    padding-top: 25px;
+  }
+}
 
 /*--
 	Main Start
