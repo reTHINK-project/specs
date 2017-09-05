@@ -1,3 +1,12 @@
+---
+layout: documentation
+title: Quick installation guide of the reThink Platform
+category: datamodel
+---
+
+Quick installation guide of the reThink Platform
+------------------
+
 # Quick installation guide of the reThink Platform.
 # Table of Contents
 1. [Components to install](#components-to-install)
@@ -54,7 +63,7 @@ As mentionned above, the communication service providers consists in __3__ compo
 
 
 
-On next steps, we will build a docker-compose file, for each component we will build a service. 
+On next steps, we will build a docker-compose file, for each component we will build a service.
 Your docker-compose file, should be something like [this](https://github.com/reTHINK-project/specs/tree/master/deployment/docker-compose.yml), at the end of this steps. After it run ```docker-compose up -d ```
 
 #### Domain Registry
