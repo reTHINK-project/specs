@@ -1,6 +1,5 @@
 ---
 layout: documentation
-title: 'reTHINK Specifications'
 ---
 
 # reTHINK Framework Specifications
