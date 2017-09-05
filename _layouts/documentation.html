@@ -8,11 +8,20 @@ layout: default
     {% assign navurl = page.url | remove: 'index.html' %}
 
     {% assign docs_by_category = site.pages %}
+
     {% for ident in site.category_order %}
+      <p class="category">{{ ident }}</p>
       <ul>
-        <li>
-          <a href="{{ ident.title.path }}" class="category active doc-link" role="link">{{ ident.title }}</a>
-        </li>
+        {% assign category = docs_by_category | where: "category", ident %}
+        {% for item in category %}
+          <li>
+            {% if item.url == navurl %}
+              <a href="{{ item.url | relative_url }}" class="active doc-link" role="link">  {{ item.title }} </a>
+            {% else %}
+              <a href="{{ item.url | relative_url }}" class="doc-link" role="link">  {{ item.title }} </a>
+            {% endif %}
+          </li>
+        {% endfor %}
       </ul>
     {% endfor %}
   </div>

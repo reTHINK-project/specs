@@ -59,7 +59,7 @@ header_pages:
 - documentation.md
 
 # Site permalink settings
-permalink: specs/:title/
+permalink: /:title/
 # End
 
 # # Collections settings
@@ -70,8 +70,7 @@ permalink: specs/:title/
 # # End
 
 category_order:
-  - title: 'datamodel'
-    path: /specs/datamodel/
+  - 'datamodel'
   - 'deployment'
   - 'dynamic-view'
   - 'group-communication'
