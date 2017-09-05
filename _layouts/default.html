@@ -7,10 +7,35 @@
 
     {% include header.html %}
 
-    <main class="main-content" role="content" aria-label="Content">
-      {{ content }}
-    </main>
+    <div class="row">
+      <div class="sidebar col-sm-3">
+        {% assign navurl = page.url | remove: 'index.html' %}
 
+        {% assign docs_by_category = site.pages %}
+        <ul style="padding-top: 25px;">
+        {% for ident in site.category_order %}
+          <!-- <p class="category">{{ ident }}</p> -->
+
+            {% assign category = docs_by_category | where: "category", ident %}
+            {% for item in category %}
+              <li>
+                {% if item.url == navurl %}
+                  <a href="/specs{{ item.url | relative_url }}" class="active doc-link" role="link">  {{ item.title }} </a>
+                {% else %}
+                  <a href="/specs{{ item.url | relative_url }}" class="doc-link" role="link">  {{ item.title }} </a>
+                {% endif %}
+              </li>
+            {% endfor %}
+
+        {% endfor %}
+        </ul>
+      </div>
+      <div class="main col-sm-9">
+        <main class="main-content" role="content" aria-label="Content">
+          {{ content }}
+        </main>
+      </div>
+    </div>
     {% include footer.html %}
 
   </body>
