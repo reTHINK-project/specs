@@ -1,3 +1,13 @@
+---
+layout: documentation
+title: Hyperty Domain
+category: datamodel
+---
+
+Hyperty Domain
+------------------
+
+
 The Hyperty domain brings together and organizes the data of the service provider about the induced administrative domain. Beyond the associated identifiers, it is structured around two main building blocks concerning respectively the governance carried out in this domain and the associated infrastructure subject of this governance.  
 
 The infrastructure block includes the main servers supporting the various services required in such a domain :
