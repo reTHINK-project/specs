@@ -23,7 +23,7 @@ description: > # this means to ignore newlines until "baseurl:"
   real-time decentralized communication infra-structure
   where services are inherently inter-operable.
 
-baseurl: "/specs" # the subpath of your site, e.g. /blog
+baseurl: "" # the subpath of your site, e.g. /blog
 url: "" # the base hostname & protocol for your site, e.g. http://example.com
 twitter_username: rethink_eu
 github_username:  reTHINK-project
