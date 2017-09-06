@@ -5,21 +5,18 @@ category: Messaging Framework
 order: 2
 ---
 
-#### Messaging Node Functional Architecture
-
 The Messaging Node functional architecture is presented in the figure below and it comprises three main types of functionalities including the Core Functionalities, Connectors and Protocol Stubs.
 
-Compared to the phase 1 version two additional components have been added to the Messaging Node Architecture, a Subscription Manager as well as a connector for the Global Registry.
 
 ![Figure @msg-node-architecture-messaging-node-architecture: Messaging Node Architecture](msg-node-architecture.png)
 
-##### Core Functionalities
+## Core Functionalities
 
-###### Message BUS
+### Message BUS
 
 The Message BUS routes messages to internal Messaging Node components and external elements by using Connectors or Protocol Stubs. It supports different communication patterns including publish/subscribe and request/response communication.
 
-###### Policy Engine
+### Policy Engine
 
 Message nodes are responsible for the interaction of runtimes that might belong to different administrative domains by offering protocol stubs to these external runtimes. The domain operators need a mechanism to control these domain interactions and to potentially block or limit certain combinations of message exchange.
 
@@ -27,11 +24,11 @@ In order to achieve this, a MN must provide a hook in the message flow that allo
 
 Therefore a Policy Engine provides Policy Decision and Policy Enforcement functionalities at Domain level for incoming and outgoing messages in cooperation with authentication and authorization provided by Identity Management functionalities. It also provides authorization / access control to the Message BUS.
 
-###### Session Management
+### Session Management
 
 Session Management functionalities are used to control messaging connections to service provider back-end services. For example, when user turns-on the device and connects to its domain, providing credentials as required by Identity Management functionalities. In general, each message should contain a valid token that is generated when the client connects to the Messaging Node. It also manages the registry of protocol stubs and connectors supported by the Messaging Nodes to support the routing of messages to these components.
 
-###### Address Allocation Management
+### Address Allocation Management
 
 As soon as an entity in a runtime wants to be accessible from another runtime, this entity must be addressable. Since a MN is the central message routing point for a domain it is the MNs task to create these addresses and to assign them to the requesting runtime. The resulting internal allocation table stores the relation of the allocated addresses to the stub connections and enables a proper routing of messages between the runtimes.
 
@@ -46,7 +43,7 @@ Address Allocation Management functionality must have listeners to receive messa
 domain://msg-node.<sp-domain>/address-allocation
 ```
 
-##### Subscription Manager
+### Subscription Manager
 
 A core concept in the reTHINK architecture is that Hyperties interact with each other by exchanging and synchronizing their managed data objects based on the [Reporter - Observer pattern](p2p-data-sync.md). The MN supports this concept by allowing observers (Hyperties, running in one or more runtimes) to subscribe for changes of certain allocated data object urls deployed in other runtimes. Whenever a Hyperty runtime reports a change in a monitored data object it sends a change message to the MN. The "to" address of this message will simply be the allocated address of the updated data object, not the address of the subscribers directly.
 
@@ -99,7 +96,7 @@ The Subscription Manager functionality must have listeners to receive messages f
 domain://msg-node.<sp-domain>/sm
 ```
 
-##### Protocol Stub
+### Protocol Stub
 
 The basic operation mode of a MN is that it is connected by runtimes directly via the provided protocol stubs. A message received from one runtime will be forwarded to another runtime which must also be connected through a stub. This is a classic "triangular" messaging architecture. The triangular message flow looks like this:
 
@@ -125,12 +122,12 @@ It is the responsibility of the MN to release resources if the "disconnect" meth
 
 For more detailed specification of Protocol Stubs please refer to [Protocol stub specification](https://github.com/reTHINK-project/specs/blob/master/messaging-framework/stub-specification.md).
 
-### Connectors
+## Connectors
 
 Connectors implement protocol stacks used to interoperate with external elements from the domains. In general there are connectors for outgoing access to components inside or outside the own domain and on the other hand endpoints listening for incoming connections from external entities, like hyperty runtimes on end-user/network- devices.
 All types of Connectors can be supported by using protocol on-the-fly concept, giving more flexibility for the integration of the Messaging Node in the Service Provider infra-structure.
 
-#### IdM Connector
+### IdM Connector
 
 The IdM connector provides access to the domains Identity Manager. The IdM functionalities support the Session Manager for a general Access Control and the Policy Manager for the validation of identity tokens in messages and the enforcement of routing policies.
 
@@ -140,7 +137,7 @@ It must have listeners to receive messages for the following addresses:
 domain://idm.<sp-domain>
 ```
 
-#### Domain Registry Connector
+### Domain Registry Connector
 
 The allocation of a unique address is only the first step on the way to make a hyperty or data object usable from another runtime. In order to make it discoverable the allocated addresses must be registered in the domain registry component. The interaction with the domain registry is also the task of the MN. The MN has to intercept messages from a runtime that address the <registry> subdomain of the MNs own url and to create a corresponding asynchronous request to the domain registry. As soon as it receives an answer, the MN has to respond this answer back to the runtime.
 
@@ -152,7 +149,7 @@ It must have listeners to receive messages for the following addresses:
 domain://registry.<sp-domain>
 ```
 
-#### Global Registry Connector
+### Global Registry Connector
 
 The role of the Global Registry Connector is comparable to the connector for the Domain Registry. It acts as a relay between the hyperty runtimes and the Global Registry. It is used by the Runtime Graph Connector to handle user’s GUID and it is also used by Hyperties to discover the domains where special remote Hyperties are registered. This Connector is optional. It might be required in cases where the runtime itself might not be able to establish an own connection to the Global registry. In such cases it can use the Connector running on the MN of its home-domain to access it.
 The specification of the messages for the interaction with the global registry can be found at [Global Registry messages](https://github.com/reTHINK-project/specs/blob/master/messages/global-registry-messages.md).
@@ -163,11 +160,11 @@ It must have listeners to receive messages for the following addresses:
 global://registry/
 ```
 
-#### QoS Broker Connector
+### QoS Broker Connector
 
 The QoS Broker Connector allows applications to communicate with the QoS Broker Component in a certain domain. The application can use this mechanism to inquire available network resources and to place resource reservations for application sessions.
 
-#### End-User Device Connector / Network Server Connector
+### End-User Device Connector / Network Server Connector
 
 These Connectors provide the “server-side” for connections that are initiated by protocol stubs running inside of Hyperty runtimes. These runtimes can either be running on end-user devices (e.g. in a browser or stand-alone environment) or on network-server devices, for example on an embedded system that implements an IoT use case.
 A simple technical example for such a connector is a Websocket server that waits for connection requests from externally deployed stubs and handles them. The types of required server-side connectors correlates to the types of stubs that the MN needs to support. If a stub, for instance, needs to establish a REST like communication than the MN must operate a connector that implements the REST server endpoint.

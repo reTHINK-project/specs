@@ -86,7 +86,11 @@
             <div class="navbar-header">
               <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
                 <span class="sr-only">Toggle navigation</span>
-                <span class="icon-bar"></span>
+                <span class="icon-bar"><a target="_blank" title="reTHINK-project" href="https://github.com/reTHINK-project">
+  <span class="icon icon--github"><svg viewBox="0 0 16 16" width="100%" height="100%"><path fill="#828282" d="M7.999,0.431c-4.285,0-7.76,3.474-7.76,7.761 c0,3.428,2.223,6.337,5.307,7.363c0.388,0.071,0.53-0.168,0.53-0.374c0-0.184-0.007-0.672-0.01-1.32 c-2.159,0.469-2.614-1.04-2.614-1.04c-0.353-0.896-0.862-1.135-0.862-1.135c-0.705-0.481,0.053-0.472,0.053-0.472 c0.779,0.055,1.189,0.8,1.189,0.8c0.692,1.186,1.816,0.843,2.258,0.645c0.071-0.502,0.271-0.843,0.493-1.037 C4.86,11.425,3.049,10.76,3.049,7.786c0-0.847,0.302-1.54,0.799-2.082C3.768,5.507,3.501,4.718,3.924,3.65 c0,0,0.652-0.209,2.134,0.796C6.677,4.273,7.34,4.187,8,4.184c0.659,0.003,1.323,0.089,1.943,0.261 c1.482-1.004,2.132-0.796,2.132-0.796c0.423,1.068,0.157,1.857,0.077,2.054c0.497,0.542,0.798,1.235,0.798,2.082 c0,2.981-1.814,3.637-3.543,3.829c0.279,0.24,0.527,0.713,0.527,1.437c0,1.037-0.01,1.874-0.01,2.129 c0,0.208,0.14,0.449,0.534,0.373c3.081-1.028,5.302-3.935,5.302-7.362C15.76,3.906,12.285,0.431,7.999,0.431z"/></svg>
+</span>
+</a>
+</span>
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
               </button>
@@ -101,8 +105,6 @@
                 <ul class="nav navbar-nav navbar-right">
                   
                     
-                    
-                    <li><a class="page-link" href="/specs/documentation/">Documentation</a></li>
                     
                   
                 </ul>
@@ -1150,21 +1152,17 @@
   <div class="main col-sm-9">
     <section>
       <div class="">
-        <h4 id="messaging-node-functional-architecture">Messaging Node Functional Architecture</h4>
-
-<p>The Messaging Node functional architecture is presented in the figure below and it comprises three main types of functionalities including the Core Functionalities, Connectors and Protocol Stubs.</p>
-
-<p>Compared to the phase 1 version two additional components have been added to the Messaging Node Architecture, a Subscription Manager as well as a connector for the Global Registry.</p>
+        <p>The Messaging Node functional architecture is presented in the figure below and it comprises three main types of functionalities including the Core Functionalities, Connectors and Protocol Stubs.</p>
 
 <p><img src="/specs/messaging-framework/msg-node-architecture.png" alt="Figure @msg-node-architecture-messaging-node-architecture: Messaging Node Architecture" /></p>
 
-<h5 id="core-functionalities">Core Functionalities</h5>
+<h2 id="core-functionalities">Core Functionalities</h2>
 
-<h6 id="message-bus">Message BUS</h6>
+<h3 id="message-bus">Message BUS</h3>
 
 <p>The Message BUS routes messages to internal Messaging Node components and external elements by using Connectors or Protocol Stubs. It supports different communication patterns including publish/subscribe and request/response communication.</p>
 
-<h6 id="policy-engine">Policy Engine</h6>
+<h3 id="policy-engine">Policy Engine</h3>
 
 <p>Message nodes are responsible for the interaction of runtimes that might belong to different administrative domains by offering protocol stubs to these external runtimes. The domain operators need a mechanism to control these domain interactions and to potentially block or limit certain combinations of message exchange.</p>
 
@@ -1172,11 +1170,11 @@
 
 <p>Therefore a Policy Engine provides Policy Decision and Policy Enforcement functionalities at Domain level for incoming and outgoing messages in cooperation with authentication and authorization provided by Identity Management functionalities. It also provides authorization / access control to the Message BUS.</p>
 
-<h6 id="session-management">Session Management</h6>
+<h3 id="session-management">Session Management</h3>
 
 <p>Session Management functionalities are used to control messaging connections to service provider back-end services. For example, when user turns-on the device and connects to its domain, providing credentials as required by Identity Management functionalities. In general, each message should contain a valid token that is generated when the client connects to the Messaging Node. It also manages the registry of protocol stubs and connectors supported by the Messaging Nodes to support the routing of messages to these components.</p>
 
-<h6 id="address-allocation-management">Address Allocation Management</h6>
+<h3 id="address-allocation-management">Address Allocation Management</h3>
 
 <p>As soon as an entity in a runtime wants to be accessible from another runtime, this entity must be addressable. Since a MN is the central message routing point for a domain it is the MNs task to create these addresses and to assign them to the requesting runtime. The resulting internal allocation table stores the relation of the allocated addresses to the stub connections and enables a proper routing of messages between the runtimes.</p>
 
@@ -1191,7 +1189,7 @@ The specification of the messages to manage address allocations can be found at 
 </code></pre>
 </div>
 
-<h5 id="subscription-manager">Subscription Manager</h5>
+<h3 id="subscription-manager">Subscription Manager</h3>
 
 <p>A core concept in the reTHINK architecture is that Hyperties interact with each other by exchanging and synchronizing their managed data objects based on the <a href="/specs/messaging-framework/p2p-data-sync/">Reporter - Observer pattern</a>. The MN supports this concept by allowing observers (Hyperties, running in one or more runtimes) to subscribe for changes of certain allocated data object urls deployed in other runtimes. Whenever a Hyperty runtime reports a change in a monitored data object it sends a change message to the MN. The “to” address of this message will simply be the allocated address of the updated data object, not the address of the subscribers directly.</p>
 
@@ -1244,7 +1242,7 @@ The Subscription Manager functionality must have listeners to receive messages f
 </code></pre>
 </div>
 
-<h5 id="protocol-stub">Protocol Stub</h5>
+<h3 id="protocol-stub">Protocol Stub</h3>
 
 <p>The basic operation mode of a MN is that it is connected by runtimes directly via the provided protocol stubs. A message received from one runtime will be forwarded to another runtime which must also be connected through a stub. This is a classic “triangular” messaging architecture. The triangular message flow looks like this:</p>
 
@@ -1270,12 +1268,12 @@ RuntimeA --&gt; StubA --&gt; MN-A --&gt; StubB --&gt; MN-B --&gt; RuntimeB
 
 <p>For more detailed specification of Protocol Stubs please refer to <a href="https://github.com/reTHINK-project/specs/blob/master/messaging-framework/stub-specification.md">Protocol stub specification</a>.</p>
 
-<h3 id="connectors">Connectors</h3>
+<h2 id="connectors">Connectors</h2>
 
 <p>Connectors implement protocol stacks used to interoperate with external elements from the domains. In general there are connectors for outgoing access to components inside or outside the own domain and on the other hand endpoints listening for incoming connections from external entities, like hyperty runtimes on end-user/network- devices.
 All types of Connectors can be supported by using protocol on-the-fly concept, giving more flexibility for the integration of the Messaging Node in the Service Provider infra-structure.</p>
 
-<h4 id="idm-connector">IdM Connector</h4>
+<h3 id="idm-connector">IdM Connector</h3>
 
 <p>The IdM connector provides access to the domains Identity Manager. The IdM functionalities support the Session Manager for a general Access Control and the Policy Manager for the validation of identity tokens in messages and the enforcement of routing policies.</p>
 
@@ -1285,7 +1283,7 @@ All types of Connectors can be supported by using protocol on-the-fly concept, g
 </code></pre>
 </div>
 
-<h4 id="domain-registry-connector">Domain Registry Connector</h4>
+<h3 id="domain-registry-connector">Domain Registry Connector</h3>
 
 <p>The allocation of a unique address is only the first step on the way to make a hyperty or data object usable from another runtime. In order to make it discoverable the allocated addresses must be registered in the domain registry component. The interaction with the domain registry is also the task of the MN. The MN has to intercept messages from a runtime that address the <registry> subdomain of the MNs own url and to create a corresponding asynchronous request to the domain registry. As soon as it receives an answer, the MN has to respond this answer back to the runtime.</registry></p>
 
@@ -1297,7 +1295,7 @@ All types of Connectors can be supported by using protocol on-the-fly concept, g
 </code></pre>
 </div>
 
-<h4 id="global-registry-connector">Global Registry Connector</h4>
+<h3 id="global-registry-connector">Global Registry Connector</h3>
 
 <p>The role of the Global Registry Connector is comparable to the connector for the Domain Registry. It acts as a relay between the hyperty runtimes and the Global Registry. It is used by the Runtime Graph Connector to handle user’s GUID and it is also used by Hyperties to discover the domains where special remote Hyperties are registered. This Connector is optional. It might be required in cases where the runtime itself might not be able to establish an own connection to the Global registry. In such cases it can use the Connector running on the MN of its home-domain to access it.
 The specification of the messages for the interaction with the global registry can be found at <a href="https://github.com/reTHINK-project/specs/blob/master/messages/global-registry-messages.md">Global Registry messages</a>.</p>
@@ -1308,11 +1306,11 @@ The specification of the messages for the interaction with the global registry c
 </code></pre>
 </div>
 
-<h4 id="qos-broker-connector">QoS Broker Connector</h4>
+<h3 id="qos-broker-connector">QoS Broker Connector</h3>
 
 <p>The QoS Broker Connector allows applications to communicate with the QoS Broker Component in a certain domain. The application can use this mechanism to inquire available network resources and to place resource reservations for application sessions.</p>
 
-<h4 id="end-user-device-connector--network-server-connector">End-User Device Connector / Network Server Connector</h4>
+<h3 id="end-user-device-connector--network-server-connector">End-User Device Connector / Network Server Connector</h3>
 
 <p>These Connectors provide the “server-side” for connections that are initiated by protocol stubs running inside of Hyperty runtimes. These runtimes can either be running on end-user devices (e.g. in a browser or stand-alone environment) or on network-server devices, for example on an embedded system that implements an IoT use case.
 A simple technical example for such a connector is a Websocket server that waits for connection requests from externally deployed stubs and handles them. The types of required server-side connectors correlates to the types of stubs that the MN needs to support. If a stub, for instance, needs to establish a REST like communication than the MN must operate a connector that implements the REST server endpoint.</p>
