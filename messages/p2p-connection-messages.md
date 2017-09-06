@@ -1,6 +1,11 @@
-### P2P Connection Messages
+---
+layout: documentation
+title: P2P Connections Management
+category: Messages Specification
+order: 8
+---
 
-This doc specifies Messages that are used to manage P2P Connections between different Runtime using P2P Protostubs, including:
+This doc specifies Messages that are used to manage P2P Connections between different Runtimes using P2P Protostubs, including:
 
 -	[P2P Connections managed by the RuntimeUA](#runtime-ua-management)
 

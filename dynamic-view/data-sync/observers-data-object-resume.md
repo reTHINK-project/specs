@@ -1,6 +1,9 @@
-#### Resume Data Object Synchronisation for Observers
-
-**Phase 2 New!!**
+---
+layout: documentation
+title: Data Sync Resume for Observers
+category: How it Works - Data Synchronization
+order: 7
+---
 
 This Process is performed to resume the synchronisation of Observers data objects. Such resume will be automatically performed everytime the Syncher is instantiated in order to resume the sync of data objects created in previous sessions for the same Hyperty ie the HypertyURL is maintained along the different sessions. In addition, objects can also be resumed and reused from different sessions by explicitely asking the syncher to resume data synchronization that matches a certain criteria e.g. for all objects compliant with a certain data schema that were associated with the UserURL that is currently associated with the Hyperty instance.
 
@@ -8,12 +11,13 @@ This Process is performed to resume the synchronisation of Observers data object
 
 Steps 1-2: the resume of data synchronisation streams for observers is performed by the syncher.resumeObservers() function that has as an optional input parameter  json object `criteria`:
 
-      ```
-      {
+```
+{
       "resource" : <[dataObject](https://github.com/reTHINK-project/specs/blob/master/datamodel/core/data-synch/readme.md)>,
       "identity" : <[userIdentity](https://github.com/reTHINK-project/specs/blob/master/datamodel/core/user-identity/readme.md)>
       }
-      ```
+```
+
 If the `criteria` is not provided it is assumed the resume is to be performed for objects previously handled for the same HypertyURL.
 Then the syncher asks the local Sync Manager to resume data synchronisation streams sending a  [subscription request message](https://github.com/reTHINK-project/specs/blob/master/messages/data-sync-messages.md#resume-subscriptions-for-the-same-hyperty-url). If provided, the criteria info is attached into the message body.
 

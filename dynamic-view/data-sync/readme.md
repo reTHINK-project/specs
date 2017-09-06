@@ -1,5 +1,11 @@
-Procedures to Manage Hyperty Data Objects
------------------------------------------
+---
+layout: documentation
+title: Overview
+category: How it Works - Data Synchronization
+order: 1
+---
+
+*TODO: provide overview of how p2p data synchronization  work*
 
 ### [Create Hyperty Data Object](data-object-creation.md)
 

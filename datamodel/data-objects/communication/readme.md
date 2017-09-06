@@ -1,7 +1,8 @@
 ---
 layout: documentation
-title: Communication
-category: datamodel
+title: Communication Data Object
+category: Data Object Models
+order: 1
 ---
 
 ### Communication Data Model

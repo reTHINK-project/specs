@@ -1,3 +1,10 @@
+---
+layout: documentation
+title: How to develop Message Nodes
+category: Getting Started
+order: 8
+---
+
 ### Recommendations and lessons learned for the Development of Message Nodes
 
 For a general overview and to support initial design decisions for a new implementation of a Message Node, please also have a look at [Message Node and Protostubs design recommendations](https://github.com/reTHINK-project/specs/blob/master/messaging-framework/msg-node-design.md).

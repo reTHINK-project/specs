@@ -1,7 +1,8 @@
 ---
 layout: documentation
-title: Connection
-category: datamodel
+title: Connection Data Object
+category: Data Object Models
+order: 2
 ---
 
 ### Connection

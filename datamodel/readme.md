@@ -1,10 +1,9 @@
 ---
 layout: documentation
-title: reTHINK data Model
+title: Data Model Overview
+category: datamodel
+order: 1
 ---
-
-reTHINK Data Model
-------------------
 
 ![reTHINK Data Model](Rethink-Core.png)
 

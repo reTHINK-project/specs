@@ -1,4 +1,9 @@
-#### Data Object Subscription by Observer
+---
+layout: documentation
+title: Data Object Subscription
+category: How it Works - Data Synchronization
+order: 3
+---
 
 ![Figure @data-sync-subscription Request to subscribe a Sync Data Object](data-object-subscribe.png)
 

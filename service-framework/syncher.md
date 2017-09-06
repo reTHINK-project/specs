@@ -1,4 +1,11 @@
-## Synchronizaiton among Hyperties (Syncer API)
+---
+layout: documentation
+title: Syncher API
+category: APIs
+order: 2
+---
+
+## P2P Synchronization API
 
 *[source](https://github.com/reTHINK-project/dev-service-framework/blob/master/src/syncher/Syncher.js)*
 

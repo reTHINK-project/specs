@@ -1,14 +1,10 @@
 ---
 layout: documentation
-title: Trust Management and Security
-category: trust-management
+title: Overview
+category: Trust Management
+order: 1
 ---
 
-Trust Management and Security
-------------------
-## Trust Management and Security
-
-This document gives an overview on the Hyperty Trust Model as well as on Hyperty Sandbox runtime execution environment.
 
 Hyperties are securely associated to User Identities selected by the end-user himself. Hyperty Users are human beings (including group of human beings e.g. corporation) or things (including group of things and physical spaces e.g. a smart home or smart building).
 

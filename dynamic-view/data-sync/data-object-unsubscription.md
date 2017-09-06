@@ -1,4 +1,10 @@
-#### Data Object Unsubscription by Observer
+---
+layout: documentation
+title: Data Object Unsubscription
+category: How it Works - Data Synchronization
+order: 4
+---
+
 
 ![Figure @data-sync-subscription Request to subscribe a Sync Data Object](data-object-unsubscribe.png)
 

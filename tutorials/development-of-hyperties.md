@@ -1,3 +1,10 @@
+---
+layout: documentation
+title: How to develop new Hyperties
+category: Getting Started
+order: 3
+---
+
 Hyperty Development
 -------------------
 

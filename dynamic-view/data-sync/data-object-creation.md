@@ -1,4 +1,10 @@
-#### Data Object Creation by Reporter
+---
+layout: documentation
+title: Data Object Creation
+category: How it Works - Data Synchronization
+order: 2
+---
+
 
 This MSC diagrams shows the most relevant steps to support the setup of data object synchronisation.
 

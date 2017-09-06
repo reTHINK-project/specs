@@ -25,7 +25,7 @@ layout: default
     {% for ident in site.category_order %}
       <p class="category">{{ ident }}</p>
       <ul>
-        {% assign category = docs_by_category | where: "category", ident %}
+        {% assign category = docs_by_category | where: "category", ident | sort: "order"  %}
         {% for item in category %}
           <li>
             {% if item.url == navurl %}
@@ -39,8 +39,6 @@ layout: default
     {% endfor %}
   </div>
 
-
-
   <div class="main col-sm-9">
     <section>
       <div class="">
@@ -48,6 +46,5 @@ layout: default
       </div>
     </section>
   </div>
+   {% include doc-scroll.html %}
 </div>
-{% include deeplink.html %}
-{% include doc-scroll.html %}

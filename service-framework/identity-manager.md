@@ -1,4 +1,10 @@
-#### Identity Manager library
+---
+layout: documentation
+title: Identity Manager API
+category: APIs
+order: 4
+---
+
 
 *to be updated / completed*
 

@@ -1,6 +1,11 @@
-### Address Allocation Messages
+---
+layout: documentation
+title: Address Allocation
+category: Messages Specification
+order: 3
+---
 
-**Phase 2 changed:** merged address allocation for objects and hyperties using the same address suffix: `address-allocation`. Runtime Address Allocation function is now a generic core runtime function separated from the runtime registry and from the sync manager.
+Runtime Address Allocation function is a generic core runtime function separated from the runtime registry and from the sync manager.
 
 The following Messages used to manage URL address allocation are specified in this doc. Where,
 

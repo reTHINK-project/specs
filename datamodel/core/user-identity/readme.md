@@ -1,7 +1,8 @@
 ---
 layout: documentation
 title: Identity
-category: datamodel
+category: Core Datamodel
+order: 9
 ---
 
 

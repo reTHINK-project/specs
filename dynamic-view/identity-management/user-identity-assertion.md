@@ -1,4 +1,10 @@
-#### User identity assertion
+---
+layout: documentation
+title: User identity assertion
+category: How it Works - Identity Management
+order: 3
+---
+
 
 Message bodies can contain JWT tokens for Access Control or for Identity Assertion purposes that are inserted by the Identity Module before the message is routed to protostubs.
 

@@ -1,4 +1,9 @@
-#### Observer unsubscribed by Reporter
+---
+layout: documentation
+title: Observer unsubscribed by Reporter
+category: How it Works - Data Synchronization
+order: 9
+---
 
 ![Figure: REporter Request Observer to unsubscribe the Sync Data Object](observer-unsubsribed-by-reporter.png)
 

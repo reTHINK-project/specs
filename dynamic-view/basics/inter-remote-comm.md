@@ -1,4 +1,9 @@
-#### Inter-domain Remote Communication
+---
+layout: documentation
+title: Cross Domain Msg delivery
+category: How it Works - Basics
+order: 10
+---
 
 The routing of messages between two Hyperties running in different Runtime instance and from different domains, is described below.
 
@@ -51,4 +56,3 @@ SP2H@B <- BUS@B : postMessage( message )
 
 
 ![Figure @runtime-inter-remote-comm: Inter-domain Remote Communication](interdomain-remote-communication.png)
-

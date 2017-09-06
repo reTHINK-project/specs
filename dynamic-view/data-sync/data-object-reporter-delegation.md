@@ -1,4 +1,10 @@
-#### Data Object Reporter Delegation
+---
+layout: documentation
+title: Data Object Reporter Delegation
+category: How it Works - Data Synchronization
+order: 10
+---
+
 
 ![Figure @data-sync-subscription Request to subscribe a Sync Data Object](data-object-reporter-delegation.png)
 

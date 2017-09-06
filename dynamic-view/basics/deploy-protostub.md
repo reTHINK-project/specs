@@ -1,4 +1,9 @@
-#### Deploy Protocol Stub
+---
+layout: documentation
+title: Protocol Stub Deployment
+category: How it Works - Basics
+order: 4
+---
 
 The main data flows to support the deployment of protocol stubs required to connect the Hyperty Runtime to a specific back-end server, is presented in the figure below and described in this section.
 

@@ -1,5 +1,9 @@
-Identity Management Messages
-----------------------------
+---
+layout: documentation
+title: Identity Management
+category: Messages Specification
+order: 6
+---
 
 This doc specifies Messages to be used to manage identities, where,
 
@@ -192,7 +196,7 @@ Response by the identity module to the identity-gui.
 "body" : { "type" : "execute" , "value" : "<url-value>" , "code" : 200 }
 ```
 
-#### Store One Identity 
+#### Store One Identity
 
 Request made by the identity-gui to the identity module for storing one identity.
 

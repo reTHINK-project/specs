@@ -1,7 +1,8 @@
 ---
 layout: documentation
 title: Message Routing
-category: basic-procedures
+category: How it Works - Basics
+order: 6
 ---
 
 #### Message Routing in Message BUS

@@ -1,4 +1,9 @@
-#### Deploy Hyperty
+---
+layout: documentation
+title: Hyperty Deployment
+category: How it Works - Basics
+order: 3
+---
 
 The Runtime procedures to deploy a new Hyperty are described in this section.
 
@@ -9,7 +14,7 @@ TODO: the loadHyperty should have the following:
 ```javascript
 // hypertyCatalogueURL -  hyperty-catalogue://<domain>/.well-known/hyperty/<name of hyperty>
 // resuseURL - default = false | Possible options: true | false | hyperty://<domain>/<id>
-// appURL 
+// appURL
 loadHyperty(hypertyCatalogueURL, reuseURL = false, appURL)
 ```
 

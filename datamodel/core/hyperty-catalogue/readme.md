@@ -1,7 +1,8 @@
 ---
 layout: documentation
 title: Hyperty Catalogue
-category: datamodel
+category: Core Datamodel
+order: 4
 ---
 
 Catalogue Data Model

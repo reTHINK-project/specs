@@ -1,10 +1,15 @@
-#### Deploy Interworking Protocol Stub (iwstub)
+---
+layout: documentation
+title: Overview
+category: How it Works - Legacy Interworking
+order: 3
+---
 
 The main data flows to support the deployment of protocol stubs required to connect the Hyperty Runtime to a Legacy domain, is presented in the figure below and described in this section.
 
 ![Figure @runtime-deploy-protostub: Deploy Protocol Stub](deploy-iwstub.png)
 
-**Steps 1-3**: The Interworking Protocol Stub (the term IWstub will used in this document) deployment can be intiated by the Core Runtime Sandbox (e.g. Runtime Registry) or from other sandbox (e.g. Application). The Interworking Protocol Stub deployment will be triggered by the deployment of an Hyperty which will interact with a Legacy Domain service or by some attempt from a local Hyperty to communicate with a legacy domain which requires that interworking Protocol Stub. The Runtime UA only downloads and deploys requested IWstub after checking in the Registry that there is no Protocol Stub available in the Hyperty Runtime. **The "p2pconfig" parameter is not used in Interworking Protosutbshould provided containing the remote [P2P Handler Stub](../../messaging-framework/p2p-msg-delivery,md)??**.
+**Steps 1-3**: The Interworking Protocol Stub (the term IWstub will used in this document) deployment can be intiated by the Core Runtime Sandbox (e.g. Runtime Registry) or from other sandbox (e.g. Application). The Interworking Protocol Stub deployment will be triggered by the deployment of an Hyperty which will interact with a Legacy Domain service or by some attempt from a local Hyperty to communicate with a legacy domain which requires that interworking Protocol Stub. The Runtime UA only downloads and deploys requested IWstub after checking in the Registry that there is no Protocol Stub available in the Hyperty Runtime. **The "p2pconfig" parameter is not used in Interworking Protostub should provided containing the remote [P2P Handler Stub](../../messaging-framework/p2p-msg-delivery,md)??**.
 
 **Steps 4 - 5**: the Runtime UA is able to derive the URL to download the Protocol Stub descriptor from the domain URL (legacy-domain), since it is a well known URI defined in the reTHINK Architecture Interfaces [15]. The Legacy Domain must add a Catalogue and a Service backend to download the IWstub code. This role may not be played by the Legacy Domain itself by a Third organization which provide interoperability between reTHINK and the legacy service. In this case, the [descriptor](https://github.com/reTHINK-project/specs/tree/master/datamodel/core/hyperty-catalogue) of the protostub will include the attribute set to *true*.
 
@@ -14,7 +19,7 @@ The main data flows to support the deployment of protocol stubs required to conn
 
 **Steps 12-15**: The Runtime UA instantiates a new sandbox through the Sandbox interface which is registered in the Registry. The `capabilities` input parameter (see RuntimeSandboxCapabilities type in [Runtime Descriptor](../../datamodel/core/hyperty-catalogue/readme.md#hyperty-runtime-descriptor)) is used to indicate capabilities required eg window capabilities. This parameter can be useful to support future interconnection with different Legacy Domains.
 
-**Steps 16-18**: The Runtime UA requests the new Legacy Domain sandbox to instantiate the protostub source code, extracting the configuration data from the protostub descriptor. 
+**Steps 16-18**: The Runtime UA requests the new Legacy Domain sandbox to instantiate the protostub source code, extracting the configuration data from the protostub descriptor.
 
 **Steps 19-20**: These steps are exclusive of the IWstub and may be different depending on the Legacy Domain the IWstub interacts with. In the diagram an interconnection with a SIP network is proposed, but other pro. Please note that if the runtime is being executed in a browser there is a limitation in the types of protocols we can use to interact with the Legacy Domain since it is limited to use either Protocols over HTTP or Protocols over Websocket (e.g. [SIPoWS](https://tools.ietf.org/html/rfc7118) or [XMPPoWS](https://datatracker.ietf.org/doc/rfc7395/)).  
 

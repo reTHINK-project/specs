@@ -1,4 +1,9 @@
-#### Resolve Routing Address
+---
+layout: documentation
+title: Routing Address Resolve
+category: How it Works - Basics
+order: 7
+---
 
 This section describes how the Runtime Registry procedures to resolve a routing address during the [Message Routing process](bus-msg-routing.md).
 

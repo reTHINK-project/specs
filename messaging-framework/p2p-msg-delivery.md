@@ -1,4 +1,10 @@
-## P2P Message Delivery
+---
+layout: documentation
+title: P2P Message Delivery
+category: Messaging Framework
+order: 4
+---
+
 
 Communication between different Hyperty Runtimes can be supported with peer to peer connections or via a Message Node. In both options a Protostub implementing the most appropriate network protocol stack is used. For example,  JSON over Websockets and  Restfull API Client are good options for Protostubs used to interface with a Message Node, while WebRTC Datachannel is a good option for a Protostub used to directly interface with another Hyperty Runtime. The usage of P2P Protostubs are favored since fewer resources are spent and Network latency should be better.
 

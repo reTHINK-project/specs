@@ -1,3 +1,10 @@
+---
+layout: documentation
+title: Hyper-linked Entities - Hyperties
+category: Getting Started
+order: 1
+---
+
 Hyper-linked Entities - Hyperties
 ---------------------------------
 

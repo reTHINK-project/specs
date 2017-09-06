@@ -1,4 +1,10 @@
-#### [Discovery library
+---
+layout: documentation
+title: Discovery API
+category: APIs
+order: 3
+---
+
 
 *[source](https://github.com/reTHINK-project/dev-service-framework/blob/master/src/message-factory/MessageFactory.js)*
 

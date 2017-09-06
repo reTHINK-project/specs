@@ -1,6 +1,10 @@
-#### Resume Data Object Synchronisation for Reporters
+---
+layout: documentation
+title: Data Sync Resume for Reporters
+category: How it Works - Data Synchronization
+order: 8
+---
 
-**Phase 2 New!!**
 
 This Process is performed to resume the synchronisation of Reporters data objects. Such resume will be automatically performed everytime the Syncher is instantiated in order to resume the sync of data objects created in previous sessions for the same Hyperty ie the HypertyURL is maintained along the different sessions. In addition, objects can also be resumed and reused from different sessions by explicitely asking the syncher to resume data synchronization that matches a certain criteria e.g. for all objects compliant with a certain data schema that were associated with the UserURL that is currently associated with the Hyperty instance.
 

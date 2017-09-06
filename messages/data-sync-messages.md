@@ -1,4 +1,9 @@
-### Hyperty Data Object Synchronisation Messages
+---
+layout: documentation
+title: Data Object Synchronization
+category: Messages Specification
+order: 2
+---
 
 This doc specifies Messages that are used to manage Hyperty Data Object Synchronisation, including:
 

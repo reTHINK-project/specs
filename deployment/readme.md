@@ -1,14 +1,10 @@
 ---
 layout: documentation
-title: Quick installation guide of the reThink Platform
-category: deployment
+title: Quick installation guide
+category: Backend Deployment
 ---
 
-Quick installation guide of the reThink Platform
-------------------
 
-# Quick installation guide of the reThink Platform.
-# Table of Contents
 1. [Components to install](#components-to-install)
    1. [Server-side components](#server-side-components)
    2. [Client-side components](#client-side-components)
@@ -30,6 +26,7 @@ __Please note that this section is dedicated to an operational platform__. Devel
 If you already know how is the platform, go directly to [Installation Process](#installation-process).
 
 ## Components to install
+
 A complete reThink platform consists on server-side components that are finally deployed in the browser. These components are shown in the following picture and described hereafter.  
 
 All components are available in Docker images and the preferred host is an Ubuntu 14.04.  

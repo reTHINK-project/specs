@@ -1,4 +1,9 @@
-#### Deploy Hyperty Runtime
+---
+layout: documentation
+title: Runtime Deployment
+category: How it Works - Basics
+order: 2
+---
 
 In case the device does not support the Hyperty Core Runtime components e.g. an existing browser like Chrome or a Network Node.js Server, they have to be deployed in the Device or in the Server.
 

@@ -1,7 +1,8 @@
 ---
 layout: documentation
-title: Context
-category: datamodel
+title: Context Data Object
+category: Data Object Models
+order: 3
 ---
 ## Context Data Object Model
 

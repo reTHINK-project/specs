@@ -1,4 +1,9 @@
-### Registration Messages
+---
+layout: documentation
+title: Registration
+category: Messages Specification
+order: 4
+---
 
 This doc specifies Messages to be used to manage registrations in the Domain Registry, where,
 

@@ -1,4 +1,9 @@
-#### Register Hyperty
+---
+layout: documentation
+title: Hyperty Registration
+category: How it Works - Basics
+order: 5
+---
 
 The Runtime procedures to register a new Hyperty are described in this section.
 

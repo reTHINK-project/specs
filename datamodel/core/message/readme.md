@@ -1,7 +1,8 @@
 ---
 layout: documentation
 title: Message
-category: datamodel
+category: Core Datamodel
+order: 3
 ---
 
 Message Model

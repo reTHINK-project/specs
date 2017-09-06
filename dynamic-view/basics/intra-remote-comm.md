@@ -1,3 +1,10 @@
+---
+layout: documentation
+title: Inter-runtime Msg delivery
+category: How it Works - Basics
+order: 9
+---
+
 #### Intra-domain Remote Communication
 
 The routing of messages between two Hyperties running in different Runtime instance but from the same domain, is described below.

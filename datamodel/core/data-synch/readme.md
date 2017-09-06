@@ -1,7 +1,8 @@
 ---
 layout: documentation
 title: Data Object
-category: datamodel
+category: Core Datamodel
+order: 5
 ---
 
 Data Object Synchronisation Model

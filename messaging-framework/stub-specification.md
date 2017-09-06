@@ -1,4 +1,9 @@
-## Protostub specification
+---
+layout: documentation
+title: Protostub specification
+category: Messaging Framework
+order: 3
+---
 
 ### Stub construction and activation
 

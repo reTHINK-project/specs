@@ -1,4 +1,9 @@
-#### Associate User Identity to Hyperty Instance
+---
+layout: documentation
+title: Identity Binding
+category: How it Works - Identity Management
+order: 1
+---
 
 ![Figure @runtime-ident-man-user-to-hyperty-binding-scheme: Associate User Identity to Hyperty Instance](user-to-hyperty-binding-scheme.png)
 

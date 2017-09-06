@@ -1,12 +1,11 @@
 ---
 layout: documentation
-title: Address
-category: datamodel
+title: Address Model
+category: Core Datamodel
+order: 2
 ---
 
-## reTHINK Address Model
-
-It is proposed to use as much as possible Web URLs model for reTHINK addressing model as defined in the [WHATWG standard](https://url.spec.whatwg.org/). According to this standard, there is no distinguish betweeb URL and URI. The intention is not to depend on existing DNS based naming resolution but to keep it open as such decision will take place in WP4.
+reTHINK addresses are compliant with [URL WHATWG standard](https://url.spec.whatwg.org/). According to this standard, there is no distinguish between URL and URI. The intention is not to depend on existing DNS based naming resolution but to keep it open as such decision will take place in WP4.
 
 reTHINK URL is used by the [Message model](../message/readme.md) to identify the message recipient, message sender and resources where operations carried by the message will be performed. It is to be noted, that in some situations, there is no need to resolve URL into IP addresses in order to reach the URL endpoint. For example, it is possible that Hyperty instances served by a messaging service like vertx.io would use a dedicated name space to manage message routing between Hyperty instances.
 

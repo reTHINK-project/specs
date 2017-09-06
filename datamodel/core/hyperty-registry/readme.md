@@ -1,7 +1,8 @@
 ---
 layout: documentation
 title: Hyperty Registry
-category: datamodel
+category: Core Datamodel
+order: 4
 ---
 
 Registry Data Model

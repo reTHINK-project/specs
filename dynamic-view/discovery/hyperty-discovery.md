@@ -1,3 +1,10 @@
+---
+layout: documentation
+title: Data Sync Resume for Observers
+category: How it Works - Discovery
+order: 1
+---
+
 #### Discover Hyperty
 
 The Runtime procedures to Discover available Hyperties. Check Messages Specification [here](../../specs/messages/registration-messages.md#hyperty-instance-query-per-user)

@@ -1,4 +1,9 @@
-### Discovery Messages
+---
+layout: documentation
+title: Discovery
+category: Messages Specification
+order: 5
+---
 
 This doc specifies the Messages to be used when interacting with the Discovery component integrated in runtime core, where,
 
@@ -119,7 +124,7 @@ Not Found Response from Discovery component:
 "body" : { "code" : 404, "description" : "Not Found" }
 ```
 
-#### Discover DataObjects by Reporter 
+#### Discover DataObjects by Reporter
 
 Querying the Domain Registry with a reporter url (hyperty). Optionally also with types of dataObject schemas
 (e.g. `comasdm`), types of dataObject resources (e.g. `chat`).

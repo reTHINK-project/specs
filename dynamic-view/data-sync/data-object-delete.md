@@ -1,4 +1,10 @@
-#### Data Object Delete by Reporter
+---
+layout: documentation
+title: Data Object Delete
+category: How it Works - Data Synchronization
+order: 5
+---
+
 
 ![Figure @data-object-delete Request to delete a Sync Data Object](data-object-delete.png)
 

@@ -1,15 +1,16 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script>
    $(document).ready(function (){
+     console.log('[doc-scroll]')
 
      var scrollPosition = getParameterByName('scroll');
      if(scrollPosition)
-      $(".doc-menu").scrollTop(scrollPosition);
+      $(".sidebar").scrollTop(scrollPosition);
 
      $('.doc-link').click(function(){
-        var scrollTop = $(".doc-menu").scrollTop();
+        var scrollTop = $(".sidebar").scrollTop();
         if(scrollTop > 0)
-          $(this).attr("href",this.href + "?scroll=" + $(".doc-menu").scrollTop());
+          $(this).attr("href",this.href + "?scroll=" + $(".sidebar").scrollTop());
      });
 
      function getParameterByName(name, url) {

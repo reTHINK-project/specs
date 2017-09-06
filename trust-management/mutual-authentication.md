@@ -1,4 +1,9 @@
-#### Mutual Authentication
+---
+layout: documentation
+title: Mutual Authentication
+category: Trust Management
+order: 2
+---
 
 Identity management relies upon managing life-cycle of identity-related security tokens. Therefore, identity assertions are used in reTHINK to identify a user and to prove that he was authenticated on an IdP. The IdP asserts a particular content for the user, provided during the request for authentication by the IdM, after a successful authentication this same user.
 

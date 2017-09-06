@@ -1,7 +1,8 @@
 ---
 layout: documentation
 title: Hyperty Resource
-category: datamodel
+category: Core Datamodel
+order: 6
 ---
 
 

@@ -26,7 +26,7 @@ grant: > # this means to ignore newlines until "baseurl:"
   This project has received funding from the European
   Horizon 2020 Programme for research, technological
   development and demonstration under grant agreement n° 645342
-baseurl: "/specs" # the subpath of your site, e.g. /blog
+baseurl: "" # the subpath of your site, e.g. /blog
 url: "" # the base hostname & protocol for your site, e.g. http://example.com
 twitter_username: rethink_eu
 github_username:  reTHINK-project
@@ -73,15 +73,20 @@ permalink: /:title/
 # # End
 
 category_order:
-  - 'tutorials'
-  - 'datamodel'
-  - 'service-framework'
-  - 'messaging-framework'
-  - 'runtime'
-  - 'trust-management'
-  - 'deployment'
-  - 'basic-procedures'
-  - 'messages'
+  - 'Getting Started'
+  - 'APIs'
+  - 'Messaging Framework'
+  - 'Runtime'
+  - 'Trust Management'
+  - 'How it Works - Basics'
+  - 'How it Works - Data Synchronization'
+  - 'How it Works - Discovery'
+  - 'How it Works - Identity Management'
+  - 'How it Works - Legacy Interworking'
+  - 'Core Datamodel'
+  - 'Data Object Models'
+  - 'Messages Specification'
+  - 'Backend Deployment'
 
 # Exclude from processing.
 # The following items will not be processed, by default. Create a custom list

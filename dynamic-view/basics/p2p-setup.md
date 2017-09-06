@@ -1,6 +1,9 @@
-#### Setup of P2P Connections
-
-**Phase 2 New!**
+---
+layout: documentation
+title: P2P Msg delivery
+category: How it Works - Basics
+order: 12
+---
 
 This section describes how P2P Connections are performed as triggered by the [registry.resolve](resolve-routing-address.md) procedure.
 

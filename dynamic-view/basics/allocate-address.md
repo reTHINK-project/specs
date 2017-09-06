@@ -1,6 +1,9 @@
-#### Allocate Address
-
-**Phase 2 New!! Adddress Allocation is now a separated process, similar to Hyperty addresses and Data Object addresses**
+---
+layout: documentation
+title: Address Allocation
+category: How it Works - Basics
+order: 5
+---
 
 The Runtime procedures to allocate a new address to Hyperties or Data Objects are described in this section.
 
