@@ -26,7 +26,7 @@ grant: > # this means to ignore newlines until "baseurl:"
   This project has received funding from the European
   Horizon 2020 Programme for research, technological
   development and demonstration under grant agreement n° 645342
-baseurl: "" # the subpath of your site, e.g. /blog
+baseurl: "/specs" # the subpath of your site, e.g. /blog
 url: "" # the base hostname & protocol for your site, e.g. http://example.com
 twitter_username: rethink_eu
 github_username:  reTHINK-project
