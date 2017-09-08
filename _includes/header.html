@@ -16,7 +16,7 @@
               </button>
               {% assign default_paths = site.pages | map: "path" %}
               {% assign page_paths = site.header_pages | default: default_paths %}
-              <a class="site-title" title="{{ site.subtitle }}" href="{{ "/" | relative_url }}"><img src="{{site.logo | relative_url}}" alt="{{ site.title | escape }}"></a>
+              <a class="site-title" title="{{ site.subtitle }}" href="{{ site.url }}"><img src="{{site.logo | relative_url}}" alt="{{ site.title | escape }}"></a>
             </div>
 
             <!-- Collect the nav links, forms, and other content for toggling -->
@@ -31,6 +31,8 @@
                   {% endfor %}
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
+                  <li><a class="page-link" href="../specs" target="_blank">Specifications</a></li>
+                  <li><a class="page-link" href="../dev-hyperty" target="_blank">Hyperties</a></li>
                   <li><a class="page-link" href="https://github.com/reTHINK-project/dev-hyperty-toolkit" target="_blank">GitHub</a></li>
                   <li><a class="page-link" href="https://github.com/reTHINK-project/dev-hyperty-toolkit/releases" target="_blank">v{{site.version}}</a></li>
                 </ul>

@@ -1,8 +1,16 @@
+---
+layout: documentation
+title: Message Node Evaluation
+category: Testing
+order: 4
+---
+
 ## Message Node tests
 
-This folder structure contains common conformance tests for the Message Nodes according to the [Message Specification](https://github.com/reTHINK-project/dev-service-framework/tree/master/docs/specs/messages) and some performance related tests as proposed in the [Draft of D6.3](https://bscw.rethink-project.eu/bscw/bscw.cgi/d36924/D6.3%20--%20Trials%20Evaluation.docx)
+This folder structure contains common conformance tests for the Message Nodes according to the [Message Specification](../messages) and some performance related tests.
 
 ### Quickstart
+
 #### Initial Setup
 
 For the initial setup you  have to clone the testbeds repo to your machine and execute inside the "specs/tests/msg-node" folder

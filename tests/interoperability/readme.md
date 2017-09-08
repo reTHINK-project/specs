@@ -1,3 +1,10 @@
+---
+layout: documentation
+title: Interoperability Evaluation
+category: Testing
+order: 2
+---
+
 ## Interoperability Evaluation
 
 This documents provides guidelines to perform interoperability tests with reTHINK framework.
