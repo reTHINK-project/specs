@@ -146,6 +146,9 @@
 <loc>http://localhost:4000/specs/standards/readme/</loc>
 </url>
 <url>
+<loc>http://localhost:4000/specs/use-cases/readme/</loc>
+</url>
+<url>
 <loc>http://localhost:4000/specs/datamodel/data-objects/communication/readme/</loc>
 </url>
 <url>
@@ -279,9 +282,6 @@
 </url>
 <url>
 <loc>http://localhost:4000/specs/service-framework/syncher/</loc>
-</url>
-<url>
-<loc>http://localhost:4000/specs/use-cases/use-cases/</loc>
 </url>
 <url>
 <loc>http://localhost:4000/specs/dynamic-view/identity-management/user-identity-assertion/</loc>

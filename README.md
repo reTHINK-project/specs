@@ -11,9 +11,8 @@ The reTHINK Framework provides the tools to build a global decentralised network
 
 Watch reTHINK Overview YouTube Video:
 
-<a href="http://www.youtube.com/watch?feature=player_embedded&v=8H57GIBs31o
-" target="_blank"><img src="http://img.youtube.com/vi/8H57GIBs31o/0.jpg" 
-alt="reTHINK Overview" width="240" height="180" border="10" /></a>
+<a href="https://youtu.be/8H57GIBs31o" target="_blank"><img src="http://img.youtube.com/vi/8H57GIBs31o/0.jpg"
+alt="reTHINK Overview" width="240" height="180" /></a>
 
 
 
@@ -37,4 +36,3 @@ Transversal to these specs we have:
 You can also find in this repo a set of [tutorials](tutorials/readme.md) to support the development of Hyperties, Apps and Message Nodes.
 
 In order to setup your own reTHINK Framework, you should install the several components (docker images available). The full process is described in [deployment section](deployment/readme.md). Developers only have to use [toolkit](https://github.com/reTHINK-project/dev-hyperty-toolkit).
-

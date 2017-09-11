@@ -109,8 +109,8 @@
                   
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
-                  <li><a class="page-link" href="../specs" target="_blank">Specifications</a></li>
-                  <li><a class="page-link" href="../dev-hyperty" target="_blank">Hyperties</a></li>
+                  <li><a class="page-link" href="../../specs" target="_blank">Specifications</a></li>
+                  <li><a class="page-link" href="../../dev-hyperty" target="_blank">Hyperties</a></li>
                   <li><a class="page-link" href="https://github.com/reTHINK-project/dev-hyperty-toolkit" target="_blank">GitHub</a></li>
                   <li><a class="page-link" href="https://github.com/reTHINK-project/dev-hyperty-toolkit/releases" target="_blank">v0.6.1</a></li>
                 </ul>
@@ -738,7 +738,7 @@
             
               <li>
                 
-                  <a href="/specs/specs/use-cases/use-cases/" class="doc-link" role="link">  reTHINK Use Cases Overview </a>
+                  <a href="/specs/specs/use-cases/readme/" class="doc-link" role="link">  reTHINK Use Cases Overview </a>
                 
               </li>
             
@@ -1375,7 +1375,7 @@
         
           <li>
             
-              <a href="/specs/use-cases/use-cases/" class="doc-link" role="link">  reTHINK Use Cases Overview </a>
+              <a href="/specs/use-cases/readme/" class="doc-link" role="link">  reTHINK Use Cases Overview </a>
             
           </li>
         
@@ -1386,38 +1386,103 @@
   <div class="main col-sm-9">
     <section>
       <div class="">
-        <p><em>TODO: reorganize and adapt</em></p>
+        <p>The reTHINK framework is an implementation of the
+<strong>Decentralized Communications</strong> concept providing trustworthy communication among any peers without central authorities or communication monopolies.</p>
 
-<h2 id="application-development">Application development</h2>
+<p>It introduces a new service paradigm - Hyperties - to facilitate the development of complex decentralized Web Applications according to Microservices architectural patterns.</p>
 
-<p>Developers can use Hyperties in Applications by using any framework or tool, with a few lines of code as fully explained <a href="development-of-apps.html">here</a>.</p>
+<p>Hyperties are inherently inter-operable without the need to standardize protocols or service APIs.
+Required Protocols are dynamically loaded and P2P data synchronisation streams are established between Hyperties by using the Reporter - Observer communication pattern.</p>
 
-<p>You can start by having a look on <a href="https://github.com/reTHINK-project/dev-app">this example</a>.</p>
+<p>Developers can use Hyperties in Applications by using any framework or tool by just performing a few steps:</p>
 
-<h2 id="hyperty-development">Hyperty development</h2>
+<p>1- import the following script in your HTML:</p>
 
-<p>Currently the hyperty toolkit can be used to develop hyperties to be executed in the Browser or in the NodeJS.
-You can find a quick start <a href="https://github.com/reTHINK-project/dev-hyperty-toolkit#quick-start">here</a> and full documentation <a href="https://github.com/reTHINK-project/dev-hyperty-toolkit/wiki">here</a> including the Hello World Hyperty.</p>
+<pre class="line-numbers">
+  <code class="language-markup">
+    &lt;script src="https://hybroker.rethink.ptinovacao.pt/.well-known/runtime/rethink.js"&gt;&lt;/script&gt;
+  </code>
+</pre>
 
-<p>A set of APIs are provided to help the development of Hyperties as documented <a href="../service-framework">here</a></p>
+<p>2- Add these lines in your javascript to instantiate the Hypert Runtime</p>
 
-<p>Have a look on <a href="../dev-hyperty">available Hyperties</a>.</p>
+<pre class="line-numbers">
+  <code class="language-javascript">
+    let config = {
+      "development": true,
+      "runtimeURL": "hyperty-catalogue://hybroker.rethink.ptinovacao.pt/.well-known/runtime/Runtime",
+      "domain": "hybroker.rethink.ptinovacao.pt"
+    }
 
-<h2 id="protostubs-development">Protostubs development</h2>
+    let runtime;
+    let hypertyCatalogueURL = config.domain + '/.well-known/hyperty/HelloWorldReporter';
 
-<p><em>to be provided</em></p>
+    rethink.install(config).then(function(result) {
 
-<h2 id="idp-proxies-development">IdP Proxies development</h2>
+      runtime = result;
 
-<p><em>to be provided</em></p>
+      deployHyperty();
 
-<h2 id="the-development-of-interworking-protostubs-for-chat">The development of Interworking Protostubs for Chat</h2>
+    }).catch(function(reason) {
+      console.error(reason);
+    });
+  </code>
+</pre>
 
-<p><em>to be provided</em></p>
+<p>3- then load and deploy the HelloWorldReporter Hyperty from the Catalogue</p>
 
-<h2 id="the-development-of-interworking-protostubs-for-audio-and-video">The development of Interworking Protostubs for Audio and Video</h2>
+<pre class="line-numbers">
+  <code class="language-javascript">
+    function deployHyperty(){
+      runtime.requireHyperty(hypertyCatalogueURL).then( function(hyperty) {
+          startUsingDeployedHperty(hyperty);
+        }).catch(function(reason) {
+        errorMessage(reason);
+      });
+    }
+  </code>
+</pre>
 
-<p><em>to be provided</em></p>
+<p>4- and invoke Hyperty functions from its API as a common Javascript Lib:</p>
+
+<pre class="line-numbers">
+  <code class="language-javascript">
+  function startUsingDeployedHperty(hyperty){
+    hyperty.instance.hello(observer).then( function() {
+      hyperty.instance.bye('Bye bye');
+      });
+  }
+  </code>
+</pre>
+
+<p>5- to test, open in anonymous mode, another browser to run the HelloWorldObserver Hyperty at <code class="highlighter-rouge">https://rethink-project.github.io/dev-hyperty/demos/hello-world-observer/</code>, copy its address:</p>
+
+<p><img src="../../img/tutorials/helloWorldDemo1.png" alt="Hello World Observer Hyperty Address" /></p>
+
+<p>… and set it in your <code class="highlighter-rouge">observer</code> javascript variable:</p>
+
+<pre class="line-numbers">
+  <code class="language-javascript">
+    let observer = hyperty://hybroker.rethink.ptinovacao.pt/2b6dbcc1-a623-484c-b87e-5ce86ea0b9d3;
+  </code>
+</pre>
+
+<p>Run your App and you should see <code class="highlighter-rouge">Hello</code> and <code class="highlighter-rouge">Bye</code> messages in the HelloWorldObserver page, something like this:</p>
+
+<p><img src="../../img/tutorials/helloWorldDemo2.png" alt="Messages received by Hello World Observer Hyperty " /></p>
+
+<p>You may see the complete source code <a href="https://github.com/reTHINK-project/dev-hyperty/tree/master/docs/demos/hello-world-reporter">here</a>.</p>
+
+<p>Do you want more? then ..</p>
+
+<ul>
+  <li>
+    <p>play with available Hyperties that are in the <a href="../../../dev-hyperty">Hyperty Catalogue</a>.</p>
+  </li>
+  <li>
+    <p>develop your own Hyperty in a few steps as explained <a href="../development-of-hyperties">here</a>.</p>
+  </li>
+</ul>
 
       </div>
     </section>
