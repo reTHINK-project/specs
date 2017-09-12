@@ -48,6 +48,7 @@ plugins:
   - jekyll-sitemap
   - jekyll-avatar
   - jekyll-github-metadata
+  - jemoji
 
 kramdown:
   input: GFM
