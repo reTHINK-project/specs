@@ -35,12 +35,3 @@ Full documentation [here](https://doc.esdoc.org/github.com/reTHINK-project/dev-s
 
 The [Identity Manager library](identity-manager.md) retrieves information about Identities associated to Hyperties.
 Full documentation [here](https://doc.esdoc.org/github.com/reTHINK-project/dev-service-framework/class/src/identityManager/IdentityManager.js~IdentityManager.html).
-
-
-**Other Useful APIs:**
-
-* Service Framework [Address Factory](address-factory.md)
-* Service Framework [Message Factory](message-factory.md)
-* [Runtime Capabilities Manager](runtime-capabilities-manager.md),
-* [QoS interface and LHCB library](qos.md),
-* [Storage Manager](storage-manager.md).

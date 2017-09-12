@@ -7,7 +7,7 @@ order: 1
 
 *TODO: provide overview*
 
-All Messages specified below, are compliant with [reTHINK Resource Oriented Message Model](../datamodel/core/message).
+All Messages specified below, are compliant with [reTHINK Resource Oriented Message Model](../../datamodel/core/message/readme/).
 
 ### [Address Allocation Messages](address-allocation-messages.md)
 
