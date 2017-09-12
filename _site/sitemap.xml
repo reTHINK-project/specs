@@ -86,6 +86,9 @@
 <loc>http://localhost:4000/specs/dynamic-view/identity-management/domain-login/</loc>
 </url>
 <url>
+<loc>http://localhost:4000/specs/concepts/foundations/</loc>
+</url>
+<url>
 <loc>http://localhost:4000/specs/dynamic-view/discovery/hyperty-discovery/</loc>
 </url>
 <url>
@@ -207,9 +210,6 @@
 </url>
 <url>
 <loc>http://localhost:4000/specs/runtime/readme/</loc>
-</url>
-<url>
-<loc>http://localhost:4000/specs/concepts/readme/</loc>
 </url>
 <url>
 <loc>http://localhost:4000/specs/dynamic-view/data-sync/readme/</loc>

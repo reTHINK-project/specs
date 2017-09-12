@@ -141,9 +141,8 @@ Developers can use Hyperties in Applications by using any Web framework with a f
 
 Check the complete source code [here](https://github.com/reTHINK-project/dev-hyperty/tree/master/docs/demos/hello-world-reporter).
 
-------------
 
-Next steps:
+## Next steps:
 
  * play with available Hyperties that are in the [Hyperty Catalogue](../../../dev-hyperty).
 

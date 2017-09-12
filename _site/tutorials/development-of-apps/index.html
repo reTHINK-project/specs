@@ -210,6 +210,12 @@
             
               <li>
                 
+                  <a href="/specs/specs/concepts/foundations/" class="doc-link" role="link">  Conceptual Foundations </a>
+                
+              </li>
+            
+              <li>
+                
                   <a href="/specs/specs/concepts/hyperty/" class="doc-link" role="link">  Hyper-linked Entities - Hyperties </a>
                 
               </li>
@@ -223,12 +229,6 @@
               <li>
                 
                   <a href="/specs/specs/concepts/protofly/" class="doc-link" role="link">  Protocol on-the-fly </a>
-                
-              </li>
-            
-              <li>
-                
-                  <a href="/specs/specs/concepts/readme/" class="doc-link" role="link">  Conceptual Foundations </a>
                 
               </li>
             
@@ -823,7 +823,7 @@
         
           <li>
             
-              <a href="/specs/concepts/readme/" class="doc-link" role="link">  Conceptual Foundations </a>
+              <a href="/specs/concepts/foundations/" class="doc-link" role="link">  Conceptual Foundations </a>
             
           </li>
         
@@ -1390,86 +1390,90 @@
 
 <p>Developers can use Hyperties in Applications by using any framework or tool, with a few lines of code.</p>
 
-<h3 id="how-to-use-hyperties">How to use Hyperties</h3>
-
 <p>The usage of Hyperties is very simple and similar to the usage of any common Javascript library:</p>
 
 <p>1- the App has to ensure the runtime is instantiated:</p>
 
 <p>You can use through the npm module like:</p>
-<div class="language-shell highlighter-rouge"><pre class="highlight"><code>npm install npm install github:reTHINK-project/dev-runtime-browser#master --save
-</code></pre>
-</div>
-<div class="language-javascript highlighter-rouge"><pre class="highlight"><code><span class="kr">import</span> <span class="nx">rethink</span> <span class="nx">from</span> <span class="s1">'runtime-browser'</span><span class="p">;</span>
-</code></pre>
-</div>
+
+<pre class="line-numbers">
+  <code class="language-shell">
+    npm install npm install github:reTHINK-project/dev-runtime-browser#master --save
+  </code>
+</pre>
+
+<pre class="line-numbers">
+  <code class="language-javascript">
+  import rethink from 'runtime-browser';
+  </code>
+</pre>
 
 <p>or you can load through the html script tag</p>
 
-<div class="language-html highlighter-rouge"><pre class="highlight"><code><span class="cp">&lt;!DOCTYPE html&gt;</span>
-<span class="nt">&lt;html</span> <span class="na">lang=</span><span class="s">"en"</span><span class="nt">&gt;</span>
-<span class="nt">&lt;head&gt;</span>
-    <span class="nt">&lt;meta</span> <span class="na">charset=</span><span class="s">"UTF-8"</span><span class="nt">&gt;</span>
-    <span class="nt">&lt;title&gt;</span>Your App Name<span class="nt">&lt;/title&gt;</span>
-<span class="nt">&lt;/head&gt;</span>
-<span class="nt">&lt;body&gt;</span>
-    <span class="nt">&lt;script </span><span class="na">src=</span><span class="s">"https://&lt;domain&gt;/.well-know/runtime/rethink.js"</span><span class="nt">&gt;&lt;/script&gt;</span>
-<span class="nt">&lt;/body&gt;</span>
-<span class="nt">&lt;/html&gt;</span>
-</code></pre>
-</div>
+<pre class="line-numbers">
+  <code class="language-markup">
+    &lt;script src="https://hybroker.rethink.ptinovacao.pt/.well-known/runtime/rethink.js"&gt;&lt;/script&gt;
+  </code>
+</pre>
 
 <p>For both methods you need to do:</p>
 
-<div class="language-javascript highlighter-rouge"><pre class="highlight"><code><span class="kd">let</span> <span class="nx">config</span> <span class="o">=</span> <span class="p">{</span>
-  <span class="s2">"development"</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
-  <span class="s2">"runtimeURL"</span><span class="p">:</span> <span class="s2">"hyperty-catalogue://hybroker.rethink.ptinovacao.pt/.well-known/runtime/Runtime"</span><span class="p">,</span>
-  <span class="s2">"domain"</span><span class="p">:</span> <span class="s2">"hybroker.rethink.ptinovacao.pt"</span>
-<span class="p">}</span>
+<pre class="line-numbers">
+  <code class="language-javascript">
+    let config = {
+      "development": true,
+      "runtimeURL": "hyperty-catalogue://hybroker.rethink.ptinovacao.pt/.well-known/runtime/Runtime",
+      "domain": "hybroker.rethink.ptinovacao.pt"
+    }
 
-<span class="nx">rethink</span><span class="p">.</span><span class="nx">install</span><span class="p">(</span><span class="nx">config</span><span class="p">).</span><span class="nx">then</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">result</span><span class="p">)</span> <span class="p">{</span>
+    rethink.default.install(config).then(function(result) {
 
-  <span class="nx">runtime</span> <span class="o">=</span> <span class="nx">result</span><span class="p">;</span>
+      runtime = result;
 
-  <span class="c1">// your code</span>
+      // your code
 
-<span class="p">}).</span><span class="k">catch</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">reason</span><span class="p">)</span> <span class="p">{</span>
-  <span class="nx">console</span><span class="p">.</span><span class="nx">error</span><span class="p">(</span><span class="nx">reason</span><span class="p">);</span>
-<span class="p">});</span>
-</code></pre>
-</div>
+    }).catch(function(reason) {
+      console.error(reason);
+    });
+  </code>
+</pre>
 
 <p>2- then load and deploy the required Hyperty from the Catalogue</p>
 
-<div class="language-javascript highlighter-rouge"><pre class="highlight"><code><span class="nx">runtime</span><span class="p">.</span><span class="nx">requireHyperty</span><span class="p">(</span><span class="s1">'hyperty-catalogue://catalogue.example.com/.well-known/hyperty/HelloWorldReporter'</span><span class="p">).</span><span class="nx">then</span><span class="p">(</span>
+<pre class="line-numbers">
+  <code class="language-javascript">
+    runtime.requireHyperty('hyperty-catalogue://catalogue.example.com/.well-known/hyperty/HelloWorldReporter').then(
 
-  <span class="nx">startUsingHpertyDeployed</span><span class="p">;</span>
+      startUsingHpertyDeployed;
 
-  <span class="p">).</span><span class="k">catch</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">reason</span><span class="p">)</span> <span class="p">{</span>
-  <span class="nx">errorMessage</span><span class="p">(</span><span class="nx">reason</span><span class="p">);</span>
-<span class="p">});</span>
-</code></pre>
-</div>
+      ).catch(function(reason) {
+      errorMessage(reason);
+    });
+  </code>
+</pre>
 
 <p>3- and invoke Hyperty functions from its API as a common Javascript Lib:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>startUsingHpertyDeployed(hyperty){
-  hyperty.instance.hello();
-}
+<pre class="line-numbers">
+  <code class="language-javascript">
+    startUsingHpertyDeployed(hyperty){
+      hyperty.instance.hello(observer);
+    }
+  </code>
+</pre>
 
-</code></pre>
-</div>
-<h3 id="application-vs-hyperty">Application vs Hyperty</h3>
+<h2 id="application-vs-hyperty">Application vs Hyperty</h2>
 
-<p>A Hyperty is a module of software logic that is dynamically deployed in web runtime environments on end user devices, to execute session control and media flow management in a peer to peer manner. They are ready-to-use modules which are instantiated within the reTHINK runtime when required by the application. From the App developer perspective, Hyperties are similar to common Javascript libraries. Hyperty unique characteristics as described <a href="hyperty.md">here</a> are transparent for the App developer. Through the Core Runtime, the required Hyperties and Protostubs are downloaded from the Catalogue server.</p>
+<p>An Hyperty is a module of software logic that is dynamically deployed in web runtime environments on end user devices, to execute session control and media flow management in a peer to peer manner. They are ready-to-use modules which are instantiated within the reTHINK runtime when required by the application. From the App developer perspective, Hyperties are similar to common Javascript libraries. Hyperty unique characteristics as described <a href="/specs/concepts/hyperty/">here</a> are transparent for the App developer. Through the Core Runtime, the required Hyperties and Protostubs are downloaded from the Catalogue server.</p>
 
 <p>The Protostubs are the pieces of code which allows to interact with different messaging protocols. They are downloaded dynamically when the hyperty tries to reach a hyperty belonging to a different Content Service Provider (CSP) which uses a specific protocol for its messaging nodes.</p>
 
 <p>This process is transparent for the developer of the final application, and of course, also for the final user of the application. If the Application requires some functionality or service provided by a Hyperty which has not been downloaded and instantiated yet, the runtime can get the code and instantiate it on the fly. The Application Developer only has to know in advance the Catalogue URL from where Hyperties are downloaded.</p>
 
-<h3 id="how-to-adapt-existing-applications">How to adapt existing Applications</h3>
+<h2 id="how-to-adapt-existing-applications">How to adapt existing Applications</h2>
 
-<h4 id="standard-web-application">Standard web application</h4>
+<h3 id="standard-web-application">Standard web application</h3>
+
 <p>The diagram below shows how a standard application, which interacts with services provided by a service provider, currently looks like. There are several points which are not being considered such as Identity Management issues. If you need to interact with the service provided by CSP A, you need to use the library it provides, you need to authenticate to that specific service and you need to provide the logic in the Web Application to be able to produce and consume data from it.</p>
 
 <p><img src="/specs/tutorials/standard_app_diagrams.png" alt="Standard App Diagram" /></p>
@@ -1478,7 +1482,8 @@
 
 <p>On the other side, we have only considered here Web Apps, but services provided by CSPs can be potentially used from a wide range of devices including constrained devices for M2M application. That is the reason why the reTHINK client libraries has been to be executed also in M2M scenarios where no web browsers are involved.</p>
 
-<h4 id="rethink-application">reTHINK application</h4>
+<h3 id="rethink-application">reTHINK application</h3>
+
 <p>reTHINK web applications are similar to a common Web Application and have no impact at interface level, being impossible for an average user to distinguish between a standard application and a reTHINK application. However there are some settings available that gives the end user the power to make some decisions independently of the App consumed namely in terms of Identity to be used, Contact Lists and personal policies in general.</p>
 
 <p><img src="/specs/tutorials/hyperty-app-black-box.png" alt="reTHINK App Diagram Black-box diagram" /></p>
@@ -1489,24 +1494,26 @@
 
 <p><img src="/specs/tutorials/hyperty_app_diagrams.png" alt="reTHINK App Diagram" /></p>
 
-<h4 id="relevant-concepts">Relevant concepts</h4>
+<h2 id="relevant-concepts">Relevant concepts</h2>
 
-<h5 id="security-sandboxes">Security: sandboxes</h5>
+<p><em>move to concepts section</em></p>
+
+<h3 id="security-sandboxes">Security: sandboxes</h3>
 
 <p>The Web developer does not have to deal with low level details of the architecture. The sandboxes and the management of hyperties and protostubs is done by the core framework. The sandboxes allows to isolate code from different providers reducing the risk of suffering cross-site scripting attacks.
 There are special cases where the Hyperty needs to be executed in the same sandbox as the main web application, for example, when the Hyperty needs to access the WebRTC API. These hyperties which are executed in the same sandbox as the main app are called <strong>App Hyperties</strong>. The hyperties which are executed in a different sandbox (a Web Worker in the case of the runtime browser) are called <strong>Service Hyperties</strong>.</p>
 
-<h5 id="compatibility-protostubs">Compatibility: Protostubs</h5>
+<h3 id="compatibility-protostubs">Compatibility: Protostubs</h3>
 
 <p>In a standard Web Application, the developers needs to know in advance with which services providers it will be necessary to interact. The number of protocols an application can speak is limited in implementation time and it can not change without modifying the code. In reTHINK the protocol-on-the-fly concept is used. If you need to interact with a service which uses protocol A, the framework will provide you on-the-fly a piece of code called protostub which will be executed in the right sandbox. This protostub will speak protocol A and it will expose a common API to the Hyperty Core Runtime. The Web Developer will not need to deal with this complexity.</p>
 
-<h5 id="identity-management">Identity management.</h5>
+<h3 id="identity-management">Identity management.</h3>
 
 <p>The identity management is normally coupled to the service logic and there are many different standard protocols for authentication and Identity management that makes it harder to achieve interoperability between different services. The reTHINK framework decouples the service logic from the Identity Management logic and provides a common Identity Management API that is agnostic of protocols used. The protocol-on-the-fly mechanism is also used to provide you on-the-fly the right protostub (here called IDP Proxy) to interact with each Identity Provider selected by the end-user.</p>
 
-<h4 id="admin-guis">Admin GUIs</h4>
+<h3 id="admin-guis">Admin GUIs</h3>
 
-<p>With rethink, you get some services like identity management or policy management. Some of this services can be configured by the user of your application. Rethink injects an iframe on your application that contains the administration GUIs. As an example, you can take a look at <a href="../policy-management/user-interface.md">policy manangement administration GUI</a>.</p>
+<p>With rethink, you get some services like identity management or policy management. Some of this services can be configured by the user of your application. Rethink injects an iframe on your application that contains the administration GUIs.</p>
 
       </div>
     </section>
