@@ -34,9 +34,9 @@ Developers can use Hyperties in Applications by using any framework or tool by j
     }
 
     let runtime;
-    let hypertyCatalogueURL = config.domain + '/.well-known/hyperty/HelloWorldReporter';
+    let hypertyCatalogueURL = 'hyperty-catalogue://'+config.domain + '/.well-known/hyperty/HelloWorldReporter';
 
-    rethink.install(config).then(function(result) {
+    rethink.default.install(config).then(function(result) {
 
       runtime = result;
 
@@ -67,14 +67,14 @@ Developers can use Hyperties in Applications by using any framework or tool by j
 <pre class="line-numbers">
   <code class="language-javascript">
   function startUsingDeployedHperty(hyperty){
-    hyperty.instance.hello(observer).then( function() {
-      hyperty.instance.bye('Bye bye');
+    hyperty.instance.hello(observer).then( function(hello) {
+      console.log('[SimpleHelloWorld.hello] ', hello);
       });
   }
   </code>
 </pre>
 
-5- to test, open in anonymous mode, another browser to run the HelloWorldObserver Hyperty at `https://rethink-project.github.io/dev-hyperty/demos/hello-world-observer/`, copy its address:
+5- to test, open in anonymous mode, another browser to run the [HelloWorldObserver Hyperty](https://rethink-project.github.io/dev-hyperty/demos/hello-world-observer/), copy its address:
 
 ![Hello World Observer Hyperty Address](../../img/tutorials/helloWorldDemo1.png)
 
@@ -82,7 +82,7 @@ Developers can use Hyperties in Applications by using any framework or tool by j
 
 <pre class="line-numbers">
   <code class="language-javascript">
-    let observer = hyperty://hybroker.rethink.ptinovacao.pt/2b6dbcc1-a623-484c-b87e-5ce86ea0b9d3;
+    let observer = 'hyperty://hybroker.rethink.ptinovacao.pt/2b6dbcc1-a623-484c-b87e-5ce86ea0b9d3';
   </code>
 </pre>
 
