@@ -170,18 +170,3 @@ If at least you have one "YES" answers to the above questions then most likely, 
 -- Video Chat between human beings;
 
 -- a Human-being or a Data Analysis service collecting data from sensors in a Room.
-
-## Hyperty Concept
-
-*move / merge into concepts section?*
-
-The Hyperty Concept is introduced [here](hyperty.md) as a secure user associated [microservice](http://martinfowler.com/articles/microservices.html), which can be deployed either on a web runtime environment, on an end-user device or on a networked server. The main characteristics of a Hyperty include:
-
--	*Modular*: A Hyperty should be a self-contained module providing reusable service logic implementions in form of a script (e.g. a JavaScript file)
--	*User association* : A Hyperty instance is associated to a “User” (e.g. Human beings, physical objects, physical spaces, organizations) through an Identity, even if this User can be anonymous in some cases.
--	*Data Synchronization Communication*: Hyperties interact with each other through data synch objects by using the Reporter – Observer communication pattern.
--	*Protocol Agnostic*: Through the protocol-on-the-fly concept, Hyperties are network protocol agnostic. In other words, the data synchronization communication between Hyperties is not dependent on a specific network protocol. Communication is accomplished via a common data schema that describes the data synch objects used.
--	*GUI independent*: Hyperty should not provide Graphical User Interfaces.
--	*APIs*: A Hyperty can expose Javascript APIs within the runtime environment that can to be used by web applications
-
-While designing and specifying service logics, it should be noted that Hyperties are not suitable for all use cases. In some case, making use of a simple reusable JavaScript file as library may suffice. The next section explains the criteria under which the decision to use a Hyperty or not could apply.

@@ -5,12 +5,10 @@ category: Getting Started
 order: 2
 ---
 
-Application Development with Hyperties
------------------------
+<h1></h1>
+<h1></h1>
 
 Developers can use Hyperties in Applications by using any framework or tool, with a few lines of code.
-
-
 
 
 The usage of Hyperties is very simple and similar to the usage of any common Javascript library:
@@ -117,25 +115,3 @@ In the standard application, the developers needs to know in advance the librari
 The diagram below depicts an Higher level picture of the Core Runtime architecture which is transparent to App developers. This diagram has been created for didactic purposes and it does not include all the elements. For example it does not contain the modules in charge of dealing with identity management.
 
 ![reTHINK App Diagram](hyperty_app_diagrams.png)
-
-
-## Relevant concepts
-
-*move to concepts section*
-
-### Security: sandboxes
-
-The Web developer does not have to deal with low level details of the architecture. The sandboxes and the management of hyperties and protostubs is done by the core framework. The sandboxes allows to isolate code from different providers reducing the risk of suffering cross-site scripting attacks.
-There are special cases where the Hyperty needs to be executed in the same sandbox as the main web application, for example, when the Hyperty needs to access the WebRTC API. These hyperties which are executed in the same sandbox as the main app are called **App Hyperties**. The hyperties which are executed in a different sandbox (a Web Worker in the case of the runtime browser) are called **Service Hyperties**.  
-
-### Compatibility: Protostubs
-
-In a standard Web Application, the developers needs to know in advance with which services providers it will be necessary to interact. The number of protocols an application can speak is limited in implementation time and it can not change without modifying the code. In reTHINK the protocol-on-the-fly concept is used. If you need to interact with a service which uses protocol A, the framework will provide you on-the-fly a piece of code called protostub which will be executed in the right sandbox. This protostub will speak protocol A and it will expose a common API to the Hyperty Core Runtime. The Web Developer will not need to deal with this complexity.   
-
-### Identity management.
-
-The identity management is normally coupled to the service logic and there are many different standard protocols for authentication and Identity management that makes it harder to achieve interoperability between different services. The reTHINK framework decouples the service logic from the Identity Management logic and provides a common Identity Management API that is agnostic of protocols used. The protocol-on-the-fly mechanism is also used to provide you on-the-fly the right protostub (here called IDP Proxy) to interact with each Identity Provider selected by the end-user.
-
-### Admin GUIs
-
-With rethink, you get some services like identity management or policy management. Some of this services can be configured by the user of your application. Rethink injects an iframe on your application that contains the administration GUIs.
