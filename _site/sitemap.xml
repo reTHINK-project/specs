@@ -272,6 +272,9 @@
 <loc>http://localhost:4000/specs/dynamic-view/data-sync/reporters-data-object-resume/</loc>
 </url>
 <url>
+<loc>http://localhost:4000/specs/dynamic-view/basics/resolve-msg-node-address/</loc>
+</url>
+<url>
 <loc>http://localhost:4000/specs/dynamic-view/basics/resolve-routing-address/</loc>
 </url>
 <url>
@@ -314,9 +317,6 @@
 <loc>http://localhost:4000/specs/dynamic-view/basics/inter-local-comm/</loc>
 </url>
 <url>
-<loc>http://localhost:4000/specs/dynamic-view/basics/resolve-msg-node-address/</loc>
-</url>
-<url>
 <loc>http://localhost:4000/specs/dynamic-view/identity-management/user-registration/</loc>
 </url>
 <url>
@@ -336,9 +336,6 @@
 </url>
 <url>
 <loc>http://localhost:4000/specs/messages/qos-management-messages/</loc>
-</url>
-<url>
-<loc>http://localhost:4000/specs/messaging-framework/p2p-data-sync/</loc>
 </url>
 <url>
 <loc>http://localhost:4000/specs/messaging-framework/protofly/</loc>

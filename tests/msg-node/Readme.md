@@ -7,7 +7,7 @@ order: 4
 
 ## Message Node tests
 
-This folder structure contains common conformance tests for the Message Nodes according to the [Message Specification](../messages) and some performance related tests.
+This folder structure contains common conformance tests for the Message Nodes according to the [Message Specification](../../../messages/readme/) and some performance related tests.
 
 ### Quickstart
 

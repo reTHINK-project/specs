@@ -109,7 +109,7 @@
                   
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
-                  <li><a class="page-link" href="/specs/">Specifications</a></li>
+                  <li><a class="page-link" href="/specs/">Documentation</a></li>
                   <li><a class="page-link" href="/dev-hyperty" target="_blank">Hyperties</a></li>
                   <li><a class="page-link" href="https://github.com/reTHINK-project/dev-hyperty-toolkit" target="_blank">GitHub</a></li>
                   <li><a class="page-link" href="https://github.com/reTHINK-project/dev-hyperty-toolkit/releases" target="_blank">v0.6.1</a></li>
@@ -306,7 +306,7 @@
             
               <li>
                 
-                  <a href="/specs/specs/messaging-framework/readme/" class="doc-link" role="link">  Overview </a>
+                  <a href="/specs/specs/messaging-framework/readme/" class="doc-link" role="link">  Messaging Framework Overview </a>
                 
               </li>
             
@@ -433,6 +433,12 @@
               <li>
                 
                   <a href="/specs/specs/dynamic-view/basics/register-hyperty/" class="doc-link" role="link">  Hyperty Registration </a>
+                
+              </li>
+            
+              <li>
+                
+                  <a href="/specs/specs/dynamic-view/basics/resolve-msg-node-address/" class="doc-link" role="link">  Routing Address Resolve for Msg Node Stubs </a>
                 
               </li>
             
@@ -943,7 +949,7 @@
         
           <li>
             
-              <a href="/specs/messaging-framework/readme/" class="doc-link" role="link">  Overview </a>
+              <a href="/specs/messaging-framework/readme/" class="doc-link" role="link">  Messaging Framework Overview </a>
             
           </li>
         
@@ -1064,6 +1070,12 @@
           <li>
             
               <a href="/specs/dynamic-view/basics/bus-msg-routing/" class="doc-link" role="link">  Message Routing </a>
+            
+          </li>
+        
+          <li>
+            
+              <a href="/specs/dynamic-view/basics/resolve-msg-node-address/" class="doc-link" role="link">  Routing Address Resolve for Msg Node Stubs </a>
             
           </li>
         
@@ -1426,7 +1438,7 @@
 
 <p><img src="/specs/dynamic-view/legacy-interworking/deploy-iwstub.png" alt="Figure @runtime-deploy-protostub: Deploy Protocol Stub" /></p>
 
-<p><strong>Steps 1-3</strong>: The Interworking Protocol Stub (the term IWstub will used in this document) deployment can be intiated by the Core Runtime Sandbox (e.g. Runtime Registry) or from other sandbox (e.g. Application). The Interworking Protocol Stub deployment will be triggered by the deployment of an Hyperty which will interact with a Legacy Domain service or by some attempt from a local Hyperty to communicate with a legacy domain which requires that interworking Protocol Stub. The Runtime UA only downloads and deploys requested IWstub after checking in the Registry that there is no Protocol Stub available in the Hyperty Runtime. <strong>The “p2pconfig” parameter is not used in Interworking Protostub should provided containing the remote <a href="../../messaging-framework/p2p-msg-delivery,md">P2P Handler Stub</a>??</strong>.</p>
+<p><strong>Steps 1-3</strong>: The Interworking Protocol Stub (the term IWstub will used in this document) deployment can be intiated by the Core Runtime Sandbox (e.g. Runtime Registry) or from other sandbox (e.g. Application). The Interworking Protocol Stub deployment will be triggered by the deployment of an Hyperty which will interact with a Legacy Domain service or by some attempt from a local Hyperty to communicate with a legacy domain which requires that interworking Protocol Stub. The Runtime UA only downloads and deploys requested IWstub after checking in the Registry that there is no Protocol Stub available in the Hyperty Runtime. <strong>The “p2pconfig” parameter is not used in Interworking Protostub</strong>.</p>
 
 <p><strong>Steps 4 - 5</strong>: the Runtime UA is able to derive the URL to download the Protocol Stub descriptor from the domain URL (legacy-domain), since it is a well known URI defined in the reTHINK Architecture Interfaces [15]. The Legacy Domain must add a Catalogue and a Service backend to download the IWstub code. This role may not be played by the Legacy Domain itself by a Third organization which provide interoperability between reTHINK and the legacy service. In this case, the <a href="https://github.com/reTHINK-project/specs/tree/master/datamodel/core/hyperty-catalogue">descriptor</a> of the protostub will include the attribute set to <em>true</em>.</p>
 

@@ -153,7 +153,7 @@ Any changes performed in your Hyperty source code will be automaticaly loaded by
 
 ## Next steps:
 
-Have a look on [available APIs](../service-framework/readme/) to facilitate the development of powerful Hyperties like the ones available in the [Hyperty Catalogue](../../../dev-hyperty)
+Have a look on [available APIs](../../service-framework/readme/) to facilitate the development of powerful Hyperties like the ones available in the [Hyperty Catalogue](../../../dev-hyperty)
 
 ## Criteria to use Hyperties
 

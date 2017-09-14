@@ -5,50 +5,51 @@ category: Testing
 order: 2
 ---
 
-## Interoperability Evaluation
-
 This documents provides guidelines to perform interoperability tests with reTHINK framework.
-Before you go ahead with these tests it is recommended to be familiar with main reTHINK concepts enabling full interoperability among services without having to standardize protocols or service APIs, as described [here](https://rethink-project.github.io/Concepts).
+Before you go ahead with these tests it is recommended to be familiar with main reTHINK concepts enabling full interoperability among services without having to standardize protocols or service APIs, as described [here](../../../concepts/foundations/).
 
 The following tests allow to verify the usage of these concepts to support adhoc interoperability (i.e. interoperability between endpoints without previous knowledge) at different levels:
 
-* Interoperability between two different reTHINK domains using different Messaging Nodes implementations including Protostubs but using the same Hyperty implementations.
+-- Interoperability between two different reTHINK domains using different Messaging Nodes implementations including Protostubs but using the same Hyperty implementations.
 
-* Interoperability between two different reTHINK domains using different Messaging Nodes implementations including Protostubs and different Hyperty implementations.
+-- Interoperability between two different reTHINK domains using different Messaging Nodes implementations including Protostubs and different Hyperty implementations.
 
-* Interoperability with legacy services, i.e., between one Hyperty and some non-reTHINK service.
+-- Interoperability with legacy services, i.e., between one Hyperty and some non-reTHINK service.
 
 For each of these tests, the latency will be measured for two scenarios:
 
-1. when communication occurs for the first time between the two peers. In this situation, the protocol stub and the Idp Proxy has to be downloaded from the catalogue and deployed in the runtime.
-1. it is not the first time the communication occurs between the two peers. In this situation, the protocol stub and the Idp Proxy is cached locally and does not have to be downloaded from the catalogue.
+1- when communication occurs for the first time between the two peers. In this situation, the protocol stub and the Idp Proxy has to be downloaded from the catalogue and deployed in the runtime.
 
-### Tests Setup
+2- it is not the first time the communication occurs between the two peers. In this situation, the protocol stub and the Idp Proxy is cached locally and does not have to be downloaded from the catalogue.
+
+## Tests Setup
 
 Interoperability tests can be performed partially locally or fully using back-end services like the ones provided by reTHINK testbeds. In both options two Google accounts are required.
 
-#### Interoperability Tests Setup with remote domains
+### Interoperability Tests Setup with remote domains
 
 This is the simplest setup environment where no service has to be installed locally. Only standard Browsers are required. The usage of Chrome or Firefox are recommended.
 The *hysmart* testbed from Altice Labs using the [vertx](https://github.com/reTHINK-project/dev-msg-node-vertx) Messaging Node implementation and the *Tlabs* using the [Matrix based Messaging Node](https://github.com/reTHINK-project/dev-msg-node-matrix), are used in these guidelines but any reTHINK compliant testbed can be used. Just follow the [Quick Installation Guide for reTHINK Framework](https://github.com/reTHINK-project/specs/blob/master/deployment/readme.md) to deploy your own reTHINK domain or testbed.
 
 
-#### Interoperability Tests Setup with one `localhost` domain and one remote domain
+### Interoperability Tests Setup with one `localhost` domain and one remote domain
 
 In this setup environment, one of the domains is installed as `localhost`. This kind of setup environment is useful to test locally some developments before deploying in testbeds. It also gives you more freedom to decide on the implementation to be used including your own implementation, if that is the case.
 
 **Localhost installation:**
 
-1. Toolkit installation: follow the quick toolkit installation guide as provided [here]((https://github.com/reTHINK-project/dev-hyperty-toolkit#quick-start).
-1. Domain Registry installation: follow the installation guide [here](https://github.com/reTHINK-project/dev-domain-registry/readme.md)
-1. Messaging Node installation: select one of the following Messaging Nodes implementation and perform the provided installation procedures:
+1- Toolkit installation: follow the quick toolkit installation guide as provided [here]((https://github.com/reTHINK-project/dev-hyperty-toolkit#quick-start).
 
-  * [VertX](https://github.com/reTHINK-project/dev-msg-node-vertx)
-  * [Matrix](https://github.com/reTHINK-project/dev-msg-node-matrix)
-  * [NodeJS](https://github.com/reTHINK-project/dev-msg-node-nodejs)
-  * [no Matrix](https://github.com/reTHINK-project/dev-msg-node-nomatrix)  
+2- Domain Registry installation: follow the installation guide [here](https://github.com/reTHINK-project/dev-domain-registry/readme.md)
 
-### Cross-domain interoperability test with Group Chat
+3- Messaging Node installation: select one of the following Messaging Nodes implementation and perform the provided installation procedures:
+
+  -- [VertX](https://github.com/reTHINK-project/dev-msg-node-vertx)
+  -- [Matrix](https://github.com/reTHINK-project/dev-msg-node-matrix)
+  -- [NodeJS](https://github.com/reTHINK-project/dev-msg-node-nodejs)
+  -- [no Matrix](https://github.com/reTHINK-project/dev-msg-node-nomatrix)  
+
+## Cross-domain interoperability test with Group Chat
 
 The Group Chat cross-domain interoperability test allows to test how two domains using different messaging communication protocols, i.e. using two different Messaging Nodes implementations can interoperate without having to agree in advance on the protocol to be used. Both domains use the same [Group Chat Manager Hyperty implementation](https://github.com/reTHINK-project/dev-hyperty/tree/develop/docs/group-chat-manager). Before you start performing this, pls ensure you have two valid Google accounts to be used.
 
@@ -94,7 +95,7 @@ Step 7: Both users can exchange messages:
 
 ![SCA user chat with Call Center user](sca-chat.PNG)
 
-### Group Chat interoperability with Slack legacy service
+## Group Chat interoperability with Slack legacy service
 
 The Group Chat interoperability with Slack legacy service test allows to test how one full reTHINK compliant domain can interoperate with another domain that is not reTHINK compliant without having to agree in advance on the protocol to be used. The Hyperty implementation is also agnostic of the legacy domains it can interoperate with.
 
@@ -124,7 +125,7 @@ The user from the legacy Slack application, chat with the reTHINK Call Center Ap
 
 ![Slack user chat with SCA user and Call Center user](slack-chat-sca-callcenter.png)
 
-### WebRTC Audio and Video interoperability test
+## WebRTC Audio and Video interoperability test
 
 This test will show how two users using different Applications, different Hyperties from different domains, each one using different protocols, are able to call each other. The Call Center Application uses the [DTWebRTC Hyperty](https://github.com/reTHINK-project/dev-hyperty/tree/develop/docs/dtwebrtc) while the SCA uses the [Connector Hyperty](https://github.com/reTHINK-project/dev-hyperty/tree/develop/docs/connector).
 
@@ -146,7 +147,7 @@ and the SCA user:
 
 ![SCA Video Communication with Call Center user](sca-callcenter-call.PNG)
 
-### End-to-end Interoperability Performance evaluation
+## End-to-end Interoperability Performance evaluation
 
 The Call Setup latency was measured for the call established between the DT Call Center Application hosted in Berlin, (Germany) and the SCA Application hosted in Aveiro (Portugal):
 

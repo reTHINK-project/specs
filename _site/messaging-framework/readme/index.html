@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no, maximum-scale=1, minimum-scale=1">
 
-  <title>Overview</title>
+  <title>Messaging Framework Overview</title>
   <meta name="description" content="reTHINK Framework provides the tools to build a global real-time decentralized communication infra-structure where services are inherently inter-operable.">
 
   <link rel="canonical" href="http://localhost:4000/specs/messaging-framework/readme/">
@@ -109,7 +109,7 @@
                   
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
-                  <li><a class="page-link" href="/specs/">Specifications</a></li>
+                  <li><a class="page-link" href="/specs/">Documentation</a></li>
                   <li><a class="page-link" href="/dev-hyperty" target="_blank">Hyperties</a></li>
                   <li><a class="page-link" href="https://github.com/reTHINK-project/dev-hyperty-toolkit" target="_blank">GitHub</a></li>
                   <li><a class="page-link" href="https://github.com/reTHINK-project/dev-hyperty-toolkit/releases" target="_blank">v0.6.1</a></li>
@@ -306,7 +306,7 @@
             
               <li>
                 
-                  <a href="/specs/specs/messaging-framework/readme/" class="active doc-link" role="link">  Overview </a>
+                  <a href="/specs/specs/messaging-framework/readme/" class="active doc-link" role="link">  Messaging Framework Overview </a>
                 
               </li>
             
@@ -433,6 +433,12 @@
               <li>
                 
                   <a href="/specs/specs/dynamic-view/basics/register-hyperty/" class="doc-link" role="link">  Hyperty Registration </a>
+                
+              </li>
+            
+              <li>
+                
+                  <a href="/specs/specs/dynamic-view/basics/resolve-msg-node-address/" class="doc-link" role="link">  Routing Address Resolve for Msg Node Stubs </a>
                 
               </li>
             
@@ -773,7 +779,7 @@
         <div class="row">
             <div class="col-sm-12">
                 <div class="block">
-                    <h1>Overview</h1>
+                    <h1>Messaging Framework Overview</h1>
                     <p></p>
                 </div>
             </div>
@@ -943,7 +949,7 @@
         
           <li>
             
-              <a href="/specs/messaging-framework/readme/" class="active doc-link" role="link">  Overview </a>
+              <a href="/specs/messaging-framework/readme/" class="active doc-link" role="link">  Messaging Framework Overview </a>
             
           </li>
         
@@ -1064,6 +1070,12 @@
           <li>
             
               <a href="/specs/dynamic-view/basics/bus-msg-routing/" class="doc-link" role="link">  Message Routing </a>
+            
+          </li>
+        
+          <li>
+            
+              <a href="/specs/dynamic-view/basics/resolve-msg-node-address/" class="doc-link" role="link">  Routing Address Resolve for Msg Node Stubs </a>
             
           </li>
         
@@ -1422,11 +1434,7 @@
   <div class="main col-sm-9">
     <section>
       <div class="">
-        <h2 id="decentralized-messaging-framework-overview">Decentralized Messaging Framework overview</h2>
-
-<p>This document gives an overview on a Decentralized Messaging Framework technical solution that is used by the higher level <a href="/specs/messaging-framework/p2p-data-sync/">Data Synchronisation Reporter - Observer communication mechanism</a>.</p>
-
-<p>The Decentraized Messaging Framework is designed on top of a Resource Oriented Messaging model that supports publish/subscribe as well as request/response messaging patterns. Messages are used to perform CRUD operations on resources handled by communication endpoints, for example to create or update a WebRTC connection. In addition, Subscribe operations on resources are also supported in order to be notified on any change performed to such resource. The current reference implementation uses JSON for the message format. Each message has a fixed set of header fields and a variable message body. These are the common header fields that are required to route Messages:</p>
+        <p>The Decentralized Messaging Framework is designed on top of a Resource Oriented Messaging model that supports publish/subscribe as well as request/response messaging patterns. Messages are used to perform CRUD operations on resources handled by communication endpoints, for example to create or update a WebRTC connection. In addition, Subscribe operations on resources are also supported in order to be notified on any change performed to such resource. The current reference implementation uses JSON for the message format. Each message has a fixed set of header fields and a variable message body. These are the common header fields that are required to route Messages:</p>
 
 <p><strong>id</strong>: an identifier used to associate RESPONSE messages to the initial REQUEST message</p>
 

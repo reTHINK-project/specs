@@ -109,7 +109,7 @@
                   
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
-                  <li><a class="page-link" href="/specs/">Specifications</a></li>
+                  <li><a class="page-link" href="/specs/">Documentation</a></li>
                   <li><a class="page-link" href="/dev-hyperty" target="_blank">Hyperties</a></li>
                   <li><a class="page-link" href="https://github.com/reTHINK-project/dev-hyperty-toolkit" target="_blank">GitHub</a></li>
                   <li><a class="page-link" href="https://github.com/reTHINK-project/dev-hyperty-toolkit/releases" target="_blank">v0.6.1</a></li>
@@ -306,7 +306,7 @@
             
               <li>
                 
-                  <a href="/specs/specs/messaging-framework/readme/" class="doc-link" role="link">  Overview </a>
+                  <a href="/specs/specs/messaging-framework/readme/" class="doc-link" role="link">  Messaging Framework Overview </a>
                 
               </li>
             
@@ -433,6 +433,12 @@
               <li>
                 
                   <a href="/specs/specs/dynamic-view/basics/register-hyperty/" class="doc-link" role="link">  Hyperty Registration </a>
+                
+              </li>
+            
+              <li>
+                
+                  <a href="/specs/specs/dynamic-view/basics/resolve-msg-node-address/" class="doc-link" role="link">  Routing Address Resolve for Msg Node Stubs </a>
                 
               </li>
             
@@ -943,7 +949,7 @@
         
           <li>
             
-              <a href="/specs/messaging-framework/readme/" class="doc-link" role="link">  Overview </a>
+              <a href="/specs/messaging-framework/readme/" class="doc-link" role="link">  Messaging Framework Overview </a>
             
           </li>
         
@@ -1064,6 +1070,12 @@
           <li>
             
               <a href="/specs/dynamic-view/basics/bus-msg-routing/" class="doc-link" role="link">  Message Routing </a>
+            
+          </li>
+        
+          <li>
+            
+              <a href="/specs/dynamic-view/basics/resolve-msg-node-address/" class="doc-link" role="link">  Routing Address Resolve for Msg Node Stubs </a>
             
           </li>
         
@@ -1450,16 +1462,11 @@
 
 <h4 id="hyperty">Hyperty</h4>
 
-<p><a href="../tutorials/hyperty.md">Hyperties</a> is a new service paradigm designed according to <a href="/specs/messaging-framework/readme/">Decentralised Communication principles</a>.
-It follows Microservices architectural patterns, i.e. Hyperties are independently deployable components.
-Each hyperty provides a small set of business capabilities, using the smart endpoints and dumb pipes philosophy.
-On the other side, Hyperties follow emerging Edge and Fog computing paradigms as opposed to more popular Cloud Computing and they are executed as much as possible in end-users devices.</p>
-
 <p>Hyperties are dynamically deployed from the Runtime Catalogue, when required by Applications. Each Hyperty instance is registered in the Runtime Registry.</p>
 
 <h4 id="protocol-stub">Protocol Stub</h4>
 
-<p>The Protocol Stub implements a protocol stack to be used to communicate with the Service Provider’s backend servers (including Messaging Server or other functionalities) according to <a href="/specs/messaging-framework/protofly/">Protocol on the Fly</a> concept.</p>
+<p>The Protocol Stub implements a protocol stack to be used to communicate with the Service Provider’s backend servers (including Messaging Server or other functionalities).</p>
 
 <p>Protocol stubs are only reachable through the Message BUS. In this way it is ensured that all messages received and sent goes through the message bus where policies can be enforced and additional data can be added or changed including identity tokens.</p>
 
@@ -1527,7 +1534,7 @@ On the other side, Hyperties follow emerging Edge and Fog computing paradigms as
 
 <h4 id="runtime-catalogue">Runtime Catalogue</h4>
 
-<p>The Runtime Catalogue manages the descriptors of deployable components and Hyperty Data Object schemas that are downloaded from the Service Provider Catalogue via the <a href="https://github.com/reTHINK-project/architecture/blob/master/docs/interface-design/Interface-Design.md#73-catalogue-interface">Catalogue Service interface</a>. The Runtime Catalogue ensures synchronisation with Back-end Catalogue servers.</p>
+<p>The Runtime Catalogue manages the descriptors of deployable components and Hyperty Data Object schemas that are downloaded from the Service Provider Catalogue. The Runtime Catalogue ensures synchronisation with Back-end Catalogue servers.</p>
 
 <p>The Runtime Catalogue must have listeners to receive messages at:</p>
 

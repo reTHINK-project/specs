@@ -8,7 +8,7 @@ order: 3
 
 Message bodies can contain JWT tokens for Access Control or for Identity Assertion purposes that are inserted by the Identity Module before the message is routed to protostubs.
 
-When these messages reach the destination MessageBUS, the JWT tokens are decoded and translated into standard [User Identity Data format](../user-identity).
+When these messages reach the destination MessageBUS, the JWT tokens are decoded and translated into standard [User Identity Data format](../../../datamodel/core/user-identity/readme/).
 
 According to applicable policies, IdTokens are verified by the Identity Module and, if successful, `"assertedIdentity" : "true"` is inserted in the MessageBody. These procedures are performed before the message is delivered to the Hyperty.
 

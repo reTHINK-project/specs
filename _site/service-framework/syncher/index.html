@@ -109,7 +109,7 @@
                   
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
-                  <li><a class="page-link" href="/specs/">Specifications</a></li>
+                  <li><a class="page-link" href="/specs/">Documentation</a></li>
                   <li><a class="page-link" href="/dev-hyperty" target="_blank">Hyperties</a></li>
                   <li><a class="page-link" href="https://github.com/reTHINK-project/dev-hyperty-toolkit" target="_blank">GitHub</a></li>
                   <li><a class="page-link" href="https://github.com/reTHINK-project/dev-hyperty-toolkit/releases" target="_blank">v0.6.1</a></li>
@@ -306,7 +306,7 @@
             
               <li>
                 
-                  <a href="/specs/specs/messaging-framework/readme/" class="doc-link" role="link">  Overview </a>
+                  <a href="/specs/specs/messaging-framework/readme/" class="doc-link" role="link">  Messaging Framework Overview </a>
                 
               </li>
             
@@ -433,6 +433,12 @@
               <li>
                 
                   <a href="/specs/specs/dynamic-view/basics/register-hyperty/" class="doc-link" role="link">  Hyperty Registration </a>
+                
+              </li>
+            
+              <li>
+                
+                  <a href="/specs/specs/dynamic-view/basics/resolve-msg-node-address/" class="doc-link" role="link">  Routing Address Resolve for Msg Node Stubs </a>
                 
               </li>
             
@@ -943,7 +949,7 @@
         
           <li>
             
-              <a href="/specs/messaging-framework/readme/" class="doc-link" role="link">  Overview </a>
+              <a href="/specs/messaging-framework/readme/" class="doc-link" role="link">  Messaging Framework Overview </a>
             
           </li>
         
@@ -1064,6 +1070,12 @@
           <li>
             
               <a href="/specs/dynamic-view/basics/bus-msg-routing/" class="doc-link" role="link">  Message Routing </a>
+            
+          </li>
+        
+          <li>
+            
+              <a href="/specs/dynamic-view/basics/resolve-msg-node-address/" class="doc-link" role="link">  Routing Address Resolve for Msg Node Stubs </a>
             
           </li>
         
@@ -1422,16 +1434,12 @@
   <div class="main col-sm-9">
     <section>
       <div class="">
-        <h2 id="p2p-synchronization-api">P2P Synchronization API</h2>
-
-<p><em><a href="https://github.com/reTHINK-project/dev-service-framework/blob/master/src/syncher/Syncher.js">source</a></em></p>
+        <p><a href="https://github.com/reTHINK-project/dev-service-framework/blob/master/src/syncher/Syncher.js">source code</a>*</p>
 
 <p>Full documentation <a href="https://doc.esdoc.org/github.com/reTHINK-project/dev-service-framework/class/src/syncher/Syncher.js~Syncher.html">here</a></p>
 
 <p>The Syncher API provides data object synchronisation among Hyperties. The synchronised Data Objects are JSON data objects.
 The Syncher API is depicted in the following diagram:</p>
-
-<p><img src="/specs/service-framework/SyncherAPI.png" alt="Syncher API" /></p>
 
 <p>The Syncher is a singleton owned by a Hyperty Instance that uses it to communicate with other Hyperty instance through data synchronisation. The Syncher “owns” all DataObjects (DataObject class) used by its Hyperty Instance i.e. DataObject instances (creation, destruction) are managed by the Syncher and not by the Hyperty Instance. Each DataObject is addressed by a URL - ObjectURL - that is used by the Hyperty Messaging Framework to correctly route messages required to support the data synchronisation, via the MiniBUS component. When a new Data Object (Reporter or Observed) is created, the Syncher will add listeners in the MiniBus to receive messages targeting the ObjectURL. This means, the Syncher is the end-point associated to ObjectURL and not the Hyperty Instance.</p>
 
@@ -1443,11 +1451,13 @@ The Syncher API is depicted in the following diagram:</p>
 
 <p>In addition, DataObjects can handle  Children Object with collections of DataObjectChild. Either Reporter (DataObjectReporter) or Observers (DataObjectObserver) can create DataObjectChilds in a certain children collection (<code class="highlighter-rouge">addChild()</code> function).</p>
 
-<h3 id="syncher-api">Syncher API</h3>
+<p><img src="/specs/service-framework/syncher-api.png" alt="Syncher API" /></p>
+
+<h2 id="syncher">Syncher</h2>
 
 <p>This is the main class that manages the creation of Data Objects. It is a singleton i.e. only one instance is available per Hyperty instance. It’s the owner of all kind of data objects that can be synchronised by the Syncher including Reported Objects (DataObjectReporter) and Observed Objects (DataObjectObserver).</p>
 
-<h4 id="properties">Properties</h4>
+<h3 id="properties">Properties</h3>
 
 <ul>
   <li>
@@ -1461,7 +1471,7 @@ The Syncher API is depicted in the following diagram:</p>
   </li>
 </ul>
 
-<h4 id="methods">Methods</h4>
+<h3 id="methods">Methods</h3>
 
 <p><strong>constructor</strong></p>
 
@@ -1559,7 +1569,7 @@ The Syncher API is depicted in the following diagram:</p>
   </li>
 </ul>
 
-<h4 id="event-handlers">Event Handlers</h4>
+<h3 id="event-handlers">Event Handlers</h3>
 
 <p><strong>onNotification</strong></p>
 
@@ -1601,12 +1611,13 @@ The Syncher API is depicted in the following diagram:</p>
   <li>callback: callback function to receive the event.</li>
 </ul>
 
-<h3 id="dataobjectchild">DataObjectChild</h3>
+<h2 id="dataobjectchild">DataObjectChild</h2>
+
 <p>Child objects are returned from the <code class="highlighter-rouge">DataObject.addChild</code>.
 DataObjectChild are created in relation to a pre-existent path on the parent object schema.
 Child objects can be created from a Reporter or Observer and are shared between them.</p>
 
-<h5 id="properties-1">Properties</h5>
+<h3 id="properties-1">Properties</h3>
 <ul>
   <li>
     <p>childId: URL address for a child, related to an ObjectURL</p>
@@ -1619,7 +1630,7 @@ Child objects can be created from a Reporter or Observer and are shared between 
   </li>
 </ul>
 
-<h5 id="event-handlers-1">Event Handlers</h5>
+<h3 id="event-handlers-1">Event Handlers</h3>
 
 <p><strong>onResponse</strong></p>
 
@@ -1641,7 +1652,8 @@ Child objects can be created from a Reporter or Observer and are shared between 
   <li>callback: callback function to receive events</li>
 </ul>
 
-<h5 id="methods-events-and-handlers">Methods, Events and Handlers</h5>
+<h3 id="methods-events-and-handlers">Methods, Events and Handlers</h3>
+
 <p>Every object have methods, and event handlers to map to a pulling and push scheme.
 Methods fire actions and Handlers react to actions and respond accordingly.
 All events listed on the class diagram are intercepted in an event handler. From a functional perspective, methods like (accept, reject, wait, …) are responses to an action. Since actions are represented by events, it makes sense that responses are directly related to them. Some rules:</p>
@@ -1655,28 +1667,34 @@ All events listed on the class diagram are intercepted in an event handler. From
   </li>
 </ul>
 
-<h5 id="syncstatus">SyncStatus</h5>
+<h2 id="syncstatus">SyncStatus</h2>
 
 <p>It is used to get and control the status of a DataObject (local, remote, reporter or observer). The interface is not yet implemented, documentation should be updated accordingly from the provided implementation behavior.</p>
 
 <p><strong>TODO</strong> Maybe some kind of state machine diagram is needed to define better all the status, and the actions that activate the status transitions.</p>
 
-<h6 id="properties-2">Properties</h6>
+<h3 id="properties-2">Properties</h3>
 <p>status: actual state based on the actions: pause, resume, stop, …</p>
 
-<h6 id="methods-1">Methods</h6>
+<h3 id="methods-1">Methods</h3>
 <p>pause: should pause the synchronization process, pause the mission of update messages between the reporter/observer link.</p>
 
 <p>resume: resume the synchronization process from a pause action.</p>
 
 <p>stop: probably the same as unsubscribe, so maybe this method is outdated.</p>
 
-<h5 id="syncsubscription">SyncSubscription</h5>
+<h2 id="syncsubscription">SyncSubscription</h2>
 
 <p>A reference to a remote observer/subscription, associated to a HypertyURL.</p>
 
-<h6 id="properties-3">Properties</h6>
+<h3 id="properties-3">Properties</h3>
 <p>url: HypertyURL of the observer.</p>
+
+<h2 id="syncher-events">Syncher Events</h2>
+
+<p>Syncher events are defined in the picture bellow:</p>
+
+<p><img src="/specs/service-framework/syncher-events.png" alt="Syncher Events" /></p>
 
       </div>
     </section>

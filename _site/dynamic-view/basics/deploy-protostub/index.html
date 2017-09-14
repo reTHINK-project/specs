@@ -109,7 +109,7 @@
                   
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
-                  <li><a class="page-link" href="/specs/">Specifications</a></li>
+                  <li><a class="page-link" href="/specs/">Documentation</a></li>
                   <li><a class="page-link" href="/dev-hyperty" target="_blank">Hyperties</a></li>
                   <li><a class="page-link" href="https://github.com/reTHINK-project/dev-hyperty-toolkit" target="_blank">GitHub</a></li>
                   <li><a class="page-link" href="https://github.com/reTHINK-project/dev-hyperty-toolkit/releases" target="_blank">v0.6.1</a></li>
@@ -306,7 +306,7 @@
             
               <li>
                 
-                  <a href="/specs/specs/messaging-framework/readme/" class="doc-link" role="link">  Overview </a>
+                  <a href="/specs/specs/messaging-framework/readme/" class="doc-link" role="link">  Messaging Framework Overview </a>
                 
               </li>
             
@@ -433,6 +433,12 @@
               <li>
                 
                   <a href="/specs/specs/dynamic-view/basics/register-hyperty/" class="doc-link" role="link">  Hyperty Registration </a>
+                
+              </li>
+            
+              <li>
+                
+                  <a href="/specs/specs/dynamic-view/basics/resolve-msg-node-address/" class="doc-link" role="link">  Routing Address Resolve for Msg Node Stubs </a>
                 
               </li>
             
@@ -943,7 +949,7 @@
         
           <li>
             
-              <a href="/specs/messaging-framework/readme/" class="doc-link" role="link">  Overview </a>
+              <a href="/specs/messaging-framework/readme/" class="doc-link" role="link">  Messaging Framework Overview </a>
             
           </li>
         
@@ -1064,6 +1070,12 @@
           <li>
             
               <a href="/specs/dynamic-view/basics/bus-msg-routing/" class="doc-link" role="link">  Message Routing </a>
+            
+          </li>
+        
+          <li>
+            
+              <a href="/specs/dynamic-view/basics/resolve-msg-node-address/" class="doc-link" role="link">  Routing Address Resolve for Msg Node Stubs </a>
             
           </li>
         
@@ -1426,19 +1438,19 @@
 
 <p><img src="/specs/dynamic-view/basics/deploy-protostub.png" alt="Figure @runtime-deploy-protostub: Deploy Protocol Stub" /></p>
 
-<p>Steps 1: Several components might initiate de Protocol Stub deploy that can come from the Core Runtime Sandbox (e.g. Runtime Registry) or from other sandbox (e.g. Application). The Protocol Stub deployment may be triggered by the deployment of an Hyperty or by some attempt from a local Hyperty to communicate with a remote Hyperty running in the domain served by the Protocol Stub. In this former case the Runtime Registry would take the initiative to start the Protocol Stub deploy. <strong>Phase 2 New!</strong> For the deployment of P2P Requester Stubs, the “p2pconfig” parameter contains the remote <a href="../../messaging-framework/p2p-msg-delivery,md">P2P Handler Stub</a> instance URL and the “local MN StubURL” connecting to the MN from the remote runtime that will be used for the P2P setup signalling. For the deployment of P2P Handler Stubs, the “p2pconfig” parameter contains “isHandlerStub = true”.</p>
+<p>Steps 1: Several components might initiate de Protocol Stub deploy that can come from the Core Runtime Sandbox (e.g. Runtime Registry) or from other sandbox (e.g. Application). The Protocol Stub deployment may be triggered by the deployment of an Hyperty or by some attempt from a local Hyperty to communicate with a remote Hyperty running in the domain served by the Protocol Stub. In this former case the Runtime Registry would take the initiative to start the Protocol Stub deploy. For the deployment of P2P Requester Stubs, the “p2pconfig” parameter contains the remote <a href="../../../messaging-framework/p2p-msg-delivery,md">P2P Handler Stub</a> instance URL and the “local MN StubURL” connecting to the MN from the remote runtime that will be used for the P2P setup signalling. For the deployment of P2P Handler Stubs, the “p2pconfig” parameter contains “isHandlerStub = true”.</p>
 
-<p>Steps 6 - 7: The Runtime UA only downloads and deploys requested Protocol Stub after checking in the Registry that there is no Protocol Stub available in the Hyperty Runtime. <strong>Phase 2 New!</strong> it checks the p2pConfig to look for the type of protostubb to be loaded and check with the runtime registry that it is not yet deployed in the Runtime.</p>
+<p>Steps 6 - 7: The Runtime UA only downloads and deploys requested Protocol Stub after checking in the Registry that there is no Protocol Stub available in the Hyperty Runtime. It checks the p2pConfig to look for the type of protostubb to be loaded and check with the runtime registry that it is not yet deployed in the Runtime.</p>
 
 <p>Steps 8 - 9: the Runtime UA is able to derive the URL to download the Protocol Stub descriptor from the domain URL (sp-domain), since it is a well known URI defined in the reTHINK Architecture Interfaces [15].</p>
 
 <p>Steps 10-11: The Runtime UA downloads the protostub source code, extracting the protostubDownloadURL from the protostub descriptor.</p>
 
-<p>Steps 12-16: The Runtime UA requests the Registry about existing sandbox do be used. If no appropriate sandbox is available, it instantiates a new sandbox through the Sandbox interface which is registered in the Registry. <strong>Phase 2 New!</strong> The <code class="highlighter-rouge">capabilities</code> input parameter (see RuntimeSandboxCapabilities type in <a href="/specs/datamodel/core/hyperty-catalogue/readme/#hyperty-runtime-descriptor">Runtime Descriptor</a>) is used to indicate capabilities required eg window capabilities.</p>
+<p>Steps 12-16: The Runtime UA requests the Registry about existing sandbox do be used. If no appropriate sandbox is available, it instantiates a new sandbox through the Sandbox interface which is registered in the Registry. The <code class="highlighter-rouge">capabilities</code> input parameter (see RuntimeSandboxCapabilities type in <a href="/specs/datamodel/core/hyperty-catalogue/readme/#hyperty-runtime-descriptor">Runtime Descriptor</a>) is used to indicate capabilities required eg window capabilities.</p>
 
-<p>Steps 17 - 25: the new Protocol Stub is registered in the Runtime Registry, which allocates and returns the runtime address (RuntimeURL) for the new runtime component. Since the protostub only has to be reached by runtime components, the protostub URL can be generated by the Runtime Registry ensuring the URL is unique in the Runtime namespace. Optionaly, the protostub is registered in the remote Domain Registry. In addition, the runtime Registry requests the runtime BUS to add its listener to receive events about the Protocol Stub status. <strong>New Phase 2:</strong> For P2P Requester Stubs <a href="/specs/messages/p2p-connection-messages/#set-p2p-equester-routing-path">its Routing Path is set at Message Node Subscription Manager functionality</a>.</p>
+<p>Steps 17 - 25: the new Protocol Stub is registered in the Runtime Registry, which allocates and returns the runtime address (RuntimeURL) for the new runtime component. Since the protostub only has to be reached by runtime components, the protostub URL can be generated by the Runtime Registry ensuring the URL is unique in the Runtime namespace. Optionaly, the protostub is registered in the remote Domain Registry. In addition, the runtime Registry requests the runtime BUS to add its listener to receive events about the Protocol Stub status. For P2P Requester Stubs <a href="/specs/messages/p2p-connection-messages/#set-p2p-equester-routing-path">its Routing Path is set at Message Node Subscription Manager functionality</a>.</p>
 
-<p>Steps 26-28: The Runtime UA requests the new sandbox to instantiate the protostub source code, extracting the configuration data from the protostub descriptor. (<strong>Phase 2 New!</strong>) For P2P Requester Stubs, the p2pConfig json data is concatonated with the protostub descriptor configuration json data.</p>
+<p>Steps 26-28: The Runtime UA requests the new sandbox to instantiate the protostub source code, extracting the configuration data from the protostub descriptor. For P2P Requester Stubs, the p2pConfig json data is concatonated with the protostub descriptor configuration json data.</p>
 
 <p>Steps 29: The Runtime UA finishes the Protocol Stub deploy by adding in the runtime BUS the protostub listener to receive messages from the runtime.</p>
 

@@ -109,7 +109,7 @@
                   
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
-                  <li><a class="page-link" href="/specs/">Specifications</a></li>
+                  <li><a class="page-link" href="/specs/">Documentation</a></li>
                   <li><a class="page-link" href="/dev-hyperty" target="_blank">Hyperties</a></li>
                   <li><a class="page-link" href="https://github.com/reTHINK-project/dev-hyperty-toolkit" target="_blank">GitHub</a></li>
                   <li><a class="page-link" href="https://github.com/reTHINK-project/dev-hyperty-toolkit/releases" target="_blank">v0.6.1</a></li>
@@ -306,7 +306,7 @@
             
               <li>
                 
-                  <a href="/specs/specs/messaging-framework/readme/" class="doc-link" role="link">  Overview </a>
+                  <a href="/specs/specs/messaging-framework/readme/" class="doc-link" role="link">  Messaging Framework Overview </a>
                 
               </li>
             
@@ -433,6 +433,12 @@
               <li>
                 
                   <a href="/specs/specs/dynamic-view/basics/register-hyperty/" class="doc-link" role="link">  Hyperty Registration </a>
+                
+              </li>
+            
+              <li>
+                
+                  <a href="/specs/specs/dynamic-view/basics/resolve-msg-node-address/" class="doc-link" role="link">  Routing Address Resolve for Msg Node Stubs </a>
                 
               </li>
             
@@ -943,7 +949,7 @@
         
           <li>
             
-              <a href="/specs/messaging-framework/readme/" class="doc-link" role="link">  Overview </a>
+              <a href="/specs/messaging-framework/readme/" class="doc-link" role="link">  Messaging Framework Overview </a>
             
           </li>
         
@@ -1064,6 +1070,12 @@
           <li>
             
               <a href="/specs/dynamic-view/basics/bus-msg-routing/" class="doc-link" role="link">  Message Routing </a>
+            
+          </li>
+        
+          <li>
+            
+              <a href="/specs/dynamic-view/basics/resolve-msg-node-address/" class="doc-link" role="link">  Routing Address Resolve for Msg Node Stubs </a>
             
           </li>
         
@@ -1422,61 +1434,50 @@
   <div class="main col-sm-9">
     <section>
       <div class="">
-        <h2 id="interoperability-evaluation">Interoperability Evaluation</h2>
-
-<p>This documents provides guidelines to perform interoperability tests with reTHINK framework.
-Before you go ahead with these tests it is recommended to be familiar with main reTHINK concepts enabling full interoperability among services without having to standardize protocols or service APIs, as described <a href="https://rethink-project.github.io/Concepts">here</a>.</p>
+        <p>This documents provides guidelines to perform interoperability tests with reTHINK framework.
+Before you go ahead with these tests it is recommended to be familiar with main reTHINK concepts enabling full interoperability among services without having to standardize protocols or service APIs, as described <a href="../../../concepts/foundations/">here</a>.</p>
 
 <p>The following tests allow to verify the usage of these concepts to support adhoc interoperability (i.e. interoperability between endpoints without previous knowledge) at different levels:</p>
 
-<ul>
-  <li>
-    <p>Interoperability between two different reTHINK domains using different Messaging Nodes implementations including Protostubs but using the same Hyperty implementations.</p>
-  </li>
-  <li>
-    <p>Interoperability between two different reTHINK domains using different Messaging Nodes implementations including Protostubs and different Hyperty implementations.</p>
-  </li>
-  <li>
-    <p>Interoperability with legacy services, i.e., between one Hyperty and some non-reTHINK service.</p>
-  </li>
-</ul>
+<p>– Interoperability between two different reTHINK domains using different Messaging Nodes implementations including Protostubs but using the same Hyperty implementations.</p>
+
+<p>– Interoperability between two different reTHINK domains using different Messaging Nodes implementations including Protostubs and different Hyperty implementations.</p>
+
+<p>– Interoperability with legacy services, i.e., between one Hyperty and some non-reTHINK service.</p>
 
 <p>For each of these tests, the latency will be measured for two scenarios:</p>
 
-<ol>
-  <li>when communication occurs for the first time between the two peers. In this situation, the protocol stub and the Idp Proxy has to be downloaded from the catalogue and deployed in the runtime.</li>
-  <li>it is not the first time the communication occurs between the two peers. In this situation, the protocol stub and the Idp Proxy is cached locally and does not have to be downloaded from the catalogue.</li>
-</ol>
+<p>1- when communication occurs for the first time between the two peers. In this situation, the protocol stub and the Idp Proxy has to be downloaded from the catalogue and deployed in the runtime.</p>
 
-<h3 id="tests-setup">Tests Setup</h3>
+<p>2- it is not the first time the communication occurs between the two peers. In this situation, the protocol stub and the Idp Proxy is cached locally and does not have to be downloaded from the catalogue.</p>
+
+<h2 id="tests-setup">Tests Setup</h2>
 
 <p>Interoperability tests can be performed partially locally or fully using back-end services like the ones provided by reTHINK testbeds. In both options two Google accounts are required.</p>
 
-<h4 id="interoperability-tests-setup-with-remote-domains">Interoperability Tests Setup with remote domains</h4>
+<h3 id="interoperability-tests-setup-with-remote-domains">Interoperability Tests Setup with remote domains</h3>
 
 <p>This is the simplest setup environment where no service has to be installed locally. Only standard Browsers are required. The usage of Chrome or Firefox are recommended.
 The <em>hysmart</em> testbed from Altice Labs using the <a href="https://github.com/reTHINK-project/dev-msg-node-vertx">vertx</a> Messaging Node implementation and the <em>Tlabs</em> using the <a href="https://github.com/reTHINK-project/dev-msg-node-matrix">Matrix based Messaging Node</a>, are used in these guidelines but any reTHINK compliant testbed can be used. Just follow the <a href="https://github.com/reTHINK-project/specs/blob/master/deployment/readme.md">Quick Installation Guide for reTHINK Framework</a> to deploy your own reTHINK domain or testbed.</p>
 
-<h4 id="interoperability-tests-setup-with-one-localhost-domain-and-one-remote-domain">Interoperability Tests Setup with one <code class="highlighter-rouge">localhost</code> domain and one remote domain</h4>
+<h3 id="interoperability-tests-setup-with-one-localhost-domain-and-one-remote-domain">Interoperability Tests Setup with one <code class="highlighter-rouge">localhost</code> domain and one remote domain</h3>
 
 <p>In this setup environment, one of the domains is installed as <code class="highlighter-rouge">localhost</code>. This kind of setup environment is useful to test locally some developments before deploying in testbeds. It also gives you more freedom to decide on the implementation to be used including your own implementation, if that is the case.</p>
 
 <p><strong>Localhost installation:</strong></p>
 
-<ol>
-  <li>Toolkit installation: follow the quick toolkit installation guide as provided [here]((https://github.com/reTHINK-project/dev-hyperty-toolkit#quick-start).</li>
-  <li>Domain Registry installation: follow the installation guide <a href="https://github.com/reTHINK-project/dev-domain-registry/readme.md">here</a></li>
-  <li>Messaging Node installation: select one of the following Messaging Nodes implementation and perform the provided installation procedures:</li>
-</ol>
+<p>1- Toolkit installation: follow the quick toolkit installation guide as provided [here]((https://github.com/reTHINK-project/dev-hyperty-toolkit#quick-start).</p>
 
-<ul>
-  <li><a href="https://github.com/reTHINK-project/dev-msg-node-vertx">VertX</a></li>
-  <li><a href="https://github.com/reTHINK-project/dev-msg-node-matrix">Matrix</a></li>
-  <li><a href="https://github.com/reTHINK-project/dev-msg-node-nodejs">NodeJS</a></li>
-  <li><a href="https://github.com/reTHINK-project/dev-msg-node-nomatrix">no Matrix</a></li>
-</ul>
+<p>2- Domain Registry installation: follow the installation guide <a href="https://github.com/reTHINK-project/dev-domain-registry/readme.md">here</a></p>
 
-<h3 id="cross-domain-interoperability-test-with-group-chat">Cross-domain interoperability test with Group Chat</h3>
+<p>3- Messaging Node installation: select one of the following Messaging Nodes implementation and perform the provided installation procedures:</p>
+
+<p>– <a href="https://github.com/reTHINK-project/dev-msg-node-vertx">VertX</a>
+  – <a href="https://github.com/reTHINK-project/dev-msg-node-matrix">Matrix</a>
+  – <a href="https://github.com/reTHINK-project/dev-msg-node-nodejs">NodeJS</a>
+  – <a href="https://github.com/reTHINK-project/dev-msg-node-nomatrix">no Matrix</a></p>
+
+<h2 id="cross-domain-interoperability-test-with-group-chat">Cross-domain interoperability test with Group Chat</h2>
 
 <p>The Group Chat cross-domain interoperability test allows to test how two domains using different messaging communication protocols, i.e. using two different Messaging Nodes implementations can interoperate without having to agree in advance on the protocol to be used. Both domains use the same <a href="https://github.com/reTHINK-project/dev-hyperty/tree/develop/docs/group-chat-manager">Group Chat Manager Hyperty implementation</a>. Before you start performing this, pls ensure you have two valid Google accounts to be used.</p>
 
@@ -1522,7 +1523,7 @@ The <em>hysmart</em> testbed from Altice Labs using the <a href="https://github.
 
 <p><img src="/specs/tests/interoperability/sca-chat.PNG" alt="SCA user chat with Call Center user" /></p>
 
-<h3 id="group-chat-interoperability-with-slack-legacy-service">Group Chat interoperability with Slack legacy service</h3>
+<h2 id="group-chat-interoperability-with-slack-legacy-service">Group Chat interoperability with Slack legacy service</h2>
 
 <p>The Group Chat interoperability with Slack legacy service test allows to test how one full reTHINK compliant domain can interoperate with another domain that is not reTHINK compliant without having to agree in advance on the protocol to be used. The Hyperty implementation is also agnostic of the legacy domains it can interoperate with.</p>
 
@@ -1552,7 +1553,7 @@ The <em>hysmart</em> testbed from Altice Labs using the <a href="https://github.
 
 <p><img src="/specs/tests/interoperability/slack-chat-sca-callcenter.png" alt="Slack user chat with SCA user and Call Center user" /></p>
 
-<h3 id="webrtc-audio-and-video-interoperability-test">WebRTC Audio and Video interoperability test</h3>
+<h2 id="webrtc-audio-and-video-interoperability-test">WebRTC Audio and Video interoperability test</h2>
 
 <p>This test will show how two users using different Applications, different Hyperties from different domains, each one using different protocols, are able to call each other. The Call Center Application uses the <a href="https://github.com/reTHINK-project/dev-hyperty/tree/develop/docs/dtwebrtc">DTWebRTC Hyperty</a> while the SCA uses the <a href="https://github.com/reTHINK-project/dev-hyperty/tree/develop/docs/connector">Connector Hyperty</a>.</p>
 
@@ -1574,7 +1575,7 @@ The <em>hysmart</em> testbed from Altice Labs using the <a href="https://github.
 
 <p><img src="/specs/tests/interoperability/sca-callcenter-call.PNG" alt="SCA Video Communication with Call Center user" /></p>
 
-<h3 id="end-to-end-interoperability-performance-evaluation">End-to-end Interoperability Performance evaluation</h3>
+<h2 id="end-to-end-interoperability-performance-evaluation">End-to-end Interoperability Performance evaluation</h2>
 
 <p>The Call Setup latency was measured for the call established between the DT Call Center Application hosted in Berlin, (Germany) and the SCA Application hosted in Aveiro (Portugal):</p>
 

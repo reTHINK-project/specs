@@ -5,7 +5,6 @@ category: Runtime
 order: 1
 ---
 
-## Hyperty Runtime
 
 The Hyperty Runtime supports the execution of Hyperties providing all required functionalities to securely manage its life-cycle, only consuming back-end support Services when strictly required.
 Thus, the Runtime features a catalogue functionality from where Hyperties source packages are deployed, as well as a registry functionality to handle the registration of Hyperty instances in order to make the Hyperties reachable within the runtime.

@@ -33,17 +33,12 @@ Some more details are provided in the following sections.
 
 #### Hyperty
 
-[Hyperties](../tutorials/hyperty.md) is a new service paradigm designed according to [Decentralised Communication principles](../messaging-framework/readme.md).
-It follows Microservices architectural patterns, i.e. Hyperties are independently deployable components.
-Each hyperty provides a small set of business capabilities, using the smart endpoints and dumb pipes philosophy.
-On the other side, Hyperties follow emerging Edge and Fog computing paradigms as opposed to more popular Cloud Computing and they are executed as much as possible in end-users devices.
-
 Hyperties are dynamically deployed from the Runtime Catalogue, when required by Applications. Each Hyperty instance is registered in the Runtime Registry.
 
 
 #### Protocol Stub
 
-The Protocol Stub implements a protocol stack to be used to communicate with the Service Provider's backend servers (including Messaging Server or other functionalities) according to [Protocol on the Fly](../messaging-framework/protofly.md) concept.
+The Protocol Stub implements a protocol stack to be used to communicate with the Service Provider's backend servers (including Messaging Server or other functionalities).
 
 Protocol stubs are only reachable through the Message BUS. In this way it is ensured that all messages received and sent goes through the message bus where policies can be enforced and additional data can be added or changed including identity tokens.
 
@@ -112,7 +107,7 @@ hyperty-runtime://<runtime-instance-identifier>/ua
 
 #### Runtime Catalogue
 
-The Runtime Catalogue manages the descriptors of deployable components and Hyperty Data Object schemas that are downloaded from the Service Provider Catalogue via the [Catalogue Service interface](https://github.com/reTHINK-project/architecture/blob/master/docs/interface-design/Interface-Design.md#73-catalogue-interface). The Runtime Catalogue ensures synchronisation with Back-end Catalogue servers.
+The Runtime Catalogue manages the descriptors of deployable components and Hyperty Data Object schemas that are downloaded from the Service Provider Catalogue. The Runtime Catalogue ensures synchronisation with Back-end Catalogue servers.
 
 The Runtime Catalogue must have listeners to receive messages at:
 

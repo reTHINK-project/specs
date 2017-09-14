@@ -7,7 +7,7 @@ order: 1
 
 #### Discover Hyperty
 
-The Runtime procedures to Discover available Hyperties. Check Messages Specification [here](../../specs/messages/registration-messages.md#hyperty-instance-query-per-user)
+The Runtime procedures to Discover available Hyperties. Check Messages Specification [here](../../../specs/messages/registration-messages.md#hyperty-instance-query-per-user)
 
 ![Figure @runtime-disocver-hyperty: discover Hyperty](discover-hyperty.png)
 

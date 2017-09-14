@@ -3,8 +3,13 @@
   icon: "coffee"
   path: /concepts/
 
-- title: "Specifications"
-  description: "You’ll find here the full detailed specification of reTHINK Framework "
+- title: "Tutorials"
+  description: "A set of tutorials is provided to support the development of Hyperties, Apps and Message Nodes "
+  icon: "planet"
+  path: /tutorials/
+
+- title: "Documentation"
+  description: "You’ll find here all the documentation of reTHINK Framework "
   icon: "compass"
   path: /specifications/
 
@@ -28,10 +33,6 @@
   icon: "leaf"
   path: /standards/
 
-- title: "Tutorials"
-  description: "A set of tutorials is provided to support the development of Hyperties, Apps and Message Nodes "
-  icon: "planet"
-  path: /tutorials/
 
 - title: "Toolkits"
   description: "Developers can use Hyperties in Applications by using any framework or tool, with a few lines of code "

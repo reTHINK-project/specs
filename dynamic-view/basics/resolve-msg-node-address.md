@@ -1,6 +1,10 @@
-#### Resolve Messsage Node Stub URL
+---
+layout: documentation
+title: Routing Address Resolve for Msg Node Stubs
+category: How it Works - Basics
+order: 7
+---
 
-**phase 1 resolve process**
 
 This section describes the Runtime Registry procedures to resolve the Message Node Stub URL during the [Resolve Routing Address](resolve-routing-address.md) process.
 
