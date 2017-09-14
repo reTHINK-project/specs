@@ -1,6 +1,6 @@
 ---
 layout: documentation
-title: Overview
+title: Trust Management Overview
 category: Trust Management
 order: 1
 ---

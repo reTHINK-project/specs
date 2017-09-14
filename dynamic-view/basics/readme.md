@@ -1,6 +1,6 @@
 ---
 layout: documentation
-title: Overview
+title: Overview on reTHINK Basic Mechanisms
 category: How it Works - Basics
 order: 1
 ---
