@@ -77,7 +77,7 @@ The Protostub status follows the state machine specified below.
 The "Deployment" states are handled by the RuntimeUA Core component while the "Connection" states are handle by the Protostub itself.
 The changes of Protostub Connection status are notified to `<runtimeProtoStubURL>/status`  address as described below which should be processed by the Runtime Registry to keep the Protostubs List updated.
 
-![ProtoStub State Machine](protostub-state-machine.png)
+![ProtoStub State Machine](../messaging-framework/protostub-state-machine.png)
 
 
 ### Connection events
