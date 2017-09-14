@@ -17,15 +17,16 @@ The Syncher is a singleton owned by a Hyperty Instance that uses it to communica
 
 According to the Reporter-Observer pattern, there are two types of DataObjects that each Syncher can manage:
 
-![Syncher API](syncher-api.png)
-
 DataObjectReporter - provides functions to handle DataObjects as a Reporter i.e. the data that is written in the object by the DataObject owner, is immediately propagated to all observers. It also handles requests from other Hyperty instance to subscribe (ie request to be an Observer) or to read the Data Object.
 
 DataObjectObserver - provides functions to handle DataObjects as a Observer i.e. it handles a "copy" of the original Data Object which is updated as soon as the Reporter changes. Changes on the DataObject are notified to the Hyperty Instance Observers.
 
 In addition, DataObjects can handle  Children Object with collections of DataObjectChild. Either Reporter (DataObjectReporter) or Observers (DataObjectObserver) can create DataObjectChilds in a certain children collection (`addChild()` function).
 
-## Syncher API
+![Syncher API](syncher-api.png)
+
+
+## Syncher
 
 This is the main class that manages the creation of Data Objects. It is a singleton i.e. only one instance is available per Hyperty instance. It's the owner of all kind of data objects that can be synchronised by the Syncher including Reported Objects (DataObjectReporter) and Observed Objects (DataObjectObserver).
 
