@@ -2,7 +2,7 @@
 layout: documentation
 title: How to develop new Protostubs
 category: Getting Started
-order: 6
+order: 3
 ---
 
 ### Stub construction and activation

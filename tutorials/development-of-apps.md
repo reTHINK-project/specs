@@ -2,7 +2,7 @@
 layout: documentation
 title: How to use Hyperties in Applications
 category: Getting Started
-order: 2
+order: 1
 ---
 
 <h1></h1>

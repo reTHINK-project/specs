@@ -2,7 +2,7 @@
 layout: documentation
 title: How to develop new Hyperties
 category: Getting Started
-order: 3
+order: 2
 ---
 
 <h1></h1>

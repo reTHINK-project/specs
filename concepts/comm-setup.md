@@ -5,20 +5,24 @@ category: Concepts
 order: 9
 ---
 
-## Communication Control Main Workflows
+Here we provide a detailed explanation on the data flows between the different reTHINK framework entities involved in the decentralized control of reTHINK communications.
 
+The classic "Alice calls Bob" example is used. However we have similar data flows for other use cases including chat and IoT.
 
-![Main reTHINK Communication Control data flows](../../img/concepts/reThink-comm-setup.png)
-
-Let's take the classic "Alice calls Bob" example to shortly illustrate the main workflows of reTHINK communication management.
 In this example, Alice and Bob are subscribers of different Communication Service Providers (CSP) i.e. it is a cross domain communication.
 Identities of Alice and Bob are also managed by different Identity Providers selected by them, regardless of the CSPs they are subscribed to.
 All these four stakeholders - Alice CSP, Alice IdP, Bob CSP and Bob IdP - have had no previous contacts or relationships before the call is established between Alice and Bob.
-We assume Bob already has all required reTHINK functionalities running in his device - including the Application and Hyperties used to handle Audio and Video communications - while Alice has no reTHINK functionality running in her device, yet. The main steps to setup a Communication between Alice and Bob are the following:
+We assume Bob already has all required reTHINK functionalities running in his device - including the Application and Hyperties used to handle Audio and Video communications - while Alice has no reTHINK functionality running in her device, yet.
 
-1. Alice deploys Some Application in her device runtime
-1. The Application deploys Hyperty H1 from Alice's CSP Catalog, that will be used to handle AV communications.
+![Main reTHINK Communication Control data flows](../../img/concepts/reThink-comm-setup.png)
+
+The main steps to setup a Communication between Alice and Bob are the following:
+
+1- Alice deploys Some Application in her device runtime
+
+2- The Application deploys Hyperty H1 from Alice's CSP Catalog, that will be used to handle AV communications.
 To be noted that Hyperty H1 and Hyperty H2 already running in Bob's device, are different.
+
 1. Alice selects her identity to be associated with Hyperty H1.
 If no valid Identity token exists, the required Idp Proxy is deployed and used to generate it i.e. Alice is authenticated.
 1. as soon as the CSP session is established, Hyperty H1 is registered in CSP's Registry.

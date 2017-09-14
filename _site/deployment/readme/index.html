@@ -162,6 +162,18 @@
             
               <li>
                 
+                  <a href="/specs/specs/tutorials/development-of-iw-stubs-for-chat/" class="doc-link" role="link">  Interworking Protostubs for Chat </a>
+                
+              </li>
+            
+              <li>
+                
+                  <a href="/specs/specs/tutorials/development-of-iw-stubs-for-webrtc/" class="doc-link" role="link">  Interworking Protostubs for WebRTC </a>
+                
+              </li>
+            
+              <li>
+                
                   <a href="/specs/specs/tutorials/development-of-protostubs/" class="doc-link" role="link">  How to develop new Protostubs </a>
                 
               </li>
@@ -240,6 +252,12 @@
             
               <li>
                 
+                  <a href="/specs/specs/service-framework/bus/" class="doc-link" role="link">  Bus API </a>
+                
+              </li>
+            
+              <li>
+                
                   <a href="/specs/specs/service-framework/discovery/" class="doc-link" role="link">  Discovery API </a>
                 
               </li>
@@ -252,7 +270,7 @@
             
               <li>
                 
-                  <a href="/specs/specs/service-framework/readme/" class="doc-link" role="link">  APIs for Hyperties </a>
+                  <a href="/specs/specs/service-framework/readme/" class="doc-link" role="link">  APIs Overview </a>
                 
               </li>
             
@@ -805,6 +823,18 @@
         
           <li>
             
+              <a href="/specs/tutorials/development-of-iw-stubs-for-chat/" class="doc-link" role="link">  Interworking Protostubs for Chat </a>
+            
+          </li>
+        
+          <li>
+            
+              <a href="/specs/tutorials/development-of-iw-stubs-for-webrtc/" class="doc-link" role="link">  Interworking Protostubs for WebRTC </a>
+            
+          </li>
+        
+          <li>
+            
               <a href="/specs/tutorials/msg-node-development-recommendations/" class="doc-link" role="link">  How to develop Message Nodes </a>
             
           </li>
@@ -877,7 +907,13 @@
         
           <li>
             
-              <a href="/specs/service-framework/readme/" class="doc-link" role="link">  APIs for Hyperties </a>
+              <a href="/specs/service-framework/readme/" class="doc-link" role="link">  APIs Overview </a>
+            
+          </li>
+        
+          <li>
+            
+              <a href="/specs/service-framework/bus/" class="doc-link" role="link">  Bus API </a>
             
           </li>
         
@@ -1386,80 +1422,203 @@
   <div class="main col-sm-9">
     <section>
       <div class="">
-        <ol>
-  <li><a href="#components-to-install">Components to install</a>
-    <ol>
-      <li><a href="#server-side-components">Server-side components</a></li>
-      <li><a href="#client-side-components">Client-side components</a></li>
-    </ol>
-  </li>
-  <li><a href="#installation-process">Installation process</a>
-    <ol>
-      <li><a href="#communication-service-provider">Communication Service Provider</a>
-        <ol>
-          <li><a href="#domain-registry">Domain Registry</a></li>
-          <li><a href="#messaging-node">Messaging node</a></li>
-          <li><a href="#catalogue">Catalogue</a></li>
-        </ol>
-      </li>
-      <li><a href="#application-deployment">Application Deployment</a>
-        <ol>
-          <li><a href="#hello-world">Hello World</a></li>
-          <li><a href="#complete-setup">Complete setup</a></li>
-        </ol>
-      </li>
-      <li>
-        <ol>
-          <li><a href="#integration-with-ims">Integration with IMS</a></li>
-        </ol>
-      </li>
-    </ol>
-  </li>
-</ol>
+        <h1></h1>
+<h1></h1>
 
-<p>This page explains how to install a complete platform to be able to deploy services and applications based on the reThink framework.
-After following this tutorial, you will be able to run the Hello World application available <a href="https://github.com/reTHINK-project/dev-app">here</a>.<br />
-The installation guides can be found in the different folders. We don’t provide here the full installation processes, but a view “as a whole”, summaries and tips. <br />
-<strong>Please note that this section is dedicated to an operational platform</strong>. Developpers should use the <a href="https://github.com/reTHINK-project/dev-hyperty-toolkit">toolkit</a>. <br />
-If you already know how is the platform, go directly to <a href="#installation-process">Installation Process</a>.</p>
+<p>This page explains how to install your own reTHINK domain to be able to deliver your own Hyperties, Protostubs or Data Schemas.
+After following this tutorial, you will be able to run all Hyperties Demos from the catalogue available <a href="https://github.com/reTHINK-project/dev-hyperty">here</a>.</p>
 
-<h2 id="components-to-install">Components to install</h2>
+<p><strong>Please note that this section is dedicated to an operational platform</strong>. Developers should use the <a href="https://github.com/reTHINK-project/dev-hyperty-toolkit">toolkit</a>.</p>
 
-<p>A complete reThink platform consists on server-side components that are finally deployed in the browser. These components are shown in the following picture and described hereafter.</p>
+<h2 id="requirements">Requirements</h2>
 
-<p>All components are available in Docker images and the preferred host is an Ubuntu 14.04.<br />
-It is recommended that the containers are deployed behind a reverse proxy for several reasons:</p>
-<ul>
-  <li>default DNS is used to access different components of the platform, adding a prefix. The reverse proxy can easily manage different virtual hosts thus simplifying access to these components.</li>
-  <li>All components are using different ports, using a reverse proxy is useful to allow using classical ports</li>
-  <li>It is recommanded that the certificates are managed on the front reverse proxy.</li>
-</ul>
+<p>The reThink Framework platform uses three main core back-end services shown in the following picture and described hereafter.</p>
+
+<p><img src="https://cloud.githubusercontent.com/assets/10738516/19760714/2f4bfb90-9c33-11e6-9463-a827f5d4ffab.png" width="700" /></p>
+
+<p>All back-end services are available in Docker images and the preferred host is an Ubuntu 14.04.</p>
+
+<p>It is recommended that the containers are deployed behind a reverse proxy for several reasons:</p>
+
+<p>– default DNS is used to access different components of the platform, adding a prefix. The reverse proxy can easily manage different virtual hosts thus simplifying access to these services.</p>
+
+<p>– All back-end services are using different ports, using a reverse proxy is useful to allow using classical ports</p>
+
+<p>– It is recommended that the certificates are managed on the front reverse proxy.</p>
 
 <p>Some tools/servers to install:</p>
-<ul>
-  <li><a href="https://httpd.apache.org/">apache2</a></li>
-  <li>or <a href="https://www.nginx.com/">nginx</a> instead of apache2</li>
-  <li><a href="https://www.digitalocean.com/community/tutorials/how-to-use-apache-as-a-reverse-proxy-with-mod_proxy-on-ubuntu-16-04">reverse proxy</a> in case of on apache2</li>
-  <li><a href="https://docs.docker.com/compose/install/">docker-compose</a></li>
-</ul>
+
+<p>– <a href="https://httpd.apache.org/">apache2</a></p>
+
+<p>– or <a href="https://www.nginx.com/">nginx</a> instead of apache2</p>
+
+<p>– <a href="https://www.digitalocean.com/community/tutorials/how-to-use-apache-as-a-reverse-proxy-with-mod_proxy-on-ubuntu-16-04">reverse proxy</a> in case of on apache2</p>
+
+<p>– <a href="https://docs.docker.com/compose/install/">docker-compose</a></p>
 
 <p>If you choose a default apache2 server, for each sub-domain you need to use a config file, where you config the reverse proxy, you can check <a href="https://github.com/reTHINK-project/specs/tree/master/deployment/registry-ssl.conf">here</a> a config for registry component.</p>
 
 <p>https free trusted certificates can be obtained on <a href="https://letsencrypt.org/">let’s encrypt</a>.</p>
 
-<p><img src="https://cloud.githubusercontent.com/assets/10738516/19760714/2f4bfb90-9c33-11e6-9463-a827f5d4ffab.png" width="700" /></p>
-
 <h2 id="installation-process">Installation process</h2>
-<p>We will first install a CSP, then the application from scratch. To illustrate our text, we will consider that the DNS of the platform is <strong><em>csp.rethink.com</em></strong></p>
 
-<h3 id="communication-service-provider">Communication Service Provider</h3>
+<p>We will first install the three back-end reTHINK Services, then the application from scratch. To illustrate our text, we will consider that the DNS of the domain is <code class="highlighter-rouge">csp.rethink.com</code></p>
 
-<p>As mentionned above, the communication service providers consists in <strong>3</strong> components. We will install first the domain registry, then the messaging node, and finally the catalogue.</p>
+<p>Here is a view of the interfaces:</p>
 
-<p>On next steps, we will build a docker-compose file, for each component we will build a service.
-Your docker-compose file, should be something like <a href="https://github.com/reTHINK-project/specs/tree/master/deployment/docker-compose.yml">this</a>, at the end of this steps. After it run <code class="highlighter-rouge">docker-compose up -d</code></p>
+<p><img src="https://cloud.githubusercontent.com/assets/10738516/19762069/b2b01b38-9c38-11e6-99c9-03f79e353b4e.png" width="700" /></p>
 
-<h4 id="domain-registry">Domain Registry</h4>
+<p>1- Deploy reTHINK back-end services with Docker Compose. Get the <a href="https://github.com/reTHINK-project/specs/tree/master/deployment/docker-compose.yml">docker-compose</a> file and execute:</p>
+
+<p><code class="highlighter-rouge">docker-compose up -d</code></p>
+
+<p>2- reverse-proxy configuration. Let’s assume we are using Apache.</p>
+
+<p>2.1- configure your domain by editing <code class="highlighter-rouge">/etc/apache2/sites-available/000-default.conf</code> with your domain:</p>
+
+<pre class="line-numbers">
+  <code class="language-yml">
+    &lt;VirtualHost *:80&gt;
+          ServerName csp.rethink.com
+           DocumentRoot /var/www/html/
+    &lt;/VirtualHost&gt;
+</code>
+</pre>
+
+<p>Activate your domain:</p>
+
+<pre>
+  <code class="language-shell">
+sudo a2ensite csp.rethink.com`
+  </code>
+</pre>
+
+<p>and restart it:</p>
+
+<pre class="line-numbers">
+ <code class="language-shell">
+sudo /etc/init.d/apache2 restart
+ </code>
+</pre>
+
+<p>2.1- configure the reverse-proxy for the Domain Registry. Take note of your Domain Registry Docker Container IP address, move to <code class="highlighter-rouge">sites-available</code> dir and create <code class="highlighter-rouge">registry.conf</code> file with it:</p>
+
+<pre class="line-numbers">
+  <code class="language-yml">
+&lt;VirtualHost *:80&gt;
+     ServerName 'registry.csp.rethink.com'
+     ProxyPass / http://172.20.0.4:4567/
+     ProxyPassReverse / http://172.20.0.4:4567/
+&lt;/VirtualHost&gt;
+ </code>
+</pre>
+
+<p>Activate the sub-domain and restart it:</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>sudo a2ensite registry.csp.rethink.com
+sudo /etc/init.d/apache2 restart
+</code></pre>
+</div>
+
+<p>To test if installation is OK, open https://registry.csp.rethink.com/live. It should provide you the current status of the registry.</p>
+
+<p>The urls of the domain users  are encoded to be able to be sent to the domain registry. For apache reverse proxy users the directives <em>AllowEncodedSlashes On</em> AND <em>ProxyPass</em> with <em>nocanon</em>.</p>
+
+<p>2.3- configure the reverse-proxy for the Message Node. Take note of your Message Node Docker Container IP address and create <code class="highlighter-rouge">registry.conf</code> file at <code class="highlighter-rouge">sites-available</code> dir with:</p>
+
+<pre class="line-numbers">
+  <code class="language-yml">
+&lt;VirtualHost *:80&gt;
+     ServerName 'msg-node.csp.rethink.com'
+     ProxyPass / http://172.20.0.2:9090/
+     ProxyPassReverse / http://172.20.0.2:9090/
+&lt;/VirtualHost&gt;
+ </code>
+</pre>
+
+<p>Activate the sub-domain and restart it:</p>
+
+<pre class="line-numbers">
+  <code class="language-shell">
+sudo a2ensite msg-node.csp.rethink.com
+sudo /etc/init.d/apache2 restart
+ </code>
+</pre>
+
+<p>To test if installation is OK, open https://msg-node.csp.rethink.com/live to give a view of the current status of the Message Node.</p>
+
+<p>2.4- configure the reverse-proxy for the Catalogue. Take note of your Catalogue Docker Container IP address and create <code class="highlighter-rouge">catalogue.conf</code> file at <code class="highlighter-rouge">sites-available</code> dir with:</p>
+
+<pre class="line-numbers">
+  <code class="language-yml">
+&lt;VirtualHost *:80&gt;
+     ServerName 'catalogue.csp.rethink.com'
+     ProxyPass / http://172.20.0.8:5683/
+     ProxyPassReverse / http://172.20.0.8:5683/
+&lt;/VirtualHost&gt;
+ </code>
+</pre>
+
+<p>Activate the sub-domain and restart it:</p>
+
+<pre class="line-numbers">
+  <code class="language-shell">
+sudo a2ensite catalogue.csp.rethink.com
+sudo /etc/init.d/apache2 restart
+ </code>
+</pre>
+
+<p>To test if installation is OK, open https://catalogue.csp.rethink.com/ gives a view of the current status of the catalogue node. It also allow to see connected databases and components.</p>
+
+<p>2.5- configure the reverse-proxy for the App Server Demos. Take note of your App Server Docker Container IP address and create <code class="highlighter-rouge">demos.conf</code> file at <code class="highlighter-rouge">sites-available</code> dir with:</p>
+
+<pre class="line-numbers">
+  <code class="language-yml">
+&lt;VirtualHost *:80&gt;
+     ServerName 'demos.csp.rethink.com'
+     ProxyPass / http://172.20.0.10/
+     ProxyPassReverse / http://172.20.0.10/
+&lt;/VirtualHost&gt;
+ </code>
+</pre>
+
+<p>Activate the sub-domain and restart it:</p>
+
+<pre class="line-numbers">
+  <code class="language-yml">
+sudo a2ensite demos.csp.rethink.com
+sudo /etc/init.d/apache2 restart
+ </code>
+</pre>
+
+<p>To test if installation is OK, open https://demos.csp.rethink.com/ and it should open the demos home page.</p>
+
+<ol>
+  <li>The Browser Runtime has to be uploaded from .well-known/runtime/ must contain the last version of the runtime. It has to be filled with <a href="https://github.com/reTHINK-project/dev-runtime-browser/tree/master/bin">these files</a>  (rethink.js, index.html, core.js, context-service.js, identities-gui.js, policies-gui.js)</li>
+</ol>
+
+<p>4- If required, configure the different IdPs to give your domain access to it.</p>
+
+<p>4.1- The google idpproxy provided is working with an account that authorizes authentication process on a test platform, which probably does not include the one under installation. This means that by default, it is not possible to use google. To be able to do this, you have to:</p>
+
+<p>– edit the sourceCode.js of the google idpproxy, change the account and secret of the google account</p>
+
+<p>– authorize on this account the use of google auth API (https://console.developers.google.com/apis/), with the authorized redirect URI https://csp.rethink.com.</p>
+
+<h2 id="hello-world-application-deployment">Hello World Application Deployment</h2>
+
+<p>The Hello World is published in the repository <a href="https://github.com/reTHINK-project/dev-app">dev-app</a>, and its installation manual is provided there. It can be deployed simply behind an HTTP server.</p>
+
+<p>When all of this is done you can try to connect on the index.html of the hello-app. First step, you should be able to load the runtime, then to load an hyperty, then to contact hyperties.</p>
+
+<h2 id="integration-with-ims">Integration with IMS</h2>
+
+<p>You should follow this <a href="https://github.com/reTHINK-project/specs/blob/master/deployment/ims-deployment.md">guide</a> to integrate your application with IMS.</p>
+
+<h2 id="docker-compose-details">Docker compose details</h2>
+
+<h3 id="domain-registry">Domain Registry</h3>
+
 <p>Domain registry is installable with a <a href="https://hub.docker.com/r/rethink/registry-domain-server/">docker image</a>. As the Domain Registry is necessary to run the messaging node, it has to be running first. The default port of the domain registry is 4567.
 The default DNS for our domain registry will be: <strong>registry.csp.rethink.com</strong>.</p>
 
@@ -1480,14 +1639,8 @@ The default DNS for our domain registry will be: <strong>registry.csp.rethink.co
 </code></pre>
 </div>
 
-<p><strong>To test if installation is OK: https://registry.csp.rethink.com/live gives a view of the current status of the registry.</strong><br />
-<strong><em>WARNING</em></strong></p>
+<h3 id="messaging-node">Messaging node</h3>
 
-<ul>
-  <li>The urls of the domain users  are encoded to be able to be sent to the domain registry. For apache reverse proxy users the directives <em>AllowEncodedSlashes On</em> AND <em>ProxyPass</em> with <em>nocanon</em>.</li>
-</ul>
-
-<h4 id="messaging-node">Messaging node</h4>
 <p>This is the core plateform. ReTHINK has provided four implementations but only one is necessary to be installed:</p>
 <ul>
   <li><a href="https://github.com/reTHINK-project/dev-msg-node-vertx">VertX</a></li>
@@ -1525,9 +1678,8 @@ The default DNS for our domain registry will be: <strong>registry.csp.rethink.co
 </code></pre>
 </div>
 
-<p><strong>To test if installation is OK: https://msg-node.csp.rethink.com/live gives a view of the current status of the nodejs node.</strong></p>
+<h3 id="catalogue">Catalogue</h3>
 
-<h4 id="catalogue">Catalogue</h4>
 <p>The catalogue is made out of two main components. A broker, that is needed to access the different services, and one or more databases. You can use this <a href="https://github.com/reTHINK-project/testbeds/tree/master/nodes/PT-node/production">database</a>, that should be possible to use on a production mode. Documentation can be accessed <a href="https://github.com/reTHINK-project/dev-catalogue/tree/master/doc">here</a>.<br />
 First of all, the broker has to be installed. A dockerhub <a href="https://hub.docker.com/r/rethink/catalogue-broker/">image</a> is available.</p>
 
@@ -1559,48 +1711,6 @@ First of all, the broker has to be installed. A dockerhub <a href="https://hub.d
       - 'catalogue-broker'
 </code></pre>
 </div>
-
-<p><strong><em>WARNING</em></strong></p>
-<ul>
-  <li>The google idpproxy provided is working with an account that authorizes authentication process on a test platform, which probably does not include the one under installation. This means that by default, it is not possible to use google. To be able to do this, you have to:</li>
-  <li>edit the sourceCode.js of the google idpproxy
-    <ul>
-      <li>change the account and secret of the google account</li>
-      <li>authorize on this account the use of google auth API (https://console.developers.google.com/apis/), with the authorized redirect URI https://csp.rethink.com.</li>
-    </ul>
-  </li>
-</ul>
-
-<p><strong>To test if installation is OK: https://catalogue.csp.rethink.com/ gives a view of the current status of the catalogue node. It also allow to see connected databases and componants</strong></p>
-
-<div class="highlighter-rouge"><pre class="highlight"><code>On directory of docker-compose.yml file you should have catalogue-database folder with all objects, after this run command
-
-docker-compose up -d
-
-</code></pre>
-</div>
-
-<h3 id="application-deployment">Application Deployment</h3>
-
-<h4 id="hello-world">Hello World</h4>
-<p>The Hello World is published in the repository <a href="https://github.com/reTHINK-project/dev-app">dev-hello</a>, and its installation manual is provided there. It can be deploied simply behind an HTTP server.</p>
-
-<h4 id="complete-setup">Complete Setup</h4>
-<p>After all these steps, application should be running. Last verifications:<br />
-<strong><em>WARNING</em></strong></p>
-<ul>
-  <li>The Browser Runtime has to be uploaded from .well-known/runtime/ must contain the last version of the runtime. It have to be filled with <a href="https://github.com/reTHINK-project/dev-runtime-browser/tree/master/bin">these files</a>  (rethink.js, index.html, core.js, context-service.js, identities-gui.js, policies-gui.js)</li>
-  <li>The Core Runtime has to be deployed in the catalogue. The core runtime is the Runtime.js file <a href="https://github.com/reTHINK-project/dev-runtime-core/tree/master/dist">here</a>. Its hould be accessible on CSP catalogue: https://catalogue.csp.rethink.com/.well-known/runtime/Runtime .</li>
-</ul>
-
-<p>When all of this is done you can try to connect on the index.html of the hello-app. First step, you should be able to load the runtime, then to load an hyperty, then to contact hyperties.</p>
-
-<p>Here is a view of the technical flows involved:
-<img src="https://cloud.githubusercontent.com/assets/10738516/19762069/b2b01b38-9c38-11e6-99c9-03f79e353b4e.png" width="700" /></p>
-
-<h3 id="integration-with-ims">Integration with IMS</h3>
-
-<p>You should follow this <a href="https://github.com/reTHINK-project/specs/blob/master/deployment/ims-deployment.md">guide</a> to integrate your application with IMS.</p>
 
       </div>
     </section>

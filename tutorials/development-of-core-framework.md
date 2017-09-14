@@ -5,39 +5,43 @@ category: Getting Started
 order: 9
 ---
 
-*to be reviewed*
+The reTHINK Core Framework is fully open sourced (Apache 2.0) and hosted in different Github repositories where you can find all information about how to get involved in the Core Framework development.
 
-## reTHINK Framework implementation
+## Front-end Components
 
-A reference implementation to support the initial Specification is provided:
+--	The [Runtime Core Repository](https://github.com/reTHINK-project/dev-runtime-core) contains the source code required to support the deployment and execution of Hyperties in user devices or in network servers. Hyperty Core Runtime components are platform agnostic and are to be included in platform specific Hyperty Runtimes, like Web Browsers and Nodejs based platforms.
 
-*	[Core Runtime Source Code and Manuals](https://github.com/reTHINK-project/dev-runtime-core)
+--	the [Runtime for Browser repo](https://github.com/reTHINK-project/dev-runtime-browser) contains the code necessary to execute the reTHINK runtime core in a browser.
 
-*	[Runtime for Browser Source Code and Manuals](https://github.com/reTHINK-project/dev-runtime-browser)
+--	the [Runtime for NodeJS repo](https://github.com/reTHINK-project/dev-runtime-nodejs) contains the code necessary to execute the reTHINK runtime core in NodeJS server.
 
-*	[Runtime for NodeJS Source Code and Manuals](https://github.com/reTHINK-project/dev-runtime-nodejs)
-
-*	[Message Node for Vertx.io Source Code and Manuals](https://github.com/reTHINK-project/dev-msg-node-vertx)
-
-*	[NoMatrix Message Node Source Code and Manuals](https://github.com/reTHINK-project/dev-msg-node-nomatrix)
-
-*	[Message Node for NodeJS Source Code and Manuals](https://github.com/reTHINK-project/dev-msg-node-nodejs)
-
-*	[Service Framework Source Code and Manuals](https://github.com/reTHINK-project/dev-service-framework)
-
-* [Development Toolkit Source Code and Manuals](https://github.com/reTHINK-project/dev-hyperty-toolkit)
-
-* [Domain Registry Source Code and Manuals](https://github.com/reTHINK-project/dev-registry-domain)
-
-* [ReTHINK Catalogue](https://github.com/reTHINK-project/dev-catalogue) - This code repository contains the documentation and implementation of the reTHINK Catalogue Broker, Database, and Test Website.
-
-* [Standalone Applications for Smartphones Source Code and Manuals](https://github.com/reTHINK-project/dev-standalone-apps)
+--	the [Service Framework repo](https://github.com/reTHINK-project/dev-service-framework) contains the source code of libraries that are used to facilitate the development of Hyperties and Protostubs.
 
 
-The Reference Implemenentation is validated with a few Services, Protostubs and Applications:
 
-* [Hyperties Source Code and Manuals](https://github.com/reTHINK-project/dev-hyperty)
+## Toolkit
 
-* [Protostubs and IdP Proxies Source Code and Manuals](https://github.com/reTHINK-project/dev-protostubs)
+* the [Toolkit repository](https://github.com/reTHINK-project/dev-hyperty-toolkit)  provides tools to develop and test Hyperties, Protostubs and IdP Proxies.
 
-* [Smart Contextual Assistance application](https://github.com/reTHINK-project/dev-smart-contextual-assistance-app)
+## back-end Components
+
+The reTHINK Core Framework is comprised by three main back-end components: Message Node, Registry and Catalogue.
+
+### Message Node
+
+The Message Node provides real time message oriented communication functionalities used by Hyperties to communicate (Message Routing). There are three implementations of the Message Node:
+
+
+--	the [Message Node based on Vertx.io Java ](https://github.com/reTHINK-project/dev-msg-node-vertx)
+
+-- the [NoMatrix Message Node Source (JavaScript)](https://github.com/reTHINK-project/dev-msg-node-nomatrix)
+
+--	[Message Node based on NodeJS (Javascript)](https://github.com/reTHINK-project/dev-msg-node-nodejs)
+
+## Domain Registry
+
+The [Domain Registry repo](https://github.com/reTHINK-project/dev-registry-domain) contains the source code for Registry Support Service where Hyperty instances and associated End-users are registered and discoverable.
+
+## Catalogue
+
+The [ReTHINK Catalogue](https://github.com/reTHINK-project/dev-catalogue) contains the documentation and implementation of the reTHINK Catalogue Broker, Database, and Test Website. The Catalogue Support Service provides access to Hyperty assets including service descriptions, software services, policy, documentation, and other assets or artifacts that are essential to the operation of the service.

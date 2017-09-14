@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no, maximum-scale=1, minimum-scale=1">
 
-  <title>APIs for Hyperties</title>
+  <title>APIs Overview</title>
   <meta name="description" content="reTHINK Framework provides the tools to build a global real-time decentralized communication infra-structure where services are inherently inter-operable.">
 
   <link rel="canonical" href="http://localhost:4000/specs/service-framework/readme/">
@@ -162,6 +162,18 @@
             
               <li>
                 
+                  <a href="/specs/specs/tutorials/development-of-iw-stubs-for-chat/" class="doc-link" role="link">  Interworking Protostubs for Chat </a>
+                
+              </li>
+            
+              <li>
+                
+                  <a href="/specs/specs/tutorials/development-of-iw-stubs-for-webrtc/" class="doc-link" role="link">  Interworking Protostubs for WebRTC </a>
+                
+              </li>
+            
+              <li>
+                
                   <a href="/specs/specs/tutorials/development-of-protostubs/" class="doc-link" role="link">  How to develop new Protostubs </a>
                 
               </li>
@@ -240,6 +252,12 @@
             
               <li>
                 
+                  <a href="/specs/specs/service-framework/bus/" class="doc-link" role="link">  Bus API </a>
+                
+              </li>
+            
+              <li>
+                
                   <a href="/specs/specs/service-framework/discovery/" class="doc-link" role="link">  Discovery API </a>
                 
               </li>
@@ -252,7 +270,7 @@
             
               <li>
                 
-                  <a href="/specs/specs/service-framework/readme/" class="active doc-link" role="link">  APIs for Hyperties </a>
+                  <a href="/specs/specs/service-framework/readme/" class="active doc-link" role="link">  APIs Overview </a>
                 
               </li>
             
@@ -755,7 +773,7 @@
         <div class="row">
             <div class="col-sm-12">
                 <div class="block">
-                    <h1>APIs for Hyperties</h1>
+                    <h1>APIs Overview</h1>
                     <p></p>
                 </div>
             </div>
@@ -800,6 +818,18 @@
           <li>
             
               <a href="/specs/tutorials/development-of-idp-proxies/" class="doc-link" role="link">  How to develop new Idp Proxies </a>
+            
+          </li>
+        
+          <li>
+            
+              <a href="/specs/tutorials/development-of-iw-stubs-for-chat/" class="doc-link" role="link">  Interworking Protostubs for Chat </a>
+            
+          </li>
+        
+          <li>
+            
+              <a href="/specs/tutorials/development-of-iw-stubs-for-webrtc/" class="doc-link" role="link">  Interworking Protostubs for WebRTC </a>
             
           </li>
         
@@ -877,7 +907,13 @@
         
           <li>
             
-              <a href="/specs/service-framework/readme/" class="active doc-link" role="link">  APIs for Hyperties </a>
+              <a href="/specs/service-framework/readme/" class="active doc-link" role="link">  APIs Overview </a>
+            
+          </li>
+        
+          <li>
+            
+              <a href="/specs/service-framework/bus/" class="doc-link" role="link">  Bus API </a>
             
           </li>
         
@@ -1386,35 +1422,17 @@
   <div class="main col-sm-9">
     <section>
       <div class="">
-        <p>The reTHINK Service Framework provides a comprehensive set of application program interfaces (namly APIs) and JavaScript-based libraries to support the development of Hyperties.  As such, the Service Framework is agnostic with respect to the underlying messaging node, modular in design, and to the widest degree agnostic to devices and their operating systems, such as Android, iOS, Raspberry PI, Linux, or Windows. It features a comprehensive set of application program interfaces (APIs) and JavaScript libraries to facilitate the development of Hyperties within the reTHINK architecture.</p>
+        <p>The reTHINK Service Framework provides a comprehensive set of APIs to support the development of Hyperties. These APIs are agnostic with respect to the underlying messaging node, modular in design, and to the widest degree agnostic to devices and their operating systems, such as Android, iOS, Raspberry PI, Linux, or Windows.</p>
 
-<p>As such, the reTHINK Service Framework enables the design of the Hyperty Runtime APIs to be developer-friendly, i.e., the latter only have to focus on a few core functionalities, namely:</p>
+<p>Hyperty developers only have to focus on a few APIs:</p>
 
-<p><strong>Messaging Framework Bus</strong></p>
+<p>The <a href="bus.md">Messaging Framework Bus</a> provides a simple API to send and receive messages.</p>
 
-<p>Simple bus API to send and receive messages:</p>
+<p>The	<a href="/specs/service-framework/syncher/">Syncher API</a> provides the main functionalities used by Hyperties enabling the synchronisation of data among Hyperties through the Reporter-Observer communication pattern.</p>
 
-<p><code class="highlighter-rouge">postMessage(inMsg, responseCallback)</code> that is used to post messages in order to communicate with registered listeners.</p>
+<p>The <a href="/specs/service-framework/discovery/">Discovery API</a> allows the discovery of remote Hyperties or Data Objects by using different criteria.</p>
 
-<p><code class="highlighter-rouge">addListener(url, listener)</code> that is used to register a listener to receive message when <code class="highlighter-rouge">msg.to === url</code>.</p>
-
-<p>Full documentation <a href="https://doc.esdoc.org/github.com/reTHINK-project/dev-runtime-core/class/src/bus/Bus.js~Bus.html">here</a></p>
-
-<p><strong>Syncher</strong></p>
-
-<p>The	<a href="/specs/service-framework/syncher/">Syncher API</a> that is used to synchronise data among Hyperties by using the Reporter-Observer communication pattern.</p>
-
-<p>Full documentation <a href="https://doc.esdoc.org/github.com/reTHINK-project/dev-service-framework/class/src/syncher/Syncher.js~Syncher.html">here</a></p>
-
-<p><strong>Discovery</strong></p>
-
-<p>The Discovery library allows the discovery of remote Hyperties or Data Objects by using different criteria.
-Full documentation <a href="https://doc.esdoc.org/github.com/reTHINK-project/dev-service-framework/class/src/discovery/Discovery.js~Discovery.html">here</a>.</p>
-
-<p><strong>Identity Manager</strong></p>
-
-<p>The <a href="/specs/service-framework/identity-manager/">Identity Manager library</a> retrieves information about Identities associated to Hyperties.
-Full documentation <a href="https://doc.esdoc.org/github.com/reTHINK-project/dev-service-framework/class/src/identityManager/IdentityManager.js~IdentityManager.html">here</a>.</p>
+<p>The <a href="/specs/service-framework/identity-manager/">Identity Manager library</a> retrieves information about Identities associated to Hyperties.</p>
 
       </div>
     </section>

@@ -9,6 +9,8 @@ order: 2
 
 *[source](https://github.com/reTHINK-project/dev-service-framework/blob/master/src/syncher/Syncher.js)*
 
+Full documentation [here](https://doc.esdoc.org/github.com/reTHINK-project/dev-service-framework/class/src/syncher/Syncher.js~Syncher.html)
+
 The Syncher API provides data object synchronisation among Hyperties. The synchronised Data Objects are JSON data objects.
 The Syncher API is depicted in the following diagram:
 

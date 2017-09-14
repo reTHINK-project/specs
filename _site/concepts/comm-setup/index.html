@@ -162,6 +162,18 @@
             
               <li>
                 
+                  <a href="/specs/specs/tutorials/development-of-iw-stubs-for-chat/" class="doc-link" role="link">  Interworking Protostubs for Chat </a>
+                
+              </li>
+            
+              <li>
+                
+                  <a href="/specs/specs/tutorials/development-of-iw-stubs-for-webrtc/" class="doc-link" role="link">  Interworking Protostubs for WebRTC </a>
+                
+              </li>
+            
+              <li>
+                
                   <a href="/specs/specs/tutorials/development-of-protostubs/" class="doc-link" role="link">  How to develop new Protostubs </a>
                 
               </li>
@@ -240,6 +252,12 @@
             
               <li>
                 
+                  <a href="/specs/specs/service-framework/bus/" class="doc-link" role="link">  Bus API </a>
+                
+              </li>
+            
+              <li>
+                
                   <a href="/specs/specs/service-framework/discovery/" class="doc-link" role="link">  Discovery API </a>
                 
               </li>
@@ -252,7 +270,7 @@
             
               <li>
                 
-                  <a href="/specs/specs/service-framework/readme/" class="doc-link" role="link">  APIs for Hyperties </a>
+                  <a href="/specs/specs/service-framework/readme/" class="doc-link" role="link">  APIs Overview </a>
                 
               </li>
             
@@ -805,6 +823,18 @@
         
           <li>
             
+              <a href="/specs/tutorials/development-of-iw-stubs-for-chat/" class="doc-link" role="link">  Interworking Protostubs for Chat </a>
+            
+          </li>
+        
+          <li>
+            
+              <a href="/specs/tutorials/development-of-iw-stubs-for-webrtc/" class="doc-link" role="link">  Interworking Protostubs for WebRTC </a>
+            
+          </li>
+        
+          <li>
+            
               <a href="/specs/tutorials/msg-node-development-recommendations/" class="doc-link" role="link">  How to develop Message Nodes </a>
             
           </li>
@@ -877,7 +907,13 @@
         
           <li>
             
-              <a href="/specs/service-framework/readme/" class="doc-link" role="link">  APIs for Hyperties </a>
+              <a href="/specs/service-framework/readme/" class="doc-link" role="link">  APIs Overview </a>
+            
+          </li>
+        
+          <li>
+            
+              <a href="/specs/service-framework/bus/" class="doc-link" role="link">  Bus API </a>
             
           </li>
         
@@ -1386,20 +1422,25 @@
   <div class="main col-sm-9">
     <section>
       <div class="">
-        <h2 id="communication-control-main-workflows">Communication Control Main Workflows</h2>
+        <p>Here we provide a detailed explanation on the data flows between the different reTHINK framework entities involved in the decentralized control of reTHINK communications.</p>
+
+<p>The classic “Alice calls Bob” example is used. However we have similar data flows for other use cases including chat and IoT.</p>
+
+<p>In this example, Alice and Bob are subscribers of different Communication Service Providers (CSP) i.e. it is a cross domain communication.
+Identities of Alice and Bob are also managed by different Identity Providers selected by them, regardless of the CSPs they are subscribed to.
+All these four stakeholders - Alice CSP, Alice IdP, Bob CSP and Bob IdP - have had no previous contacts or relationships before the call is established between Alice and Bob.
+We assume Bob already has all required reTHINK functionalities running in his device - including the Application and Hyperties used to handle Audio and Video communications - while Alice has no reTHINK functionality running in her device, yet.</p>
 
 <p><img src="../../img/concepts/reThink-comm-setup.png" alt="Main reTHINK Communication Control data flows" /></p>
 
-<p>Let’s take the classic “Alice calls Bob” example to shortly illustrate the main workflows of reTHINK communication management.
-In this example, Alice and Bob are subscribers of different Communication Service Providers (CSP) i.e. it is a cross domain communication.
-Identities of Alice and Bob are also managed by different Identity Providers selected by them, regardless of the CSPs they are subscribed to.
-All these four stakeholders - Alice CSP, Alice IdP, Bob CSP and Bob IdP - have had no previous contacts or relationships before the call is established between Alice and Bob.
-We assume Bob already has all required reTHINK functionalities running in his device - including the Application and Hyperties used to handle Audio and Video communications - while Alice has no reTHINK functionality running in her device, yet. The main steps to setup a Communication between Alice and Bob are the following:</p>
+<p>The main steps to setup a Communication between Alice and Bob are the following:</p>
+
+<p>1- Alice deploys Some Application in her device runtime</p>
+
+<p>2- The Application deploys Hyperty H1 from Alice’s CSP Catalog, that will be used to handle AV communications.
+To be noted that Hyperty H1 and Hyperty H2 already running in Bob’s device, are different.</p>
 
 <ol>
-  <li>Alice deploys Some Application in her device runtime</li>
-  <li>The Application deploys Hyperty H1 from Alice’s CSP Catalog, that will be used to handle AV communications.
-To be noted that Hyperty H1 and Hyperty H2 already running in Bob’s device, are different.</li>
   <li>Alice selects her identity to be associated with Hyperty H1.
 If no valid Identity token exists, the required Idp Proxy is deployed and used to generate it i.e. Alice is authenticated.</li>
   <li>as soon as the CSP session is established, Hyperty H1 is registered in CSP’s Registry.

@@ -162,6 +162,18 @@
             
               <li>
                 
+                  <a href="/specs/specs/tutorials/development-of-iw-stubs-for-chat/" class="doc-link" role="link">  Interworking Protostubs for Chat </a>
+                
+              </li>
+            
+              <li>
+                
+                  <a href="/specs/specs/tutorials/development-of-iw-stubs-for-webrtc/" class="doc-link" role="link">  Interworking Protostubs for WebRTC </a>
+                
+              </li>
+            
+              <li>
+                
                   <a href="/specs/specs/tutorials/development-of-protostubs/" class="doc-link" role="link">  How to develop new Protostubs </a>
                 
               </li>
@@ -240,6 +252,12 @@
             
               <li>
                 
+                  <a href="/specs/specs/service-framework/bus/" class="doc-link" role="link">  Bus API </a>
+                
+              </li>
+            
+              <li>
+                
                   <a href="/specs/specs/service-framework/discovery/" class="doc-link" role="link">  Discovery API </a>
                 
               </li>
@@ -252,7 +270,7 @@
             
               <li>
                 
-                  <a href="/specs/specs/service-framework/readme/" class="doc-link" role="link">  APIs for Hyperties </a>
+                  <a href="/specs/specs/service-framework/readme/" class="doc-link" role="link">  APIs Overview </a>
                 
               </li>
             
@@ -805,6 +823,18 @@
         
           <li>
             
+              <a href="/specs/tutorials/development-of-iw-stubs-for-chat/" class="doc-link" role="link">  Interworking Protostubs for Chat </a>
+            
+          </li>
+        
+          <li>
+            
+              <a href="/specs/tutorials/development-of-iw-stubs-for-webrtc/" class="doc-link" role="link">  Interworking Protostubs for WebRTC </a>
+            
+          </li>
+        
+          <li>
+            
               <a href="/specs/tutorials/msg-node-development-recommendations/" class="doc-link" role="link">  How to develop Message Nodes </a>
             
           </li>
@@ -877,7 +907,13 @@
         
           <li>
             
-              <a href="/specs/service-framework/readme/" class="doc-link" role="link">  APIs for Hyperties </a>
+              <a href="/specs/service-framework/readme/" class="doc-link" role="link">  APIs Overview </a>
+            
+          </li>
+        
+          <li>
+            
+              <a href="/specs/service-framework/bus/" class="doc-link" role="link">  Bus API </a>
             
           </li>
         
@@ -1386,61 +1422,45 @@
   <div class="main col-sm-9">
     <section>
       <div class="">
-        <p><em>to be reviewed</em></p>
+        <p>The reTHINK Core Framework is fully open sourced (Apache 2.0) and hosted in different Github repositories where you can find all information about how to get involved in the Core Framework development.</p>
 
-<h2 id="rethink-framework-implementation">reTHINK Framework implementation</h2>
+<h2 id="front-end-components">Front-end Components</h2>
 
-<p>A reference implementation to support the initial Specification is provided:</p>
+<p>–	The <a href="https://github.com/reTHINK-project/dev-runtime-core">Runtime Core Repository</a> contains the source code required to support the deployment and execution of Hyperties in user devices or in network servers. Hyperty Core Runtime components are platform agnostic and are to be included in platform specific Hyperty Runtimes, like Web Browsers and Nodejs based platforms.</p>
 
-<ul>
-  <li>
-    <p><a href="https://github.com/reTHINK-project/dev-runtime-core">Core Runtime Source Code and Manuals</a></p>
-  </li>
-  <li>
-    <p><a href="https://github.com/reTHINK-project/dev-runtime-browser">Runtime for Browser Source Code and Manuals</a></p>
-  </li>
-  <li>
-    <p><a href="https://github.com/reTHINK-project/dev-runtime-nodejs">Runtime for NodeJS Source Code and Manuals</a></p>
-  </li>
-  <li>
-    <p><a href="https://github.com/reTHINK-project/dev-msg-node-vertx">Message Node for Vertx.io Source Code and Manuals</a></p>
-  </li>
-  <li>
-    <p><a href="https://github.com/reTHINK-project/dev-msg-node-nomatrix">NoMatrix Message Node Source Code and Manuals</a></p>
-  </li>
-  <li>
-    <p><a href="https://github.com/reTHINK-project/dev-msg-node-nodejs">Message Node for NodeJS Source Code and Manuals</a></p>
-  </li>
-  <li>
-    <p><a href="https://github.com/reTHINK-project/dev-service-framework">Service Framework Source Code and Manuals</a></p>
-  </li>
-  <li>
-    <p><a href="https://github.com/reTHINK-project/dev-hyperty-toolkit">Development Toolkit Source Code and Manuals</a></p>
-  </li>
-  <li>
-    <p><a href="https://github.com/reTHINK-project/dev-registry-domain">Domain Registry Source Code and Manuals</a></p>
-  </li>
-  <li>
-    <p><a href="https://github.com/reTHINK-project/dev-catalogue">ReTHINK Catalogue</a> - This code repository contains the documentation and implementation of the reTHINK Catalogue Broker, Database, and Test Website.</p>
-  </li>
-  <li>
-    <p><a href="https://github.com/reTHINK-project/dev-standalone-apps">Standalone Applications for Smartphones Source Code and Manuals</a></p>
-  </li>
-</ul>
+<p>–	the <a href="https://github.com/reTHINK-project/dev-runtime-browser">Runtime for Browser repo</a> contains the code necessary to execute the reTHINK runtime core in a browser.</p>
 
-<p>The Reference Implemenentation is validated with a few Services, Protostubs and Applications:</p>
+<p>–	the <a href="https://github.com/reTHINK-project/dev-runtime-nodejs">Runtime for NodeJS repo</a> contains the code necessary to execute the reTHINK runtime core in NodeJS server.</p>
+
+<p>–	the <a href="https://github.com/reTHINK-project/dev-service-framework">Service Framework repo</a> contains the source code of libraries that are used to facilitate the development of Hyperties and Protostubs.</p>
+
+<h2 id="toolkit">Toolkit</h2>
 
 <ul>
-  <li>
-    <p><a href="https://github.com/reTHINK-project/dev-hyperty">Hyperties Source Code and Manuals</a></p>
-  </li>
-  <li>
-    <p><a href="https://github.com/reTHINK-project/dev-protostubs">Protostubs and IdP Proxies Source Code and Manuals</a></p>
-  </li>
-  <li>
-    <p><a href="https://github.com/reTHINK-project/dev-smart-contextual-assistance-app">Smart Contextual Assistance application</a></p>
-  </li>
+  <li>the <a href="https://github.com/reTHINK-project/dev-hyperty-toolkit">Toolkit repository</a>  provides tools to develop and test Hyperties, Protostubs and IdP Proxies.</li>
 </ul>
+
+<h2 id="back-end-components">back-end Components</h2>
+
+<p>The reTHINK Core Framework is comprised by three main back-end components: Message Node, Registry and Catalogue.</p>
+
+<h3 id="message-node">Message Node</h3>
+
+<p>The Message Node provides real time message oriented communication functionalities used by Hyperties to communicate (Message Routing). There are three implementations of the Message Node:</p>
+
+<p>–	the <a href="https://github.com/reTHINK-project/dev-msg-node-vertx">Message Node based on Vertx.io Java </a></p>
+
+<p>– the <a href="https://github.com/reTHINK-project/dev-msg-node-nomatrix">NoMatrix Message Node Source (JavaScript)</a></p>
+
+<p>–	<a href="https://github.com/reTHINK-project/dev-msg-node-nodejs">Message Node based on NodeJS (Javascript)</a></p>
+
+<h2 id="domain-registry">Domain Registry</h2>
+
+<p>The <a href="https://github.com/reTHINK-project/dev-registry-domain">Domain Registry repo</a> contains the source code for Registry Support Service where Hyperty instances and associated End-users are registered and discoverable.</p>
+
+<h2 id="catalogue">Catalogue</h2>
+
+<p>The <a href="https://github.com/reTHINK-project/dev-catalogue">ReTHINK Catalogue</a> contains the documentation and implementation of the reTHINK Catalogue Broker, Database, and Test Website. The Catalogue Support Service provides access to Hyperty assets including service descriptions, software services, policy, documentation, and other assets or artifacts that are essential to the operation of the service.</p>
 
       </div>
     </section>
