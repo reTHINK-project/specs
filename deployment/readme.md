@@ -13,7 +13,7 @@ After following this tutorial, you will be able to run all Hyperties Demos from 
 
 __Please note that this section is dedicated to an operational platform__. Developers should use the [toolkit](https://github.com/reTHINK-project/dev-hyperty-toolkit).   
 
-## Components to install
+## Requirements
 
 The reThink Framework platform uses three main core back-end services shown in the following picture and described hereafter.
 
@@ -75,7 +75,7 @@ Here is a view of the interfaces:
 
 Activate your domain:
 
-<pre class="line-numbers">
+<pre>
   <code class="language-shell">
 sudo a2ensite csp.rethink.com`
   </code>
