@@ -1,0 +1,56 @@
+@startuml
+
+
+interface Event {
+  identity: ?Identity.Identity
+  url: URL
+  type: create | delete | subscribe | unsubscribe | response | change
+}
+
+interface CreateEvent {
+  from: HypertyURL
+  value: JSON
+  schema?: SchemaURL
+  ack(type): void
+}
+
+interface DeleteEvent {
+  object: DataObjectObserver
+}
+
+interface SubscribeEvent {
+  accept(): SyncSubscription
+  reject(reason): void
+}
+
+interface UnSubscribeEvent {
+  object: SyncSubscription
+}
+
+interface ResponseEvent {
+  code: int
+  source?: HypertyURL
+}
+
+interface ChangeEvent {
+  cType: update | add | delete
+  oType: object | array
+  field: string /*separated dot path*/
+  data?: value | [value]
+}
+
+interface ReadEvent {
+  accept(): void
+  reject(reason): void
+}
+
+CreateEvent --|> Event
+DeleteEvent --|> Event
+SubscribeEvent --|> Event
+UnSubscribeEvent -up-|> Event
+ResponseEvent -up-|> Event
+ChangeEvent -up-|> Event
+ReadEvent -up-|> Event
+
+
+@enduml
