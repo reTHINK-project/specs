@@ -4,43 +4,38 @@ title: Quick installation guide
 category: Backend Deployment
 ---
 
-
-1. [Components to install](#components-to-install)
-   1. [Server-side components](#server-side-components)
-   2. [Client-side components](#client-side-components)
-2. [Installation process](#installation-process)
-   1. [Communication Service Provider](#communication-service-provider)
-      1. [Domain Registry](#domain-registry)
-      2. [Messaging node](#messaging-node)
-      3. [Catalogue](#catalogue)
-   2. [Application Deployment](#application-deployment)
-      1. [Hello World](#hello-world)
-      2. [Complete setup](#complete-setup)
-   3. 1. [Integration with IMS](#integration-with-ims)
+<h1></h1>
+<h1></h1>
 
 
+This page explains how to install your own reTHINK domain to be able to deliver your own Hyperties, Protostubs or Data Schemas.
+After following this tutorial, you will be able to run all Hyperties in the catalogue available [here](https://github.com/reTHINK-project/dev-hyperty).  
 
-This page explains how to install a complete platform to be able to deploy services and applications based on the reThink framework.
-After following this tutorial, you will be able to run all Hyperties in the catalogue available [here](https://github.com/reTHINK-project/dev-app).  
-The installation guides can be found in the different folders. We don't provide here the full installation processes, but a view "as a whole", summaries and tips.   
 __Please note that this section is dedicated to an operational platform__. Developpers should use the [toolkit](https://github.com/reTHINK-project/dev-hyperty-toolkit).   
-If you already know how is the platform, go directly to [Installation Process](#installation-process).
 
 ## Components to install
 
 A complete reThink platform consists on server-side components that are finally deployed in the browser. These components are shown in the following picture and described hereafter.  
 
 All components are available in Docker images and the preferred host is an Ubuntu 14.04.  
+
 It is recommended that the containers are deployed behind a reverse proxy for several reasons:
+
 * default DNS is used to access different components of the platform, adding a prefix. The reverse proxy can easily manage different virtual hosts thus simplifying access to these components.
+
 * All components are using different ports, using a reverse proxy is useful to allow using classical ports
+
 * It is recommanded that the certificates are managed on the front reverse proxy.
 
 Some tools/servers to install:
-* [apache2](https://httpd.apache.org/)
-* or [nginx](https://www.nginx.com/) instead of apache2
-* [reverse proxy](https://www.digitalocean.com/community/tutorials/how-to-use-apache-as-a-reverse-proxy-with-mod_proxy-on-ubuntu-16-04) in case of on apache2
-* [docker-compose](https://docs.docker.com/compose/install/)
+
+- [apache2](https://httpd.apache.org/)
+
+- or [nginx](https://www.nginx.com/) instead of apache2
+
+- [reverse proxy](https://www.digitalocean.com/community/tutorials/how-to-use-apache-as-a-reverse-proxy-with-mod_proxy-on-ubuntu-16-04) in case of on apache2
+
+- [docker-compose](https://docs.docker.com/compose/install/)
 
 If you choose a default apache2 server, for each sub-domain you need to use a config file, where you config the reverse proxy, you can check [here](https://github.com/reTHINK-project/specs/tree/master/deployment/registry-ssl.conf) a config for registry component.
 
@@ -53,7 +48,11 @@ https free trusted certificates can be obtained on [let's encrypt](https://letse
 
 ## Installation process
 
-We will first install a CSP, then the application from scratch. To illustrate our text, we will consider that the DNS of the platform is `csp.rethink.com`
+We will first install the three back-end reTHINK Services, then the application from scratch. To illustrate our text, we will consider that the DNS of the domain is `csp.rethink.com`
+
+Here is a view of the interfaces:
+<img src="https://cloud.githubusercontent.com/assets/10738516/19762069/b2b01b38-9c38-11e6-99c9-03f79e353b4e.png" width="700"/>
+
 
 1- Deploy reTHINK back-end services with Docker Compose. Get the [docker-compose](https://github.com/reTHINK-project/specs/tree/master/deployment/docker-compose.yml) file and execute:
 
@@ -63,12 +62,14 @@ We will first install a CSP, then the application from scratch. To illustrate ou
 
 2.1- configure your domain by editing `/etc/apache2/sites-available/000-default.conf` with your domain:
 
-```yml
-<VirtualHost *:80>
-      ServerName csp.rethink.com
-       DocumentRoot /var/www/html/
-</VirtualHost>
-```
+<pre class="line-numbers">
+  <code class="language-yml">
+    <VirtualHost *:80>
+          ServerName csp.rethink.com
+           DocumentRoot /var/www/html/
+    </VirtualHost>
+</code>
+</pre>
 
 Activate your domain:
 
@@ -166,7 +167,7 @@ To test if installation is OK, open https://demos.csp.rethink.com/ and it should
 
 ## Hello World Application Deployment
 
-The Hello World is published in the repository [dev-hello](https://github.com/reTHINK-project/dev-app), and its installation manual is provided there. It can be deployed simply behind an HTTP server.  
+The Hello World is published in the repository [dev-app](https://github.com/reTHINK-project/dev-app), and its installation manual is provided there. It can be deployed simply behind an HTTP server.  
 
 #### Complete Setup
 After all these steps, application should be running. Last verifications:  
@@ -177,8 +178,6 @@ ___WARNING___
 
 When all of this is done you can try to connect on the index.html of the hello-app. First step, you should be able to load the runtime, then to load an hyperty, then to contact hyperties.
 
-Here is a view of the technical flows involved:
-<img src="https://cloud.githubusercontent.com/assets/10738516/19762069/b2b01b38-9c38-11e6-99c9-03f79e353b4e.png" width="700"/>
 
 
 ### Docker compose details
