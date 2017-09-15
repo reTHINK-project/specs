@@ -1638,34 +1638,32 @@
   <div class="main col-sm-9">
     <section>
       <div class="">
-        <h3 id="recommendations-and-lessons-learned-for-the-development-of-message-nodes">Recommendations and lessons learned for the Development of Message Nodes</h3>
+        <p>For a general overview and to support initial design decisions for a new implementation of a Message Node, please have a look at <a href="../../messaging-framework/msg-node-design.md">Message Node and Protostubs design recommendations</a>.</p>
 
-<p>For a general overview and to support initial design decisions for a new implementation of a Message Node, please also have a look at <a href="https://github.com/reTHINK-project/specs/blob/master/messaging-framework/msg-node-design.md">Message Node and Protostubs design recommendations</a>.</p>
-
-<p>This chapter summarizes the results and the “lessons learned” from the different reference implementations of Message Nodes so far. One important lesson is:</p>
+<p>This doc summarizes the results and the “lessons learned” from the different reference implementations of Message Nodes so far. One important lesson is:</p>
 
 <p><strong>The Message Nodes play a crucial role for the stability, robustness and the experienced performance of applications developed on top of the rethink infrastructure.</strong></p>
 
 <p>This is because the Message Nodes are the central gateway to access resources of a service providers domain. They are responsible for the allocation of addresses, for the interworking with the domain registry to register and search hyperties and objects and they route messages between such entities.</p>
 
-<h4 id="where-to-find-the-relevant-specification">Where to find the relevant specification</h4>
+<h2 id="where-to-find-the-relevant-specification">Where to find the relevant specification</h2>
 
-<p>The specification for the implementation of a MN is spread to several places in the github repository. The best place to start with is the description of
-<a href="https://github.com/reTHINK-project/specs/blob/master/messaging-framework/readme.md">Functional Architecture</a> as a high level intro.</p>
+<p>The best place to start with is the description of
+<a href="../../messaging-framework/readme/">Functional Architecture</a> as a high level intro.</p>
 
-<p>But since the Message Node deals with messages the probably best source of detail information is the documentation of the Messages itself. You can find this documentation in several different markup files under <a href="https://github.com/reTHINK-project/specs/tree/master/messages">Message Specification</a>. However, this documentation includes all kind of messages, i.e. also messages that are not relevant for the MN itself, because they are Runtime internal and therefore never reach the MN.</p>
+<p>The specification of messages that are handled by the Message Node are defined <a href="../../messages/readme/">here</a>. However, this documentation includes all kind of messages, i.e. also messages that are not relevant for the MN itself, because they are Runtime internal and therefore never reach the MN.</p>
 
-<p>Therefore - as a common rule - the focus should be on messages sent to “domain://…”. This prefix is an indication that the MN is responsible for the handling of the message via one of its support services or a connector. All other messages that will reach the MN must be routed according to the established data-sync pathes.</p>
+<p>Therefore - as a common rule - the focus should be on messages sent to “domain://…”. This prefix is an indication that the MN is responsible for the handling of the message via one of its support services or a connector. All other messages that will reach the MN must be routed according to <code class="highlighter-rouge">to</code> address.</p>
 
-<p>You should start with the <a href="https://github.com/reTHINK-project/specs/blob/master/messages/address-allocation-messages.md">address-allocation-messages</a>, then continue with the <a href="https://github.com/reTHINK-project/specs/blob/master/messages/registration-messages.md">registration-messages</a> and go on with the <a href="https://github.com/reTHINK-project/specs/blob/master/messages/data-sync-messages.md">data-sync-messages</a>. These are the mandatory parts to make a MN work with most of the provided examples.</p>
+<p>You should start with the <a href="../../messages/address-allocation-messages">address-allocation-messages</a>, then continue with the <a href="../../messages/registration-messages">registration-messages</a> and go on with the <a href="../../messages/data-sync-messages">data-sync-messages</a>. These are the mandatory parts to make a MN work with most of the provided examples.</p>
 
-<h4 id="test-cases">Test cases</h4>
+<h2 id="test-cases">Test cases</h2>
 
-<p>In order to ensure that a MN will work as it should, there is a set of test cases available at <a href="">https://github.com/reTHINK-project/specs/blob/master/messages/data-sync-messages.md</a>. A Quickstart documentation and additional information is provided there and is out of scope here.</p>
+<p>In order to ensure that a MN will work as it should, there is a set of test cases available at <a href="../../messages/data-sync-messages">here</a>. A Quickstart documentation and additional information is provided there and is out of scope here.</p>
 
 <p>These testcases are focussing on the conformance with the message specification and on performance measurements. Tests for the robustness of the MNs, i.e. against malformed requests etc. are not yet in focus.</p>
 
-<h4 id="performance-hints">Performance hints</h4>
+<h2 id="performance-hints">Performance hints</h2>
 
 <p>As mentioned before, the MN plays a central role for the experienced/felt performance of applicatons running on top of the rethink framework. Therefore it is important to achieve a high performance for the allocation of addresses and especially for the routing of messages.</p>
 
