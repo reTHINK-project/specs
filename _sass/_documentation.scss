@@ -1,0 +1,29 @@
+@import "_sidebar";
+
+.sidebar {
+
+  .category {
+
+  }
+
+  ul {
+    margin-bottom: 25px;
+  }
+
+  .doc-link {
+
+    color: $blue1;
+    margin: 0 0 0 10px;
+    padding: 0 5px;
+    display: block;
+
+    &:hover,
+    &:active,
+    &.active {
+      color: $black;
+      background: $gray;
+    }
+
+  }
+
+}

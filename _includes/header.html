@@ -1,44 +1,48 @@
 <!-- Header Start -->
-<header class="sticky-top" role="banner">
-  <div class="container">
+<header  class="header sticky-top" role="banner" aria-label="Header">
+  <div class="container-fluid">
     <div class="row">
       <div class="col-md-12">
         <!-- header Nav Start -->
         <nav class="navbar navbar-default">
-          <div class="container-fluid">
-            <!-- Brand and toggle get grouped for better mobile display -->
-            <div class="navbar-header">
-              <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-                <span class="sr-only">Toggle navigation</span>
-                <span class="icon-bar">{% include icon-github.html username=site.github_username %}</span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-              </button>
-              {% assign default_paths = site.pages | map: "path" %}
-              {% assign page_paths = site.header_pages | default: default_paths %}
-              <a class="site-title" title="{{ site.subtitle }}" href="{{ site.url }}"><img src="{{site.logo | relative_url}}" alt="{{ site.title | escape }}"></a>
-            </div>
+          <!-- Brand and toggle get grouped for better mobile display -->
+          <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+              <span class="sr-only">Toggle navigation</span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </button>
+            {% assign default_paths = site.pages | map: "path" %}
+            {% assign page_paths = site.header_pages | default: default_paths %}
+            <a class="site-title" title="{{ site.subtitle }}" href="{{ site.url }}"><img src="{{site.logo | relative_url}}" alt="{{ site.title | escape }}"></a>
+          </div>
 
-            <!-- Collect the nav links, forms, and other content for toggling -->
-            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-              {% if page_paths %}
+          <!-- Collect the nav links, forms, and other content for toggling -->
+          <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            {% if page_paths %}
+              <ul class="nav navbar-nav navbar-right">
+                {% for path in page_paths %}
+                  {% assign my_page = site.pages | where: "path", path | first %}
+                  {% if my_page.title %}
+                  <li><a class="page-link" href="{{ my_page.url | relative_url }}">{{ my_page.title | escape }}</a></li>
+                  {% endif %}
+                {% endfor %}
+              </ul>
+              <div class="visible-xs-block">
                 <ul class="nav navbar-nav navbar-right">
-                  {% for path in page_paths %}
-                    {% assign my_page = site.pages | where: "path", path | first %}
-                    {% if my_page.title %}
-                    <li><a class="page-link" href="{{ my_page.url | relative_url }}">{{ my_page.title | escape }}</a></li>
-                    {% endif %}
-                  {% endfor %}
-                </ul>
-                <ul class="nav navbar-nav navbar-right">
-                  <li><a class="page-link" href="{{site.ur}}/specs/">Documentation</a></li>
+                  <li>
+                    <a class="page-link" href="{{site.ur}}/specs/">Documentation</a>
+                    {% include menu.html %}
+                  </li>
                   <li><a class="page-link" href="{{site.ur}}/dev-hyperty" target="_blank">Hyperties</a></li>
                   <li><a class="page-link" href="https://github.com/reTHINK-project/dev-hyperty-toolkit" target="_blank">GitHub</a></li>
                   <li><a class="page-link" href="https://github.com/reTHINK-project/dev-hyperty-toolkit/releases" target="_blank">v{{site.version}}</a></li>
                 </ul>
-              {% endif %}
-            </div><!-- /.navbar-collapse -->
-          </div><!-- /.container-fluid -->
+              </div>
+
+            {% endif %}
+          </div><!-- /.navbar-collapse -->
         </nav>
       </div>
     </div>

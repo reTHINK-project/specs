@@ -144,6 +144,9 @@ section .main-content {
   position: relative;
   background-position: center;
 
+  float: left;
+  width: 100%;
+
   &:before {
     content: "";
     position: absolute;
