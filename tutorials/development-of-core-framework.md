@@ -21,7 +21,7 @@ The reTHINK Core Framework is fully open sourced (Apache 2.0) and hosted in diff
 
 ## Toolkit
 
-* the [Toolkit repository](https://github.com/reTHINK-project/dev-hyperty-toolkit)  provides tools to develop and test Hyperties, Protostubs and IdP Proxies.
+the [Toolkit repository](https://github.com/reTHINK-project/dev-hyperty-toolkit)  provides tools to develop and test Hyperties, Protostubs and IdP Proxies.
 
 ## back-end Components
 

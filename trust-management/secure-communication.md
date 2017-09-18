@@ -5,6 +5,8 @@ category: Trust Management
 order: 3
 ---
 
+-------------------------------------------
+
 
 The reTHINK framework provides support for two types of communication, a direct communication between two users through their respective Hyperties and the Reporter - Observer communication, using Data Objects, where messages are broadcasted to all  authorized Hyperties. The encryption of these communications is optional, depending on the user preferences regarding secure channels. This secure channel consists on the creation of a HMAC of the message followed by the encryption of the message, to ensure confidentiality and integrity.
 
