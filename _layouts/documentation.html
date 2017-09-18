@@ -2,22 +2,8 @@
 layout: default
 ---
 
-<!-- Slider Start -->
-<div class="row">
-  <section id="global-header">
-    <div class="">
-        <div class="row">
-            <div class="col-sm-12">
-                <div class="block">
-                    <h1>{{ page.title | escape }}</h1>
-                    <p>{{ page.subtitle | escape }}</p>
-                </div>
-            </div>
-        </div>
-    </div>
-  </section>
-
-  <div class="sidebar col-sm-3">
+<div>
+  <div id="navbar" class="sidebar col-sm-3">
     {% assign navurl = page.url | remove: 'index.html' %}
 
     {% assign docs_by_category = site.pages %}
@@ -40,11 +26,25 @@ layout: default
   </div>
 
   <div class="main col-sm-9">
+
+    <div class="row">
+      <section id="global-header">
+          <div class="col-sm-12">
+            <div class="block">
+              <h1>{{ page.title | escape }}</h1>
+              <p>{{ page.subtitle | escape }}</p>
+            </div>
+          </div>
+      </section>
+    </div>
+
     <section>
       <div class="">
         {{ content }}
       </div>
     </section>
   </div>
-   {% include doc-scroll.html %}
+
+  {% include doc-scroll.html %}
+
 </div>
