@@ -14,8 +14,8 @@ When the MessageBUS is processing a new message and looking up routing paths for
 
 There are two types of P2P Protostubs:
 
-- P2P Handler Stub: it is deployed as soon as the Runtime is instantiated in order to be ready to receive requests for P2P Connections setup. This Stub plays the [observer](p2p-data-sync.md) role of [Connection Data objects](../datamodel/data-objects/connection) that are created by remote P2P Requesters Stub. The P2P Handler Stub can observe more than one connection data objects ie it can handle several p2p connections to remote runtimes. Each p2p connection would be managed by a connection controller (see Connector hyperty design). As soon as the Runtime is instantiated, the P2P Handler Stub is deployed and the path to receive P2P Data Connection creation requests from P2P Requester Stubs is set.
-- P2P Requester Stub : it is deployed to setup a p2p connection with a remote runtime  P2P Handler Stub. It plays the [reporter](p2p-data-sync.md) role for a single [Connection Data object](../datamodel/data-objects/connection) object instance.
+* P2P Handler Stub: it is deployed as soon as the Runtime is instantiated in order to be ready to receive requests for P2P Connections setup. This Stub plays the [observer](p2p-data-sync.md) role of [Connection Data objects](../datamodel/data-objects/connection) that are created by remote P2P Requesters Stub. The P2P Handler Stub can observe more than one connection data objects ie it can handle several p2p connections to remote runtimes. Each p2p connection would be managed by a connection controller (see Connector hyperty design). As soon as the Runtime is instantiated, the P2P Handler Stub is deployed and the path to receive P2P Data Connection creation requests from P2P Requester Stubs is set.
++ P2P Requester Stub : it is deployed to setup a p2p connection with a remote runtime  P2P Handler Stub. It plays the [reporter](../concepts/p2p-data-sync.md) role for a single [Connection Data object](../datamodel/data-objects/connection) object instance.
 
 These P2P Protostubs are provisioned in the catalogue.
 
@@ -29,5 +29,6 @@ The P2P Connections status follows the state machine specified below. The change
 
 Detailed description of P2P Message Delivery procedures can be found for:
 
-* [Routing Address Resolution](../dynamic-view/basics/resolve-routing-address.md)
-* [P2P Connection setup for Message Delivery](../dynamic-view/basics/p2p-setup.md)
+ * [Routing Address Resolution](../dynamic-view/basics/resolve-routing-address.md)
+
+ * [P2P Connection setup for Message Delivery](../dynamic-view/basics/p2p-setup.md)

@@ -918,7 +918,7 @@ Thus, the Messaging Framework is comprised by a network of Routers where each Ro
 
 <p>Listeners are programmatically registered and unregistered by Routing Management functionalities, which take their decisions according to a higher level view of the Routing Network.</p>
 
-<p><img src="routing-management.png" alt="Hyperty Message Routing Management" /></p>
+<p><img src="/specs/img/messaging-framework/routing-management.png" alt="Hyperty Message Routing Management" /></p>
 
 <p>The Messaging Framework works at three layers:</p>
 
@@ -926,9 +926,9 @@ Thus, the Messaging Framework is comprised by a network of Routers where each Ro
 
 <p>At the Runtime level where Sandboxes are hosted (e.g. in a Browser or in a NodeJS instance), message delivery is provided by the <a href="https://github.com/reTHINK-project/dev-runtime-core/blob/master/src/bus/MessageBus.js">Message BUS component</a>, which is an extension of the MiniBUS.</p>
 
-<p>At Domain Level, message delivery is provided by the <a href="/specs/messaging-framework/msg-node/">Message Node</a> functionality by using the <a href="../../tutorials/protofly.md">Protofly mechanism</a>, i.e. communication between Message BUS and Message Nodes and among Message Nodes are protocol agnostic. This also means that the Message Node can be provided by any Messaging solution as soon as there is a Protostub available. Currently, a <a href="https://github.com/reTHINK-project/dev-msg-node-vertx">Vertx Message Node</a>, a <a href="https://github.com/reTHINK-project/dev-msg-node-matrix">Matrix Message Node</a> and a <a href="https://github.com/reTHINK-project/dev-msg-node-nodejs">NodeJS Message Node</a> are provided. These are just reference implementations of Message Nodes and anyone is free to develop its own Message Node. Check the <a href="/specs/messaging-framework/msg-node-design/">Message Node design guide</a> and the <a href="/specs/messaging-framework/stub-specification/">Protocol Stub specification</a> for more details.</p>
+<p>At Domain Level, message delivery is provided by the <a href="/specs/messaging-framework/msg-node/">Message Node</a> functionality by using the <a href="/specs/concepts/protofly/">Protofly mechanism</a>, i.e. communication between Message BUS and Message Nodes and among Message Nodes are protocol agnostic. This also means that the Message Node can be provided by any Messaging solution as soon as there is a Protostub available. Currently, a <a href="https://github.com/reTHINK-project/dev-msg-node-vertx">Vertx Message Node</a>, a <a href="https://github.com/reTHINK-project/dev-msg-node-matrix">Matrix Message Node</a> and a <a href="https://github.com/reTHINK-project/dev-msg-node-nodejs">NodeJS Message Node</a> are provided. These are just reference implementations of Message Nodes and anyone is free to develop its own Message Node. Check the <a href="/specs/messaging-framework/msg-node-design/">Message Node design guide</a> and the <a href="/specs/messaging-framework/stub-specification/">Protocol Stub specification</a> for more details.</p>
 
-<p><img src="mofly.png" alt="Adhoc Messaging Oriented Middleware Routing Layers" /></p>
+<p><img src="/specs/img/messaging-framework/mofly.png" alt="Adhoc Messaging Oriented Middleware Routing Layers" /></p>
 
 <p>At runtime level (MessageBUS and MiniBUS), it is used a standard CRUD based <a href="/specs/datamodel/core/message/readme/">JSON Message Model</a>, which is easily mapped into Restfull APIs.</p>
 

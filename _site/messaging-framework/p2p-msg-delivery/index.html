@@ -899,7 +899,7 @@
 
 <ul>
   <li>P2P Handler Stub: it is deployed as soon as the Runtime is instantiated in order to be ready to receive requests for P2P Connections setup. This Stub plays the <a href="p2p-data-sync.md">observer</a> role of <a href="../datamodel/data-objects/connection">Connection Data objects</a> that are created by remote P2P Requesters Stub. The P2P Handler Stub can observe more than one connection data objects ie it can handle several p2p connections to remote runtimes. Each p2p connection would be managed by a connection controller (see Connector hyperty design). As soon as the Runtime is instantiated, the P2P Handler Stub is deployed and the path to receive P2P Data Connection creation requests from P2P Requester Stubs is set.</li>
-  <li>P2P Requester Stub : it is deployed to setup a p2p connection with a remote runtime  P2P Handler Stub. It plays the <a href="p2p-data-sync.md">reporter</a> role for a single <a href="../datamodel/data-objects/connection">Connection Data object</a> object instance.</li>
+  <li>P2P Requester Stub : it is deployed to setup a p2p connection with a remote runtime  P2P Handler Stub. It plays the <a href="/specs/concepts/p2p-data-sync/">reporter</a> role for a single <a href="../datamodel/data-objects/connection">Connection Data object</a> object instance.</li>
 </ul>
 
 <p>These P2P Protostubs are provisioned in the catalogue.</p>
@@ -915,8 +915,12 @@
 <p>Detailed description of P2P Message Delivery procedures can be found for:</p>
 
 <ul>
-  <li><a href="/specs/dynamic-view/basics/resolve-routing-address/">Routing Address Resolution</a></li>
-  <li><a href="/specs/dynamic-view/basics/p2p-setup/">P2P Connection setup for Message Delivery</a></li>
+  <li>
+    <p><a href="/specs/dynamic-view/basics/resolve-routing-address/">Routing Address Resolution</a></p>
+  </li>
+  <li>
+    <p><a href="/specs/dynamic-view/basics/p2p-setup/">P2P Connection setup for Message Delivery</a></p>
+  </li>
 </ul>
 
       </div>
