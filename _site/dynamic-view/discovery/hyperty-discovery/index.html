@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no, maximum-scale=1, minimum-scale=1">
 
-  <title>Data Sync Resume for Observers</title>
+  <title>Discovery process</title>
   <meta name="description" content="reTHINK Framework provides the tools to build a global real-time decentralized communication infra-structure where services are inherently inter-operable.">
 
   <link rel="canonical" href="http://localhost:4000/specs/dynamic-view/discovery/hyperty-discovery/">
@@ -522,7 +522,7 @@
             
               <li>
                 
-                  <a href="/specs/specs/dynamic-view/discovery/hyperty-discovery/" class="active doc-link" role="link">  Data Sync Resume for Observers </a>
+                  <a href="/specs/specs/dynamic-view/discovery/hyperty-discovery/" class="active doc-link" role="link">  Discovery process </a>
                 
               </li>
             
@@ -881,7 +881,7 @@
         <div class="row">
             <div class="col-sm-12">
                 <div class="block">
-                    <h1>Data Sync Resume for Observers</h1>
+                    <h1>Discovery process</h1>
                     <p></p>
                 </div>
             </div>
@@ -1285,7 +1285,7 @@
         
           <li>
             
-              <a href="/specs/dynamic-view/discovery/hyperty-discovery/" class="active doc-link" role="link">  Data Sync Resume for Observers </a>
+              <a href="/specs/dynamic-view/discovery/hyperty-discovery/" class="active doc-link" role="link">  Discovery process </a>
             
           </li>
         
@@ -1638,13 +1638,21 @@
   <div class="main col-sm-9">
     <section>
       <div class="">
-        <h4 id="discover-hyperty">Discover Hyperty</h4>
+        <p>Hyperty instances and Data Object instances can be discovered according to different criteria including users, names, supported HypertyResources and Schemes. Discovery is provided by two main components in the Hyperty Runtime:</p>
 
-<p>The Runtime procedures to Discover available Hyperties. Check Messages Specification <a href="/specs/messages/registration-messages/#hyperty-instance-query-per-user">here</a></p>
+<p>The <a href="https://github.com/reTHINK-project/dev-runtime-core/blob/master/src/discovery/CoreDiscovery.js">Runtime Core Discovery</a> is a Core Runtime Component that performs the required queries to available Registries in order to handle discovery requests coming from hyperties.</p>
 
-<p><img src="/specs/dynamic-view/discovery/discover-hyperty.png" alt="Figure @runtime-disocver-hyperty: discover Hyperty" /></p>
+<p>The <a href="https://github.com/reTHINK-project/dev-service-framework/blob/master/src/syncher/Syncher.js">Discovery Lib</a> works like a discovery proxy for Runtime Core Discovery components by exposing to the Hyperty Instance a discovery API. These Discovery requests are then forwarded to the Runtime Core Discovery component. The Discovery Results are returned in Discovery Objects that provides event handlers for registration status changes of discovered Hyperties or Data Objects.</p>
 
-<p>Hyperty discovery is performed through the Runtime Registry which returns the Hyperty Registry entry (<strong>phase 2 new!!</strong>) containing its Hyperty Runtime URL, the P2P Handler Stub instance URL and the catalogue URL of P2P Requester Stub. It should be possible to rule this discovery according to policies enforced in the MN ie the user should be able to control who is able to have access to its P2P connections. The Runtime Registry saves the returned Hyperty Registry entry.</p>
+<p>The Domain Registry exposes a REST API to handle the discovery requestes coming from the Runtime Core Discovery component.</p>
+
+<p>The Detailed description of the Discovery process is provided below.</p>
+
+<p><em>to be updated</em></p>
+
+<p><img src="/specs/dynamic-view/discovery/discover-hyperty.png" alt="Figure discover Hyperty" /></p>
+
+<p>Check Messages Specification <a href="/specs/messages/registration-messages/#hyperty-instance-query-per-user">here</a></p>
 
       </div>
     </section>

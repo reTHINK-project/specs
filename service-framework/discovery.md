@@ -8,6 +8,13 @@ order: 3
 
 *[source code](https://github.com/reTHINK-project/dev-service-framework/blob/master/src/message-factory/MessageFactory.js)*
 
-Hyperty discovery is performed through the Runtime Registry which is used to query about Hyperty Registry entries containing its Hyperty Runtime URL, the P2P Handler Stub instance URL and the catalogue URL of P2P Requester Stub. A full dynamic view for discovery is provided [here](https://github.com/reTHINK-project/specs/tree/master/dynamic-view/discovery).
+Hyperty discovery is performed through the Runtime Core Discovery component which is used to query about Hyperty instances and Data Objects according to different criteria including UserId, supported Scheme, Hyperty Resources and name.
+
+The discovery results are returned as a DiscoveryObject that provides event handlers for registration status changes (`onLive` and `onDisconnected`).
+
+*to be completed*
+
+
+The detailed description of how discovery works is provided [here](../dynamic-view/discovery/hyperty-discovery.md).
 
 Full documentation [here](https://doc.esdoc.org/github.com/reTHINK-project/dev-service-framework/class/src/discovery/Discovery.js~Discovery.html).

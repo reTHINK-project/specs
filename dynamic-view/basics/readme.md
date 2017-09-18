@@ -11,9 +11,9 @@ The heart of reTHINK framework is the Hyperty Core Runtime that is platform agno
 
 -- RuntimeUA: handles the life-cycle of deployable components ie it deploys Hyperties, Protostubs and IdP Proxies in the most appropriate sandboxes. During the Hyperty deployment process the RuntimeUA asks the Identity Module to provide an authenticated Identity to be associated with the new Hyperty Instance. More information [here](../identity-managemenet/readme.md).
 
--- Runtime Registry: it handles the registration of Hyperties at the Domain Registry, when requested by the RuntimeUA during the deployment process. The Runtime Registry is also responsible to resolve the best Protostub to be used to deliver a message outside the Hyperty Runtime, when requested by the Message BUS. In case no Protostub is available it will trigger the Deployment of a new Protostub that will be handled by the RuntimeUA.
+-- Runtime Registry: it handles the registration of Hyperties at the Domain Registry, when requested by the RuntimeUA during the deployment process. The Runtime Registry is also responsible to resolve the best Protostub to be used to deliver a message outside the Hyperty Runtime, when requested by the Message BUS. In case no Protostub is not available it will trigger the Deployment of a new Protostub that will be handled by the RuntimeUA.
 
--- Message BUS: handles the delivery of messages inside the Runtime. When no listener is registered for a certain target address (header `to` o the message), it requests the `Registry.resolve()` to provide the address of the Protostub that will deliver the message outside the Hyperty Runtime. Before a message is delivered, the Message Bus asks the Policy Engine to authorize it.
+-- Message BUS: handles the delivery of messages inside the Runtime. When no listener is registered for a certain target address (header `to` of the message), it requests the `Registry.resolve()` to provide the address of the Protostub that will deliver the message outside the Hyperty Runtime. Before a message is delivered, the Message Bus asks the Policy Engine to authorize it.
 
 
 The first time the user is using the reTHINK framework in the device, the Hyperty Runtime is downloaded from the catalogue and instantiated. The runtime is cached locally and only loaded again for new versions.

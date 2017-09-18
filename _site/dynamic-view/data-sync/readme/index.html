@@ -522,7 +522,7 @@
             
               <li>
                 
-                  <a href="/specs/specs/dynamic-view/discovery/hyperty-discovery/" class="doc-link" role="link">  Data Sync Resume for Observers </a>
+                  <a href="/specs/specs/dynamic-view/discovery/hyperty-discovery/" class="doc-link" role="link">  Discovery process </a>
                 
               </li>
             
@@ -1285,7 +1285,7 @@
         
           <li>
             
-              <a href="/specs/dynamic-view/discovery/hyperty-discovery/" class="doc-link" role="link">  Data Sync Resume for Observers </a>
+              <a href="/specs/dynamic-view/discovery/hyperty-discovery/" class="doc-link" role="link">  Discovery process </a>
             
           </li>
         
@@ -1638,37 +1638,29 @@
   <div class="main col-sm-9">
     <section>
       <div class="">
-        <p>The Data Object synchronisation transparently works on top of the Decentralized Messaging Framework.</p>
+        <p>Data Objects handled by Hyperties are synchronised by using the Reporter - Observer Peer-to-Peer data synchronisation communication pattern. Such mechanism is provided by two main components in the Hyperty Runtime:</p>
 
-<p>The Data Object synchronisation is provided by two components in the Runtime:</p>
-
-<p>The <a href="https://github.com/reTHINK-project/dev-service-framework/blob/master/src/syncher/Syncher.js">Syncher</a> is a singleton Component co-located with the Service Instance, which is in charge of handling all required procedures to manage data synchronisation at the Service instance side, as a Reporter or a Observer service.</p>
+<p>The <a href="https://github.com/reTHINK-project/dev-service-framework/blob/master/src/syncher/Syncher.js">Syncher</a> is a singleton Component co-located with the Service Instance, which is in charge of handling all required procedures to manage data synchronisation at the Hyperty instance side, as a Reporter or a Observer service. The Syncher is included in the Hyperty deployable package that is published in the Catalogue.</p>
 
 <p>The <a href="https://github.com/reTHINK-project/dev-runtime-core/blob/master/src/syncher/SyncherManager.js">Runtime Sync Manager</a> is a Core Runtime Component, which is in charge of handling authorisation requests to create Sync Data Objects from Reporters and subscription requests to Sync Data Objects from Observers. As soon as authorisation is granted the Sync Manager handles all required MessageBUS listeners in order to setup the Data Sync Stream routing path among Reporters and Observers. I.e., the Runtime Sync Manager provides a Messaging Framework Routing Manager functionality.</p>
 
-<p>The <a href="https://github.com/reTHINK-project/dev-service-framework/blob/master/src/syncher/Syncher.js">Message Node Sync Manager</a> is a Message Node functionality, which is in charge of handling requests from Runtime Sync Managers in order to setup the Data Sync Stream routing path between the Reporter Runtime and Observers Runtimes. I.e., the Message Node Sync Manager also provides a <a href="/specs/dynamic-view/data-sync/readme/">Messaging Framework</a> Routing Manager functionality..</p>
+<p>When the data synchronisation stream is not established with P2P Connections, the Message Node Subscription Manager functionality is used, to handle requests from Runtime Sync Managers in order to setup the Data Sync Stream routing path between the Reporter Runtime and Observers Runtimes.</p>
 
-<p><img src="../img/howto-data-sync/sync-routing-management.png" alt="Routing Management for Hyperty Data Syncronisation" /></p>
+<p><img src="../../../img/howto-data-sync/sync-routing-management.png" alt="Routing Management for Hyperty Data Syncronisation" /></p>
 
-<p>A detailed description of the Data Synchronisation procedures are provided at:</p>
+<p>The Hyperty Data Object synchronisation mechanism is provided according to the following main procedures:</p>
 
-<h3 id="create-hyperty-data-object"><a href="/specs/dynamic-view/data-sync/data-object-creation/">Create Hyperty Data Object</a></h3>
+<p>To <strong>create a new Data Object</strong>, the Reporter Hyperty uses the Syncher to request the Runtime Sync Manager to authorise it. If authorised, the Sync Manager asks the Address Allocation component to get a new Data Object Address and asks the Runtime Registry to register the new Data Object instance in the Domain Registry in order to be discoverable (optional). The required routing paths to receive requests to subscribe, unsubscribe and read the Data Object, are also setup by adding the appropriate listeners in the Message Bus and by asking the Message Node Subscription Manager functionality to setup these routing paths at domain level. If all these procedures are successfuly performed, the Sync Manager answers the Syncher data object creation request with a 200 Ok response including in the body the new allocated Data Object Address. Optionaly, the Hyperty Reporter may invite other Hyperties to be observers or to announce the creation of the new Data Object. The full detailed description of the Data Object Creation process is provided <a href="/specs/dynamic-view/data-sync/data-object-creation/">here</a>.</p>
 
-<h3 id="subscribe-hyperty-data-object-and-receive-updates"><a href="/specs/dynamic-view/data-sync/data-object-subscription/">Subscribe Hyperty Data Object and receive Updates</a></h3>
+<p>To <strong>be an Observer of a Data Object</strong> an Hyperty uses its Syncher to subscribe it and the subscription request is forwarded to local Sync Manager Core component. At this point, the Subscription process is handled between the Observer Sync Manager and the Reporter Sync Manager. First, the observer Sync Manager adds the required listeners to the Message Bus to ensure all the routing paths are established to handle the Data Synchronisation (for data object changes and data object delete). In case P2P Connection are not used this process also requires to ask the Message Node of the Reporter domain to establish these routing paths. Then, the Subscription request is sent to Reporter Sync Manager, which verifies if there is any pre-authorisation set by the Reporter, if not, the subscription is forwarded to Reporter Hyperty Syncher. If the subscription request is authorised, the Sync Manager establishes the required routing path from the Reporter side, in order to complete the full data synchronisation stream establishment between the two Hyperty Runtimes. If the Subscription process is successful, a response is sent back to the new observer, containing in the body the most updated version of the Data Object. At this point, any change performed by the Reporter in the Data Object, is immediately propagated till the new Observer throught the data synchronisation stream. The full detailed description of the Data Object Subscription process is provided <a href="/specs/dynamic-view/data-sync/data-object-subscription/">here</a>.</p>
 
-<h3 id="unsubscribe-hyperty-data-object"><a href="/specs/dynamic-view/data-sync/data-object-unsubscription/">Unsubscribe Hyperty Data Object</a></h3>
+<p>Anytime, the <strong>Observer role is ended</strong> by using the Syncher to unsubscribe it. Again, unsubscription process is performed between the Observer Sync Manager and the Reporter Sync Manager. During this process, the data synchronisation stream is ended by removing the listeners added in the subscription process from the messaging framework and the Reporter is notified about the unsubscription. The full detailed description of the Data Object Subscription process is provided <a href="/specs/dynamic-view/data-sync/data-object-unsubscription/">here</a>. To be noted that the Reporter also has the power to stop the data synchronisation for a certain Observer as fully described <a href="/specs/dynamic-view/data-sync/observer-unsubscribed-by-reporter/">here</a>.</p>
 
-<h3 id="delete-hyperty-data-object"><a href="/specs/dynamic-view/data-sync/data-object-delete/">Delete Hyperty Data Object</a></h3>
+<p>The <strong>Data Object can be deleted</strong> by the Hyperty Reporter which is handled by its Sync Manager by removing all listeners added to the Messaging Framework during the Data Object Creation process. Then, all observers are notified by the Data Object deletion. On receiving the Data Object delete event, Observers should perform unsubscribe process to remove all listener added during the subscription process. The full detailed description of the Data Object Delete process is provided <a href="/specs/dynamic-view/data-sync/data-object-delete/">here</a>.</p>
 
-<h3 id="management-of-hyperty-data-object-child"><a href="/specs/dynamic-view/data-sync/data-object-child/">Management of Hyperty Data Object Child</a></h3>
+<p>A <strong>Data Object Child</strong> belongs to a Data Object Parent resource and can be created by any Observer of the Data Object Parent as well as by its Reporter. The Reporter - Observer rules still applies to Data Object Child ie there is only one Reporter that can update the Data Object Child, which can be an Observer of the Data Object Parent, as mentioned earlier. In order to support Data Object Childs, a Data Object Synchronisation stream has to be established for each children with address <code class="highlighter-rouge">&lt;DataObjectURL&gt;/children/&lt;nameOfChildren&gt;</code> during the creation and the subscription of Parent Data Object. Such stream will be used to publish among all involved Hyperties (observers and reporter), the creation, update and delete of Data Object Childs. To be noted that the name of the children must defined in the Data Object Schema. The full detailed description on how to manage a Data Object Child is provided <a href="/specs/dynamic-view/data-sync/data-object-child/">here</a>.</p>
 
-<h3 id="data-sync-observers-resume"><a href="/specs/dynamic-view/data-sync/observers-data-object-resume/">Data Sync Observers Resume</a></h3>
-
-<h3 id="data-sync-reporters-resume"><a href="/specs/dynamic-view/data-sync/reporters-data-object-resume/">Data Sync Reporters Resume</a></h3>
-
-<h3 id="hyperty-data-object-reporter-delegation"><a href="/specs/dynamic-view/data-sync/data-object-reporter-delegation/">Hyperty Data Object Reporter delegation</a></h3>
-
-<p><em>not implemented yet</em></p>
+<p>The <strong>Synchronisation of Data Objects can be Resumed between different runtime sessions</strong> e.g. when the browser is closed and opened again. Such resume will be automatically performed everytime the Syncher is instantiated in order to resume the sync of data objects created in previous sessions for the same Hyperty ie the HypertyURL is maintained along the different sessions. In addition, objects can also be resumed and reused from different sessions by explicitely asking the syncher to resume data synchronization that matches a certain criteria e.g. for all objects compliant with a certain data schema that were associated with the UserURL that is currently associated with the Hyperty instance. Data synchronisation resume is optional and has to be set during the Data Object creation and subscription process. It implies that Data Object Metadata is stored locally by the Data Object Storage Runtime Core Component. The resume of the Data Synchronisation is fully described from the Reporter side <a href="/specs/dynamic-view/data-sync/reporters-data-object-resume/">here</a> and from the Observer side <a href="/specs/dynamic-view/data-sync/observers-data-object-resume/">here</a>.</p>
 
       </div>
     </section>

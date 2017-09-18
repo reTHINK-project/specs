@@ -522,7 +522,7 @@
             
               <li>
                 
-                  <a href="/specs/specs/dynamic-view/discovery/hyperty-discovery/" class="doc-link" role="link">  Data Sync Resume for Observers </a>
+                  <a href="/specs/specs/dynamic-view/discovery/hyperty-discovery/" class="doc-link" role="link">  Discovery process </a>
                 
               </li>
             
@@ -1285,7 +1285,7 @@
         
           <li>
             
-              <a href="/specs/dynamic-view/discovery/hyperty-discovery/" class="doc-link" role="link">  Data Sync Resume for Observers </a>
+              <a href="/specs/dynamic-view/discovery/hyperty-discovery/" class="doc-link" role="link">  Discovery process </a>
             
           </li>
         
@@ -1642,11 +1642,11 @@
 
 <p>The heart of reTHINK framework is the Hyperty Core Runtime that is platform agnostic and currently implemented in Javascript, with specific extensions for Browser Runtime and NodeJS Servers. The main Runtime Core Components providing the basic mechanisms are:</p>
 
-<p>– RuntimeUA: handles the life-cycle of deployable components ie it deploys Hyperties, Protostubs and IdP Proxies in the most appropriate sandboxes.</p>
+<p>– RuntimeUA: handles the life-cycle of deployable components ie it deploys Hyperties, Protostubs and IdP Proxies in the most appropriate sandboxes. During the Hyperty deployment process the RuntimeUA asks the Identity Module to provide an authenticated Identity to be associated with the new Hyperty Instance. More information <a href="../identity-managemenet/readme.md">here</a>.</p>
 
-<p>– Runtime Registry: it handles the registration of Hyperties at the Domain Registry, when requested by the RuntimeUA during the deployment process. The Runtime Registry is also responsible to resolve the best Protostub to be used to deliver a message outside the Hyperty Runtime, when requested by the Message BUS. In case no Protostub is available it will trigger the Deployment of a new Protostub that will be handled by the RuntimeUA.</p>
+<p>– Runtime Registry: it handles the registration of Hyperties at the Domain Registry, when requested by the RuntimeUA during the deployment process. The Runtime Registry is also responsible to resolve the best Protostub to be used to deliver a message outside the Hyperty Runtime, when requested by the Message BUS. In case no Protostub is not available it will trigger the Deployment of a new Protostub that will be handled by the RuntimeUA.</p>
 
-<p>– Message BUS: handles the delivery of messages inside the Runtime. When no listener is registered for a certain target address (header <code class="highlighter-rouge">to</code> o the message), it requests the <code class="highlighter-rouge">Registry.resolve()</code> to provide the address of the Protostub that will deliver the message outside the Hyperty Runtime. Before a message is delivered, the Message Bus asks the Policy Engine to authorize it.</p>
+<p>– Message BUS: handles the delivery of messages inside the Runtime. When no listener is registered for a certain target address (header <code class="highlighter-rouge">to</code> of the message), it requests the <code class="highlighter-rouge">Registry.resolve()</code> to provide the address of the Protostub that will deliver the message outside the Hyperty Runtime. Before a message is delivered, the Message Bus asks the Policy Engine to authorize it.</p>
 
 <p>The first time the user is using the reTHINK framework in the device, the Hyperty Runtime is downloaded from the catalogue and instantiated. The runtime is cached locally and only loaded again for new versions.
 The deployment of the Runtime is fully detailed <a href="/specs/dynamic-view/basics/deploy-runtime/">here</a>.</p>

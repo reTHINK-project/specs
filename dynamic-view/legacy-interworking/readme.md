@@ -5,6 +5,14 @@ category: How it Works - Legacy Interworking
 order: 3
 ---
 
+reTHINK framework provides a mechanism to interact with legacy services by using InterWorking protostub - the "_IWStub_".
+
+From the Identity Management perspective, probably the Hyperty will need to be associated to two identities. The Identity Module will handle the authentication against the Identity Provider of the Legacy domain. After a successful authentication normally a token will be provided. This token has to be used from the Protostub to authenticate itself during the registration/login process to the legacy domain. Depending on the Legacy Domain this process may be different, however it should be compatible with the most scenarios.
+
+Once the Identity Module has finished the authentication process, the Hyperty is ready to instruct the Protostub to register into the legacy domain and start the exchange of messages in order to give service to the application using the Hyperty.
+
+The Hyperty will be able to interact with the legacy domain sending messages to the Protostub as it is done for a regular Message Node. The same way the Hyperty will be able to receive messages from it. The messages received by the Protostub from the legacy domain will also be translated into reTHINK messages (which are described  [here](../messages/legacy-interworking-messages.md)).
+
 The main data flows to support the deployment of protocol stubs required to connect the Hyperty Runtime to a Legacy domain, is presented in the figure below and described in this section.
 
 ![Figure @runtime-deploy-protostub: Deploy Protocol Stub](deploy-iwstub.png)
