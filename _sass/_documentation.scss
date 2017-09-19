@@ -1,10 +1,44 @@
 @import "_sidebar";
 
-.sidebar {
 
-  .category {
+.navbar-nav {
+
+  @media (max-width: 768px) {
+    height: calc(100vh - 102px);
+    overflow-y: scroll;
+  }
+
+  .sidebar {
+
+    .category {
+      color: $blue1;
+    }
+
+    ul {
+      margin-bottom: 25px;
+    }
+
+    .doc-link {
+
+      color: $white;
+      margin: 0 0 0 10px;
+      padding: 0 5px;
+      display: block;
+
+      &:hover,
+      &:active,
+      &.active {
+        color: $black;
+        background: $gray;
+      }
+
+    }
 
   }
+
+}
+
+.sidebar {
 
   ul {
     margin-bottom: 25px;

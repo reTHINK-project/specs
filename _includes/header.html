@@ -21,19 +21,15 @@
           <!-- Collect the nav links, forms, and other content for toggling -->
           <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             {% if page_paths %}
-              <ul class="nav navbar-nav navbar-right">
-                {% for path in page_paths %}
-                  {% assign my_page = site.pages | where: "path", path | first %}
-                  {% if my_page.title %}
-                  <li><a class="page-link" href="{{ my_page.url | relative_url }}">{{ my_page.title | escape }}</a></li>
-                  {% endif %}
-                {% endfor %}
-              </ul>
-              <div class="visible-xs-block">
+              <div class="">
                 <ul class="nav navbar-nav navbar-right">
                   <li>
                     <a class="page-link" href="{{site.ur}}/specs/">Documentation</a>
-                    {% include menu.html %}
+                    <div id="navbar" class="sidebar col-sm-3 col-md-2 hidden-sm hidden-md hidden-lg">
+                      <div class="doc-nav" role="navigation" aria-label="Documentation navigation">
+                        {% include menu.html %}
+                      </div>
+                    </div>
                   </li>
                   <li><a class="page-link" href="{{site.ur}}/dev-hyperty" target="_blank">Hyperties</a></li>
                   <li><a class="page-link" href="https://github.com/reTHINK-project/dev-hyperty-toolkit" target="_blank">GitHub</a></li>
