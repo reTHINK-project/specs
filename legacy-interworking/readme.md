@@ -6,12 +6,11 @@ category: legacy-interworking
 
 Interworking with Legacy Services
 ------------------
-## Interworking with Legacy Services
 
-###Introduction
+### Introduction
 reTHINK framework provides a mechanism to interact with legacy networks. This allows. for example. to setup calls with an IMS system from a Hyperty running in a browser, or exchanging Slack messages from a Hyperty. These scenarios are realized through the implementation of an InterWorking protostub - the "_IWStub_" - which will interact with the legacy service. Since protostubs also have to be created to interact with different Message Nodes, it does not add any relevant changes to reTHINK architecture. It may be also necessary to associate the Hyperty to more than one Identity, at least one identity used by the application which uses the Hyperty and also an identity valid for the Legacy domain. Both identities could be the same, however this would not be a common case.
 
-###Applications
+### Applications
 Integration with existing services is a critical requirement in order to make possible a soft migration from the existing services to reTHINK framework by making reTHINK application inter-operable with potentially any service.
 
 One example is to integrate reTHINK with existing telephony networks. Being able to make and receive calls, and to use other advanced services provided by operator's IMS platform allows to open the operator services in a flexible and secure way to all the devices and platforms where reTHINK runtime can be executed.
@@ -19,17 +18,19 @@ One example is to integrate reTHINK with existing telephony networks. Being able
 The same is applicable to other popular services such as Facebook, Slack, Salesforce and any other social network or messaging system which expose public APIs. For example, this inter-working mechanism will allow to build an application which can receive calls from IMS in the public Identity of the user (normally an e.164 number) and also to send and receive Slack messages in the same web interface. These features can be combined with any reTHINK-based service.
 
 
-###Interworking strategy proposal
+### Interworking strategy proposal
 
-####Who provides the IWstub?
+### Who provides the IWstub?
+
 The IWStub must be provided by the legacy domain and it must make reTHINK interoperable with the API or GW deployed in the legacy service to expose service to third parties. For example, in the case of IMS the IWstub must implement the protocol needed to interact with gateway element which translates web-based signaling protocol and WebRTC media profile in SIP and media profiles compatible with IMS.
 
 Ideally the IWstub should also be downloaded from a back-end service of the Legacy Domain. If the Legacy Domain does not allow to download it, then it could be loaded from the default domain.
 
-####Protocol implemented by the protostub
+#### Protocol implemented by the protostub
 IF the runtime is being executed in a browser runtime, it must be taken into consideration that only HTTP or Websocket based protocols can be used (those are the only protocols that a browser can use without adding any additional plug-in). If the runtime is being executed in a Node.js runtime (or in any other runtime that can be created in the future) this limitation may not exist.  
 
-####High level diagram
+### High level diagram
+
 The diagram below shows a high level architecture of the integration of reTHINK with an external service.
 
 ![Legacy domain interworking diagram](rethink-Legacy-Integration-approach2.png)
@@ -40,7 +41,7 @@ Once the Identity Module has finished the authentication process, the Hyperty is
 
 The Hyperty will be able to interact with the legacy domain sending messages to the Protostub as it is done for a regular Message Node. The same way the Hyperty will be able to receive messages from it. The messages received by the Protostub from the legacy domain will also be translated into reTHINK messages (which are described  [here](../messages/legacy-interworking-messages.md)).
 
-###Technical implementation
+### Technical implementation
 
 
 The diagram below shows the deployment process of an IWstub.
@@ -56,7 +57,7 @@ A complete description of the diagram has been included [here](../dynamic-view/l
 
 
 
-###IWstub implementation
+### IWstub implementation
 The data model of the Protostub which has been used from it conception in reTHINK, has been adapted to be compatible with the IWstub so in terms of data model it is like any other protostub.
 
 The main difference respect to a regular protostub is that the IWprotostub is associated to an identity. Further details are descibed in the [interworking stub development guide](developemlegacy-interworking/interworking-stubs-development.md).
@@ -68,13 +69,13 @@ Several attributes were included to accomodate the same data model to the IWstub
 
 A complete list of attributes can be consulted [here.](https://github.com/reTHINK-project/specs/tree/master/datamodel/core/hyperty-catalogue).
 
-###Token based authentication techniques
+### Token based authentication techniques
 Many Internet-based services expose APIs to be accessed from third-party services. Many of these APIs use token-based mechanisms to authenticate the request coming from authorized users.
 
 The emergence of WebRTC support by most important browser vendors motivated 3GPP to defined token-based strategies to access the IMS network from Web applications. This will allow to use potentially any web browser with WebRTc support to behave as a user Equipment which has been restricted to native SIP clients. In the case of IMS, the authentication provider enabled by the operator (which can be the operator itself) provides a registration token after a correct login. This token based authentication has been designed to open IMS services to Web browser. reTHINK will leverage this token-based authentication feature by using a Interworking IDP Proxy separated from the IWStub.  
 
 
-###IMS interworking
+### IMS interworking
 3GPP has released a [draft specification 24.371](https://portal.3gpp.org/desktopmodules/Specifications/SpecificationDetails.aspx?specificationId=1087) to define WebRTC access to IMS systems. The proposed legacy interconnection scheme for reTHINK is compliant with this specification and it will be shown in T.6.3.
 
 The diagram below shows the interconnection diagram which is very similar to the generic one previously shown. The IMS gateway will perform a validation of the token obtained from the Identity provider and it will be passed to the gateway element of the IMS network in order to validate the token and register the identity associated to the reTHINK hyperty in the IMS network through the IMS protostub (which is an example of IWstub).

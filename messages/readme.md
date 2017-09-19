@@ -5,9 +5,9 @@ category: Messages Specification
 order: 1
 ---
 
-*TODO: provide overview*
+Hyperties and all other reTHINK Framework components, communicate each other through messages according to [reTHINK Resource Oriented Message Model](../../datamodel/core/message/readme/).
 
-All Messages specified below, are compliant with [reTHINK Resource Oriented Message Model](../../datamodel/core/message/readme/).
+The full detailed Specification of messages used in the different procedures are defined at:
 
 ## [Address Allocation Messages](address-allocation-messages.md)
 
