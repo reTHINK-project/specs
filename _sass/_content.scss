@@ -1,0 +1,17 @@
+.main-documentation {
+
+  margin-left: 260px;
+  padding: 0 20px;
+  float: left;
+
+  h1 {
+    color: $blue1;
+    font-weight: bold;
+  }
+
+  @media (max-width: 768px) {
+    width: 100%;
+    margin-left: 0;
+  }
+
+}

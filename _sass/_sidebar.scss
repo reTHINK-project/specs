@@ -1,10 +1,17 @@
 .sidebar {
 
-  height: calc(100vh - 102px);
   overflow-y: scroll;
   padding-bottom: 20px;
+  position: fixed;
+  width: 260px;
+  padding: 0 20px;
+  top: 102px;
+  bottom: 0;
+  left: 0;
 
   @media (max-width: 768px) {
+    position: static;
+    width: auto;
     height: auto;
     overflow: hidden;
   }
