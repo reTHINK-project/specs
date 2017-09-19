@@ -43,9 +43,7 @@ If you choose a default apache2 server, for each sub-domain you need to use a co
 
 https free trusted certificates can be obtained on [let's encrypt](https://letsencrypt.org/).  
 
-
-
-
+You need to have DNS configured for your host domain and for three sub-domains: `catalogue`, `registry` and `msg-node`.
 
 ## Installation process
 
@@ -66,7 +64,7 @@ Here is a view of the interfaces:
 
 <pre class="line-numbers">
   <code class="language-yml">
-    <VirtualHost *:80>
+    <VirtualHost *:443>
           ServerName csp.rethink.com
            DocumentRoot /var/www/html/
     </VirtualHost>
@@ -77,7 +75,7 @@ Activate your domain:
 
 <pre>
   <code class="language-shell">
-sudo a2ensite csp.rethink.com`
+sudo a2ensite 000-default`
   </code>
 </pre>
 
@@ -93,7 +91,7 @@ sudo /etc/init.d/apache2 restart
 
 <pre class="line-numbers">
   <code class="language-yml">
-<VirtualHost *:80>
+<VirtualHost *:443>
      ServerName 'registry.csp.rethink.com'
      ProxyPass / http://172.20.0.4:4567/
      ProxyPassReverse / http://172.20.0.4:4567/
@@ -104,7 +102,7 @@ sudo /etc/init.d/apache2 restart
 Activate the sub-domain and restart it:
 
 ```
-sudo a2ensite registry.csp.rethink.com
+sudo a2ensite registry
 sudo /etc/init.d/apache2 restart
 ```
 
@@ -117,7 +115,7 @@ The urls of the domain users  are encoded to be able to be sent to the domain re
 
 <pre class="line-numbers">
   <code class="language-yml">
-<VirtualHost *:80>
+<VirtualHost *:443>
      ServerName 'msg-node.csp.rethink.com'
      ProxyPass / http://172.20.0.2:9090/
      ProxyPassReverse / http://172.20.0.2:9090/
@@ -129,7 +127,7 @@ Activate the sub-domain and restart it:
 
 <pre class="line-numbers">
   <code class="language-shell">
-sudo a2ensite msg-node.csp.rethink.com
+sudo a2ensite msg-node
 sudo /etc/init.d/apache2 restart
  </code>
 </pre>
@@ -140,7 +138,7 @@ To test if installation is OK, open https://msg-node.csp.rethink.com/live to giv
 
 <pre class="line-numbers">
   <code class="language-yml">
-<VirtualHost *:80>
+<VirtualHost *:443>
      ServerName 'catalogue.csp.rethink.com'
      ProxyPass / http://172.20.0.8:5683/
      ProxyPassReverse / http://172.20.0.8:5683/
@@ -152,7 +150,7 @@ Activate the sub-domain and restart it:
 
 <pre class="line-numbers">
   <code class="language-shell">
-sudo a2ensite catalogue.csp.rethink.com
+sudo a2ensite catalogue
 sudo /etc/init.d/apache2 restart
  </code>
 </pre>
@@ -163,7 +161,7 @@ To test if installation is OK, open https://catalogue.csp.rethink.com/ gives a v
 
 <pre class="line-numbers">
   <code class="language-yml">
-<VirtualHost *:80>
+<VirtualHost *:443>
      ServerName 'demos.csp.rethink.com'
      ProxyPass / http://172.20.0.10/
      ProxyPassReverse / http://172.20.0.10/
@@ -175,7 +173,7 @@ Activate the sub-domain and restart it:
 
 <pre class="line-numbers">
   <code class="language-yml">
-sudo a2ensite demos.csp.rethink.com
+sudo a2ensite demos
 sudo /etc/init.d/apache2 restart
  </code>
 </pre>
