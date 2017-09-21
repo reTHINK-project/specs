@@ -49,6 +49,7 @@ header {
           color: $menu_color_hover;
         }
 
+        &:focus,
         &:active {
           color: $menu_color_hover;
           text-decoration: underline;
