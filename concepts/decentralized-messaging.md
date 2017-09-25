@@ -10,7 +10,7 @@ order: 3
 Decentralised Communications are built on top of a Resource Oriented Messaging model that supports  publish/subscribe as well as request/response messaging patterns.
 Messages are used to perform CRUD (Create, Read, Update, Delete) operations on resources handled by communication endpoints, for example to create or update a WebRTC connection.
 
-![Decentralized Messaging](../../img/concepts/decentralized-messaging.jpg)
+![Decentralized Messaging](../../img/concepts/decentralized-messaging.png)
 
 The Message delivery is based on a network of routers where each router only knows adjacent registered routers or end-points.
 The routers forward messages to all registered listeners, which can be other routers or the final recipient end-point. Listeners are programmatically registered and unregistered by Routing Management functionalities, which take their decisions according to a higher level view of the Routing Network.
