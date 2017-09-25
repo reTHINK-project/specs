@@ -51,6 +51,12 @@ p {
   font-size: 1.125rem; /* 18/16 */
   line-height: 28px;
 }
+
+iframe {
+  max-width: 640px;
+  width: 100%;
+}
+
 ul {
   padding: 0;
   margin: 0;

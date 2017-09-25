@@ -61,3 +61,44 @@
   }
 
 }
+
+.main-documentation {
+
+  footer {
+    display: none;
+    padding-top: 20px;
+    border-top: 1px solid;
+    margin-top: 20px;
+    background: none;
+
+    .container {
+      width: auto;
+      padding: 0;
+    }
+
+    .subscribe {
+      margin: 0;
+      width: 100%;
+
+      h2 {
+        margin: 0;
+        padding: 0;
+      }
+    }
+
+    .social-media-list {
+      margin-top: 0;
+      margin-bottom: 10px;
+    }
+
+    .footer-menu p {
+      color: $black;
+      font-size: 0.875rem /* 14/16 */
+    }
+
+    .footer-footer {
+      float: left;
+    }
+  }
+
+}

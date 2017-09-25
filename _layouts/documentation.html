@@ -2,31 +2,32 @@
 layout: default
 ---
 
+
 <div>
-  <div id="navbar" class="sidebar col-sm-3 col-md-2 hidden-xs">
+  <!-- <section id="global-header">
+    <div class="col-sm-12">
+      <div class="block">
+        <h1>{{ page.title | escape }}</h1>
+        <p>{{ page.subtitle | escape }}</p>
+      </div>
+    </div>
+  </section> -->
+
+  <div id="navbar" class="sidebar hidden-xs">
     <div class="doc-nav" role="navigation" aria-label="Documentation navigation">
       {% include menu.html %}
     </div>
   </div>
 
-  <div class="main col-sm-9 col-md-10">
+  <div class="main-documentation">
 
-    <div class="row">
-      <section id="global-header">
-          <div class="col-sm-12">
-            <div class="block">
-              <h1>{{ page.title | escape }}</h1>
-              <p>{{ page.subtitle | escape }}</p>
-            </div>
-          </div>
-      </section>
-    </div>
-
+    <h1>{{ page.title | escape }}</h1>
     <section>
-      <div class="">
-        {{ content }}
-      </div>
+      {{ content }}
     </section>
+
+    {% include footer.html %}
+
   </div>
 
   {% include doc-scroll.html %}
