@@ -1,12 +1,12 @@
 ---
 layout: documentation
-title: reTHINK Framework Specification
+title: reTHINK Framework Documentation
 ---
 
 <p></p>
 <p></p>
 
-You'll find here the full detailed specification of reTHINK Framework
+You'll find here all the technical documentation of reTHINK Framework including detailed specifications.
 
 The reTHINK Framework provides the tools to build a global decentralised network of [Hyperlinked Entities (hyperties)](concepts/hyperty.md) that are [executed at the edge](../specs/runtime/readme/) and [trustfully](concepts/decentralized-trust.md) communicates through a [Decentralised Messaging Framework](concepts/decentralized-messaging).
 
