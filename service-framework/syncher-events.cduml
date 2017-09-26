@@ -9,7 +9,7 @@ interface Event {
 
 interface CreateEvent {
   from: HypertyURL
-  value: JSON
+  value: SyncDataObject.SyncMetadta
   schema?: SchemaURL
   ack(type): void
 }
