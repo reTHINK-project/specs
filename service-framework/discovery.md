@@ -10,7 +10,7 @@ order: 3
 
 Hyperty discovery is performed through the Runtime Core Discovery component which is used to query about Hyperty instances and Data Objects according to different criteria including UserId, supported Scheme, Hyperty Resources and name.
 
-The discovery results are returned as a DiscoveryObject that provides event handlers for registration status changes (`onLive` and `onDisconnected`).
+The discovery results are returned as a DiscoveredObject that provides event handlers for registration status changes (`onLive` and `onDisconnected`).
 
 
 The detailed description of how discovery works is provided [here](../dynamic-view/discovery/hyperty-discovery.md).
@@ -47,7 +47,7 @@ This is the main class that allows Hyperties to discover other Hyperties or Data
 
 This function allows to discover Hyperty instances running for a certain user in a specific Domain.
 
-`discoverHypertiesDO(user: string, scheme: string, resources: [string], domain?: string): Promise [<DiscoveryObject>]`
+`discoverHypertiesDO(user: string, scheme: string, resources: [string], domain?: string): Promise [<DiscoveredObject>]`
 
 **user:** the identitier of the user eg email
 
@@ -57,19 +57,19 @@ This function allows to discover Hyperty instances running for a certain user in
 
 **domain (optional):** the domain name where the hyperty to be discovered is registered.
 
-**return:** Promise to an Array of DiscoveryObject.
+**return:** Promise to an Array of DiscoveredObject.
 
 ### discover Hyperty Per URL
 
 This function allows to discover a specific Hyperty instance given its Hyperty URL.
 
-`discoverHypertyPerURLDO(url: HypertyURL, domain?: string): Promise <DiscoveryObject>`
+`discoverHypertyPerURLDO(url: HypertyURL, domain?: string): Promise <DiscoveredObject>`
 
 **url:** Hyperty URL to be discovered
 
 **domain (optional):** the domain name where the hyperty to be discovered is registered.
 
-**return:** Promise to a DiscoveryObject.
+**return:** Promise to a DiscoveredObject.
 
 ## Data Objects Discovery
 
@@ -77,7 +77,7 @@ This function allows to discover a specific Hyperty instance given its Hyperty U
 
 This function allows to discover Data Object instances running for a certain user in a specific Domain.
 
-`discoverDataObjectsDO(user: string, scheme: string, resources: [string], domain?: string): Promise [<DiscoveryObject>]`
+`discoverDataObjectsDO(user: string, scheme: string, resources: [string], domain?: string): Promise [<DiscoveredObject>]`
 
 **user:** the identitier of the user eg email
 
@@ -87,25 +87,25 @@ This function allows to discover Data Object instances running for a certain use
 
 **domain (optional):** the domain name where the Data Object to be discovered is registered.
 
-**return:** Promise to an Array of DiscoveryObject.
+**return:** Promise to an Array of DiscoveredObject.
 
 ### discover Data Object Per URL
 
 This function allows to discover a specific Data Object instance given its URL.
 
-`discoverDataObjectPerURLDO(url: URL, domain?: string): Promise <DiscoveryObject>`
+`discoverDataObjectPerURLDO(url: URL, domain?: string): Promise <DiscoveredObject>`
 
 **url:** Data Object URL to be discovered
 
 **domain (optional):** the domain name where the Data Object to be discovered is registered.
 
-**return:** Promise to a DiscoveryObject.
+**return:** Promise to a DiscoveredObject.
 
 ### discover Data Object Per Name
 
 This function allows to discover Data Object instances given its name in a specific Domain.
 
-`discoverDataObjectsPerNameDO(name: string, scheme: string, resources: [string], domain?: string): Promise [<DiscoveryObject>]`
+`discoverDataObjectsPerNameDO(name: string, scheme: string, resources: [string], domain?: string): Promise [<DiscoveredObject>]`
 
 **name:** the name of the Data Object to be discovered
 
@@ -115,13 +115,13 @@ This function allows to discover Data Object instances given its name in a speci
 
 **domain (optional):** the domain name where the Data Object to be discovered is registered.
 
-**return:** Promise to an Array of DiscoveryObject.
+**return:** Promise to an Array of DiscoveredObject.
 
 ### discover Data Object Per Reporter
 
 This function allows to discover Data Object instances given its Reporter Hyperty URL, in a specific Domain.
 
-`discoverDataObjectsPerReporterDO(reporter: HypertyURL, scheme: string, resources: [string], domain?: string): Promise [<DiscoveryObject>]`
+`discoverDataObjectsPerReporterDO(reporter: HypertyURL, scheme: string, resources: [string], domain?: string): Promise [<DiscoveredObject>]`
 
 **reporter:** the Reporter Hyperty URL of the Data Object to be discovered
 
@@ -131,13 +131,13 @@ This function allows to discover Data Object instances given its Reporter Hypert
 
 **domain (optional):** the domain name where the Data Object to be discovered is registered.
 
-**return:** Promise to an Array of DiscoveryObject.
+**return:** Promise to an Array of DiscoveredObject.
 
 ## Discoveries Resume
 
-This function allows to retrieve all DiscoveryObjects created in past sessions with active notifications for registration status (see below the DiscoveryObject doc for more info)
+This function allows to retrieve all DiscoveredObjects created in past sessions with active notifications for registration status (see below the DiscoveredObject doc for more info)
 
-`resumeDiscoveries(): Promise [<DiscoveryObject>]`
+`resumeDiscoveries(): Promise [<DiscoveredObject>]`
 
 **reporter:** the Reporter Hyperty URL of the Data Object to be discovered
 
@@ -147,7 +147,72 @@ This function allows to retrieve all DiscoveryObjects created in past sessions w
 
 **domain (optional):** the domain name where the Data Object to be discovered is registered.
 
-**return:** Promise to an Array of DiscoveryObject.
+**return:** Promise to an Array of DiscoveredObject.
 
+# DiscoveredObject Interface
 
- *to be completed*
+This is the class implemented by the Objects returned by the Discovery functions described above. It contains all data retrieved from the Registry as well as functions to enable and disable notifications about the registration status of the DiscoveredObject.
+
+## Properties
+
+**data:** contains all data retrieved from the Registry as defined by the [Registry Data Model](../datamodel/core/hyperty-registry/readme.md)
+
+## constructor
+
+`constructor(data: RegistryDataObject, runtimeURL: RuntimeURL, discoveryURL: HypertyURL, msgBus: MiniBus)`
+
+**data:** contains all data retrieved from the Registry as defined by the [Registry Data Model](../datamodel/core/hyperty-registry/readme.md)
+
+**discoveryURL:** the URL of the Hyperty that is using the discovery library.
+
+**runtimeURL:** the Runtime URL where the Hyperty is executing
+
+**msgBus:** MiniBus interface to send and receive message, using postMessage and addListener
+
+## Subscribe to be notified when DiscoveredObject is `live`
+
+This function allows to subscribe for notifications about when the DiscoveredObject registration status is changed to `live`, i.e. when such notification is received it means the Hyperty instance or the Data Object instance associated with this DiscoveredObject is running again.
+
+`onLive(subscriber: HypertyURL, callback: function() ): Promise`
+
+**subscriber:** the URL of the Hyperty subscribing for this notification
+
+**callback:** callback function to receive the notification.
+
+**return:** Promise with void.
+
+## Subscribe to be notified when DiscoveredObject is `disconnected`
+
+This function allows to subscribe for notifications about when the DiscoveredObject registration status is changed to `disconnected`, i.e. when such notification is received it means the Hyperty instance or the Data Object instance associated with this DiscoveredObject is not running anymore.
+
+`onDisconnected(subscriber: HypertyURL, callback: function() ): Promise`
+
+**subscriber:** the URL of the Hyperty subscribing for this notification
+
+**callback:** callback function to receive the notification.
+
+**return:** Promise with void.
+
+## Unsubscribe for `live` registration status notifications
+
+This function allows to unsubscribe for notifications about when the DiscoveredObject registration status is changed to `live`, i.e. Hyperty stops receiving notifications about when the Hyperty instance or the Data Object instance associated with this DiscoveredObject is running again.
+
+`unsubscribeLive(subscriber: HypertyURL ): Promise`
+
+**subscriber:** the URL of the Hyperty that is unsubscribing for this notification
+
+**callback:** callback function to receive the notification.
+
+**return:** Promise with void.
+
+## Unsubscribe for `disconnected` registration status notifications
+
+This function allows to unsubscribe for notifications about when the DiscoveredObject registration status is changed to `disconnected`, i.e. Hyperty stops receiving notifications about when the Hyperty instance or the Data Object instance associated with this DiscoveredObject is not running anymore.
+
+`unsubscribeDisconnected(subscriber: HypertyURL ): Promise`
+
+**subscriber:** the URL of the Hyperty that is unsubscribing for this notification
+
+**callback:** callback function to receive the notification.
+
+**return:** Promise with void.
