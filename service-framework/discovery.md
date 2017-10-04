@@ -6,7 +6,7 @@ order: 3
 ---
 
 
-*[source code](https://github.com/reTHINK-project/dev-service-framework/blob/master/src/message-factory/MessageFactory.js)*
+*[source code](https://github.com/reTHINK-project/dev-service-framework/tree/master/src/discovery)*
 
 Hyperty discovery is performed through the Runtime Core Discovery component which is used to query about Hyperty instances and Data Objects according to different criteria including UserId, supported Scheme, Hyperty Resources and name.
 
@@ -23,23 +23,23 @@ This is the main class that allows Hyperties to discover other Hyperties or Data
 
 ## Properties
 
-* messageBus: MiniBus interface to send and receive message, using postMessage and addListener
+**messageBus:** MiniBus interface to send and receive message, using postMessage and addListener
 
-* runtimeURL: the Runtime URL
+**runtimeURL:** the Runtime URL
 
-* domain: the runtime domain
+**domain:** the runtime domain
 
-* discoveryURL: the URL of the Hyperty that is using this discovery library. It will be used to set the `from` header field of discovery message requests.
+**discoveryURL:** the URL of the Hyperty that is using this discovery library. It will be used to set the `from` header field of discovery message requests.
 
 ## constructor
 
 `constructor(hypertyURL: HypertyURL, runtimeURL: RuntimeURL, msgBus: MiniBus)`
 
-* hypertyURL: the URL of the Hyperty that is using the discovery library.
+**hypertyURL:** the URL of the Hyperty that is using the discovery library.
 
-* runtimeURL: the Runtime URL where the Hyperty is executing
+**runtimeURL:** the Runtime URL where the Hyperty is executing
 
-* msgBus: MiniBus interface to send and receive message, using postMessage and addListener
+**msgBus:** MiniBus interface to send and receive message, using postMessage and addListener
 
 ## Hyperties Discovery
 
