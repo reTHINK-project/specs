@@ -47,11 +47,11 @@ This is the main class that allows Hyperties to discover other Hyperties or Data
 
 This function allows to discover Hyperty instances running for a certain user in a specific Domain.
 
-`discoverHypertiesDO(user: string, scheme: string, resources: [string], domain?: string): Promise [<DiscoveredObject>]`
+`discoverHypertiesDO(user: string, scheme: [string], resources: [string], domain?: string): Promise [<DiscoveredObject>]`
 
 **user:** the identitier of the user eg email
 
-**scheme:** the Data Object URL scheme supported by the Hyperty to be discovered including `connection` for webrtc connections, `comm` for chat and file sharing, and `context` for user context including User Availability (presence).
+**scheme:** list of types of Data Object URL scheme supported by the Hyperty to be discovered including `connection` for webrtc connections, `comm` for chat and file sharing, and `context` for user context including User Availability (presence).
 
 **resources:** list of types of Hyperty Resources supported by the Hyperty to be discovered including `chat`, `file`, `audio` and / or `video`
 
@@ -93,7 +93,7 @@ This function allows to discover a specific Hyperty instance given its Hyperty U
   // Example
   discovery.discoverHypertyPerURLDO("hyperty://example.com/486ee3b3-002c-4d2d-a9e8-e2f7f9db58ac", "example.com").then(function(discoveredObject) {
    let hyperties = discoveredObject.data; 
-   console.log("Discovered Hyperties: ", hyperties);
+   console.log("Discovered Hyperty: ", hyperties);
   }
   </code>
 </pre>
@@ -104,17 +104,32 @@ This function allows to discover a specific Hyperty instance given its Hyperty U
 
 This function allows to discover Data Object instances running for a certain user in a specific Domain.
 
-`discoverDataObjectsDO(user: string, scheme: string, resources: [string], domain?: string): Promise [<DiscoveredObject>]`
+`discoverDataObjectsDO(user: string, scheme: [string], resources: [string], domain?: string): Promise [<DiscoveredObject>]`
 
 **user:** the identitier of the user eg email
 
-**scheme:** the Data Object URL scheme used by the Data Object to be discovered including `connection` for webrtc connections, `comm` for chat and file sharing, and `context` for user context including User Availability (presence).
+**scheme:** list of types of Data Object URL scheme used by the Data Object to be discovered including `connection` for webrtc connections, `comm` for chat and file sharing, and `context` for user context including User Availability (presence).
 
 **resources:** list of types of Hyperty Resources supported by the Data Object to be discovered including `chat`, `file`, `audio` and / or `video`
 
 **domain (optional):** the domain name where the Data Object to be discovered is registered.
 
 **return:** Promise to an Array of DiscoveredObject.
+
+**How to use it**
+
+<pre class="line-numbers">
+  <code class="language-javascript">
+  // Example
+  discovery.discoverDataObjectsDO("user://google.com/xpto@gmail.com", ["comm"], ["chat"], "example.com").then(function(discoveredObjects) {
+   let dataObjects; 
+   discoveredObjects.map(function(object) {
+    dataObjects.push(object.data);
+   }
+   console.log("Discovered Data Objects: ", dataObjects);
+  }
+  </code>
+</pre>
 
 ### discover Data Object Per URL
 
@@ -128,37 +143,79 @@ This function allows to discover a specific Data Object instance given its URL.
 
 **return:** Promise to a DiscoveredObject.
 
+**How to use it**
+
+<pre class="line-numbers">
+  <code class="language-javascript">
+  // Example
+  discovery.discoverDataObjectPerURLDO("comm://example.com/38d63a5b-99ce-4e1b-bf4e-4f5ec1d27e76", "example.com").then(function(discoveredObject) {
+   let dataObject = discoveredObject.data; 
+   console.log("Discovered Data Object: ", dataObject);
+  }
+  </code>
+</pre>
+
 ### discover Data Object Per Name
 
 This function allows to discover Data Object instances given its name in a specific Domain.
 
-`discoverDataObjectsPerNameDO(name: string, scheme: string, resources: [string], domain?: string): Promise [<DiscoveredObject>]`
+`discoverDataObjectsPerNameDO(name: string, scheme: [string], resources: [string], domain?: string): Promise [<DiscoveredObject>]`
 
 **name:** the name of the Data Object to be discovered
 
-**scheme:** the Data Object URL scheme used by the Data Object to be discovered including `connection` for webrtc connections, `comm` for chat and file sharing, and `context` for user context including User Availability (presence).
+**scheme:** list of types of Data Object URL scheme used by the Data Object to be discovered including `connection` for webrtc connections, `comm` for chat and file sharing, and `context` for user context including User Availability (presence).
 
 **resources:** list of types of Hyperty Resources supported by the Data Object to be discovered including `chat`, `file`, `audio` and / or `video`
 
 **domain (optional):** the domain name where the Data Object to be discovered is registered.
 
 **return:** Promise to an Array of DiscoveredObject.
+
+**How to use it**
+
+<pre class="line-numbers">
+  <code class="language-javascript">
+  // Example
+  discovery.discoverDataObjectsPerNameDO("example", ["comm"], ["chat"], "example.com").then(function(discoveredObjects) {
+   let dataObject; 
+   discoveredObjects.map(function(object) {
+    dataObjects.push(object.data);
+   }
+   console.log("Discovered Data Objects: ", dataObjects);
+  }
+  </code>
+</pre>
 
 ### discover Data Object Per Reporter
 
 This function allows to discover Data Object instances given its Reporter Hyperty URL, in a specific Domain.
 
-`discoverDataObjectsPerReporterDO(reporter: HypertyURL, scheme: string, resources: [string], domain?: string): Promise [<DiscoveredObject>]`
+`discoverDataObjectsPerReporterDO(reporter: HypertyURL, scheme: [string], resources: [string], domain?: string): Promise [<DiscoveredObject>]`
 
 **reporter:** the Reporter Hyperty URL of the Data Object to be discovered
 
-**scheme:** the Data Object URL scheme used by the Data Object to be discovered including `connection` for webrtc connections, `comm` for chat and file sharing, and `context` for user context including User Availability (presence).
+**scheme:** list of types of Data Object URL scheme used by the Data Object to be discovered including `connection` for webrtc connections, `comm` for chat and file sharing, and `context` for user context including User Availability (presence).
 
 **resources:** list of types of Hyperty Resources supported by the Data Object to be discovered including `chat`, `file`, `audio` and / or `video`
 
 **domain (optional):** the domain name where the Data Object to be discovered is registered.
 
 **return:** Promise to an Array of DiscoveredObject.
+
+**How to use it**
+
+<pre class="line-numbers">
+  <code class="language-javascript">
+  // Example
+  discovery.discoverDataObjectsPerReporterDO("hyperty://example.com/486ee3b3-002c-4d2d-a9e8-e2f7f9db58ac", ["comm"], ["chat"], "example.com").then(function(discoveredObjects) {
+   let dataObject; 
+   discoveredObjects.map(function(object) {
+    dataObjects.push(object.data);
+   }
+   console.log("Discovered Data Objects: ", dataObjects);
+  }
+  </code>
+</pre>
 
 ## Discoveries Resume
 
