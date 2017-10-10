@@ -68,7 +68,7 @@ This function allows to discover Hyperty instances running for a certain user in
    let hyperties; 
    discoveredObjects.map(function(object) {
     hyperties.push(object.data);
-   }
+   });
    console.log("Discovered Hyperties: ", hyperties);
   }
   </code>
@@ -125,7 +125,7 @@ This function allows to discover Data Object instances running for a certain use
    let dataObjects; 
    discoveredObjects.map(function(object) {
     dataObjects.push(object.data);
-   }
+   });
    console.log("Discovered Data Objects: ", dataObjects);
   }
   </code>
@@ -180,7 +180,7 @@ This function allows to discover Data Object instances given its name in a speci
    let dataObjects; 
    discoveredObjects.map(function(object) {
     dataObjects.push(object.data);
-   }
+   });
    console.log("Discovered Data Objects: ", dataObjects);
   }
   </code>
@@ -211,7 +211,7 @@ This function allows to discover Data Object instances given its Reporter Hypert
    let dataObjects; 
    discoveredObjects.map(function(object) {
     dataObjects.push(object.data);
-   }
+   });
    console.log("Discovered Data Objects: ", dataObjects);
   }
   </code>
@@ -234,7 +234,7 @@ This function allows to retrieve all DiscoveredObjects created in past sessions 
    let objects; 
    discoveredObjects.map(function(object) {
     objects.push(object.data);
-   }
+   });
    console.log("Discovered Objects (Hyperties or Data Objects): ", objects);
   }
   </code>
@@ -280,7 +280,7 @@ This function allows to subscribe for notifications about when the DiscoveredObj
   discovery.discoverHypertyPerURLDO("hyperty://example.com/486ee3b3-002c-4d2d-a9e8-e2f7f9db58ac", "example.com").then(function(discoveredObject) {
    discoveredObject.onLive(_this._myUrl,()=>{
     console.log("[Notification] disconnected Hyperty is back to live: ", discoveredObject.data);
-   }
+   });
   }
   </code>
 </pre>
@@ -305,7 +305,7 @@ This function allows to subscribe for notifications about when the DiscoveredObj
   discovery.discoverHypertyPerURLDO("hyperty://example.com/486ee3b3-002c-4d2d-a9e8-e2f7f9db58ac", "example.com").then(function(discoveredObject) {
    discoveredObject.onDisconnected(_this._myUrl,()=>{
     console.log("[Notification] Hyperty was disconnected: ", discoveredObject.data);
-   }
+   });
   }
   </code>
 </pre>
@@ -332,7 +332,7 @@ This function allows to unsubscribe for notifications about when the DiscoveredO
     console.log("[Notification] disconnected Hyperty is back to live: ", discoveredObject.data);
     // unsubscribe function
     discoveredObject.unsubscribeLive(_this._url);
-   }
+   });
   }
   </code>
 </pre>
@@ -359,7 +359,7 @@ This function allows to unsubscribe for notifications about when the DiscoveredO
     console.log("[Notification] Hyperty was disconnected: ", discoveredObject.data);
     // unsubscribe function
     discoveredObject.unsubscribeDisconnected(_this._url);
-   }
+   });
   }
   </code>
 </pre>
