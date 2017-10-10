@@ -92,8 +92,8 @@ This function allows to discover a specific Hyperty instance given its Hyperty U
   <code class="language-javascript">
   // Example
   discovery.discoverHypertyPerURLDO("hyperty://example.com/486ee3b3-002c-4d2d-a9e8-e2f7f9db58ac", "example.com").then(function(discoveredObject) {
-   let hyperties = discoveredObject.data; 
-   console.log("Discovered Hyperty: ", hyperties);
+   let hyperty = discoveredObject.data; 
+   console.log("Discovered Hyperty: ", hyperty);
   }
   </code>
 </pre>
