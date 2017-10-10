@@ -177,7 +177,7 @@ This function allows to discover Data Object instances given its name in a speci
   <code class="language-javascript">
   // Example
   discovery.discoverDataObjectsPerNameDO("example", ["comm"], ["chat"], "example.com").then(function(discoveredObjects) {
-   let dataObject; 
+   let dataObjects; 
    discoveredObjects.map(function(object) {
     dataObjects.push(object.data);
    }
