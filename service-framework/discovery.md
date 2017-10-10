@@ -208,7 +208,7 @@ This function allows to discover Data Object instances given its Reporter Hypert
   <code class="language-javascript">
   // Example
   discovery.discoverDataObjectsPerReporterDO("hyperty://example.com/486ee3b3-002c-4d2d-a9e8-e2f7f9db58ac", ["comm"], ["chat"], "example.com").then(function(discoveredObjects) {
-   let dataObject; 
+   let dataObjects; 
    discoveredObjects.map(function(object) {
     dataObjects.push(object.data);
    }
