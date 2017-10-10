@@ -63,11 +63,13 @@ This function allows to discover Hyperty instances running for a certain user in
 
 <pre class="line-numbers">
   <code class="language-javascript">
-  discovery.discoverHypertiesDO(user, schema, resources, domain).then(function(discoveredObjects) {
+  // Example
+  discovery.discoverHypertiesDO("user://google.com/xpto@gmail.com", ["comm"], ["chat"], "example.com").then(function(discoveredObjects) {
    let hyperties; 
    discoveredObjects.map(function(object) {
     hyperties.push(object.data);
    }
+   console.log("Discovered Hyperties: ", hyperties);
   }
   </code>
 </pre>
