@@ -63,7 +63,7 @@ This function allows to discover Hyperty instances running for a certain user in
 
 <pre class="line-numbers">
   <code class="language-javascript">
-  // Example
+  // Example: user wants to discover the Hyperties of the user with the email xpto@gmail.com and related with chat scheme
   discovery.discoverHypertiesDO("user://google.com/xpto@gmail.com", ["comm"], ["chat"], "example.com").then(function(discoveredObjects) {
    let hyperties; 
    discoveredObjects.map(function(object) {
@@ -90,7 +90,7 @@ This function allows to discover a specific Hyperty instance given its Hyperty U
 
 <pre class="line-numbers">
   <code class="language-javascript">
-  // Example
+  // Example: user wants to discover the Hyperty with a specific URL
   discovery.discoverHypertyPerURLDO("hyperty://example.com/486ee3b3-002c-4d2d-a9e8-e2f7f9db58ac", "example.com").then(function(discoveredObject) {
    let hyperty = discoveredObject.data; 
    console.log("Discovered Hyperty: ", hyperty);
@@ -120,7 +120,7 @@ This function allows to discover Data Object instances running for a certain use
 
 <pre class="line-numbers">
   <code class="language-javascript">
-  // Example
+  // Example: user wants to discover the Data Objects with Reporter Hyperties associated with the user email xpto@gmail.com and related with the chat scheme
   discovery.discoverDataObjectsDO("user://google.com/xpto@gmail.com", ["comm"], ["chat"], "example.com").then(function(discoveredObjects) {
    let dataObjects; 
    discoveredObjects.map(function(object) {
@@ -147,7 +147,7 @@ This function allows to discover a specific Data Object instance given its URL.
 
 <pre class="line-numbers">
   <code class="language-javascript">
-  // Example
+  // Example: user wants to discover the Data Object with a specific URL
   discovery.discoverDataObjectPerURLDO("comm://example.com/38d63a5b-99ce-4e1b-bf4e-4f5ec1d27e76", "example.com").then(function(discoveredObject) {
    let dataObject = discoveredObject.data; 
    console.log("Discovered Data Object: ", dataObject);
@@ -175,7 +175,7 @@ This function allows to discover Data Object instances given its name in a speci
 
 <pre class="line-numbers">
   <code class="language-javascript">
-  // Example
+  // Example: user wants to discover the Data Objects with a specific name and related with chat scheme
   discovery.discoverDataObjectsPerNameDO("example", ["comm"], ["chat"], "example.com").then(function(discoveredObjects) {
    let dataObjects; 
    discoveredObjects.map(function(object) {
@@ -206,7 +206,7 @@ This function allows to discover Data Object instances given its Reporter Hypert
 
 <pre class="line-numbers">
   <code class="language-javascript">
-  // Example
+  // Example: user wants to discover the Data Objects with Reporter Hyperties with a specific URL and related with the chat scheme
   discovery.discoverDataObjectsPerReporterDO("hyperty://example.com/486ee3b3-002c-4d2d-a9e8-e2f7f9db58ac", ["comm"], ["chat"], "example.com").then(function(discoveredObjects) {
    let dataObjects; 
    discoveredObjects.map(function(object) {
@@ -229,7 +229,7 @@ This function allows to retrieve all DiscoveredObjects created in past sessions 
 
 <pre class="line-numbers">
   <code class="language-javascript">
-  // Example
+  // Example: user wants to resume his previous discoveries from the subscriptions made
   discovery.resumeDiscoveries().then(function(discoveredObjects) {
    let objects; 
    discoveredObjects.map(function(object) {
@@ -276,7 +276,7 @@ This function allows to subscribe for notifications about when the DiscoveredObj
 
 <pre class="line-numbers">
   <code class="language-javascript">
-  // Example using the discoverHypertyPerURLDO function
+  // Example: user uses the discoverHypertyPerURLDO function to discover the Hyperty with a specific URL and then subscribe to receive the onLive events
   discovery.discoverHypertyPerURLDO("hyperty://example.com/486ee3b3-002c-4d2d-a9e8-e2f7f9db58ac", "example.com").then(function(discoveredObject) {
    discoveredObject.onLive(_this._myUrl,()=>{
     console.log("[Notification] disconnected Hyperty is back to live: ", discoveredObject.data);
@@ -301,7 +301,7 @@ This function allows to subscribe for notifications about when the DiscoveredObj
 
 <pre class="line-numbers">
   <code class="language-javascript">
-  // Example using the discoverHypertyPerURLDO function
+    // Example: user uses the discoverHypertyPerURLDO function to discover the Hyperty with a specific URL and then subscribe to receive the onDisconnected events
   discovery.discoverHypertyPerURLDO("hyperty://example.com/486ee3b3-002c-4d2d-a9e8-e2f7f9db58ac", "example.com").then(function(discoveredObject) {
    discoveredObject.onDisconnected(_this._myUrl,()=>{
     console.log("[Notification] Hyperty was disconnected: ", discoveredObject.data);
@@ -326,7 +326,7 @@ This function allows to unsubscribe for notifications about when the DiscoveredO
 
 <pre class="line-numbers">
   <code class="language-javascript">
-  // Example using the discoverHypertyPerURLDO function
+    // Example: user uses the discoverHypertyPerURLDO function to discover the Hyperty with a specific URL and to subscribe to receive the onLive events. After receiving the notification, the subscription is canceled
   discovery.discoverHypertyPerURLDO("hyperty://example.com/486ee3b3-002c-4d2d-a9e8-e2f7f9db58ac", "example.com").then(function(discoveredObject) {
    discoveredObject.onLive(_this._myUrl,()=>{
     console.log("[Notification] disconnected Hyperty is back to live: ", discoveredObject.data);
@@ -353,7 +353,7 @@ This function allows to unsubscribe for notifications about when the DiscoveredO
 
 <pre class="line-numbers">
   <code class="language-javascript">
-  // Example using the discoverHypertyPerURLDO function
+  // Example: user uses the discoverHypertyPerURLDO function to discover the Hyperty with a specific URL and to subscribe to receive the onDisconnected events. After receiving the notification, the subscription is canceled
   discovery.discoverHypertyPerURLDO("hyperty://example.com/486ee3b3-002c-4d2d-a9e8-e2f7f9db58ac", "example.com").then(function(discoveredObject) {
    discoveredObject.onDisconnected(_this._myUrl,()=>{
     console.log("[Notification] Hyperty was disconnected: ", discoveredObject.data);
