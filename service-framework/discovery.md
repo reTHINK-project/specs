@@ -223,15 +223,22 @@ This function allows to retrieve all DiscoveredObjects created in past sessions 
 
 `resumeDiscoveries(): Promise [<DiscoveredObject>]`
 
-**reporter:** the Reporter Hyperty URL of the Data Object to be discovered
-
-**scheme:** the Data Object URL scheme used by the Data Object to be discovered including `connection` for webrtc connections, `comm` for chat and file sharing, and `context` for user context including User Availability (presence).
-
-**resources:** list of types of Hyperty Resources supported by the Data Object to be discovered including `chat`, `file`, `audio` and / or `video`
-
-**domain (optional):** the domain name where the Data Object to be discovered is registered.
-
 **return:** Promise to an Array of DiscoveredObject.
+
+**How to use it**
+
+<pre class="line-numbers">
+  <code class="language-javascript">
+  // Example
+  discovery.resumeDiscoveries().then(function(discoveredObjects) {
+   let objects; 
+   discoveredObjects.map(function(object) {
+    objects.push(object.data);
+   }
+   console.log("Discovered Objects (Hyperties or Data Objects): ", objects);
+  }
+  </code>
+</pre>
 
 # DiscoveredObject Interface
 
@@ -265,6 +272,19 @@ This function allows to subscribe for notifications about when the DiscoveredObj
 
 **return:** Promise with void.
 
+**How to use it**
+
+<pre class="line-numbers">
+  <code class="language-javascript">
+  // Example using the discoverHypertyPerURLDO function
+  discovery.discoverHypertyPerURLDO("hyperty://example.com/486ee3b3-002c-4d2d-a9e8-e2f7f9db58ac", "example.com").then(function(discoveredObject) {
+   discoveredObject.onLive(_this._myUrl,()=>{
+    console.log("[Notification] disconnected Hyperty is back to live: ", discoveredObject.data);
+   }
+  }
+  </code>
+</pre>
+
 ## Subscribe to be notified when DiscoveredObject is `disconnected`
 
 This function allows to subscribe for notifications about when the DiscoveredObject registration status is changed to `disconnected`, i.e. when such notification is received it means the Hyperty instance or the Data Object instance associated with this DiscoveredObject is not running anymore.
@@ -276,6 +296,19 @@ This function allows to subscribe for notifications about when the DiscoveredObj
 **callback:** callback function to receive the notification.
 
 **return:** Promise with void.
+
+**How to use it**
+
+<pre class="line-numbers">
+  <code class="language-javascript">
+  // Example using the discoverHypertyPerURLDO function
+  discovery.discoverHypertyPerURLDO("hyperty://example.com/486ee3b3-002c-4d2d-a9e8-e2f7f9db58ac", "example.com").then(function(discoveredObject) {
+   discoveredObject.onDisconnected(_this._myUrl,()=>{
+    console.log("[Notification] Hyperty was disconnected: ", discoveredObject.data);
+   }
+  }
+  </code>
+</pre>
 
 ## Unsubscribe for `live` registration status notifications
 
@@ -289,6 +322,21 @@ This function allows to unsubscribe for notifications about when the DiscoveredO
 
 **return:** Promise with void.
 
+**How to use it**
+
+<pre class="line-numbers">
+  <code class="language-javascript">
+  // Example using the discoverHypertyPerURLDO function
+  discovery.discoverHypertyPerURLDO("hyperty://example.com/486ee3b3-002c-4d2d-a9e8-e2f7f9db58ac", "example.com").then(function(discoveredObject) {
+   discoveredObject.onLive(_this._myUrl,()=>{
+    console.log("[Notification] disconnected Hyperty is back to live: ", discoveredObject.data);
+    // unsubscribe function
+    discoveredObject.unsubscribeLive(_this._url);
+   }
+  }
+  </code>
+</pre>
+
 ## Unsubscribe for `disconnected` registration status notifications
 
 This function allows to unsubscribe for notifications about when the DiscoveredObject registration status is changed to `disconnected`, i.e. Hyperty stops receiving notifications about when the Hyperty instance or the Data Object instance associated with this DiscoveredObject is not running anymore.
@@ -300,3 +348,19 @@ This function allows to unsubscribe for notifications about when the DiscoveredO
 **callback:** callback function to receive the notification.
 
 **return:** Promise with void.
+
+**How to use it**
+
+<pre class="line-numbers">
+  <code class="language-javascript">
+  // Example using the discoverHypertyPerURLDO function
+  discovery.discoverHypertyPerURLDO("hyperty://example.com/486ee3b3-002c-4d2d-a9e8-e2f7f9db58ac", "example.com").then(function(discoveredObject) {
+   discoveredObject.onDisconnected(_this._myUrl,()=>{
+    console.log("[Notification] Hyperty was disconnected: ", discoveredObject.data);
+    // unsubscribe function
+    discoveredObject.unsubscribeDisconnected(_this._url);
+   }
+  }
+  </code>
+</pre>
+
