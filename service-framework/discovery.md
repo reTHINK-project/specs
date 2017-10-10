@@ -59,6 +59,19 @@ This function allows to discover Hyperty instances running for a certain user in
 
 **return:** Promise to an Array of DiscoveredObject.
 
+#### How to use it
+
+<pre class="line-numbers">
+  <code class="language-javascript">
+  discovery.discoverHypertiesDO(user, schema, resources, domain).then(function(discoveredObjects) {
+   let hyperties; 
+   discoveredObjects.map(function(object) {
+    hyperties.push(object.data);
+   }
+  }
+  </code>
+</pre>
+
 ### discover Hyperty Per URL
 
 This function allows to discover a specific Hyperty instance given its Hyperty URL.
