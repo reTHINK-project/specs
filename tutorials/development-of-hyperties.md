@@ -7,6 +7,16 @@ order: 2
 
 <h1></h1>
 
+*TODO1: Improve this explanation. dataObject configuration could be better explained as well. Add one or more additional Hyperties development. Use more schemas and examples using them.*
+
+*TODO2: Add guidelines on what to develop according to type of problem to be addressed: App, Hyperty, Protostub or Idp Proxy. Example of questions to be addressed:
+- what is the logic that is supposed to be part of the hyperty or the application?
+- should I use one reporter per user (and each has a set of observers for all reporters) or should one user have one reporter and the other observers while communication through dataChilds?
+
+Give use cases and explain how to address and what concepts to explore.*
+
+*TODO3: create issues asking for help to improve documentation*
+
 Here you may find the basic steps any developer needs to undertake to develop Hyperties. The source code of the Hello World Hyperty used as example, can be found [here](https://github.com/reTHINK-project/dev-hyperty/tree/master/src/hello-world):
 
 1- Clone the [Hyperty Toolkit Repo](https://github.com/reTHINK-project/dev-hyperty-toolkit/blob/master/README.md), the [Hyperty Repo](https://github.com/reTHINK-project/dev-hyperty) and follow the Hyperty Toolkit Installation Guideline.
