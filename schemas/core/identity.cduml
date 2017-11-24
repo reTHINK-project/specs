@@ -9,18 +9,18 @@ package Identity <<Rect>> {
 		PHYSICAL_OBJECT
 	}
 
-	class Identity {
+	class Identities {
 		guid : URL.UserUUIDURL
-		identifiers : URL.UserURL
+	}
+
+	class Identity {
+		identifiers : URL.UserURL[]
+		assertion : JWT
+		refresh : JWT?
+		idp : string
 	}
 
 	Identity -up- UserHypertyAccount.UserHypertyAccount
-
-	class AuthenticationData {
-	}
-
-	class AuthorisationData {
-	}
 
 	class IdAssertion {
 		assertion : string
@@ -57,25 +57,10 @@ package Identity <<Rect>> {
 		context : URL.ContextURL
 	}
 
-	note top : compliant with OIDC standard claims?
+	note top : compliant with OIDC standard claims
 
-	class JWT {
-	}
-
-	note bottom : JSON Web Token
-
-	class IDToken {
-	}
-
-	class AccessToken {
-	}
-
-	IDToken ..|> JWT
-	AccessToken ..|> JWT
-
-	Identity ..> IdentityType
-	Identity *.. "1..*" AuthenticationData
-	Identity *.. "0..*" AuthorisationData
+	Identities ..> IdentityType
+	Identities *.. "1..*" Identity
 	Identity *.. "1..*" UserProfile
 	Identity *.. "0..*" ServiceAddress
 	Identity *.. "0..*" IdAssertion
@@ -83,8 +68,6 @@ package Identity <<Rect>> {
 
 	IdAssertion ..> IdValidation : validated by
 
-	AuthenticationData *.. "1..*" IDToken
-	AuthorisationData *.. "1..*" AccessToken
 }
 
 @enduml
