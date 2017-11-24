@@ -51,10 +51,26 @@ package Identity <<Rect>> {
 	}
 
 	class UserProfile {
-		username : string
-		cn : string
-		avatar : URL.URL
-		context : URL.ContextURL
+		sub : string // (subject) Identifier for the End-User at the Issuer
+		name : string // End-User's full name in displayable form
+		given_name : string
+		family_name : string
+		middle_name : string
+		nickname : string
+		preferred_username : string
+		profile : URL.URL // URL of the End-User's profile page.
+		picture : URL.URL
+		website : URL.URL
+		email : string
+		email_verified : boolean
+		gender : string
+		birthdate : string
+		zoneinfo : string
+		locale : string
+		phone_number : string
+		address : object
+		updated_at : int
+		phone_number_verified	: boolean
 	}
 
 	note top : compliant with OIDC standard claims
