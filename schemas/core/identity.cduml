@@ -15,28 +15,27 @@ package Identity <<Rect>> {
 
 	class Identity {
 		identifiers : URL.UserURL[]
-		assertion : JWT
+		assertion : IdAssertion
+		accessTokens : AccessTokens[]
+		refreshAssertion : JWT?
+	}
+
+	class AccessToken {
+		resources : HypertyResourceType[]
+		schemes : string[]
+		accessToken : JWT
 		refresh : JWT?
-		idp : string
 	}
 
 	Identity -up- UserHypertyAccount.UserHypertyAccount
 
 	class IdAssertion {
-		assertion : string
-		idp : URL.URL
-		scope : string
+		assertion : JWT
+		idp : {domain, protocol}
+		userProfile : UserProfile
 	}
 
 	note top : compliant with WebRTC\n RTCIdentityAssertionResult
-
-	class IdValidation {
-		// identifier?
-		identity : string
-		contents : string
-	}
-
-	note top : compliant with WebRTC\n RTCIdentityValidationResult
 
 	class ServiceType {
 		E164_TELEPHONY
@@ -77,12 +76,12 @@ package Identity <<Rect>> {
 
 	Identities ..> IdentityType
 	Identities *.. "1..*" Identity
-	Identity *.. "1..*" UserProfile
+	IdAssertion *.. "1..*" UserProfile
+	Identity *.. "1..*" AccessToken
 	Identity *.. "0..*" ServiceAddress
 	Identity *.. "0..*" IdAssertion
 	ServiceAddress ..> ServiceType
 
-	IdAssertion ..> IdValidation : validated by
 
 }
 
