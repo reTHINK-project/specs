@@ -11,13 +11,14 @@ package Identity <<Rect>> {
 
 	class Identities {
 		guid : URL.UserUUIDURL
+		currentIdentity: Identity
+		defaultIdentity: Identity
 	}
 
 	class Identity {
 		identifiers : URL.UserURL[]
 		assertion : IdAssertion
 		accessTokens : AccessTokens[]
-		refreshAssertion : JWT?
 	}
 
 	class AccessToken {
@@ -25,6 +26,7 @@ package Identity <<Rect>> {
 		schemes : string[]
 		accessToken : JWT
 		refresh : JWT?
+		expires: integer
 	}
 
 	Identity -up- UserHypertyAccount.UserHypertyAccount
@@ -33,6 +35,8 @@ package Identity <<Rect>> {
 		assertion : JWT
 		idp : {domain, protocol}
 		userProfile : UserProfile
+		refresh: JWT?
+		expires: integer
 	}
 
 	note top : compliant with WebRTC\n RTCIdentityAssertionResult
@@ -50,6 +54,7 @@ package Identity <<Rect>> {
 	}
 
 	class UserProfile {
+		UserURL : URL.UserURL
 		sub : string // (subject) Identifier for the End-User at the Issuer
 		name : string // End-User's full name in displayable form
 		given_name : string
