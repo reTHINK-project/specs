@@ -13,29 +13,25 @@ package Identity <<Rect>> {
 		guid : URL.UserUUIDURL
 		currentIdentity: Identity
 		defaultIdentity: Identity
-	}
-
-	class Identity {
-		identifiers : URL.UserURL[]
-		assertion : IdAssertion
-		accessTokens : AccessTokens[]
+		identities: Identity[]
+		accessTokens : AccessToken[]
 	}
 
 	class AccessToken {
 		resources : HypertyResourceType[]
 		schemes : string[]
-		accessToken : JWT
-		refresh : JWT?
+		accessToken : string
+		refresh : string
 		expires: integer
 	}
 
 	Identity -up- UserHypertyAccount.UserHypertyAccount
 
-	class IdAssertion {
+	class Identity {
 		assertion : JWT
 		idp : {domain, protocol}
 		userProfile : UserProfile
-		refresh: JWT?
+		refresh: string
 		expires: integer
 	}
 
@@ -81,10 +77,9 @@ package Identity <<Rect>> {
 
 	Identities ..> IdentityType
 	Identities *.. "1..*" Identity
-	IdAssertion *.. "1..*" UserProfile
-	Identity *.. "1..*" AccessToken
+	Identity *.. "1..*" UserProfile
+	Identities *.. "1..*" AccessToken
 	Identity *.. "0..*" ServiceAddress
-	Identity *.. "0..*" IdAssertion
 	ServiceAddress ..> ServiceType
 
 
