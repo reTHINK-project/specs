@@ -7,7 +7,6 @@ order: 6
 
 This doc specifies Messages to be used to manage identities, where,
 
-- `<contents-value>` is a string containing the user's public key
 - `<origin-value>` is a string comtaining the idp domain name
 - `<usernameHint-value>` is a string with the user identifier
 - `<assertion-value>` is a string compliant with [JWT](../datamodel/core/user-identity/) class
