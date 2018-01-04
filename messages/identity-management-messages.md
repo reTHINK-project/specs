@@ -7,22 +7,25 @@ order: 6
 
 This doc specifies Messages to be used to manage identities, where,
 
-
--	`<contents-value>` is a JSON object compliant with ...
--	`<origin-value>` is a JSON object compliant with ...
--	`<usernameHint-value>` is a JSON object compliant with ...
--	`<assertion-value>` is a JSON object compliant with ...
-- `<identity-values>` is a JSON object compliant with ...
-- `<identity-value>` is a JSON object compliant with ...
-- `<idp-values>` is a JSON object compliant with ...
-- `<email-value>` is a JSON object compliant with ...
-- `<idp-domain>` is a JSON object compliant with ...
+- `<contents-value>` is a string containing the user's public key
+- `<origin-value>` is a string comtaining the idp domain name
+- `<usernameHint-value>` is a string with the user identifier
+- `<assertion-value>` is a string compliant with [JWT](../datamodel/core/user-identity/) class
+- `<identities-values>` is a JSON object compliant with [Identities](../datamodel/core/user-identity/) class
+- `<identity-values>` is a JSON object compliant with [Identity](../datamodel/core/user-identity/) class
+- `<idp-values>` is a JSON object compliant with [Idp](../datamodel/core/user-identity/) class
+- `<userURL>` is a string compliant with [User URL](../datamodel/core/address/readme.md#user-url-type)
+- `<idp-domain>` is a string with the idp domain name
 - `<publicKey-value>` is a string containing the user's public key
-- `<urlreceived-value>` is a JSON object compliant with ...
+- `<loginEndPoint>` is a string with the url to be used to open the login window popup
+- `<AccessTokenAuthorisationEndPoint>` is a string with the url to be used to open the Authorisation window popup to get the Access Token
+- `<external-service-domain>`is a string with the domain name of the external service to be used with the Access Token
+- `<access-token-value>` is a string with the Access Token
 
-### Identity Module -> Identity GUI
 
-####   show Identity GUI
+## Identity Module -> Identity GUI
+
+###   show Identity GUI
 
 Message sent by the Identity Module to Identity GUI to show the Identity GUI.
 
@@ -35,9 +38,9 @@ Message sent by the Identity Module to Identity GUI to show the Identity GUI.
 "body" : { "method" : "show" }
 ```
 
-### Identity GUI -> Identity Provider (Idp Proxy)
+## Identity GUI -> Identity Provider (Idp Proxy)
 
-####   get Login Endpoint
+###   get Login Endpoint
 
 Message sent by the Identity GUI to Identity Management (IDP Proxy) to retrieve the Loging endpoint.
 
@@ -49,7 +52,7 @@ Message sent by the Identity GUI to Identity Management (IDP Proxy) to retrieve 
 "body" : { "method" : "getLoginEndpoint" }
 ```
 
-response Message sent back from the Identity Management (IDP Proxy).
+Response Message sent back from the Identity Management (IDP Proxy).
 
 ```
 "id" : 1
@@ -60,7 +63,7 @@ response Message sent back from the Identity Management (IDP Proxy).
 ```
 
 
-#### generate Assertion
+### generate Assertion
 
 Message sent by the Identity GUI function to Identity Management (IDP Proxy) to generate an Identity Assertion.
 
@@ -83,7 +86,7 @@ Response Message sent back from the Identity Management (IDP Proxy).
 ```
 
 
-#### validate Assertion
+### validate Assertion
 
 Message sent by the Identity Module function to Identity Management (IDP Proxy) to validate an Identity Assertion.
 
@@ -102,10 +105,10 @@ Response Message sent back from the Identity Management (IDP Proxy).
 "type" : "response",
 "from" : "domain-idp://<idp-domain>",
 "to" : "hyperty-runtime://<runtime-domain>/<runtime-instance-identifier>/idm",
-"body" : { "code": 200, "value" : "<boolean?>" }
+"body" : { "code": 200, "value" : "<identity>" }
 ```
 
-####   get Access Token Authorisation Endpoint
+###   get Access Token Authorisation Endpoint
 
 Message sent by the Identity GUI to Identity Management (IDP Proxy) to retrieve the Access Token Authorisation Endpoint.
 
@@ -127,7 +130,7 @@ Response Message sent back from the Identity Management (IDP Proxy).
 "body" : { "code": 200, "value" : "<AccessTokenAuthorisationEndPoint>" }
 ```
 
-#### get Access Token
+### get Access Token
 
 Message sent by the Identity GUI function to Identity Management (IDP Proxy) to get an Access Token for a set of Hyperty Resources.
 
@@ -149,9 +152,9 @@ Response Message sent back from the Identity Management (IDP Proxy).
 "body" : { "code": 200, "value" : "<access-token-value>" }
 ```
 
-### Identity Module -> Identity Provider (Idp Proxy)
+## Identity Module -> Identity Provider (Idp Proxy)
 
-#### refresh Assertion
+### refresh Assertion
 
 Message sent by the Identity GUI function to Identity Management (IDP Proxy) to refresh an Identity Assertion.
 
@@ -173,7 +176,7 @@ Response Message sent back from the Identity Management (IDP Proxy).
 "body" : { "code": 200, "value" : "<assertion-value>" }
 ```
 
-#### refresh Access Token
+### refresh Access Token
 
 Message sent by the Identity GUI function to Identity Management (IDP Proxy) to refresh an Access Token.
 
@@ -195,9 +198,9 @@ Response Message sent back from the Identity Management (IDP Proxy).
 "body" : { "code": 200, "value" : "<access-token-value>" }
 ```
 
-### Identity GUI -> Identity Module
+## Identity GUI -> Identity Module
 
-####   get My Public Key
+###   get My Public Key
 
 Message sent by the Identity GUI to the Crypto Manager to retrieve the user public key.
 
@@ -221,7 +224,7 @@ response Message sent back from the Crypto Manager.
 "body" : { "code": 200, "value" : "<publicKey-value>" }
 ```
 
-#### Deploy Identity Module GUI
+### Deploy Identity Module GUI
 
 Request made by the identity-gui to the identity module for deploying the gui.
 
@@ -240,10 +243,10 @@ response by the identity module to the identity-gui.
 "type" : "response",
 "from" : "hyperty-runtime://<runtime-domain>/<runtime-instance-identifier>/idm",
 "to" : "hyperty-runtime://<runtime-domain>/<runtime-instance-identifier>/identity-gui",
-"body" : { "type" : "execute" , "value" : {} , "code" : 200 }
+"body" : { "code" : 200 }
 ```
 
-#### Get Identities To Choose From
+### Get Identities To Choose From
 
 Request made by the identity-gui to the identity module for the identities available to choose.
 
@@ -265,7 +268,7 @@ response by the identity module to the identity-gui.
 "body" : { "value" : { ["identities" : "<identity-values>" , "idps" : "<idp-values>"] } , "code" : 200 }
 ```
 
-#### Remove Identity
+### Remove Identity
 
 Request made by the identity-gui to the identity module for unregistering one identity.
 
@@ -289,7 +292,7 @@ Response by the identity module to the identity-gui.
 
 
 
-#### Add Identity
+### Add Identity
 
 Request made by the identity-gui to the identity module to add identity.
 
@@ -311,7 +314,7 @@ Response by the identity module to the identity-gui.
 "body" : { "code" : 200 }
 ```
 
-#### Set Default Identity
+### Set Default Identity
 
 Request made by the identity-gui to the identity module to add identity.
 
@@ -333,7 +336,7 @@ Response by the identity module to the identity-gui.
 "body" : { "code" : 200 }
 ```
 
-#### Add Access Token
+### Add Access Token
 
 Request made by the identity-gui to the identity module to add Access Token.
 
