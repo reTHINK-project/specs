@@ -1,0 +1,27 @@
+@startuml "../../datamodel/data-objects/wallet/Wallet-Data-Object-Model.png"
+
+package Wallet <<Rect>> {
+
+	class Wallet {
+	  scheme = "wallet"
+		address = URL.URL
+		status = <active, deleted>
+		identity = Identity
+		created = <ISO 8601 compliant>
+		balance = integer
+		transactions = Transaction[]
+	}
+
+	class Transaction {
+		recipient = URL.URL
+		source = URL.URL
+    date = <ISO 8601 compliant>,
+    value = integer
+    nonce = integer
+	}
+
+	}
+
+
+	Wallet *--> "1" Transaction
+@enduml
