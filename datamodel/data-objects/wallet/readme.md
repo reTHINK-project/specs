@@ -5,7 +5,7 @@ category: Data Object Models
 order: 6
 ---
 
-![Wallet Object Model](wallet-model.png)
+![Wallet Object Model](Wallet-Data-Object-Model.png)
 
 The Wallet model is comprised by its balance in terms of amount of tokens and a set of transactions.
 
