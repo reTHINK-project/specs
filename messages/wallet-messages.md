@@ -7,8 +7,8 @@ order: 4
 
 This doc specifies Messages to be used to manage wallets and token transactions, where,
 
--	`<Wallet>` is a JSON object compliant with [Wallet data model](../datamodel/data-objects/wallet/readme/).
--	`<Transaction>` is a JSON object compliant with [Wallet Transaction data model](../datamodel/data-objects/wallet/readme/).
+-	`<Wallet>` is a JSON object compliant with [Wallet data model](../../datamodel/data-objects/wallet/readme/).
+-	`<Transaction>` is a JSON object compliant with [Wallet Transaction data model](../../datamodel/data-objects/wallet/readme/).
 
 #### Wallet creation request
 
