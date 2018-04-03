@@ -1,0 +1,51 @@
+@startuml "../../datamodel/data-objects/spot/Spot-Data-Object-Model.png"
+
+package Spot <<Rect>> {
+
+	class Spot {
+	  id = string
+		type = SpotType
+		name = string
+		description = string
+		picture = URL
+		location = SpotLocation
+		opening-hours = SpotSchedulle
+	}
+
+	enum SpotType {
+		Shop
+		ecar-charger
+		ebike-station
+	}
+
+	class SpotSchedulle {
+			days = WeekPeriod[]
+			exceptions = yearDay[]
+	}
+
+	class SpotLocation {
+			degrees-latitude = string
+			degrees-longitude = string
+	}
+
+	class WeekPeriod {
+			monday = TimePeriod[]
+			...
+			sunday = TimePeriod[]
+	}
+
+	class TimePeriod {
+			start: Time
+			end: Time
+	}
+
+	}
+
+
+	Spot --> SpotLocation
+	Spot --> SpotSchedulle
+	SpotSchedulle --> WeekPeriod
+	WeekPeriod --> TimePeriod
+
+
+@enduml
