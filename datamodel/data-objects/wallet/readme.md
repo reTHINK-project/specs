@@ -11,9 +11,8 @@ The Wallet model is comprised by its balance in terms of amount of tokens and a 
 
 **Wallet**
 
-* `address` wallet address e.g.  
-* `wallet://sharing-cities/etuyetrhgfjhf`
-* `identity` wallet owner identity
+* `address` wallet address e.g. `wallet://sharing-cities/etuyetrhgfjhf`
+* `owner` the wallet owner GUID URL (user public key)
 * `created` timestamp creation
 * `balance` amount of tokens
 * `transactions` all transactions performed with this wallet. See below

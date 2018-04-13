@@ -6,7 +6,7 @@ package Wallet <<Rect>> {
 	  scheme = "wallet"
 		address = URL.URL
 		status = <active, deleted>
-		identity = Identity
+		owner = UserGUIDURL.URL
 		created = <ISO 8601 compliant>
 		balance = integer
 		transactions = Transaction[]
