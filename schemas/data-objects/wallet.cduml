@@ -15,9 +15,10 @@ package Wallet <<Rect>> {
 	class Transaction {
 		recipient = URL.URL
 		source = URL.URL
-    date = <ISO 8601 compliant>,
+    date = <ISO 8601 compliant>
     value = integer
     nonce = integer
+		description = string
 	}
 
 	}

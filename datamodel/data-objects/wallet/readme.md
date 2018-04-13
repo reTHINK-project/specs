@@ -24,5 +24,6 @@ The Wallet model is comprised by its balance in terms of amount of tokens and a 
 * `recipient` wallet address of the recipient
 *  `source` data stream address that was used to generate this transaction
 *  `date` transaction date.
-* `value` amount of tokens in the transaction
+* `value` amount of tokens in the transaction. If `-1` it is an unsuccessful transaction
 *  `nonce` the count of the number of performed mining transactions, starting with 0
+* `description` optional text to describe or identify the transaction. For unsuccessful transactions it may be used to describe the reason.
