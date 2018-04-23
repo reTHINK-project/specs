@@ -124,12 +124,12 @@ note bottom : to be updated
 
 	class ContextValue {
 		type ?: HypertyResource.HypertyResourceType
-		name : ContextUnitName
+		name ?: ContextUnitName
 		unit ?: ContextUnit
 		value : object
-		sum ?: ContextUnit
 		time ?: date
-		updateTime ?: date
+		startTime ?: date
+		endTime ?: date
 		expires ?: date
 	}
 
