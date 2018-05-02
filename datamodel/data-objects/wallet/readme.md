@@ -21,6 +21,7 @@ The Wallet model is comprised by its balance in terms of amount of tokens and a 
 **Transaction**
 
 * `recipient` wallet address of the recipient
+*  `data` data that was used to generate this transaction e.g. walking distance
 *  `source` data stream address that was used to generate this transaction
 *  `date` transaction date.
 * `value` amount of tokens in the transaction. If `-1` it is an unsuccessful transaction
