@@ -1,0 +1,45 @@
+@startuml "../../datamodel/data-objects/elearning/Elearning-Data-Object-Model.png"
+
+package Elearning <<Rect>> {
+
+	class Elearning {
+	    id : string
+		type : ElearningType
+		name : string
+		description : string
+		picture :? URL
+		credits :? string[]
+		age : string
+		license :? string?
+		questions : ElearningQuestion[]
+		date : <ISO 8601 compliant>
+		value : int
+	}
+
+	enum ElearningType {
+		QUIZZ
+		POWER-QUIZZ
+		MINI-QUIZZ
+	}
+
+	class ElearningQuestion {
+			id : int
+			question : string
+			answers : string[]
+			correctAnswer : int
+			value :? int
+			tip :? string
+	}
+
+	class ElearningAnswer {
+	    id : string
+		answers : int[]
+		date : <ISO 8601 compliant>
+	}
+	
+	}
+
+	Elearning *-->"1..n" ElearningQuestion
+
+
+@enduml
