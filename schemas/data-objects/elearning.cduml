@@ -8,7 +8,7 @@ package Elearning <<Rect>> {
 		name : string
 		description : string
 		picture :? URL
-		credits :? string[]
+		kudos :? string[]
 		age : string
 		license :? string?
 		questions : ElearningQuestion[]
