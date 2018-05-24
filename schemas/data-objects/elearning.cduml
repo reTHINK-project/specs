@@ -28,7 +28,7 @@ package Elearning <<Rect>> {
 			answers : string[]
 			correctAnswer : int
 			value :? int
-			tip :? string
+			hint :? string
 	}
 
 	class ElearningAnswer {

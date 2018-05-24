@@ -26,13 +26,13 @@ questions: [
   question: "Qual destas atividades contribuiu mais para as alterações do nosso planeta?",
   answers: ["Andar de carro", "Cortar as árvores", "Usar combustíveis fósseis para a energia" ],
   correctAnswer: 2,
-  tip: "A queima de combustíveis fósseis para produzir energia é a atividade humana que mais contribui para as alterações que prejudicam o nosso planeta."
+  hint: "A queima de combustíveis fósseis para produzir energia é a atividade humana que mais contribui para as alterações que prejudicam o nosso planeta."
   },
   id: 2,
   question: "O que entendes por energias renováveis? ",
   answers: ["Energia produzida em Portugal", "Energia que faz mal ao planeta", "Energia limpa e que nunca se acaba (por exemplo, energia do sol e do vento)" ],
   correctAnswer: 2,
-  tip: "As energias renováveis são as que existem livremente e em muita quantidade no nosso meio, tal como o sol, o vento ou a água, e não faz mal ao nosso ambiente."
+  hint: "As energias renováveis são as que existem livremente e em muita quantidade no nosso meio, tal como o sol, o vento ou a água, e não faz mal ao nosso ambiente."
   }
    ]
 ```
