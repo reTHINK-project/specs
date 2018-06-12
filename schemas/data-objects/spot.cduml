@@ -9,7 +9,8 @@ package Spot <<Rect>> {
 		description = string
 		picture = URL
 		location = SpotLocation
-		opening-hours = SpotSchedulle
+		opening-hours ?= SpotSchedulle
+		items = Items[]
 	}
 
 	enum SpotType {

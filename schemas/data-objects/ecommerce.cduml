@@ -1,0 +1,18 @@
+@startuml "../../datamodel/data-objects/ecommerce/Ecommerce-Data-Object-Model.png"
+
+package Ecommerce <<Rect>> {
+
+	class Item {
+		id: string
+		icon: URL
+	    name: string
+	    description ?: string
+	    cost: int
+	    spotID: string
+    	expires: Date
+	}
+}
+
+
+
+@enduml
