@@ -1,0 +1,29 @@
+@startuml "../../datamodel/data-objects/device/Device-Data-Object-Model.png"
+
+package Device <<Rect>> {
+
+	class Device {
+		id = string
+		status = <active, deleted>
+		owner = UserGUIDURL.URL
+		created = <ISO 8601 compliant>
+		sensors = Port[]
+		actuators = Port[]
+	}
+
+	class Port {
+		type = <sensor, actuator>
+		created = <ISO 8601 compliant>
+		lastModified = <ISO 8601 compliant>
+		status = <active, deleted>
+		context = Context.Context
+		name = string
+		description ?= string
+	}
+
+}
+
+	Device *--> "1" Port
+	Context <-- Port
+
+@enduml

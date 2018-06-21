@@ -17,6 +17,7 @@ The Wallet model is comprised by its balance in terms of amount of tokens and a 
 * `balance` amount of tokens
 * `transactions` all transactions performed with this wallet. See below
 * `status` active or deleted
+* `profile` a JSON object with any attributes describing the wallet or the wallet owner e.g. age range, workplace, etc
 
 **Transaction**
 

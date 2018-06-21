@@ -10,6 +10,7 @@ package Wallet <<Rect>> {
 		created = <ISO 8601 compliant>
 		balance = integer
 		transactions = Transaction[]
+		profile = JSON
 	}
 
 	class Transaction {
