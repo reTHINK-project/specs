@@ -9,7 +9,12 @@ package Ecommerce <<Rect>> {
 	    description ?: string
 	    cost: int
 	    spotID: string
+		start: Date
     	expires: Date
+		constraints: JSON
+		successfulTransactionIcon: URL
+		failedTransactionIcon: URL
+
 	}
 }
 
