@@ -18,6 +18,7 @@ The Wallet model is comprised by its balance in terms of amount of tokens and a 
 * `transactions` all transactions performed with this wallet. See below
 * `status` active or deleted
 * `profile` a JSON object with any attributes describing the wallet or the wallet owner e.g. age range, workplace, etc
+* `bonus-credit` amount of tokens available to spend on bonus.
 
 **Transaction**
 
@@ -28,3 +29,5 @@ The Wallet model is comprised by its balance in terms of amount of tokens and a 
 * `value` amount of tokens in the transaction. If `-1` it is an unsuccessful transaction
 *  `nonce` the count of the number of performed mining transactions, starting with 0
 * `description` optional text to describe or identify the transaction. For unsuccessful transactions it may be used to describe the reason.
+*  `bonus` true if transaction is related to a bonus item false otherwise.
+
