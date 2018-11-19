@@ -12,6 +12,7 @@ package Wallet <<Rect>> {
 		transactions = Transaction[]
 		profile = JSON
 		bonus-credit = integer
+		accounts = Account[]
 	}
 
 	class Transaction {
@@ -25,8 +26,17 @@ package Wallet <<Rect>> {
 		bonus = boolean
 	}
 
+	class Account {
+		name = string
+		lastBalance = integer
+    lastPeriod = string
+    description = string
+	}
+
+
 	}
 
 
 	Wallet *--> "1" Transaction
+	Wallet *--> "1" Account
 @enduml
