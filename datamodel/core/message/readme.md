@@ -94,6 +94,10 @@ Defines the criteria syntax used in criteria field. To be used for search purpos
 
 Defines the criteria to be used for search purposes. Syntax used to define the criteria is set in the criteriaSyntax.
 
+##### page
+
+To be used for large Resources to identify the number of the page to be read from the resource. Example, for arrays or JSON objects, if each page contains 50 elements, a request for page number 2 should return [50 - 99] elements or objects range.
+
 #### UpdateMessageBody
 
 ##### attribute (optional)

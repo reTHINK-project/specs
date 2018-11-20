@@ -9,10 +9,10 @@ package Wallet <<Rect>> {
 		owner = UserGUIDURL.URL
 		created = <ISO 8601 compliant>
 		balance = integer
-		transactions = Transaction[]
+		transactions = Transaction
 		profile = JSON
 		bonus-credit = integer
-		accounts = Account[]
+		accounts = Account
 	}
 
 	class Transaction {
@@ -28,7 +28,11 @@ package Wallet <<Rect>> {
 
 	class Account {
 		name = string
+		totalBalance = integer
+		totalData = integer
+		lastData = integer
 		lastBalance = integer
+		dataUnit = string
     lastPeriod = string
     description = string
 	}

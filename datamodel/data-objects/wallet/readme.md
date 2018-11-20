@@ -16,6 +16,7 @@ The Wallet model is comprised by its balance in terms of amount of tokens and a 
 * `created` timestamp creation
 * `balance` amount of tokens
 * `transactions` all transactions performed with this wallet. See below
+* `accounts` all accounts associated with this wallet. See below
 * `status` active or deleted
 * `profile` a JSON object with any attributes describing the wallet or the wallet owner e.g. age range, workplace, etc
 * `bonus-credit` amount of tokens available to spend on bonus.
@@ -31,3 +32,15 @@ The Wallet model is comprised by its balance in terms of amount of tokens and a 
 * `description` optional text to describe or identify the transaction. For unsuccessful transactions it may be used to describe the reason.
 *  `bonus` true if transaction is related to a bonus item false otherwise.
 
+**Account**
+
+An Account represents a source from where tokens are transferred e.g. "Walk Activity" account provide data about how the Wallet owner has earned tokens with Walk Activities.
+
+* `name` name of the account e.g. "Caminhada".
+* `totalBalance` the total ammount of tokens of this account
+* `totalData` the total ammount of data that was used to generated the total ammount of tokens. Example, "20" of Walk Activity Total data accounts 20 km of walking distance for wallet owner.
+* `lastBalance` the ammount of tokens earned in the last period of time.
+* `lastData` the ammount of data accounted in the last period of time.
+* `dataUnit` the measurement unit used for data. Example, "km" for Walking Activities.
+* `lastPeriod` the period of time used to calculate `lastBalance` and `lastData`
+* `description` optional text to describe the Account.

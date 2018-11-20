@@ -58,6 +58,7 @@ package Message <<Rect>> {
 		attribute ?: string
 		criteriaSyntax ?: string
 		criteria ?: string
+		page ?: int
 	}
 
 	class SubscribeMessageBody {
