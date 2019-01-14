@@ -9,21 +9,11 @@ package Wallet <<Rect>> {
 		owner = UserGUIDURL.URL
 		created = <ISO 8601 compliant>
 		balance = integer
-		transactions = Transaction
+		transactions = Transaction[]
 		profile = JSON
 		bonus-credit = integer
 		accounts = Account
-	}
-
-	class Transaction {
-		recipient = URL.URL
-		source = URL.URL
-		data = Object
-    date = <ISO 8601 compliant>
-    value = integer
-    nonce = integer
-		description = string
-		bonus = boolean
+		wallet2bGranted: <public wallet id to be granted everytime there is a new transaction>,
 	}
 
 	class Account {
@@ -35,7 +25,22 @@ package Wallet <<Rect>> {
 		dataUnit = string
     lastPeriod = string
     description = string
+		lastTransactions: string[]
 	}
+
+	class Transaction {
+		_id : string
+  	wallet: string
+		recipient = URL.URL
+		source = URL.URL
+		data = Object
+    date = <ISO 8601 compliant>
+    value = integer
+    nonce = integer
+		description = string
+		bonus = boolean
+	}
+
 
 
 	}
