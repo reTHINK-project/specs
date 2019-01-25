@@ -145,6 +145,11 @@ note bottom : to be updated
 	 RUNNING
 	 SLEEPING
 	 STILL
+	 BIKING
+	 E-DRIVING
+	 SHARED_BIKING
+	 SHARED_E-DRIVING
+	 GIVING_FEEDBACK
 	}
 
 	enum UserCommunication {
