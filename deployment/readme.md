@@ -15,7 +15,7 @@ __Please note that this section is dedicated to an operational platform__. Devel
 
 ## Requirements
 
-The reThink Framework platform uses three main core back-end services shown in the following picture and described hereafter.
+The reThink Framework platform uses two main core back-end services shown in the following picture and described hereafter.
 
 <img src="https://cloud.githubusercontent.com/assets/10738516/19760714/2f4bfb90-9c33-11e6-9463-a827f5d4ffab.png" width="700">
 
@@ -35,19 +35,38 @@ Some tools/servers to install:
 
 -- or [nginx](https://www.nginx.com/) instead of apache2
 
--- [reverse proxy](https://www.digitalocean.com/community/tutorials/how-to-use-apache-as-a-reverse-proxy-with-mod_proxy-on-ubuntu-16-04) in case of on apache2
+-- [reverse proxy for Apache](https://www.digitalocean.com/community/tutorials/how-to-use-apache-as-a-reverse-proxy-with-mod_proxy-on-ubuntu-16-04) in case of on apache2
+
+-- or [ReverseProxy for nginx](https://docs.nginx.com/nginx/admin-guide/web-server/reverse-proxy/) config for nginx
 
 -- [docker-compose](https://docs.docker.com/compose/install/)
 
 If you choose a default apache2 server, for each sub-domain you need to use a config file, where you config the reverse proxy, you can check [here](https://github.com/reTHINK-project/specs/tree/master/deployment/registry-ssl.conf) a config for registry component.
 
-https free trusted certificates can be obtained on [let's encrypt](https://letsencrypt.org/).  
+-- - [Node.js and Npm](https://linuxize.com/post/how-to-install-node-js-on-centos-7/)
 
-You need to have DNS configured for your host domain and for three sub-domains: `catalogue`, `registry` and `msg-node`.
+-- certbot: https free trusted certificates can be obtained on [let's encrypt](https://www.digitalocean.com/community/tutorials/how-to-secure-apache-with-let-s-encrypt-on-centos-7)
+
+-- You need to have DNS configured for your host domain and for four sub-domains: `registry`, `msg-node`, `backup` and `<backend runtime name>`.
+
+### Runtime backend (Vertx)
+
+It is used to support the Sharing Cities Application as a backend Server, where for example is used to save information of user points and ranking. It uses mongo. Can be used and deployed with a [docker image](https://hub.docker.com/r/rethinkaltice/dev-java-hyperty).
+
+You need to have DNS and the sub-domain configured: `vertx-runtime`
+
+### BackUP Service (CouchDB) 
+
+It is used to support backup Browser's Runtime data stored.
+
+Can be installed using this [tutorial](https://www.rosehosting.com/blog/how-to-install-apache-couchdb-on-centos-7/).
+
+You need to have DNS and the sub-domain configured: `backup`
+
 
 ## Installation process
 
-We will first install the three back-end reTHINK Services, then the application from scratch. To illustrate our text, we will consider that the DNS of the domain is `csp.rethink.com`
+We will first install the three back-end reTHINK Services, then the application from scratch. To illustrate our text, we will consider that the DNS of the domain is `rethink.com`
 
 Here is a view of the interfaces:
 
