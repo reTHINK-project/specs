@@ -13,12 +13,9 @@ After following this tutorial, you will be able to run all Hyperties Demos from 
 
 __Please note that this section is dedicated to an operational platform__. Developers should use the [toolkit](https://github.com/reTHINK-project/dev-protostubs).   
 
-## Requirements
+The reThink Framework platform uses two main core back-end services - Message Node and Domain Registry - shown in the following picture and described hereafter.
 
-The reThink Framework platform uses two main core back-end services shown in the following picture and described hereafter.
-
-
-<img src="../img/deployment/deployment-arch.jpg" width="700">
+<img src="https://raw.githubusercontent.com/reTHINK-project/specs/master/img/deployment/deployment-arch.jpg" width="700">
 
 All back-end services are available in Docker images and the preferred host is an Ubuntu 14.04 or CentOS.  
 
@@ -29,6 +26,8 @@ It is recommended that the containers are deployed behind a reverse proxy for se
 -- All back-end services are using different ports, using a reverse proxy is useful to allow using classical ports
 
 -- It is recommended that the certificates are managed on the front reverse proxy.
+
+## Requirements
 
 Some tools/servers to install:
 
