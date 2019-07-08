@@ -11,13 +11,13 @@ category: Backend Deployment
 This page explains how to install your own reTHINK domain to be able to deliver your own Hyperties, Protostubs or Data Schemas.
 After following this tutorial, you will be able to run all Hyperties Demos from the catalogue available [here](https://github.com/reTHINK-project/dev-hyperty).  
 
-__Please note that this section is dedicated to an operational platform__. Developers should use the [toolkit](https://github.com/reTHINK-project/dev-hyperty-toolkit).   
+__Please note that this section is dedicated to an operational platform__. Developers should use the [toolkit](https://github.com/reTHINK-project/dev-protostubs).   
 
 ## Requirements
 
 The reThink Framework platform uses two main core back-end services shown in the following picture and described hereafter.
 
-<img src="deployment-arch.jpg" width="700">
+<img src="https://github.com/reTHINK-project/specs/blob/master/deployment/deployment-arch.jpg" width="700">
 
 All back-end services are available in Docker images and the preferred host is an Ubuntu 14.04.  
 
@@ -51,18 +51,17 @@ If you choose a default apache2 server, for each sub-domain you need to use a co
 
 ### Runtime backend (Vertx)
 
-It is used to support the Sharing Cities Application as a backend Server, where for example is used to save information of user points and ranking. It uses mongo. Can be used and deployed with a [docker image](https://hub.docker.com/r/rethinkaltice/dev-java-hyperty).
+It is used to support the executions of Hyperties in a Java runtime Backend by using the Vertx.io framework. It currently uses mongodb data base. Can be used and deployed with a [docker image](https://hub.docker.com/r/rethinkaltice/dev-java-hyperty).
 
 You need to have DNS and the sub-domain configured: `vertx-runtime`
 
 ### BackUP Service (CouchDB) 
 
-It is used to support backup Browser's Runtime data stored.
+It is used to backup data stored in the browser.
 
 Can be installed using this [tutorial](https://www.rosehosting.com/blog/how-to-install-apache-couchdb-on-centos-7/).
 
 You need to have DNS and the sub-domain configured: `backup`
-
 
 ## Installation process
 
