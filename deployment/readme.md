@@ -17,7 +17,8 @@ __Please note that this section is dedicated to an operational platform__. Devel
 
 The reThink Framework platform uses two main core back-end services shown in the following picture and described hereafter.
 
-<img src="https://github.com/reTHINK-project/specs/blob/master/deployment/deployment-arch.jpg" width="700">
+
+<img src="./deployment/deployment-arch.jpg" width="700">
 
 All back-end services are available in Docker images and the preferred host is an Ubuntu 14.04.  
 
