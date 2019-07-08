@@ -9,15 +9,15 @@ category: Backend Deployment
 
 
 This page explains how to install your own reTHINK domain to be able to deliver your own Hyperties, Protostubs or Data Schemas.
-After following this tutorial, you will be able to run all Hyperties Demos from the catalogue available [here](https://github.com/reTHINK-project/dev-hyperty).  
+After following this tutorial, you will be able to run all Hyperties Demos from the catalogue available [here](https://github.com/reTHINK-project/dev-protostubs).  
 
 __Please note that this section is dedicated to an operational platform__. Developers should use the [toolkit](https://github.com/reTHINK-project/dev-protostubs).   
 
-The reThink Framework platform uses two main core back-end services - Message Node and Domain Registry - shown in the following picture and described hereafter.
+The reThink Framework platform uses three main core back-end services - Message Node and Domain Registry - and optionaly two additional backend services, the Java backend runtime, Vertx Runtime, to support Hyperties executed at the backend and the Backup service to backup data stored in browser runtime, as depicted in the picture below:
 
 <img src="https://raw.githubusercontent.com/reTHINK-project/specs/master/img/deployment/deployment-arch.jpg" width="700">
 
-All back-end services are available in Docker images and the preferred host is an Ubuntu 14.04 or CentOS.  
+The two 2 back-end services and the Backend runtime, are available in Docker images and the preferred host is an Ubuntu 14.04 or CentOS.  
 
 It is recommended that the containers are deployed behind a reverse proxy for several reasons:
 
@@ -49,11 +49,48 @@ If you choose a default apache2 server, for each sub-domain you need to use a co
 
 -- You need to have DNS configured for your host domain and for four sub-domains: `registry`, `msg-node`, `backup` and `<backend runtime name>`.
 
-### Runtime backend (Vertx)
 
-It is used to support the executions of Hyperties in a Java runtime Backend by using the Vertx.io framework. It currently uses mongodb data base. Can be used and deployed with a [docker image](https://hub.docker.com/r/rethinkaltice/dev-java-hyperty).
+## Installation process
 
-You need to have DNS and the sub-domain configured: `vertx-runtime`
+### Docker Services: Message Node; Domain Registry and Vertx Runtime
+
+To illustrate our text, we will consider that the DNS of the domain is `rethink.com`. Currently there are four implementations of the Message Node but only one is necessary to be installed. In this guide we use the Vertx Message Node.
+
+Deploy reTHINK back-end services with Docker Compose. Get the [docker-compose](https://github.com/reTHINK-project/specs/tree/master/deployment/docker-compose.yml) file and execute:
+
+`docker-compose up -d`
+
+___Notes for other Message Nodes deployments___
+
+*  _nodejs installation_: the docker-compose must be configured. If you use the script "start.sh", it will also build the domain registry. The url to provide in the "environment" section is the _domain_ of the plateform (here csp.rethink.com).
+*  _no Matrix installation_: after building the docker image, the simplest is to use the dockerStart.sh script. Be carefull to enter the good folder for the volume mapping, suppress the parameters _--net=rethink -p 8001:8001_ when used with a proxy. Note also that the default is exposed on HTTP on 8001. The MatrixProtoStub example is showing an URL of WebSocket with wss on 443, which is what the reverse proxy will provide.
+*  multiple installations of msg-node-vertx on the same machine to serve different servers they can't be installed on the same network (use for example 172.18.0.2 and 172.19.0.2)
+
+### Setup Dynamic reTHINK libraries (Protostubs, Idp Proxies, Hyperties and Runtime Core)
+
+According to reTHINK protocol on-the-fly concept, network protocols and service logic running in the browser are dynamicaly deployed in the runtime just when required by the Application. 
+
+Thus, you should:
+
+1. clone [dev-protostubs repo](https://github.com/reTHINK-project/dev-protostubs) 
+
+2. copy the `dist` directory to standard Linux HTTP server dir that will be served by the reverse proxy:
+
+`sudo cp -R . /var/www/stubs/public_html/`
+
+It should be noted the reTHINK Runtime and Hyperty demos are also included in such distribution.
+
+3. configure the runtime domain at [root demos index.html](https://github.com/reTHINK-project/dev-protostubs/blob/master/dist/index.html#L101)
+
+4. the message-node address [here](https://github.com/reTHINK-project/dev-protostubs/blob/master/dist/.well-known/protocolstub/default.ps.json#L6)
+
+5. if required, the vertx runtime address [here](https://github.com/reTHINK-project/dev-protostubs/blob/master/dist/.well-known/protocolstub/sharing-cities-dsm.ps.json#L7)
+
+6. If required, configure the different IdPs to give your domain access to it. The google idpproxy provided is working with an account that authorizes authentication process on a test platform, which probably does not include the one under installation. This means that by default, it is not possible to use google. To be able to do this, you have to:
+
+-- the google idpproxy, change the account and secret of the google account
+
+-- authorize on this account the use of google auth API (https://console.developers.google.com/apis/), with the authorized redirect URI https://rethink.com.  
 
 ### BackUP Service (CouchDB) 
 
@@ -61,152 +98,174 @@ It is used to backup data stored in the browser.
 
 Can be installed using this [tutorial](https://www.rosehosting.com/blog/how-to-install-apache-couchdb-on-centos-7/).
 
-You need to have DNS and the sub-domain configured: `backup`
 
-## Installation process
-
-We will first install the three back-end reTHINK Services, then the application from scratch. To illustrate our text, we will consider that the DNS of the domain is `rethink.com`
-
-Here is a view of the interfaces:
-
-<img src="https://cloud.githubusercontent.com/assets/10738516/19762069/b2b01b38-9c38-11e6-99c9-03f79e353b4e.png" width="700"/>
+### Reverse Proxy
 
 
-1- Deploy reTHINK back-end services with Docker Compose. Get the [docker-compose](https://github.com/reTHINK-project/specs/tree/master/deployment/docker-compose.yml) file and execute:
+With all services running on different containers we need to set up the different sub-domains and point them to the correct containers. 
 
-`docker-compose up -d`
+List of sub-domains needed:
 
-2- reverse-proxy configuration. Let's assume we are using Apache.
+- backup
+- msg-node
+- registry
+- vertx-runtime
+- app
 
-2.1- configure your domain by editing `/etc/apache2/sites-available/000-default.conf` with your domain:
+For each sub-domain we need to create and enable config files.
 
-<pre class="line-numbers">
-  <code class="language-yml">
-    <VirtualHost *:443>
-          ServerName csp.rethink.com
-           DocumentRoot /var/www/html/
-    </VirtualHost>
-</code>
-</pre>
-
-Activate your domain:
-
-<pre>
-  <code class="language-shell">
-sudo a2ensite 000-default`
-  </code>
-</pre>
-
-and restart it:
-
-<pre class="line-numbers">
- <code class="language-shell">
-sudo /etc/init.d/apache2 restart
- </code>
-</pre>
-
-2.1- configure the reverse-proxy for the Domain Registry. Take note of your Domain Registry Docker Container IP address, move to `sites-available` dir and create `registry.conf` file with it:
-
-<pre class="line-numbers">
-  <code class="language-yml">
-<VirtualHost *:443>
-     ServerName 'registry.csp.rethink.com'
-     ProxyPass / http://172.20.0.4:4567/
-     ProxyPassReverse / http://172.20.0.4:4567/
-</VirtualHost>
- </code>
-</pre>
-
-Activate the sub-domain and restart it:
+1 - enable firewall-cmd 
 
 ```
-sudo a2ensite registry
-sudo /etc/init.d/apache2 restart
+sudo firewall-cmd --permanent --zone=public --add-service=http
+sudo firewall-cmd --permanent --zone=public --add-service=https
+sudo firewall-cmd --reload
 ```
 
-To test if installation is OK, open https://registry.csp.rethink.com/live. It should provide you the current status of the registry.
+2 - setup NGINX for ‘VirtualHosts’ 
 
-The urls of the domain users  are encoded to be able to be sent to the domain registry. For apache reverse proxy users the directives _AllowEncodedSlashes On_ AND _ProxyPass_ with _nocanon_.
+```
+mkdir /etc/nginx/sites-available
+mkdir /etc/nginx/sites-enabled
+```
+
+3 - configure NGINX
+
+```
+vim /etc/nginx/nginx.conf
+```
+
+3.1 - add after the ‘*http{}*’ block:
+
+```
+include /etc/nginx/sites-enabled/*.conf;
+server_names_hash_bucket_size 64;
+```
 
 
-2.3- configure the reverse-proxy for the Message Node. Take note of your Message Node Docker Container IP address and create `registry.conf` file at `sites-available` dir with:
 
-<pre class="line-numbers">
-  <code class="language-yml">
-<VirtualHost *:443>
-     ServerName 'msg-node.csp.rethink.com'
-     ProxyPass / http://172.20.0.2:9090/
-     ProxyPassReverse / http://172.20.0.2:9090/
-</VirtualHost>
- </code>
-</pre>
+4- configure each main domain/sub-domain by editing and adding servers on directory `/etc/nginx/sites-available/ ` 
 
-Activate the sub-domain and restart it:
+we will start with main domain
 
-<pre class="line-numbers">
-  <code class="language-shell">
-sudo a2ensite msg-node
-sudo /etc/init.d/apache2 restart
- </code>
-</pre>
+```
+vim /etc/nginx/sites-available/rethink.com.conf
+```
 
-To test if installation is OK, open https://msg-node.csp.rethink.com/live to give a view of the current status of the Message Node.  
+add the simple configuration
 
-2.4- configure the reverse-proxy for the Catalogue. Take note of your Catalogue Docker Container IP address and create `catalogue.conf` file at `sites-available` dir with:
+```bash
+server {
+    server_name rethink.com;
+	#reverse proxy for protostubs main path
+   location / {
+        root /var/www/stubs/public_html;
+        add_header Access-Control-Allow-Origin *;
+    }
 
-<pre class="line-numbers">
-  <code class="language-yml">
-<VirtualHost *:443>
-     ServerName 'catalogue.csp.rethink.com'
-     ProxyPass / http://172.20.0.8:5683/
-     ProxyPassReverse / http://172.20.0.8:5683/
-</VirtualHost>
- </code>
-</pre>
+    #reverse proxy for Docker administration with Portained on /admin path
+    location /admin/ {
 
-Activate the sub-domain and restart it:
+        proxy_pass http://172.20.0.5:9000/;
 
-<pre class="line-numbers">
-  <code class="language-shell">
-sudo a2ensite catalogue
-sudo /etc/init.d/apache2 restart
- </code>
-</pre>
+    }
 
-To test if installation is OK, open https://catalogue.csp.rethink.com/ gives a view of the current status of the catalogue node. It also allow to see connected databases and components.
+    #reverse proxy for push-server on /pushserver path
+    location /pushserver/ {
+        proxy_pass http://172.20.0.130:3002/;
+    }
+}
+```
 
-2.5- configure the reverse-proxy for the App Server Demos. Take note of your App Server Docker Container IP address and create `demos.conf` file at `sites-available` dir with:
+We use reverse-proxy to point the different services to the correct domain/sub-domain. In this case, we are using:
 
-<pre class="line-numbers">
-  <code class="language-yml">
-<VirtualHost *:443>
-     ServerName 'demos.csp.rethink.com'
-     ProxyPass / http://172.20.0.10/
-     ProxyPassReverse / http://172.20.0.10/
-</VirtualHost>
- </code>
-</pre>
+- the push server service, which is running on ip 172.20.0.130 and port 3002.
+- and dynamically deployable stubs served as static files at standard HTTP server `/var/www/` dir
 
-Activate the sub-domain and restart it:
 
-<pre class="line-numbers">
-  <code class="language-yml">
-sudo a2ensite demos
-sudo /etc/init.d/apache2 restart
- </code>
-</pre>
 
-To test if installation is OK, open https://demos.csp.rethink.com/ and it should open the demos home page.
+We can test config files of nginx before the reload/restart of service, with command 
 
-3. The Browser Runtime has to be uploaded from .well-known/runtime/ must contain the last version of the runtime. It has to be filled with [these files](https://github.com/reTHINK-project/dev-runtime-browser/tree/master/bin)  (rethink.js, index.html, core.js, context-service.js, identities-gui.js, policies-gui.js)
+```bash
+sudo nginx -t
+nginx: the configuration file /etc/nginx/nginx.conf syntax is ok
+nginx: configuration file /etc/nginx/nginx.conf test is successful
+```
 
-4- If required, configure the different IdPs to give your domain access to it.
 
-4.1- The google idpproxy provided is working with an account that authorizes authentication process on a test platform, which probably does not include the one under installation. This means that by default, it is not possible to use google. To be able to do this, you have to:
+5- To enable the new domain we need to create a symlink
 
--- edit the sourceCode.js of the google idpproxy, change the account and secret of the google account
+```
+ln -s /etc/nginx/sites-available/rethink.com.conf /etc/nginx/sites-enabled/rethink.com.conf
+```
 
--- authorize on this account the use of google auth API (https://console.developers.google.com/apis/), with the authorized redirect URI https://csp.rethink.com.  
+6- restart nginx
+
+```
+sudo service nginx restart
+```
+
+7 For each domain/sub-domain we need to get a new certificate to enable SSL. 
+
+7.1 Install Certbot Let's Encrypt Client
+
+```
+sudo yum install epel-release
+sudo yum install certbot python2-certbot-apache mod_ssl
+```
+
+7.2 Obtaining a Certificate
+
+```
+sudo certbot --nginx
+```
+
+ Choose the name/names to activate HTTPS and enable redirect to 443 port to avoid connections to 80 port.
+
+7.3 After it you could check, some changes were made to the file /etc/nginx/sites-available/rethink.com.conf
+
+```
+server {
+    server_name rethink.com;
+	#reverse proxy for protostubs main path
+   location / {
+        root /var/www/stubs/public_html;
+        add_header Access-Control-Allow-Origin *;
+    }
+
+    #reverse proxy for Docker administration with Portained on /admin path
+    location /admin/ {
+
+        proxy_pass http://172.20.0.5:9000/;
+
+    }
+
+    #reverse proxy for push-server on /pushserver path
+    location /pushserver/ {
+        proxy_pass http://172.20.0.130:3002/;
+    }
+
+    listen 443 ssl; # managed by Certbot
+    ssl_certificate /etc/letsencrypt/live/rethink.com-0001/fullchain.pem; # managed by Certbot
+    ssl_certificate_key /etc/letsencrypt/live/rethink.com-0001/privkey.pem; # managed by Certbot
+    include /etc/letsencrypt/options-ssl-nginx.conf; # managed by Certbot
+    ssl_dhparam /etc/letsencrypt/ssl-dhparams.pem; # managed by Certbot
+
+}
+server {
+    if ($host = rethink.com) {
+        return 301 https://$host$request_uri;
+    } # managed by Certbot
+
+    server_name rethink.com;
+    listen 80;
+    return 404; # managed by Certbot
+}
+```
+
+8 - Sub Domain config files
+
+The set of files related to the configuration of the sub-domains is available [here](./sites-available).
 
 ## Hello World Application Deployment
 
@@ -218,97 +277,3 @@ When all of this is done you can try to connect on the index.html of the hello-a
 
 You should follow this [guide](https://github.com/reTHINK-project/specs/blob/master/deployment/ims-deployment.md) to integrate your application with IMS.
 
-## Docker compose details
-
-### Domain Registry
-
-Domain registry is installable with a [docker image](https://hub.docker.com/r/rethink/registry-domain-server/). As the Domain Registry is necessary to run the messaging node, it has to be running first. The default port of the domain registry is 4567.
-The default DNS for our domain registry will be: __registry.csp.rethink.com__.  
-
-```
-service for docker-compose file
-
-'domain-registry':
-    image: 'rethink/registry-domain-server:latest'
-    container_name: 'domain-registry'
-    networks:
-      rethink:
-        ipv4_address: 172.18.0.4
-    environment:
-      - STORAGE_TYPE=RAM
-      - EXPIRES=3600
-    expose:
-      - '4568'
-      - '4567'
-```
-
-### Messaging node
-
-This is the core plateform. ReTHINK has provided four implementations but only one is necessary to be installed:
-* [VertX](https://github.com/reTHINK-project/dev-msg-node-vertx)
-* [Matrix](https://github.com/reTHINK-project/dev-msg-node-matrix)
-* [NodeJS](https://github.com/reTHINK-project/dev-msg-node-nodejs)
-* [no Matrix](https://github.com/reTHINK-project/dev-msg-node-nomatrix)  
-
-___WARNING___
-*  _vertx installation_: the node.config.json contains a parameter that will be used during the docker run through an environment variable. The domain parameter must contain the DNS of the full platform (here csp.rethink.com), and it will be used then to build the DNS of the componants (msg-node.csp.rethink.com, registry.csp.rethink.com, etc...). The registry url must be filled here, but it is not sure if it can be tuned. To install you can use [docker image](https://hub.docker.com/r/rethink/msg-node-vertx/)
-*  _nodejs installation_: the docker-compose must be configured. If you use the script "start.sh", it will also build the domain registry. The url to provide in the "environment" section is the _domain_ of the plateform (here csp.rethink.com).
-*  _no Matrix installation_: after building the docker image, the simplest is to use the dockerStart.sh script. Be carefull to enter the good folder for the volume mapping, suppress the parameters _--net=rethink -p 8001:8001_ when used with a proxy. Note also that the default is exposed on HTTP on 8001. The MatrixProtoStub example is showing an URL of WebSocket with wss on 443, which is what the reverse proxy will provide.
-*  multiple installations of msg-node-vertx on the same machine to serve different servers they can't be installed on the same network (use for example 172.18.0.2 and 172.19.0.2)
-
-```
-service for docker-compose file
-
-'msg-node-vertx':
-    image: 'rethink/msg-node-vertx:master'
-    container_name: 'msg-node-vertx'
-    environment:
-      - MSG_NODE_CONFIG=env
-      - NODE_DOMAIN=csp.rethink.com
-      - NODE_PORT=9090
-      - NODE_REGISTRY_URL=http://172.18.0.4:4567
-      - NODE_GLOBAL_REGISTRY_URL=http://130.149.22.133:5002
-      - NODE_REGISTRY_RETRIES=2
-      - NODE_REGISTRY_SSL=false
-      - NODE_REGISTRY_OWN_CERTIFICATES=false
-    networks:
-      rethink:
-        ipv4_address: 172.18.0.2
-    expose:
-      - '443'
-```
-
-
-### Catalogue
-
-The catalogue is made out of two main components. A broker, that is needed to access the different services, and one or more databases. You can use this [database](https://github.com/reTHINK-project/testbeds/tree/master/nodes/PT-node/production), that should be possible to use on a production mode. Documentation can be accessed [here](https://github.com/reTHINK-project/dev-catalogue/tree/master/doc).  
-First of all, the broker has to be installed. A dockerhub [image](https://hub.docker.com/r/rethink/catalogue-broker/) is available.
-
-```
-broker component for docker-compose file
-
-'catalogue-broker':
-    image: rethink/catalogue-broker
-    container_name: 'catalogue-broker'
-    networks:
-      rethink:
-        ipv4_address: 172.18.0.8
-    hostname: 'catalogue.csp.rethink.com'
-    command: [-host, 'catalogue.csp.rethink.com', -default, protocolstub/VertxProtoStub, -default, protocolstub/VertxProtoStubNode]
-
-    expose:
-      - '443'
-      - '5683'
-```
-
-```
-catalogue database component using local database
-
-'catalogue-database-ptinovacao':
-    build: "./catalogue-database"
-    container_name: 'catalogue-database-ptinovacao'
-    network_mode: "service:catalogue-broker"
-    command: [-host, catalogue.csp.rethink.com]
-    depends_on:
-      - 'catalogue-broker'
-```

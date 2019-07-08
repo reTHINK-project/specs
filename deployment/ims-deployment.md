@@ -19,7 +19,7 @@ Request Example
 
 ### Deployment diagram
 
-![Deployment view](./ims-deployment.png)
+![Deployment view](../img/deployment/ims-deployment.png)
 
 ## Previous considerations before the installation
 

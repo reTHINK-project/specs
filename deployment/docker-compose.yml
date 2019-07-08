@@ -2,58 +2,98 @@
 version: '2'
 services:
   'msg-node-vertx':
-    image: 'rethink/msg-node-vertx:master'
+    image: 'rethinkaltice/dev-msg-node-vertx:latest'
     container_name: 'msg-node-vertx'
     environment:
       - MSG_NODE_CONFIG=env
-      - NODE_DOMAIN=csp.rethink.com
+      - NODE_DOMAIN=rethink.com
       - NODE_PORT=9090
-      - NODE_REGISTRY_URL=http://172.18.0.4:4567
+      - NODE_REGISTRY_URL=http://172.20.0.4:4567
       - NODE_GLOBAL_REGISTRY_URL=http://130.149.22.133:5002
       - NODE_REGISTRY_RETRIES=2
       - NODE_REGISTRY_SSL=false
       - NODE_REGISTRY_OWN_CERTIFICATES=false
     networks:
       rethink:
-        ipv4_address: 172.18.0.2
+        ipv4_address: 172.20.0.2
     expose:
       - '443'
+      - '9090'
 
-	'domain-registry':
-    image: 'rethink/registry-domain-server:latest'
+  'domain-registry':
+    image: 'rethinkaltice/dev-registry-domain:latest'
     container_name: 'domain-registry'
     networks:
       rethink:
-        ipv4_address: 172.18.0.4
+        ipv4_address: 172.20.0.4
     environment:
       - STORAGE_TYPE=RAM
-      - EXPIRES=3600
+      - EXPIRES=30
+      - EXPIRES_MAX=3600
     expose:
       - '4568'
       - '4567'
 
-  'catalogue-broker':
-    image: rethink/catalogue-broker
-    container_name: 'catalogue-broker'
+
+
+  mongodb:
+    image: mongo:latest
+    container_name: "mongodb"
+    environment:
+      - MONGO_DATA_DIR=/data/db
+      - MONGO_LOG_DIR=/dev/null
+    volumes:
+      - ./data/db:/data/db
     networks:
       rethink:
-        ipv4_address: 172.18.0.8
-    hostname: 'catalogue.csp.rethink.com'
-    command: [-host, 'catalogue.csp.rethink.com', -default, protocolstub/VertxProtoStub, -default, protocolstub/VertxProtoStubNode]
+        ipv4_address: 172.20.0.64
+    expose:
+      - '27017'
 
+  'dev-java-hyperty':
+    image: 'rethinkaltice/dev-java-hyperty:develop'
+    container_name: "dev-java-hyperty"
+    environment:
+      - MONGOHOSTS=172.20.0.64
+      - MONGOPORTS=27017
+      - MONGO_CLUSTER=NO
+      - LOG_LEVEL=INFO
+      - SCHEDULE_MINUTE=0
+      - SCHEDULE_HOUR=2
+      - SIOT_POC=https://vertx-runtime.rethink.com/requestpub
+      - CHALLENGE_EXPIRE=1559257200000
+    networks:
+      rethink:
+        ipv4_address: 172.20.0.128
     expose:
       - '443'
-      - '5683'
-      - '5683'
+      - '9091'
 
-  'catalogue-database-ptinovacao':
-    build: "./catalogue-database"
-    container_name: 'catalogue-database-ptinovacao'
-    network_mode: "service:catalogue-broker"
-    command: [-host, catalogue.csp.rethink.com]
-    depends_on:
-      - 'catalogue-broker'
+  portainer_container:
+    image: portainer/portainer
+    container_name: "portainer_container"
+    ports:
+      - "192.168.89.96:9000:9000"
+      - "127.0.0.1:9000:9000"
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+    networks:
+      rethink:
+        ipv4_address: 172.20.0.5
 
+  dev-push-server:
+    image: 'rethinkaltice/dev-push-server:latest'
+    container_name: 'dev-push-server'
+    environment:
+      - MONGO_HOSTS=mongodb://172.20.0.64:27017/test
+      - NODE_PORT=3002
+      - SUBSCRIPTION_COLLECTION=subscriptionprod
+      - NOTIFICATION_COLLECTION=notificationprod
+    networks:
+      rethink:
+        ipv4_address: 172.20.0.130
+    expose:
+      - '3002'
 
 
 networks:
@@ -62,7 +102,7 @@ networks:
     ipam:
       driver: default
       config:
-        - subnet: 172.18.0.0/16
-          gateway: 172.18.0.1
+        - subnet: 172.20.0.0/16
+          gateway: 172.20.0.1
 ```
 
