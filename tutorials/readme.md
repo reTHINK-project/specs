@@ -13,10 +13,6 @@ The reTHINK framework is an implementation of the
 
 It introduces a new service paradigm - Hyperties - to facilitate the development of complex decentralized Web Applications according to Microservices architectural patterns.
 
-## Security: sandboxes
-
-The Web developer does not have to deal with low level details of the architecture. The sandboxes and the management of hyperties and protostubs is done by the core framework. The sandboxes allows to isolate code from different providers reducing the risk of suffering cross-site scripting attacks.
-
 ## Interoperability: Protostubs
 
 In a standard Web Application, developers need to know in advance with which services providers it will be necessary to interact. The number of protocols an application can speak is limited in implementation time and it can not change without modifying the code. In reTHINK the protocol-on-the-fly concept is used. If you need to interact with a service which uses protocol A, the framework will provide you on-the-fly a piece of code called protostub which will be executed in the right sandbox. This protostub will speak protocol A and it will expose a common API to the Hyperty Core Runtime. The Web Developer will not need to deal with this complexity.   
@@ -37,7 +33,7 @@ Developers can use Hyperties in Applications by using any Web framework with a f
 
 <pre class="line-numbers">
   <code class="language-markup">
-    &lt;script src="https://hybroker.rethink.ptinovacao.pt/.well-known/runtime/rethink.js">&lt;/script>
+    &lt;script src="https://rethink.alticelabs.com/.well-known/runtime/rethink.js">&lt;/script>
   </code>
 </pre>
 
@@ -46,17 +42,15 @@ Developers can use Hyperties in Applications by using any Web framework with a f
 <pre class="line-numbers">
   <code class="language-javascript">
     let config = {
-      "development": true,
-      "runtimeURL": "hyperty-catalogue://hybroker.rethink.ptinovacao.pt/.well-known/runtime/Runtime",
-      "domain": "hybroker.rethink.ptinovacao.pt"
+      "domain": "rethink.alticelabs.com"
     }
 
     let runtime;
-    let hypertyCatalogueURL = 'hyperty-catalogue://'+config.domain + '/.well-known/hyperty/HelloWorldReporter';
+    let hypertyCatalogueURL = 'https://'+config.domain + '/.well-known/hyperty/HelloWorldReporter.hy.js';
 
     let observer ='hyperty://hybroker.rethink.ptinovacao.pt/d35a4bce-e281-4125-8536-a6daa24ea9ce'; // Address from the Observer Hyperty
 
-    rethink.default.install(config).then(function(result) {
+    rethink.rethink.install(config).then(function(result) {
 
       runtime = result;
 
@@ -89,7 +83,7 @@ Developers can use Hyperties in Applications by using any Web framework with a f
 <pre class="line-numbers">
   <code class="language-javascript">
   function startUsingDeployedHperty(hyperty){
-    hyperty.instance.hello(observer).then( function(hello) {
+    hyperty.hello(observer).then( function(hello) {
       helloObj = hello;
       console.log('[SimpleHelloWorld.hello] ', helloObj.data);
       });
@@ -109,7 +103,7 @@ Developers can use Hyperties in Applications by using any Web framework with a f
 <pre class="line-numbers">
   <code class="language-javascript">
     function startUsingDeployedHperty(hyperty){
-      hyperty.instance.hello(observer).then( function(hello) {
+      hyperty.hello(observer).then( function(hello) {
         helloObj = hello;
         console.log('[SimpleHelloWorld.hello] ', helloObj.data);
         setTimeout(function(){ sayBye(hyperty);}, 3000);
@@ -125,7 +119,7 @@ Developers can use Hyperties in Applications by using any Web framework with a f
 <pre class="line-numbers">
   <code class="language-javascript">
     function sayBye(hyperty){
-      hyperty.instance.bye();
+      hyperty.bye();
       console.log('[SimpleHelloWorld.sayBye] ', helloObj.data);
       }
   </code>
@@ -140,7 +134,7 @@ Developers can use Hyperties in Applications by using any Web framework with a f
 <pre class="line-numbers">
   <code class="language-javascript">
     function sayBye(hyperty){
-      hyperty.instance.bye();
+      hyperty.bye();
       console.log('[SimpleHelloWorld.sayBye] ', helloObj.data);
       setTimeout(function(){ sayHelloAgain();}, 3000);
     }
@@ -155,11 +149,11 @@ Developers can use Hyperties in Applications by using any Web framework with a f
 ... run your App again and you should see a new "Hello Again" message on the remote Observer Hyperty and ... :fireworks: :rocket:  Cool? :stuck_out_tongue_winking_eye:
 
 
-Check the complete source code [here](https://github.com/reTHINK-project/dev-hyperty/tree/master/docs/demos/hello-world-reporter).
+Check the complete source code [here](https://github.com/reTHINK-project/dev-protostubs/tree/master/docs/demos/hello-world-reporter).
 
 
 ## Next steps:
 
- - play with available Hyperties that are in the [Hyperty Catalogue](../../../dev-hyperty).
+ - play with available Hyperties that are in the [Hyperty Catalogue](../../../dev-protostubs).
 
  - develop your own Hyperty in a few steps as explained [here](../development-of-hyperties).
